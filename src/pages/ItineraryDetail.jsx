@@ -10,7 +10,7 @@ const ItineraryDetail = () => {
   return (
     <div className="bg-white">
       {/* Hero Section */}
-      <section className="relative h-[70vh] md:h-[80vh] flex items-center justify-center">
+      <section className="relative h-[60vh] flex items-center justify-center">
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
           <img 
@@ -32,61 +32,85 @@ const ItineraryDetail = () => {
         </div>
 
         {/* Info Bar */}
-        <div className="relative md:absolute bottom-0 left-1/2 -translate-x-1/2 md:translate-y-1/2 w-full max-w-5xl px-4 sm:px-6 z-20 mt-10 md:mt-0">
-          <div className="bg-white rounded-[24px] md:rounded-[32px] shadow-2xl py-8 md:py-12 px-4 sm:px-10 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-12 border border-gray-100/50">
-            
-            {/* Duration */}
-            <div className="flex flex-col items-center text-center space-y-3 md:space-y-4 group cursor-default">
-              <div className="w-12 h-12 md:w-16 md:h-16 bg-primary/5 rounded-full flex items-center justify-center transition-all duration-300 group-hover:bg-primary shadow-sm">
-                <svg className="w-6 h-6 md:w-8 md:h-8 text-primary group-hover:text-white transition-colors" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zm-7 5h5v5h-5z"/>
-                </svg>
+        <div className="relative md:absolute bottom-0 left-1/2 -translate-x-1/2 md:translate-y-1/2 w-full max-w-6xl px-4 sm:px-6 z-20 mt-10 md:mt-0">
+          <div className="bg-white rounded-[24px] md:rounded-[32px] shadow-2xl py-6 md:py-8 px-8 md:px-12 border border-gray-100/50 flex flex-col gap-6 md:gap-8">
+            {/* Row 1: Main Stats */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 w-full">
+              {/* Duration */}
+              <div className="flex flex-col items-center text-center space-y-2 md:space-y-3 group cursor-default">
+                <div className="w-10 h-10 md:w-12 md:h-12 bg-primary/5 rounded-full flex items-center justify-center transition-all duration-300 group-hover:bg-primary shadow-sm">
+                  <svg className="w-5 h-5 md:w-6 md:h-6 text-primary group-hover:text-white transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zm-7 5h5v5h-5z"/>
+                  </svg>
+                </div>
+                <div className="space-y-0.5">
+                  <p className="text-gray-400 text-[9px] font-bold uppercase tracking-[0.15em]">Duration</p>
+                  <p className="text-primary text-base md:text-lg font-extrabold tracking-tight">07 Days</p>
+                </div>
               </div>
-              <div className="space-y-1">
-                <p className="text-gray-400 text-[10px] font-bold uppercase tracking-[0.2em]">Duration</p>
-                <p className="text-primary text-lg md:text-xl font-extrabold tracking-tight">07 Days</p>
+
+              {/* Group */}
+              <div className="flex flex-col items-center text-center space-y-2 md:space-y-3 group cursor-default">
+                <div className="w-10 h-10 md:w-12 md:h-12 bg-primary/5 rounded-full flex items-center justify-center transition-all duration-300 group-hover:bg-primary shadow-sm">
+                  <svg className="w-5 h-5 md:w-6 md:h-6 text-primary group-hover:text-white transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+                  </svg>
+                </div>
+                <div className="space-y-0.5">
+                  <p className="text-gray-400 text-[9px] font-bold uppercase tracking-[0.15em]">Group</p>
+                  <p className="text-primary text-base md:text-lg font-extrabold tracking-tight">Private</p>
+                </div>
+              </div>
+
+              {/* Effort */}
+              <div className="flex flex-col items-center text-center space-y-2 md:space-y-3 group cursor-default">
+                <div className="w-10 h-10 md:w-12 md:h-12 bg-primary/5 rounded-full flex items-center justify-center transition-all duration-300 group-hover:bg-primary shadow-sm">
+                  <svg className="w-5 h-5 md:w-6 md:h-6 text-primary group-hover:text-white transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7z"/>
+                  </svg>
+                </div>
+                <div className="space-y-0.5">
+                  <p className="text-gray-400 text-[9px] font-bold uppercase tracking-[0.15em]">Effort</p>
+                  <p className="text-primary text-base md:text-lg font-extrabold tracking-tight">Moderate</p>
+                </div>
               </div>
             </div>
 
-            {/* Theme */}
-            <div className="flex flex-col items-center text-center space-y-3 md:space-y-4 group cursor-default">
-              <div className="w-12 h-12 md:w-16 md:h-16 bg-primary/5 rounded-full flex items-center justify-center transition-all duration-300 group-hover:bg-primary shadow-sm">
-                <svg className="w-6 h-6 md:w-8 md:h-8 text-primary group-hover:text-white transition-colors" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9s1.5.67 1.5 1.5S7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
-                </svg>
-              </div>
-              <div className="space-y-1">
-                <p className="text-gray-400 text-[10px] font-bold uppercase tracking-[0.2em]">Theme</p>
-                <p className="text-primary text-lg md:text-xl font-extrabold tracking-tight">Heritage</p>
+            {/* Row 2: All Highlights */}
+            <div className="w-full border-t border-gray-100 pt-4 md:pt-6">
+              <div className="flex flex-col items-center gap-4">
+                {/* Header for Row 2 */}
+                <div className="flex items-center gap-4 w-full">
+                  <div className="h-[1px] flex-grow bg-gray-50"></div>
+                  <p className="text-gray-400 text-[8px] md:text-[9px] font-bold uppercase tracking-[0.4em] whitespace-nowrap">Highlights & Visits</p>
+                  <div className="h-[1px] flex-grow bg-gray-50"></div>
+                </div>
+
+                {/* Highlights List */}
+                <div className="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8">
+                  {days.map((day, idx) => (
+                    <div key={idx} className="flex flex-col items-center gap-2 group cursor-pointer">
+                      <div className="relative">
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full border-2 border-white shadow-lg overflow-hidden transition-all duration-500 group-hover:scale-110 group-hover:ring-2 group-hover:ring-primary/20">
+                          <img 
+                            src={day.image} 
+                            alt={day.location} 
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                          />
+                        </div>
+                        {/* Day indicator badge on image */}
+                        <div className="absolute -top-1 -right-1 w-5 h-5 bg-primary text-white text-[8px] font-bold rounded-full flex items-center justify-center border-2 border-white shadow-md z-10">
+                          {idx + 1}
+                        </div>
+                      </div>
+                      <p className="text-primary text-[8px] md:text-[9px] font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-1 group-hover:translate-y-0 text-center">
+                        {day.location}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-
-            {/* Group */}
-            <div className="flex flex-col items-center text-center space-y-3 md:space-y-4 group cursor-default">
-              <div className="w-12 h-12 md:w-16 md:h-16 bg-primary/5 rounded-full flex items-center justify-center transition-all duration-300 group-hover:bg-primary shadow-sm">
-                <svg className="w-6 h-6 md:w-8 md:h-8 text-primary group-hover:text-white transition-colors" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
-                </svg>
-              </div>
-              <div className="space-y-1">
-                <p className="text-gray-400 text-[10px] font-bold uppercase tracking-[0.2em]">Group</p>
-                <p className="text-primary text-lg md:text-xl font-extrabold tracking-tight">Private</p>
-              </div>
-            </div>
-
-            {/* Effort */}
-            <div className="flex flex-col items-center text-center space-y-3 md:space-y-4 group cursor-default">
-              <div className="w-12 h-12 md:w-16 md:h-16 bg-primary/5 rounded-full flex items-center justify-center transition-all duration-300 group-hover:bg-primary shadow-sm">
-                <svg className="w-6 h-6 md:w-8 md:h-8 text-primary group-hover:text-white transition-colors" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7z"/>
-                </svg>
-              </div>
-              <div className="space-y-1">
-                <p className="text-gray-400 text-[10px] font-bold uppercase tracking-[0.2em]">Effort</p>
-                <p className="text-primary text-lg md:text-xl font-extrabold tracking-tight">Moderate</p>
-              </div>
-            </div>
-
           </div>
         </div>
       </section>

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@200;300;400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -10,24 +12,27 @@
 
 body {
   margin: 0;
-  font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  @apply text-body;
+  @apply font-sans text-base text-primary;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-serif tracking-tight;
 }
 
 h1 {
-  @apply text-h1-mobile md:text-h1-desktop font-bold leading-tight;
+  @apply text-h1-mobile md:text-h1-desktop font-black leading-[1.1];
 }
 
 h2 {
-  @apply text-h2-mobile md:text-h2-desktop font-semibold leading-snug;
+  @apply text-h2-mobile md:text-h2-desktop font-extrabold leading-[1.2];
 }
 
 h3 {
-  @apply text-h3-mobile md:text-h3-desktop font-medium leading-normal;
+  @apply text-h3-mobile md:text-h3-desktop font-bold leading-normal;
 }
 
-p, span, li {
-  @apply text-body font-normal;
+p, span, li, a, button {
+  @apply font-sans font-normal;
 }

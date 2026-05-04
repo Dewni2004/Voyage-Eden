@@ -32,16 +32,16 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled || isMenuOpen ? 'bg-white shadow-lg py-4' : 'bg-transparent py-6'
+      className={`fixed top-0 left-0 right-0 z-50 ${isScrolled || isMenuOpen ? 'bg-white shadow-lg py-4' : 'bg-transparent py-6'
         }`}
     >
       <div className='container mx-auto px-6 flex justify-between items-center'>
         {/* Logo Section */}
-        <Link to="/" className='flex items-center cursor-pointer group' onClick={() => setIsMenuOpen(false)}>
+        <Link to="/" className='flex items-center cursor-pointer' onClick={() => setIsMenuOpen(false)}>
           <img
             src={logo}
             alt="Eden Travels Logo"
-            className={`h-14 md:h-20 w-auto object-contain transition-all duration-500 group-hover:scale-105 ${!isScrolled && !isMenuOpen ? 'brightness-0 invert' : ''
+            className={`h-14 md:h-20 w-auto object-contain ${!isScrolled && !isMenuOpen ? 'brightness-0 invert' : ''
               }`}
           />
         </Link>
@@ -52,11 +52,10 @@ const Navbar = () => {
             <li key={link.name}>
               <Link
                 to={link.path}
-                className={`text-[17px] font-medium transition-all duration-300 relative group ${!isScrolled ? 'text-white hover:text-luxury' : (link.specialized ? 'text-red-700 font-semibold text-[18px]' : 'text-primary hover:text-luxury')
+                className={`text-[17px] font-medium relative ${!isScrolled ? 'text-white' : (link.specialized ? 'text-red-700 font-semibold text-[18px]' : 'text-primary')
                   }`}
               >
                 {link.name}
-                <span className={`absolute -bottom-1 left-0 w-0 h-[2px] bg-luxury transition-all duration-300 group-hover:w-full ${link.specialized ? 'hidden' : ''}`}></span>
               </Link>
             </li>
           ))}
@@ -71,7 +70,7 @@ const Navbar = () => {
                 href={flag.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className='w-8 h-8 rounded-full overflow-hidden border-2 border-gray-100 shadow-sm hover:scale-125 transition-all cursor-pointer'
+                className='w-8 h-8 rounded-full overflow-hidden border-2 border-gray-100 shadow-sm cursor-pointer'
               >
                 <img
                   src={flag.url}
@@ -97,7 +96,7 @@ const Navbar = () => {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 top-0 bg-white z-[60] transition-all duration-500 lg:hidden flex flex-col ${isMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
+        className={`fixed inset-0 top-0 bg-white z-[60] lg:hidden flex flex-col ${isMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
           }`}
       >
         <div className='flex items-center justify-between px-6 py-6 border-b'>
@@ -127,16 +126,16 @@ const Navbar = () => {
 
           <div className="mt-auto pb-10 border-t pt-10">
             <p className="text-gray-500 mb-6 font-medium">Change Language</p>
-            <div className='flex items-center space-x-6'>
+            <div className='flex flex-col space-y-6'>
               {flags.map((flag) => (
                 <a
                   key={flag.code}
                   href={flag.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className='flex items-center space-x-3 cursor-pointer group'
+                  className='flex items-center space-x-3 cursor-pointer'
                 >
-                  <div className='w-10 h-10 rounded-full overflow-hidden border-2 border-gray-100 shadow-sm group-hover:scale-110 transition-all'>
+                  <div className='w-10 h-10 rounded-full overflow-hidden border-2 border-gray-100 shadow-sm'>
                     <img
                       src={flag.url}
                       alt={flag.alt}

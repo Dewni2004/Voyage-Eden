@@ -4,6 +4,8 @@ import blogHeader from '../assets/itinerary-hero.png'; // Fallback
 import blogSafari from '../assets/blog-safari.png';
 import blogCity from '../assets/blog-city.png';
 
+import PageHero from '../components/UI/PageHero';
+
 const BlogDetail = () => {
   const { id } = useParams();
 
@@ -31,27 +33,11 @@ const BlogDetail = () => {
 
   return (
     <div className="bg-[#f8fbff] min-h-screen">
-      {/* Hero Section */}
-      <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
-        <img 
-          src="/C:/Users/ASUS/.gemini/antigravity/brain/281003f6-40f9-4b9c-803a-003a6a03115c/upper_diyaluma_falls_blog_1777866025087.png" 
-          alt="Upper Diyaluma Falls" 
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]"></div>
-        
-        <div className="relative z-10 text-center px-6">
-          <span className="bg-white/20 backdrop-blur-md text-white px-6 py-2 rounded-full text-sm font-bold uppercase tracking-widest border border-white/30 mb-8 inline-block">
-            Adventure
-          </span>
-          <h1 className="text-white text-5xl md:text-7xl font-bold mb-4 drop-shadow-2xl tracking-tight">
-            Upper Diyaluma Falls
-          </h1>
-          <p className="text-white/90 text-2xl md:text-3xl font-light italic drop-shadow-lg">
-            The Hidden Gem
-          </p>
-        </div>
-      </section>
+      <PageHero 
+        title="Upper Diyaluma Falls"
+        description="Le joyau caché du Sri Lanka, offrant des piscines naturelles à débordement et des vues panoramiques spectaculaires."
+        image="/C:/Users/ASUS/.gemini/antigravity/brain/281003f6-40f9-4b9c-803a-003a6a03115c/upper_diyaluma_falls_blog_1777866025087.png"
+      />
 
       {/* Main Content Area */}
       <div className="max-w-7xl mx-auto px-6 py-16 md:py-24">

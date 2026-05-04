@@ -15,12 +15,12 @@ const WhatsAppButton = () => {
       aria-label="Contact us on WhatsApp"
     >
       {/* Tooltip */}
-      <span className="absolute right-full mr-3 bg-white text-primary text-xs font-bold px-3 py-1.5 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap border border-gray-100">
+      <span className="absolute right-full mr-3 bg-white text-primary text-xs font-bold px-3 py-1.5 rounded-full shadow-lg opacity-0 whitespace-nowrap border border-gray-100">
         Contact us
       </span>
       
       {/* Button */}
-      <div className="relative bg-[#25D366] hover:bg-[#128C7E] text-white p-4 rounded-full shadow-2xl transition-all duration-300 transform hover:scale-110 active:scale-95 flex items-center justify-center">
+      <div className="relative bg-[#25D366] text-white p-4 rounded-full shadow-2xl flex items-center justify-center">
         <svg 
           width="32" 
           height="32" 

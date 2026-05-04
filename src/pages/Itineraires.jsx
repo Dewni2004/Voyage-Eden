@@ -44,12 +44,12 @@ const Itineraires = () => {
     <div>
       <ItineraryHero />
       <ItineraryCategories />
-      <PopularItineraries title="nos itinéraires les plus populaires" id="popular" itineraries={allItineraries.popular} />
-      <PopularItineraries title="voyages d'aventure" id="adventure" itineraries={allItineraries.adventure} />
-      <PopularItineraries title="voyages en famille" id="family" itineraries={allItineraries.family} />
+      <PopularItineraries title="Nos Itinéraires les Plus Populaires" id="popular" itineraries={allItineraries.popular} />
+      <PopularItineraries title="Voyages d'aventure" id="adventure" itineraries={allItineraries.adventure} />
+      <PopularItineraries title="Voyages en famille" id="family" itineraries={allItineraries.family} />
       <PopularItineraries title="Collection de luxe" id="luxury" itineraries={allItineraries.collection} isDark={true} />
-      <PopularItineraries title="voyages de golf" id="golf" itineraries={allItineraries.golf} isGreen={true} />
-      <PopularItineraries title="voyages de surf et de plongée" id="surf" itineraries={allItineraries.surf} />
+      <PopularItineraries title="Voyages de golf" id="golf" itineraries={allItineraries.golf} isGreen={true} />
+      <PopularItineraries title="Voyages de surf et de plongée" id="surf" itineraries={allItineraries.surf} />
       <Newsletter />
     </div>
   );

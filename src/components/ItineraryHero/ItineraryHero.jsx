@@ -1,4 +1,5 @@
 import React from 'react';
+import itineraryBanner from '../../assets/Itinerari - Banner.webp';
 
 const ItineraryHero = () => {
   return (
@@ -6,7 +7,7 @@ const ItineraryHero = () => {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
         <img 
-          src="https://images.unsplash.com/photo-1544616782-88641ebdf10c?auto=format&fit=crop&q=80&w=1600" 
+          src={itineraryBanner} 
           alt="Sri Lanka Itineraries" 
           className="w-full h-full object-cover"
         />

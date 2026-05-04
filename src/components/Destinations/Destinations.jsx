@@ -57,7 +57,7 @@ const Destinations = () => {
             <img 
               src={destinations[0].image} 
               alt={destinations[0].name} 
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
             <div className="absolute bottom-10 left-10 text-white">
@@ -74,7 +74,7 @@ const Destinations = () => {
             <img 
               src={destinations[1].image} 
               alt={destinations[1].name} 
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
             <div className="absolute bottom-8 left-8 text-white">
@@ -91,7 +91,7 @@ const Destinations = () => {
             <img 
               src={destinations[2].image} 
               alt={destinations[2].name} 
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
             <div className="absolute bottom-6 left-6 text-white">
@@ -108,7 +108,7 @@ const Destinations = () => {
             <img 
               src={destinations[3].image} 
               alt={destinations[3].name} 
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
             <div className="absolute bottom-6 left-6 text-white">

@@ -8,29 +8,16 @@ import officeTeam2 from '../assets/team-office-2.png';
 import guide1 from '../assets/guide-1.png';
 import guide2 from '../assets/guide-2.png';
 
+import PageHero from '../components/UI/PageHero';
+
 const AboutUs = () => {
   return (
-    <div className="pt-20">
-      {/* Hero Section */}
-      <section className="relative h-[60vh] md:h-[70vh] flex items-center justify-center overflow-hidden">
-        {/* Background Image with Overlay */}
-        <div className="absolute inset-0 z-0">
-          <img 
-            src={teamPhoto} 
-            alt="Eden Travels Team" 
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black/40"></div>
-        </div>
-
-        {/* Hero Content */}
-        <div className="relative z-10 text-center px-6">
-          <h1 className="text-white text-5xl md:text-7xl font-bold tracking-tight drop-shadow-lg mb-4">
-            Get To Know Us
-          </h1>
-          <div className="w-24 h-1 bg-luxury mx-auto rounded-full shadow-lg"></div>
-        </div>
-      </section>
+    <div>
+      <PageHero 
+        title="Get To Know Us"
+        description="We are a multicultural team dedicated to creating authentic and personalized travel experiences in Sri Lanka."
+        image={teamPhoto}
+      />
 
       {/* Who We Are Section */}
       <section className="py-24 bg-[#f8fbff]">

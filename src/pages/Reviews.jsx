@@ -3,6 +3,9 @@ import blogSafari from '../assets/blog-safari.png';
 import blogCity from '../assets/blog-city.png';
 import blogBoat from '../assets/blog-boat.png';
 
+import PageHero from '../components/UI/PageHero';
+import reviewsBanner from '../assets/family-beach.png';
+
 const Reviews = () => {
   const [selectedReview, setSelectedReview] = React.useState(null);
 
@@ -34,39 +37,11 @@ const Reviews = () => {
 
   return (
     <div className="bg-white min-h-screen">
-      {/* Hero Section */}
-      <section className="relative h-[70vh] flex items-center justify-center overflow-hidden">
-        <img 
-          src="/C:/Users/ASUS/.gemini/antigravity/brain/281003f6-40f9-4b9c-803a-003a6a03115c/reviews_hero_family_1777866517622.png" 
-          alt="Happy Travelers" 
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-black/50"></div>
-        
-        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto mt-20">
-          {/* Rating Badge */}
-          <div className="inline-flex items-center gap-3 bg-white/20 backdrop-blur-md border border-white/30 px-4 sm:px-6 py-2 rounded-full mb-6 sm:mb-8">
-            <div className="flex text-yellow-400">
-              {[...Array(5)].map((_, i) => (
-                <svg key={i} className="w-3.5 h-3.5 sm:w-4 h-4 fill-current" viewBox="0 0 20 20">
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                </svg>
-              ))}
-            </div>
-            <span className="text-white text-xs sm:text-sm font-bold tracking-wide">Rated 4.9/5 by 150+ Travelers</span>
-          </div>
-
-          <h1 className="text-white text-4xl sm:text-5xl md:text-7xl font-bold mb-4 tracking-tight drop-shadow-2xl">
-            Real Stories
-          </h1>
-          <h2 className="text-white text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 opacity-90">
-            Unforgettable Journeys
-          </h2>
-          <p className="text-white/80 text-base sm:text-lg md:text-xl font-medium leading-relaxed max-w-3xl mx-auto drop-shadow-lg">
-            Read what our clients say about their experience traveling through Sri Lanka with Eden Travels. Authentic voices, real adventures.
-          </p>
-        </div>
-      </section>
+      <PageHero 
+        title="Real Stories"
+        description="Lisez ce que nos clients disent de leur expérience de voyage au Sri Lanka avec Eden Travels. Des voix authentiques, de vraies aventures."
+        image={reviewsBanner}
+      />
 
       {/* Recent Videos Section */}
       <section className="max-w-7xl mx-auto px-6 py-24">

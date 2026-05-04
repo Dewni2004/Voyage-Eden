@@ -51,12 +51,12 @@ const TrustSection = () => {
             <a
               key={item.id}
               href={item.href}
-              className="flex items-center space-x-6 group cursor-pointer transition-transform duration-300 hover:scale-105"
+              className="flex items-center space-x-6 cursor-pointer"
             >
-              <div className="transform group-hover:rotate-6 transition-transform duration-300">
+              <div>
                 {item.icon}
               </div>
-              <p className="text-primary font-semibold text-lg md:text-xl max-w-[200px] leading-tight group-hover:text-luxury transition-colors duration-300">
+              <p className="text-primary font-semibold text-lg md:text-xl max-w-[200px] leading-tight">
                 {item.text}
               </p>
             </a>

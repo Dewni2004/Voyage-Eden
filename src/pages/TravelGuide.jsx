@@ -4,6 +4,9 @@ import blogSafari from '../assets/blog-safari.png';
 import blogCity from '../assets/blog-city.png';
 import blogBoat from '../assets/blog-boat.png';
 
+import PageHero from '../components/UI/PageHero';
+import guideBanner from '../assets/itinerary-hero.png';
+
 const TravelGuide = () => {
   const articles = [
     {
@@ -73,7 +76,13 @@ const TravelGuide = () => {
   const tags = ["Aventures", "Savoir De La Ville", "Excursion", "Culture", "Tours", "Photographie", "Tourisme", "Voyage En Voiture", "Excursion Nature"];
 
   return (
-    <div className="pt-32 pb-24 bg-[#f8fbff]">
+    <div>
+      <PageHero 
+        title="Guide de Voyage"
+        description="Découvrez nos conseils, histoires et guides pour explorer le Sri Lanka comme un local."
+        image={guideBanner}
+      />
+      <div className="py-24 bg-[#f8fbff]">
       <div className="container mx-auto px-6">
         <div className="flex flex-col lg:flex-row gap-12">
           
@@ -193,6 +202,7 @@ const TravelGuide = () => {
 
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

@@ -1,8 +1,15 @@
-import React from 'react';
+import PageHero from '../components/UI/PageHero';
+import contactBanner from '../assets/Galle-Fort.jpg';
 
 const ContactUs = () => {
   return (
-    <div className="pt-32 pb-24 bg-[#f8fbff]">
+    <div>
+      <PageHero 
+        title="Contactez-nous"
+        description="Nous sommes là pour vous aider à planifier votre voyage de rêve au Sri Lanka. N'hésitez pas à nous contacter."
+        image={contactBanner}
+      />
+      <div className="py-24 bg-[#f8fbff]">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           
@@ -197,6 +204,7 @@ const ContactUs = () => {
 
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
