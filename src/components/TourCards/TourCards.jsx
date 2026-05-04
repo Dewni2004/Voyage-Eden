@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import tour1 from '../../assets/Tour Card 1.webp';
-import tour2 from '../../assets/Tour Card 2.png';
-import tour3 from '../../assets/Tour Card 3.png';
+import tour1 from '../../assets/L\'île des couleurs (8 jours).webp';
+import tour2 from '../../assets/Explorez le mythique Ceylan (12 jours).png';
+import tour3 from '../../assets/Le pays des épices (15 jours).png';
 import tour4 from '../../assets/Tour Card 4.png';
 
 const TourCards = () => {

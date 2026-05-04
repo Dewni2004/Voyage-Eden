@@ -8,8 +8,8 @@ const Itineraires = () => {
   const allItineraries = {
     popular: [
       { id: 1, title: "L'île des couleurs (8 jours)", image: 'https://images.unsplash.com/photo-1552423158-efee1b2ff6b2?auto=format&fit=crop&q=80&w=800', price: '1,260', description: 'Explore the highlights of Sri Lanka...', icons: ['4/5 Star', 'Half Board', 'Car'] },
-      { id: 2, title: "Lune de miel au paradis", image: 'https://images.unsplash.com/photo-1583275484611-5c4e9f583168?auto=format&fit=crop&q=80&w=800', price: '1,260', description: 'A romantic getaway...', icons: ['4/5 Star', 'Half Board', 'Car'] },
-      { id: 3, title: "The Island of Colours (8 Days)", image: 'https://images.unsplash.com/photo-1544616782-88641ebdf10c?auto=format&fit=crop&q=80&w=800', price: '1,260', description: 'Classic Sri Lanka experience...', icons: ['4/5 Star', 'Full Board', 'Van'] },
+      { id: 2, title: "Explorez le mythique Ceylan (12 jours)", image: 'https://images.unsplash.com/photo-1583275484611-5c4e9f583168?auto=format&fit=crop&q=80&w=800', price: '1,260', description: 'A romantic getaway...', icons: ['4/5 Star', 'Half Board', 'Car'] },
+      { id: 3, title: "Le pays des épices (15 jours)", image: 'https://images.unsplash.com/photo-1544616782-88641ebdf10c?auto=format&fit=crop&q=80&w=800', price: '1,260', description: 'Classic Sri Lanka experience...', icons: ['4/5 Star', 'Full Board', 'Van'] },
     ],
     adventure: [
       { id: 4, title: "L'île des couleurs (8 jours)", image: 'https://images.unsplash.com/photo-1551041777-ed7783a9977c?auto=format&fit=crop&q=80&w=800', price: '1,260', description: 'Experience the magic of the Esala Perahera...', icons: ['4/5 Star', 'Half Board', 'Car'] },
