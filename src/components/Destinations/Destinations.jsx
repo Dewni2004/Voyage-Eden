@@ -48,11 +48,11 @@ const Destinations = () => {
         </div>
 
         {/* Masonry-style Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 h-[800px] md:h-[600px] lg:h-[700px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 h-auto lg:h-[700px]">
           {/* Large Card (Sigiriya) */}
           <a 
             href="/travel-guide" 
-            className="lg:col-span-2 lg:row-span-2 relative rounded-[2rem] overflow-hidden group cursor-pointer"
+            className="lg:col-span-2 lg:row-span-2 relative rounded-[2rem] overflow-hidden group cursor-pointer h-[400px] lg:h-full"
           >
             <img 
               src={destinations[0].image} 
@@ -69,7 +69,7 @@ const Destinations = () => {
           {/* Medium Card (Ella) */}
           <a 
             href="/travel-guide" 
-            className="lg:col-span-2 relative rounded-[2rem] overflow-hidden group cursor-pointer"
+            className="lg:col-span-2 relative rounded-[2rem] overflow-hidden group cursor-pointer h-[300px] lg:h-full"
           >
             <img 
               src={destinations[1].image} 
@@ -86,7 +86,7 @@ const Destinations = () => {
           {/* Small Card 1 (Kandy) */}
           <a 
             href="/travel-guide" 
-            className="relative rounded-[2rem] overflow-hidden group cursor-pointer"
+            className="relative rounded-[2rem] overflow-hidden group cursor-pointer h-[250px] lg:h-full"
           >
             <img 
               src={destinations[2].image} 
@@ -103,7 +103,7 @@ const Destinations = () => {
           {/* Small Card 2 (Mirissa) */}
           <a 
             href="/travel-guide" 
-            className="relative rounded-[2rem] overflow-hidden group cursor-pointer"
+            className="relative rounded-[2rem] overflow-hidden group cursor-pointer h-[250px] lg:h-full"
           >
             <img 
               src={destinations[3].image} 

@@ -65,22 +65,22 @@ const AboutUs = () => {
             </div>
 
             {/* Right Content - Overlapping Images */}
-            <div className="lg:w-1/2 relative h-[500px] md:h-[600px] w-full">
+            <div className="lg:w-1/2 relative h-[450px] sm:h-[550px] md:h-[600px] w-full mt-16 lg:mt-0 px-4 sm:px-0">
               {/* Top Image */}
-              <div className="absolute top-0 left-0 w-4/5 h-[350px] z-10 transition-transform duration-500 hover:scale-[1.02]">
+              <div className="absolute top-0 left-0 w-[85%] h-[250px] sm:h-[350px] z-10 transition-transform duration-500 hover:scale-[1.02]">
                 <img 
                   src={beachSunset} 
                   alt="Sri Lanka Beach Sunset" 
-                  className="w-full h-full object-cover rounded-[40px] shadow-2xl border-4 border-white"
+                  className="w-full h-full object-cover rounded-[30px] md:rounded-[40px] shadow-2xl border-4 border-white"
                 />
               </div>
               
               {/* Bottom Image */}
-              <div className="absolute bottom-0 right-0 w-3/4 h-[350px] z-20 transition-transform duration-500 hover:scale-[1.02]">
+              <div className="absolute bottom-0 right-0 w-[75%] h-[250px] sm:h-[350px] z-20 transition-transform duration-500 hover:scale-[1.02]">
                 <img 
                   src={familyBeach} 
                   alt="Family on Beach" 
-                  className="w-full h-full object-cover rounded-[40px] shadow-2xl border-4 border-white"
+                  className="w-full h-full object-cover rounded-[30px] md:rounded-[40px] shadow-2xl border-4 border-white"
                 />
               </div>
             </div>
