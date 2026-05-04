@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #1e406f;
+  --secondary: #f3f4f6;
+  --accent: #3b82f6;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  @apply text-body;
+}
+
+h1 {
+  @apply text-h1-mobile md:text-h1-desktop font-bold leading-tight;
+}
+
+h2 {
+  @apply text-h2-mobile md:text-h2-desktop font-semibold leading-snug;
+}
+
+h3 {
+  @apply text-h3-mobile md:text-h3-desktop font-medium leading-normal;
+}
+
+p, span, li {
+  @apply text-body font-normal;
+}
