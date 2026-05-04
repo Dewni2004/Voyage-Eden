@@ -19,9 +19,6 @@ const WhatsAppButton = () => {
         Contact us
       </span>
       
-      {/* Pulse Effect */}
-      <div className="absolute inset-0 bg-green-500 rounded-full animate-ping opacity-25"></div>
-      
       {/* Button */}
       <div className="relative bg-[#25D366] hover:bg-[#128C7E] text-white p-4 rounded-full shadow-2xl transition-all duration-300 transform hover:scale-110 active:scale-95 flex items-center justify-center">
         <svg 

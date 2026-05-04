@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import itineraryHero from '../assets/itinerary-hero.png';
+import IncludedExcluded from '../components/IncludedExcluded/IncludedExcluded';
+import PaymentPolicy from '../components/PaymentPolicy/PaymentPolicy';
+import BookingCard from '../components/BookingCard/BookingCard';
 
 const ItineraryDetail = () => {
   const [activeDay, setActiveDay] = useState(1);
@@ -252,6 +255,15 @@ const ItineraryDetail = () => {
 
         </div>
       </section>
+
+      {/* Included & Excluded Section */}
+      <IncludedExcluded />
+
+      {/* Payment Policy Section */}
+      <PaymentPolicy />
+
+      {/* Booking Card Section */}
+      <BookingCard />
     </div>
   );
 };

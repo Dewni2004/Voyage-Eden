@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import blogSafari from '../assets/blog-safari.png';
 import blogCity from '../assets/blog-city.png';
 import blogBoat from '../assets/blog-boat.png';
@@ -101,20 +102,22 @@ const TravelGuide = () => {
                       <span>{article.author}</span>
                     </div>
                     
-                    <h3 className="text-primary text-xl font-bold mb-4 leading-tight hover:text-luxury transition-colors cursor-pointer">
-                      {article.title}
-                    </h3>
+                    <Link to={`/blog/${article.id}`}>
+                      <h3 className="text-primary text-xl font-bold mb-4 leading-tight hover:text-luxury transition-colors cursor-pointer">
+                        {article.title}
+                      </h3>
+                    </Link>
                     
                     <p className="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-3">
                       {article.excerpt}
                     </p>
                     
-                    <button className="text-primary font-bold text-sm flex items-center group/btn hover:text-luxury transition-all">
+                    <Link to={`/blog/${article.id}`} className="text-primary font-bold text-sm flex items-center group/btn hover:text-luxury transition-all">
                       Read More
                       <svg className="w-4 h-4 ml-2 transform group-hover/btn:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                       </svg>
-                    </button>
+                    </Link>
                   </div>
                 </article>
               ))}
