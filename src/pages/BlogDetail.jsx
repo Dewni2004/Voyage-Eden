@@ -1,15 +1,52 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import blogHeader from '../assets/itinerary-hero.png'; // Fallback
-import blogSafari from '../assets/blog-safari.png';
-import blogCity from '../assets/blog-city.png';
-
+import { blogArticles } from '../data/blogData';
+import { getArticles } from '../services/contentService';
 import PageHero from '../components/UI/PageHero';
 
 const BlogDetail = () => {
   const { id } = useParams();
+  const [article, setArticle] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  // Categories data
+  useEffect(() => {
+    const fetchArticle = async () => {
+      // First try static data
+      let found = blogArticles.find(item => item.id.toString() === id);
+      
+      if (!found) {
+        // Try Firestore
+        const dynamicArticles = await getArticles();
+        found = dynamicArticles.find(item => item.id === id);
+      }
+      
+      setArticle(found);
+      setLoading(false);
+    };
+    fetchArticle();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#f8fbff]">
+        <div className="text-primary font-bold">Loading article...</div>
+      </div>
+    );
+  }
+
+  // If article not found, show error
+  if (!article) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#f8fbff]">
+        <div className="text-center">
+          <h2 className="text-3xl font-bold text-primary mb-4">Article non trouvé</h2>
+          <Link to="/travel-guide" className="text-luxury font-bold hover:underline">Retour au guide de voyage</Link>
+        </div>
+      </div>
+    );
+  }
+
+  // Sidebar data
   const categories = [
     { name: "Tourist Attractions", count: 12 },
     { name: "News & Curiosities", count: 3 },
@@ -17,26 +54,14 @@ const BlogDetail = () => {
     { name: "Useful Tips", count: 10 },
   ];
 
-  // Popular Reads data
-  const popularReads = [
-    {
-      title: "Discovering Badulla: A Natural Paradise",
-      date: "April 15, 2024",
-      image: blogSafari
-    },
-    {
-      title: "Exploring Rathnapura: The Gem City",
-      date: "May 02, 2024",
-      image: blogCity
-    }
-  ];
+  const popularReads = blogArticles.slice(0, 3);
 
   return (
     <div className="bg-[#f8fbff] min-h-screen">
       <PageHero 
-        title="Upper Diyaluma Falls"
-        description="Le joyau caché du Sri Lanka, offrant des piscines naturelles à débordement et des vues panoramiques spectaculaires."
-        image="/C:/Users/ASUS/.gemini/antigravity/brain/281003f6-40f9-4b9c-803a-003a6a03115c/upper_diyaluma_falls_blog_1777866025087.png"
+        title={article.title}
+        description={article.description}
+        image={article.image}
       />
 
       {/* Main Content Area */}
@@ -47,65 +72,35 @@ const BlogDetail = () => {
           <div className="lg:w-2/3">
             <div className="bg-white rounded-[40px] p-10 md:p-16 shadow-xl border border-gray-100">
               <h2 className="text-primary text-3xl md:text-4xl font-bold mb-10 leading-tight">
-                Introduction to Upper Diyaluma Falls
+                Introduction to {article.title}
               </h2>
               
               <div className="prose prose-lg max-w-none text-gray-700 font-medium leading-relaxed">
-                <p className="relative pl-16 mb-8 first-letter:text-7xl first-letter:font-bold first-letter:text-primary first-letter:float-left first-letter:mr-4 first-letter:mt-2">
-                  Located near the town of Koslanda, the "Upper Diyaluma Falls" is part of the famous Diyaluma Falls, the second highest waterfall in Sri Lanka. However, what many travelers do not know is that at the top of this impressive waterfall lies a little-explored natural paradise, with natural infinity pools and spectacular panoramic views.
-                </p>
-
-                <h3 className="text-primary text-2xl font-bold mt-12 mb-6">A unique and less crowded destination</h3>
-                <p className="mb-8">
-                  Unlike the base of Diyaluma, which is easily accessible from the road, Upper Diyaluma offers a more intimate and authentic experience. Here, you can enjoy nature in its purest state, surrounded by tropical vegetation, fresh mountain air, and the soothing sound of water flowing over the rocks.
-                </p>
-
-                <div className="my-12 rounded-[32px] overflow-hidden shadow-2xl group">
-                  <img 
-                    src="/C:/Users/ASUS/.gemini/antigravity/brain/281003f6-40f9-4b9c-803a-003a6a03115c/upper_diyaluma_falls_blog_1777866025087.png" 
-                    alt="Upper Diyaluma View" 
-                    className="w-full h-[400px] object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                </div>
-
-                <div className="my-12 bg-[#f8fbff] border-l-8 border-luxury p-10 rounded-r-[32px] italic">
-                  <p className="text-xl md:text-2xl text-primary font-bold leading-relaxed">
-                    "Visiting Upper Diyaluma Falls is like discovering a magical corner of Sri Lanka that combines adventure, relaxation, and dreamlike landscapes."
-                  </p>
-                </div>
-
-                <div className="my-12 bg-[#f9bcad] rounded-[32px] p-10 shadow-lg relative overflow-hidden">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl translate-x-1/2 -translate-y-1/2"></div>
-                  <div className="flex items-center gap-6 mb-8">
-                    <div className="w-14 h-14 bg-primary rounded-full flex items-center justify-center shadow-lg">
-                      <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.663 17h4.674M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                      </svg>
-                    </div>
-                    <h4 className="text-primary text-2xl font-bold">Traveler Tips</h4>
-                  </div>
-                  <ul className="space-y-6">
-                    <li className="flex items-start gap-3">
-                      <span className="text-primary font-bold mt-1">•</span>
-                      <p className="text-gray-800"><span className="font-bold">Best time:</span> Visit during the dry season for stable weather.</p>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span className="text-primary font-bold mt-1">•</span>
-                      <p className="text-gray-800"><span className="font-bold">Gear up:</span> Wear comfortable clothing, non-slip footwear, and bring a swimsuit.</p>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span className="text-primary font-bold mt-1">•</span>
-                      <p className="text-gray-800"><span className="font-bold">Essentials:</span> Don't forget sunscreen and plenty of water!</p>
-                    </li>
-                  </ul>
-                </div>
-
-                <p className="mb-12">
-                  It is the perfect place for those seeking something different, away from traditional tourist routes, and who want to connect with nature in a unique way. Without a doubt, Upper Diyaluma is one of the island's best-kept secrets.
-                </p>
+                {article.content.map((block, index) => {
+                  if (block.type === 'paragraph') {
+                    return (
+                      <p key={index} className={`mb-8 ${index === 0 ? 'relative pl-16 first-letter:text-7xl first-letter:font-bold first-letter:text-primary first-letter:float-left first-letter:mr-4 first-letter:mt-2' : ''}`}>
+                        {block.text}
+                      </p>
+                    );
+                  }
+                  if (block.type === 'heading') {
+                    return <h3 key={index} className="text-primary text-2xl font-bold mt-12 mb-6">{block.text}</h3>;
+                  }
+                  if (block.type === 'quote') {
+                    return (
+                      <div key={index} className="my-12 bg-[#f8fbff] border-l-8 border-luxury p-10 rounded-r-[32px] italic">
+                        <p className="text-xl md:text-2xl text-primary font-bold leading-relaxed">
+                          "{block.text}"
+                        </p>
+                      </div>
+                    );
+                  }
+                  return null;
+                })}
 
                 <div className="pt-8 border-t border-gray-100 flex flex-wrap gap-4">
-                  {['#SriLanka', '#Waterfalls', '#Nature'].map((tag) => (
+                  {article.tags.map((tag) => (
                     <span key={tag} className="bg-gray-50 text-gray-400 font-bold px-6 py-2 rounded-full text-sm border border-gray-100">
                       {tag}
                     </span>

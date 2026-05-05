@@ -26,7 +26,7 @@ const TrustSection = () => {
           </svg>
         </div>
       ),
-      text: 'Cliquez ici pour consulter nos avis Google',
+      text: 'Cliquez ici pour voir nos 451 avis cinq étoiles.',
       href: '#',
     },
     {
@@ -44,19 +44,19 @@ const TrustSection = () => {
   ];
 
   return (
-    <section className="py-24 bg-white">
+    <section className="py-16 md:py-24 bg-white">
       <div className="container mx-auto px-6">
-        <div className="flex flex-col md:flex-row items-center justify-center gap-12 md:gap-24">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-24">
           {trustItems.map((item) => (
             <a
               key={item.id}
               href={item.href}
-              className="flex items-center space-x-6 cursor-pointer"
+              className="flex flex-row items-center space-x-5 md:space-x-6 cursor-pointer group"
             >
-              <div>
+              <div className="transition-transform duration-300 group-hover:scale-110">
                 {item.icon}
               </div>
-              <p className="text-primary font-semibold text-lg md:text-xl max-w-[200px] leading-tight">
+              <p className="text-primary font-bold text-base md:text-xl max-w-[200px] md:max-w-[250px] leading-tight group-hover:text-luxury transition-colors">
                 {item.text}
               </p>
             </a>

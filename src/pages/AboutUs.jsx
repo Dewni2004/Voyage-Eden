@@ -52,9 +52,9 @@ const AboutUs = () => {
             </div>
 
             {/* Right Content - Overlapping Images */}
-            <div className="lg:w-1/2 relative h-[450px] sm:h-[550px] md:h-[600px] w-full mt-16 lg:mt-0 px-4 sm:px-0">
+            <div className="lg:w-1/2 relative h-[350px] sm:h-[450px] md:h-[600px] w-full mt-16 lg:mt-0 px-4 sm:px-0">
               {/* Top Image */}
-              <div className="absolute top-0 left-0 w-[85%] h-[250px] sm:h-[350px] z-10 transition-transform duration-500 hover:scale-[1.02]">
+              <div className="absolute top-0 left-0 w-[80%] h-[200px] sm:h-[300px] md:h-[350px] z-10 transition-transform duration-500 hover:scale-[1.02]">
                 <img 
                   src={beachSunset} 
                   alt="Sri Lanka Beach Sunset" 
@@ -63,7 +63,7 @@ const AboutUs = () => {
               </div>
               
               {/* Bottom Image */}
-              <div className="absolute bottom-0 right-0 w-[75%] h-[250px] sm:h-[350px] z-20 transition-transform duration-500 hover:scale-[1.02]">
+              <div className="absolute bottom-0 right-0 w-[70%] h-[200px] sm:h-[300px] md:h-[350px] z-20 transition-transform duration-500 hover:scale-[1.02]">
                 <img 
                   src={familyBeach} 
                   alt="Family on Beach" 
@@ -146,22 +146,26 @@ const AboutUs = () => {
             <h2 className="text-primary text-4xl font-bold mb-4">Meet the Founders & Representatives</h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-            {[1, 2, 3, 4].map((member) => (
-              <div key={member} className="flex flex-col items-center text-center group">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+            {[
+              { name: "Manjula", role: "Fondateur & PDG", desc: "Avec plus de 13 ans d'expérience, Manjula dirige l'équipe avec passion et expertise locale.", img: officeTeam1 },
+              { name: "Nethmi", role: "Conseillère en voyages", desc: "Notre agent de voyage dynamique qui se surpasse pour organiser des voyages passionnants.", img: teamMember },
+              { name: "Ashan", role: "Responsable des opérations", desc: "Ashan veille à ce que toutes nos opérations sur le terrain se déroulent sans accroc.", img: officeTeam2 }
+            ].map((member, index) => (
+              <div key={index} className="flex flex-col items-center text-center group">
                 <div className="relative mb-8 p-1.5 rounded-full border-[6px] border-primary transition-transform duration-500 group-hover:scale-105 group-hover:border-luxury shadow-xl shadow-primary/20">
                   <div className="w-48 h-48 rounded-full overflow-hidden">
                     <img 
-                      src={teamMember} 
-                      alt="Nethmi - Travel Consultant" 
+                      src={member.img} 
+                      alt={member.name} 
                       className="w-full h-full object-cover"
                     />
                   </div>
                 </div>
-                <h3 className="text-primary text-2xl font-bold mb-1">Nethmi</h3>
-                <p className="text-primary/70 font-semibold mb-4">Travel Consultant</p>
+                <h3 className="text-primary text-2xl font-bold mb-1">{member.name}</h3>
+                <p className="text-primary/70 font-semibold mb-4">{member.role}</p>
                 <p className="text-gray-600 text-sm leading-relaxed max-w-[250px]">
-                  Our energetic travel agent who goes the extra mile to curate exciting, well-organized trips, making sure every detail is perfectly planned.
+                  {member.desc}
                 </p>
               </div>
             ))}
@@ -179,21 +183,23 @@ const AboutUs = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[...Array(8)].map((_, index) => (
-              <div key={index} className="bg-[#f8fbff] p-8 rounded-[32px] border border-gray-100 flex flex-col items-center text-center transition-all duration-300 hover:shadow-xl hover:-translate-y-2 group">
-                <div className="w-40 h-40 rounded-full overflow-hidden mb-6 shadow-lg border-4 border-white group-hover:border-luxury transition-colors duration-300">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
+            {[
+              { name: "Kumara", role: "Specialist", img: officeTeam1 },
+              { name: "Dilshani", role: "Coordination", img: officeTeam2 },
+              { name: "Pradeep", role: "Logistics", img: teamMember },
+              { name: "Inoka", role: "Support", img: officeTeam1 },
+            ].map((member, index) => (
+              <div key={index} className="bg-[#f8fbff] p-6 md:p-8 rounded-[32px] border border-gray-100 flex flex-col items-center text-center transition-all duration-300 hover:shadow-xl hover:-translate-y-2 group">
+                <div className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full overflow-hidden mb-6 shadow-lg border-4 border-white group-hover:border-luxury transition-colors duration-300">
                   <img 
-                    src={index % 3 === 0 ? officeTeam1 : (index % 3 === 1 ? officeTeam2 : teamMember)} 
-                    alt="Team Member" 
+                    src={member.img} 
+                    alt={member.name} 
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <h3 className="text-primary text-xl font-bold mb-1">Manjula</h3>
-                <p className="text-primary/70 font-semibold text-sm mb-4">Travel Consultant</p>
-                <p className="text-gray-500 text-xs leading-relaxed">
-                  Your time in Sri Lanka should be about discovery, not sales pitches. We focus purely on creating meaningful experiences that showcase the real Sri Lanka.
-                </p>
+                <h3 className="text-primary text-lg md:text-xl font-bold mb-1">{member.name}</h3>
+                <p className="text-primary/70 font-semibold text-xs md:text-sm mb-4">{member.role}</p>
               </div>
             ))}
           </div>
@@ -210,21 +216,23 @@ const AboutUs = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-            {[...Array(8)].map((_, index) => (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-12">
+            {[
+              { name: "Saman", img: guide1 },
+              { name: "Kamal", img: guide2 },
+              { name: "Nuwan", img: guide1 },
+              { name: "Upul", img: guide2 },
+            ].map((guide, index) => (
               <div key={index} className="flex flex-col items-center text-center group">
-                <div className="w-48 h-48 rounded-full overflow-hidden mb-8 shadow-xl border-4 border-white group-hover:border-luxury transition-all duration-300 transform group-hover:scale-105">
+                <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full overflow-hidden mb-6 md:mb-8 shadow-xl border-4 border-white group-hover:border-luxury transition-all duration-300 transform group-hover:scale-105">
                   <img 
-                    src={index % 2 === 0 ? guide1 : guide2} 
+                    src={guide.img} 
                     alt="Guide / Driver" 
                     className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                   />
                 </div>
-                <h3 className="text-primary text-2xl font-bold mb-1">Nethmi</h3>
-                <p className="text-primary/70 font-semibold mb-4">Travel Consultant</p>
-                <p className="text-gray-600 text-sm leading-relaxed max-w-[250px]">
-                  Our energetic travel agent who goes the extra mile to curate exciting, well-organized trips, making sure every detail is perfectly planned.
-                </p>
+                <h3 className="text-primary text-xl md:text-2xl font-bold mb-1">{guide.name}</h3>
+                <p className="text-primary/70 font-semibold mb-4 text-sm md:text-base">Certified Guide</p>
               </div>
             ))}
           </div>

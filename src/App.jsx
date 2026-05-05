@@ -8,12 +8,16 @@ import ContactUs from './pages/ContactUs';
 import ItineraryDetail from './pages/ItineraryDetail';
 import BlogDetail from './pages/BlogDetail';
 import Reviews from './pages/Reviews';
+import ReviewDetail from './pages/ReviewDetail';
+import Admin from './pages/Admin';
 import Footer from './components/Footer/Footer';
 import WhatsAppButton from './components/WhatsAppButton/WhatsAppButton';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <div className="flex flex-col min-h-screen">
         <Navbar />
         <main className="flex-grow">
@@ -26,6 +30,8 @@ function App() {
             <Route path="/itinerary/:id" element={<ItineraryDetail />} />
             <Route path="/blog/:id" element={<BlogDetail />} />
             <Route path="/reviews" element={<Reviews />} />
+            <Route path="/review/:id" element={<ReviewDetail />} />
+            <Route path="/admin" element={<Admin />} />
           </Routes>
         </main>
         <Footer />

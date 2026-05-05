@@ -34,12 +34,12 @@ const ItineraryCategories = () => {
             <div 
               key={cat.id}
               onClick={() => scrollToSection(cat.id)}
-              className="relative h-64 rounded-[2rem] overflow-hidden cursor-pointer shadow-sm"
+              className="relative h-64 rounded-[2rem] overflow-hidden cursor-pointer shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl group"
             >
               <img 
                 src={cat.image} 
                 alt={cat.title} 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90"></div>
               <div className="absolute inset-0 flex items-end justify-center pb-8">

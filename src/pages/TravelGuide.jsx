@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { getArticles } from '../services/contentService';
 import blogSafari from '../assets/blog-safari.png';
 import blogCity from '../assets/blog-city.png';
 import blogBoat from '../assets/blog-boat.png';
@@ -7,63 +8,22 @@ import blogBoat from '../assets/blog-boat.png';
 import PageHero from '../components/UI/PageHero';
 import guideBanner from '../assets/itinerary-hero.png';
 
+import { blogArticles } from '../data/blogData';
+
 const TravelGuide = () => {
-  const articles = [
-    {
-      id: 1,
-      title: "Spiritual Sojourn: Pilgrimage Tours For Soul Seekers",
-      image: blogSafari,
-      date: "06 TH FEB 2024",
-      author: "By Admin",
-      category: "Culture",
-      excerpt: "Explore the ancient temples and sacred sites of Sri Lanka, where spirituality meets history in a profound journey of self-discovery."
-    },
-    {
-      id: 2,
-      title: "Main-Country Memoirs: Vineyard Tours For Wine Stoppers",
-      image: blogCity,
-      date: "04 TH FEB 2024",
-      author: "By Admin",
-      category: "Luxury",
-      excerpt: "Indulge in the finest Ceylon teas and colonial-style experiences in the heart of the hill country, where tradition and elegance blend."
-    },
-    {
-      id: 3,
-      title: "Rhythms of the Rainforest: Adventure Tours In Sinharaja",
-      image: blogBoat,
-      date: "02 ND FEB 2024",
-      author: "By Admin",
-      category: "Adventure",
-      excerpt: "Immerse yourself in the dense jungles of Sinharaja, a UNESCO World Heritage site home to endemic species and breathtaking waterfalls."
-    },
-    {
-      id: 4,
-      title: "Coastal Calm: Surf & Yoga Retreats in Weligama",
-      image: blogSafari,
-      date: "31 ST JAN 2024",
-      author: "By Admin",
-      category: "Wellness",
-      excerpt: "Find your balance on the southern coast, where the waves are perfect and the sunsets provide the ultimate backdrop for meditation."
-    },
-    {
-      id: 5,
-      title: "Echoes of Antiquity: Exploring the Cultural Triangle",
-      image: blogCity,
-      date: "28 TH JAN 2024",
-      author: "By Admin",
-      category: "History",
-      excerpt: "Step back in time as you visit the ancient cities of Anuradhapura and Polonnaruwa, witnessing the grandeur of a bygone era."
-    },
-    {
-      id: 6,
-      title: "Wild Wonders: A Journey Through Yala National Park",
-      image: blogBoat,
-      date: "25 TH JAN 2024",
-      author: "By Admin",
-      category: "Wildlife",
-      excerpt: "Track the elusive leopard and majestic elephant in the diverse landscapes of Yala, Sri Lanka's most famous wildlife sanctuary."
-    }
-  ];
+  const [dynamicArticles, setDynamicArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchArticles = async () => {
+      const data = await getArticles();
+      setDynamicArticles(data);
+      setLoading(false);
+    };
+    fetchArticles();
+  }, []);
+
+  const articles = [...dynamicArticles, ...blogArticles];
 
   const categories = [
     { name: "Safari Aventure", count: 5 },
@@ -154,13 +114,13 @@ const TravelGuide = () => {
             </div>
 
             {/* Categories */}
-            <div className="bg-white p-10 rounded-[32px] shadow-lg border border-gray-100">
+            <div className="bg-white p-8 md:p-10 rounded-[32px] shadow-lg border border-gray-100">
               <h3 className="text-primary text-xl font-bold mb-8">Catégories</h3>
               <ul className="space-y-4">
                 {categories.map((cat, index) => (
-                  <li key={index} className="flex justify-between items-center group cursor-pointer hover:bg-gray-50 p-4 rounded-xl transition-all border-b border-gray-50 last:border-0">
+                  <li key={index} className="flex justify-between items-center group cursor-pointer hover:bg-gray-50 p-3 md:p-4 rounded-xl transition-all border-b border-gray-50 last:border-0">
                     <span className="text-gray-700 font-medium group-hover:text-luxury transition-colors">{cat.name}</span>
-                    <span className="bg-gray-100 text-primary text-xs font-bold w-8 h-8 flex items-center justify-center rounded-lg group-hover:bg-luxury group-hover:text-white transition-all">
+                    <span className="bg-primary/5 text-primary text-xs font-bold w-8 h-8 flex items-center justify-center rounded-lg group-hover:bg-luxury group-hover:text-white transition-all">
                       {cat.count}
                     </span>
                   </li>

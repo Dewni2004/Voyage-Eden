@@ -36,3 +36,35 @@ h3 {
 p, span, li, a, button {
   @apply font-sans font-normal;
 }
+
+@layer utilities {
+  .section-padding {
+    @apply py-16 md:py-24;
+  }
+  
+  .container-padding {
+    @apply px-4 sm:px-6 md:px-8;
+  }
+
+  .mobile-card {
+    @apply rounded-[32px] md:rounded-[40px];
+  }
+}
+
+/* Custom Scrollbar for premium feel */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2c5282;
+}

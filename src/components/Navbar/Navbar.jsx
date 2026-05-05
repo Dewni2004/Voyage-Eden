@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../assets/French - Logo.png';
+import logo from '../../assets/French-t.png';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -41,8 +41,7 @@ const Navbar = () => {
           <img
             src={logo}
             alt="Eden Travels Logo"
-            className={`h-14 md:h-20 w-auto object-contain ${!isScrolled && !isMenuOpen ? 'brightness-0 invert' : ''
-              }`}
+            className="h-12 md:h-20 w-auto object-contain transition-all duration-300"
           />
         </Link>
 
@@ -108,7 +107,7 @@ const Navbar = () => {
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
           </button>
         </div>
-        <div className="container mx-auto px-6 py-10 flex flex-col overflow-y-auto">
+        <div className="container mx-auto px-6 py-6 flex flex-col h-full overflow-y-auto">
           <ul className='flex flex-col space-y-6 mb-10'>
             {navLinks.map((link) => (
               <li key={link.name}>

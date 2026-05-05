@@ -34,7 +34,7 @@ const PopularItineraries = ({ title, id, itineraries, isDark, isGreen }) => {
                 
                 {/* Icon Bar */}
                 <div className={`flex items-center space-x-4 mb-6 py-2 px-3 ${isGreen ? 'bg-white/10' : 'bg-gray-50'} rounded-lg`}>
-                  {item.icons.map((icon, i) => (
+                  {(item.icons || []).map((icon, i) => (
                     <div key={i} className="flex items-center space-x-1.5">
                       <div className={`w-1.5 h-1.5 rounded-full ${isGreen ? 'bg-white/50' : 'bg-primary/30'}`}></div>
                       <span className={`text-[10px] font-bold uppercase tracking-tighter ${isGreen ? 'text-white/90' : 'text-gray-500'}`}>{icon}</span>
