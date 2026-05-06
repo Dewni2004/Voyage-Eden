@@ -3,6 +3,8 @@ import {
   addReview, addArticle, getReviews, getArticles, updateArticle, deleteArticle, updateReview, deleteReview,
   getItineraries, addItinerary, updateItinerary, deleteItinerary 
 } from '../services/contentService';
+import ImageUploadField from '../components/Admin/ImageUploadField';
+import MapCoordinatePicker from '../components/Admin/MapCoordinatePicker';
 
 const Admin = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -574,10 +576,12 @@ const Admin = () => {
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div className="space-y-2">
-                      <label className={labelClass}>Cover Image URL</label>
-                      <input type="text" required value={articleForm.image} onChange={(e) => setArticleForm({...articleForm, image: e.target.value})} className={inputClass} placeholder="https://..." />
-                    </div>
+                    <ImageUploadField 
+                      label="Cover Image" 
+                      value={articleForm.image} 
+                      onChange={(url) => setArticleForm({...articleForm, image: url})} 
+                      folder="articles"
+                    />
                     <div className="space-y-2">
                       <label className={labelClass}>Short Card Excerpt</label>
                       <input type="text" required value={articleForm.excerpt} onChange={(e) => setArticleForm({...articleForm, excerpt: e.target.value})} className={inputClass} placeholder="Preview snippet..." />
@@ -651,10 +655,12 @@ const Admin = () => {
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div className="space-y-2">
-                      <label className={labelClass}>Main Hero Photo</label>
-                      <input type="text" required value={reviewForm.img} onChange={(e) => setReviewForm({...reviewForm, img: e.target.value})} className={inputClass} placeholder="https://..." />
-                    </div>
+                    <ImageUploadField 
+                      label="Main Hero Photo" 
+                      value={reviewForm.img} 
+                      onChange={(url) => setReviewForm({...reviewForm, img: url})} 
+                      folder="reviews"
+                    />
                     <div className="space-y-2">
                       <label className={labelClass}>Italicized Headline</label>
                       <input type="text" value={reviewForm.headline} onChange={(e) => setReviewForm({...reviewForm, headline: e.target.value})} className={inputClass} placeholder="An unforgettable journey..." />
@@ -675,14 +681,17 @@ const Admin = () => {
                     <h3 className="text-xl font-serif font-bold text-primary mb-8 text-center">Visual Gallery</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                       {reviewForm.gallery.map((url, i) => (
-                        <div key={i} className="space-y-2">
-                          <label className="text-[10px] font-bold text-gray-300 uppercase tracking-widest ml-1">Photo {i+1}</label>
-                          <input type="text" value={url} onChange={(e) => {
+                        <ImageUploadField 
+                          key={i}
+                          label={`Photo ${i+1}`}
+                          value={url}
+                          onChange={(newUrl) => {
                             const newGallery = [...reviewForm.gallery];
-                            newGallery[i] = e.target.value;
+                            newGallery[i] = newUrl;
                             setReviewForm({...reviewForm, gallery: newGallery});
-                          }} className="w-full bg-gray-50 border border-gray-100 rounded-xl py-3 px-4 outline-none focus:ring-2 focus:ring-primary/20 text-xs font-medium" placeholder="https://..." />
-                        </div>
+                          }}
+                          folder="reviews/gallery"
+                        />
                       ))}
                     </div>
                   </div>
@@ -700,7 +709,12 @@ const Admin = () => {
                       <h3 className="text-lg font-serif font-bold text-primary mb-6 flex items-center gap-3">👤 Guide Info</h3>
                       <div className="space-y-4">
                         <input type="text" placeholder="Guide Name" value={reviewForm.guide.name} onChange={(e) => setReviewForm({...reviewForm, guide: {...reviewForm.guide, name: e.target.value}})} className={inputClass} />
-                        <input type="text" placeholder="Photo URL" value={reviewForm.guide.photo} onChange={(e) => setReviewForm({...reviewForm, guide: {...reviewForm.guide, photo: e.target.value}})} className={inputClass} />
+                        <ImageUploadField 
+                          label="Guide Photo" 
+                          value={reviewForm.guide.photo} 
+                          onChange={(url) => setReviewForm({...reviewForm, guide: {...reviewForm.guide, photo: url}})} 
+                          folder="guides"
+                        />
                         <textarea placeholder="Personal Quote" value={reviewForm.guide.quote} onChange={(e) => setReviewForm({...reviewForm, guide: {...reviewForm.guide, quote: e.target.value}})} className={`${inputClass} h-24 resize-none`}></textarea>
                       </div>
                     </div>
@@ -759,10 +773,12 @@ const Admin = () => {
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div className="space-y-2">
-                      <label className={labelClass}>Main Hero URL</label>
-                      <input type="text" required value={itineraryForm.image} onChange={(e) => setItineraryForm({...itineraryForm, image: e.target.value})} className={inputClass} />
-                    </div>
+                    <ImageUploadField 
+                      label="Main Hero Visual" 
+                      value={itineraryForm.image} 
+                      onChange={(url) => setItineraryForm({...itineraryForm, image: url})} 
+                      folder="itineraries"
+                    />
                     <div className="space-y-2">
                       <label className={labelClass}>Price Base (USD)</label>
                       <input type="text" required value={itineraryForm.price} onChange={(e) => setItineraryForm({...itineraryForm, price: e.target.value})} className={inputClass} />
@@ -810,14 +826,16 @@ const Admin = () => {
                                 setItineraryDays(newDays);
                               }} className="w-full bg-gray-50/50 border border-gray-100 rounded-2xl py-4 px-6 outline-none focus:ring-4 focus:ring-primary/5 transition-all font-medium text-primary shadow-inner" />
                             </div>
-                            <div className="space-y-2">
-                              <label className={labelClass}>Day Visual URL</label>
-                              <input type="text" required value={day.image} onChange={e => {
+                            <ImageUploadField 
+                              label="Day Visual" 
+                              value={day.image} 
+                              onChange={(url) => {
                                 const newDays = [...itineraryDays];
-                                newDays[idx].image = e.target.value;
+                                newDays[idx].image = url;
                                 setItineraryDays(newDays);
-                              }} className="w-full bg-gray-50/50 border border-gray-100 rounded-2xl py-4 px-6 outline-none focus:ring-4 focus:ring-primary/5 transition-all font-medium text-primary shadow-inner" />
-                            </div>
+                              }} 
+                              folder="itineraries/days"
+                            />
                           </div>
 
                           <div className="space-y-2 mt-8">
@@ -865,21 +883,16 @@ const Admin = () => {
                                 setItineraryDays(newDays);
                               }} className="w-full bg-gray-50/50 border border-gray-100 rounded-2xl py-3 px-5 outline-none focus:ring-4 focus:ring-primary/5 transition-all text-sm font-medium shadow-inner" />
                             </div>
-                            <div className="space-y-2">
-                              <label className={labelClass}>Map Plot (X, Y)</label>
-                              <div className="flex gap-2">
-                                <input type="number" value={day.coords.x} onChange={e => {
-                                  const newDays = [...itineraryDays];
-                                  newDays[idx].coords.x = parseInt(e.target.value);
-                                  setItineraryDays(newDays);
-                                }} className="w-full bg-gray-50/50 border border-gray-100 rounded-2xl py-3 px-4 outline-none focus:ring-4 focus:ring-primary/5 text-xs shadow-inner" />
-                                <input type="number" value={day.coords.y} onChange={e => {
-                                  const newDays = [...itineraryDays];
-                                  newDays[idx].coords.y = parseInt(e.target.value);
-                                  setItineraryDays(newDays);
-                                }} className="w-full bg-gray-50/50 border border-gray-100 rounded-2xl py-3 px-4 outline-none focus:ring-4 focus:ring-primary/5 text-xs shadow-inner" />
-                              </div>
-                            </div>
+                            <MapCoordinatePicker 
+                              x={day.coords.x} 
+                              y={day.coords.y} 
+                              dayNumber={day.id}
+                              onChange={(x, y) => {
+                                const newDays = [...itineraryDays];
+                                newDays[idx].coords = { x, y };
+                                setItineraryDays(newDays);
+                              }} 
+                            />
                           </div>
                         </div>
                       ))}
