@@ -9,14 +9,16 @@ import offersImg from '../../assets/Half - Day offers card.webp';
 
 const ItineraryCategories = () => {
   const categories = [
-    { id: 'adventure', title: 'Adventure Trips', image: adventureImg },
-    { id: 'honeymoon', title: 'Honeymoon Trips', image: honeymoonImg },
-    { id: 'family', title: 'Family Trips', image: familyImg },
-    { id: 'luxury', title: 'Super Luxury', image: luxuryImg },
-    { id: 'golf', title: 'Golf Trips', image: 'https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?auto=format&fit=crop&q=80&w=400' },
-    { id: 'esala', title: 'Esala', image: esalaImg },
-    { id: '8days', title: '8 Days Trips', image: eightDaysImg },
-    { id: 'offers', title: 'Half Board Offers', image: offersImg },
+    { id: 'popular', title: 'Populaires', image: 'https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&q=80&w=400' },
+    { id: 'honeymoon', title: 'Voyages de noces', image: honeymoonImg },
+    { id: 'family', title: 'Voyages en famille', image: familyImg },
+    { id: 'luxury', title: 'Collection de luxe', image: luxuryImg },
+    { id: 'golf', title: 'Séjours golfiques', image: 'https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?auto=format&fit=crop&q=80&w=400' },
+    { id: 'surf', title: 'Surf & Plongée', image: 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&q=80&w=400' },
+    { id: 'adventure', title: 'Aventure', image: adventureImg },
+    { id: 'pererahera', title: 'Esela Perahera', image: esalaImg },
+    { id: '8days', title: '8 Jours', image: eightDaysImg },
+    { id: 'interest', title: 'Par Intérêt', image: offersImg },
   ];
 
   const scrollToSection = (id) => {
@@ -29,7 +31,7 @@ const ItineraryCategories = () => {
   return (
     <section className="py-24 bg-white">
       <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
           {categories.map((cat) => (
             <div 
               key={cat.id}

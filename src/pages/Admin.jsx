@@ -31,7 +31,8 @@ const Admin = () => {
     duration: '',
     group: 'Private',
     effort: 'Moderate',
-    category: 'popular'
+    category: 'popular',
+    icons: '5 Star, Half Board, Car'
   });
 
   const [itineraryDays, setItineraryDays] = useState([
@@ -127,7 +128,7 @@ const Admin = () => {
   };
 
   const resetItineraryForm = () => {
-    setItineraryForm({ title: '', description: '', image: '', price: '', duration: '', group: 'Private', effort: 'Moderate', category: 'popular' });
+    setItineraryForm({ title: '', description: '', image: '', price: '', duration: '', group: 'Private', effort: 'Moderate', category: 'popular', icons: '5 Star, Half Board, Car' });
     setItineraryDays([{ id: 1, location: '', image: '', description: '', highlights: '', accommodation: '', meals: 'Breakfast & Dinner', travel: '', coords: { x: 150, y: 225 } }]);
     setEditingItineraryId(null);
   };
@@ -175,7 +176,8 @@ const Admin = () => {
       duration: itinerary.duration || '',
       group: itinerary.group || 'Private',
       effort: itinerary.effort || 'Moderate',
-      category: itinerary.category || 'popular'
+      category: itinerary.category || 'popular',
+      icons: Array.isArray(itinerary.icons) ? itinerary.icons.join(', ') : (itinerary.icons || '5 Star, Half Board, Car')
     });
     setItineraryDays(itinerary.days || [{ id: 1, location: '', image: '', description: '', highlights: '', accommodation: '', meals: 'Breakfast & Dinner', travel: '', coords: { x: 150, y: 225 } }]);
     setEditingItineraryId(itinerary.id);
@@ -267,7 +269,11 @@ const Admin = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const data = { ...itineraryForm, days: itineraryDays };
+      const data = { 
+        ...itineraryForm, 
+        days: itineraryDays,
+        icons: itineraryForm.icons.split(',').map(i => i.trim()).filter(i => i !== '')
+      };
       if (editingItineraryId) {
         await updateItinerary(editingItineraryId, data);
         setMessage({ type: 'success', text: 'Itinerary updated successfully!' });
@@ -289,7 +295,7 @@ const Admin = () => {
   const updateBlock = (index, text) => { const b = [...contentBlocks]; b[index].text = text; setContentBlocks(b); };
   const removeBlock = (index) => setContentBlocks(contentBlocks.filter((_, i) => i !== index));
 
-  const inputClass = "w-full bg-gray-50 border border-gray-200 rounded-2xl py-4 px-6 outline-none focus:ring-2 focus:ring-primary/20 transition-all";
+  const loginInputClass = "w-full bg-gray-50 border border-gray-200 rounded-2xl py-4 px-6 outline-none focus:ring-2 focus:ring-primary/20 transition-all";
 
   if (!isAuthenticated) {
     return (
@@ -307,7 +313,7 @@ const Admin = () => {
           <form onSubmit={handleLogin} className="space-y-6">
             <div>
               <label className="block text-sm font-bold text-gray-700 mb-2">Secret Key</label>
-              <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className={inputClass} placeholder="Enter password..." />
+              <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className={loginInputClass} placeholder="Enter password..." />
             </div>
             <button className="w-full bg-primary text-white font-bold py-4 rounded-2xl hover:bg-primary/90 transition-all">Login to Dashboard</button>
           </form>
@@ -317,446 +323,591 @@ const Admin = () => {
   }
 
   const tabs = [
-    { id: 'articles', label: '📄 Articles', count: publishedArticles.length },
-    { id: 'reviews', label: '⭐ Reviews', count: publishedReviews.length },
-    { id: 'itineraries', label: '🗺️ Itineraries', count: publishedItineraries.length },
-    { id: 'new-article', label: editingArticleId ? '✏️ Edit Article' : '+ New Article' },
-    { id: 'new-review', label: editingReviewId ? '✏️ Edit Review' : '+ New Review' },
-    { id: 'new-itinerary', label: editingItineraryId ? '✏️ Edit Itinerary' : '+ New Itinerary' },
+    { id: 'articles', label: 'Articles', icon: '📄', count: publishedArticles.length },
+    { id: 'reviews', label: 'Reviews', icon: '⭐', count: publishedReviews.length },
+    { id: 'itineraries', label: 'Itineraries', icon: '🗺️', count: publishedItineraries.length },
+    { id: 'new-article', label: editingArticleId ? 'Edit Article' : 'New Article', icon: '✍️' },
+    { id: 'new-review', label: editingReviewId ? 'Edit Review' : 'New Review', icon: '✨' },
+    { id: 'new-itinerary', label: editingItineraryId ? 'Edit Itinerary' : 'New Itinerary', icon: '📍' },
   ];
 
+  const inputClass = "w-full bg-white border border-gray-100 rounded-2xl py-4 px-6 outline-none focus:ring-2 focus:ring-primary/20 transition-all text-primary font-medium placeholder:text-gray-300 shadow-sm";
+  const labelClass = "text-xs font-bold text-gray-400 uppercase tracking-widest ml-1 mb-2 block";
+
   return (
-    <div className="min-h-screen bg-[#f8fbff]">
-      {/* Header */}
-      <div className="bg-primary text-white px-8 py-6 flex items-center justify-between shadow-xl">
-        <div>
-          <h1 className="text-2xl font-bold font-serif">Content Manager</h1>
-          <p className="text-white/60 text-sm">Eden Travels Dashboard</p>
-        </div>
-        <a href="/" className="text-white/70 hover:text-white text-sm font-bold transition-colors">← Back to Site</a>
-      </div>
-
-      <div className="max-w-5xl mx-auto px-6 py-10">
-        {/* Tabs */}
-        <div className="flex flex-wrap gap-3 mb-8">
-          {tabs.map(tab => (
-            <button
-              key={tab.id}
-              onClick={() => { setActiveTab(tab.id); if (tab.id === 'new-article' && !editingArticleId) resetArticleForm(); if (tab.id === 'new-review' && !editingReviewId) resetReviewForm(); }}
-              className={`px-6 py-3 rounded-2xl font-bold transition-all flex items-center gap-2 ${activeTab === tab.id ? 'bg-primary text-white shadow-lg shadow-primary/30' : 'bg-white text-gray-500 hover:bg-gray-50 border border-gray-100'}`}
-            >
-              {tab.label}
-              {tab.count !== undefined && <span className={`text-xs px-2 py-0.5 rounded-full ${activeTab === tab.id ? 'bg-white/20' : 'bg-gray-100'}`}>{tab.count}</span>}
-            </button>
-          ))}
-        </div>
-
-        {/* Message */}
-        {message.text && (
-          <div className={`mb-6 p-4 rounded-2xl text-center font-bold ${message.type === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
-            {message.text}
-            <button onClick={() => setMessage({ type: '', text: '' })} className="ml-4 opacity-60 hover:opacity-100">×</button>
+    <div className="min-h-screen bg-[#f4f7fe] flex font-sans text-primary">
+      {/* Sidebar */}
+      <aside className="w-80 bg-primary h-screen sticky top-0 flex flex-col shadow-2xl z-50">
+        <div className="p-10">
+          <div className="mb-12">
+            <h1 className="text-white text-3xl font-serif font-bold tracking-tight">Eden</h1>
+            <p className="text-luxury text-[10px] font-bold uppercase tracking-[0.3em] mt-1">Management</p>
           </div>
-        )}
 
-        {/* ARTICLES LIST */}
-        {activeTab === 'articles' && (
-          <div className="space-y-4">
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-primary text-2xl font-bold">Published Articles</h2>
-              <button onClick={() => { resetArticleForm(); setActiveTab('new-article'); }} className="bg-primary text-white font-bold px-6 py-3 rounded-2xl hover:bg-primary/90 transition-all">+ New Article</button>
-            </div>
-            {contentLoading ? (
-              <div className="text-center py-20 text-gray-400 font-bold">Loading...</div>
-            ) : publishedArticles.length === 0 ? (
-              <div className="text-center py-20 bg-white rounded-[32px] border border-gray-100">
-                <p className="text-gray-400 font-bold">No articles yet.</p>
-                <button onClick={() => setActiveTab('new-article')} className="mt-4 text-primary font-bold hover:underline">+ Publish your first article</button>
-              </div>
-            ) : publishedArticles.map((article) => (
-              <div key={article.id} className="bg-white rounded-[24px] p-6 shadow-sm border border-gray-100 flex gap-6 items-center hover:shadow-md transition-all">
-                <div className="w-20 h-20 rounded-2xl overflow-hidden flex-shrink-0 bg-gray-100">
-                  {article.image && <img src={article.image} alt="" className="w-full h-full object-cover" />}
+          <nav className="space-y-2">
+            {tabs.map(tab => (
+              <button
+                key={tab.id}
+                onClick={() => { 
+                  setActiveTab(tab.id); 
+                  if (tab.id === 'new-article' && !editingArticleId) resetArticleForm(); 
+                  if (tab.id === 'new-review' && !editingReviewId) resetReviewForm(); 
+                  if (tab.id === 'new-itinerary' && !editingItineraryId) resetItineraryForm();
+                }}
+                className={`w-full flex items-center justify-between px-6 py-4 rounded-2xl transition-all duration-300 group ${activeTab === tab.id ? 'bg-white text-primary shadow-xl scale-105' : 'text-white/60 hover:text-white hover:bg-white/5'}`}
+              >
+                <div className="flex items-center gap-4">
+                  <span className={`text-xl transition-transform group-hover:scale-110 ${activeTab === tab.id ? 'opacity-100' : 'opacity-50'}`}>{tab.icon}</span>
+                  <span className="font-bold text-sm tracking-wide">{tab.label}</span>
                 </div>
-                <div className="flex-1 min-w-0">
-                  <span className="text-[10px] font-bold text-luxury uppercase tracking-widest">{article.category}</span>
-                  <h3 className="text-primary font-bold text-lg leading-tight truncate">{article.title}</h3>
-                  <p className="text-gray-400 text-sm truncate">{article.excerpt}</p>
-                  <p className="text-gray-300 text-xs mt-1">{article.date}</p>
-                </div>
-                <div className="flex gap-3 flex-shrink-0">
-                  <button onClick={() => handleEditArticle(article)} className="bg-primary/10 hover:bg-primary hover:text-white text-primary font-bold px-5 py-2.5 rounded-xl transition-all text-sm">Edit</button>
-                  <button onClick={() => handleDeleteArticle(article.id)} className="bg-red-50 hover:bg-red-500 hover:text-white text-red-500 font-bold px-5 py-2.5 rounded-xl transition-all text-sm">Delete</button>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* REVIEWS LIST */}
-        {activeTab === 'reviews' && (
-          <div className="space-y-4">
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-primary text-2xl font-bold">Published Reviews</h2>
-              <button onClick={() => { resetReviewForm(); setActiveTab('new-review'); }} className="bg-primary text-white font-bold px-6 py-3 rounded-2xl hover:bg-primary/90 transition-all">+ New Review</button>
-            </div>
-            {contentLoading ? (
-              <div className="text-center py-20 text-gray-400 font-bold">Loading...</div>
-            ) : publishedReviews.length === 0 ? (
-              <div className="text-center py-20 bg-white rounded-[32px] border border-gray-100">
-                <p className="text-gray-400 font-bold">No reviews yet.</p>
-                <button onClick={() => setActiveTab('new-review')} className="mt-4 text-primary font-bold hover:underline">+ Add your first review</button>
-              </div>
-            ) : publishedReviews.map((review) => (
-              <div key={review.id} className="bg-white rounded-[24px] p-6 shadow-sm border border-gray-100 flex gap-6 items-center hover:shadow-md transition-all">
-                <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 bg-gray-100">
-                  {review.img && <img src={review.img} alt="" className="w-full h-full object-cover" />}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex text-yellow-400 gap-0.5 mb-1">{'★'.repeat(review.rating || 5)}</div>
-                  <h3 className="text-primary font-bold">{review.name}</h3>
-                  <p className="text-gray-400 text-sm truncate">{review.text}</p>
-                  <p className="text-gray-300 text-xs mt-1">Tour: {review.date}</p>
-                </div>
-                <div className="flex gap-3 flex-shrink-0">
-                  <button onClick={() => handleEditReview(review)} className="bg-primary/10 hover:bg-primary hover:text-white text-primary font-bold px-5 py-2.5 rounded-xl transition-all text-sm">Edit</button>
-                  <button onClick={() => handleDeleteReview(review.id)} className="bg-red-50 hover:bg-red-500 hover:text-white text-red-500 font-bold px-5 py-2.5 rounded-xl transition-all text-sm">Delete</button>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* ITINERARIES LIST */}
-        {activeTab === 'itineraries' && (
-          <div className="space-y-4">
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-primary text-2xl font-bold">Published Itineraries</h2>
-              <button onClick={() => { resetItineraryForm(); setActiveTab('new-itinerary'); }} className="bg-primary text-white font-bold px-6 py-3 rounded-2xl hover:bg-primary/90 transition-all">+ New Itinerary</button>
-            </div>
-            {contentLoading ? (
-              <div className="text-center py-20 text-gray-400 font-bold">Loading...</div>
-            ) : publishedItineraries.length === 0 ? (
-              <div className="text-center py-20 bg-white rounded-[32px] border border-gray-100">
-                <p className="text-gray-400 font-bold">No itineraries yet.</p>
-                <button onClick={() => setActiveTab('new-itinerary')} className="mt-4 text-primary font-bold hover:underline">+ Create your first itinerary</button>
-              </div>
-            ) : publishedItineraries.map((itinerary) => (
-              <div key={itinerary.id} className="bg-white rounded-[24px] p-6 shadow-sm border border-gray-100 flex gap-6 items-center hover:shadow-md transition-all">
-                <div className="w-20 h-20 rounded-2xl overflow-hidden flex-shrink-0 bg-gray-100">
-                  {itinerary.image && <img src={itinerary.image} alt="" className="w-full h-full object-cover" />}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <span className="text-[10px] font-bold text-luxury uppercase tracking-widest">{itinerary.category}</span>
-                  <h3 className="text-primary font-bold text-lg leading-tight truncate">{itinerary.title}</h3>
-                  <p className="text-gray-400 text-sm truncate">{itinerary.description}</p>
-                  <p className="text-gray-300 text-xs mt-1">{itinerary.duration} • {itinerary.price} EUR</p>
-                </div>
-                <div className="flex gap-3 flex-shrink-0">
-                  <button onClick={() => handleEditItinerary(itinerary)} className="bg-primary/10 hover:bg-primary hover:text-white text-primary font-bold px-5 py-2.5 rounded-xl transition-all text-sm">Edit</button>
-                  <button onClick={() => handleDeleteItinerary(itinerary.id)} className="bg-red-50 hover:bg-red-500 hover:text-white text-red-500 font-bold px-5 py-2.5 rounded-xl transition-all text-sm">Delete</button>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* NEW / EDIT ARTICLE FORM */}
-        {activeTab === 'new-article' && (
-          <div className="bg-white p-8 md:p-12 rounded-[40px] shadow-xl border border-gray-100">
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="text-primary text-2xl font-bold">{editingArticleId ? 'Edit Article' : 'New Article'}</h2>
-              {editingArticleId && <button type="button" onClick={resetArticleForm} className="text-gray-400 text-sm hover:text-gray-600">× Cancel Edit</button>}
-            </div>
-            <form onSubmit={handleArticleSubmit} className="space-y-6">
-              <div className="space-y-2">
-                <label className="text-sm font-bold text-primary ml-1">Main Title</label>
-                <input type="text" required value={articleForm.title} onChange={(e) => setArticleForm({...articleForm, title: e.target.value})} className={inputClass} />
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-bold text-primary ml-1">Hero Description</label>
-                <input type="text" required value={articleForm.description} onChange={(e) => setArticleForm({...articleForm, description: e.target.value})} className={inputClass} />
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-primary ml-1">Category</label>
-                  <select value={articleForm.category} onChange={(e) => setArticleForm({...articleForm, category: e.target.value})} className={inputClass}>
-                    <option>History</option><option>Nature</option><option>Culture</option><option>Adventure</option><option>Luxury</option>
-                  </select>
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-primary ml-1">Cover Image URL</label>
-                  <input type="text" required value={articleForm.image} onChange={(e) => setArticleForm({...articleForm, image: e.target.value})} className={inputClass} />
-                </div>
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-bold text-primary ml-1">Short Excerpt (Card Preview)</label>
-                <input type="text" required value={articleForm.excerpt} onChange={(e) => setArticleForm({...articleForm, excerpt: e.target.value})} className={inputClass} />
-              </div>
-
-              <div className="space-y-4 pt-6 border-t border-gray-100">
-                <h3 className="text-primary font-bold text-xl">Article Content</h3>
-                {contentBlocks.map((block, index) => (
-                  <div key={index} className="bg-gray-50 p-5 rounded-3xl relative group">
-                    <button type="button" onClick={() => removeBlock(index)} className="absolute -top-2 -right-2 w-7 h-7 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity text-sm font-bold">×</button>
-                    <span className={`inline-block px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider mb-3 ${block.type === 'heading' ? 'bg-primary text-white' : block.type === 'quote' ? 'bg-luxury text-white' : 'bg-gray-200 text-gray-600'}`}>{block.type}</span>
-                    <textarea rows={block.type === 'paragraph' ? 4 : 2} value={block.text} onChange={(e) => updateBlock(index, e.target.value)} placeholder={`Enter ${block.type} text...`} className="w-full bg-white border border-gray-200 rounded-xl py-3 px-5 outline-none resize-none focus:ring-2 focus:ring-primary/20"></textarea>
-                  </div>
-                ))}
-                <div className="flex flex-wrap gap-3 pt-2">
-                  <button type="button" onClick={() => addBlock('paragraph')} className="bg-gray-100 hover:bg-gray-200 text-primary font-bold px-5 py-2.5 rounded-xl transition-all text-sm">+ Paragraph</button>
-                  <button type="button" onClick={() => addBlock('heading')} className="bg-gray-100 hover:bg-gray-200 text-primary font-bold px-5 py-2.5 rounded-xl transition-all text-sm">+ Heading</button>
-                  <button type="button" onClick={() => addBlock('quote')} className="bg-gray-100 hover:bg-gray-200 text-primary font-bold px-5 py-2.5 rounded-xl transition-all text-sm">+ Quote</button>
-                </div>
-              </div>
-
-              <button disabled={loading} className="w-full bg-primary text-white font-bold py-5 rounded-2xl shadow-xl transition-all hover:bg-primary/90 disabled:opacity-70 mt-4">
-                {loading ? 'Saving...' : editingArticleId ? '💾 Save Changes' : '🚀 Publish Article'}
+                {tab.count !== undefined && (
+                  <span className={`text-[10px] font-bold px-2 py-1 rounded-full ${activeTab === tab.id ? 'bg-primary/10 text-primary' : 'bg-white/10 text-white/40'}`}>
+                    {tab.count}
+                  </span>
+                )}
               </button>
-            </form>
-          </div>
-        )}
+            ))}
+          </nav>
+        </div>
 
-        {/* NEW / EDIT REVIEW FORM */}
-        {activeTab === 'new-review' && (
-          <div className="bg-white p-8 md:p-12 rounded-[40px] shadow-xl border border-gray-100">
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="text-primary text-2xl font-bold">{editingReviewId ? 'Edit Review' : 'New Review'}</h2>
-              {editingReviewId && <button type="button" onClick={resetReviewForm} className="text-gray-400 text-sm hover:text-gray-600">× Cancel Edit</button>}
-            </div>
-            <form onSubmit={handleReviewSubmit} className="space-y-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-primary ml-1">Traveler Name</label>
-                  <input type="text" required value={reviewForm.name} onChange={(e) => setReviewForm({...reviewForm, name: e.target.value})} className={inputClass} />
+        <div className="mt-auto p-10 border-t border-white/5">
+          <a href="/" className="flex items-center gap-3 text-white/50 hover:text-white transition-colors text-sm font-bold uppercase tracking-widest">
+            <span className="text-lg">←</span> View Website
+          </a>
+        </div>
+      </aside>
+
+      {/* Main Content */}
+      <main className="flex-1 overflow-y-auto px-12 py-12">
+        {/* Top Header */}
+        <header className="flex items-center justify-between mb-12 bg-white/50 backdrop-blur-md p-6 rounded-[32px] border border-white shadow-sm">
+          <div>
+            <h2 className="text-3xl font-serif font-bold text-primary">Dashboard</h2>
+            <p className="text-gray-400 text-sm font-medium">Welcome back, Admin</p>
+          </div>
+          <div className="flex items-center gap-4">
+            {message.text && (
+              <div className={`px-6 py-3 rounded-2xl font-bold text-sm animate-fade-in ${message.type === 'success' ? 'bg-green-50 text-green-600 border border-green-100' : 'bg-red-50 text-red-600 border border-red-100'}`}>
+                {message.text}
+                <button onClick={() => setMessage({ type: '', text: '' })} className="ml-4 hover:scale-110 transition-transform">×</button>
+              </div>
+            )}
+            <div className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center text-white font-bold shadow-lg shadow-primary/20">ET</div>
+          </div>
+        </header>
+
+        {/* Content Area */}
+        <div className="max-w-6xl mx-auto">
+          {/* ARTICLES LIST */}
+          {activeTab === 'articles' && (
+            <div className="animate-fade-in">
+              <div className="flex justify-between items-end mb-8 px-4">
+                <div>
+                  <h3 className="text-2xl font-serif font-bold text-primary mb-1">Travel Guides</h3>
+                  <p className="text-gray-400 text-sm font-medium">Manage your blog articles and guides</p>
                 </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-primary ml-1">Tour Month/Year (e.g. Feb 2024)</label>
-                  <input type="text" required value={reviewForm.date} onChange={(e) => setReviewForm({...reviewForm, date: e.target.value})} className={inputClass} />
-                </div>
+                <button onClick={() => { resetArticleForm(); setActiveTab('new-article'); }} className="bg-primary text-white font-bold px-8 py-4 rounded-2xl hover:bg-primary/90 transition-all shadow-xl shadow-primary/20 text-sm tracking-wide">+ NEW ARTICLE</button>
               </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-primary ml-1">Main Hero Photo URL</label>
-                  <input type="text" required value={reviewForm.img} onChange={(e) => setReviewForm({...reviewForm, img: e.target.value})} className={inputClass} />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-primary ml-1">Review Headline (Italicized text)</label>
-                  <input type="text" value={reviewForm.headline} onChange={(e) => setReviewForm({...reviewForm, headline: e.target.value})} className={inputClass} placeholder="e.g. This trip far exceeded our expectations." />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-sm font-bold text-primary ml-1">Short Preview Snippet (For Cards)</label>
-                <input type="text" required value={reviewForm.text} onChange={(e) => setReviewForm({...reviewForm, text: e.target.value})} className={inputClass} />
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-sm font-bold text-primary ml-1">Full Detailed Story</label>
-                <textarea rows="8" required value={reviewForm.detailedText} onChange={(e) => setReviewForm({...reviewForm, detailedText: e.target.value})} className={`${inputClass} resize-none`} placeholder="Write the full story here..."></textarea>
-              </div>
-
-              <div className="pt-8 border-t border-gray-100">
-                <h3 className="text-primary font-bold text-xl mb-6">Gallery Images (Optional)</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {reviewForm.gallery.map((url, i) => (
-                    <input key={i} type="text" value={url} onChange={(e) => {
-                      const newGallery = [...reviewForm.gallery];
-                      newGallery[i] = e.target.value;
-                      setReviewForm({...reviewForm, gallery: newGallery});
-                    }} className={inputClass} placeholder={`Gallery Image ${i+1} URL`} />
-                  ))}
-                </div>
-              </div>
-
-              <div className="pt-8 border-t border-gray-100 grid grid-cols-1 md:grid-cols-2 gap-10">
-                <div>
-                  <h3 className="text-primary font-bold text-xl mb-6">Tour Stats</h3>
-                  <div className="space-y-4">
-                    <input type="text" placeholder="Specific Date" value={reviewForm.tourDetails.date} onChange={(e) => setReviewForm({...reviewForm, tourDetails: {...reviewForm.tourDetails, date: e.target.value}})} className={inputClass} />
-                    <input type="text" placeholder="Traveler Type (e.g. Couple)" value={reviewForm.tourDetails.travelerType} onChange={(e) => setReviewForm({...reviewForm, tourDetails: {...reviewForm.tourDetails, travelerType: e.target.value}})} className={inputClass} />
-                    <input type="text" placeholder="Group Type (e.g. Private)" value={reviewForm.tourDetails.group} onChange={(e) => setReviewForm({...reviewForm, tourDetails: {...reviewForm.tourDetails, group: e.target.value}})} className={inputClass} />
+              <div className="grid grid-cols-1 gap-4">
+                {contentLoading ? (
+                  <div className="flex flex-col items-center justify-center py-32 space-y-4">
+                    <div className="w-12 h-12 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
+                    <p className="text-gray-400 font-bold text-sm uppercase tracking-widest">Syncing with database...</p>
                   </div>
-                </div>
-                <div>
-                  <h3 className="text-primary font-bold text-xl mb-6">Guide Profile</h3>
-                  <div className="space-y-4">
-                    <input type="text" placeholder="Guide Name" value={reviewForm.guide.name} onChange={(e) => setReviewForm({...reviewForm, guide: {...reviewForm.guide, name: e.target.value}})} className={inputClass} />
-                    <input type="text" placeholder="Guide Photo URL" value={reviewForm.guide.photo} onChange={(e) => setReviewForm({...reviewForm, guide: {...reviewForm.guide, photo: e.target.value}})} className={inputClass} />
-                    <input type="text" placeholder="Guide's Quote about them" value={reviewForm.guide.quote} onChange={(e) => setReviewForm({...reviewForm, guide: {...reviewForm.guide, quote: e.target.value}})} className={inputClass} />
+                ) : publishedArticles.length === 0 ? (
+                  <div className="bg-white rounded-[40px] p-24 text-center border border-gray-100 shadow-sm">
+                    <div className="text-6xl mb-6">📭</div>
+                    <h4 className="text-xl font-bold text-primary mb-2">No articles found</h4>
+                    <p className="text-gray-400 max-w-xs mx-auto mb-8">Start sharing your travel stories with the world.</p>
+                    <button onClick={() => setActiveTab('new-article')} className="text-primary font-bold hover:underline">Create your first guide →</button>
                   </div>
-                </div>
+                ) : publishedArticles.map((article) => (
+                  <div key={article.id} className="bg-white rounded-[32px] p-6 shadow-sm border border-gray-100 flex gap-8 items-center group hover:shadow-2xl hover:-translate-y-1 transition-all duration-500">
+                    <div className="w-24 h-24 rounded-3xl overflow-hidden flex-shrink-0 bg-gray-100 shadow-inner">
+                      {article.image && <img src={article.image} alt="" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-3 mb-2">
+                        <span className="text-[10px] font-bold text-luxury bg-luxury/10 px-2 py-0.5 rounded-full uppercase tracking-widest">{article.category}</span>
+                        <span className="text-gray-300 text-xs font-bold">{article.date}</span>
+                      </div>
+                      <h3 className="text-primary font-bold text-xl leading-tight truncate mb-1">{article.title}</h3>
+                      <p className="text-gray-400 text-sm truncate font-medium">{article.excerpt}</p>
+                    </div>
+                    <div className="flex gap-3 flex-shrink-0 pr-4">
+                      <button onClick={() => handleEditArticle(article)} className="w-12 h-12 flex items-center justify-center bg-gray-50 hover:bg-primary hover:text-white text-gray-400 rounded-2xl transition-all duration-300">✏️</button>
+                      <button onClick={() => handleDeleteArticle(article.id)} className="w-12 h-12 flex items-center justify-center bg-red-50 hover:bg-red-500 hover:text-white text-red-400 rounded-2xl transition-all duration-300">🗑️</button>
+                    </div>
+                  </div>
+                ))}
               </div>
-
-              <button disabled={loading} className="w-full bg-primary text-white font-bold py-5 rounded-2xl shadow-xl transition-all hover:bg-primary/90 disabled:opacity-70 mt-4">
-                {loading ? 'Saving...' : editingReviewId ? '💾 Save Story' : '⭐ Publish Story'}
-              </button>
-            </form>
-          </div>
-        )}
-
-        {/* NEW / EDIT ITINERARY FORM */}
-        {activeTab === 'new-itinerary' && (
-          <div className="bg-white p-8 md:p-12 rounded-[40px] shadow-xl border border-gray-100">
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="text-primary text-2xl font-bold">{editingItineraryId ? 'Edit Itinerary' : 'New Itinerary'}</h2>
-              {editingItineraryId && <button type="button" onClick={resetItineraryForm} className="text-gray-400 text-sm hover:text-gray-600">× Cancel Edit</button>}
             </div>
-            <form onSubmit={handleItinerarySubmit} className="space-y-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-primary ml-1">Tour Title</label>
-                  <input type="text" required value={itineraryForm.title} onChange={(e) => setItineraryForm({...itineraryForm, title: e.target.value})} className={inputClass} />
+          )}
+
+          {/* REVIEWS LIST */}
+          {activeTab === 'reviews' && (
+            <div className="animate-fade-in">
+              <div className="flex justify-between items-end mb-8 px-4">
+                <div>
+                  <h3 className="text-2xl font-serif font-bold text-primary mb-1">Guest Reviews</h3>
+                  <p className="text-gray-400 text-sm font-medium">Manage feedback and client testimonials</p>
                 </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-primary ml-1">Category</label>
-                  <select value={itineraryForm.category} onChange={(e) => setItineraryForm({...itineraryForm, category: e.target.value})} className={inputClass}>
-                    <option value="popular">Popular</option>
-                    <option value="adventure">Adventure</option>
-                    <option value="family">Family</option>
-                    <option value="luxury">Luxury</option>
-                    <option value="golf">Golf</option>
-                    <option value="surf">Surf & Dive</option>
-                  </select>
-                </div>
+                <button onClick={() => { resetReviewForm(); setActiveTab('new-review'); }} className="bg-primary text-white font-bold px-8 py-4 rounded-2xl hover:bg-primary/90 transition-all shadow-xl shadow-primary/20 text-sm tracking-wide">+ NEW REVIEW</button>
               </div>
 
-              <div className="space-y-2">
-                <label className="text-sm font-bold text-primary ml-1">Short Description</label>
-                <textarea rows="3" required value={itineraryForm.description} onChange={(e) => setItineraryForm({...itineraryForm, description: e.target.value})} className={`${inputClass} resize-none`}></textarea>
+              <div className="grid grid-cols-1 gap-4">
+                {contentLoading ? (
+                  <div className="flex flex-col items-center justify-center py-32 space-y-4">
+                    <div className="w-12 h-12 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
+                    <p className="text-gray-400 font-bold text-sm uppercase tracking-widest">Updating reviews...</p>
+                  </div>
+                ) : publishedReviews.length === 0 ? (
+                  <div className="bg-white rounded-[40px] p-24 text-center border border-gray-100 shadow-sm">
+                    <div className="text-6xl mb-6">✨</div>
+                    <h4 className="text-xl font-bold text-primary mb-2">No reviews yet</h4>
+                    <p className="text-gray-400 max-w-xs mx-auto mb-8">Gather feedback from your happy travelers.</p>
+                    <button onClick={() => setActiveTab('new-review')} className="text-primary font-bold hover:underline">Add your first story →</button>
+                  </div>
+                ) : publishedReviews.map((review) => (
+                  <div key={review.id} className="bg-white rounded-[32px] p-6 shadow-sm border border-gray-100 flex gap-8 items-center group hover:shadow-2xl hover:-translate-y-1 transition-all duration-500">
+                    <div className="w-20 h-20 rounded-full overflow-hidden flex-shrink-0 bg-gray-100 shadow-inner border-2 border-white ring-8 ring-gray-50/50">
+                      {review.img && <img src={review.img} alt="" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex text-yellow-400 gap-0.5 mb-2 drop-shadow-sm">{'★'.repeat(review.rating || 5)}</div>
+                      <h3 className="text-primary font-bold text-xl mb-1">{review.name}</h3>
+                      <p className="text-gray-400 text-sm truncate font-medium">{review.headline || review.text}</p>
+                      <p className="text-luxury text-[10px] font-bold uppercase tracking-[0.2em] mt-2">Exp: {review.date}</p>
+                    </div>
+                    <div className="flex gap-3 flex-shrink-0 pr-4">
+                      <button onClick={() => handleEditReview(review)} className="w-12 h-12 flex items-center justify-center bg-gray-50 hover:bg-primary hover:text-white text-gray-400 rounded-2xl transition-all duration-300">✏️</button>
+                      <button onClick={() => handleDeleteReview(review.id)} className="w-12 h-12 flex items-center justify-center bg-red-50 hover:bg-red-500 hover:text-white text-red-400 rounded-2xl transition-all duration-300">🗑️</button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* ITINERARIES LIST */}
+          {activeTab === 'itineraries' && (
+            <div className="animate-fade-in">
+              <div className="flex justify-between items-end mb-8 px-4">
+                <div>
+                  <h3 className="text-2xl font-serif font-bold text-primary mb-1">Luxury Itineraries</h3>
+                  <p className="text-gray-400 text-sm font-medium">Design and organize premium tour packages</p>
+                </div>
+                <button onClick={() => { resetItineraryForm(); setActiveTab('new-itinerary'); }} className="bg-primary text-white font-bold px-8 py-4 rounded-2xl hover:bg-primary/90 transition-all shadow-xl shadow-primary/20 text-sm tracking-wide">+ NEW ITINERARY</button>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-primary ml-1">Hero Image URL</label>
-                  <input type="text" required value={itineraryForm.image} onChange={(e) => setItineraryForm({...itineraryForm, image: e.target.value})} className={inputClass} />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-primary ml-1">Starting Price (EUR)</label>
-                  <input type="text" required value={itineraryForm.price} onChange={(e) => setItineraryForm({...itineraryForm, price: e.target.value})} className={inputClass} />
-                </div>
+              <div className="grid grid-cols-1 gap-4">
+                {contentLoading ? (
+                  <div className="flex flex-col items-center justify-center py-32 space-y-4">
+                    <div className="w-12 h-12 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
+                    <p className="text-gray-400 font-bold text-sm uppercase tracking-widest">Loading itineraries...</p>
+                  </div>
+                ) : publishedItineraries.length === 0 ? (
+                  <div className="bg-white rounded-[40px] p-24 text-center border border-gray-100 shadow-sm">
+                    <div className="text-6xl mb-6">🗺️</div>
+                    <h4 className="text-xl font-bold text-primary mb-2">No itineraries yet</h4>
+                    <p className="text-gray-400 max-w-xs mx-auto mb-8">Build beautiful travel routes for your clients.</p>
+                    <button onClick={() => setActiveTab('new-itinerary')} className="text-primary font-bold hover:underline">Plan your first trip →</button>
+                  </div>
+                ) : publishedItineraries.map((itinerary) => (
+                  <div key={itinerary.id} className="bg-white rounded-[32px] p-6 shadow-sm border border-gray-100 flex gap-8 items-center group hover:shadow-2xl hover:-translate-y-1 transition-all duration-500">
+                    <div className="w-32 h-24 rounded-3xl overflow-hidden flex-shrink-0 bg-gray-100 shadow-inner relative">
+                      {itinerary.image && <img src={itinerary.image} alt="" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />}
+                      <div className="absolute top-2 left-2 bg-primary/80 backdrop-blur-sm text-white text-[8px] font-bold px-2 py-0.5 rounded-full uppercase tracking-widest">{itinerary.duration}</div>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-3 mb-2">
+                        <span className="text-[10px] font-bold text-luxury bg-luxury/10 px-2 py-0.5 rounded-full uppercase tracking-widest">{itinerary.category}</span>
+                        <span className="text-primary/40 font-bold text-[10px] uppercase tracking-widest">USD {itinerary.price} / PERS</span>
+                      </div>
+                      <h3 className="text-primary font-bold text-xl leading-tight truncate mb-1">{itinerary.title}</h3>
+                      <p className="text-gray-400 text-sm truncate font-medium">{itinerary.description}</p>
+                    </div>
+                    <div className="flex gap-3 flex-shrink-0 pr-4">
+                      <button onClick={() => handleEditItinerary(itinerary)} className="w-12 h-12 flex items-center justify-center bg-gray-50 hover:bg-primary hover:text-white text-gray-400 rounded-2xl transition-all duration-300">✏️</button>
+                      <button onClick={() => handleDeleteItinerary(itinerary.id)} className="w-12 h-12 flex items-center justify-center bg-red-50 hover:bg-red-500 hover:text-white text-red-400 rounded-2xl transition-all duration-300">🗑️</button>
+                    </div>
+                  </div>
+                ))}
               </div>
+            </div>
+          )}
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-primary ml-1">Duration</label>
-                  <input type="text" required value={itineraryForm.duration} onChange={(e) => setItineraryForm({...itineraryForm, duration: e.target.value})} className={inputClass} />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-primary ml-1">Group Type</label>
-                  <input type="text" value={itineraryForm.group} onChange={(e) => setItineraryForm({...itineraryForm, group: e.target.value})} className={inputClass} />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-bold text-primary ml-1">Effort Level</label>
-                  <input type="text" value={itineraryForm.effort} onChange={(e) => setItineraryForm({...itineraryForm, effort: e.target.value})} className={inputClass} />
-                </div>
-              </div>
-
-              <div className="pt-8 border-t border-gray-100">
-                <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-primary font-bold text-xl">Day-by-Day Plan</h3>
-                  <button type="button" onClick={() => setItineraryDays([...itineraryDays, { id: itineraryDays.length + 1, location: '', image: '', description: '', highlights: '', accommodation: '', meals: 'Breakfast & Dinner', travel: '', coords: { x: 150, y: 225 } }])} className="text-primary font-bold text-sm hover:underline">+ Add Day</button>
-                </div>
+          {/* NEW / EDIT ARTICLE FORM */}
+          {activeTab === 'new-article' && (
+            <div className="animate-slide-up">
+              <div className="bg-white p-12 md:p-16 rounded-[48px] shadow-2xl border border-gray-50 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
                 
-                <div className="space-y-10">
-                  {itineraryDays.map((day, idx) => (
-                    <div key={idx} className="bg-gray-50 p-8 rounded-[32px] relative group border border-gray-100">
-                      <div className="absolute -left-3 top-6 w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center font-bold shadow-lg">D{day.id}</div>
-                      <button type="button" onClick={() => setItineraryDays(itineraryDays.filter((_, i) => i !== idx))} className="absolute top-6 right-6 text-red-500 opacity-0 group-hover:opacity-100 transition-opacity font-bold">Remove Day</button>
-                      
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-                        <div className="space-y-2">
-                          <label className="text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">Location</label>
-                          <input type="text" required value={day.location} onChange={e => {
-                            const newDays = [...itineraryDays];
-                            newDays[idx].location = e.target.value;
-                            setItineraryDays(newDays);
-                          }} className="w-full bg-white border border-gray-200 rounded-xl py-3 px-5 outline-none focus:ring-2 focus:ring-primary/20" />
-                        </div>
-                        <div className="space-y-2">
-                          <label className="text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">Day Photo URL</label>
-                          <input type="text" required value={day.image} onChange={e => {
-                            const newDays = [...itineraryDays];
-                            newDays[idx].image = e.target.value;
-                            setItineraryDays(newDays);
-                          }} className="w-full bg-white border border-gray-200 rounded-xl py-3 px-5 outline-none focus:ring-2 focus:ring-primary/20" />
-                        </div>
-                      </div>
+                <div className="flex items-center justify-between mb-12 relative z-10">
+                  <div>
+                    <h2 className="text-3xl font-serif font-bold text-primary mb-2">{editingArticleId ? 'Edit Article' : 'New Article'}</h2>
+                    <p className="text-gray-400 font-medium">Create captivating travel guides</p>
+                  </div>
+                  {editingArticleId && (
+                    <button type="button" onClick={resetArticleForm} className="bg-gray-50 text-gray-400 hover:text-red-500 w-10 h-10 rounded-full flex items-center justify-center transition-colors">✕</button>
+                  )}
+                </div>
 
-                      <div className="space-y-2 mt-6">
-                        <label className="text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">Activity Description</label>
-                        <textarea rows="3" required value={day.description} onChange={e => {
-                          const newDays = [...itineraryDays];
-                          newDays[idx].description = e.target.value;
-                          setItineraryDays(newDays);
-                        }} className="w-full bg-white border border-gray-200 rounded-xl py-3 px-5 outline-none focus:ring-2 focus:ring-primary/20 resize-none"></textarea>
-                      </div>
+                <form onSubmit={handleArticleSubmit} className="space-y-10 relative z-10">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="space-y-2">
+                      <label className={labelClass}>Main Title</label>
+                      <input type="text" required value={articleForm.title} onChange={(e) => setArticleForm({...articleForm, title: e.target.value})} className={inputClass} placeholder="The Golden Triangle..." />
+                    </div>
+                    <div className="space-y-2">
+                      <label className={labelClass}>Category</label>
+                      <select value={articleForm.category} onChange={(e) => setArticleForm({...articleForm, category: e.target.value})} className={inputClass}>
+                        <option>History</option><option>Nature</option><option>Culture</option><option>Adventure</option><option>Luxury</option>
+                      </select>
+                    </div>
+                  </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                        <div className="space-y-2">
-                          <label className="text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">Highlights (Comma separated)</label>
-                          <input type="text" value={day.highlights} onChange={e => {
-                            const newDays = [...itineraryDays];
-                            newDays[idx].highlights = e.target.value;
-                            setItineraryDays(newDays);
-                          }} className="w-full bg-white border border-gray-200 rounded-xl py-3 px-5 outline-none focus:ring-2 focus:ring-primary/20" />
-                        </div>
-                        <div className="space-y-2">
-                          <label className="text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">Accommodation</label>
-                          <input type="text" value={day.accommodation} onChange={e => {
-                            const newDays = [...itineraryDays];
-                            newDays[idx].accommodation = e.target.value;
-                            setItineraryDays(newDays);
-                          }} className="w-full bg-white border border-gray-200 rounded-xl py-3 px-5 outline-none focus:ring-2 focus:ring-primary/20" />
-                        </div>
-                      </div>
+                  <div className="space-y-2">
+                    <label className={labelClass}>Hero Description</label>
+                    <input type="text" required value={articleForm.description} onChange={(e) => setArticleForm({...articleForm, description: e.target.value})} className={inputClass} placeholder="A deep dive into..." />
+                  </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
-                        <div className="space-y-2">
-                          <label className="text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">Meals</label>
-                          <input type="text" value={day.meals} onChange={e => {
-                            const newDays = [...itineraryDays];
-                            newDays[idx].meals = e.target.value;
-                            setItineraryDays(newDays);
-                          }} className="w-full bg-white border border-gray-200 rounded-xl py-3 px-5 outline-none focus:ring-2 focus:ring-primary/20" />
-                        </div>
-                        <div className="space-y-2">
-                          <label className="text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">Travel (Dist/Time)</label>
-                          <input type="text" value={day.travel} onChange={e => {
-                            const newDays = [...itineraryDays];
-                            newDays[idx].travel = e.target.value;
-                            setItineraryDays(newDays);
-                          }} className="w-full bg-white border border-gray-200 rounded-xl py-3 px-5 outline-none focus:ring-2 focus:ring-primary/20" />
-                        </div>
-                        <div className="space-y-2">
-                          <label className="text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">Map Coords (X, Y)</label>
-                          <div className="flex gap-2">
-                            <input type="number" placeholder="X" value={day.coords.x} onChange={e => {
-                              const newDays = [...itineraryDays];
-                              newDays[idx].coords.x = parseInt(e.target.value);
-                              setItineraryDays(newDays);
-                            }} className="w-full bg-white border border-gray-200 rounded-xl py-3 px-5 outline-none focus:ring-2 focus:ring-primary/20" />
-                            <input type="number" placeholder="Y" value={day.coords.y} onChange={e => {
-                              const newDays = [...itineraryDays];
-                              newDays[idx].coords.y = parseInt(e.target.value);
-                              setItineraryDays(newDays);
-                            }} className="w-full bg-white border border-gray-200 rounded-xl py-3 px-5 outline-none focus:ring-2 focus:ring-primary/20" />
-                          </div>
-                        </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="space-y-2">
+                      <label className={labelClass}>Cover Image URL</label>
+                      <input type="text" required value={articleForm.image} onChange={(e) => setArticleForm({...articleForm, image: e.target.value})} className={inputClass} placeholder="https://..." />
+                    </div>
+                    <div className="space-y-2">
+                      <label className={labelClass}>Short Card Excerpt</label>
+                      <input type="text" required value={articleForm.excerpt} onChange={(e) => setArticleForm({...articleForm, excerpt: e.target.value})} className={inputClass} placeholder="Preview snippet..." />
+                    </div>
+                  </div>
+
+                  <div className="pt-10 border-t border-gray-100">
+                    <div className="flex items-center justify-between mb-8">
+                      <h3 className="text-xl font-serif font-bold text-primary">Content Architect</h3>
+                      <div className="flex gap-2">
+                        <button type="button" onClick={() => addBlock('paragraph')} className="bg-gray-50 hover:bg-primary hover:text-white text-primary text-[10px] font-bold uppercase tracking-widest px-4 py-2 rounded-xl transition-all">+ Para</button>
+                        <button type="button" onClick={() => addBlock('heading')} className="bg-gray-50 hover:bg-primary hover:text-white text-primary text-[10px] font-bold uppercase tracking-widest px-4 py-2 rounded-xl transition-all">+ Head</button>
+                        <button type="button" onClick={() => addBlock('quote')} className="bg-gray-50 hover:bg-primary hover:text-white text-primary text-[10px] font-bold uppercase tracking-widest px-4 py-2 rounded-xl transition-all">+ Quote</button>
                       </div>
                     </div>
-                  ))}
-                </div>
-              </div>
 
-              <button disabled={loading} className="w-full bg-primary text-white font-bold py-5 rounded-2xl shadow-xl transition-all hover:bg-primary/90 disabled:opacity-70 mt-10">
-                {loading ? 'Saving...' : editingItineraryId ? '💾 Save Itinerary' : '🗺️ Publish Itinerary'}
-              </button>
-            </form>
-          </div>
-        )}
-      </div>
+                    <div className="space-y-6">
+                      {contentBlocks.map((block, index) => (
+                        <div key={index} className="bg-gray-50/50 p-8 rounded-[32px] relative group border border-gray-100 hover:border-primary/20 transition-colors">
+                          <button type="button" onClick={() => removeBlock(index)} className="absolute -top-3 -right-3 w-8 h-8 bg-white text-red-500 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center font-bold">✕</button>
+                          <div className="flex items-center gap-2 mb-4">
+                            <div className={`w-2 h-2 rounded-full ${block.type === 'heading' ? 'bg-primary' : block.type === 'quote' ? 'bg-luxury' : 'bg-gray-300'}`}></div>
+                            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">{block.type}</span>
+                          </div>
+                          <textarea 
+                            rows={block.type === 'paragraph' ? 4 : 2} 
+                            value={block.text} 
+                            onChange={(e) => updateBlock(index, e.target.value)} 
+                            placeholder={`Enter your ${block.type} here...`} 
+                            className="w-full bg-white border border-gray-100 rounded-2xl py-4 px-6 outline-none resize-none focus:ring-4 focus:ring-primary/5 transition-all font-medium text-primary"
+                          ></textarea>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <button disabled={loading} className="w-full bg-primary text-white font-bold py-6 rounded-[24px] shadow-2xl shadow-primary/30 transition-all hover:bg-primary/90 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 mt-12 text-sm tracking-[0.2em]">
+                    {loading ? 'PROCESSING...' : editingArticleId ? 'SAVE CHANGES' : 'PUBLISH GUIDE'}
+                  </button>
+                </form>
+              </div>
+            </div>
+          )}
+
+          {/* NEW / EDIT REVIEW FORM */}
+          {activeTab === 'new-review' && (
+            <div className="animate-slide-up">
+              <div className="bg-white p-12 md:p-16 rounded-[48px] shadow-2xl border border-gray-50 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
+                
+                <div className="flex items-center justify-between mb-12 relative z-10">
+                  <div>
+                    <h2 className="text-3xl font-serif font-bold text-primary mb-2">{editingReviewId ? 'Edit Experience' : 'Share Experience'}</h2>
+                    <p className="text-gray-400 font-medium">Turn feedback into a luxury story</p>
+                  </div>
+                  {editingReviewId && (
+                    <button type="button" onClick={resetReviewForm} className="bg-gray-50 text-gray-400 hover:text-red-500 w-10 h-10 rounded-full flex items-center justify-center transition-colors">✕</button>
+                  )}
+                </div>
+
+                <form onSubmit={handleReviewSubmit} className="space-y-12 relative z-10">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="space-y-2">
+                      <label className={labelClass}>Traveler Name</label>
+                      <input type="text" required value={reviewForm.name} onChange={(e) => setReviewForm({...reviewForm, name: e.target.value})} className={inputClass} placeholder="Sophie & Marc" />
+                    </div>
+                    <div className="space-y-2">
+                      <label className={labelClass}>Tour Display Date</label>
+                      <input type="text" required value={reviewForm.date} onChange={(e) => setReviewForm({...reviewForm, date: e.target.value})} className={inputClass} placeholder="February 2024" />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="space-y-2">
+                      <label className={labelClass}>Main Hero Photo</label>
+                      <input type="text" required value={reviewForm.img} onChange={(e) => setReviewForm({...reviewForm, img: e.target.value})} className={inputClass} placeholder="https://..." />
+                    </div>
+                    <div className="space-y-2">
+                      <label className={labelClass}>Italicized Headline</label>
+                      <input type="text" value={reviewForm.headline} onChange={(e) => setReviewForm({...reviewForm, headline: e.target.value})} className={inputClass} placeholder="An unforgettable journey..." />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className={labelClass}>Short Preview Snippet</label>
+                    <input type="text" required value={reviewForm.text} onChange={(e) => setReviewForm({...reviewForm, text: e.target.value})} className={inputClass} />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className={labelClass}>Detailed Experience Story</label>
+                    <textarea rows="10" required value={reviewForm.detailedText} onChange={(e) => setReviewForm({...reviewForm, detailedText: e.target.value})} className={`${inputClass} resize-none shadow-inner`} placeholder="Describe the luxury experience in detail..."></textarea>
+                  </div>
+
+                  <div className="pt-10 border-t border-gray-100">
+                    <h3 className="text-xl font-serif font-bold text-primary mb-8 text-center">Visual Gallery</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                      {reviewForm.gallery.map((url, i) => (
+                        <div key={i} className="space-y-2">
+                          <label className="text-[10px] font-bold text-gray-300 uppercase tracking-widest ml-1">Photo {i+1}</label>
+                          <input type="text" value={url} onChange={(e) => {
+                            const newGallery = [...reviewForm.gallery];
+                            newGallery[i] = e.target.value;
+                            setReviewForm({...reviewForm, gallery: newGallery});
+                          }} className="w-full bg-gray-50 border border-gray-100 rounded-xl py-3 px-4 outline-none focus:ring-2 focus:ring-primary/20 text-xs font-medium" placeholder="https://..." />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-12 pt-10 border-t border-gray-100">
+                    <div className="bg-gray-50/50 p-8 rounded-[40px]">
+                      <h3 className="text-lg font-serif font-bold text-primary mb-6 flex items-center gap-3">📊 Tour Stats</h3>
+                      <div className="space-y-4">
+                        <input type="text" placeholder="Tour Date" value={reviewForm.tourDetails.date} onChange={(e) => setReviewForm({...reviewForm, tourDetails: {...reviewForm.tourDetails, date: e.target.value}})} className={inputClass} />
+                        <input type="text" placeholder="Traveler Type" value={reviewForm.tourDetails.travelerType} onChange={(e) => setReviewForm({...reviewForm, tourDetails: {...reviewForm.tourDetails, travelerType: e.target.value}})} className={inputClass} />
+                        <input type="text" placeholder="Group Type" value={reviewForm.tourDetails.group} onChange={(e) => setReviewForm({...reviewForm, tourDetails: {...reviewForm.tourDetails, group: e.target.value}})} className={inputClass} />
+                      </div>
+                    </div>
+                    <div className="bg-gray-50/50 p-8 rounded-[40px]">
+                      <h3 className="text-lg font-serif font-bold text-primary mb-6 flex items-center gap-3">👤 Guide Info</h3>
+                      <div className="space-y-4">
+                        <input type="text" placeholder="Guide Name" value={reviewForm.guide.name} onChange={(e) => setReviewForm({...reviewForm, guide: {...reviewForm.guide, name: e.target.value}})} className={inputClass} />
+                        <input type="text" placeholder="Photo URL" value={reviewForm.guide.photo} onChange={(e) => setReviewForm({...reviewForm, guide: {...reviewForm.guide, photo: e.target.value}})} className={inputClass} />
+                        <textarea placeholder="Personal Quote" value={reviewForm.guide.quote} onChange={(e) => setReviewForm({...reviewForm, guide: {...reviewForm.guide, quote: e.target.value}})} className={`${inputClass} h-24 resize-none`}></textarea>
+                      </div>
+                    </div>
+                  </div>
+
+                  <button disabled={loading} className="w-full bg-primary text-white font-bold py-6 rounded-[24px] shadow-2xl shadow-primary/30 transition-all hover:bg-primary/90 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 mt-12 text-sm tracking-[0.2em]">
+                    {loading ? 'STORING...' : editingReviewId ? 'UPDATE STORY' : 'POST EXPERIENCE'}
+                  </button>
+                </form>
+              </div>
+            </div>
+          )}
+
+          {/* NEW / EDIT ITINERARY FORM */}
+          {activeTab === 'new-itinerary' && (
+            <div className="animate-slide-up">
+              <div className="bg-white p-12 md:p-16 rounded-[48px] shadow-2xl border border-gray-50 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
+                
+                <div className="flex items-center justify-between mb-12 relative z-10">
+                  <div>
+                    <h2 className="text-3xl font-serif font-bold text-primary mb-2">{editingItineraryId ? 'Fine-tune Journey' : 'Draft New Journey'}</h2>
+                    <p className="text-gray-400 font-medium">Design the ultimate luxury itinerary</p>
+                  </div>
+                  {editingItineraryId && (
+                    <button type="button" onClick={resetItineraryForm} className="bg-gray-50 text-gray-400 hover:text-red-500 w-10 h-10 rounded-full flex items-center justify-center transition-colors">✕</button>
+                  )}
+                </div>
+
+                <form onSubmit={handleItinerarySubmit} className="space-y-12 relative z-10">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="space-y-2">
+                      <label className={labelClass}>Tour Title</label>
+                      <input type="text" required value={itineraryForm.title} onChange={(e) => setItineraryForm({...itineraryForm, title: e.target.value})} className={inputClass} placeholder="Ceylon Royal Heritage..." />
+                    </div>
+                    <div className="space-y-2">
+                      <label className={labelClass}>Category Slug</label>
+                      <select value={itineraryForm.category} onChange={(e) => setItineraryForm({...itineraryForm, category: e.target.value})} className={inputClass}>
+                        <option value="popular">Popular</option>
+                        <option value="honeymoon">Honeymoon</option>
+                        <option value="family">Family</option>
+                        <option value="luxury">Luxury</option>
+                        <option value="golf">Golf</option>
+                        <option value="surf">Surf & Dive</option>
+                        <option value="adventure">Adventure</option>
+                        <option value="pererahera">Esela Perahera</option>
+                        <option value="8days">8 Days Trips</option>
+                        <option value="interest">By Interest</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className={labelClass}>Package Overview</label>
+                    <textarea rows="4" required value={itineraryForm.description} onChange={(e) => setItineraryForm({...itineraryForm, description: e.target.value})} className={`${inputClass} resize-none shadow-inner`}></textarea>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="space-y-2">
+                      <label className={labelClass}>Main Hero URL</label>
+                      <input type="text" required value={itineraryForm.image} onChange={(e) => setItineraryForm({...itineraryForm, image: e.target.value})} className={inputClass} />
+                    </div>
+                    <div className="space-y-2">
+                      <label className={labelClass}>Price Base (USD)</label>
+                      <input type="text" required value={itineraryForm.price} onChange={(e) => setItineraryForm({...itineraryForm, price: e.target.value})} className={inputClass} />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className={labelClass}>Tour Features (Icons - comma separated)</label>
+                    <input type="text" value={itineraryForm.icons} onChange={(e) => setItineraryForm({...itineraryForm, icons: e.target.value})} className={inputClass} placeholder="5 Star, Half Board, Private Car" />
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div className="space-y-2">
+                      <label className={labelClass}>Duration Display</label>
+                      <input type="text" required value={itineraryForm.duration} onChange={(e) => setItineraryForm({...itineraryForm, duration: e.target.value})} className={inputClass} placeholder="12 Days" />
+                    </div>
+                    <div className="space-y-2">
+                      <label className={labelClass}>Group Type</label>
+                      <input type="text" value={itineraryForm.group} onChange={(e) => setItineraryForm({...itineraryForm, group: e.target.value})} className={inputClass} placeholder="Private" />
+                    </div>
+                    <div className="space-y-2">
+                      <label className={labelClass}>Effort Level</label>
+                      <input type="text" value={itineraryForm.effort} onChange={(e) => setItineraryForm({...itineraryForm, effort: e.target.value})} className={inputClass} placeholder="Moderate" />
+                    </div>
+                  </div>
+
+                  <div className="pt-10 border-t border-gray-100">
+                    <div className="flex items-center justify-between mb-12">
+                      <h3 className="text-2xl font-serif font-bold text-primary">Day-by-Day Architect</h3>
+                      <button type="button" onClick={() => setItineraryDays([...itineraryDays, { id: itineraryDays.length + 1, location: '', image: '', description: '', highlights: '', accommodation: '', meals: 'Breakfast & Dinner', travel: '', coords: { x: 150, y: 225 } }])} className="bg-primary text-white text-[10px] font-bold uppercase tracking-widest px-6 py-3 rounded-[18px] shadow-lg shadow-primary/10 hover:scale-105 active:scale-95 transition-all">+ Add New Day</button>
+                    </div>
+                    
+                    <div className="space-y-20">
+                      {itineraryDays.map((day, idx) => (
+                        <div key={idx} className="bg-white p-10 rounded-[48px] relative group border-2 border-gray-50 shadow-xl hover:border-primary/10 transition-all duration-500">
+                          <div className="absolute -left-5 top-10 w-14 h-14 bg-primary text-white rounded-[24px] flex items-center justify-center font-bold shadow-2xl shadow-primary/20 rotate-[-10deg] group-hover:rotate-0 transition-transform">D{day.id}</div>
+                          <button type="button" onClick={() => setItineraryDays(itineraryDays.filter((_, i) => i !== idx))} className="absolute top-10 right-10 text-red-300 hover:text-red-500 font-bold text-xs uppercase tracking-widest transition-colors">Delete Day</button>
+                          
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-6">
+                            <div className="space-y-2">
+                              <label className={labelClass}>Destination</label>
+                              <input type="text" required value={day.location} onChange={e => {
+                                const newDays = [...itineraryDays];
+                                newDays[idx].location = e.target.value;
+                                setItineraryDays(newDays);
+                              }} className="w-full bg-gray-50/50 border border-gray-100 rounded-2xl py-4 px-6 outline-none focus:ring-4 focus:ring-primary/5 transition-all font-medium text-primary shadow-inner" />
+                            </div>
+                            <div className="space-y-2">
+                              <label className={labelClass}>Day Visual URL</label>
+                              <input type="text" required value={day.image} onChange={e => {
+                                const newDays = [...itineraryDays];
+                                newDays[idx].image = e.target.value;
+                                setItineraryDays(newDays);
+                              }} className="w-full bg-gray-50/50 border border-gray-100 rounded-2xl py-4 px-6 outline-none focus:ring-4 focus:ring-primary/5 transition-all font-medium text-primary shadow-inner" />
+                            </div>
+                          </div>
+
+                          <div className="space-y-2 mt-8">
+                            <label className={labelClass}>Day's Narrative</label>
+                            <textarea rows="4" required value={day.description} onChange={e => {
+                              const newDays = [...itineraryDays];
+                              newDays[idx].description = e.target.value;
+                              setItineraryDays(newDays);
+                            }} className="w-full bg-gray-50/50 border border-gray-100 rounded-2xl py-4 px-6 outline-none focus:ring-4 focus:ring-primary/5 transition-all font-medium text-primary shadow-inner resize-none"></textarea>
+                          </div>
+
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-8">
+                            <div className="space-y-2">
+                              <label className={labelClass}>Key Highlights</label>
+                              <input type="text" value={day.highlights} onChange={e => {
+                                const newDays = [...itineraryDays];
+                                newDays[idx].highlights = e.target.value;
+                                setItineraryDays(newDays);
+                              }} className="w-full bg-gray-50/50 border border-gray-100 rounded-2xl py-4 px-6 outline-none focus:ring-4 focus:ring-primary/5 transition-all font-medium text-primary shadow-inner" placeholder="Temple, Jungle, Tea..." />
+                            </div>
+                            <div className="space-y-2">
+                              <label className={labelClass}>Accommodation</label>
+                              <input type="text" value={day.accommodation} onChange={e => {
+                                const newDays = [...itineraryDays];
+                                newDays[idx].accommodation = e.target.value;
+                                setItineraryDays(newDays);
+                              }} className="w-full bg-gray-50/50 border border-gray-100 rounded-2xl py-4 px-6 outline-none focus:ring-4 focus:ring-primary/5 transition-all font-medium text-primary shadow-inner" />
+                            </div>
+                          </div>
+
+                          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                            <div className="space-y-2">
+                              <label className={labelClass}>Meals</label>
+                              <input type="text" value={day.meals} onChange={e => {
+                                const newDays = [...itineraryDays];
+                                newDays[idx].meals = e.target.value;
+                                setItineraryDays(newDays);
+                              }} className="w-full bg-gray-50/50 border border-gray-100 rounded-2xl py-3 px-5 outline-none focus:ring-4 focus:ring-primary/5 transition-all text-sm font-medium shadow-inner" />
+                            </div>
+                            <div className="space-y-2">
+                              <label className={labelClass}>Travel Log</label>
+                              <input type="text" value={day.travel} onChange={e => {
+                                const newDays = [...itineraryDays];
+                                newDays[idx].travel = e.target.value;
+                                setItineraryDays(newDays);
+                              }} className="w-full bg-gray-50/50 border border-gray-100 rounded-2xl py-3 px-5 outline-none focus:ring-4 focus:ring-primary/5 transition-all text-sm font-medium shadow-inner" />
+                            </div>
+                            <div className="space-y-2">
+                              <label className={labelClass}>Map Plot (X, Y)</label>
+                              <div className="flex gap-2">
+                                <input type="number" value={day.coords.x} onChange={e => {
+                                  const newDays = [...itineraryDays];
+                                  newDays[idx].coords.x = parseInt(e.target.value);
+                                  setItineraryDays(newDays);
+                                }} className="w-full bg-gray-50/50 border border-gray-100 rounded-2xl py-3 px-4 outline-none focus:ring-4 focus:ring-primary/5 text-xs shadow-inner" />
+                                <input type="number" value={day.coords.y} onChange={e => {
+                                  const newDays = [...itineraryDays];
+                                  newDays[idx].coords.y = parseInt(e.target.value);
+                                  setItineraryDays(newDays);
+                                }} className="w-full bg-gray-50/50 border border-gray-100 rounded-2xl py-3 px-4 outline-none focus:ring-4 focus:ring-primary/5 text-xs shadow-inner" />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <button disabled={loading} className="w-full bg-primary text-white font-bold py-6 rounded-[24px] shadow-2xl shadow-primary/30 transition-all hover:bg-primary/90 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 mt-16 text-sm tracking-[0.2em]">
+                    {loading ? 'ARCHITECTING...' : editingItineraryId ? 'UPDATE JOURNEY' : 'CONSTRUCT JOURNEY'}
+                  </button>
+                </form>
+              </div>
+            </div>
+          )}
+        </div>
+      </main>
+
+      <style dangerouslySetInnerHTML={{ __html: `
+        @keyframes fade-in {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slide-up {
+          from { opacity: 0; transform: translateY(40px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in { animation: fade-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .animate-slide-up { animation: slide-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+      `}} />
     </div>
   );
 };

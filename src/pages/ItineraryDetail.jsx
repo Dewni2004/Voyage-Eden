@@ -37,63 +37,116 @@ const ItineraryDetail = () => {
   return (
     <div className="bg-white">
       {/* Hero Section */}
-      <section className="relative h-[60vh] flex items-center justify-center">
+      <section className="relative h-[80vh] flex items-center justify-center">
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
           <img 
-            src={itinerary.image} 
+            src={itinerary.image || 'https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&q=80&w=1200'} 
             alt={itinerary.title} 
             className="w-full h-full object-cover"
+            onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&q=80&w=1200'; }}
           />
           <div className="absolute inset-0 bg-black/40"></div>
         </div>
 
-        {/* Hero Content & Info Bar Container */}
-        <div className="relative z-10 flex flex-col items-center w-full mt-20 md:mt-0 text-white">
-          <div className="text-center px-6 max-w-5xl mx-auto mb-10">
-            <h1 className="text-3xl sm:text-4xl md:text-7xl font-bold tracking-tight drop-shadow-xl mb-6 leading-tight">
-              {itinerary.title}
-            </h1>
-            <p className="text-white/90 text-base md:text-xl font-medium max-w-3xl mx-auto drop-shadow-lg">
-              {itinerary.description}
-            </p>
-          </div>
+        {/* Hero Content */}
+        <div className="relative z-10 flex flex-col items-center w-full text-white text-center px-6 -mt-20">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight drop-shadow-xl mb-6 leading-tight">
+            {itinerary.title}
+          </h1>
+          <p className="text-white/90 text-sm md:text-lg font-medium max-w-2xl mx-auto drop-shadow-lg opacity-80">
+            {itinerary.description}
+          </p>
+        </div>
 
-          {/* Info Bar */}
-          <div className="relative md:absolute bottom-0 md:left-1/2 md:-translate-x-1/2 md:translate-y-1/2 w-full max-w-5xl px-4 z-20">
-            <div className="bg-white rounded-[32px] shadow-2xl py-8 px-12 border border-gray-100 grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* Info Bar (Floating Half-on-Half) */}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-full max-w-5xl px-4 z-20">
+          <div className="bg-white rounded-[40px] shadow-2xl py-6 md:py-8 px-6 md:px-12 border border-gray-50 flex flex-col items-center">
+            {/* Stats Row */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full text-center">
               {/* Duration */}
-              <div className="flex flex-row md:flex-col items-center md:text-center space-x-4 md:space-x-0 md:space-y-2">
-                <div className="w-12 h-12 bg-primary/5 rounded-2xl flex items-center justify-center text-primary">
-                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zm-7 5h5v5h-5z"/></svg>
+              <div className="flex flex-row md:flex-col items-center md:text-center space-x-4 md:space-x-0 md:space-y-3">
+                <div className="w-14 h-14 bg-[#f0f4f9] rounded-full flex items-center justify-center text-primary mx-auto">
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
                 </div>
                 <div>
-                  <p className="text-gray-400 text-[10px] font-bold uppercase tracking-widest">Duration</p>
-                  <p className="text-primary text-lg font-black">{itinerary.duration}</p>
+                  <p className="text-gray-400 text-[10px] font-bold uppercase tracking-[0.2em] mb-1">Duration</p>
+                  <p className="text-primary text-xl font-bold">{itinerary.duration}</p>
                 </div>
               </div>
 
               {/* Group */}
-              <div className="flex flex-row md:flex-col items-center md:text-center space-x-4 md:space-x-0 md:space-y-2">
-                <div className="w-12 h-12 bg-primary/5 rounded-2xl flex items-center justify-center text-primary">
-                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+              <div className="flex flex-row md:flex-col items-center md:text-center space-x-4 md:space-x-0 md:space-y-3">
+                <div className="w-14 h-14 bg-[#f0f4f9] rounded-full flex items-center justify-center text-primary mx-auto">
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                  </svg>
                 </div>
                 <div>
-                  <p className="text-gray-400 text-[10px] font-bold uppercase tracking-widest">Group</p>
-                  <p className="text-primary text-lg font-black">{itinerary.group}</p>
+                  <p className="text-gray-400 text-[10px] font-bold uppercase tracking-[0.2em] mb-1">Group</p>
+                  <p className="text-primary text-xl font-bold">{itinerary.group}</p>
                 </div>
               </div>
 
               {/* Effort */}
-              <div className="flex flex-row md:flex-col items-center md:text-center space-x-4 md:space-x-0 md:space-y-2">
-                <div className="w-12 h-12 bg-primary/5 rounded-2xl flex items-center justify-center text-primary">
-                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7z"/></svg>
+              <div className="flex flex-row md:flex-col items-center md:text-center space-x-4 md:space-x-0 md:space-y-3">
+                <div className="w-14 h-14 bg-[#f0f4f9] rounded-full flex items-center justify-center text-primary mx-auto">
+                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7z"/>
+                  </svg>
                 </div>
                 <div>
-                  <p className="text-gray-400 text-[10px] font-bold uppercase tracking-widest">Effort</p>
-                  <p className="text-primary text-lg font-black">{itinerary.effort}</p>
+                  <p className="text-gray-400 text-[10px] font-bold uppercase tracking-[0.2em] mb-1">Effort</p>
+                  <p className="text-primary text-xl font-bold">{itinerary.effort}</p>
                 </div>
               </div>
+            </div>
+
+            {/* Separator */}
+            <div className="w-full flex items-center gap-4 my-6">
+              <div className="flex-grow h-px bg-gray-100"></div>
+              <p className="text-gray-400 text-[8px] font-bold uppercase tracking-[0.3em] whitespace-nowrap">Highlights & Visits</p>
+              <div className="flex-grow h-px bg-gray-100"></div>
+            </div>
+
+            {/* Highlights Thumbnails */}
+            <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+              {itinerary.days?.map((day, idx) => (
+                <div 
+                  key={idx} 
+                  className={`relative group cursor-pointer transition-all duration-300 ${activeDay === day.id ? 'scale-110' : 'hover:scale-105 opacity-70 hover:opacity-100'}`}
+                  onClick={() => { 
+                    setActiveDay(day.id); 
+                    if (window.innerWidth < 1024) setIsModalOpen(true); 
+                    document.getElementById('itinerary-section')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                >
+                  <div className={`w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden border-2 transition-all duration-300 ${activeDay === day.id ? 'border-primary shadow-lg' : 'border-white shadow-md'}`}>
+                    <img 
+                      src={day.image} 
+                      alt={day.location} 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className={`absolute -top-1 -right-1 w-5 h-5 rounded-full flex items-center justify-center border-2 border-white transition-colors duration-300 ${activeDay === day.id ? 'bg-primary' : 'bg-gray-400 group-hover:bg-primary'}`}>
+                    <span className="text-white text-[9px] font-bold">{day.id}</span>
+                  </div>
+                  {/* Image Preview on Hover */}
+                  <div className="absolute -top-48 left-1/2 -translate-x-1/2 w-64 h-44 rounded-[32px] overflow-hidden shadow-2xl border-4 border-white opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none z-[60] scale-50 group-hover:scale-100 origin-bottom">
+                    <img 
+                      src={day.image} 
+                      alt={day.location} 
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 to-transparent py-3 px-4">
+                      <p className="text-white text-xs font-bold truncate leading-tight">{day.location}</p>
+                      <p className="text-white/70 text-[10px] font-medium uppercase tracking-wider">Day {day.id}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -103,7 +156,7 @@ const ItineraryDetail = () => {
       <div className="hidden md:block h-48"></div>
 
       {/* Interactive Itinerary Section */}
-      <section className="max-w-7xl mx-auto px-6 pb-24">
+      <section id="itinerary-section" className="max-w-7xl mx-auto px-6 pb-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           
           {/* Left Column: Interactive Map */}

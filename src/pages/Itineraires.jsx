@@ -31,12 +31,16 @@ const Itineraires = () => {
       <ItineraryHero />
       <ItineraryCategories />
       
-      <PopularItineraries title="Nos Itinéraires les Plus Populaires" id="popular" itineraries={getByCategory('popular')} />
-      <PopularItineraries title="Voyages d'aventure" id="adventure" itineraries={getByCategory('adventure')} />
+      <PopularItineraries title="Nos itinéraires les plus populaires" id="popular" itineraries={getByCategory('popular')} />
+      <PopularItineraries title="Voyages de noces" id="honeymoon" itineraries={getByCategory('honeymoon')} />
       <PopularItineraries title="Voyages en famille" id="family" itineraries={getByCategory('family')} />
       <PopularItineraries title="Collection de luxe" id="luxury" itineraries={getByCategory('luxury')} isDark={true} />
-      <PopularItineraries title="Voyages de golf" id="golf" itineraries={getByCategory('golf')} isGreen={true} />
+      <PopularItineraries title="Séjours golfiques" id="golf" itineraries={getByCategory('golf')} isGreen={true} />
       <PopularItineraries title="Voyages de surf et de plongée" id="surf" itineraries={getByCategory('surf')} />
+      <PopularItineraries title="Voyages d'aventure" id="adventure" itineraries={getByCategory('adventure')} />
+      <PopularItineraries title="Spéciaux d'Esela Perahera" id="pererahera" itineraries={getByCategory('pererahera')} />
+      <PopularItineraries title="Itinéraires de 8 jours" id="8days" itineraries={getByCategory('8days')} />
+      <PopularItineraries title="itinéraires basés sur les centres d'intérêt" id="interest" itineraries={getByCategory('interest')} />
       
       <Newsletter />
     </div>
