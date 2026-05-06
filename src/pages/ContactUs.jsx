@@ -1,5 +1,5 @@
 import PageHero from '../components/UI/PageHero';
-import contactBanner from '../assets/Galle-Fort.jpg';
+import officeStaff2 from '../assets/Office - staff 2.jpg';
 import nethmiImg from '../assets/Nethmi.webp';
 
 const ContactUs = () => {
@@ -8,7 +8,9 @@ const ContactUs = () => {
       <PageHero 
         title="Contactez-nous"
         description="Nous sommes là pour vous aider à planifier votre voyage de rêve au Sri Lanka. N'hésitez pas à nous contacter."
-        image={contactBanner}
+        image={officeStaff2}
+        overlayOpacity="bg-black/60"
+        bgPosition="object-[center_20%]"
       />
       
       <div className="py-16 md:py-24 bg-[#f8fbff]">

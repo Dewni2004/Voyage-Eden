@@ -4,11 +4,12 @@ import { getReviews } from '../services/contentService';
 import { staticTextReviews } from '../data/reviewsData';
 
 import PageHero from '../components/UI/PageHero';
-import reviewsBanner from '../assets/family-beach.png';
+import reviewsBanner from '../assets/Review page Banner.jpeg';
 
 const Reviews = () => {
   const [dynamicReviews, setDynamicReviews] = useState([]);
   const [selectedReview, setSelectedReview] = useState(null);
+  const [selectedVideo, setSelectedVideo] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -23,19 +24,19 @@ const Reviews = () => {
   const textReviews = [...dynamicReviews, ...staticTextReviews];
 
   const videoReviews = [
-    { id: 1, name: "Tharindu & Anne", date: "Jan 2024", thumbnail: "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=800" },
-    { id: 2, name: "The Wilson Family", date: "Dec 2023", thumbnail: "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?w=800" },
-    { id: 3, name: "Elena & Marco", date: "Nov 2023", thumbnail: "https://images.unsplash.com/photo-1506929199175-4841174e17df?w=800" },
-    { id: 4, name: "Sophie Laurent", date: "Oct 2023", thumbnail: "https://images.unsplash.com/photo-1533105079780-92b9be482077?w=800" },
-    { id: 5, name: "James Wilson", date: "Sep 2023", thumbnail: "https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?w=800" },
-    { id: 6, name: "The Rossi Group", date: "Aug 2023", thumbnail: "https://images.unsplash.com/photo-1493558103817-5859396d3c6a?w=800" }
+    { id: "Pjdej3Rz-OM", name: "Tharindu & Anne", date: "Jan 2024", thumbnail: "https://img.youtube.com/vi/Pjdej3Rz-OM/hqdefault.jpg" },
+    { id: "T5pHb4KrFJg", name: "The Wilson Family", date: "Dec 2023", thumbnail: "https://img.youtube.com/vi/T5pHb4KrFJg/hqdefault.jpg" },
+    { id: "iZbmWFCZrKQ", name: "Elena & Marco", date: "Nov 2023", thumbnail: "https://img.youtube.com/vi/iZbmWFCZrKQ/hqdefault.jpg" },
+    { id: "iPXf_9b4AQ8", name: "Sophie Laurent", date: "Oct 2023", thumbnail: "https://img.youtube.com/vi/iPXf_9b4AQ8/hqdefault.jpg" },
+    { id: "6APcyO3HLqM", name: "James Wilson", date: "Sep 2023", thumbnail: "https://img.youtube.com/vi/6APcyO3HLqM/hqdefault.jpg" },
+    { id: "Rcp6ilHKp8Q", name: "The Rossi Group", date: "Aug 2023", thumbnail: "https://img.youtube.com/vi/Rcp6ilHKp8Q/hqdefault.jpg" }
   ];
 
   return (
     <div className="bg-[#f8fbff] min-h-screen">
       <div className="relative h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
-        <img src={reviewsBanner} alt="" className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-black/40"></div>
+        <img src={reviewsBanner} alt="" className="absolute inset-0 w-full h-full object-cover object-center" />
+        <div className="absolute inset-0 bg-black/60"></div>
         <div className="relative z-10 text-center text-white px-6">
           <div className="flex justify-center text-yellow-400 gap-1 mb-6">
             {[...Array(5)].map((_, i) => (
@@ -60,7 +61,11 @@ const Reviews = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {videoReviews.map((video) => (
-            <div key={video.id} className="bg-white rounded-[32px] overflow-hidden shadow-xl group cursor-pointer border border-gray-100">
+            <div 
+              key={video.id} 
+              onClick={() => setSelectedVideo(video)}
+              className="bg-white rounded-[32px] overflow-hidden shadow-xl group cursor-pointer border border-gray-100 transition-all hover:-translate-y-2"
+            >
               <div className="relative h-64">
                 <img src={video.thumbnail} alt="" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors flex items-center justify-center">
@@ -77,7 +82,14 @@ const Reviews = () => {
           ))}
         </div>
         <div className="mt-12 text-center">
-          <button className="bg-primary text-white font-bold px-10 py-4 rounded-2xl shadow-xl shadow-primary/20 hover:-translate-y-1 transition-all">View All Videos</button>
+          <a 
+            href="https://www.youtube.com/@srilankaviajeseden" 
+            target="_blank" 
+            rel="noreferrer"
+            className="inline-block bg-primary text-white font-bold px-10 py-4 rounded-2xl shadow-xl shadow-primary/20 hover:-translate-y-1 transition-all"
+          >
+            View All Videos
+          </a>
         </div>
       </section>
 
@@ -180,6 +192,31 @@ const Reviews = () => {
           </div>
         </div>
       </section>
+      {/* Video Modal */}
+      {selectedVideo && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-6">
+          <div 
+            className="absolute inset-0 bg-black/90 backdrop-blur-md"
+            onClick={() => setSelectedVideo(null)}
+          ></div>
+          <div className="relative w-full max-w-5xl aspect-video bg-black rounded-3xl overflow-hidden shadow-2xl animate-in zoom-in duration-300">
+            <button 
+              onClick={() => setSelectedVideo(null)}
+              className="absolute top-6 right-6 w-12 h-12 bg-white/10 hover:bg-white/20 text-white rounded-full flex items-center justify-center z-20 transition-all backdrop-blur-xl"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+            <iframe
+              src={`https://www.youtube.com/embed/${selectedVideo.id}?autoplay=1`}
+              title={selectedVideo.name}
+              className="w-full h-full border-0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
+        </div>
+      )}
+
       {/* Review Modal */}
       {selectedReview && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-6">
