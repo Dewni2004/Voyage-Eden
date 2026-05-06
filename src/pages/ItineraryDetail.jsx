@@ -5,6 +5,8 @@ import { staticItineraries } from '../data/staticItineraries';
 import IncludedExcluded from '../components/IncludedExcluded/IncludedExcluded';
 import PaymentPolicy from '../components/PaymentPolicy/PaymentPolicy';
 import BookingCard from '../components/BookingCard/BookingCard';
+import srilankaMap from '../assets/SRI LANKA - MAP.png';
+import map from '../assets/map.png';
 
 const ItineraryDetail = () => {
   const { id } = useParams();
@@ -160,11 +162,15 @@ const ItineraryDetail = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           
           {/* Left Column: Interactive Map */}
-          <div className="relative">
-            <div className="bg-[#f8fbff] rounded-[40px] p-6 sm:p-12 flex items-center justify-center min-h-[500px] border border-gray-100 shadow-inner">
-              <div className="relative w-full max-w-[450px] aspect-[3/4]">
-                <svg viewBox="0 0 300 450" className="w-full h-full filter drop-shadow-2xl">
-                  <path d="M142 432C128 428 111 416 100 405C85 390 73 370 65 348C58 328 55 303 58 278C60 258 64 240 70 223C75 210 78 198 78 185C78 172 75 160 70 148C65 135 62 120 62 105C62 85 68 65 78 50C88 35 105 25 125 22C140 20 155 22 170 28C185 35 198 48 208 65C218 82 223 100 223 120C223 140 218 160 208 178C198 195 185 208 170 218C155 228 145 240 142 255C140 265 142 278 148 290C155 305 165 318 178 328C195 342 210 360 218 380C225 400 225 420 215 435C205 450 185 455 165 450C155 448 148 440 142 432Z" fill="#769d7a" />
+          <div className="relative group/map">
+            <div className="absolute -inset-4 bg-gradient-to-tr from-primary/5 to-luxury/5 rounded-[48px] blur-2xl opacity-0 group-hover/map:opacity-100 transition-duration-700"></div>
+            <div className="bg-[#fdfbf7] rounded-[40px] p-4 sm:p-8 flex items-center justify-center min-h-[550px] border border-luxury/10 shadow-2xl relative z-10 overflow-hidden">
+              {/* Paper Texture Overlay */}
+              <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')]"></div>
+              
+              <div className="relative w-full max-w-[420px] aspect-[3/4]">
+                <svg viewBox="0 0 300 450" className="w-full h-full filter drop-shadow-xl">
+                  <image href={map} x="0" y="0" width="300" height="450" className="opacity-100" />
                   
                   {/* Route Lines */}
                   <g className="route-lines">
@@ -175,8 +181,8 @@ const ItineraryDetail = () => {
                         <line 
                           key={`line-${day.id}`}
                           x1={prevDay.coords.x} y1={prevDay.coords.y} x2={day.coords.x} y2={day.coords.y} 
-                          stroke="white" strokeWidth="4" strokeDasharray="8,6" strokeLinecap="round"
-                          className={`transition-all duration-1000 ${activeDay >= day.id ? 'opacity-100' : 'opacity-0'}`}
+                          stroke="#b02a30" strokeWidth="3" strokeDasharray="6,4" strokeLinecap="round"
+                          className={`transition-all duration-1000 opacity-30 ${activeDay >= day.id ? 'opacity-60' : 'opacity-0'}`}
                         />
                       );
                     })}
@@ -185,12 +191,34 @@ const ItineraryDetail = () => {
                   {/* Day Markers */}
                   {days.map((day) => (
                     <g key={day.id} onClick={() => { setActiveDay(day.id); if (window.innerWidth < 1024) setIsModalOpen(true); }} className="cursor-pointer group">
-                      <circle cx={day.coords.x} cy={day.coords.y} r="20" className="fill-transparent" />
-                      <circle cx={day.coords.x} cy={day.coords.y} r="14" className={`transition-all duration-300 ${activeDay === day.id ? 'fill-[#b02a30] scale-110' : 'fill-gray-400 group-hover:fill-gray-500'}`} />
-                      <text x={day.coords.x} y={day.coords.y} dy=".35em" textAnchor="middle" className="fill-white text-[10px] font-black pointer-events-none">{day.id}</text>
+                      {/* Outer Glow */}
+                      <circle 
+                        cx={day.coords.x} cy={day.coords.y} r="22" 
+                        className={`transition-all duration-500 fill-primary/10 scale-0 ${activeDay === day.id ? 'scale-100 opacity-100' : 'opacity-0 group-hover:scale-75 group-hover:opacity-50'}`} 
+                      />
+                      <circle cx={day.coords.x} cy={day.coords.y} r="18" className="fill-transparent" />
+                      
+                      {/* Main Marker */}
+                      <circle 
+                        cx={day.coords.x} cy={day.coords.y} r="15" 
+                        className={`transition-all duration-500 shadow-lg ${activeDay === day.id ? 'fill-[#b02a30] scale-110' : 'fill-[#64748b] group-hover:fill-primary/80'}`} 
+                      />
+                      
+                      {/* Day Number */}
+                      <text 
+                        x={day.coords.x} y={day.coords.y} dy=".35em" textAnchor="middle" 
+                        className="fill-white text-[11px] font-black pointer-events-none select-none"
+                      >
+                        {day.id}
+                      </text>
                     </g>
                   ))}
                 </svg>
+              </div>
+
+              {/* Map Label */}
+              <div className="absolute bottom-6 right-8 opacity-40">
+                <p className="text-[10px] font-bold text-primary uppercase tracking-[0.3em] vertical-text">Interactive Route</p>
               </div>
             </div>
           </div>
