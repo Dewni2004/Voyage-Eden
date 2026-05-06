@@ -65,43 +65,43 @@ const ItineraryDetail = () => {
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-full max-w-5xl px-4 z-20">
           <div className="bg-white rounded-[40px] shadow-2xl py-6 md:py-8 px-6 md:px-12 border border-gray-50 flex flex-col items-center">
             {/* Stats Row */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full text-center">
+            <div className="grid grid-cols-3 md:grid-cols-3 gap-4 md:gap-8 w-full text-center">
               {/* Duration */}
-              <div className="flex flex-row md:flex-col items-center md:text-center space-x-4 md:space-x-0 md:space-y-3">
-                <div className="w-14 h-14 bg-[#f0f4f9] rounded-full flex items-center justify-center text-primary mx-auto">
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+              <div className="flex flex-col items-center text-center space-y-2 md:space-y-3">
+                <div className="w-10 h-10 md:w-14 md:h-14 bg-[#f0f4f9] rounded-full flex items-center justify-center text-primary mx-auto">
+                  <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
                 </div>
                 <div>
-                  <p className="text-gray-400 text-[10px] font-bold uppercase tracking-[0.2em] mb-1">Duration</p>
-                  <p className="text-primary text-xl font-bold">{itinerary.duration}</p>
+                  <p className="text-gray-400 text-[8px] md:text-[10px] font-bold uppercase tracking-[0.1em] md:tracking-[0.2em] mb-0.5 md:mb-1">Duration</p>
+                  <p className="text-primary text-sm md:text-xl font-bold whitespace-nowrap">{itinerary.duration}</p>
                 </div>
               </div>
 
               {/* Group */}
-              <div className="flex flex-row md:flex-col items-center md:text-center space-x-4 md:space-x-0 md:space-y-3">
-                <div className="w-14 h-14 bg-[#f0f4f9] rounded-full flex items-center justify-center text-primary mx-auto">
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+              <div className="flex flex-col items-center text-center space-y-2 md:space-y-3">
+                <div className="w-10 h-10 md:w-14 md:h-14 bg-[#f0f4f9] rounded-full flex items-center justify-center text-primary mx-auto">
+                  <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                   </svg>
                 </div>
                 <div>
-                  <p className="text-gray-400 text-[10px] font-bold uppercase tracking-[0.2em] mb-1">Group</p>
-                  <p className="text-primary text-xl font-bold">{itinerary.group}</p>
+                  <p className="text-gray-400 text-[8px] md:text-[10px] font-bold uppercase tracking-[0.1em] md:tracking-[0.2em] mb-0.5 md:mb-1">Group</p>
+                  <p className="text-primary text-sm md:text-xl font-bold whitespace-nowrap">{itinerary.group}</p>
                 </div>
               </div>
 
               {/* Effort */}
-              <div className="flex flex-row md:flex-col items-center md:text-center space-x-4 md:space-x-0 md:space-y-3">
-                <div className="w-14 h-14 bg-[#f0f4f9] rounded-full flex items-center justify-center text-primary mx-auto">
-                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <div className="flex flex-col items-center text-center space-y-2 md:space-y-3">
+                <div className="w-10 h-10 md:w-14 md:h-14 bg-[#f0f4f9] rounded-full flex items-center justify-center text-primary mx-auto">
+                  <svg className="w-5 h-5 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7z"/>
                   </svg>
                 </div>
                 <div>
-                  <p className="text-gray-400 text-[10px] font-bold uppercase tracking-[0.2em] mb-1">Effort</p>
-                  <p className="text-primary text-xl font-bold">{itinerary.effort}</p>
+                  <p className="text-gray-400 text-[8px] md:text-[10px] font-bold uppercase tracking-[0.1em] md:tracking-[0.2em] mb-0.5 md:mb-1">Effort</p>
+                  <p className="text-primary text-sm md:text-xl font-bold whitespace-nowrap">{itinerary.effort}</p>
                 </div>
               </div>
             </div>
@@ -155,7 +155,7 @@ const ItineraryDetail = () => {
       </section>
 
       {/* Spacer for the floating info bar */}
-      <div className="hidden md:block h-48"></div>
+      <div className="h-40 md:h-48"></div>
 
       {/* Interactive Itinerary Section */}
       <section id="itinerary-section" className="max-w-7xl mx-auto px-6 pb-24">
