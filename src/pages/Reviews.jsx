@@ -118,7 +118,7 @@ const Reviews = () => {
                   <div className="border-t border-white/20 pt-6 flex items-end justify-between">
                     <div>
                       <h4 className="text-white font-bold text-xl leading-tight font-serif">{review.name}</h4>
-                      <p className="text-luxury text-[10px] font-bold uppercase tracking-widest mt-1">{review.tourDetails?.travelerType || 'Traveler'}</p>
+                      <p className="text-luxury text-[10px] font-bold uppercase tracking-widest mt-1">{review.tourdetails?.travelertype || review.tourDetails?.travelerType || 'Traveler'}</p>
                     </div>
                     <Link 
                       to={`/review/${review.id}`}

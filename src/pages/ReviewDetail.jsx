@@ -62,7 +62,7 @@ const ReviewDetail = () => {
                 "{review.headline || review.text}"
               </h2>
               <div className="prose prose-lg text-gray-600 leading-relaxed whitespace-pre-wrap max-w-none">
-                {review.detailedText || review.text}
+                {review.detailedText || review.detailedtext || review.text}
               </div>
             </div>
 
@@ -90,7 +90,7 @@ const ReviewDetail = () => {
                   </div>
                   <div>
                     <p className="text-gray-400 text-xs font-bold uppercase">Date</p>
-                    <p className="text-primary font-bold">{review.tourDetails?.date || review.date}</p>
+                    <p className="text-primary font-bold">{review.tourdetails?.date || review.tourDetails?.date || review.date}</p>
                   </div>
                 </li>
                 <li className="flex items-center gap-4">
@@ -99,7 +99,7 @@ const ReviewDetail = () => {
                   </div>
                   <div>
                     <p className="text-gray-400 text-xs font-bold uppercase">Traveler Type</p>
-                    <p className="text-primary font-bold">{review.tourDetails?.travelerType || 'Couple'}</p>
+                    <p className="text-primary font-bold">{review.tourdetails?.travelertype || review.tourDetails?.travelerType || 'Couple'}</p>
                   </div>
                 </li>
                 <li className="flex items-center gap-4">
@@ -108,7 +108,7 @@ const ReviewDetail = () => {
                   </div>
                   <div>
                     <p className="text-gray-400 text-xs font-bold uppercase">Group</p>
-                    <p className="text-primary font-bold">{review.tourDetails?.group || 'Private'}</p>
+                    <p className="text-primary font-bold">{review.tourdetails?.group || review.tourDetails?.group || 'Private'}</p>
                   </div>
                 </li>
               </ul>

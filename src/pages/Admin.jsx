@@ -59,11 +59,11 @@ const Admin = () => {
     img: '', // Main hero image
     rating: 5,
     headline: '',
-    detailedText: '',
+    detailedtext: '',
     gallery: ['', '', '', ''], // 4 gallery slots
-    tourDetails: {
+    tourdetails: {
       date: '',
-      travelerType: 'Couple',
+      travelertype: 'Couple',
       group: 'Private'
     },
     guide: {
@@ -110,11 +110,11 @@ const Admin = () => {
       img: '',
       rating: 5,
       headline: '',
-      detailedText: '',
+      detailedtext: '',
       gallery: ['', '', '', ''],
-      tourDetails: {
+      tourdetails: {
         date: '',
-        travelerType: 'Couple',
+        travelertype: 'Couple',
         group: 'Private'
       },
       guide: {
@@ -157,9 +157,9 @@ const Admin = () => {
       img: review.img || '',
       rating: review.rating || 5,
       headline: review.headline || '',
-      detailedText: review.detailedText || '',
-      gallery: review.gallery || ['', '', '', ''],
-      tourDetails: review.tourDetails || { date: '', travelerType: 'Couple', group: 'Private' },
+      detailedtext: '',
+      gallery: ['', '', '', ''],
+      tourdetails: review.tourdetails || { date: '', travelertype: 'Couple', group: 'Private' },
       guide: review.guide || { name: 'Hasindu', photo: '', rating: 5, quote: '' }
     });
     setEditingReviewId(review.id);
@@ -668,7 +668,7 @@ const Admin = () => {
 
                   <div className="space-y-2">
                     <label className={labelClass}>Detailed Experience Story</label>
-                    <textarea rows="10" required value={reviewForm.detailedText} onChange={(e) => setReviewForm({...reviewForm, detailedText: e.target.value})} className={`${inputClass} resize-none shadow-inner`} placeholder="Describe the luxury experience in detail..."></textarea>
+                    <textarea rows="10" required value={reviewForm.detailedtext} onChange={(e) => setReviewForm({...reviewForm, detailedtext: e.target.value})} className={`${inputClass} resize-none shadow-inner`} placeholder="Describe the luxury experience in detail..."></textarea>
                   </div>
 
                   <div className="pt-10 border-t border-gray-100">
@@ -691,9 +691,9 @@ const Admin = () => {
                     <div className="bg-gray-50/50 p-8 rounded-[40px]">
                       <h3 className="text-lg font-serif font-bold text-primary mb-6 flex items-center gap-3">📊 Tour Stats</h3>
                       <div className="space-y-4">
-                        <input type="text" placeholder="Tour Date" value={reviewForm.tourDetails.date} onChange={(e) => setReviewForm({...reviewForm, tourDetails: {...reviewForm.tourDetails, date: e.target.value}})} className={inputClass} />
-                        <input type="text" placeholder="Traveler Type" value={reviewForm.tourDetails.travelerType} onChange={(e) => setReviewForm({...reviewForm, tourDetails: {...reviewForm.tourDetails, travelerType: e.target.value}})} className={inputClass} />
-                        <input type="text" placeholder="Group Type" value={reviewForm.tourDetails.group} onChange={(e) => setReviewForm({...reviewForm, tourDetails: {...reviewForm.tourDetails, group: e.target.value}})} className={inputClass} />
+                        <input type="text" placeholder="Tour Date" value={reviewForm.tourdetails.date} onChange={(e) => setReviewForm({...reviewForm, tourdetails: {...reviewForm.tourdetails, date: e.target.value}})} className={inputClass} />
+                        <input type="text" placeholder="Traveler Type" value={reviewForm.tourdetails.travelertype} onChange={(e) => setReviewForm({...reviewForm, tourdetails: {...reviewForm.tourdetails, travelertype: e.target.value}})} className={inputClass} />
+                        <input type="text" placeholder="Group Type" value={reviewForm.tourdetails.group} onChange={(e) => setReviewForm({...reviewForm, tourdetails: {...reviewForm.tourdetails, group: e.target.value}})} className={inputClass} />
                       </div>
                     </div>
                     <div className="bg-gray-50/50 p-8 rounded-[40px]">

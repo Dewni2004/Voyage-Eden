@@ -159,16 +159,16 @@ const ItineraryDetail = () => {
 
       {/* Interactive Itinerary Section */}
       <section id="itinerary-section" className="max-w-7xl mx-auto px-6 pb-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-stretch">
           
           {/* Left Column: Interactive Map */}
-          <div className="relative group/map">
+          <div className="relative group/map h-full">
             <div className="absolute -inset-4 bg-gradient-to-tr from-primary/5 to-luxury/5 rounded-[48px] blur-2xl opacity-0 group-hover/map:opacity-100 transition-duration-700"></div>
-            <div className="bg-[#fdfbf7] rounded-[40px] p-4 sm:p-8 flex items-center justify-center min-h-[550px] border border-luxury/10 shadow-2xl relative z-10 overflow-hidden">
+            <div className="bg-[#fdfbf7] rounded-[40px] p-4 sm:p-8 flex items-center justify-center h-full border border-luxury/10 shadow-2xl relative z-10 overflow-hidden">
               {/* Paper Texture Overlay */}
               <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')]"></div>
               
-              <div className="relative w-full max-w-[420px] aspect-[3/4]">
+              <div className="relative w-full max-w-[500px] aspect-[3/4]">
                 <svg viewBox="0 0 300 450" className="w-full h-full filter drop-shadow-xl">
                   <image href={map} x="0" y="0" width="300" height="450" className="opacity-100" />
                   

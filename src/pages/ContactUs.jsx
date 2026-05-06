@@ -1,6 +1,6 @@
 import PageHero from '../components/UI/PageHero';
 import contactBanner from '../assets/Galle-Fort.jpg';
-import teamMember from '../assets/team-member.png';
+import nethmiImg from '../assets/Nethmi.webp';
 
 const ContactUs = () => {
   return (
@@ -127,7 +127,7 @@ const ContactUs = () => {
               <div className="bg-gray-100/50 p-8 md:p-10 rounded-[40px] border border-white shadow-lg backdrop-blur-sm">
                 <div className="flex items-center gap-6 mb-8">
                   <div className="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border-4 border-white shadow-md">
-                    <img src={teamMember} alt="Consultant" className="w-full h-full object-cover" />
+                    <img src={nethmiImg} alt="Consultant" className="w-full h-full object-cover" />
                   </div>
                   <div>
                     <h3 className="text-primary text-xl md:text-2xl font-bold">Nethmi</h3>

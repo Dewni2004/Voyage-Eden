@@ -1,12 +1,36 @@
 import React from 'react';
-import teamPhoto from '../assets/team-photo.png';
-import beachSunset from '../assets/beach-sunset.png';
-import familyBeach from '../assets/family-beach.png';
+import officeStaff from '../assets/Office- staff.jpg';
+import officeStaff2 from '../assets/Office - staff 2.jpg';
+import guidesImage from '../assets/Guides.jpg';
 import teamMember from '../assets/team-member.png';
 import officeTeam1 from '../assets/team-office-1.png';
 import officeTeam2 from '../assets/team-office-2.png';
 import guide1 from '../assets/guide-1.png';
 import guide2 from '../assets/guide-2.png';
+import sanjiImg from '../assets/Sanji.webp';
+import anaImg from '../assets/Ana.webp';
+import joseImg from '../assets/Jose.webp';
+import marcoImg from '../assets/Marco.webp';
+import manjulaImg from '../assets/Manjula.webp';
+import rasikaImg from '../assets/Rasika.webp';
+import nethmiImg from '../assets/Nethmi.webp';
+import thakshilaImg from '../assets/Thakshila.webp';
+import anjanImg from '../assets/Anjan.webp';
+import dewniImg from '../assets/Dewni.webp';
+import oshadhiImg from '../assets/Oshadhi.webp';
+import sewminiImg from '../assets/Sewmini.webp';
+import kasunImg from '../assets/Kasun.webp';
+import thenuraImg from '../assets/Thenura.webp';
+import sithmiImg from '../assets/Sithmi2-300x239.webp';
+import theekshanaImg from '../assets/Theekshana.webp';
+import sampathImg from '../assets/Sampath.jpg';
+import nalindaImg from '../assets/Nalinda.webp';
+import nazriImg from '../assets/Nazri.webp';
+import chammiImg from '../assets/Chammi.webp';
+import chamaraImg from '../assets/Chamara.webp';
+import ajeebImg from '../assets/Ajeeb.webp';
+import noelImg from '../assets/Noel.webp';
+import chinthakaImg from '../assets/Chinthaka.webp';
 
 import PageHero from '../components/UI/PageHero';
 
@@ -16,7 +40,8 @@ const AboutUs = () => {
       <PageHero 
         title="Get To Know Us"
         description="We are a multicultural team dedicated to creating authentic and personalized travel experiences in Sri Lanka."
-        image={teamPhoto}
+        image={officeStaff}
+        overlayOpacity="bg-black/60"
       />
 
       {/* Who We Are Section */}
@@ -56,8 +81,8 @@ const AboutUs = () => {
               {/* Top Image */}
               <div className="absolute top-0 left-0 w-[80%] h-[200px] sm:h-[300px] md:h-[350px] z-10 transition-transform duration-500 hover:scale-[1.02]">
                 <img 
-                  src={beachSunset} 
-                  alt="Sri Lanka Beach Sunset" 
+                  src={officeStaff2} 
+                  alt="Eden Travels Office Staff" 
                   className="w-full h-full object-cover rounded-[30px] md:rounded-[40px] shadow-2xl border-4 border-white"
                 />
               </div>
@@ -65,8 +90,8 @@ const AboutUs = () => {
               {/* Bottom Image */}
               <div className="absolute bottom-0 right-0 w-[70%] h-[200px] sm:h-[300px] md:h-[350px] z-20 transition-transform duration-500 hover:scale-[1.02]">
                 <img 
-                  src={familyBeach} 
-                  alt="Family on Beach" 
+                  src={guidesImage} 
+                  alt="Eden Travels Guides" 
                   className="w-full h-full object-cover rounded-[30px] md:rounded-[40px] shadow-2xl border-4 border-white"
                 />
               </div>
@@ -146,11 +171,32 @@ const AboutUs = () => {
             <h2 className="text-primary text-4xl font-bold mb-4">Meet the Founders & Representatives</h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
             {[
-              { name: "Manjula", role: "Fondateur & PDG", desc: "Avec plus de 13 ans d'expérience, Manjula dirige l'équipe avec passion et expertise locale.", img: officeTeam1 },
-              { name: "Nethmi", role: "Conseillère en voyages", desc: "Notre agent de voyage dynamique qui se surpasse pour organiser des voyages passionnants.", img: teamMember },
-              { name: "Ashan", role: "Responsable des opérations", desc: "Ashan veille à ce que toutes nos opérations sur le terrain se déroulent sans accroc.", img: officeTeam2 }
+              { 
+                name: "Sanji", 
+                role: "Co-fondateur", 
+                desc: "Né au Sri Lanka et fort d'une expérience professionnelle en Europe, il est cofondateur de l'agence. Spécialisé dans l'accompagnement des voyageurs hispanophones.", 
+                img: sanjiImg 
+              },
+              { 
+                name: "Ana", 
+                role: "Co-fondatrice", 
+                desc: "Elle se spécialise dans la conception de voyages sur mesure, veillant à chaque détail pour créer des expériences uniques et mémorables.", 
+                img: anaImg 
+              },
+              { 
+                name: "Jose", 
+                role: "Représentant en Espagne", 
+                desc: "Jose conçoit des voyages sur mesure pour les voyageurs espagnols et latino-américains. Passionné et attentif aux détails.", 
+                img: joseImg 
+              },
+              { 
+                name: "Marco", 
+                role: "Représentant en Europe & Italie", 
+                desc: "Marco conçoit des itinéraires personnalisés et coordonne Viaggi Eden, assurant une liaison essentielle entre l'Europe et le Sri Lanka.", 
+                img: marcoImg 
+              }
             ].map((member, index) => (
               <div key={index} className="flex flex-col items-center text-center group">
                 <div className="relative mb-8 p-1.5 rounded-full border-[6px] border-primary transition-transform duration-500 group-hover:scale-105 group-hover:border-luxury shadow-xl shadow-primary/20">
@@ -185,10 +231,78 @@ const AboutUs = () => {
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
             {[
-              { name: "Kumara", role: "Specialist", img: officeTeam1 },
-              { name: "Dilshani", role: "Coordination", img: officeTeam2 },
-              { name: "Pradeep", role: "Logistics", img: teamMember },
-              { name: "Inoka", role: "Support", img: officeTeam1 },
+              { 
+                name: "Manjula", 
+                role: "Directeur Général", 
+                img: manjulaImg,
+                desc: "M. Manjula assure le bon déroulement des opérations quotidiennes, coordonne les équipes et supervise les flux de travail pour maintenir l'efficacité."
+              },
+              { 
+                name: "Rasika", 
+                role: "Gestion Financière", 
+                img: rasikaImg,
+                desc: "Rasika assure la gestion financière avec expertise et précision, garantissant efficacité et stabilité au sein de l'entreprise."
+              },
+              { 
+                name: "Nethmi", 
+                role: "Conseillère en voyages", 
+                img: nethmiImg,
+                desc: "Nethmi offre un accompagnement personnalisé, en concevant des voyages qui allient culture et confort pour une expérience réussie."
+              },
+              { 
+                name: "Thakshila", 
+                role: "Opérations Numériques", 
+                img: thakshilaImg,
+                desc: "Thakshila dirige les opérations numériques, gère les systèmes, le CRM et le site web, assurant l'innovation sur toutes les plateformes."
+              },
+              { 
+                name: "Anjan", 
+                role: "Comptable", 
+                img: anjanImg,
+                desc: "Anjan gère la facturation, les paiements et le budget avec un souci du détail, assurant un contrôle financier efficace."
+              },
+              { 
+                name: "Dewni", 
+                role: "Support Informatique", 
+                img: dewniImg,
+                desc: "Dewni fournit un support informatique, gérant les mises à jour et le dépannage pour des opérations techniques fluides."
+              },
+              { 
+                name: "Oshadhi", 
+                role: "Assistant Sol (Formation)", 
+                img: oshadhiImg,
+                desc: "Oshadhi apporte son soutien aux excursions quotidiennes, en aidant à l'élaboration des itinéraires et à la coordination."
+              },
+              { 
+                name: "Sewmini", 
+                role: "Assistante Comptable (Formation)", 
+                img: sewminiImg,
+                desc: "Sewmini apporte son soutien aux services de comptabilité, d'établissement des coûts et de devis avec exactitude."
+              },
+              { 
+                name: "Kasun", 
+                role: "Assistante Conseillère (Formation)", 
+                img: kasunImg,
+                desc: "Kasun aide à préparer des itinéraires personnalisés et assure la communication avec les clients pour leurs réservations."
+              },
+              { 
+                name: "Thenura", 
+                role: "Développeur CRM", 
+                img: thenuraImg,
+                desc: "Thenura développe le CRM personnalisé de l'agence, créant des outils qui rationalisent les processus et optimisent le service."
+              },
+              { 
+                name: "Sithmi", 
+                role: "Conseillère en Voyages (Formation)", 
+                img: sithmiImg,
+                desc: "Sithmi se concentre sur la gestion de la clientèle et la conception d'itinéraires sur mesure répondant aux attentes des voyageurs."
+              },
+              { 
+                name: "Theekshana", 
+                role: "Création de Contenu (Formation)", 
+                img: theekshanaImg,
+                desc: "Theekshana soutient les activités de marketing et aide à la préparation des itinéraires via la création de contenu social."
+              }
             ].map((member, index) => (
               <div key={index} className="bg-[#f8fbff] p-6 md:p-8 rounded-[32px] border border-gray-100 flex flex-col items-center text-center transition-all duration-300 hover:shadow-xl hover:-translate-y-2 group">
                 <div className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full overflow-hidden mb-6 shadow-lg border-4 border-white group-hover:border-luxury transition-colors duration-300">
@@ -200,6 +314,9 @@ const AboutUs = () => {
                 </div>
                 <h3 className="text-primary text-lg md:text-xl font-bold mb-1">{member.name}</h3>
                 <p className="text-primary/70 font-semibold text-xs md:text-sm mb-4">{member.role}</p>
+                <p className="text-gray-500 text-[11px] leading-relaxed line-clamp-3 group-hover:line-clamp-none transition-all duration-300">
+                  {member.desc}
+                </p>
               </div>
             ))}
           </div>
@@ -216,23 +333,70 @@ const AboutUs = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
             {[
-              { name: "Saman", img: guide1 },
-              { name: "Kamal", img: guide2 },
-              { name: "Nuwan", img: guide1 },
-              { name: "Upul", img: guide2 },
+              { 
+                name: "Sampath", 
+                role: "Chauffeur-Guide Espagnol", 
+                img: sampathImg,
+                desc: "Notre chauffeur-guide vedette, l'un des meilleurs hispanophones. Expérimenté et chaleureux, il crée des expériences inoubliables."
+              },
+              { 
+                name: "Nalinda", 
+                role: "Chauffeur-Guide Espagnol", 
+                img: nalindaImg,
+                desc: "Parle couramment espagnol, réputé pour sa gentillesse et son attention particulière aux enfants. Prudent et toujours positif."
+              },
+              { 
+                name: "Nazri", 
+                role: "Chauffeur-Guide Espagnol", 
+                img: nazriImg,
+                desc: "Très attentionné envers les familles, il connaît parfaitement les coutumes locales et se met en quatre pour satisfaire les voyageurs."
+              },
+              { 
+                name: "Chammi", 
+                role: "Chauffeur-Guide Espagnol", 
+                img: chammiImg,
+                desc: "Sympathique et professionnel, il gère tous les détails logistiques. Sa conduite sûre et sa fiabilité rendent chaque trajet agréable."
+              },
+              { 
+                name: "Chamara", 
+                role: "Chauffeur-Guide Professionnel", 
+                img: chamaraImg,
+                desc: "Prend en charge tous les détails logistiques pour vous garantir un voyage confortable. Fiable avec une personnalité chaleureuse."
+              },
+              { 
+                name: "Ajeeb", 
+                role: "Chauffeur-Guide Professionnel", 
+                img: ajeebImg,
+                desc: "Le compagnon idéal pour un voyage paisible. Sa disponibilité et son professionnalisme vous garantissent une sérénité totale."
+              },
+              { 
+                name: "Noel", 
+                role: "Chauffeur Italien", 
+                img: noelImg,
+                desc: "Parle couramment italien, Noël s'occupe de tout pour que vous profitiez pleinement. Sa gentillesse assure votre bien-être."
+              },
+              { 
+                name: "Chinthaka", 
+                role: "Chauffeur Italien", 
+                img: chinthakaImg,
+                desc: "Chauffeur italien sympathique et expérimenté. Professionnel et attentif, il vous garantit une expérience sûre et inoubliable."
+              },
             ].map((guide, index) => (
-              <div key={index} className="flex flex-col items-center text-center group">
-                <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full overflow-hidden mb-6 md:mb-8 shadow-xl border-4 border-white group-hover:border-luxury transition-all duration-300 transform group-hover:scale-105">
+              <div key={index} className="bg-white p-6 md:p-8 rounded-[32px] border border-gray-100 flex flex-col items-center text-center transition-all duration-300 hover:shadow-xl hover:-translate-y-2 group">
+                <div className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full overflow-hidden mb-6 shadow-lg border-4 border-[#f8fbff] group-hover:border-luxury transition-colors duration-300">
                   <img 
                     src={guide.img} 
-                    alt="Guide / Driver" 
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                    alt={guide.name} 
+                    className="w-full h-full object-cover"
                   />
                 </div>
-                <h3 className="text-primary text-xl md:text-2xl font-bold mb-1">{guide.name}</h3>
-                <p className="text-primary/70 font-semibold mb-4 text-sm md:text-base">Certified Guide</p>
+                <h3 className="text-primary text-lg md:text-xl font-bold mb-1">{guide.name}</h3>
+                <p className="text-primary/70 font-semibold text-xs md:text-sm mb-4">{guide.role}</p>
+                <p className="text-gray-500 text-[11px] leading-relaxed line-clamp-3 group-hover:line-clamp-none transition-all duration-300">
+                  {guide.desc}
+                </p>
               </div>
             ))}
           </div>
