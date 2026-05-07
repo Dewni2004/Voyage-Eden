@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { blogArticles } from '../data/blogData';
 import { getArticles } from '../services/contentService';
 import PageHero from '../components/UI/PageHero';
+import { Helmet } from 'react-helmet-async';
 
 const BlogDetail = () => {
   const { id } = useParams();
@@ -58,6 +59,15 @@ const BlogDetail = () => {
 
   return (
     <div className="bg-[#f8fbff] min-h-screen">
+      <Helmet>
+        <title>{article.seo_title || `${article.title} | Eden Travels`}</title>
+        <meta name="description" content={article.seo_description || article.description?.substring(0, 160)} />
+        {article.seo_keywords && <meta name="keywords" content={article.seo_keywords} />}
+        <meta property="og:title" content={article.seo_title || article.title} />
+        <meta property="og:description" content={article.seo_description || article.description?.substring(0, 160)} />
+        <meta property="og:image" content={article.image} />
+        <meta property="og:type" content="article" />
+      </Helmet>
       <PageHero 
         title={article.title}
         description={article.description}

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getItineraries } from '../services/contentService';
 import { staticItineraries } from '../data/staticItineraries';
+import { Helmet } from 'react-helmet-async';
 import IncludedExcluded from '../components/IncludedExcluded/IncludedExcluded';
 import PaymentPolicy from '../components/PaymentPolicy/PaymentPolicy';
 import BookingCard from '../components/BookingCard/BookingCard';
@@ -38,6 +39,15 @@ const ItineraryDetail = () => {
 
   return (
     <div className="bg-white">
+      <Helmet>
+        <title>{itinerary.seo_title || `${itinerary.title} | Eden Travels`}</title>
+        <meta name="description" content={itinerary.seo_description || itinerary.description?.substring(0, 160)} />
+        {itinerary.seo_keywords && <meta name="keywords" content={itinerary.seo_keywords} />}
+        <meta property="og:title" content={itinerary.seo_title || itinerary.title} />
+        <meta property="og:description" content={itinerary.seo_description || itinerary.description?.substring(0, 160)} />
+        <meta property="og:image" content={itinerary.image} />
+        <meta property="og:type" content="website" />
+      </Helmet>
       {/* Hero Section */}
       <section className="relative h-[80vh] flex items-center justify-center">
         {/* Background Image with Overlay */}

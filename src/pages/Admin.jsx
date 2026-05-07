@@ -34,7 +34,10 @@ const Admin = () => {
     group: 'Private',
     effort: 'Moderate',
     category: 'popular',
-    icons: '5 Star, Half Board, Car'
+    icons: '5 Star, Half Board, Car',
+    seo_title: '',
+    seo_description: '',
+    seo_keywords: ''
   });
 
   const [itineraryDays, setItineraryDays] = useState([
@@ -48,7 +51,10 @@ const Admin = () => {
     excerpt: '',
     image: '',
     author: 'Eden Travels',
-    date: new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' }).toUpperCase()
+    date: new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' }).toUpperCase(),
+    seo_title: '',
+    seo_description: '',
+    seo_keywords: ''
   });
 
   const [contentBlocks, setContentBlocks] = useState([{ type: 'paragraph', text: '' }]);
@@ -99,9 +105,30 @@ const Admin = () => {
   }, [isAuthenticated]);
 
   const resetArticleForm = () => {
-    setArticleForm({ title: '', description: '', category: 'History', excerpt: '', image: '', author: 'Eden Travels', date: new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' }).toUpperCase() });
+    setArticleForm({ 
+      title: '', 
+      description: '', 
+      category: 'History', 
+      excerpt: '', 
+      image: '', 
+      author: 'Eden Travels', 
+      date: new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' }).toUpperCase(),
+      seo_title: '',
+      seo_description: '',
+      seo_keywords: ''
+    });
     setContentBlocks([{ type: 'paragraph', text: '' }]);
     setEditingArticleId(null);
+  };
+
+  const autoGenerateArticleSEO = () => {
+    if (!articleForm.title) return alert("Please enter a title first");
+    setArticleForm({
+      ...articleForm,
+      seo_title: `${articleForm.title} | Eden Travels`,
+      seo_description: articleForm.excerpt || articleForm.description.substring(0, 155),
+      seo_keywords: `${articleForm.category.toLowerCase()}, sri lanka, travel guide, ${articleForm.title.toLowerCase().replace(/ /g, ', ')}`
+    });
   };
 
   const resetReviewForm = () => {
@@ -130,9 +157,32 @@ const Admin = () => {
   };
 
   const resetItineraryForm = () => {
-    setItineraryForm({ title: '', description: '', image: '', price: '', duration: '', group: 'Private', effort: 'Moderate', category: 'popular', icons: '5 Star, Half Board, Car' });
+    setItineraryForm({ 
+      title: '', 
+      description: '', 
+      image: '', 
+      price: '', 
+      duration: '', 
+      group: 'Private', 
+      effort: 'Moderate', 
+      category: 'popular', 
+      icons: '5 Star, Half Board, Car',
+      seo_title: '',
+      seo_description: '',
+      seo_keywords: ''
+    });
     setItineraryDays([{ id: 1, location: '', image: '', description: '', highlights: '', accommodation: '', meals: 'Breakfast & Dinner', travel: '', coords: { x: 150, y: 225 } }]);
     setEditingItineraryId(null);
+  };
+
+  const autoGenerateItinerarySEO = () => {
+    if (!itineraryForm.title) return alert("Please enter a title first");
+    setItineraryForm({
+      ...itineraryForm,
+      seo_title: `${itineraryForm.title} | Luxury Sri Lanka Tours`,
+      seo_description: itineraryForm.description.substring(0, 155),
+      seo_keywords: `${itineraryForm.category.toLowerCase()}, luxury tours, sri lanka, itinerary, ${itineraryForm.title.toLowerCase().replace(/ /g, ', ')}`
+    });
   };
 
   const handleEditArticle = (article) => {
@@ -143,7 +193,10 @@ const Admin = () => {
       excerpt: article.excerpt || '',
       image: article.image || '',
       author: article.author || 'Eden Travels',
-      date: article.date || ''
+      date: article.date || '',
+      seo_title: article.seo_title || '',
+      seo_description: article.seo_description || '',
+      seo_keywords: article.seo_keywords || ''
     });
     setContentBlocks(article.content && article.content.length > 0 ? article.content : [{ type: 'paragraph', text: '' }]);
     setEditingArticleId(article.id);
@@ -179,7 +232,10 @@ const Admin = () => {
       group: itinerary.group || 'Private',
       effort: itinerary.effort || 'Moderate',
       category: itinerary.category || 'popular',
-      icons: Array.isArray(itinerary.icons) ? itinerary.icons.join(', ') : (itinerary.icons || '5 Star, Half Board, Car')
+      icons: Array.isArray(itinerary.icons) ? itinerary.icons.join(', ') : (itinerary.icons || '5 Star, Half Board, Car'),
+      seo_title: itinerary.seo_title || '',
+      seo_description: itinerary.seo_description || '',
+      seo_keywords: itinerary.seo_keywords || ''
     });
     setItineraryDays(itinerary.days || [{ id: 1, location: '', image: '', description: '', highlights: '', accommodation: '', meals: 'Breakfast & Dinner', travel: '', coords: { x: 150, y: 225 } }]);
     setEditingItineraryId(itinerary.id);
@@ -618,6 +674,62 @@ const Admin = () => {
                     </div>
                   </div>
 
+                  {/* SEO Settings Section */}
+                  <div className="pt-10 border-t border-gray-100 mt-12">
+                    <div className="flex items-center gap-3 mb-8">
+                      <div className="w-10 h-10 bg-luxury/10 rounded-xl flex items-center justify-center">
+                        <svg className="w-5 h-5 text-luxury" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-serif font-bold text-primary">SEO Architecture</h3>
+                        <p className="text-gray-400 text-xs font-medium">Optimize visibility for search engines</p>
+                      </div>
+                      <button 
+                        type="button" 
+                        onClick={autoGenerateArticleSEO}
+                        className="ml-auto bg-luxury/10 hover:bg-luxury hover:text-white text-luxury text-[10px] font-bold uppercase tracking-widest px-4 py-2 rounded-xl transition-all flex items-center gap-2"
+                      >
+                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                        Auto-Generate
+                      </button>
+                    </div>
+                    
+                    <div className="space-y-6">
+                      <div className="space-y-2">
+                        <label className={labelClass}>Meta Title (Recommended 50-60 chars)</label>
+                        <input 
+                          type="text" 
+                          value={articleForm.seo_title} 
+                          onChange={(e) => setArticleForm({...articleForm, seo_title: e.target.value})} 
+                          className={inputClass} 
+                          placeholder="Luxury Sri Lanka Tours | Eden Travels"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <label className={labelClass}>Meta Description (Recommended 150-160 chars)</label>
+                        <textarea 
+                          rows="3" 
+                          value={articleForm.seo_description} 
+                          onChange={(e) => setArticleForm({...articleForm, seo_description: e.target.value})} 
+                          className={`${inputClass} resize-none`} 
+                          placeholder="Discover the ultimate luxury travel experience in Sri Lanka..."
+                        ></textarea>
+                      </div>
+                      <div className="space-y-2">
+                        <label className={labelClass}>Meta Keywords (Comma separated)</label>
+                        <input 
+                          type="text" 
+                          value={articleForm.seo_keywords} 
+                          onChange={(e) => setArticleForm({...articleForm, seo_keywords: e.target.value})} 
+                          className={inputClass} 
+                          placeholder="sri lanka luxury tours, safari, tea plantations"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
                   <button disabled={loading} className="w-full bg-primary text-white font-bold py-6 rounded-[24px] shadow-2xl shadow-primary/30 transition-all hover:bg-primary/90 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 mt-12 text-sm tracking-[0.2em]">
                     {loading ? 'PROCESSING...' : editingArticleId ? 'SAVE CHANGES' : 'PUBLISH GUIDE'}
                   </button>
@@ -896,6 +1008,62 @@ const Admin = () => {
                           </div>
                         </div>
                       ))}
+                    </div>
+                  </div>
+
+                  {/* SEO Settings Section */}
+                  <div className="pt-10 border-t border-gray-100 mt-16">
+                    <div className="flex items-center gap-3 mb-8">
+                      <div className="w-10 h-10 bg-luxury/10 rounded-xl flex items-center justify-center">
+                        <svg className="w-5 h-5 text-luxury" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-serif font-bold text-primary">SEO Architecture</h3>
+                        <p className="text-gray-400 text-xs font-medium">Optimize visibility for search engines</p>
+                      </div>
+                      <button 
+                        type="button" 
+                        onClick={autoGenerateItinerarySEO}
+                        className="ml-auto bg-luxury/10 hover:bg-luxury hover:text-white text-luxury text-[10px] font-bold uppercase tracking-widest px-4 py-2 rounded-xl transition-all flex items-center gap-2"
+                      >
+                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                        Auto-Generate
+                      </button>
+                    </div>
+                    
+                    <div className="space-y-6">
+                      <div className="space-y-2">
+                        <label className={labelClass}>Meta Title (Recommended 50-60 chars)</label>
+                        <input 
+                          type="text" 
+                          value={itineraryForm.seo_title} 
+                          onChange={(e) => setItineraryForm({...itineraryForm, seo_title: e.target.value})} 
+                          className={inputClass} 
+                          placeholder="Luxury Sri Lanka Tours | Eden Travels"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <label className={labelClass}>Meta Description (Recommended 150-160 chars)</label>
+                        <textarea 
+                          rows="3" 
+                          value={itineraryForm.seo_description} 
+                          onChange={(e) => setItineraryForm({...itineraryForm, seo_description: e.target.value})} 
+                          className={`${inputClass} resize-none`} 
+                          placeholder="Discover the ultimate luxury travel experience in Sri Lanka..."
+                        ></textarea>
+                      </div>
+                      <div className="space-y-2">
+                        <label className={labelClass}>Meta Keywords (Comma separated)</label>
+                        <input 
+                          type="text" 
+                          value={itineraryForm.seo_keywords} 
+                          onChange={(e) => setItineraryForm({...itineraryForm, seo_keywords: e.target.value})} 
+                          className={inputClass} 
+                          placeholder="sri lanka luxury tours, safari, tea plantations"
+                        />
+                      </div>
                     </div>
                   </div>
 
