@@ -21,7 +21,6 @@ const Navbar = () => {
     { name: 'Guide de Voyage', path: '/travel-guide' },
     { name: 'Contactez-nous', path: '/contact' },
     { name: 'Avis', path: '/reviews' },
-    { name: 'Offres', path: '/offers', specialized: true },
   ];
 
   const flags = [

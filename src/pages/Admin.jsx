@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { 
   addReview, addArticle, getReviews, getArticles, updateArticle, deleteArticle, updateReview, deleteReview,
-  getItineraries, addItinerary, updateItinerary, deleteItinerary 
+  getItineraries, addItinerary, updateItinerary, deleteItinerary,
+  getCategories, addCategory, updateCategory, deleteCategory
 } from '../services/contentService';
 import ImageUploadField from '../components/Admin/ImageUploadField';
 import MapCoordinatePicker from '../components/Admin/MapCoordinatePicker';
@@ -17,12 +18,14 @@ const Admin = () => {
   const [publishedArticles, setPublishedArticles] = useState([]);
   const [publishedReviews, setPublishedReviews] = useState([]);
   const [publishedItineraries, setPublishedItineraries] = useState([]);
+  const [publishedCategories, setPublishedCategories] = useState([]);
   const [contentLoading, setContentLoading] = useState(false);
 
   // Edit mode
   const [editingArticleId, setEditingArticleId] = useState(null);
   const [editingReviewId, setEditingReviewId] = useState(null);
   const [editingItineraryId, setEditingItineraryId] = useState(null);
+  const [editingCategoryId, setEditingCategoryId] = useState(null);
 
   // Form States
   const [itineraryForm, setItineraryForm] = useState({
@@ -38,6 +41,12 @@ const Admin = () => {
     seo_title: '',
     seo_description: '',
     seo_keywords: ''
+  });
+
+  const [categoryForm, setCategoryForm] = useState({
+    title: '',
+    slug: '',
+    image: ''
   });
 
   const [itineraryDays, setItineraryDays] = useState([
@@ -93,10 +102,16 @@ const Admin = () => {
 
   const fetchContent = async () => {
     setContentLoading(true);
-    const [articles, reviews, itineraries] = await Promise.all([getArticles(), getReviews(), getItineraries()]);
+    const [articles, reviews, itineraries, categories] = await Promise.all([
+      getArticles(), 
+      getReviews(), 
+      getItineraries(),
+      getCategories()
+    ]);
     setPublishedArticles(articles);
     setPublishedReviews(reviews);
     setPublishedItineraries(itineraries);
+    setPublishedCategories(categories);
     setContentLoading(false);
   };
 
@@ -175,6 +190,11 @@ const Admin = () => {
     setEditingItineraryId(null);
   };
 
+  const resetCategoryForm = () => {
+    setCategoryForm({ title: '', slug: '', image: '' });
+    setEditingCategoryId(null);
+  };
+
   const autoGenerateItinerarySEO = () => {
     if (!itineraryForm.title) return alert("Please enter a title first");
     setItineraryForm({
@@ -243,6 +263,17 @@ const Admin = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleEditCategory = (category) => {
+    setCategoryForm({
+      title: category.title || '',
+      slug: category.slug || '',
+      image: category.image || ''
+    });
+    setEditingCategoryId(category.id);
+    setActiveTab('new-category');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const handleDeleteArticle = async (id) => {
     if (!window.confirm('Are you sure you want to delete this article?')) return;
     try {
@@ -270,6 +301,17 @@ const Admin = () => {
     try {
       await deleteItinerary(id);
       setMessage({ type: 'success', text: 'Itinerary deleted!' });
+      fetchContent();
+    } catch (e) {
+      setMessage({ type: 'error', text: `Delete failed: ${e.message}` });
+    }
+  };
+
+  const handleDeleteCategory = async (id) => {
+    if (!window.confirm('Are you sure you want to delete this category?')) return;
+    try {
+      await deleteCategory(id);
+      setMessage({ type: 'success', text: 'Category deleted!' });
       fetchContent();
     } catch (e) {
       setMessage({ type: 'error', text: `Delete failed: ${e.message}` });
@@ -349,6 +391,27 @@ const Admin = () => {
     setLoading(false);
   };
 
+  const handleCategorySubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      if (editingCategoryId) {
+        await updateCategory(editingCategoryId, categoryForm);
+        setMessage({ type: 'success', text: 'Category updated successfully!' });
+      } else {
+        await addCategory(categoryForm);
+        setMessage({ type: 'success', text: 'Category added successfully!' });
+      }
+      resetCategoryForm();
+      fetchContent();
+      setActiveTab('interests');
+    } catch (error) {
+      console.error(error);
+      setMessage({ type: 'error', text: `Failed: ${error.message}` });
+    }
+    setLoading(false);
+  };
+
   const addBlock = (type) => setContentBlocks([...contentBlocks, { type, text: '' }]);
   const updateBlock = (index, text) => { const b = [...contentBlocks]; b[index].text = text; setContentBlocks(b); };
   const removeBlock = (index) => setContentBlocks(contentBlocks.filter((_, i) => i !== index));
@@ -384,9 +447,11 @@ const Admin = () => {
     { id: 'articles', label: 'Articles', icon: '📄', count: publishedArticles.length },
     { id: 'reviews', label: 'Reviews', icon: '⭐', count: publishedReviews.length },
     { id: 'itineraries', label: 'Itineraries', icon: '🗺️', count: publishedItineraries.length },
+    { id: 'interests', label: 'Interests', icon: '🎯', count: publishedCategories.length },
     { id: 'new-article', label: editingArticleId ? 'Edit Article' : 'New Article', icon: '✍️' },
     { id: 'new-review', label: editingReviewId ? 'Edit Review' : 'New Review', icon: '✨' },
     { id: 'new-itinerary', label: editingItineraryId ? 'Edit Itinerary' : 'New Itinerary', icon: '📍' },
+    { id: 'new-category', label: editingCategoryId ? 'Edit Category' : 'New Category', icon: '📂' },
   ];
 
   const inputClass = "w-full bg-white border border-gray-100 rounded-2xl py-4 px-6 outline-none focus:ring-2 focus:ring-primary/20 transition-all text-primary font-medium placeholder:text-gray-300 shadow-sm";
@@ -411,6 +476,7 @@ const Admin = () => {
                   if (tab.id === 'new-article' && !editingArticleId) resetArticleForm(); 
                   if (tab.id === 'new-review' && !editingReviewId) resetReviewForm(); 
                   if (tab.id === 'new-itinerary' && !editingItineraryId) resetItineraryForm();
+                  if (tab.id === 'new-category' && !editingCategoryId) resetCategoryForm();
                 }}
                 className={`w-full flex items-center justify-between px-6 py-4 rounded-2xl transition-all duration-300 group ${activeTab === tab.id ? 'bg-white text-primary shadow-xl scale-105' : 'text-white/60 hover:text-white hover:bg-white/5'}`}
               >
@@ -596,6 +662,48 @@ const Admin = () => {
             </div>
           )}
 
+          {/* INTERESTS / CATEGORIES LIST */}
+          {activeTab === 'interests' && (
+            <div className="animate-fade-in">
+              <div className="flex justify-between items-end mb-8 px-4">
+                <div>
+                  <h3 className="text-2xl font-serif font-bold text-primary mb-1">Interest Categories</h3>
+                  <p className="text-gray-400 text-sm font-medium">Manage interest groups and itineraries categories</p>
+                </div>
+                <button onClick={() => { resetCategoryForm(); setActiveTab('new-category'); }} className="bg-primary text-white font-bold px-8 py-4 rounded-2xl hover:bg-primary/90 transition-all shadow-xl shadow-primary/20 text-sm tracking-wide">+ NEW CATEGORY</button>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {contentLoading ? (
+                  <div className="flex flex-col items-center justify-center py-32 space-y-4 col-span-full">
+                    <div className="w-12 h-12 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
+                    <p className="text-gray-400 font-bold text-sm uppercase tracking-widest">Loading categories...</p>
+                  </div>
+                ) : publishedCategories.length === 0 ? (
+                  <div className="bg-white rounded-[40px] p-24 text-center border border-gray-100 shadow-sm col-span-full">
+                    <div className="text-6xl mb-6">🎯</div>
+                    <h4 className="text-xl font-bold text-primary mb-2">No categories yet</h4>
+                    <p className="text-gray-400 max-w-xs mx-auto mb-8">Define interests like 'Adventure' or 'Culture'.</p>
+                    <button onClick={() => setActiveTab('new-category')} className="text-primary font-bold hover:underline">Create your first category →</button>
+                  </div>
+                ) : publishedCategories.map((cat) => (
+                  <div key={cat.id} className="bg-white rounded-[32px] p-6 shadow-sm border border-gray-100 flex gap-6 items-center group hover:shadow-2xl hover:-translate-y-1 transition-all duration-500">
+                    <div className="w-20 h-20 rounded-2xl overflow-hidden flex-shrink-0 bg-gray-100 shadow-inner">
+                      {cat.image && <img src={cat.image} alt="" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-primary font-bold text-lg mb-1">{cat.title}</h3>
+                      <p className="text-luxury text-[10px] font-bold uppercase tracking-[0.2em]">Slug: {cat.slug}</p>
+                    </div>
+                    <div className="flex gap-2 flex-shrink-0">
+                      <button onClick={() => handleEditCategory(cat)} className="w-10 h-10 flex items-center justify-center bg-gray-50 hover:bg-primary hover:text-white text-gray-400 rounded-xl transition-all duration-300 text-sm">✏️</button>
+                      <button onClick={() => handleDeleteCategory(cat.id)} className="w-10 h-10 flex items-center justify-center bg-red-50 hover:bg-red-500 hover:text-white text-red-400 rounded-xl transition-all duration-300 text-sm">🗑️</button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
           {/* NEW / EDIT ARTICLE FORM */}
           {activeTab === 'new-article' && (
             <div className="animate-slide-up">
@@ -874,7 +982,7 @@ const Admin = () => {
                         <option value="adventure">Adventure</option>
                         <option value="pererahera">Esela Perahera</option>
                         <option value="8days">8 Days Trips</option>
-                        <option value="interest">By Interest</option>
+                        <option value="interests">Interests</option>
                       </select>
                     </div>
                   </div>
@@ -1069,6 +1177,48 @@ const Admin = () => {
 
                   <button disabled={loading} className="w-full bg-primary text-white font-bold py-6 rounded-[24px] shadow-2xl shadow-primary/30 transition-all hover:bg-primary/90 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 mt-16 text-sm tracking-[0.2em]">
                     {loading ? 'ARCHITECTING...' : editingItineraryId ? 'UPDATE JOURNEY' : 'CONSTRUCT JOURNEY'}
+                  </button>
+                </form>
+              </div>
+            </div>
+          )}
+          {/* NEW / EDIT CATEGORY FORM */}
+          {activeTab === 'new-category' && (
+            <div className="animate-slide-up">
+              <div className="bg-white p-12 md:p-16 rounded-[48px] shadow-2xl border border-gray-50 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
+                
+                <div className="flex items-center justify-between mb-12 relative z-10">
+                  <div>
+                    <h2 className="text-3xl font-serif font-bold text-primary mb-2">{editingCategoryId ? 'Modify Interest' : 'New Interest Group'}</h2>
+                    <p className="text-gray-400 font-medium">Categorize itineraries by traveler interests</p>
+                  </div>
+                  {editingCategoryId && (
+                    <button type="button" onClick={resetCategoryForm} className="bg-gray-50 text-gray-400 hover:text-red-500 w-10 h-10 rounded-full flex items-center justify-center transition-colors">✕</button>
+                  )}
+                </div>
+
+                <form onSubmit={handleCategorySubmit} className="space-y-10 relative z-10">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="space-y-2">
+                      <label className={labelClass}>Category Title</label>
+                      <input type="text" required value={categoryForm.title} onChange={(e) => setCategoryForm({...categoryForm, title: e.target.value})} className={inputClass} placeholder="Voyages de noces..." />
+                    </div>
+                    <div className="space-y-2">
+                      <label className={labelClass}>URL Slug / ID</label>
+                      <input type="text" required value={categoryForm.slug} onChange={(e) => setCategoryForm({...categoryForm, slug: e.target.value})} className={inputClass} placeholder="honeymoon" />
+                    </div>
+                  </div>
+
+                  <ImageUploadField 
+                    label="Category Thumbnail" 
+                    value={categoryForm.image} 
+                    onChange={(url) => setCategoryForm({...categoryForm, image: url})} 
+                    folder="categories"
+                  />
+
+                  <button disabled={loading} className="w-full bg-primary text-white font-bold py-6 rounded-[24px] shadow-2xl shadow-primary/30 transition-all hover:bg-primary/90 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 mt-12 text-sm tracking-[0.2em]">
+                    {loading ? 'SAVING...' : editingCategoryId ? 'SAVE CATEGORY' : 'CREATE CATEGORY'}
                   </button>
                 </form>
               </div>

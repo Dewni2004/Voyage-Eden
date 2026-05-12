@@ -178,3 +178,62 @@ export const deleteArticle = async (id) => {
     throw error;
   }
 };
+// --- CATEGORIES ---
+
+export const getCategories = async () => {
+  try {
+    const { data, error } = await supabase
+      .from('categories')
+      .select('*')
+      .order('id', { ascending: true });
+    
+    if (error) throw error;
+    return data || [];
+  } catch (error) {
+    console.error("Error fetching categories:", error);
+    return [];
+  }
+};
+
+export const addCategory = async (categoryData) => {
+  try {
+    const { data, error } = await supabase
+      .from('categories')
+      .insert([categoryData])
+      .select();
+    
+    if (error) throw error;
+    return data[0].id;
+  } catch (error) {
+    console.error("Error adding category:", error);
+    throw error;
+  }
+};
+
+export const updateCategory = async (id, categoryData) => {
+  try {
+    const { error } = await supabase
+      .from('categories')
+      .update(categoryData)
+      .eq('id', id);
+    
+    if (error) throw error;
+  } catch (error) {
+    console.error("Error updating category:", error);
+    throw error;
+  }
+};
+
+export const deleteCategory = async (id) => {
+  try {
+    const { error } = await supabase
+      .from('categories')
+      .delete()
+      .eq('id', id);
+    
+    if (error) throw error;
+  } catch (error) {
+    console.error("Error deleting category:", error);
+    throw error;
+  }
+};

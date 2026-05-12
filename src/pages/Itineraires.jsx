@@ -40,8 +40,9 @@ const Itineraires = () => {
       <PopularItineraries title="Voyages d'aventure" id="adventure" itineraries={getByCategory('adventure')} />
       <PopularItineraries title="Spéciaux d'Esela Perahera" id="pererahera" itineraries={getByCategory('pererahera')} />
       <PopularItineraries title="Itinéraires de 8 jours" id="8days" itineraries={getByCategory('8days')} />
-      <PopularItineraries title="itinéraires basés sur les centres d'intérêt" id="interest" itineraries={getByCategory('interest')} />
       
+      <PopularItineraries title="itinéraires basés sur les centres d'intérêt" id="interests" itineraries={getByCategory('interests')} />
+
       <Newsletter />
     </div>
   );

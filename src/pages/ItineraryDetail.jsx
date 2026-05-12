@@ -66,9 +66,6 @@ const ItineraryDetail = () => {
           <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight drop-shadow-xl mb-6 leading-tight">
             {itinerary.title}
           </h1>
-          <p className="text-white/90 text-sm md:text-lg font-medium max-w-2xl mx-auto drop-shadow-lg opacity-80">
-            {itinerary.description}
-          </p>
         </div>
 
         {/* Info Bar (Floating Half-on-Half) */}
@@ -124,7 +121,7 @@ const ItineraryDetail = () => {
             </div>
 
             {/* Highlights Thumbnails */}
-            <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+            <div className="flex flex-wrap justify-center items-start gap-y-10 gap-x-6 md:gap-x-8">
               {itinerary.days?.map((day, idx) => (
                 <div 
                   key={idx} 
@@ -145,6 +142,7 @@ const ItineraryDetail = () => {
                   <div className={`absolute -top-1 -right-1 w-5 h-5 rounded-full flex items-center justify-center border-2 border-white transition-colors duration-300 ${activeDay === day.id ? 'bg-primary' : 'bg-gray-400 group-hover:bg-primary'}`}>
                     <span className="text-white text-[9px] font-bold">{day.id}</span>
                   </div>
+
                   {/* Image Preview on Hover */}
                   <div className="absolute -top-48 left-1/2 -translate-x-1/2 w-64 h-44 rounded-[32px] overflow-hidden shadow-2xl border-4 border-white opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none z-[60] scale-50 group-hover:scale-100 origin-bottom">
                     <img 
@@ -153,7 +151,7 @@ const ItineraryDetail = () => {
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 to-transparent py-3 px-4">
-                      <p className="text-white text-xs font-bold truncate leading-tight">{day.location}</p>
+                      <p className="text-white text-xs font-bold truncate leading-tight">{day.location.split(' - ')[0]}</p>
                       <p className="text-white/70 text-[10px] font-medium uppercase tracking-wider">Day {day.id}</p>
                     </div>
                   </div>
@@ -243,16 +241,18 @@ const ItineraryDetail = () => {
                 className="w-full h-full object-cover transition-all duration-1000 group-hover/img:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
-              <div className="absolute bottom-6 left-8">
-                <span className="bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest border border-white/30">
+              <div className="absolute bottom-6 left-8 flex flex-col items-start gap-2">
+                <span className="bg-white/20 backdrop-blur-md text-white px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest border border-white/30">
                   Day {days[activeDay - 1].id}
                 </span>
+                <h3 className="text-white text-2xl md:text-3xl font-bold drop-shadow-xl leading-tight">
+                  {days[activeDay - 1].location.split(' - ')[0]}
+                </h3>
               </div>
             </div>
 
             {/* Description */}
             <div className="mb-10 px-2">
-              <h3 className="text-primary text-2xl font-bold mb-4">{days[activeDay - 1].location}</h3>
               <p className="text-gray-700 text-[15px] leading-relaxed font-medium">
                 {days[activeDay - 1].description}
               </p>
@@ -288,7 +288,7 @@ const ItineraryDetail = () => {
               className="mt-12 w-full bg-primary hover:bg-luxury text-white font-bold py-5 rounded-2xl shadow-xl transition-all"
               disabled={activeDay === days.length}
             >
-              {activeDay === days.length ? 'Tour Concluded' : `Next Day ${activeDay + 1} - ${days[activeDay].location}`}
+              {activeDay === days.length ? 'Tour Concluded' : 'Next Day'}
             </button>
           </div>
         </div>
@@ -308,7 +308,7 @@ const ItineraryDetail = () => {
             <h3 className="text-primary text-2xl font-bold mb-4">{days[activeDay - 1].location}</h3>
             <p className="text-gray-700 mb-8">{days[activeDay - 1].description}</p>
             <button onClick={() => { if (activeDay < days.length) setActiveDay(activeDay + 1); else setIsModalOpen(false); }} className="w-full bg-primary text-white font-bold py-4 rounded-2xl">
-              {activeDay === days.length ? 'Close' : `Next: ${days[activeDay].location}`}
+              {activeDay === days.length ? 'Close' : 'Next Day'}
             </button>
           </div>
         </div>

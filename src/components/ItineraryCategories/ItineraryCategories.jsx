@@ -1,25 +1,44 @@
-import React from 'react';
-import adventureImg from '../../assets/Adventure - Trips Card.webp';
+import React, { useEffect, useState } from 'react';
+import { getCategories } from '../../services/contentService';
 import honeymoonImg from '../../assets/Honeymoon - Trips Card.webp';
+import adventureImg from '../../assets/Adventure - Trips Card.webp';
 import familyImg from '../../assets/Family - Trip Card.webp';
 import luxuryImg from '../../assets/Luxury - Trip Card.webp';
 import esalaImg from '../../assets/Perhera - Trip Card.webp';
 import eightDaysImg from '../../assets/8Days - Trip Card.webp';
-import offersImg from '../../assets/Half - Day offers card.webp';
 
-const ItineraryCategories = () => {
-  const categories = [
-    { id: 'popular', title: 'Populaires', image: 'https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&q=80&w=400' },
+const ItineraryCategories = ({ showTitle = false }) => {
+  const [categories, setCategories] = useState([
+    { id: 'popular', title: 'Populaires', image: 'https://images.unsplash.com/photo-1529253355930-dd3426776426?auto=format&fit=crop&q=80' },
     { id: 'honeymoon', title: 'Voyages de noces', image: honeymoonImg },
     { id: 'family', title: 'Voyages en famille', image: familyImg },
     { id: 'luxury', title: 'Collection de luxe', image: luxuryImg },
-    { id: 'golf', title: 'Séjours golfiques', image: 'https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?auto=format&fit=crop&q=80&w=400' },
-    { id: 'surf', title: 'Surf & Plongée', image: 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&q=80&w=400' },
+    { id: 'golf', title: 'Séjours golfiques', image: 'https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?auto=format&fit=crop&q=80' },
+    { id: 'surf', title: 'Surf & Plongée', image: 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&q=80' },
     { id: 'adventure', title: 'Aventure', image: adventureImg },
     { id: 'pererahera', title: 'Esela Perahera', image: esalaImg },
     { id: '8days', title: '8 Jours', image: eightDaysImg },
-    { id: 'interest', title: 'Par Intérêt', image: offersImg },
-  ];
+    { id: 'interests', title: "Centres d'intérêt", image: 'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&q=80' }
+  ]);
+
+  useEffect(() => {
+    const fetch = async () => {
+      const dynamicCats = await getCategories();
+      if (dynamicCats && dynamicCats.length > 0) {
+        const combined = [...categories];
+        dynamicCats.forEach(dCat => {
+          const idx = combined.findIndex(c => c.id === dCat.slug);
+          if (idx !== -1) {
+            combined[idx] = { ...combined[idx], ...dCat, id: dCat.slug };
+          } else {
+            combined.push({ ...dCat, id: dCat.slug });
+          }
+        });
+        setCategories(combined);
+      }
+    };
+    fetch();
+  }, []);
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
@@ -29,24 +48,34 @@ const ItineraryCategories = () => {
   };
 
   return (
-    <section className="py-24 bg-white">
-      <div className="container mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-8">
-          {categories.map((cat) => (
+    <section className="py-20 bg-white">
+      <div className="container mx-auto px-4">
+        {showTitle && (
+          <div className="text-center mb-16 animate-fade-in">
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-primary mb-4">
+              itinéraires basés sur les centres d'intérêt
+            </h2>
+            <div className="w-24 h-1 bg-luxury mx-auto"></div>
+          </div>
+        )}
+        
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+          {categories.map((category, index) => (
             <div 
-              key={cat.id}
-              onClick={() => scrollToSection(cat.id)}
-              className="relative h-44 sm:h-64 rounded-2xl sm:rounded-[2rem] overflow-hidden cursor-pointer shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl group"
+              key={category.id}
+              onClick={() => scrollToSection(category.id)}
+              className="group relative h-48 rounded-3xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 animate-fade-in"
+              style={{ animationDelay: `${index * 100}ms` }}
             >
               <img 
-                src={cat.image} 
-                alt={cat.title} 
+                src={category.image} 
+                alt={category.title}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90"></div>
-              <div className="absolute inset-0 flex items-end justify-center pb-4 sm:pb-8">
-                <h3 className="text-white text-sm sm:text-xl font-bold tracking-wide drop-shadow-lg text-center px-2 sm:px-4">
-                  {cat.title}
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent"></div>
+              <div className="absolute bottom-0 left-0 right-0 p-6">
+                <h3 className="text-white font-bold text-lg leading-tight group-hover:text-luxury transition-colors">
+                  {category.title}
                 </h3>
               </div>
             </div>
