@@ -237,3 +237,18 @@ export const deleteCategory = async (id) => {
     throw error;
   }
 };
+
+// --- NEWSLETTER ---
+export const subscribeToNewsletter = async (email) => {
+  try {
+    const { error } = await supabase
+      .from('newsletter')
+      .insert([{ email }]);
+    
+    if (error) throw error;
+    return true;
+  } catch (error) {
+    console.error("Error subscribing to newsletter:", error);
+    throw error;
+  }
+};

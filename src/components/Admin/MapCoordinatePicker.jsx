@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import map from '../../assets/map.png';
+import map from '../../assets/Tra.png';
 
 const MapCoordinatePicker = ({ x, y, onChange, dayNumber }) => {
   const mapRef = useRef(null);

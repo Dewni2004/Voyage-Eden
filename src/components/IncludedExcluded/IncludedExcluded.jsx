@@ -2,30 +2,30 @@ import React from 'react';
 
 const IncludedExcluded = () => {
   const inclusions = [
-    "Hotel accommodation (according to selected package)",
-    "Breakfast & dinner at hotels",
-    "Private air-conditioned vehicle",
-    "Professional driver-guide",
-    "Airport transfers",
-    "Gasoline, road tax, government taxes, parking, and vehicle insurance"
+    "Hébergement à l'hôtel (selon le forfait sélectionné)",
+    "Petit-déjeuner et dîner aux hôtels",
+    "Véhicule privé climatisé",
+    "Chauffeur-guide professionnel",
+    "Transferts aéroport",
+    "Essence, taxe routière, taxes gouvernementales, parking et assurance du véhicule"
   ];
 
   const exclusions = [
-    "International flights",
-    "Entrance fees to attractions",
-    "Optional excursions & Personal expenses",
-    "Tips, Alcoholic beverages or soft drinks",
-    "Sri Lanka visa fees"
+    "Vols internationaux",
+    "Frais d'entrée aux attractions",
+    "Excursions optionnelles et dépenses personnelles",
+    "Pourboires, boissons alcoolisées ou boissons gazeuses",
+    "Frais de visa pour le Sri Lanka"
   ];
 
   return (
     <section className="max-w-7xl mx-auto px-6 py-16">
-      <h2 className="text-primary text-3xl md:text-4xl font-bold mb-10">What's Included & Excluded</h2>
+      <h2 className="text-primary text-3xl md:text-4xl font-bold mb-10">Ce qui est inclus et exclu</h2>
       
       <div className="bg-[#f8fbff] rounded-[40px] p-8 md:p-16 border border-gray-100 shadow-inner grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24">
         {/* Price Includes */}
         <div>
-          <h3 className="text-xl font-bold mb-8 text-black">Price Includes</h3>
+          <h3 className="text-xl font-bold mb-8 text-black">Le prix comprend</h3>
           <ul className="space-y-5">
             {inclusions.map((item, index) => (
               <li key={index} className="flex items-start gap-4">
@@ -44,7 +44,7 @@ const IncludedExcluded = () => {
 
         {/* Price Excludes */}
         <div>
-          <h3 className="text-xl font-bold mb-8 text-black">Price Excludes</h3>
+          <h3 className="text-xl font-bold mb-8 text-black">Le prix ne comprend pas</h3>
           <ul className="space-y-5">
             {exclusions.map((item, index) => (
               <li key={index} className="flex items-start gap-4">

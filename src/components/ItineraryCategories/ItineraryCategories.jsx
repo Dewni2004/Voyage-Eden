@@ -6,10 +6,12 @@ import familyImg from '../../assets/Family - Trip Card.webp';
 import luxuryImg from '../../assets/Luxury - Trip Card.webp';
 import esalaImg from '../../assets/Perhera - Trip Card.webp';
 import eightDaysImg from '../../assets/8Days - Trip Card.webp';
+import popularImg from '../../assets/Popularies.jpg';
+import interestsImg from '../../assets/Intrests.jpg';
 
 const ItineraryCategories = ({ showTitle = false }) => {
   const [categories, setCategories] = useState([
-    { id: 'popular', title: 'Populaires', image: 'https://images.unsplash.com/photo-1529253355930-dd3426776426?auto=format&fit=crop&q=80' },
+    { id: 'popular', title: 'Populaires', image: popularImg },
     { id: 'honeymoon', title: 'Voyages de noces', image: honeymoonImg },
     { id: 'family', title: 'Voyages en famille', image: familyImg },
     { id: 'luxury', title: 'Collection de luxe', image: luxuryImg },
@@ -18,7 +20,7 @@ const ItineraryCategories = ({ showTitle = false }) => {
     { id: 'adventure', title: 'Aventure', image: adventureImg },
     { id: 'pererahera', title: 'Esela Perahera', image: esalaImg },
     { id: '8days', title: '8 Jours', image: eightDaysImg },
-    { id: 'interests', title: "Centres d'intérêt", image: 'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&q=80' }
+    { id: 'interests', title: "Centres d'intérêt", image: interestsImg }
   ]);
 
   useEffect(() => {

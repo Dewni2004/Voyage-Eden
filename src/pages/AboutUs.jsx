@@ -38,8 +38,8 @@ const AboutUs = () => {
   return (
     <div>
       <PageHero 
-        title="Get To Know Us"
-        description="We are a multicultural team dedicated to creating authentic and personalized travel experiences in Sri Lanka."
+        title="Apprenez à nous connaître"
+        description="Nous sommes une équipe multiculturelle dédiée à la création d'expériences de voyage authentiques et personnalisées au Sri Lanka."
         image={officeStaff}
         overlayOpacity="bg-black/60"
       />
@@ -50,23 +50,23 @@ const AboutUs = () => {
           <div className="flex flex-col lg:flex-row gap-16 items-center">
             {/* Left Content */}
             <div className="lg:w-1/2">
-              <h2 className="text-primary text-4xl font-bold mb-8">Who We Are</h2>
+              <h2 className="text-primary text-4xl font-bold mb-8">Qui sommes-nous</h2>
               
               <div className="space-y-6 text-gray-700 text-lg leading-relaxed mb-12">
                 <p>
-                  We are a multicultural team based in Kandy and Kurunegala, in the heart of Sri Lanka, specializing in personalized travel experiences that showcase the authentic beauty of our island nation.
+                  Nous sommes une équipe multiculturelle basée à Kandy et Kurunegala, au cœur du Sri Lanka, spécialisée dans les expériences de voyage personnalisées qui mettent en valeur la beauté authentique de notre nation insulaire.
                 </p>
                 <p>
-                  Proudly operating under the well-established Sri Lanka Viajes Eden Group of Companies, we uphold the same passion, professionalism, and commitment to excellence. All our operations are based in Sri Lanka, supported by a dedicated local team of travel specialists, experienced guides, and professional chauffeurs.
+                  Fiers de faire partie du groupe Sri Lanka Viajes Eden, nous partageons la même passion, le même professionnalisme et le même engagement envers l'excellence. Toutes nos opérations sont basées au Sri Lanka, soutenues par une équipe locale dévouée de spécialistes du voyage, de guides expérimentés et de chauffeurs professionnels.
                 </p>
               </div>
 
               {/* Stats Cards */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {[
-                  { label: "Years Experience", value: "13+" },
-                  { label: "Local Experts", value: "100%" },
-                  { label: "Star Reviews", value: "4.9" },
+                  { label: "Années d'expérience", value: "13+" },
+                  { label: "Experts locaux", value: "100%" },
+                  { label: "Avis Étoilés", value: "4.9" },
                 ].map((stat, index) => (
                   <div key={index} className="bg-[#b4bdc9]/40 backdrop-blur-sm p-8 rounded-2xl border border-white/50 text-center transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
                     <div className="text-primary text-4xl font-bold mb-2">{stat.value}</div>
@@ -104,17 +104,17 @@ const AboutUs = () => {
       <section className="py-24 bg-white">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-primary text-4xl font-bold mb-4">What Sets Us Apart?</h2>
+            <h2 className="text-primary text-4xl font-bold mb-4">Ce qui nous distingue ?</h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              Our diverse team brings together the best of local knowledge and international service standards.
+              Notre équipe diversifiée réunit le meilleur des connaissances locales et des normes de service internationales.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               {
-                title: "No Compulsory Purchases",
-                desc: "Your time in Sri Lanka should be about discovery, not sales pitches. We focus purely on creating meaningful experiences that showcase the real Sri Lanka.",
+                title: "Pas d'achats forcés",
+                desc: "Votre séjour au Sri Lanka doit être synonyme de découverte, pas de discours commerciaux. Nous nous concentrons uniquement sur la création d'expériences significatives qui montrent le vrai Sri Lanka.",
                 icon: (
                   <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
@@ -122,8 +122,8 @@ const AboutUs = () => {
                 )
               },
               {
-                title: "Connected to Local Life",
-                desc: "Being based right here in Kandy keeps us plugged into Sri Lanka's pulse. We stay current with local festivals and authentic cultural experiences with our Superior category hotels.",
+                title: "Connectés à la vie locale",
+                desc: "Être basés ici même à Kandy nous permet de rester connectés au pouls du Sri Lanka. Nous nous tenons au courant des festivals locaux et des expériences culturelles authentiques avec nos hôtels de catégorie Supérieure.",
                 icon: (
                   <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
@@ -131,8 +131,8 @@ const AboutUs = () => {
                 )
               },
               {
-                title: "International Driving Standards",
-                desc: "Our drivers are specially trained to meet European safety and comfort expectations, providing smooth, predictable service.",
+                title: "Normes de conduite internationales",
+                desc: "Nos chauffeurs sont spécialement formés pour répondre aux attentes européennes en matière de sécurité et de confort, offrant un service fluide et prévisible.",
                 icon: (
                   <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -141,8 +141,8 @@ const AboutUs = () => {
                 )
               },
               {
-                title: "Proven Track Record",
-                desc: "Our reputation speaks through the voices of those who've traveled with us. Browse our client testimonials to hear directly from fellow travelers.",
+                title: "Une expérience confirmée",
+                desc: "Notre réputation s'exprime à travers la voix de ceux qui ont voyagé avec nous. Parcourez nos témoignages clients pour entendre directement d'autres voyageurs.",
                 icon: (
                   <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.382-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
@@ -168,7 +168,7 @@ const AboutUs = () => {
       <section className="py-24 bg-[#f8fbff]">
         <div className="container mx-auto px-6">
           <div className="text-center mb-20">
-            <h2 className="text-primary text-4xl font-bold mb-4">Meet the Founders & Representatives</h2>
+            <h2 className="text-primary text-4xl font-bold mb-4">Rencontrez les fondateurs et représentants</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
@@ -223,9 +223,9 @@ const AboutUs = () => {
       <section className="py-24 bg-white">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-primary text-4xl font-bold mb-4">Our Team at the Office</h2>
+            <h2 className="text-primary text-4xl font-bold mb-4">Notre équipe au bureau</h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              The dedicated professionals who make your dream trip a reality behind the scenes.
+              Les professionnels dévoués qui font de votre voyage de rêve une réalité dans les coulisses.
             </p>
           </div>
 
@@ -327,9 +327,9 @@ const AboutUs = () => {
       <section className="py-24 bg-[#f8fbff]">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-primary text-4xl font-bold mb-4">Our Guides & Drivers</h2>
+            <h2 className="text-primary text-4xl font-bold mb-4">Nos guides et chauffeurs</h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              Your company on the road. Local experts who turn every tour into an authentic experience.
+              Vos compagnons de route. Des experts locaux qui transforment chaque circuit en une expérience authentique.
             </p>
           </div>
 

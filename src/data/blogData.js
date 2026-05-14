@@ -1,36 +1,36 @@
 export const blogArticles = [
   {
     id: 1,
-    title: "The Island of Taprobane",
-    description: "Un paradis privé à 100 mètres de la plage de Weligama, une villa historique construite en 1920.",
-    image: "/src/assets/itinerary-hero.png", // User will replace
+    title: "L'île de Taprobane",
+    description: "L'île de Taprobane est située à 100 mètres de la plage de Weligama, au sud du Sri Lanka. Taprobane, initialement appelée 'Galduwa' (île rocheuse en cinghalais), est une île privée avec une villa construite en 1920 par le comte de Mauny.",
+    image: "/src/assets/itinerary-hero.png",
     date: "04 MAY 2024",
     author: "By Admin",
     category: "History",
-    excerpt: "Explore the hexagonal villa of Count Mauny on this private rock island in southern Sri Lanka.",
+    excerpt: "Explorez la villa hexagonale du comte de Mauny sur cette île rocheuse privée au sud du Sri Lanka.",
     content: [
       {
         type: "paragraph",
-        text: "The island of Taprobane is located 100 meters from the beach of Weligama, in southern Sri Lanka. Taprobane, originally called 'Galduwa' (Rock Island in Sinhalese), is a private island with a villa built in 1920 by the Count of Mauny, an eccentric Englishman who made this island his home."
+        text: "L'île de Taprobane est située à 100 mètres de la plage de Weligama, dans le sud du Sri Lanka. Taprobane, initialement appelée 'Galduwa' (île rocheuse en cinghalais), est une île privée avec une villa construite en 1920 par le comte de Mauny, un Anglais excentrique qui a fait de cette île sa demeure."
       },
       {
         type: "paragraph",
-        text: "The trees surrounding the house and the crystal clear waters of Weligama Bay make this island a special place for visitors. The island is currently operating as a premium boutique hotel."
+        text: "Les arbres entourant la maison et les eaux cristallines de la baie de Weligama font de cette île un lieu privilégié pour les visiteurs. L'île fonctionne actuellement comme un hôtel de charme haut de gamme."
       },
       {
         type: "heading",
-        text: "Architecture and Design"
+        text: "Architecture et Design"
       },
       {
         type: "paragraph",
-        text: "The Palladio style house is on the highest point of the 2 acre island with sweeping views of the bay and fishing village. The house itself is planned around a central hexagonal hall and surrounded by large verandahs and terraces, offering a fantasy experience in outdoor living."
+        text: "La maison de style Palladio se trouve sur le point le plus élevé de l'île de 2 acres avec une vue imprenable sur la baie et le village de pêcheurs. La maison elle-même est conçue autour d'un hall hexagonal central et entourée de grandes vérandas et terrasses, offrant une expérience fantastique de vie en plein air."
       },
       {
         type: "quote",
-        text: "It is a fantasy experience in outdoor living; perfect for honeymooners, families and anyone wanting to experience island life."
+        text: "C'est une expérience fantastique de vie en plein air ; parfait pour les jeunes mariés, les familles et tous ceux qui souhaitent découvrir la vie insulaire."
       }
     ],
-    tags: ["#Taprobane", "#Weligama", "#History", "#PrivateIsland"]
+    tags: ["#Taprobane", "#Weligama", "#Histoire", "#IlePrivée"]
   },
   {
     id: 2,

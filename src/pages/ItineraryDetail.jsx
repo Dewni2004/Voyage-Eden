@@ -6,8 +6,7 @@ import { Helmet } from 'react-helmet-async';
 import IncludedExcluded from '../components/IncludedExcluded/IncludedExcluded';
 import PaymentPolicy from '../components/PaymentPolicy/PaymentPolicy';
 import BookingCard from '../components/BookingCard/BookingCard';
-import srilankaMap from '../assets/SRI LANKA - MAP.png';
-import map from '../assets/map.png';
+import map from '../assets/Tra.png';
 
 const ItineraryDetail = () => {
   const { id } = useParams();
@@ -32,8 +31,8 @@ const ItineraryDetail = () => {
     fetchItinerary();
   }, [id]);
 
-  if (loading) return <div className="min-h-screen flex items-center justify-center text-primary font-bold">Loading Tour Details...</div>;
-  if (!itinerary) return <div className="min-h-screen flex items-center justify-center text-primary font-bold">Tour Not Found</div>;
+  if (loading) return <div className="min-h-screen flex items-center justify-center text-primary font-bold">Chargement des détails du voyage...</div>;
+  if (!itinerary) return <div className="min-h-screen flex items-center justify-center text-primary font-bold">Voyage non trouvé</div>;
 
   const days = itinerary.days || [];
 
@@ -81,7 +80,7 @@ const ItineraryDetail = () => {
                   </svg>
                 </div>
                 <div>
-                  <p className="text-gray-400 text-[8px] md:text-[10px] font-bold uppercase tracking-[0.1em] md:tracking-[0.2em] mb-0.5 md:mb-1">Duration</p>
+                  <p className="text-gray-400 text-[8px] md:text-[10px] font-bold uppercase tracking-[0.1em] md:tracking-[0.2em] mb-0.5 md:mb-1">Durée</p>
                   <p className="text-primary text-sm md:text-xl font-bold whitespace-nowrap">{itinerary.duration}</p>
                 </div>
               </div>
@@ -94,7 +93,7 @@ const ItineraryDetail = () => {
                   </svg>
                 </div>
                 <div>
-                  <p className="text-gray-400 text-[8px] md:text-[10px] font-bold uppercase tracking-[0.1em] md:tracking-[0.2em] mb-0.5 md:mb-1">Group</p>
+                  <p className="text-gray-400 text-[8px] md:text-[10px] font-bold uppercase tracking-[0.1em] md:tracking-[0.2em] mb-0.5 md:mb-1">Groupe</p>
                   <p className="text-primary text-sm md:text-xl font-bold whitespace-nowrap">{itinerary.group}</p>
                 </div>
               </div>
@@ -116,7 +115,7 @@ const ItineraryDetail = () => {
             {/* Separator */}
             <div className="w-full flex items-center gap-4 my-6">
               <div className="flex-grow h-px bg-gray-100"></div>
-              <p className="text-gray-400 text-[8px] font-bold uppercase tracking-[0.3em] whitespace-nowrap">Highlights & Visits</p>
+              <p className="text-gray-400 text-[8px] font-bold uppercase tracking-[0.3em] whitespace-nowrap">Points forts et visites</p>
               <div className="flex-grow h-px bg-gray-100"></div>
             </div>
 
@@ -152,7 +151,7 @@ const ItineraryDetail = () => {
                     />
                     <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 to-transparent py-3 px-4">
                       <p className="text-white text-xs font-bold truncate leading-tight">{day.location.split(' - ')[0]}</p>
-                      <p className="text-white/70 text-[10px] font-medium uppercase tracking-wider">Day {day.id}</p>
+                      <p className="text-white/70 text-[10px] font-medium uppercase tracking-wider">Jour {day.id}</p>
                     </div>
                   </div>
                 </div>
@@ -172,61 +171,72 @@ const ItineraryDetail = () => {
           {/* Left Column: Interactive Map */}
           <div className="relative group/map h-full">
             <div className="absolute -inset-4 bg-gradient-to-tr from-primary/5 to-luxury/5 rounded-[48px] blur-2xl opacity-0 group-hover/map:opacity-100 transition-duration-700"></div>
-            <div className="bg-[#fdfbf7] rounded-[40px] p-4 sm:p-8 flex items-center justify-center h-full border border-luxury/10 shadow-2xl relative z-10 overflow-hidden">
-              {/* Paper Texture Overlay */}
-              <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')]"></div>
+            <div className="bg-white rounded-[48px] p-2 flex items-center justify-center h-full border border-gray-100 shadow-2xl relative z-10 overflow-hidden group/map-inner">
+              {/* Subtle Texture Overlay */}
+              <div className="absolute inset-0 opacity-[0.02] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/pinstriped-suit.png')]"></div>
               
-              <div className="relative w-full max-w-[500px] aspect-[3/4]">
-                <svg viewBox="0 0 300 450" className="w-full h-full filter drop-shadow-xl">
-                  <image href={map} x="0" y="0" width="300" height="450" className="opacity-100" />
-                  
-                  {/* Route Lines */}
-                  <g className="route-lines">
-                    {days.map((day, index) => {
-                      if (index === 0) return null;
-                      const prevDay = days[index - 1];
-                      return (
-                        <line 
-                          key={`line-${day.id}`}
-                          x1={prevDay.coords.x} y1={prevDay.coords.y} x2={day.coords.x} y2={day.coords.y} 
-                          stroke="#b02a30" strokeWidth="3" strokeDasharray="6,4" strokeLinecap="round"
-                          className={`transition-all duration-1000 opacity-30 ${activeDay >= day.id ? 'opacity-60' : 'opacity-0'}`}
-                        />
-                      );
-                    })}
-                  </g>
-
-                  {/* Day Markers */}
-                  {days.map((day) => (
-                    <g key={day.id} onClick={() => { setActiveDay(day.id); if (window.innerWidth < 1024) setIsModalOpen(true); }} className="cursor-pointer group">
-                      {/* Outer Glow */}
-                      <circle 
-                        cx={day.coords.x} cy={day.coords.y} r="22" 
-                        className={`transition-all duration-500 fill-primary/10 scale-0 ${activeDay === day.id ? 'scale-100 opacity-100' : 'opacity-0 group-hover:scale-75 group-hover:opacity-50'}`} 
-                      />
-                      <circle cx={day.coords.x} cy={day.coords.y} r="18" className="fill-transparent" />
-                      
-                      {/* Main Marker */}
-                      <circle 
-                        cx={day.coords.x} cy={day.coords.y} r="15" 
-                        className={`transition-all duration-500 shadow-lg ${activeDay === day.id ? 'fill-[#b02a30] scale-110' : 'fill-[#64748b] group-hover:fill-primary/80'}`} 
-                      />
-                      
-                      {/* Day Number */}
-                      <text 
-                        x={day.coords.x} y={day.coords.y} dy=".35em" textAnchor="middle" 
-                        className="fill-white text-[11px] font-black pointer-events-none select-none"
-                      >
-                        {day.id}
-                      </text>
+              <div className="relative w-full h-full flex items-center justify-center p-4">
+                <div className="relative w-full h-full max-w-[450px] aspect-[3/4]">
+                  <svg viewBox="0 0 300 450" className="w-full h-full drop-shadow-2xl">
+                    <image href={map} x="0" y="0" width="300" height="450" preserveAspectRatio="xMidYMid meet" className="opacity-100" />
+                    
+                    {/* Route Lines */}
+                    <g className="route-lines">
+                      {days.map((day, index) => {
+                        if (index === 0) return null;
+                        const prevDay = days[index - 1];
+                        return (
+                          <line 
+                            key={`line-${day.id}`}
+                            x1={prevDay.coords.x} y1={prevDay.coords.y} x2={day.coords.x} y2={day.coords.y} 
+                            stroke="#b02a30" strokeWidth="2" strokeDasharray="5,5" strokeLinecap="round"
+                            className={`transition-all duration-1000 ${activeDay >= day.id ? 'opacity-40' : 'opacity-0'}`}
+                          />
+                        );
+                      })}
                     </g>
-                  ))}
-                </svg>
+
+                    {/* Day Markers */}
+                    {days.map((day) => (
+                      <g 
+                        key={day.id} 
+                        onClick={() => { setActiveDay(day.id); if (window.innerWidth < 1024) setIsModalOpen(true); }} 
+                        className="cursor-pointer group/marker"
+                      >
+                        {/* Marker Shadow */}
+                        <circle cx={day.coords.x} cy={day.coords.y} r="14" className="fill-black/5" transform="translate(1,1)" />
+                        
+                        {/* Main Marker Circle */}
+                        <circle 
+                          cx={day.coords.x} cy={day.coords.y} 
+                          r={activeDay === day.id ? "14" : "12"} 
+                          className={`transition-all duration-300 ${activeDay === day.id ? 'fill-primary shadow-lg' : 'fill-primary/70 group-hover/marker:fill-primary'}`} 
+                        />
+                        
+                        {/* Day Number */}
+                        <text 
+                          x={day.coords.x} y={day.coords.y} dy=".35em" textAnchor="middle" 
+                          className="fill-white text-[9px] font-bold pointer-events-none select-none"
+                        >
+                          {day.id}
+                        </text>
+                      </g>
+                    ))}
+                  </svg>
+                </div>
               </div>
 
-              {/* Map Label */}
-              <div className="absolute bottom-6 right-8 opacity-40">
-                <p className="text-[10px] font-bold text-primary uppercase tracking-[0.3em] vertical-text">Interactive Route</p>
+              {/* Map Label Overlay */}
+              <div className="absolute top-8 left-8">
+                <div className="flex items-center gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></div>
+                  <span className="text-[10px] font-bold text-primary uppercase tracking-[0.3em]">Live Route</span>
+                </div>
+              </div>
+
+              {/* Interaction Guide */}
+              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-white/80 backdrop-blur-md px-4 py-2 rounded-full border border-gray-100 shadow-sm opacity-0 group-hover/map-inner:opacity-100 transition-opacity duration-300">
+                <p className="text-[9px] font-bold text-gray-500 uppercase tracking-wider">Cliquez sur un jour pour explorer</p>
               </div>
             </div>
           </div>
@@ -243,7 +253,7 @@ const ItineraryDetail = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
               <div className="absolute bottom-6 left-8 flex flex-col items-start gap-2">
                 <span className="bg-white/20 backdrop-blur-md text-white px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest border border-white/30">
-                  Day {days[activeDay - 1].id}
+                  Jour {days[activeDay - 1].id}
                 </span>
                 <h3 className="text-white text-2xl md:text-3xl font-bold drop-shadow-xl leading-tight">
                   {days[activeDay - 1].location.split(' - ')[0]}
@@ -265,7 +275,7 @@ const ItineraryDetail = () => {
                   <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L16 4m0 13V4m0 0L9 7" /></svg>
                 </div>
                 <div>
-                  <h4 className="text-primary font-bold text-sm uppercase tracking-wider mb-0.5">Highlights</h4>
+                  <h4 className="text-primary font-bold text-sm uppercase tracking-wider mb-0.5">Points forts</h4>
                   <p className="text-gray-500 text-xs font-medium leading-relaxed">{days[activeDay - 1].highlights}</p>
                 </div>
               </div>
@@ -276,7 +286,7 @@ const ItineraryDetail = () => {
                   <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
                 </div>
                 <div>
-                  <h4 className="text-primary font-bold text-sm uppercase tracking-wider mb-0.5">Accommodation</h4>
+                  <h4 className="text-primary font-bold text-sm uppercase tracking-wider mb-0.5">Hébergement</h4>
                   <p className="text-gray-500 text-xs font-medium leading-relaxed">{days[activeDay - 1].accommodation}</p>
                 </div>
               </div>
@@ -288,7 +298,7 @@ const ItineraryDetail = () => {
               className="mt-12 w-full bg-primary hover:bg-luxury text-white font-bold py-5 rounded-2xl shadow-xl transition-all"
               disabled={activeDay === days.length}
             >
-              {activeDay === days.length ? 'Tour Concluded' : 'Next Day'}
+              {activeDay === days.length ? 'Tour terminé' : 'Jour suivant'}
             </button>
           </div>
         </div>
@@ -308,7 +318,7 @@ const ItineraryDetail = () => {
             <h3 className="text-primary text-2xl font-bold mb-4">{days[activeDay - 1].location}</h3>
             <p className="text-gray-700 mb-8">{days[activeDay - 1].description}</p>
             <button onClick={() => { if (activeDay < days.length) setActiveDay(activeDay + 1); else setIsModalOpen(false); }} className="w-full bg-primary text-white font-bold py-4 rounded-2xl">
-              {activeDay === days.length ? 'Close' : 'Next Day'}
+              {activeDay === days.length ? 'Fermer' : 'Jour suivant'}
             </button>
           </div>
         </div>

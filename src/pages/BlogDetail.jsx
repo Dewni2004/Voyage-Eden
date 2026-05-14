@@ -106,6 +106,66 @@ const BlogDetail = () => {
                       </div>
                     );
                   }
+                  if (block.type === 'image') {
+                    return (
+                      <div key={index} className="my-12 rounded-[32px] overflow-hidden shadow-lg border border-gray-100">
+                        <img src={block.text} alt="" className="w-full h-auto object-cover" />
+                      </div>
+                    );
+                  }
+                  if (block.type === 'tips') {
+                    return (
+                      <div key={index} className="my-12 bg-gradient-to-br from-[#1e406f] to-[#0d213f] p-10 md:p-12 rounded-[40px] shadow-2xl relative overflow-hidden group">
+                        {/* Decorative Background Elements */}
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl group-hover:scale-110 transition-transform duration-700"></div>
+                        <div className="absolute bottom-0 left-0 w-32 h-32 bg-luxury/10 rounded-full translate-y-1/2 -translate-x-1/2 blur-2xl"></div>
+                        
+                        <div className="relative z-10">
+                          <div className="flex items-center gap-4 mb-8">
+                            <div className="w-14 h-14 bg-luxury rounded-2xl flex items-center justify-center text-2xl shadow-lg shadow-luxury/20">
+                              💡
+                            </div>
+                            <div>
+                              <h4 className="text-white text-2xl font-bold font-serif tracking-wide">Travel Tips</h4>
+                              <p className="text-luxury text-xs font-bold uppercase tracking-widest">Expert Advice</p>
+                            </div>
+                          </div>
+                          
+                          <div className="prose prose-invert max-w-none">
+                            <ul className="space-y-4 list-none p-0 m-0">
+                              {block.text.split('\n').filter(tip => tip.trim() !== '').map((tip, i) => (
+                                <li key={i} className="flex gap-3 text-white/90 text-base md:text-lg font-medium leading-relaxed italic">
+                                  <span className="text-luxury mt-1.5 flex-shrink-0">✦</span>
+                                  <span>{tip.trim()}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                          
+                          <div className="mt-8 pt-8 border-t border-white/10 flex items-center justify-between">
+                            <span className="text-white/40 text-[10px] font-bold uppercase tracking-widest">Eden Travels Signature Guide</span>
+                            <div className="flex gap-1">
+                              {[1,2,3].map(i => <div key={i} className="w-1 h-1 bg-luxury rounded-full opacity-50"></div>)}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  }
+                  if (block.type === 'list') {
+                    return (
+                      <ul key={index} className="my-10 space-y-4">
+                        {block.text.split('\n').filter(item => item.trim() !== '').map((item, i) => (
+                          <li key={i} className="flex gap-4 group">
+                            <div className="mt-1.5 flex-shrink-0 w-5 h-5 rounded-full bg-luxury/10 flex items-center justify-center group-hover:bg-luxury transition-colors">
+                              <div className="w-1.5 h-1.5 bg-luxury rounded-full group-hover:bg-white"></div>
+                            </div>
+                            <span className="text-gray-700 font-medium leading-relaxed">{item.trim()}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    );
+                  }
                   return null;
                 })}
 

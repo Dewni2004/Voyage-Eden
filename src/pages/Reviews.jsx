@@ -43,10 +43,10 @@ const Reviews = () => {
               <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
             ))}
           </div>
-          <h1 className="text-5xl md:text-7xl font-bold font-serif mb-4">Real Stories</h1>
-          <p className="text-xl md:text-3xl font-medium tracking-wide uppercase opacity-90">Unforgettable Journeys</p>
+          <h1 className="text-5xl md:text-7xl font-bold font-serif mb-4">Histoires réelles</h1>
+          <p className="text-xl md:text-3xl font-medium tracking-wide uppercase opacity-90">Voyages inoubliables</p>
           <p className="mt-8 text-white/80 max-w-2xl mx-auto text-lg">
-            See how our travelers experienced the magic of Sri Lanka, from the misty hills to the golden shores.
+            Découvrez comment nos voyageurs ont vécu la magie du Sri Lanka, des collines brumeuses aux rivages dorés.
           </p>
         </div>
       </div>
@@ -54,9 +54,9 @@ const Reviews = () => {
       {/* Recent Videos Section */}
       <section className="py-24 max-w-7xl mx-auto px-6">
         <div className="mb-16 text-center md:text-left">
-          <span className="text-luxury text-sm font-bold uppercase tracking-widest mb-2 block">Visual Memories</span>
-          <h2 className="text-primary text-4xl font-bold font-serif">Recent Videos</h2>
-          <p className="text-gray-400 mt-2">Short video highlights from our guests' amazing trips.</p>
+          <span className="text-luxury text-sm font-bold uppercase tracking-widest mb-2 block">Souvenirs visuels</span>
+          <h2 className="text-primary text-4xl font-bold font-serif">Vidéos récentes</h2>
+          <p className="text-gray-400 mt-2">Courts moments forts en vidéo des voyages incroyables de nos clients.</p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -76,7 +76,7 @@ const Reviews = () => {
               </div>
               <div className="p-6 text-center">
                 <h4 className="text-primary font-bold text-lg">{video.name}</h4>
-                <p className="text-gray-400 text-sm mt-1">Tour in {video.date}</p>
+                <p className="text-gray-400 text-sm mt-1">Voyage en {video.date}</p>
               </div>
             </div>
           ))}
@@ -88,7 +88,7 @@ const Reviews = () => {
             rel="noreferrer"
             className="inline-block bg-primary text-white font-bold px-10 py-4 rounded-2xl shadow-xl shadow-primary/20 hover:-translate-y-1 transition-all"
           >
-            View All Videos
+            Voir toutes les vidéos
           </a>
         </div>
       </section>
@@ -97,9 +97,9 @@ const Reviews = () => {
       <section className="py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-16 text-center md:text-left">
-            <span className="text-luxury text-sm font-bold uppercase tracking-widest mb-2 block">Guest Feedback</span>
-            <h2 className="text-primary text-4xl font-bold font-serif">Recent Reviews</h2>
-            <p className="text-gray-400 mt-2">Authentic stories and experiences shared by our valued guests.</p>
+            <span className="text-luxury text-sm font-bold uppercase tracking-widest mb-2 block">Avis des voyageurs</span>
+            <h2 className="text-primary text-4xl font-bold font-serif">Avis récents</h2>
+            <p className="text-gray-400 mt-2">Histoires et expériences authentiques partagées par nos clients précieux.</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -146,7 +146,7 @@ const Reviews = () => {
           </div>
 
           <div className="mt-12 text-center">
-            <button className="bg-primary text-white font-bold px-10 py-4 rounded-2xl shadow-xl shadow-primary/20 hover:-translate-y-1 transition-all">Load More Reviews</button>
+            <button className="bg-primary text-white font-bold px-10 py-4 rounded-2xl shadow-xl shadow-primary/20 hover:-translate-y-1 transition-all">Charger plus d'avis</button>
           </div>
         </div>
       </section>
@@ -154,16 +154,16 @@ const Reviews = () => {
       {/* Why Travelers Love Us Section */}
       <section className="py-32 max-w-7xl mx-auto px-6">
         <div className="text-center mb-20">
-          <h2 className="text-primary text-4xl md:text-5xl font-bold font-serif mb-6">Why Travelers Love Us</h2>
+          <h2 className="text-primary text-4xl md:text-5xl font-bold font-serif mb-6">Pourquoi les voyageurs nous aiment</h2>
           <div className="w-24 h-1 bg-luxury mx-auto rounded-full"></div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {[
-            { title: "Tailored Trips", icon: "M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4", desc: "Crafting every journey to fit your personal style." },
-            { title: "Expert Guides", icon: "M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z", desc: "Local experts who know the island's best-kept secrets." },
-            { title: "Premium Hotels", icon: "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4", desc: "Only the finest accommodations for your comfort." },
-            { title: "Safe & Private", icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z", desc: "Your safety and privacy are our top priorities." }
+            { title: "Voyages sur mesure", icon: "M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4", desc: "Créer chaque voyage selon votre style personnel." },
+            { title: "Guides experts", icon: "M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z", desc: "Des experts locaux qui connaissent les secrets les mieux gardés de l'île." },
+            { title: "Hôtels de prestige", icon: "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4", desc: "Seulement les meilleurs hébergements pour votre confort." },
+            { title: "Sûr et privé", icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z", desc: "Votre sécurité et votre vie privée sont nos priorités absolues." }
           ].map((feature, i) => (
             <div key={i} className="bg-white p-10 rounded-[40px] shadow-lg border border-gray-50 text-center hover:shadow-2xl transition-all hover:-translate-y-2">
               <div className="w-16 h-16 bg-primary/5 text-primary rounded-2xl flex items-center justify-center mx-auto mb-6">
@@ -177,17 +177,52 @@ const Reviews = () => {
       </section>
 
       {/* Footer CTA */}
-      <section className="px-6 pb-24">
-        <div className="max-w-7xl mx-auto bg-primary rounded-[50px] overflow-hidden relative p-12 md:p-24 text-center text-white shadow-2xl">
-          <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
-          <div className="relative z-10">
-            <h2 className="text-4xl md:text-6xl font-bold font-serif mb-8">Ready to write your own story?</h2>
-            <p className="text-white/70 text-lg mb-12 max-w-2xl mx-auto">
-              Join hundreds of happy travelers and experience the trip of a lifetime with Eden Travels.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link to="/contact" className="bg-white text-primary font-bold px-10 py-5 rounded-2xl hover:bg-luxury hover:text-white transition-all shadow-xl">Plan My Trip Now</Link>
-              <a href="https://wa.me/94770000000" target="_blank" rel="noreferrer" className="bg-transparent border-2 border-white text-white font-bold px-10 py-5 rounded-2xl hover:bg-white hover:text-primary transition-all">Chat on WhatsApp</a>
+      <section className="px-6 pb-12">
+        <div className="max-w-7xl mx-auto relative rounded-[2.5rem] overflow-hidden shadow-xl group">
+          {/* Background Image & Overlays */}
+          <div className="absolute inset-0">
+            <img 
+              src="https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&q=80&w=2000" 
+              alt="Travel Background" 
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/90 to-primary/60"></div>
+          </div>
+
+          <div className="relative z-10 p-6 md:p-10 text-center">
+            <div className="max-w-2xl mx-auto flex flex-col items-center">
+              <div className="inline-block px-3 py-1 bg-white/10 backdrop-blur-md border border-white/20 rounded-full mb-4">
+                <span className="text-white text-[8px] font-bold uppercase tracking-[0.3em]">Commencez l'aventure</span>
+              </div>
+              
+              <h2 className="text-2xl md:text-4xl font-bold font-serif text-white mb-4 leading-tight">
+                Prêt à écrire votre <span className="italic opacity-80">propre histoire ?</span>
+              </h2>
+              
+              <p className="text-white/70 text-sm md:text-base mb-8 font-light max-w-lg">
+                Rejoignez des centaines de voyageurs heureux et vivez le voyage de votre vie avec Eden Travels.
+              </p>
+
+              <div className="flex flex-col sm:flex-row justify-center items-center gap-3">
+                <Link 
+                  to="/contact" 
+                  className="bg-white text-primary hover:bg-luxury hover:text-white font-bold px-8 py-3 rounded-2xl transition-all duration-300 shadow-lg active:scale-95 text-sm"
+                >
+                  Planifier mon voyage
+                </Link>
+                
+                <a 
+                  href="https://wa.me/94770000000" 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  className="flex items-center justify-center gap-2 bg-white/10 backdrop-blur-md border border-white/30 text-white font-bold px-6 py-3 rounded-2xl hover:bg-white/20 transition-all text-sm"
+                >
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.94 3.674 1.436 5.662 1.436h.008c6.548 0 11.88-5.338 11.883-11.896a11.826 11.826 0 00-3.48-8.413z"/>
+                  </svg>
+                  WhatsApp
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -257,12 +292,12 @@ const Reviews = () => {
               
               <div className="border-t border-gray-100 pt-8">
                 <h4 className="text-primary font-bold text-2xl mb-1">{selectedReview.name}</h4>
-                <p className="text-gray-400 text-sm font-bold uppercase tracking-[0.2em]">Tour in {selectedReview.date}</p>
+                <p className="text-gray-400 text-sm font-bold uppercase tracking-[0.2em]">Voyage en {selectedReview.date}</p>
                 <Link
                   to={`/review/${selectedReview.id}`}
                   className="mt-6 text-primary font-bold text-sm flex items-center gap-2 group/btn hover:text-luxury transition-all"
                 >
-                  Read Full Story
+                  Lire l'histoire complète
                   <svg className="w-4 h-4 transform group-hover/btn:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
