@@ -759,6 +759,9 @@ const Admin = () => {
                         <button type="button" onClick={() => addBlock('paragraph')} className="bg-gray-50 hover:bg-primary hover:text-white text-primary text-[10px] font-bold uppercase tracking-widest px-4 py-2 rounded-xl transition-all">+ Para</button>
                         <button type="button" onClick={() => addBlock('heading')} className="bg-gray-50 hover:bg-primary hover:text-white text-primary text-[10px] font-bold uppercase tracking-widest px-4 py-2 rounded-xl transition-all">+ Head</button>
                         <button type="button" onClick={() => addBlock('quote')} className="bg-gray-50 hover:bg-primary hover:text-white text-primary text-[10px] font-bold uppercase tracking-widest px-4 py-2 rounded-xl transition-all">+ Quote</button>
+                        <button type="button" onClick={() => addBlock('image')} className="bg-gray-50 hover:bg-primary hover:text-white text-primary text-[10px] font-bold uppercase tracking-widest px-4 py-2 rounded-xl transition-all">+ Image</button>
+                        <button type="button" onClick={() => addBlock('tips')} className="bg-gray-50 hover:bg-primary hover:text-white text-primary text-[10px] font-bold uppercase tracking-widest px-4 py-2 rounded-xl transition-all">+ Tips</button>
+                        <button type="button" onClick={() => addBlock('list')} className="bg-gray-50 hover:bg-primary hover:text-white text-primary text-[10px] font-bold uppercase tracking-widest px-4 py-2 rounded-xl transition-all">+ List</button>
                       </div>
                     </div>
 
@@ -767,16 +770,25 @@ const Admin = () => {
                         <div key={index} className="bg-gray-50/50 p-8 rounded-[32px] relative group border border-gray-100 hover:border-primary/20 transition-colors">
                           <button type="button" onClick={() => removeBlock(index)} className="absolute -top-3 -right-3 w-8 h-8 bg-white text-red-500 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center font-bold">✕</button>
                           <div className="flex items-center gap-2 mb-4">
-                            <div className={`w-2 h-2 rounded-full ${block.type === 'heading' ? 'bg-primary' : block.type === 'quote' ? 'bg-luxury' : 'bg-gray-300'}`}></div>
+                            <div className={`w-2 h-2 rounded-full ${block.type === 'heading' ? 'bg-primary' : block.type === 'quote' ? 'bg-luxury' : block.type === 'image' ? 'bg-green-500' : block.type === 'tips' ? 'bg-orange-400' : block.type === 'list' ? 'bg-blue-400' : 'bg-gray-300'}`}></div>
                             <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">{block.type}</span>
                           </div>
-                          <textarea 
-                            rows={block.type === 'paragraph' ? 4 : 2} 
-                            value={block.text} 
-                            onChange={(e) => updateBlock(index, e.target.value)} 
-                            placeholder={`Enter your ${block.type} here...`} 
-                            className="w-full bg-white border border-gray-100 rounded-2xl py-4 px-6 outline-none resize-none focus:ring-4 focus:ring-primary/5 transition-all font-medium text-primary"
-                          ></textarea>
+                          {block.type === 'image' ? (
+                            <ImageUploadField 
+                              label="Block Image" 
+                              value={block.text} 
+                              onChange={(url) => updateBlock(index, url)} 
+                              folder="articles/content"
+                            />
+                          ) : (
+                            <textarea 
+                              rows={block.type === 'paragraph' ? 4 : 2} 
+                              value={block.text} 
+                              onChange={(e) => updateBlock(index, e.target.value)} 
+                              placeholder={`Enter your ${block.type} here...`} 
+                              className="w-full bg-white border border-gray-100 rounded-2xl py-4 px-6 outline-none resize-none focus:ring-4 focus:ring-primary/5 transition-all font-medium text-primary"
+                            ></textarea>
+                          )}
                         </div>
                       ))}
                     </div>

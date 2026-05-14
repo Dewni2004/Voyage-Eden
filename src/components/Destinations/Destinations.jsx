@@ -1,121 +1,125 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { getArticles } from '../../services/contentService';
+import { Link } from 'react-router-dom';
 import sigiriya from '../../assets/Sigiriya.jpg';
 import ella from '../../assets/Ella.jfif';
 import kandy from '../../assets/Kandy.jpg';
 import mirissa from '../../assets/Mirissa.webp';
+import taprobane from '../../assets/itinerary-hero.png';
+import diyaluma from '../../assets/blog-safari.png';
 
 const Destinations = () => {
-  const destinations = [
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const fallbackDestinations = [
     {
       id: 1,
-      name: 'Sigiriya Lion Rock',
-      description: 'The 8th Wonder of the World',
-      image: sigiriya,
-      size: 'large', // Left side full height
+      title: "L'île de Taprobane",
+      excerpt: "Explorez la villa hexagonale du comte de Mauny sur cette île rocheuse privée au sud du Sri Lanka.",
+      image: taprobane
     },
     {
       id: 2,
-      name: 'Ella Montagnes Brumeuses',
-      description: 'Paysages pittoresques et plantations de thé',
-      image: ella,
-      size: 'medium', // Top right
+      title: "Upper Diyaluma Falls",
+      excerpt: "Discover the second highest waterfall in Sri Lanka and its hidden natural infinity pools.",
+      image: diyaluma
     },
-    {
-      id: 3,
-      name: 'Kandy',
-      description: 'Cultural Heart',
-      image: kandy,
-      size: 'small', // Bottom right 1
-    },
-    {
-      id: 4,
-      name: 'Mirissa',
-      description: 'Côte d’Or',
-      image: mirissa,
-      size: 'small', // Bottom right 2
-    },
+    { id: 'kandy', title: 'Kandy', excerpt: 'Cultural Heart', image: kandy },
+    { id: 'mirissa', title: 'Mirissa', excerpt: 'Côte d’Or', image: mirissa },
   ];
+
+  useEffect(() => {
+    const fetchArticles = async () => {
+      const data = await getArticles();
+      setArticles(data.slice(0, 4));
+      setLoading(false);
+    };
+    fetchArticles();
+  }, []);
+
+  const displayItems = articles.length >= 4 ? articles : fallbackDestinations;
+
+  if (loading && articles.length === 0) {
+    return <div className="py-24 text-center text-gray-400">Loading guide...</div>;
+  }
 
   return (
     <section className="py-24 bg-white">
       <div className="container mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="mb-4">Destinations populaires</h2>
+          <h2 className="mb-4">Le Journal d’Eden</h2>
           <p className="text-gray-600 max-w-2xl mx-auto text-lg font-light">
-            Les lieux les plus emblématiques du Sri Lanka à ne surtout pas manquer.
+            Inspiration et découvertes du monde.
           </p>
         </div>
 
         {/* Masonry-style Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 h-auto lg:h-[700px]">
-          {/* Large Card (Sigiriya) */}
-          <a 
-            href="/travel-guide" 
+          {/* Large Card (Left) */}
+          <Link
+            to={articles.length >= 1 ? `/blog/${displayItems[0].id}` : '/travel-guide'}
             className="lg:col-span-2 lg:row-span-2 relative rounded-[2rem] overflow-hidden group cursor-pointer h-[400px] lg:h-full"
           >
-            <img 
-              src={destinations[0].image} 
-              alt={destinations[0].name} 
-              className="w-full h-full object-cover"
+            <img
+              src={displayItems[0].image}
+              alt={displayItems[0].title}
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
             <div className="absolute bottom-10 left-10 text-white">
-              <h3 className="text-3xl font-bold mb-2 drop-shadow-lg">{destinations[0].name}</h3>
-              <p className="text-lg opacity-90 font-light italic">{destinations[0].description}</p>
+              <h3 className="text-3xl font-bold mb-2 drop-shadow-lg">{displayItems[0].title}</h3>
             </div>
-          </a>
+          </Link>
 
-          {/* Medium Card (Ella) */}
-          <a 
-            href="/travel-guide" 
+          {/* Medium Card (Top Right) */}
+          <Link
+            to={articles.length >= 2 ? `/blog/${displayItems[1].id}` : '/travel-guide'}
             className="lg:col-span-2 relative rounded-[2rem] overflow-hidden group cursor-pointer h-[300px] lg:h-full"
           >
-            <img 
-              src={destinations[1].image} 
-              alt={destinations[1].name} 
-              className="w-full h-full object-cover"
+            <img
+              src={displayItems[1].image}
+              alt={displayItems[1].title}
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
             <div className="absolute bottom-8 left-8 text-white">
-              <h3 className="text-2xl font-bold mb-1 drop-shadow-lg">{destinations[1].name}</h3>
-              <p className="text-sm opacity-90 font-light italic">{destinations[1].description}</p>
+              <h3 className="text-2xl font-bold mb-1 drop-shadow-lg">{displayItems[1].title}</h3>
             </div>
-          </a>
+          </Link>
 
-          {/* Small Card 1 (Kandy) */}
-          <a 
-            href="/travel-guide" 
+          {/* Small Card 1 (Bottom Right 1) */}
+          <Link
+            to={articles.length >= 3 ? `/blog/${displayItems[2].id}` : '/travel-guide'}
             className="relative rounded-[2rem] overflow-hidden group cursor-pointer h-[250px] lg:h-full"
           >
-            <img 
-              src={destinations[2].image} 
-              alt={destinations[2].name} 
-              className="w-full h-full object-cover"
+            <img
+              src={displayItems[2].image}
+              alt={displayItems[2].title}
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
             <div className="absolute bottom-6 left-6 text-white">
-              <h3 className="text-xl font-bold mb-1 drop-shadow-lg">{destinations[2].name}</h3>
-              <p className="text-xs opacity-90 font-light italic">{destinations[2].description}</p>
+              <h3 className="text-xl font-bold mb-1 drop-shadow-lg">{displayItems[2].title}</h3>
             </div>
-          </a>
+          </Link>
 
-          {/* Small Card 2 (Mirissa) */}
-          <a 
-            href="/travel-guide" 
+          {/* Small Card 2 (Bottom Right 2) */}
+          <Link
+            to={articles.length >= 4 ? `/blog/${displayItems[3].id}` : '/travel-guide'}
             className="relative rounded-[2rem] overflow-hidden group cursor-pointer h-[250px] lg:h-full"
           >
-            <img 
-              src={destinations[3].image} 
-              alt={destinations[3].name} 
-              className="w-full h-full object-cover"
+            <img
+              src={displayItems[3].image}
+              alt={displayItems[3].title}
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
             <div className="absolute bottom-6 left-6 text-white">
-              <h3 className="text-xl font-bold mb-1 drop-shadow-lg">{destinations[3].name}</h3>
-              <p className="text-xs opacity-90 font-light italic">{destinations[3].description}</p>
+              <h3 className="text-xl font-bold mb-1 drop-shadow-lg">{displayItems[3].title}</h3>
             </div>
-          </a>
+          </Link>
         </div>
       </div>
     </section>
