@@ -1,46 +1,21 @@
-import React from 'react';
-import blogSafari from '../../assets/blog-safari.png';
-import blogCity from '../../assets/blog-city.png';
-import blogBoat from '../../assets/blog-boat.png';
+import React, { useEffect, useState } from 'react';
+import { getReviews } from '../../services/contentService';
 
 const Reviews = () => {
-  const reviews = [
-    {
-      id: 1,
-      name: 'Sarah & James',
-      location: 'UK',
-      text: '"Une expérience inoubliable ! Le safari animalier a été le point culminant de notre voyage."',
-      image: blogSafari,
-    },
-    {
-      id: 2,
-      name: 'Michael Chen',
-      location: 'Canada',
-      text: '"The personalized itinerary was exactly what we needed. From tea plantations to beaches."',
-      image: blogCity,
-    },
-    {
-      id: 3,
-      name: 'Elena Rossi',
-      location: 'Italy',
-      text: '"Professional guides and beautiful accommodations. Sri Lanka is a gem, absolutely magical."',
-      image: blogBoat,
-    },
-    {
-      id: 4,
-      name: 'David Wilson',
-      location: 'Australia',
-      text: '"Excellent service from start to finish. The local knowledge of our driver was impressive."',
-      image: blogSafari,
-    },
-    {
-      id: 5,
-      name: 'Sophia Chen',
-      location: 'UK',
-      text: '"Everything was handled with care and luxury. We felt so taken care of throughout."',
-      image: blogCity,
-    },
-  ];
+  const [reviews, setReviews] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      const data = await getReviews();
+      setReviews(data);
+      setLoading(false);
+    };
+    fetchReviews();
+  }, []);
+
+  if (loading || reviews.length === 0) return null;
+
 
   return (
     <section className="py-24 bg-white">
@@ -60,7 +35,7 @@ const Reviews = () => {
             >
               {/* Background Image */}
               <img 
-                src={review.image} 
+                src={review.img} 
                 alt={review.name} 
                 className="absolute inset-0 w-full h-full object-cover"
               />
@@ -85,7 +60,7 @@ const Reviews = () => {
 
                 <div className="border-t border-white/20 pt-6">
                   <h4 className="font-bold text-xl mb-1">{review.name}</h4>
-                  <p className="text-luxury text-xs font-bold uppercase tracking-widest">{review.location}</p>
+                  <p className="text-luxury text-xs font-bold uppercase tracking-widest">{review.date}</p>
                 </div>
               </div>
             </div>

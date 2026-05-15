@@ -151,7 +151,7 @@ const ItineraryDetail = () => {
                     />
                     <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 to-transparent py-3 px-4">
                       <p className="text-white text-xs font-bold truncate leading-tight">{day.location.split(' - ')[0]}</p>
-                      <p className="text-white/70 text-[10px] font-medium uppercase tracking-wider">Jour {day.id}</p>
+                      <p className="text-white/70 text-[10px] font-medium uppercase tracking-wider">{day.displayLabel || `Jour ${day.id}`}</p>
                     </div>
                   </div>
                 </div>
@@ -252,8 +252,8 @@ const ItineraryDetail = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
               <div className="absolute bottom-6 left-8 flex flex-col items-start gap-2">
-                <span className="bg-white/20 backdrop-blur-md text-white px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest border border-white/30">
-                  Jour {days[activeDay - 1].id}
+                    <span className="bg-white/20 backdrop-blur-md text-white px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest border border-white/30">
+                  {days[activeDay - 1].displayLabel || `Jour ${days[activeDay - 1].id}`}
                 </span>
                 <h3 className="text-white text-2xl md:text-3xl font-bold drop-shadow-xl leading-tight">
                   {days[activeDay - 1].location.split(' - ')[0]}
@@ -315,6 +315,7 @@ const ItineraryDetail = () => {
             <div className="h-48 rounded-[32px] overflow-hidden mb-8">
               <img src={days[activeDay - 1].image} alt="" className="w-full h-full object-cover" />
             </div>
+            <span className="text-luxury text-[10px] font-bold uppercase tracking-widest mb-2 block">{days[activeDay - 1].displayLabel || `Jour ${days[activeDay - 1].id}`}</span>
             <h3 className="text-primary text-2xl font-bold mb-4">{days[activeDay - 1].location}</h3>
             <p className="text-gray-700 mb-8">{days[activeDay - 1].description}</p>
             <button onClick={() => { if (activeDay < days.length) setActiveDay(activeDay + 1); else setIsModalOpen(false); }} className="w-full bg-primary text-white font-bold py-4 rounded-2xl">

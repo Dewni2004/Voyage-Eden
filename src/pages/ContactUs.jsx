@@ -1,22 +1,55 @@
+import React, { useRef, useState } from 'react';
+import emailjs from '@emailjs/browser';
 import PageHero from '../components/UI/PageHero';
 import officeStaff2 from '../assets/Office - staff 2.jpg';
 import nethmiImg from '../assets/Nethmi.webp';
 
 const ContactUs = () => {
+  const form = useRef();
+  const [isSending, setIsSending] = useState(false);
+  const [messageStatus, setMessageStatus] = useState({ type: '', text: '' });
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+    setIsSending(true);
+    setMessageStatus({ type: '', text: '' });
+
+    // IMPORTANT: replace these with your actual IDs from emailjs.com
+    const SERVICE_ID = "service_xxxxxx"; 
+    const TEMPLATE_ID = "template_xxxxxx";
+    const PUBLIC_KEY = "xxxxxxxxxxxx";
+
+    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY)
+      .then((result) => {
+          setMessageStatus({ 
+            type: 'success', 
+            text: 'Merci ! Votre message a été envoyé avec succès. Nous vous répondrons bientôt.' 
+          });
+          form.current.reset();
+      }, (error) => {
+          setMessageStatus({ 
+            type: 'error', 
+            text: "Désolé, une erreur s'est produite. Veuillez réessayer ou nous contacter via WhatsApp." 
+          });
+          console.error('EmailJS Error:', error);
+      })
+      .finally(() => setIsSending(false));
+  };
+
   return (
     <div>
-      <PageHero 
+      <PageHero
         title="Contactez-nous"
         description="Nous sommes là pour vous aider à planifier votre voyage de rêve au Sri Lanka. N'hésitez pas à nous contacter."
         image={officeStaff2}
         overlayOpacity="bg-black/60"
         bgPosition="object-[center_20%]"
       />
-      
+
       <div className="py-16 md:py-24 bg-[#f8fbff]">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            
+
             {/* Card 1: Nos Bureaux */}
             <div className="bg-white p-10 md:p-12 rounded-[40px] shadow-xl border border-gray-100 flex flex-col items-center text-center transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
               <div className="w-16 h-16 md:w-20 md:h-20 bg-primary rounded-full flex items-center justify-center mb-6 md:mb-8 shadow-lg shadow-primary/30">
@@ -27,7 +60,7 @@ const ContactUs = () => {
               </div>
               <h3 className="text-primary text-xl md:text-2xl font-bold mb-4 md:mb-6">Nos Bureaux</h3>
               <div className="space-y-3 text-gray-600 font-medium leading-relaxed text-sm md:text-base">
-                <p>Kandy: Stone House Suites, n° 29, Nittawela Road.</p>
+                <p>Kandy: Sri Lanka Viajes Eden, n° 29, Nittawela Road.</p>
                 <p className="pt-4 font-bold text-primary underline decoration-luxury">Kurunegala:</p>
                 <p>n° 64, unité 01, complexe Siripathi, Bauddhaloka Rd.</p>
               </div>
@@ -73,49 +106,72 @@ const ContactUs = () => {
 
           {/* Form and Info Section */}
           <div className="flex flex-col lg:flex-row gap-12 mt-16 md:mt-24 max-w-6xl mx-auto">
-            
+
             {/* Left Column: Contact Form */}
             <div className="lg:w-2/3 bg-white p-8 md:p-12 rounded-[40px] shadow-xl border border-gray-100">
               <h2 className="text-primary text-2xl md:text-3xl font-bold mb-4">Envoyez-nous un message</h2>
               <p className="text-gray-600 mb-8 md:mb-10 text-sm md:text-base">Vous avez des questions sur un circuit personnalisé ? Écrivez-nous ci-dessous et nous vous répondrons immédiatement.</p>
-              
-              <form className="space-y-6">
+
+              <form ref={form} onSubmit={sendEmail} className="space-y-6">
+                {messageStatus.text && (
+                  <div className={`p-4 rounded-2xl text-sm font-bold animate-in fade-in slide-in-from-top-4 duration-500 ${messageStatus.type === 'success' ? 'bg-green-50 text-green-600 border border-green-100' : 'bg-red-50 text-red-600 border border-red-100'}`}>
+                    {messageStatus.text}
+                  </div>
+                )}
+
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-primary ml-1">Nom*</label>
-                  <input 
-                    type="text" 
+                  <input
+                    name="user_name"
+                    type="text"
+                    required
                     className="w-full bg-gray-50 border border-gray-200 rounded-2xl py-4 px-6 focus:outline-none focus:ring-2 focus:ring-luxury/50 transition-all text-sm md:text-base"
                   />
                 </div>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-sm font-bold text-primary ml-1">Téléphone*</label>
-                    <input 
-                      type="tel" 
+                    <input
+                      name="user_phone"
+                      type="tel"
+                      required
                       className="w-full bg-gray-50 border border-gray-200 rounded-2xl py-4 px-6 focus:outline-none focus:ring-2 focus:ring-luxury/50 transition-all text-sm md:text-base"
                     />
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-bold text-primary ml-1">E-mail*</label>
-                    <input 
-                      type="email" 
+                    <input
+                      name="user_email"
+                      type="email"
+                      required
                       className="w-full bg-gray-50 border border-gray-200 rounded-2xl py-4 px-6 focus:outline-none focus:ring-2 focus:ring-luxury/50 transition-all text-sm md:text-base"
                     />
                   </div>
                 </div>
-                
+
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-primary ml-1">Écrivez votre message*</label>
-                  <textarea 
+                  <textarea
+                    name="message"
                     rows="6"
+                    required
                     className="w-full bg-gray-50 border border-gray-200 rounded-2xl py-4 px-6 focus:outline-none focus:ring-2 focus:ring-luxury/50 transition-all resize-none text-sm md:text-base"
                   ></textarea>
                 </div>
-                
+
                 <div className="flex justify-end pt-4">
-                  <button className="w-full md:w-auto bg-primary hover:bg-primary/90 text-white font-bold py-4 px-10 rounded-2xl shadow-lg shadow-primary/30 transition-all hover:scale-105 active:scale-95 text-sm md:text-base">
-                    Envoyez votre message
+                  <button 
+                    type="submit"
+                    disabled={isSending}
+                    className={`w-full md:w-auto bg-primary hover:bg-primary/90 text-white font-bold py-4 px-10 rounded-2xl shadow-lg shadow-primary/30 transition-all hover:scale-105 active:scale-95 text-sm md:text-base flex items-center justify-center gap-2 ${isSending ? 'opacity-70 cursor-not-allowed' : ''}`}
+                  >
+                    {isSending ? (
+                      <>
+                        <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
+                        Envoi en cours...
+                      </>
+                    ) : 'Envoyez votre message'}
                   </button>
                 </div>
               </form>
@@ -124,7 +180,7 @@ const ContactUs = () => {
             {/* Right Column: Consultant and Reg Info */}
             <div className="lg:w-1/3 space-y-8">
               <h2 className="text-primary text-2xl md:text-3xl font-bold ml-2">Rencontrez vos conseillers</h2>
-              
+
               {/* Consultant Card */}
               <div className="bg-gray-100/50 p-8 md:p-10 rounded-[40px] border border-white shadow-lg backdrop-blur-sm">
                 <div className="flex items-center gap-6 mb-8">
@@ -136,11 +192,11 @@ const ContactUs = () => {
                     <p className="text-primary/70 font-semibold text-xs md:text-sm">Conseillère en voyages</p>
                   </div>
                 </div>
-                
+
                 <p className="text-gray-600 text-sm leading-relaxed mb-10">
                   Notre agent de voyage dynamique qui fait tout son possible pour organiser des voyages passionnants et bien organisés, en veillant à ce que chaque détail soit parfaitement planifié.
                 </p>
-                
+
                 <div className="flex flex-col gap-4">
                   <button className="w-full flex items-center justify-center gap-2 bg-[#4ade80] hover:bg-[#22c55e] text-white font-bold py-4 px-6 rounded-2xl transition-all shadow-lg shadow-green-200">
                     Message WhatsApp
@@ -150,7 +206,7 @@ const ContactUs = () => {
                   </button>
                 </div>
               </div>
-              
+
               {/* Company Registration Card */}
               <div className="bg-primary p-8 md:p-10 rounded-[40px] text-white shadow-2xl shadow-primary/30 border border-primary/50">
                 <h3 className="text-xl md:text-2xl font-bold mb-6">Enregistrement de la société</h3>
@@ -165,18 +221,18 @@ const ContactUs = () => {
           {/* Maps Section */}
           <div className="mt-24 space-y-16 max-w-6xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-              
+
               {/* Kurunegala Map */}
               <div className="space-y-6">
                 <h2 className="text-primary text-3xl font-bold text-center">Notre bureau de Kurunegala</h2>
                 <div className="w-full h-[400px] rounded-[40px] overflow-hidden shadow-2xl border-4 border-white">
-                  <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3954.912628469382!2d80.3621453!3d7.474895!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae3398c8c50e9df%3A0x6b907f9c21b2d9d!2sSiripathi%20Complex!5e0!3m2!1sen!2slk!4v1700000000000!5m2!1sen!2slk" 
-                    width="100%" 
-                    height="100%" 
-                    style={{ border: 0 }} 
-                    allowFullScreen="" 
-                    loading="lazy" 
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d1717.815548545442!2d80.35759254140284!3d7.482394977206857!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sNo.%2064%2C%204th%20floor%2C%20Unit%2001%2C%20Siripathi%20Complex%2C%20Bauddaloka%20Rd%2C%20Kurunegala%2C%20Sri%20Lanka!5e0!3m2!1sen!2slk!4v1778821295527!5m2!1sen!2slk"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen=""
+                    loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
                     title="Kurunegala Office Map"
                   ></iframe>
@@ -187,13 +243,13 @@ const ContactUs = () => {
               <div className="space-y-6">
                 <h2 className="text-primary text-3xl font-bold text-center">Notre bureau de Kandy</h2>
                 <div className="w-full h-[400px] rounded-[40px] overflow-hidden shadow-2xl border-4 border-white">
-                  <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.551717088469!2d80.6277253!3d7.292211!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae3662c954a938d%3A0x86835a26639d6778!2sStone%20House%20Suites!5e0!3m2!1sen!2slk!4v1700000000000!5m2!1sen!2slk" 
-                    width="100%" 
-                    height="100%" 
-                    style={{ border: 0 }} 
-                    allowFullScreen="" 
-                    loading="lazy" 
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.347146777132!2d80.63299187365601!3d7.314843613464585!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae368bb2537d1f7%3A0x4209f9e5c6dab6c4!2sSri%20Lanka%20Viajes%20Eden!5e0!3m2!1sen!2slk!4v1778821110221!5m2!1sen!2slk"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen=""
+                    loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
                     title="Kandy Office Map"
                   ></iframe>

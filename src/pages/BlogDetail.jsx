@@ -10,6 +10,30 @@ const BlogDetail = () => {
   const [article, setArticle] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const translateToFrench = (word) => {
+    const translations = {
+      'History': 'Histoire',
+      'Adventure': 'Aventure',
+      'Nature': 'Nature',
+      'Culture': 'Culture',
+      'Discovery': 'Découverte',
+      'Waterfalls': 'Cascades',
+      'Beach': 'Plage',
+      'Islands': 'Îles',
+      'Private Island': 'Île privée',
+      'Tourist Attractions': 'Attractions touristiques',
+      'News & Curiosities': 'Actualités & Curiosités',
+      'Cultural & Religions': 'Culture & Religions',
+      'Useful Tips': 'Conseils utiles',
+      '#History': '#Histoire',
+      '#Adventure': '#Aventure',
+      '#Nature': '#Nature',
+      '#Culture': '#Culture',
+      '#Waterfalls': '#Cascades'
+    };
+    return translations[word] || word;
+  };
+
   useEffect(() => {
     const fetchArticle = async () => {
       // First try static data
@@ -30,7 +54,7 @@ const BlogDetail = () => {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#f8fbff]">
-        <div className="text-primary font-bold">Loading article...</div>
+        <div className="text-primary font-bold">Chargement de l'article...</div>
       </div>
     );
   }
@@ -49,10 +73,10 @@ const BlogDetail = () => {
 
   // Sidebar data
   const categories = [
-    { name: "Tourist Attractions", count: 12 },
-    { name: "News & Curiosities", count: 3 },
-    { name: "Cultural & Religions", count: 9 },
-    { name: "Useful Tips", count: 10 },
+    { name: "Attractions touristiques", count: 12 },
+    { name: "Actualités & Curiosités", count: 3 },
+    { name: "Culture & Religions", count: 9 },
+    { name: "Conseils utiles", count: 10 },
   ];
 
   const popularReads = blogArticles.slice(0, 3);
@@ -82,7 +106,7 @@ const BlogDetail = () => {
           <div className="lg:w-2/3">
             <div className="bg-white rounded-[40px] p-10 md:p-16 shadow-xl border border-gray-100">
               <h2 className="text-primary text-3xl md:text-4xl font-bold mb-10 leading-tight">
-                Introduction to {article.title}
+                Introduction à {article.title}
               </h2>
               
               <div className="prose prose-lg max-w-none text-gray-700 font-medium leading-relaxed">
@@ -126,8 +150,8 @@ const BlogDetail = () => {
                               💡
                             </div>
                             <div>
-                              <h4 className="text-white text-2xl font-bold font-serif tracking-wide">Travel Tips</h4>
-                              <p className="text-luxury text-xs font-bold uppercase tracking-widest">Expert Advice</p>
+                              <h4 className="text-white text-2xl font-bold font-serif tracking-wide">Conseils de voyage</h4>
+                              <p className="text-luxury text-xs font-bold uppercase tracking-widest">Avis d'expert</p>
                             </div>
                           </div>
                           
@@ -143,7 +167,7 @@ const BlogDetail = () => {
                           </div>
                           
                           <div className="mt-8 pt-8 border-t border-white/10 flex items-center justify-between">
-                            <span className="text-white/40 text-[10px] font-bold uppercase tracking-widest">Eden Travels Signature Guide</span>
+                            <span className="text-white/40 text-[10px] font-bold uppercase tracking-widest">Guide signature Eden Travels</span>
                             <div className="flex gap-1">
                               {[1,2,3].map(i => <div key={i} className="w-1 h-1 bg-luxury rounded-full opacity-50"></div>)}
                             </div>
@@ -170,9 +194,9 @@ const BlogDetail = () => {
                 })}
 
                 <div className="pt-8 border-t border-gray-100 flex flex-wrap gap-4">
-                  {article.tags.map((tag) => (
+                  {(article.tags || []).map((tag) => (
                     <span key={tag} className="bg-gray-50 text-gray-400 font-bold px-6 py-2 rounded-full text-sm border border-gray-100">
-                      {tag}
+                      {translateToFrench(tag)}
                     </span>
                   ))}
                 </div>
@@ -186,7 +210,7 @@ const BlogDetail = () => {
             {/* Categories Card */}
             <div className="bg-white p-10 rounded-[32px] shadow-lg border border-gray-100">
               <h3 className="text-primary text-xl font-bold mb-8 relative inline-block">
-                Categories
+                Catégories
                 <span className="absolute -bottom-2 left-0 w-12 h-1 bg-luxury rounded-full"></span>
               </h3>
               <ul className="space-y-4">
@@ -205,7 +229,7 @@ const BlogDetail = () => {
             {/* Popular Reads Card */}
             <div className="bg-white p-10 rounded-[32px] shadow-lg border border-gray-100">
               <h3 className="text-primary text-xl font-bold mb-8 relative inline-block">
-                Popular Reads
+                Lectures populaires
                 <span className="absolute -bottom-2 left-0 w-12 h-1 bg-luxury rounded-full"></span>
               </h3>
               <div className="space-y-8">
@@ -231,19 +255,19 @@ const BlogDetail = () => {
               <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
               
               <div className="relative z-10 text-center">
-                <h3 className="text-white text-2xl font-bold mb-4">Join The Journey</h3>
+                <h3 className="text-white text-2xl font-bold mb-4">Rejoignez l'aventure</h3>
                 <p className="text-white/70 text-sm mb-8">
-                  Get exclusive travel tips and secret destinations delivered to your inbox.
+                  Recevez des conseils de voyage exclusifs et des destinations secrètes dans ඔබේ boite de réception.
                 </p>
                 
                 <div className="space-y-4">
                   <input 
                     type="email" 
-                    placeholder="Email Address" 
+                    placeholder="Adresse e-mail" 
                     className="w-full bg-white/10 border border-white/20 rounded-2xl py-4 px-6 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all text-white placeholder-white/40 text-sm"
                   />
                   <button className="w-full bg-[#0d213f] hover:bg-[#0a1a33] text-white font-bold py-4 rounded-2xl shadow-xl transition-all duration-300 transform active:scale-95 text-sm">
-                    Subscribe
+                    S'abonner
                   </button>
                 </div>
               </div>

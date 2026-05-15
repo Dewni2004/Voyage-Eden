@@ -20,6 +20,7 @@ const Admin = () => {
   const [publishedItineraries, setPublishedItineraries] = useState([]);
   const [publishedCategories, setPublishedCategories] = useState([]);
   const [contentLoading, setContentLoading] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
   // Edit mode
   const [editingArticleId, setEditingArticleId] = useState(null);
@@ -447,11 +448,9 @@ const Admin = () => {
     { id: 'articles', label: 'Articles', icon: '📄', count: publishedArticles.length },
     { id: 'reviews', label: 'Reviews', icon: '⭐', count: publishedReviews.length },
     { id: 'itineraries', label: 'Itineraries', icon: '🗺️', count: publishedItineraries.length },
-    { id: 'interests', label: 'Interests', icon: '🎯', count: publishedCategories.length },
     { id: 'new-article', label: editingArticleId ? 'Edit Article' : 'New Article', icon: '✍️' },
     { id: 'new-review', label: editingReviewId ? 'Edit Review' : 'New Review', icon: '✨' },
     { id: 'new-itinerary', label: editingItineraryId ? 'Edit Itinerary' : 'New Itinerary', icon: '📍' },
-    { id: 'new-category', label: editingCategoryId ? 'Edit Category' : 'New Category', icon: '📂' },
   ];
 
   const inputClass = "w-full bg-white border border-gray-100 rounded-2xl py-4 px-6 outline-none focus:ring-2 focus:ring-primary/20 transition-all text-primary font-medium placeholder:text-gray-300 shadow-sm";
@@ -473,6 +472,7 @@ const Admin = () => {
                 key={tab.id}
                 onClick={() => { 
                   setActiveTab(tab.id); 
+                  setSearchQuery('');
                   if (tab.id === 'new-article' && !editingArticleId) resetArticleForm(); 
                   if (tab.id === 'new-review' && !editingReviewId) resetReviewForm(); 
                   if (tab.id === 'new-itinerary' && !editingItineraryId) resetItineraryForm();
@@ -525,12 +525,24 @@ const Admin = () => {
           {/* ARTICLES LIST */}
           {activeTab === 'articles' && (
             <div className="animate-fade-in">
-              <div className="flex justify-between items-end mb-8 px-4">
+              <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 px-4 gap-4">
                 <div>
                   <h3 className="text-2xl font-serif font-bold text-primary mb-1">Travel Guides</h3>
                   <p className="text-gray-400 text-sm font-medium">Manage your blog articles and guides</p>
                 </div>
-                <button onClick={() => { resetArticleForm(); setActiveTab('new-article'); }} className="bg-primary text-white font-bold px-8 py-4 rounded-2xl hover:bg-primary/90 transition-all shadow-xl shadow-primary/20 text-sm tracking-wide">+ NEW ARTICLE</button>
+                <div className="flex flex-1 w-full md:w-auto max-w-md gap-4">
+                  <div className="relative flex-1">
+                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">🔍</span>
+                    <input 
+                      type="text" 
+                      placeholder="Search articles..." 
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="w-full bg-white border border-gray-100 rounded-2xl py-3 pl-12 pr-6 outline-none focus:ring-2 focus:ring-primary/10 transition-all text-sm font-medium shadow-sm"
+                    />
+                  </div>
+                  <button onClick={() => { resetArticleForm(); setActiveTab('new-article'); }} className="bg-primary text-white font-bold px-8 py-3 rounded-2xl hover:bg-primary/90 transition-all shadow-xl shadow-primary/20 text-sm tracking-wide whitespace-nowrap">+ NEW ARTICLE</button>
+                </div>
               </div>
               
               <div className="grid grid-cols-1 gap-4">
@@ -539,14 +551,27 @@ const Admin = () => {
                     <div className="w-12 h-12 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
                     <p className="text-gray-400 font-bold text-sm uppercase tracking-widest">Syncing with database...</p>
                   </div>
-                ) : publishedArticles.length === 0 ? (
+                ) : publishedArticles.filter(article => 
+                    article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    article.category.toLowerCase().includes(searchQuery.toLowerCase())
+                  ).length === 0 ? (
                   <div className="bg-white rounded-[40px] p-24 text-center border border-gray-100 shadow-sm">
-                    <div className="text-6xl mb-6">📭</div>
-                    <h4 className="text-xl font-bold text-primary mb-2">No articles found</h4>
-                    <p className="text-gray-400 max-w-xs mx-auto mb-8">Start sharing your travel stories with the world.</p>
-                    <button onClick={() => setActiveTab('new-article')} className="text-primary font-bold hover:underline">Create your first guide →</button>
+                    <div className="text-6xl mb-6">{searchQuery ? '🔎' : '📭'}</div>
+                    <h4 className="text-xl font-bold text-primary mb-2">{searchQuery ? 'No matching articles' : 'No articles found'}</h4>
+                    <p className="text-gray-400 max-w-xs mx-auto mb-8">
+                      {searchQuery ? `We couldn't find any articles matching "${searchQuery}"` : 'Start sharing your travel stories with the world.'}
+                    </p>
+                    {searchQuery ? (
+                      <button onClick={() => setSearchQuery('')} className="text-primary font-bold hover:underline">Clear search filter</button>
+                    ) : (
+                      <button onClick={() => setActiveTab('new-article')} className="text-primary font-bold hover:underline">Create your first guide →</button>
+                    )}
                   </div>
-                ) : publishedArticles.map((article) => (
+                ) : publishedArticles
+                    .filter(article => 
+                      article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                      article.category.toLowerCase().includes(searchQuery.toLowerCase())
+                    ).map((article) => (
                   <div key={article.id} className="bg-white rounded-[32px] p-6 shadow-sm border border-gray-100 flex gap-8 items-center group hover:shadow-2xl hover:-translate-y-1 transition-all duration-500">
                     <div className="w-24 h-24 rounded-3xl overflow-hidden flex-shrink-0 bg-gray-100 shadow-inner">
                       {article.image && <img src={article.image} alt="" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />}
@@ -572,12 +597,24 @@ const Admin = () => {
           {/* REVIEWS LIST */}
           {activeTab === 'reviews' && (
             <div className="animate-fade-in">
-              <div className="flex justify-between items-end mb-8 px-4">
+              <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 px-4 gap-4">
                 <div>
                   <h3 className="text-2xl font-serif font-bold text-primary mb-1">Guest Reviews</h3>
                   <p className="text-gray-400 text-sm font-medium">Manage feedback and client testimonials</p>
                 </div>
-                <button onClick={() => { resetReviewForm(); setActiveTab('new-review'); }} className="bg-primary text-white font-bold px-8 py-4 rounded-2xl hover:bg-primary/90 transition-all shadow-xl shadow-primary/20 text-sm tracking-wide">+ NEW REVIEW</button>
+                <div className="flex flex-1 w-full md:w-auto max-w-md gap-4">
+                  <div className="relative flex-1">
+                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">🔍</span>
+                    <input 
+                      type="text" 
+                      placeholder="Search reviews by guest name..." 
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="w-full bg-white border border-gray-100 rounded-2xl py-3 pl-12 pr-6 outline-none focus:ring-2 focus:ring-primary/10 transition-all text-sm font-medium shadow-sm"
+                    />
+                  </div>
+                  <button onClick={() => { resetReviewForm(); setActiveTab('new-review'); }} className="bg-primary text-white font-bold px-8 py-3 rounded-2xl hover:bg-primary/90 transition-all shadow-xl shadow-primary/20 text-sm tracking-wide whitespace-nowrap">+ NEW REVIEW</button>
+                </div>
               </div>
 
               <div className="grid grid-cols-1 gap-4">
@@ -586,14 +623,27 @@ const Admin = () => {
                     <div className="w-12 h-12 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
                     <p className="text-gray-400 font-bold text-sm uppercase tracking-widest">Updating reviews...</p>
                   </div>
-                ) : publishedReviews.length === 0 ? (
+                ) : publishedReviews.filter(review => 
+                    review.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    (review.headline && review.headline.toLowerCase().includes(searchQuery.toLowerCase()))
+                  ).length === 0 ? (
                   <div className="bg-white rounded-[40px] p-24 text-center border border-gray-100 shadow-sm">
-                    <div className="text-6xl mb-6">✨</div>
-                    <h4 className="text-xl font-bold text-primary mb-2">No reviews yet</h4>
-                    <p className="text-gray-400 max-w-xs mx-auto mb-8">Gather feedback from your happy travelers.</p>
-                    <button onClick={() => setActiveTab('new-review')} className="text-primary font-bold hover:underline">Add your first story →</button>
+                    <div className="text-6xl mb-6">{searchQuery ? '🔎' : '✨'}</div>
+                    <h4 className="text-xl font-bold text-primary mb-2">{searchQuery ? 'No matching reviews' : 'No reviews yet'}</h4>
+                    <p className="text-gray-400 max-w-xs mx-auto mb-8">
+                      {searchQuery ? `We couldn't find any reviews matching "${searchQuery}"` : 'Gather feedback from your happy travelers.'}
+                    </p>
+                    {searchQuery ? (
+                      <button onClick={() => setSearchQuery('')} className="text-primary font-bold hover:underline">Clear search filter</button>
+                    ) : (
+                      <button onClick={() => setActiveTab('new-review')} className="text-primary font-bold hover:underline">Add your first story →</button>
+                    )}
                   </div>
-                ) : publishedReviews.map((review) => (
+                ) : publishedReviews
+                    .filter(review => 
+                      review.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                      (review.headline && review.headline.toLowerCase().includes(searchQuery.toLowerCase()))
+                    ).map((review) => (
                   <div key={review.id} className="bg-white rounded-[32px] p-6 shadow-sm border border-gray-100 flex gap-8 items-center group hover:shadow-2xl hover:-translate-y-1 transition-all duration-500">
                     <div className="w-20 h-20 rounded-full overflow-hidden flex-shrink-0 bg-gray-100 shadow-inner border-2 border-white ring-8 ring-gray-50/50">
                       {review.img && <img src={review.img} alt="" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />}
@@ -617,12 +667,24 @@ const Admin = () => {
           {/* ITINERARIES LIST */}
           {activeTab === 'itineraries' && (
             <div className="animate-fade-in">
-              <div className="flex justify-between items-end mb-8 px-4">
+              <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 px-4 gap-4">
                 <div>
                   <h3 className="text-2xl font-serif font-bold text-primary mb-1">Luxury Itineraries</h3>
                   <p className="text-gray-400 text-sm font-medium">Design and organize premium tour packages</p>
                 </div>
-                <button onClick={() => { resetItineraryForm(); setActiveTab('new-itinerary'); }} className="bg-primary text-white font-bold px-8 py-4 rounded-2xl hover:bg-primary/90 transition-all shadow-xl shadow-primary/20 text-sm tracking-wide">+ NEW ITINERARY</button>
+                <div className="flex flex-1 w-full md:w-auto max-w-md gap-4">
+                  <div className="relative flex-1">
+                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">🔍</span>
+                    <input 
+                      type="text" 
+                      placeholder="Search itineraries..." 
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="w-full bg-white border border-gray-100 rounded-2xl py-3 pl-12 pr-6 outline-none focus:ring-2 focus:ring-primary/10 transition-all text-sm font-medium shadow-sm"
+                    />
+                  </div>
+                  <button onClick={() => { resetItineraryForm(); setActiveTab('new-itinerary'); }} className="bg-primary text-white font-bold px-8 py-3 rounded-2xl hover:bg-primary/90 transition-all shadow-xl shadow-primary/20 text-sm tracking-wide whitespace-nowrap">+ NEW ITINERARY</button>
+                </div>
               </div>
 
               <div className="grid grid-cols-1 gap-4">
@@ -631,14 +693,27 @@ const Admin = () => {
                     <div className="w-12 h-12 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
                     <p className="text-gray-400 font-bold text-sm uppercase tracking-widest">Loading itineraries...</p>
                   </div>
-                ) : publishedItineraries.length === 0 ? (
+                ) : publishedItineraries.filter(itinerary => 
+                    itinerary.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    itinerary.category.toLowerCase().includes(searchQuery.toLowerCase())
+                  ).length === 0 ? (
                   <div className="bg-white rounded-[40px] p-24 text-center border border-gray-100 shadow-sm">
-                    <div className="text-6xl mb-6">🗺️</div>
-                    <h4 className="text-xl font-bold text-primary mb-2">No itineraries yet</h4>
-                    <p className="text-gray-400 max-w-xs mx-auto mb-8">Build beautiful travel routes for your clients.</p>
-                    <button onClick={() => setActiveTab('new-itinerary')} className="text-primary font-bold hover:underline">Plan your first trip →</button>
+                    <div className="text-6xl mb-6">{searchQuery ? '🔎' : '🗺️'}</div>
+                    <h4 className="text-xl font-bold text-primary mb-2">{searchQuery ? 'No matching itineraries' : 'No itineraries yet'}</h4>
+                    <p className="text-gray-400 max-w-xs mx-auto mb-8">
+                      {searchQuery ? `We couldn't find any itineraries matching "${searchQuery}"` : 'Build beautiful travel routes for your clients.'}
+                    </p>
+                    {searchQuery ? (
+                      <button onClick={() => setSearchQuery('')} className="text-primary font-bold hover:underline">Clear search filter</button>
+                    ) : (
+                      <button onClick={() => setActiveTab('new-itinerary')} className="text-primary font-bold hover:underline">Plan your first trip →</button>
+                    )}
                   </div>
-                ) : publishedItineraries.map((itinerary) => (
+                ) : publishedItineraries
+                    .filter(itinerary => 
+                      itinerary.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                      itinerary.category.toLowerCase().includes(searchQuery.toLowerCase())
+                    ).map((itinerary) => (
                   <div key={itinerary.id} className="bg-white rounded-[32px] p-6 shadow-sm border border-gray-100 flex gap-8 items-center group hover:shadow-2xl hover:-translate-y-1 transition-all duration-500">
                     <div className="w-32 h-24 rounded-3xl overflow-hidden flex-shrink-0 bg-gray-100 shadow-inner relative">
                       {itinerary.image && <img src={itinerary.image} alt="" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />}
@@ -683,7 +758,7 @@ const Admin = () => {
                   <div className="bg-white rounded-[40px] p-24 text-center border border-gray-100 shadow-sm col-span-full">
                     <div className="text-6xl mb-6">🎯</div>
                     <h4 className="text-xl font-bold text-primary mb-2">No categories yet</h4>
-                    <p className="text-gray-400 max-w-xs mx-auto mb-8">Define interests like 'Adventure' or 'Culture'.</p>
+                    <p className="text-gray-400 max-w-xs mx-auto mb-8">Définissez des thématiques comme 'Aventure' ou 'Culture'.</p>
                     <button onClick={() => setActiveTab('new-category')} className="text-primary font-bold hover:underline">Create your first category →</button>
                   </div>
                 ) : publishedCategories.map((cat) => (
@@ -994,7 +1069,7 @@ const Admin = () => {
                         <option value="adventure">Adventure</option>
                         <option value="pererahera">Esela Perahera</option>
                         <option value="8days">8 Days Trips</option>
-                        <option value="interests">Interests</option>
+                        <option value="interests">Thématiques</option>
                       </select>
                     </div>
                   </div>
@@ -1046,10 +1121,26 @@ const Admin = () => {
                     <div className="space-y-20">
                       {itineraryDays.map((day, idx) => (
                         <div key={idx} className="bg-white p-10 rounded-[48px] relative group border-2 border-gray-50 shadow-xl hover:border-primary/10 transition-all duration-500">
-                          <div className="absolute -left-5 top-10 w-14 h-14 bg-primary text-white rounded-[24px] flex items-center justify-center font-bold shadow-2xl shadow-primary/20 rotate-[-10deg] group-hover:rotate-0 transition-transform">D{day.id}</div>
-                          <button type="button" onClick={() => setItineraryDays(itineraryDays.filter((_, i) => i !== idx))} className="absolute top-10 right-10 text-red-300 hover:text-red-500 font-bold text-xs uppercase tracking-widest transition-colors">Delete Day</button>
+                          <div className="absolute -left-5 top-10 w-14 h-14 bg-primary text-white rounded-[24px] flex items-center justify-center font-bold shadow-2xl shadow-primary/20 rotate-[-10deg] group-hover:rotate-0 transition-transform">{day.displayLabel || `D${day.id}`}</div>
+                          <div className="absolute top-10 right-10">
+                            <button type="button" onClick={() => setItineraryDays(itineraryDays.filter((_, i) => i !== idx))} className="text-red-300 hover:text-red-500 font-bold text-xs uppercase tracking-widest transition-colors">Delete Day</button>
+                          </div>
                           
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-6">
+                          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mt-6">
+                            <div className="space-y-2">
+                              <label className={labelClass}>Custom Day Label (Optional)</label>
+                              <input 
+                                type="text" 
+                                value={day.displayLabel || ''} 
+                                onChange={e => {
+                                  const newDays = [...itineraryDays];
+                                  newDays[idx].displayLabel = e.target.value;
+                                  setItineraryDays(newDays);
+                                }} 
+                                className="w-full bg-gray-50/50 border border-gray-100 rounded-2xl py-4 px-6 outline-none focus:ring-4 focus:ring-primary/5 transition-all font-medium text-primary shadow-inner" 
+                                placeholder="e.g. Jour 02 - 05"
+                              />
+                            </div>
                             <div className="space-y-2">
                               <label className={labelClass}>Destination</label>
                               <input type="text" required value={day.location} onChange={e => {
@@ -1203,7 +1294,7 @@ const Admin = () => {
                 <div className="flex items-center justify-between mb-12 relative z-10">
                   <div>
                     <h2 className="text-3xl font-serif font-bold text-primary mb-2">{editingCategoryId ? 'Modify Interest' : 'New Interest Group'}</h2>
-                    <p className="text-gray-400 font-medium">Categorize itineraries by traveler interests</p>
+                    <p className="text-gray-400 font-medium">Catégorisez les itinéraires par thématiques de voyage</p>
                   </div>
                   {editingCategoryId && (
                     <button type="button" onClick={resetCategoryForm} className="bg-gray-50 text-gray-400 hover:text-red-500 w-10 h-10 rounded-full flex items-center justify-center transition-colors">✕</button>
