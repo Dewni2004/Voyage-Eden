@@ -93,4 +93,3 @@ const TourCards = () => {
 };
 
 export default TourCards;
-
