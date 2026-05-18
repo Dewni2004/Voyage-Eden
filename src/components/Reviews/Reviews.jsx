@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { getReviews } from '../../services/contentService';
 
 const Reviews = () => {
@@ -28,7 +29,7 @@ const Reviews = () => {
 
         {/* Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-          {reviews.map((review) => (
+          {reviews.slice(0, 5).map((review) => (
             <div 
               key={review.id} 
               className="relative h-[450px] rounded-[2.5rem] overflow-hidden shadow-2xl cursor-pointer"
@@ -65,6 +66,27 @@ const Reviews = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* View All Button */}
+        <div className="mt-16 text-center">
+          <Link 
+            to="/reviews" 
+            className="inline-block relative group"
+          >
+            {/* Glow effect */}
+            <div className="absolute -inset-1 bg-gradient-to-r from-primary to-luxury rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+            
+            {/* Main Button */}
+            <div className="relative px-12 py-5 bg-primary/90 backdrop-blur-xl border border-white/10 rounded-2xl flex items-center gap-6 transition-all duration-300 group-hover:bg-primary shadow-2xl">
+              <span className="text-white font-bold tracking-wider uppercase text-sm">Voir tous les avis</span>
+              <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center transition-transform duration-300 group-hover:rotate-45 group-hover:bg-luxury">
+                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </div>
+            </div>
+          </Link>
         </div>
       </div>
     </section>

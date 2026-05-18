@@ -145,9 +145,6 @@ const Reviews = () => {
             ))}
           </div>
 
-          <div className="mt-12 text-center">
-            <button className="bg-primary text-white font-bold px-10 py-4 rounded-2xl shadow-xl shadow-primary/20 hover:-translate-y-1 transition-all">Charger plus d'avis</button>
-          </div>
         </div>
       </section>
 
