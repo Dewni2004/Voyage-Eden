@@ -43,7 +43,7 @@ function AppContent() {
 
 function App() {
   return (
-    <Router>
+    <Router basename="/Eden-Travels/">
       <ScrollToTop />
       <AppContent />
     </Router>
