@@ -85,7 +85,7 @@ const TravelGuide = () => {
         <div className="flex flex-col lg:flex-row gap-12">
           
           {/* Left Column: Articles */}
-          <div className="lg:w-2/3">
+          <div className="lg:w-2/3 order-2 lg:order-1">
             <h2 className="text-primary text-3xl font-bold mb-10 uppercase tracking-widest border-l-4 border-luxury pl-4">Nos Articles</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
@@ -146,7 +146,7 @@ const TravelGuide = () => {
           </div>
 
           {/* Right Column: Sidebar */}
-          <div className="lg:w-1/3 space-y-12">
+          <div className="lg:w-1/3 space-y-12 order-1 lg:order-2">
             
             {/* Search */}
             <div className="bg-white p-10 rounded-[32px] shadow-lg border border-gray-100">

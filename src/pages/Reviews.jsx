@@ -59,12 +59,12 @@ const Reviews = () => {
           <p className="text-gray-400 mt-2">Courts moments forts en vidéo des voyages incroyables de nos clients.</p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="flex sm:grid overflow-x-auto snap-x snap-mandatory hide-scrollbar sm:overflow-visible pb-8 sm:pb-0 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 -mx-6 px-6 sm:mx-0 sm:px-0">
           {videoReviews.map((video) => (
             <div 
               key={video.id} 
               onClick={() => setSelectedVideo(video)}
-              className="bg-white rounded-[32px] overflow-hidden shadow-xl group cursor-pointer border border-gray-100 transition-all hover:-translate-y-2"
+              className="min-w-[280px] w-[85vw] sm:w-auto shrink-0 snap-center bg-white rounded-[32px] overflow-hidden shadow-xl group cursor-pointer border border-gray-100 transition-all hover:-translate-y-2"
             >
               <div className="relative h-64">
                 <img src={video.thumbnail} alt="" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
@@ -102,12 +102,12 @@ const Reviews = () => {
             <p className="text-gray-400 mt-2">Histoires et expériences authentiques partagées par nos clients précieux.</p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="flex sm:grid overflow-x-auto snap-x snap-mandatory hide-scrollbar sm:overflow-visible pb-8 sm:pb-0 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 -mx-6 px-6 sm:mx-0 sm:px-0">
             {textReviews.map((review, i) => (
               <div 
                 key={i} 
                 onClick={() => setSelectedReview(review)}
-                className="relative h-[500px] rounded-[40px] overflow-hidden group shadow-xl hover:-translate-y-2 transition-all duration-500 cursor-pointer"
+                className="min-w-[280px] w-[85vw] sm:w-auto shrink-0 snap-center relative h-[500px] rounded-[40px] overflow-hidden group shadow-xl hover:-translate-y-2 transition-all duration-500 cursor-pointer"
               >
                 {/* Background Image */}
                 <img src={review.img} alt="" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />

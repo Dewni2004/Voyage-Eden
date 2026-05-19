@@ -49,6 +49,14 @@ p, span, li, a, button {
   .mobile-card {
     @apply rounded-[32px] md:rounded-[40px];
   }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 /* Custom Scrollbar for premium feel */

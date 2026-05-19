@@ -5,7 +5,7 @@ const PopularItineraries = ({ title, id, itineraries, isDark, isGreen }) => {
   const navigate = useNavigate();
   
   return (
-    <section id={id} className={`py-24 relative overflow-hidden ${isDark ? 'bg-[#050b18]' : 'bg-white'}`}>
+    <section id={id} className={`py-12 md:py-24 relative overflow-hidden ${isDark ? 'bg-[#050b18]' : 'bg-white'}`}>
       {/* Premium Background for Luxury Section */}
       {isDark && (
         <div className="absolute inset-0 pointer-events-none">
@@ -22,12 +22,12 @@ const PopularItineraries = ({ title, id, itineraries, isDark, isGreen }) => {
           <div className={`flex-grow ml-12 h-[1px] hidden md:block ${isDark ? 'bg-white/10' : 'bg-gray-200'}`}></div>
         </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        {/* Grid / Slider */}
+        <div className="flex md:grid overflow-x-auto snap-x snap-mandatory hide-scrollbar md:overflow-visible pb-8 md:pb-0 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 -mx-6 px-6 md:mx-0 md:px-0">
           {itineraries.map((item) => (
             <div 
               key={item.id} 
-              className={`${isGreen ? 'bg-[#064e3b] border-white/5 shadow-2xl' : isDark ? 'bg-[#0a152e] border-white/10 shadow-2xl' : 'bg-white border-gray-100 shadow-sm'} rounded-[2rem] overflow-hidden hover:shadow-2xl transition-all duration-500 border group flex flex-col`}
+              className={`min-w-[280px] w-[85vw] sm:w-[45vw] md:w-auto shrink-0 snap-center ${isGreen ? 'bg-[#064e3b] border-white/5 shadow-2xl' : isDark ? 'bg-[#0a152e] border-white/10 shadow-2xl' : 'bg-white border-gray-100 shadow-sm'} rounded-[2rem] overflow-hidden hover:shadow-2xl transition-all duration-500 border group flex flex-col`}
             >
               <div className="h-64 overflow-hidden relative">
                 <img 

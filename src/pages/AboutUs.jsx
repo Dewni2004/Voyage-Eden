@@ -45,14 +45,14 @@ const AboutUs = () => {
       />
 
       {/* Who We Are Section */}
-      <section className="py-24 bg-[#f8fbff]">
+      <section className="py-16 md:py-24 bg-[#f8fbff]">
         <div className="container mx-auto px-6">
           <div className="flex flex-col lg:flex-row gap-16 items-center">
             {/* Left Content */}
             <div className="lg:w-1/2">
               <h2 className="text-primary text-4xl font-bold mb-8">Qui sommes-nous</h2>
               
-              <div className="space-y-6 text-gray-700 text-lg leading-relaxed mb-12">
+              <div className="space-y-6 text-gray-700 text-lg leading-relaxed mb-8 md:mb-12">
                 <p>
                   Nous sommes une équipe multiculturelle basée à Kandy et Kurunegala, au cœur du Sri Lanka, spécialisée dans les expériences de voyage personnalisées qui mettent en valeur la beauté authentique de notre nation insulaire.
                 </p>
@@ -62,22 +62,36 @@ const AboutUs = () => {
               </div>
 
               {/* Stats Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-3 gap-3 sm:gap-6 md:gap-8 relative z-10">
                 {[
-                  { label: "Années d'expérience", value: "13+" },
-                  { label: "Experts locaux", value: "100%" },
-                  { label: "Avis Étoilés", value: "4.9" },
+                  { 
+                    label: "Années d'expérience", 
+                    value: "13+",
+                    icon: <svg className="w-5 h-5 md:w-8 md:h-8 mb-2 md:mb-4 text-luxury opacity-80 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  },
+                  { 
+                    label: "Experts locaux", 
+                    value: "100%",
+                    icon: <svg className="w-5 h-5 md:w-8 md:h-8 mb-2 md:mb-4 text-luxury opacity-80 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                  },
+                  { 
+                    label: "Avis Étoilés", 
+                    value: "4.9",
+                    icon: <svg className="w-5 h-5 md:w-8 md:h-8 mb-2 md:mb-4 text-luxury opacity-80 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" /></svg>
+                  },
                 ].map((stat, index) => (
-                  <div key={index} className="bg-[#b4bdc9]/40 backdrop-blur-sm p-8 rounded-2xl border border-white/50 text-center transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-                    <div className="text-primary text-4xl font-bold mb-2">{stat.value}</div>
-                    <div className="text-primary font-semibold text-lg leading-tight">{stat.label}</div>
+                  <div key={index} className="group relative bg-white/60 backdrop-blur-md p-3 py-5 sm:p-6 md:p-8 rounded-2xl border border-white/80 text-center flex flex-col items-center justify-center transition-all duration-500 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] hover:-translate-y-2 overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-luxury/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    {stat.icon}
+                    <div className="text-transparent bg-clip-text bg-gradient-to-br from-primary to-primary/80 text-2xl sm:text-4xl md:text-5xl font-black mb-1 md:mb-2 tracking-tight group-hover:scale-105 transition-transform duration-300 drop-shadow-sm">{stat.value}</div>
+                    <div className="text-gray-600 font-medium text-[10px] sm:text-sm md:text-base leading-tight uppercase tracking-wider">{stat.label}</div>
                   </div>
                 ))}
               </div>
             </div>
 
             {/* Right Content - Overlapping Images */}
-            <div className="lg:w-1/2 relative h-[350px] sm:h-[450px] md:h-[600px] w-full mt-16 lg:mt-0 px-4 sm:px-0">
+            <div className="lg:w-1/2 relative h-[350px] sm:h-[450px] md:h-[600px] w-full mt-8 lg:mt-0 px-4 sm:px-0">
               {/* Top Image */}
               <div className="absolute top-0 left-0 w-[80%] h-[200px] sm:h-[300px] md:h-[350px] z-10 transition-transform duration-500 hover:scale-[1.02]">
                 <img 
@@ -101,7 +115,7 @@ const AboutUs = () => {
       </section>
 
       {/* What Sets Us Apart Section */}
-      <section className="py-24 bg-white">
+      <section className="py-16 md:py-24 bg-white">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-primary text-4xl font-bold mb-4">Ce qui nous distingue ?</h2>
@@ -165,7 +179,7 @@ const AboutUs = () => {
       </section>
 
       {/* Meet the Founders & Representatives Section */}
-      <section className="py-24 bg-[#f8fbff]">
+      <section className="py-16 md:py-24 bg-[#f8fbff]">
         <div className="container mx-auto px-6">
           <div className="text-center mb-20">
             <h2 className="text-primary text-4xl font-bold mb-4">Rencontrez les fondateurs et représentants</h2>
@@ -220,7 +234,7 @@ const AboutUs = () => {
       </section>
 
       {/* Our Team at the Office Section */}
-      <section className="py-24 bg-white">
+      <section className="py-16 md:py-24 bg-white">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-primary text-4xl font-bold mb-4">Notre équipe au bureau</h2>
@@ -229,7 +243,7 @@ const AboutUs = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
             {[
               { 
                 name: "Manjula", 
@@ -324,7 +338,7 @@ const AboutUs = () => {
       </section>
 
       {/* Our Guides & Drivers Section */}
-      <section className="py-24 bg-[#f8fbff]">
+      <section className="py-16 md:py-24 bg-[#f8fbff]">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-primary text-4xl font-bold mb-4">Nos guides et chauffeurs</h2>

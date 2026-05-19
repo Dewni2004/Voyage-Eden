@@ -58,30 +58,31 @@ const TourCards = () => {
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="flex md:grid overflow-x-auto snap-x snap-mandatory hide-scrollbar md:overflow-visible pb-8 md:pb-0 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 -mx-6 px-6 md:mx-0 md:px-0">
           {tours.map((tour) => (
-            <ItineraryCard
-              key={tour.id}
-              id={tour.id}
-              title={tour.title}
-              image={tour.image}
-              icons={tour.icons}
-              description={tour.description}
-              price={tour.price}
-              tag="Populaire"
-            />
+            <div key={tour.id} className="min-w-[280px] w-[85vw] sm:w-[45vw] md:w-auto shrink-0 snap-center h-full">
+              <ItineraryCard
+                id={tour.id}
+                title={tour.title}
+                image={tour.image}
+                icons={tour.icons}
+                description={tour.description}
+                price={tour.price}
+                tag="Populaire"
+              />
+            </div>
           ))}
         </div>
 
         {/* View All Button */}
-        <div className="mt-20 text-center">
+        <div className="mt-4 md:mt-16 text-center">
           <a 
             href="/itineraires" 
-            className="inline-flex items-center space-x-3 bg-primary text-white px-10 py-4 rounded-2xl text-lg font-bold shadow-xl shadow-primary/20"
+            className="inline-flex items-center space-x-2 md:space-x-3 bg-primary text-white px-6 py-3 md:px-8 md:py-4 rounded-xl md:rounded-2xl text-sm md:text-base font-bold shadow-lg shadow-primary/20 hover:-translate-y-1 transition-all duration-300"
           >
             <span>Découvrez nos autres itinéraires</span>
-            <div className="bg-white rounded-full p-1">
-              <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+            <div className="bg-white rounded-full p-1 md:p-1.5">
+              <svg className="w-4 h-4 md:w-5 md:h-5 text-primary" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
               </svg>
             </div>
