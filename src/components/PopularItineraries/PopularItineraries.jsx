@@ -65,7 +65,7 @@ const PopularItineraries = ({ title, id, itineraries, isDark, isGreen }) => {
                   </div>
                   <button 
                     onClick={() => navigate(`/itinerary/${item.id}`)}
-                    className={`${isGreen ? 'bg-white text-[#064e3b] hover:bg-black hover:text-white' : isDark ? 'bg-luxury hover:bg-white hover:text-primary' : 'bg-primary hover:bg-luxury'} text-white px-6 py-2 rounded-xl text-sm font-bold transition-all duration-300 transform hover:-translate-y-1`}
+                    className={`${isGreen ? 'bg-white text-black hover:bg-black hover:text-white' : isDark ? 'bg-luxury text-white hover:bg-white hover:text-primary' : 'bg-primary text-white hover:bg-luxury'} px-6 py-2 rounded-xl text-sm font-bold transition-all duration-300 transform hover:-translate-y-1`}
                   >
                     Reserve Now
                   </button>
