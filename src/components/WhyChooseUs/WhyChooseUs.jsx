@@ -7,7 +7,7 @@ const WhyChooseUs = () => {
       title: 'Expertise locale',
       description: 'Nos guides sont des locaux qui connaissent les trésors cachés et les histoires secrètes du Sri Lanka.',
       icon: (
-        <svg className="w-12 h-12 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
         </svg>
       ),
@@ -17,7 +17,7 @@ const WhyChooseUs = () => {
       title: 'Sûr et sécurisé',
       description: 'Votre sécurité est notre priorité. Nous offrons une assistance 24h/24 et 7j/7 et des hébergements vérifiés.',
       icon: (
-        <svg className="w-12 h-12 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
         </svg>
       ),
@@ -27,7 +27,7 @@ const WhyChooseUs = () => {
       title: 'Voyages sur mesure',
       description: 'Chaque voyageur est unique. Nous personnalisons chaque itinéraire selon vos préférences.',
       icon: (
-        <svg className="w-12 h-12 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
         </svg>
       ),
@@ -37,7 +37,7 @@ const WhyChooseUs = () => {
       title: 'Assistance 24/7',
       description: 'Nous sommes à vos côtés à chaque étape de votre voyage pour une expérience sans souci.',
       icon: (
-        <svg className="w-12 h-12 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
         </svg>
       ),
@@ -45,7 +45,7 @@ const WhyChooseUs = () => {
   ];
 
   return (
-    <section className="py-16 md:py-24 bg-white">
+    <section className="py-10 md:py-16 bg-white">
       <div className="container mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">
@@ -56,19 +56,25 @@ const WhyChooseUs = () => {
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
           {features.map((feature) => (
             <div 
               key={feature.id} 
-              className="bg-white p-10 rounded-3xl shadow-sm text-center border border-transparent"
+              className="bg-white p-4 sm:p-10 rounded-2xl sm:rounded-[1.75rem] border border-primary/20 shadow-[0_15px_35px_-5px_rgba(30,64,111,0.06)] text-center flex flex-col justify-between"
             >
-              <div className="mb-6 flex justify-center">
-                {feature.icon}
+              <div>
+                <div className="mb-4 sm:mb-6 flex justify-center">
+                  <div className="w-10 h-10 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-primary border border-primary flex items-center justify-center text-white shadow-md shadow-primary/15">
+                    <div className="scale-75 sm:scale-100 flex items-center justify-center">
+                      {feature.icon}
+                    </div>
+                  </div>
+                </div>
+                <h3 className="text-sm sm:text-xl font-bold text-primary mb-2 sm:mb-4">
+                  {feature.title}
+                </h3>
               </div>
-              <h3 className="text-xl font-bold text-primary mb-4">
-                {feature.title}
-              </h3>
-              <p className="text-gray-500 leading-relaxed font-light text-[15px]">
+              <p className="text-gray-500 leading-relaxed font-light text-[12px] sm:text-[15px] mt-auto">
                 {feature.description}
               </p>
             </div>

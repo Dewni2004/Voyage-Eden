@@ -112,7 +112,7 @@ const ReviewDetail = () => {
                   </div>
                 </li>
               </ul>
-              <Link to="/contact" className="w-full bg-primary text-white font-bold py-4 rounded-2xl shadow-xl shadow-primary/20 mt-10 hover:-translate-y-1 transition-all text-center block">Plan My Trip</Link>
+              <Link to="/contact" className="w-full btn-premium-primary py-3.5 rounded-2xl mt-10 text-center block">Plan My Trip</Link>
             </div>
 
             {/* Featured Guide Card */}
@@ -145,7 +145,7 @@ const ReviewDetail = () => {
               <span className="text-luxury text-xs font-bold uppercase tracking-widest mb-2 block text-center md:text-left">Our Guests</span>
               <h2 className="text-primary text-4xl font-bold font-serif text-center md:text-left">More Traveler Stories</h2>
             </div>
-            <Link to="/reviews" className="bg-white border border-gray-100 shadow-lg px-8 py-4 rounded-2xl text-primary font-bold hover:bg-primary hover:text-white transition-all flex items-center gap-2 group">
+            <Link to="/reviews" className="btn-premium-primary px-8 py-3.5 rounded-2xl flex items-center gap-2 group shadow-sm">
               View All Stories 
               <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
             </Link>

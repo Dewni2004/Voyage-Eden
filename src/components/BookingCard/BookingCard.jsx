@@ -29,8 +29,8 @@ const BookingCard = () => {
             </div>
             
             <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
-              <button className="group/btn relative w-full sm:w-auto bg-luxury hover:bg-luxury/90 text-white font-bold px-10 py-4 rounded-xl shadow-xl transition-all duration-300 transform hover:-translate-y-1 active:scale-95 text-base overflow-hidden whitespace-nowrap">
-                <span className="relative z-10">Sécuriser ma réservation</span>
+              <button className="w-full sm:w-auto btn-premium-white px-10 py-3.5 rounded-xl text-base whitespace-nowrap">
+                <span>Sécuriser ma réservation</span>
               </button>
             </div>
             

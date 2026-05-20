@@ -413,9 +413,27 @@ const Admin = () => {
     setLoading(false);
   };
 
-  const addBlock = (type) => setContentBlocks([...contentBlocks, { type, text: '' }]);
+  const addBlock = (type, index = null) => {
+    if (index === null) {
+      setContentBlocks([...contentBlocks, { type, text: '' }]);
+    } else {
+      const b = [...contentBlocks];
+      b.splice(index + 1, 0, { type, text: '' });
+      setContentBlocks(b);
+    }
+  };
   const updateBlock = (index, text) => { const b = [...contentBlocks]; b[index].text = text; setContentBlocks(b); };
   const removeBlock = (index) => setContentBlocks(contentBlocks.filter((_, i) => i !== index));
+  const moveBlock = (index, direction) => {
+    if (direction === 'up' && index === 0) return;
+    if (direction === 'down' && index === contentBlocks.length - 1) return;
+    const b = [...contentBlocks];
+    const targetIndex = direction === 'up' ? index - 1 : index + 1;
+    const temp = b[index];
+    b[index] = b[targetIndex];
+    b[targetIndex] = temp;
+    setContentBlocks(b);
+  };
 
   const loginInputClass = "w-full bg-gray-50 border border-gray-200 rounded-2xl py-4 px-6 outline-none focus:ring-2 focus:ring-primary/20 transition-all";
 
@@ -844,10 +862,36 @@ const Admin = () => {
                       {contentBlocks.map((block, index) => (
                         <div key={index} className="bg-gray-50/50 p-8 rounded-[32px] relative group border border-gray-100 hover:border-primary/20 transition-colors">
                           <button type="button" onClick={() => removeBlock(index)} className="absolute -top-3 -right-3 w-8 h-8 bg-white text-red-500 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center font-bold">✕</button>
-                          <div className="flex items-center gap-2 mb-4">
-                            <div className={`w-2 h-2 rounded-full ${block.type === 'heading' ? 'bg-primary' : block.type === 'quote' ? 'bg-luxury' : block.type === 'image' ? 'bg-green-500' : block.type === 'tips' ? 'bg-orange-400' : block.type === 'list' ? 'bg-blue-400' : 'bg-gray-300'}`}></div>
-                            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">{block.type}</span>
+                          
+                          <div className="flex items-center justify-between mb-4">
+                            <div className="flex items-center gap-2">
+                              <div className={`w-2 h-2 rounded-full ${block.type === 'heading' ? 'bg-primary' : block.type === 'quote' ? 'bg-luxury' : block.type === 'image' ? 'bg-green-500' : block.type === 'tips' ? 'bg-orange-400' : block.type === 'list' ? 'bg-blue-400' : 'bg-gray-300'}`}></div>
+                              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">{block.type}</span>
+                            </div>
+
+                            {/* Move Up / Down controls */}
+                            <div className="flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-all">
+                              <button 
+                                type="button" 
+                                disabled={index === 0}
+                                onClick={() => moveBlock(index, 'up')}
+                                className="w-7 h-7 bg-white hover:bg-primary hover:text-white disabled:opacity-30 disabled:hover:bg-white disabled:hover:text-gray-400 text-gray-500 rounded-lg shadow-sm border border-gray-100 flex items-center justify-center text-xs transition-colors"
+                                title="Déplacer vers le haut"
+                              >
+                                ↑
+                              </button>
+                              <button 
+                                type="button" 
+                                disabled={index === contentBlocks.length - 1}
+                                onClick={() => moveBlock(index, 'down')}
+                                className="w-7 h-7 bg-white hover:bg-primary hover:text-white disabled:opacity-30 disabled:hover:bg-white disabled:hover:text-gray-400 text-gray-500 rounded-lg shadow-sm border border-gray-100 flex items-center justify-center text-xs transition-colors"
+                                title="Déplacer vers le bas"
+                              >
+                                ↓
+                              </button>
+                            </div>
                           </div>
+
                           {block.type === 'image' ? (
                             <ImageUploadField 
                               label="Block Image" 
@@ -864,6 +908,19 @@ const Admin = () => {
                               className="w-full bg-white border border-gray-100 rounded-2xl py-4 px-6 outline-none resize-none focus:ring-4 focus:ring-primary/5 transition-all font-medium text-primary"
                             ></textarea>
                           )}
+
+                          {/* Inline Insert Buttons */}
+                          <div className="mt-4 pt-4 border-t border-dashed border-gray-100 flex flex-wrap items-center justify-between gap-2">
+                            <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Insérer après ce bloc :</span>
+                            <div className="flex flex-wrap gap-1.5">
+                              <button type="button" onClick={() => addBlock('paragraph', index)} className="bg-white hover:bg-primary hover:text-white border border-gray-200 text-primary text-[8px] font-bold uppercase tracking-wider px-2.5 py-1.5 rounded-lg transition-all">+ Para</button>
+                              <button type="button" onClick={() => addBlock('heading', index)} className="bg-white hover:bg-primary hover:text-white border border-gray-200 text-primary text-[8px] font-bold uppercase tracking-wider px-2.5 py-1.5 rounded-lg transition-all">+ Head</button>
+                              <button type="button" onClick={() => addBlock('quote', index)} className="bg-white hover:bg-primary hover:text-white border border-gray-200 text-primary text-[8px] font-bold uppercase tracking-wider px-2.5 py-1.5 rounded-lg transition-all">+ Quote</button>
+                              <button type="button" onClick={() => addBlock('image', index)} className="bg-white hover:bg-primary hover:text-white border border-gray-200 text-primary text-[8px] font-bold uppercase tracking-wider px-2.5 py-1.5 rounded-lg transition-all">+ Image</button>
+                              <button type="button" onClick={() => addBlock('tips', index)} className="bg-white hover:bg-primary hover:text-white border border-gray-200 text-primary text-[8px] font-bold uppercase tracking-wider px-2.5 py-1.5 rounded-lg transition-all">+ Tips</button>
+                              <button type="button" onClick={() => addBlock('list', index)} className="bg-white hover:bg-primary hover:text-white border border-gray-200 text-primary text-[8px] font-bold uppercase tracking-wider px-2.5 py-1.5 rounded-lg transition-all">+ List</button>
+                            </div>
+                          </div>
                         </div>
                       ))}
                     </div>

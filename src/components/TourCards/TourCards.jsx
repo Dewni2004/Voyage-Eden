@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import ItineraryCard from '../UI/ItineraryCard';
+import swipeHandImg from '../../assets/swipe-hand-transparent.png';
 import tour1 from '../../assets/L\'île des couleurs (8 jours).webp';
 import tour2 from '../../assets/Explorez le mythique Ceylan (12 jours).png';
 import tour3 from '../../assets/Le pays des épices (15 jours).png';
 import tour4 from '../../assets/Tour Card 4.png';
 
 const TourCards = () => {
+  const [hasScrolled, setHasScrolled] = useState(false);
+  const scrollRef = useRef(null);
+
+  const handleScroll = () => {
+    if (!hasScrolled && scrollRef.current) {
+      if (scrollRef.current.scrollLeft > 20) {
+        setHasScrolled(true);
+      }
+    }
+  };
+
   const tours = [
     {
       id: "static-1",
@@ -46,8 +58,8 @@ const TourCards = () => {
   ];
 
   return (
-    <section className="py-24 bg-white">
-      <div className="container mx-auto px-6">
+    <section className="py-10 md:py-16 bg-white relative">
+      <div className="container mx-auto px-6 relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="mb-4">Nos circuits proposés à personnaliser</h2>
@@ -57,8 +69,23 @@ const TourCards = () => {
           </p>
         </div>
 
+        {/* Mobile Swipe Hint Overlay */}
+        {!hasScrolled && tours.length > 1 && (
+          <div className="md:hidden absolute top-0 right-0 bottom-0 left-0 z-20 pointer-events-none transition-opacity duration-700 flex justify-center items-center">
+            <img 
+              src={swipeHandImg} 
+              alt="Swipe Gesture" 
+              className="w-16 h-16 object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)] animate-swipe-gesture"
+            />
+          </div>
+        )}
+
         {/* Grid */}
-        <div className="flex md:grid overflow-x-auto snap-x snap-mandatory hide-scrollbar md:overflow-visible pb-8 md:pb-0 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 -mx-6 px-6 md:mx-0 md:px-0">
+        <div 
+          ref={scrollRef}
+          onScroll={handleScroll}
+          className="flex md:grid overflow-x-auto snap-x snap-mandatory hide-scrollbar md:overflow-visible pb-8 md:pb-0 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 -mx-6 px-6 md:mx-0 md:px-0"
+        >
           {tours.map((tour) => (
             <div key={tour.id} className="min-w-[280px] w-[85vw] sm:w-[45vw] md:w-auto shrink-0 snap-center h-full">
               <ItineraryCard
@@ -68,6 +95,7 @@ const TourCards = () => {
                 icons={tour.icons}
                 description={tour.description}
                 price={tour.price}
+                duration={tour.duration}
                 tag="Populaire"
               />
             </div>
@@ -78,11 +106,11 @@ const TourCards = () => {
         <div className="mt-4 md:mt-16 text-center">
           <a 
             href="/itineraires" 
-            className="inline-flex items-center space-x-2 md:space-x-3 bg-primary text-white px-6 py-3 md:px-8 md:py-4 rounded-xl md:rounded-2xl text-sm md:text-base font-bold shadow-lg shadow-primary/20 hover:-translate-y-1 transition-all duration-300"
+            className="group inline-flex items-center space-x-2 md:space-x-3 btn-premium-primary px-6 py-2.5 md:px-8 md:py-3.5 rounded-xl md:rounded-2xl text-sm md:text-base font-bold"
           >
             <span>Découvrez nos autres itinéraires</span>
-            <div className="bg-white rounded-full p-1 md:p-1.5">
-              <svg className="w-4 h-4 md:w-5 md:h-5 text-primary" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+            <div className="bg-primary group-hover:bg-white rounded-full p-1 md:p-1.5 transition-colors duration-300 shadow-sm">
+              <svg className="w-4 h-4 md:w-5 md:h-5 text-white group-hover:text-primary transition-colors duration-300" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
               </svg>
             </div>

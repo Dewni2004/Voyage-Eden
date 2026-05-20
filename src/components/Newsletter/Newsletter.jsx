@@ -71,9 +71,7 @@ const Newsletter = () => {
                   <button 
                     type="submit"
                     disabled={status === 'loading'}
-                    className={`px-6 py-3 rounded-[1.2rem] font-bold text-xs transition-all duration-300 shadow-md active:scale-95 whitespace-nowrap ${
-                      status === 'loading' ? 'bg-white/50 cursor-not-allowed' : 'bg-white text-primary hover:bg-luxury hover:text-white'
-                    }`}
+                    className="px-6 py-2 rounded-[1.2rem] btn-premium-white whitespace-nowrap disabled:opacity-40 disabled:pointer-events-none"
                   >
                     {status === 'loading' ? 'Chargement...' : "S'abonner"}
                   </button>

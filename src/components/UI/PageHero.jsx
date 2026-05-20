@@ -15,7 +15,7 @@ const PageHero = ({ title, description, image, overlayOpacity = 'bg-black/40', b
 
       {/* Content */}
       <div className="relative z-10 text-center text-white px-6 mt-16">
-        <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-6 tracking-tight lowercase drop-shadow-lg">
+        <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-bold mb-6 tracking-tight lowercase drop-shadow-lg">
           {title}
         </h1>
         {description && (

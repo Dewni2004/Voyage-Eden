@@ -10,6 +10,7 @@ import diyaluma from '../../assets/blog-safari.png';
 
 const Destinations = () => {
   const [articles, setArticles] = useState([]);
+  const [totalCount, setTotalCount] = useState(0);
   const [loading, setLoading] = useState(true);
 
   const fallbackDestinations = [
@@ -32,6 +33,7 @@ const Destinations = () => {
   useEffect(() => {
     const fetchArticles = async () => {
       const data = await getArticles();
+      setTotalCount(data.length);
       setArticles(data.slice(0, 4));
       setLoading(false);
     };
@@ -45,22 +47,25 @@ const Destinations = () => {
   }
 
   return (
-    <section className="py-16 md:py-24 bg-white">
+    <section className="py-10 md:py-16 bg-white">
       <div className="container mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="mb-4">Le Journal d’Eden</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto text-lg font-light">
+          <p className="text-gray-600 max-w-2xl mx-auto text-lg font-light mb-3">
             Inspiration et découvertes du monde.
           </p>
+          <span className="inline-block bg-primary/5 text-primary text-[11px] px-3.5 py-1 rounded-full font-bold uppercase tracking-wider">
+            {totalCount} {totalCount <= 1 ? 'article publié' : 'articles publiés'}
+          </span>
         </div>
 
         {/* Masonry-style Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 h-auto lg:h-[700px]">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 h-auto lg:h-[700px]">
           {/* Large Card (Left) */}
           <Link
             to={articles.length >= 1 ? `/blog/${displayItems[0].id}` : '/travel-guide'}
-            className="lg:col-span-2 lg:row-span-2 relative rounded-[2rem] overflow-hidden group cursor-pointer h-[400px] lg:h-full"
+            className="col-span-1 lg:col-span-2 lg:row-span-2 relative rounded-2xl md:rounded-[1.75rem] overflow-hidden group cursor-pointer h-[180px] sm:h-[220px] lg:h-full hover:-translate-y-1 hover:shadow-xl transition-all duration-500"
           >
             <img
               src={displayItems[0].image}
@@ -68,15 +73,15 @@ const Destinations = () => {
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-            <div className="absolute bottom-10 left-10 text-white">
-              <h3 className="text-3xl font-bold mb-2 drop-shadow-lg">{displayItems[0].title}</h3>
+            <div className="absolute bottom-4 left-4 right-4 md:bottom-10 md:left-10 md:right-10 text-white">
+              <h3 className="text-[13px] xs:text-sm sm:text-lg md:text-3xl font-bold mb-1 md:mb-2 drop-shadow-lg leading-tight">{displayItems[0].title}</h3>
             </div>
           </Link>
 
           {/* Medium Card (Top Right) */}
           <Link
             to={articles.length >= 2 ? `/blog/${displayItems[1].id}` : '/travel-guide'}
-            className="lg:col-span-2 relative rounded-[2rem] overflow-hidden group cursor-pointer h-[300px] lg:h-full"
+            className="col-span-1 lg:col-span-2 relative rounded-2xl md:rounded-[1.75rem] overflow-hidden group cursor-pointer h-[180px] sm:h-[220px] lg:h-full hover:-translate-y-1 hover:shadow-xl transition-all duration-500"
           >
             <img
               src={displayItems[1].image}
@@ -84,15 +89,15 @@ const Destinations = () => {
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-            <div className="absolute bottom-8 left-8 text-white">
-              <h3 className="text-2xl font-bold mb-1 drop-shadow-lg">{displayItems[1].title}</h3>
+            <div className="absolute bottom-4 left-4 right-4 md:bottom-8 md:left-8 md:right-8 text-white">
+              <h3 className="text-[13px] xs:text-sm sm:text-lg md:text-2xl font-bold mb-1 drop-shadow-lg leading-tight">{displayItems[1].title}</h3>
             </div>
           </Link>
 
           {/* Small Card 1 (Bottom Right 1) */}
           <Link
             to={articles.length >= 3 ? `/blog/${displayItems[2].id}` : '/travel-guide'}
-            className="relative rounded-[2rem] overflow-hidden group cursor-pointer h-[250px] lg:h-full"
+            className="col-span-1 relative rounded-2xl md:rounded-[1.75rem] overflow-hidden group cursor-pointer h-[180px] sm:h-[220px] lg:h-full hover:-translate-y-1 hover:shadow-xl transition-all duration-500"
           >
             <img
               src={displayItems[2].image}
@@ -100,15 +105,15 @@ const Destinations = () => {
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-            <div className="absolute bottom-6 left-6 text-white">
-              <h3 className="text-xl font-bold mb-1 drop-shadow-lg">{displayItems[2].title}</h3>
+            <div className="absolute bottom-4 left-4 right-4 text-white">
+              <h3 className="text-[13px] xs:text-sm sm:text-lg md:text-xl font-bold mb-1 drop-shadow-lg leading-tight">{displayItems[2].title}</h3>
             </div>
           </Link>
 
           {/* Small Card 2 (Bottom Right 2) */}
           <Link
             to={articles.length >= 4 ? `/blog/${displayItems[3].id}` : '/travel-guide'}
-            className="relative rounded-[2rem] overflow-hidden group cursor-pointer h-[250px] lg:h-full"
+            className="col-span-1 relative rounded-2xl md:rounded-[1.75rem] overflow-hidden group cursor-pointer h-[180px] sm:h-[220px] lg:h-full hover:-translate-y-1 hover:shadow-xl transition-all duration-500"
           >
             <img
               src={displayItems[3].image}
@@ -116,8 +121,8 @@ const Destinations = () => {
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-            <div className="absolute bottom-6 left-6 text-white">
-              <h3 className="text-xl font-bold mb-1 drop-shadow-lg">{displayItems[3].title}</h3>
+            <div className="absolute bottom-4 left-4 right-4 text-white">
+              <h3 className="text-[13px] xs:text-sm sm:text-lg md:text-xl font-bold mb-1 drop-shadow-lg leading-tight">{displayItems[3].title}</h3>
             </div>
           </Link>
         </div>

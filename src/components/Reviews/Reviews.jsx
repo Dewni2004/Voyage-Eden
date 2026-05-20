@@ -1,10 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { getReviews } from '../../services/contentService';
+import swipeHandImg from '../../assets/swipe-hand-transparent.png';
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [hasScrolled, setHasScrolled] = useState(false);
+  const scrollRef = useRef(null);
+
+  const handleScroll = () => {
+    if (!hasScrolled && scrollRef.current) {
+      if (scrollRef.current.scrollLeft > 20) {
+        setHasScrolled(true);
+      }
+    }
+  };
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -19,16 +30,33 @@ const Reviews = () => {
 
 
   return (
-    <section className="py-24 bg-white">
-      <div className="max-w-[1600px] mx-auto px-6">
+    <section className="py-10 md:py-16 bg-white">
+      <div className="max-w-[1600px] mx-auto px-6 relative">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold text-primary mb-4">Ce que disent nos clients</h2>
-          <div className="w-20 h-1 bg-luxury mx-auto rounded-full"></div>
+          <h2 className="text-3xl md:text-5xl font-bold text-primary mb-3">Ce que disent nos clients</h2>
+          <span className="inline-block bg-primary/5 text-primary text-[11px] px-3.5 py-1 rounded-full font-bold uppercase tracking-wider">
+            {reviews.length} {reviews.length <= 1 ? 'avis client' : 'avis clients'}
+          </span>
         </div>
 
+        {/* Mobile Swipe Hint Overlay */}
+        {!hasScrolled && reviews.length > 1 && (
+          <div className="md:hidden absolute top-0 right-0 bottom-0 left-0 z-20 pointer-events-none transition-opacity duration-700 flex justify-center items-center">
+            <img 
+              src={swipeHandImg} 
+              alt="Swipe Gesture" 
+              className="w-16 h-16 object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)] animate-swipe-gesture"
+            />
+          </div>
+        )}
+
         {/* Grid/Slider */}
-        <div className="flex md:grid overflow-x-auto snap-x snap-mandatory hide-scrollbar md:overflow-visible pb-8 md:pb-0 grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 -mx-6 px-6 md:mx-0 md:px-0">
+        <div 
+          ref={scrollRef}
+          onScroll={handleScroll}
+          className="flex md:grid overflow-x-auto snap-x snap-mandatory hide-scrollbar md:overflow-visible pb-8 md:pb-0 grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 -mx-6 px-6 md:mx-0 md:px-0"
+        >
           {reviews.slice(0, 5).map((review) => (
             <div 
               key={review.id} 
@@ -72,19 +100,13 @@ const Reviews = () => {
         <div className="mt-6 md:mt-16 text-center">
           <Link 
             to="/reviews" 
-            className="inline-block relative group"
+            className="group inline-flex items-center gap-4 md:gap-6 btn-premium-primary px-6 py-2.5 md:px-12 md:py-3.5 rounded-xl md:rounded-2xl text-xs md:text-sm font-bold tracking-wider uppercase"
           >
-            {/* Glow effect */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-primary to-luxury rounded-xl md:rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
-            
-            {/* Main Button */}
-            <div className="relative px-6 py-3 md:px-12 md:py-5 bg-primary/90 backdrop-blur-xl border border-white/10 rounded-xl md:rounded-2xl flex items-center gap-4 md:gap-6 transition-all duration-300 group-hover:bg-primary shadow-2xl">
-              <span className="text-white font-bold tracking-wider uppercase text-xs md:text-sm">Voir tous les avis</span>
-              <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-white/10 flex items-center justify-center transition-transform duration-300 group-hover:rotate-45 group-hover:bg-luxury">
-                <svg className="w-3 h-3 md:w-4 md:h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </div>
+            <span>Voir tous les avis</span>
+            <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-primary group-hover:bg-white flex items-center justify-center transition-all duration-300 shadow-sm">
+              <svg className="w-3 h-3 md:w-4 md:h-4 text-white group-hover:text-primary transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
             </div>
           </Link>
         </div>

@@ -31,6 +31,17 @@ const ItineraryDetail = () => {
     fetchItinerary();
   }, [id]);
 
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isModalOpen]);
+
   if (loading) return <div className="min-h-screen flex items-center justify-center text-primary font-bold">Chargement des détails du voyage...</div>;
   if (!itinerary) return <div className="min-h-screen flex items-center justify-center text-primary font-bold">Voyage non trouvé</div>;
 
@@ -127,8 +138,11 @@ const ItineraryDetail = () => {
                   className={`relative group cursor-pointer transition-all duration-300 ${activeDay === day.id ? 'scale-110' : 'hover:scale-105 opacity-70 hover:opacity-100'}`}
                   onClick={() => { 
                     setActiveDay(day.id); 
-                    if (window.innerWidth < 1024) setIsModalOpen(true); 
-                    document.getElementById('itinerary-section')?.scrollIntoView({ behavior: 'smooth' });
+                    if (window.innerWidth < 1024) {
+                      setIsModalOpen(true); 
+                    } else {
+                      document.getElementById('itinerary-section')?.scrollIntoView({ behavior: 'smooth' });
+                    }
                   }}
                 >
                   <div className={`w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden border-2 transition-all duration-300 ${activeDay === day.id ? 'border-primary shadow-lg' : 'border-white shadow-md'}`}>
@@ -295,7 +309,7 @@ const ItineraryDetail = () => {
             {/* Next Day Button */}
             <button 
               onClick={() => activeDay < days.length && setActiveDay(activeDay + 1)}
-              className="mt-12 w-full bg-primary hover:bg-luxury text-white font-bold py-5 rounded-2xl shadow-xl transition-all"
+              className="mt-12 w-full btn-premium-primary py-4 rounded-2xl shadow-sm disabled:opacity-40 disabled:pointer-events-none"
               disabled={activeDay === days.length}
             >
               {activeDay === days.length ? 'Tour terminé' : 'Jour suivant'}
@@ -308,17 +322,25 @@ const ItineraryDetail = () => {
       {isModalOpen && (
         <div className="fixed inset-0 z-[100] flex items-end justify-center lg:hidden">
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsModalOpen(false)}></div>
-          <div className="relative bg-white w-full max-h-[90vh] overflow-y-auto rounded-t-[40px] shadow-2xl p-8">
-            <button onClick={() => setIsModalOpen(false)} className="absolute top-6 right-6 w-10 h-10 bg-black/10 rounded-full flex items-center justify-center">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
-            </button>
-            <div className="h-48 rounded-[32px] overflow-hidden mb-8">
+          <div className="relative bg-white w-full max-h-[85dvh] overflow-y-auto rounded-t-[40px] shadow-2xl p-6 pb-10">
+            {/* Drag Handle */}
+            <div className="w-12 h-1.5 bg-gray-200 rounded-full mx-auto mb-6" />
+            
+            {/* Image & Close Button Overlay */}
+            <div className="relative h-44 rounded-3xl overflow-hidden mb-6 shadow-md">
               <img src={days[activeDay - 1].image} alt="" className="w-full h-full object-cover" />
+              <button 
+                onClick={() => setIsModalOpen(false)} 
+                className="absolute top-4 right-4 w-9 h-9 bg-black/40 backdrop-blur-md text-white rounded-full flex items-center justify-center transition-all hover:bg-black/60"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 18L18 6M6 6l12 12" /></svg>
+              </button>
             </div>
+
             <span className="text-luxury text-[10px] font-bold uppercase tracking-widest mb-2 block">{days[activeDay - 1].displayLabel || `Jour ${days[activeDay - 1].id}`}</span>
-            <h3 className="text-primary text-2xl font-bold mb-4">{days[activeDay - 1].location}</h3>
-            <p className="text-gray-700 mb-8">{days[activeDay - 1].description}</p>
-            <button onClick={() => { if (activeDay < days.length) setActiveDay(activeDay + 1); else setIsModalOpen(false); }} className="w-full bg-primary text-white font-bold py-4 rounded-2xl">
+            <h3 className="text-primary text-2xl font-bold mb-3">{days[activeDay - 1].location}</h3>
+            <p className="text-gray-600 text-[15px] leading-relaxed mb-6">{days[activeDay - 1].description}</p>
+            <button onClick={() => { if (activeDay < days.length) setActiveDay(activeDay + 1); else setIsModalOpen(false); }} className="w-full btn-premium-primary py-3.5 rounded-2xl shadow-sm">
               {activeDay === days.length ? 'Fermer' : 'Jour suivant'}
             </button>
           </div>

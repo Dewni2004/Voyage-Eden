@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../assets/French-t.png';
+import logoColor from '../../assets/French-t.png';
+import logoWhiteText from '../../assets/French-t-white-text.png';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -19,8 +20,8 @@ const Navbar = () => {
     { name: 'Itinéraires', path: '/itineraires' },
     { name: 'À propos de nous', path: '/about' },
     { name: 'Guide de Voyage', path: '/travel-guide' },
-    { name: 'Contactez-nous', path: '/contact' },
     { name: 'Avis', path: '/reviews' },
+    { name: 'Contactez-nous', path: '/contact' },
   ];
 
   const flags = [
@@ -35,12 +36,15 @@ const Navbar = () => {
         }`}
     >
       <div className='container mx-auto px-6 flex justify-between items-center'>
-        {/* Logo Section */}
-        <Link to="/" className='flex items-center cursor-pointer' onClick={() => setIsMenuOpen(false)}>
+        <Link
+          to="/"
+          className="flex items-center cursor-pointer transition-all duration-300"
+          onClick={() => setIsMenuOpen(false)}
+        >
           <img
-            src={logo}
+            src={!isScrolled && !isMenuOpen ? logoWhiteText : logoColor}
             alt="Eden Travels Logo"
-            className="h-12 md:h-20 w-auto object-contain transition-all duration-300"
+            className="h-16 md:h-20 w-auto object-contain transition-all duration-300"
           />
         </Link>
 
@@ -98,7 +102,7 @@ const Navbar = () => {
           }`}
       >
         <div className='flex items-center justify-between px-6 py-6 border-b'>
-          <img src={logo} alt="Logo" className="h-12 w-auto object-contain" />
+          <img src={logoColor} alt="Logo" className="h-16 w-auto object-contain" />
           <button
             className='text-primary'
             onClick={() => setIsMenuOpen(false)}

@@ -20,7 +20,7 @@ const Hero = () => {
 
       {/* Content */}
       <div className="container mx-auto px-6 relative z-10 text-center text-white">
-        <h1 className="max-w-4xl mx-auto mb-6 text-[32px] sm:text-4xl md:text-6xl lg:text-7xl font-bold leading-tight drop-shadow-lg">
+        <h1 className="home-hero-title max-w-4xl mx-auto mb-6 text-[32px] sm:text-4xl md:text-6xl lg:text-7xl font-bold leading-tight drop-shadow-lg">
           Bienvenue au <br />
           <span className="text-luxury">Sri Lanka Voyage Eden</span>
         </h1>
@@ -32,13 +32,13 @@ const Hero = () => {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
           <button 
             onClick={() => navigate('/itineraires')}
-            className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-white px-8 md:px-10 py-3.5 md:py-4 rounded-full text-base md:text-lg font-semibold transition-all shadow-xl shadow-primary/20"
+            className="w-full sm:w-auto btn-premium-white px-8 md:px-10 py-3 md:py-3.5 rounded-full text-base md:text-lg font-semibold"
           >
             Explorer les forfaits
           </button>
           <button 
             onClick={() => navigate('/contact')}
-            className="w-full sm:w-auto bg-white/10 backdrop-blur-md text-white border border-white/30 hover:bg-white/20 px-8 md:px-10 py-3.5 md:py-4 rounded-full text-base md:text-lg font-semibold transition-all"
+            className="w-full sm:w-auto border-2 border-white/40 bg-transparent text-white hover:bg-white/10 transition-all duration-300 transform active:scale-95 px-8 md:px-10 py-3 md:py-3.5 rounded-full text-base md:text-lg font-semibold"
           >
             Contactez Nous
           </button>
