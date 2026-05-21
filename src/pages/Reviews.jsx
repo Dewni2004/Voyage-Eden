@@ -248,9 +248,14 @@ const Reviews = () => {
             href="https://www.youtube.com/@srilankaviajeseden" 
             target="_blank" 
             rel="noreferrer"
-            className="inline-block btn-premium-primary px-10 py-3.5 rounded-2xl text-base shadow-sm"
+            className="group inline-flex items-center gap-2 sm:gap-3 border-[3px] border-primary bg-transparent text-primary hover:bg-primary hover:text-white px-5 py-2.5 sm:px-8 sm:py-3 rounded-full text-xs sm:text-sm md:text-base font-bold shadow-sm hover:shadow-md transition-all duration-300 transform active:scale-95"
           >
-            Voir toutes les vidéos
+            <span>Voir toutes les vidéos</span>
+            <div className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 rounded-full bg-primary/5 group-hover:bg-white flex items-center justify-center transition-all duration-300 transform group-hover:translate-x-1.5 shadow-sm">
+              <svg className="w-2.5 h-2.5 sm:w-3 h-3 md:w-4 md:h-4 text-primary transition-colors duration-300" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
           </a>
         </div>
       </section>

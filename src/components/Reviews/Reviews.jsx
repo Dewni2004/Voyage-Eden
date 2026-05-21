@@ -30,10 +30,10 @@ const Reviews = () => {
 
 
   return (
-    <section className="py-10 md:py-16 bg-white">
+    <section className="py-8 md:py-16 bg-white">
       <div className="max-w-[1600px] mx-auto px-6 relative">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-8 md:mb-16">
           <h2 className="text-3xl md:text-5xl font-bold text-primary mb-3">Ce que disent nos clients</h2>
           <span className="inline-block bg-primary/5 text-primary text-[11px] px-3.5 py-1 rounded-full font-bold uppercase tracking-wider">
             {reviews.length} {reviews.length <= 1 ? 'avis client' : 'avis clients'}
@@ -100,12 +100,12 @@ const Reviews = () => {
         <div className="mt-6 md:mt-16 text-center">
           <Link 
             to="/reviews" 
-            className="group inline-flex items-center gap-4 md:gap-6 btn-premium-primary px-6 py-2.5 md:px-12 md:py-3.5 rounded-xl md:rounded-2xl text-xs md:text-sm font-bold tracking-wider uppercase"
+            className="group inline-flex items-center gap-2 sm:gap-3 border-[3px] border-primary bg-transparent text-primary hover:bg-primary hover:text-white px-5 py-2.5 sm:px-8 sm:py-3 rounded-full text-[10px] sm:text-xs md:text-sm font-bold tracking-wider uppercase shadow-sm hover:shadow-md transition-all duration-300 transform active:scale-95"
           >
             <span>Voir tous les avis</span>
-            <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-primary group-hover:bg-white flex items-center justify-center transition-all duration-300 shadow-sm">
-              <svg className="w-3 h-3 md:w-4 md:h-4 text-white group-hover:text-primary transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            <div className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 rounded-full bg-primary/5 group-hover:bg-white flex items-center justify-center transition-all duration-300 transform group-hover:translate-x-1.5 shadow-sm">
+              <svg className="w-2.5 h-2.5 sm:w-3 h-3 md:w-4 md:h-4 text-primary transition-colors duration-300" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
               </svg>
             </div>
           </Link>

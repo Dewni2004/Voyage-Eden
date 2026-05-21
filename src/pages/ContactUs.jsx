@@ -202,13 +202,13 @@ const ContactUs = () => {
                     href="https://wa.me/94771470150"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full flex items-center justify-center gap-2 border-2 border-green-500 bg-transparent text-green-600 hover:bg-green-500 hover:text-white transition-all duration-300 transform active:scale-95 py-3.5 px-6 rounded-2xl font-bold"
+                    className="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba59] text-white border-2 border-[#25D366] hover:border-[#20ba59] transition-all duration-300 transform active:scale-95 py-3 px-4 sm:py-3.5 sm:px-6 rounded-2xl font-bold text-sm sm:text-base"
                   >
                     Message WhatsApp
                   </a>
                   <a 
                     href="mailto:srilankaedentravels@gmail.com"
-                    className="w-full flex items-center justify-center gap-2 btn-premium-primary py-3.5 px-6 rounded-2xl"
+                    className="w-full flex items-center justify-center gap-2 bg-primary hover:bg-[#1a355c] text-white border-2 border-primary hover:border-[#1a355c] transition-all duration-300 transform active:scale-95 py-3 px-4 sm:py-3.5 sm:px-6 rounded-2xl font-bold text-sm sm:text-base"
                   >
                     Envoyer un e-mail
                   </a>

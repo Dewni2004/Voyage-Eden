@@ -45,10 +45,10 @@ const WhyChooseUs = () => {
   ];
 
   return (
-    <section className="py-10 md:py-16 bg-white">
+    <section className="py-8 md:py-16 bg-white">
       <div className="container mx-auto px-6">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-8 md:mb-16">
           <h2 className="mb-4">Pourquoi voyager avec nous ?</h2>
           <p className="text-gray-600 max-w-2xl mx-auto text-lg font-light">
             Nous sommes fiers de proposer des expériences de voyage authentiques et personnalisées.
@@ -60,13 +60,15 @@ const WhyChooseUs = () => {
           {features.map((feature) => (
             <div 
               key={feature.id} 
-              className="bg-white p-4 sm:p-10 rounded-2xl sm:rounded-[1.75rem] border border-primary/20 shadow-[0_15px_35px_-5px_rgba(30,64,111,0.06)] text-center flex flex-col justify-between"
+              className="group bg-white p-4 sm:p-10 rounded-2xl sm:rounded-[1.75rem] border border-primary/20 shadow-[0_15px_35px_-5px_rgba(30,64,111,0.06)] text-center flex flex-col justify-between transition-all duration-300"
             >
               <div>
                 <div className="mb-4 sm:mb-6 flex justify-center">
-                  <div className="w-10 h-10 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-primary border border-primary flex items-center justify-center text-white shadow-md shadow-primary/15">
-                    <div className="scale-75 sm:scale-100 flex items-center justify-center">
-                      {feature.icon}
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-primary/5 flex items-center justify-center transition-all duration-300 transform group-hover:scale-110 group-hover:bg-primary/10">
+                    <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-primary text-white flex items-center justify-center shadow-md">
+                      <div className="scale-75 sm:scale-100 flex items-center justify-center">
+                        {feature.icon}
+                      </div>
                     </div>
                   </div>
                 </div>

@@ -47,10 +47,10 @@ const Destinations = () => {
   }
 
   return (
-    <section className="py-10 md:py-16 bg-white">
+    <section className="py-8 md:py-16 bg-white">
       <div className="container mx-auto px-6">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-8 md:mb-16">
           <h2 className="mb-4">Le Journal d’Eden</h2>
           <p className="text-gray-600 max-w-2xl mx-auto text-lg font-light mb-3">
             Inspiration et découvertes du monde.
