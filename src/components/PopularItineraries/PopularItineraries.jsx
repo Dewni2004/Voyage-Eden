@@ -111,7 +111,7 @@ const PopularItineraries = ({ title, id, itineraries, isDark, isGreen }) => {
       <div className="container mx-auto px-6 relative z-10">
         {/* Header */}
         <div className="flex items-center justify-between mb-16">
-          <h2 className={`text-3xl font-bold lowercase tracking-tight ${isDark ? 'text-luxury' : isGreen ? 'text-green-600' : 'text-primary'}`}>{title}</h2>
+          <h2 className={`text-3xl font-bold capitalize tracking-tight ${isDark ? 'text-luxury' : isGreen ? 'text-green-600' : 'text-primary'}`}>{title}</h2>
           <div className={`flex-grow ml-12 h-[1px] hidden md:block ${isDark ? 'bg-luxury/40' : isGreen ? 'bg-green-600/30' : 'bg-gray-200'}`}></div>
         </div>
 
@@ -170,10 +170,10 @@ const PopularItineraries = ({ title, id, itineraries, isDark, isGreen }) => {
                   {item.description}
                 </p>
 
-                <div className={`pt-6 border-t flex items-center justify-between ${isGreen || isDark ? 'border-white/10' : 'border-gray-100'}`}>
+                <div className={`pt-6 border-t flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${isGreen || isDark ? 'border-white/10' : 'border-gray-100'}`}>
                   <div className="flex flex-col">
                     <span className={`font-bold text-lg ${isGreen || isDark ? 'text-white' : 'text-primary'}`}>
-                      {item.price?.toString().toLowerCase().includes('usd') ? item.price : `USD ${item.price}`}
+                      €{item.price}
                       <span className={`${isGreen || isDark ? 'text-white/50' : 'text-gray-400'} text-[10px] font-normal uppercase ml-1`}>/ Person</span>
                     </span>
                   </div>
@@ -184,10 +184,13 @@ const PopularItineraries = ({ title, id, itineraries, isDark, isGreen }) => {
                         ? 'border-2 border-white bg-transparent text-white hover:bg-white hover:text-green-800' 
                         : isDark 
                           ? 'border-2 border-white bg-transparent text-white hover:bg-white hover:text-primary' 
-                          : 'btn-premium-primary'
-                    } px-6 py-1.5 rounded-xl text-sm font-bold transition-all duration-300`}
+                          : 'border-2 border-primary bg-transparent text-primary hover:bg-primary hover:text-white'
+                    } w-full sm:w-auto px-6 py-2 rounded-xl text-sm font-bold transition-all duration-300 flex items-center justify-center gap-2 transform hover:-translate-y-0.5 group/btn`}
                   >
                     Reserve Now
+                    <svg className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
                   </button>
                 </div>
               </div>

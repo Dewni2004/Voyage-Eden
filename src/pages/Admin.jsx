@@ -37,7 +37,7 @@ const Admin = () => {
     duration: '',
     group: 'Private',
     effort: 'Moderate',
-    category: 'popular',
+    category: 'Popular',
     icons: '5 Star, Half Board, Car',
     seo_title: '',
     seo_description: '',
@@ -181,7 +181,7 @@ const Admin = () => {
       duration: '', 
       group: 'Private', 
       effort: 'Moderate', 
-      category: 'popular', 
+      category: 'Popular', 
       icons: '5 Star, Half Board, Car',
       seo_title: '',
       seo_description: '',
@@ -252,7 +252,7 @@ const Admin = () => {
       duration: itinerary.duration || '',
       group: itinerary.group || 'Private',
       effort: itinerary.effort || 'Moderate',
-      category: itinerary.category || 'popular',
+      category: itinerary.category || 'Popular',
       icons: Array.isArray(itinerary.icons) ? itinerary.icons.join(', ') : (itinerary.icons || '5 Star, Half Board, Car'),
       seo_title: itinerary.seo_title || '',
       seo_description: itinerary.seo_description || '',
@@ -822,7 +822,20 @@ const Admin = () => {
                     <div className="space-y-2">
                       <label className={labelClass}>Category</label>
                       <select value={articleForm.category} onChange={(e) => setArticleForm({...articleForm, category: e.target.value})} className={inputClass}>
-                        <option>History</option><option>Nature</option><option>Culture</option><option>Adventure</option><option>Luxury</option>
+                        <option value="History">History</option>
+                        <option value="Nature">Nature</option>
+                        <option value="Culture">Culture</option>
+                        <option value="Adventure">Adventure</option>
+                        <option value="Luxury">Luxury</option>
+                        <option value="Honeymoon">Honeymoon</option>
+                        <option value="Family">Family</option>
+                        <option value="Golf">Golf</option>
+                        <option value="Surf">Surf</option>
+                        <option value="Discovery">Discovery</option>
+                        <option value="Waterfalls">Waterfalls</option>
+                        <option value="Beach">Beach</option>
+                        <option value="Islands">Islands</option>
+                        <option value="Popular">Popular</option>
                       </select>
                     </div>
                   </div>
@@ -1115,18 +1128,22 @@ const Admin = () => {
                       <input type="text" required value={itineraryForm.title} onChange={(e) => setItineraryForm({...itineraryForm, title: e.target.value})} className={inputClass} placeholder="Ceylon Royal Heritage..." />
                     </div>
                     <div className="space-y-2">
-                      <label className={labelClass}>Category Slug</label>
+                      <label className={labelClass}>Category</label>
                       <select value={itineraryForm.category} onChange={(e) => setItineraryForm({...itineraryForm, category: e.target.value})} className={inputClass}>
-                        <option value="popular">Popular</option>
-                        <option value="honeymoon">Honeymoon</option>
-                        <option value="family">Family</option>
-                        <option value="luxury">Luxury</option>
-                        <option value="golf">Golf</option>
-                        <option value="surf">Surf & Dive</option>
-                        <option value="adventure">Adventure</option>
-                        <option value="pererahera">Esela Perahera</option>
-                        <option value="8days">8 Days Trips</option>
-                        <option value="interests">Thématiques</option>
+                        <option value="History">History</option>
+                        <option value="Nature">Nature</option>
+                        <option value="Culture">Culture</option>
+                        <option value="Adventure">Adventure</option>
+                        <option value="Luxury">Luxury</option>
+                        <option value="Honeymoon">Honeymoon</option>
+                        <option value="Family">Family</option>
+                        <option value="Golf">Golf</option>
+                        <option value="Surf">Surf</option>
+                        <option value="Discovery">Discovery</option>
+                        <option value="Waterfalls">Waterfalls</option>
+                        <option value="Beach">Beach</option>
+                        <option value="Islands">Islands</option>
+                        <option value="Popular">Popular</option>
                       </select>
                     </div>
                   </div>

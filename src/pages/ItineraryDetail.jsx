@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getItineraries } from '../services/contentService';
-import { staticItineraries } from '../data/staticItineraries';
+
 import { Helmet } from 'react-helmet-async';
 import IncludedExcluded from '../components/IncludedExcluded/IncludedExcluded';
 import PaymentPolicy from '../components/PaymentPolicy/PaymentPolicy';
@@ -19,7 +19,7 @@ const ItineraryDetail = () => {
     const fetchItinerary = async () => {
       try {
         const dynamicData = await getItineraries();
-        const all = [...staticItineraries, ...dynamicData];
+        const all = dynamicData;
         // ID can be string or number depending on source
         const found = all.find(it => it.id.toString() === id.toString());
         setItinerary(found);

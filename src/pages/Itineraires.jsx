@@ -4,18 +4,17 @@ import ItineraryCategories from '../components/ItineraryCategories/ItineraryCate
 import PopularItineraries from '../components/PopularItineraries/PopularItineraries';
 import Newsletter from '../components/Newsletter/Newsletter';
 import { getItineraries } from '../services/contentService';
-import { staticItineraries } from '../data/staticItineraries';
+
 
 const Itineraires = () => {
-  const [itineraries, setItineraries] = useState(staticItineraries);
+  const [itineraries, setItineraries] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetch = async () => {
       try {
         const dynamicData = await getItineraries();
-        // Merge static and dynamic, dynamic takes priority if ID matches (though unlikely with Firestore IDs)
-        setItineraries([...staticItineraries, ...dynamicData]);
+        setItineraries(dynamicData);
       } catch (e) {
         console.error(e);
       }
@@ -24,7 +23,7 @@ const Itineraires = () => {
     fetch();
   }, []);
 
-  const getByCategory = (category) => itineraries.filter(it => it.category === category);
+  const getByCategory = (category) => itineraries.filter(it => it.category?.toLowerCase() === category.toLowerCase());
 
   return (
     <div>
