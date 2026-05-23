@@ -349,7 +349,7 @@ const ItineraryDetail = () => {
 
       <IncludedExcluded />
       <PaymentPolicy />
-      <BookingCard />
+      <BookingCard price={itinerary.price} itineraryTitle={itinerary.title} />
     </div>
   );
 };

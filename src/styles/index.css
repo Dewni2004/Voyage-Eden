@@ -93,13 +93,13 @@ p, span, li, a, button {
 @layer components {
   /* Premium Outlined Button Styles (No Gold) */
   .btn-premium-primary {
-    @apply border-2 border-primary bg-transparent text-primary hover:bg-primary hover:text-white transition-all duration-300 shadow-sm transform active:scale-95 font-bold;
+    @apply border border-primary bg-transparent text-primary hover:bg-primary hover:text-white transition-all duration-300 shadow-sm transform active:scale-95 font-bold;
   }
   .btn-premium-secondary {
-    @apply border-2 border-primary/40 bg-transparent text-primary/80 hover:bg-primary/10 hover:text-primary hover:border-primary transition-all duration-300 transform active:scale-95 font-bold;
+    @apply border border-primary/40 bg-transparent text-primary/80 hover:bg-primary/10 hover:text-primary hover:border-primary transition-all duration-300 transform active:scale-95 font-bold;
   }
   .btn-premium-white {
-    @apply border-2 border-white bg-transparent text-white hover:bg-white hover:text-primary transition-all duration-300 transform active:scale-95 font-bold;
+    @apply border border-white bg-transparent text-white hover:bg-white hover:text-primary transition-all duration-300 transform active:scale-95 font-bold;
   }
 }
 

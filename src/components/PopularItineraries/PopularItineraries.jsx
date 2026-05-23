@@ -181,10 +181,10 @@ const PopularItineraries = ({ title, id, itineraries, isDark, isGreen }) => {
                     onClick={() => navigate(`/itinerary/${item.id}`)}
                     className={`${
                       isGreen 
-                        ? 'border-2 border-white bg-transparent text-white hover:bg-white hover:text-green-800' 
+                        ? 'border border-white bg-transparent text-white hover:bg-white hover:text-green-800' 
                         : isDark 
-                          ? 'border-2 border-white bg-transparent text-white hover:bg-white hover:text-primary' 
-                          : 'border-2 border-primary bg-transparent text-primary hover:bg-primary hover:text-white'
+                          ? 'border border-white bg-transparent text-white hover:bg-white hover:text-primary' 
+                          : 'border border-primary bg-transparent text-primary hover:bg-primary hover:text-white'
                     } w-full sm:w-auto px-6 py-2 rounded-xl text-sm font-bold transition-all duration-300 flex items-center justify-center gap-2 transform hover:-translate-y-0.5 group/btn`}
                   >
                     Reserve Now

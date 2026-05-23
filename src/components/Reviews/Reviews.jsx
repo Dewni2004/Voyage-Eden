@@ -100,7 +100,7 @@ const Reviews = () => {
         <div className="mt-6 md:mt-16 text-center">
           <Link 
             to="/reviews" 
-            className="group inline-flex items-center gap-2 sm:gap-3 border-[3px] border-primary bg-transparent text-primary hover:bg-primary hover:text-white px-5 py-2.5 sm:px-8 sm:py-3 rounded-full text-[10px] sm:text-xs md:text-sm font-bold tracking-wider uppercase shadow-sm hover:shadow-md transition-all duration-300 transform active:scale-95"
+            className="group inline-flex items-center gap-2 sm:gap-3 border border-primary bg-transparent text-primary hover:bg-primary hover:text-white px-5 py-2.5 sm:px-8 sm:py-3 rounded-full text-[10px] sm:text-xs md:text-sm font-bold tracking-wider uppercase shadow-sm hover:shadow-md transition-all duration-300 transform active:scale-95"
           >
             <span>Voir tous les avis</span>
             <div className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 rounded-full bg-primary/5 group-hover:bg-white flex items-center justify-center transition-all duration-300 transform group-hover:translate-x-1.5 shadow-sm">

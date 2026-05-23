@@ -112,7 +112,7 @@ const ItineraryCard = ({
   const iconTextColor = isGreen || isDark ? 'text-white/90' : 'text-gray-500';
 
   return (
-    <div className={`${bgClass} rounded-[1.75rem] overflow-hidden transition-all duration-500 border group flex flex-col h-full`}>
+    <div className={`${bgClass} rounded-[1.75rem] overflow-hidden transition-all duration-500 border group flex flex-col h-full w-full`}>
       <div className="h-64 overflow-hidden relative flex-shrink-0">
         <img 
           src={image || 'https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&q=80&w=800'} 
@@ -153,9 +153,9 @@ const ItineraryCard = ({
             onClick={() => navigate(`/itinerary/${id}`)}
             className={`${
               isGreen 
-                ? 'border-2 border-white bg-transparent text-white hover:bg-white hover:text-green-800' 
+                ? 'border border-white bg-transparent text-white hover:bg-white hover:text-green-800' 
                 : isDark 
-                  ? 'border-2 border-white bg-transparent text-white hover:bg-white hover:text-primary' 
+                  ? 'border border-white bg-transparent text-white hover:bg-white hover:text-primary' 
                   : 'btn-premium-primary'
             } px-6 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap min-w-[120px] text-center`}
           >

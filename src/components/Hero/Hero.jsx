@@ -32,13 +32,13 @@ const Hero = () => {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
           <button 
             onClick={() => navigate('/itineraires')}
-            className="w-full sm:w-auto btn-premium-white px-8 md:px-10 py-3 md:py-3.5 rounded-full text-base md:text-lg font-semibold"
+            className="w-full sm:w-auto border border-white bg-transparent text-white hover:bg-white hover:text-primary transition-all duration-300 transform active:scale-95 px-8 md:px-10 py-3 md:py-3.5 rounded-full text-base md:text-lg font-semibold"
           >
             Explorer les forfaits
           </button>
           <button 
             onClick={() => navigate('/contact')}
-            className="w-full sm:w-auto border-2 border-white/40 bg-transparent text-white hover:bg-white/10 transition-all duration-300 transform active:scale-95 px-8 md:px-10 py-3 md:py-3.5 rounded-full text-base md:text-lg font-semibold"
+            className="w-full sm:w-auto border border-white bg-transparent text-white hover:bg-white hover:text-primary transition-all duration-300 transform active:scale-95 px-8 md:px-10 py-3 md:py-3.5 rounded-full text-base md:text-lg font-semibold"
           >
             Contactez Nous
           </button>
