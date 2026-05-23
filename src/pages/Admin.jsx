@@ -51,7 +51,7 @@ const Admin = () => {
   });
 
   const [itineraryDays, setItineraryDays] = useState([
-    { id: 1, location: '', image: '', description: '', highlights: '', accommodation: '', meals: 'Breakfast & Dinner', travel: '', coords: { x: 150, y: 225 } }
+    { id: 1, location: '', image: '', description: '', highlights: '', accommodation: '', accommodationImages: ['', '', '', ''], meals: 'Breakfast & Dinner', travel: '', coords: { x: 150, y: 225 } }
   ]);
 
   const [articleForm, setArticleForm] = useState({
@@ -187,7 +187,7 @@ const Admin = () => {
       seo_description: '',
       seo_keywords: ''
     });
-    setItineraryDays([{ id: 1, location: '', image: '', description: '', highlights: '', accommodation: '', meals: 'Breakfast & Dinner', travel: '', coords: { x: 150, y: 225 } }]);
+    setItineraryDays([{ id: 1, location: '', image: '', description: '', highlights: '', accommodation: '', accommodationImages: ['', '', '', ''], meals: 'Breakfast & Dinner', travel: '', coords: { x: 150, y: 225 } }]);
     setEditingItineraryId(null);
   };
 
@@ -258,7 +258,7 @@ const Admin = () => {
       seo_description: itinerary.seo_description || '',
       seo_keywords: itinerary.seo_keywords || ''
     });
-    setItineraryDays(itinerary.days || [{ id: 1, location: '', image: '', description: '', highlights: '', accommodation: '', meals: 'Breakfast & Dinner', travel: '', coords: { x: 150, y: 225 } }]);
+    setItineraryDays(itinerary.days?.map(d => ({...d, accommodationImages: d.accommodationImages || ['', '', '', '']})) || [{ id: 1, location: '', image: '', description: '', highlights: '', accommodation: '', accommodationImages: ['', '', '', ''], meals: 'Breakfast & Dinner', travel: '', coords: { x: 150, y: 225 } }]);
     setEditingItineraryId(itinerary.id);
     setActiveTab('new-itinerary');
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1189,7 +1189,7 @@ const Admin = () => {
                   <div className="pt-10 border-t border-gray-100">
                     <div className="flex items-center justify-between mb-12">
                       <h3 className="text-2xl font-serif font-bold text-primary">Day-by-Day Architect</h3>
-                      <button type="button" onClick={() => setItineraryDays([...itineraryDays, { id: itineraryDays.length + 1, location: '', image: '', description: '', highlights: '', accommodation: '', meals: 'Breakfast & Dinner', travel: '', coords: { x: 150, y: 225 } }])} className="bg-primary text-white text-[10px] font-bold uppercase tracking-widest px-6 py-3 rounded-[18px] shadow-lg shadow-primary/10 hover:scale-105 active:scale-95 transition-all">+ Add New Day</button>
+                      <button type="button" onClick={() => setItineraryDays([...itineraryDays, { id: itineraryDays.length + 1, location: '', image: '', description: '', highlights: '', accommodation: '', accommodationImages: ['', '', '', ''], meals: 'Breakfast & Dinner', travel: '', coords: { x: 150, y: 225 } }])} className="bg-primary text-white text-[10px] font-bold uppercase tracking-widest px-6 py-3 rounded-[18px] shadow-lg shadow-primary/10 hover:scale-105 active:scale-95 transition-all">+ Add New Day</button>
                     </div>
                     
                     <div className="space-y-20">
@@ -1260,6 +1260,26 @@ const Admin = () => {
                                 newDays[idx].accommodation = e.target.value;
                                 setItineraryDays(newDays);
                               }} className="w-full bg-gray-50/50 border border-gray-100 rounded-2xl py-4 px-6 outline-none focus:ring-4 focus:ring-primary/5 transition-all font-medium text-primary shadow-inner" />
+                            </div>
+                          </div>
+
+                          <div className="space-y-2 mt-8">
+                            <label className={labelClass}>Accommodation Gallery (4 Images)</label>
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                              {[0, 1, 2, 3].map((imgIdx) => (
+                                <ImageUploadField 
+                                  key={imgIdx}
+                                  label={`Image ${imgIdx + 1}`} 
+                                  value={day.accommodationImages?.[imgIdx] || ''} 
+                                  onChange={(url) => {
+                                    const newDays = [...itineraryDays];
+                                    if (!newDays[idx].accommodationImages) newDays[idx].accommodationImages = ['', '', '', ''];
+                                    newDays[idx].accommodationImages[imgIdx] = url;
+                                    setItineraryDays(newDays);
+                                  }} 
+                                  folder="itineraries/hotels"
+                                />
+                              ))}
                             </div>
                           </div>
 

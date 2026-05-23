@@ -14,6 +14,7 @@ const ItineraryDetail = () => {
   const [loading, setLoading] = useState(true);
   const [activeDay, setActiveDay] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedGalleryImage, setSelectedGalleryImage] = useState(null);
 
   useEffect(() => {
     const fetchItinerary = async () => {
@@ -295,14 +296,29 @@ const ItineraryDetail = () => {
               </div>
 
               {/* Accommodation */}
-              <div className="flex items-center gap-6 group/item">
-                <div className="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center flex-shrink-0 shadow-lg">
-                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+              <div className="flex flex-col gap-4 group/item">
+                <div className="flex items-center gap-6">
+                  <div className="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center flex-shrink-0 shadow-lg">
+                    <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+                  </div>
+                  <div>
+                    <h4 className="text-primary font-bold text-sm uppercase tracking-wider mb-0.5">Hébergement</h4>
+                    <p className="text-gray-500 text-xs font-medium leading-relaxed">{days[activeDay - 1].accommodation}</p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="text-primary font-bold text-sm uppercase tracking-wider mb-0.5">Hébergement</h4>
-                  <p className="text-gray-500 text-xs font-medium leading-relaxed">{days[activeDay - 1].accommodation}</p>
-                </div>
+
+                {days[activeDay - 1].accommodationImages && days[activeDay - 1].accommodationImages.some(img => img) && (
+                  <div className="mt-4 w-full">
+                    <div className="grid grid-cols-2 gap-3">
+                      {days[activeDay - 1].accommodationImages.map((img, idx) => img ? (
+                        <div key={idx} onClick={() => setSelectedGalleryImage(img)} className="h-32 rounded-2xl overflow-hidden shadow-md group/acc-img cursor-pointer relative">
+                          <img src={img} alt="" className="w-full h-full object-cover transition-transform duration-700 group-hover/acc-img:scale-110" />
+                          <div className="absolute inset-0 bg-black/10 group-hover/acc-img:bg-transparent transition-colors"></div>
+                        </div>
+                      ) : null)}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -350,6 +366,27 @@ const ItineraryDetail = () => {
       <IncludedExcluded />
       <PaymentPolicy />
       <BookingCard price={itinerary.price} itineraryTitle={itinerary.title} />
+      
+      {/* Lightbox Modal */}
+      {selectedGalleryImage && (
+        <div 
+          className="fixed inset-0 z-[200] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4"
+          onClick={() => setSelectedGalleryImage(null)}
+        >
+          <button 
+            className="absolute top-6 right-6 w-12 h-12 bg-white/10 hover:bg-white/20 text-white rounded-full flex items-center justify-center transition-colors"
+            onClick={() => setSelectedGalleryImage(null)}
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+          </button>
+          <img 
+            src={selectedGalleryImage} 
+            alt="Gallery preview" 
+            className="max-w-full max-h-[90vh] object-contain rounded-xl shadow-2xl"
+            onClick={e => e.stopPropagation()}
+          />
+        </div>
+      )}
     </div>
   );
 };
