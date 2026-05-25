@@ -23,10 +23,10 @@ const Destinations = () => {
     {
       id: 2,
       title: "Upper Diyaluma Falls",
-      excerpt: "Discover the second highest waterfall in Sri Lanka and its hidden natural infinity pools.",
+      excerpt: "Découvrez la deuxième plus haute cascade du Sri Lanka et ses piscines naturelles cachées.",
       image: diyaluma
     },
-    { id: 'kandy', title: 'Kandy', excerpt: 'Cultural Heart', image: kandy },
+    { id: 'kandy', title: 'Kandy', excerpt: 'Cœur culturel', image: kandy },
     { id: 'mirissa', title: 'Mirissa', excerpt: 'Côte d’Or', image: mirissa },
   ];
 
@@ -43,7 +43,7 @@ const Destinations = () => {
   const displayItems = articles.length >= 4 ? articles : fallbackDestinations;
 
   if (loading && articles.length === 0) {
-    return <div className="py-24 text-center text-gray-400">Loading guide...</div>;
+    return <div className="py-24 text-center text-gray-400">Chargement du guide...</div>;
   }
 
   return (

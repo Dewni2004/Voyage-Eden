@@ -174,7 +174,7 @@ const PopularItineraries = ({ title, id, itineraries, isDark, isGreen }) => {
                   <div className="flex flex-col">
                     <span className={`font-bold text-lg ${isGreen || isDark ? 'text-white' : 'text-primary'}`}>
                       €{item.price}
-                      <span className={`${isGreen || isDark ? 'text-white/50' : 'text-gray-400'} text-[10px] font-normal uppercase ml-1`}>/ Person</span>
+                      <span className={`${isGreen || isDark ? 'text-white/50' : 'text-gray-400'} text-[10px] font-normal uppercase ml-1`}>/ Personne</span>
                     </span>
                   </div>
                   <button 
@@ -187,7 +187,7 @@ const PopularItineraries = ({ title, id, itineraries, isDark, isGreen }) => {
                           : 'border border-primary bg-transparent text-primary hover:bg-primary hover:text-white'
                     } w-full sm:w-auto px-6 py-2 rounded-xl text-sm font-bold transition-all duration-300 flex items-center justify-center gap-2 transform hover:-translate-y-0.5 group/btn`}
                   >
-                    Reserve Now
+                    Réserver
                     <svg className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                     </svg>

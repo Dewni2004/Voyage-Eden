@@ -37,7 +37,7 @@ const Itineraires = () => {
       <PopularItineraries title="Séjours golfiques" id="golf" itineraries={getByCategory('golf')} isGreen={true} />
       <PopularItineraries title="Voyages de surf et de plongée" id="surf" itineraries={getByCategory('surf')} />
       <PopularItineraries title="Voyages d'aventure" id="adventure" itineraries={getByCategory('adventure')} />
-      <PopularItineraries title="Spéciaux d'Esela Perahera" id="pererahera" itineraries={getByCategory('pererahera')} />
+      <PopularItineraries title="Spéciaux d'Esela Perahera" id="perahera" itineraries={getByCategory('perahera')} />
       <PopularItineraries title="Itinéraires de 8 jours" id="8days" itineraries={getByCategory('8days')} />
       
       <PopularItineraries title="itinéraires basés sur les centres d'intérêt" id="interests" itineraries={getByCategory('interests')} />

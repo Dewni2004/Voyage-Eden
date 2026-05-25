@@ -86,6 +86,48 @@ const TravelGuide = () => {
 
   const allTags = ['All', ...Array.from(new Set(allArticles.flatMap(a => (a.tags || []).map(translateToFrench))))].filter(Boolean);
 
+  const ArticleCard = ({ article }) => (
+    <article className="bg-white rounded-2xl sm:rounded-[32px] overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 group flex flex-col">
+      <div className="relative h-32 xs:h-40 sm:h-64 overflow-hidden">
+        <img 
+          src={article.image} 
+          alt={article.title} 
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+        />
+        <div className="absolute top-2 left-2 sm:top-4 sm:left-4 bg-primary text-white text-[9px] sm:text-xs font-bold px-2 py-1 sm:px-4 sm:py-2 rounded-full shadow-lg">
+          {translateToFrench(article.category)}
+        </div>
+      </div>
+      
+      <div className="p-3 xs:p-5 sm:p-8 flex flex-col flex-grow justify-between">
+        <div>
+          <div className="flex items-center text-gray-400 text-[10px] sm:text-sm mb-1.5 sm:mb-4 space-x-2 sm:space-x-4">
+            <span>{article.date}</span>
+            <span className="w-1 h-1 bg-gray-300 rounded-full hidden xs:inline-block"></span>
+            <span className="hidden xs:inline-block">{article.author}</span>
+          </div>
+          
+          <Link to={`/blog/${article.id}`}>
+            <h3 className="text-primary text-xs xs:text-base sm:text-xl font-bold mb-1.5 sm:mb-4 leading-tight hover:text-primary/80 transition-colors cursor-pointer line-clamp-2">
+              {article.title}
+            </h3>
+          </Link>
+          
+          <p className="text-gray-600 text-[11px] sm:text-sm leading-relaxed mb-4 sm:mb-6 line-clamp-2 sm:line-clamp-3 hidden sm:block">
+            {article.excerpt}
+          </p>
+        </div>
+        
+        <Link to={`/blog/${article.id}`} className="text-primary font-bold text-[10px] sm:text-sm flex items-center group/btn hover:text-primary/80 transition-all mt-2 sm:mt-0">
+          Lire la suite
+          <svg className="w-3 h-3 sm:w-4 sm:h-4 ml-1 sm:ml-2 transform group-hover/btn:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </Link>
+      </div>
+    </article>
+  );
+
   return (
     <div>
       <PageHero 
@@ -99,50 +141,27 @@ const TravelGuide = () => {
           
           {/* Left Column: Articles */}
           <div className="lg:w-2/3 order-2 lg:order-1">
-            <h2 className="text-primary text-3xl font-bold mb-10 uppercase tracking-widest border-l-4 border-primary pl-4">Nos Articles</h2>
             
+            <h2 className="text-primary text-2xl font-bold mb-6 uppercase tracking-widest border-l-4 border-primary pl-4">Sri Lanka dans l'actualité</h2>
+            <div className="grid grid-cols-2 md:grid-cols-2 gap-4 md:gap-10 mb-12">
+              {allArticles.slice(0, 2).map(article => <ArticleCard key={article.id} article={article} />)}
+            </div>
+
+            <h2 className="text-primary text-2xl font-bold mb-6 uppercase tracking-widest border-l-4 border-primary pl-4">Lisez nos articles les plus utiles</h2>
+            <div className="grid grid-cols-2 md:grid-cols-2 gap-4 md:gap-10 mb-12">
+              {allArticles.slice(2, 4).map(article => <ArticleCard key={article.id} article={article} />)}
+            </div>
+
+            <h2 className="text-primary text-2xl font-bold mb-6 uppercase tracking-widest border-l-4 border-primary pl-4">Les articles les plus populaires</h2>
+            <div className="grid grid-cols-2 md:grid-cols-2 gap-4 md:gap-10 mb-12">
+              {allArticles.slice(4, 6).map(article => <ArticleCard key={article.id} article={article} />)}
+            </div>
+
+            <h2 className="text-primary text-2xl font-bold mb-6 uppercase tracking-widest border-l-4 border-primary pl-4">Tous les articles</h2>
             <div className="grid grid-cols-2 md:grid-cols-2 gap-4 md:gap-10">
               {filteredArticles.length > 0 ? (
                 (isMobile ? filteredArticles.slice(0, visibleCount) : filteredArticles).map((article) => (
-                  <article key={article.id} className="bg-white rounded-2xl sm:rounded-[32px] overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 group flex flex-col">
-                    <div className="relative h-32 xs:h-40 sm:h-64 overflow-hidden">
-                      <img 
-                        src={article.image} 
-                        alt={article.title} 
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                      />
-                      <div className="absolute top-2 left-2 sm:top-4 sm:left-4 bg-primary text-white text-[9px] sm:text-xs font-bold px-2 py-1 sm:px-4 sm:py-2 rounded-full shadow-lg">
-                        {translateToFrench(article.category)}
-                      </div>
-                    </div>
-                    
-                    <div className="p-3 xs:p-5 sm:p-8 flex flex-col flex-grow justify-between">
-                      <div>
-                        <div className="flex items-center text-gray-400 text-[10px] sm:text-sm mb-1.5 sm:mb-4 space-x-2 sm:space-x-4">
-                          <span>{article.date}</span>
-                          <span className="w-1 h-1 bg-gray-300 rounded-full hidden xs:inline-block"></span>
-                          <span className="hidden xs:inline-block">{article.author}</span>
-                        </div>
-                        
-                        <Link to={`/blog/${article.id}`}>
-                          <h3 className="text-primary text-xs xs:text-base sm:text-xl font-bold mb-1.5 sm:mb-4 leading-tight hover:text-primary/80 transition-colors cursor-pointer line-clamp-2">
-                            {article.title}
-                          </h3>
-                        </Link>
-                        
-                        <p className="text-gray-600 text-[11px] sm:text-sm leading-relaxed mb-4 sm:mb-6 line-clamp-2 sm:line-clamp-3 hidden sm:block">
-                          {article.excerpt}
-                        </p>
-                      </div>
-                      
-                      <Link to={`/blog/${article.id}`} className="text-primary font-bold text-[10px] sm:text-sm flex items-center group/btn hover:text-primary/80 transition-all mt-2 sm:mt-0">
-                        Lire la suite
-                        <svg className="w-3 h-3 sm:w-4 sm:h-4 ml-1 sm:ml-2 transform group-hover/btn:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
-                      </Link>
-                    </div>
-                  </article>
+                  <ArticleCard key={article.id} article={article} />
                 ))
               ) : (
                 <div className="col-span-full py-20 text-center bg-white rounded-[40px] shadow-sm border border-gray-100">

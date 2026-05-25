@@ -1,13 +1,12 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import ItineraryCard from '../UI/ItineraryCard';
 import swipeHandImg from '../../assets/swipe-hand-transparent.png';
-import tour1 from '../../assets/L\'île des couleurs (8 jours).webp';
-import tour2 from '../../assets/Explorez le mythique Ceylan (12 jours).png';
-import tour3 from '../../assets/Le pays des épices (15 jours).png';
-import tour4 from '../../assets/Tour Card 4.png';
+import { getItineraries } from '../../services/contentService';
 
 const TourCards = () => {
   const [hasScrolled, setHasScrolled] = useState(false);
+  const [tours, setTours] = useState([]);
+  const [loading, setLoading] = useState(true);
   const scrollRef = useRef(null);
 
   const handleScroll = () => {
@@ -18,44 +17,44 @@ const TourCards = () => {
     }
   };
 
-  const tours = [
-    {
-      id: "static-1",
-      title: "L'île des couleurs (8 jours)",
-      duration: "8 Jours",
-      image: tour1,
-      icons: ["Hôtels 4/5*", "Safari", "Groupe de 4"],
-      description: "Explorez le Sri Lanka en 8 jours : visitez Anuradhapura, Polonnaruwa, Sigiriya et Dambulla ; continuez par Kandy et Nuwara Eliya, prenez le train panoramique vers Ella, profitez d'un safari à Yala et terminez votre voyage au fort de Galle et à la plage d'Unawatuna.",
-      price: "1,260",
-    },
-    {
-      id: "static-2",
-      title: "Explorez le mythique Ceylan (12 jours)",
-      duration: "12 Jours",
-      image: tour2,
-      icons: ["Hôtels 3/4*", "Toutes entrées", "Groupe de 4"],
-      description: "Explorez le Sri Lanka en 12 jours : visitez Anuradhapura, Polonnaruwa, Sigiriya, Dambulla, Kandy, Nuwara Eliya et Ella. Profitez du safari à Yala et détendez-vous sur les plages d'Unawatuna et Mirissa, alliant histoire, nature et expériences côtières.",
-      price: "1,840",
-    },
-    {
-      id: "static-3",
-      title: "Le pays des épices (15 jours)",
-      duration: "15 Jours",
-      image: tour3,
-      icons: ["Hôtels 3/4*", "Safari Jeep", "Groupe de 4"],
-      description: "Explorez le Sri Lanka en 15 jours : visitez Anuradhapura, Polonnaruwa, Sigiriya, Trincomalee et les plages de Nilaveli. Continuez vers Kandy, Nuwara Eliya et Ella, profitez du safari classique à Yala et terminez votre voyage à Galle pour une expérience complète.",
-      price: "2,260",
-    },
-    {
-      id: "f21c35ef-6769-4f04-bea4-f4af774bb968",
-      title: "Découverte du Sud (7 jours)",
-      duration: "7 Jours",
-      image: tour4,
-      icons: ["Hôtels 4/5*", "Baleines", "Vie Sauvage"],
-      description: "Un circuit spécialisé axé sur la côte sud et la vie sauvage. Visitez le fort de Galle, Mirissa pour l'observation des baleines et le parc national de Yala pour une expérience de safari inoubliable.",
-      price: "1,050",
-    },
-  ];
+  useEffect(() => {
+    const fetchTours = async () => {
+      try {
+        const allItineraries = await getItineraries();
+        
+        // Get 3 from popular
+        const popular = allItineraries.filter(it => it.category?.toLowerCase() === 'popular').slice(0, 3);
+        // Get 1 from honeymoon
+        const honeymoon = allItineraries.filter(it => it.category?.toLowerCase() === 'honeymoon').slice(0, 1);
+        
+        // Combine them
+        const combined = [...popular, ...honeymoon];
+        
+        // Map to format expected by ItineraryCard
+        const formattedTours = combined.map(it => ({
+          id: it.id,
+          title: it.title,
+          duration: `${it.days?.length || 0} Jours`,
+          image: it.image,
+          icons: it.icons || [],
+          description: it.description || '',
+          price: it.price || '',
+          categoryTag: it.category?.toLowerCase() === 'honeymoon' ? 'Voyages de noces' : 'Populaire'
+        }));
+        
+        setTours(formattedTours);
+      } catch (error) {
+        console.error("Error fetching home itineraries:", error);
+      }
+      setLoading(false);
+    };
+    
+    fetchTours();
+  }, []);
+
+  if (loading) {
+    return <div className="py-16 text-center text-gray-500">Chargement des itinéraires...</div>;
+  }
 
   return (
     <section className="py-8 md:py-16 bg-white relative">
@@ -96,7 +95,7 @@ const TourCards = () => {
                 description={tour.description}
                 price={tour.price}
                 duration={tour.duration}
-                tag="Populaire"
+                tag={tour.categoryTag}
               />
             </div>
           ))}

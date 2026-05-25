@@ -95,7 +95,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <div className="mt-16 pt-8 border-t border-white/5 text-center text-xs text-gray-500">
-          <p>© {new Date().getFullYear()} Sri Lanka Voyage Eden. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Sri Lanka Voyage Eden. Tous droits réservés.</p>
         </div>
       </div>
     </footer>

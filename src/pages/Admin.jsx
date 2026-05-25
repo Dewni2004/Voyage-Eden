@@ -6,12 +6,42 @@ import {
 } from '../services/contentService';
 import ImageUploadField from '../components/Admin/ImageUploadField';
 import MapCoordinatePicker from '../components/Admin/MapCoordinatePicker';
+import { supabase } from '../supabase';
+
+
+const CITY_COORDINATES = {
+  'colombo': { x: 60, y: 280 },
+  'kandy': { x: 150, y: 250 },
+  'galle': { x: 100, y: 380 },
+  'sigiriya': { x: 150, y: 190 },
+  'anuradhapura': { x: 130, y: 130 },
+  'polonnaruwa': { x: 180, y: 180 },
+  'trincomalee': { x: 210, y: 110 },
+  'jaffna': { x: 100, y: 30 },
+  'nuwara eliya': { x: 160, y: 280 },
+  'ella': { x: 180, y: 290 },
+  'yala': { x: 220, y: 340 },
+  'mirissa': { x: 120, y: 390 },
+  'negombo': { x: 60, y: 250 },
+  'bentota': { x: 70, y: 320 },
+  'arugam bay': { x: 260, y: 280 },
+  'dambulla': { x: 150, y: 210 },
+  'minneriya': { x: 170, y: 190 },
+  'udawalawe': { x: 180, y: 330 },
+  'hikkaduwa': { x: 80, y: 360 },
+  'tangalle': { x: 160, y: 390 },
+  'weligama': { x: 130, y: 390 },
+  'kataragama': { x: 210, y: 350 },
+  'matara': { x: 140, y: 390 },
+  'habarana': { x: 160, y: 190 }
+};
 
 const Admin = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState('');
   const [activeTab, setActiveTab] = useState('articles');
   const [loading, setLoading] = useState(false);
+  const [isTranslating, setIsTranslating] = useState(false);
   const [message, setMessage] = useState({ type: '', text: '' });
 
   // Published content
@@ -119,6 +149,153 @@ const Admin = () => {
   useEffect(() => {
     if (isAuthenticated) fetchContent();
   }, [isAuthenticated]);
+
+  const translateText = async (text, sl = 'fr', tl = 'de') => {
+    if (!text || typeof text !== 'string') return text;
+    try {
+      const res = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sl}&tl=${tl}&dt=t&q=${encodeURIComponent(text)}`);
+      const data = await res.json();
+      return data[0].map(item => item[0]).join('');
+    } catch (e) {
+      console.error("Translation error", e);
+      return text;
+    }
+  };
+
+  const handleTranslateAndPublishArticle = async () => {
+    setIsTranslating(true);
+    setLoading(true);
+    try {
+      const frData = {
+        ...articleForm,
+        content: contentBlocks.filter(b => b.text.trim() !== ''),
+        tags: articleForm.category ? [`#${articleForm.category.replace(/\s+/g, '')}`] : []
+      };
+      
+      let newFrId = editingArticleId;
+      if (editingArticleId) {
+        await updateArticle(editingArticleId, frData);
+      } else {
+        newFrId = await addArticle(frData);
+      }
+
+      const deData = { ...frData, id: newFrId };
+      deData.title = await translateText(frData.title);
+      deData.description = await translateText(frData.description);
+      deData.excerpt = await translateText(frData.excerpt);
+      deData.seo_title = await translateText(frData.seo_title);
+      deData.seo_description = await translateText(frData.seo_description);
+      deData.seo_keywords = await translateText(frData.seo_keywords);
+      
+      deData.content = await Promise.all(frData.content.map(async (block) => {
+        if (block.type !== 'image' && block.text) {
+          return { ...block, text: await translateText(block.text) };
+        }
+        return block;
+      }));
+
+      const { error: err } = await supabase.from('articles_de').upsert(deData);
+      if (err) throw err;
+
+      setMessage({ type: 'success', text: 'Article publié en FR et traduit/publié en DE !' });
+      resetArticleForm();
+      fetchContent();
+      setActiveTab('articles');
+    } catch (e) {
+      console.error(e);
+      setMessage({ type: 'error', text: `Erreur: ${e.message}` });
+    }
+    setLoading(false);
+    setIsTranslating(false);
+  };
+
+  const handleTranslateAndPublishReview = async () => {
+    setIsTranslating(true);
+    setLoading(true);
+    try {
+      let newFrId = editingReviewId;
+      if (editingReviewId) {
+        await updateReview(editingReviewId, reviewForm);
+      } else {
+        newFrId = await addReview(reviewForm);
+      }
+
+      const deForm = { ...reviewForm, id: newFrId };
+      deForm.headline = await translateText(reviewForm.headline);
+      deForm.text = await translateText(reviewForm.text);
+      deForm.detailedtext = await translateText(reviewForm.detailedtext);
+      deForm.tourdetails.travelertype = await translateText(reviewForm.tourdetails.travelertype);
+      deForm.tourdetails.group = await translateText(reviewForm.tourdetails.group);
+      deForm.guide.quote = await translateText(reviewForm.guide.quote);
+
+      const { error: err } = await supabase.from('reviews_de').upsert(deForm);
+      if (err) throw err;
+
+      setMessage({ type: 'success', text: 'Avis publié en FR et traduit/publié en DE !' });
+      resetReviewForm();
+      fetchContent();
+      setActiveTab('reviews');
+    } catch (e) {
+      console.error(e);
+      setMessage({ type: 'error', text: `Erreur: ${e.message}` });
+    }
+    setLoading(false);
+    setIsTranslating(false);
+  };
+
+  const handleTranslateAndPublishItinerary = async () => {
+    setIsTranslating(true);
+    setLoading(true);
+    try {
+      const frData = { 
+        ...itineraryForm, 
+        days: itineraryDays,
+        icons: itineraryForm.icons.split(',').map(i => i.trim()).filter(i => i !== '')
+      };
+      
+      let newFrId = editingItineraryId;
+      if (editingItineraryId) {
+        await updateItinerary(editingItineraryId, frData);
+      } else {
+        newFrId = await addItinerary(frData);
+      }
+
+      const deData = { ...frData, id: newFrId };
+      deData.title = await translateText(frData.title);
+      deData.description = await translateText(frData.description);
+      deData.effort = await translateText(frData.effort);
+      deData.group = await translateText(frData.group);
+      deData.seo_title = await translateText(frData.seo_title);
+      deData.seo_description = await translateText(frData.seo_description);
+      deData.seo_keywords = await translateText(frData.seo_keywords);
+
+      deData.days = await Promise.all(frData.days.map(async (day) => {
+        return {
+          ...day,
+          location: await translateText(day.location),
+          description: await translateText(day.description),
+          highlights: await translateText(day.highlights),
+          accommodation: await translateText(day.accommodation),
+          meals: await translateText(day.meals),
+          travel: await translateText(day.travel),
+          displayLabel: await translateText(day.displayLabel)
+        };
+      }));
+
+      const { error: err } = await supabase.from('itineraries_de').upsert(deData);
+      if (err) throw err;
+
+      setMessage({ type: 'success', text: 'Itinéraire publié en FR et traduit/publié en DE !' });
+      resetItineraryForm();
+      fetchContent();
+      setActiveTab('itineraries');
+    } catch (e) {
+      console.error(e);
+      setMessage({ type: 'error', text: `Erreur: ${e.message}` });
+    }
+    setLoading(false);
+    setIsTranslating(false);
+  };
 
   const resetArticleForm = () => {
     setArticleForm({ 
@@ -316,6 +493,197 @@ const Admin = () => {
       fetchContent();
     } catch (e) {
       setMessage({ type: 'error', text: `Delete failed: ${e.message}` });
+    }
+  };
+
+  const handleEnglishToBothArticle = async () => {
+    if (!articleForm.title) {
+      setMessage({ type: 'error', text: 'Titre requis.' });
+      return;
+    }
+    setLoading(true);
+    setIsTranslating(true);
+    setMessage({ type: '', text: '' });
+    try {
+      // 1. Translate EN to FR and save to FR Database
+      const frData = { ...articleForm };
+      frData.title = await translateText(articleForm.title, 'en', 'fr');
+      frData.description = await translateText(articleForm.description, 'en', 'fr');
+      frData.excerpt = await translateText(articleForm.excerpt, 'en', 'fr');
+      frData.seo_title = await translateText(articleForm.seo_title, 'en', 'fr');
+      frData.seo_description = await translateText(articleForm.seo_description, 'en', 'fr');
+      frData.seo_keywords = await translateText(articleForm.seo_keywords, 'en', 'fr');
+      
+      frData.content = await Promise.all(contentBlocks.map(async (block) => {
+        if (block.type !== 'image' && block.text) {
+          return { ...block, text: await translateText(block.text, 'en', 'fr') };
+        }
+        return block;
+      }));
+      frData.content = frData.content.filter(b => b.text && b.text.trim() !== '');
+      frData.tags = articleForm.category ? [`#${articleForm.category.replace(/\s+/g, '')}`] : [];
+
+      let newFrId = editingArticleId;
+      if (editingArticleId) {
+        await updateArticle(editingArticleId, frData);
+      } else {
+        newFrId = await addArticle(frData);
+      }
+
+      // 2. Translate EN to DE and save to DE Database
+      const deData = { ...frData, id: newFrId };
+      deData.title = await translateText(articleForm.title, 'en', 'de');
+      deData.description = await translateText(articleForm.description, 'en', 'de');
+      deData.excerpt = await translateText(articleForm.excerpt, 'en', 'de');
+      deData.seo_title = await translateText(articleForm.seo_title, 'en', 'de');
+      deData.seo_description = await translateText(articleForm.seo_description, 'en', 'de');
+      deData.seo_keywords = await translateText(articleForm.seo_keywords, 'en', 'de');
+      
+      deData.content = await Promise.all(contentBlocks.map(async (block) => {
+        if (block.type !== 'image' && block.text) {
+          return { ...block, text: await translateText(block.text, 'en', 'de') };
+        }
+        return block;
+      }));
+
+      const { error: err } = await supabase.from('articles_de').upsert(deData);
+      if (err) throw err;
+
+      setMessage({ type: 'success', text: 'Article publié en FR et DE depuis l\'Anglais !' });
+      resetArticleForm();
+      fetchContent();
+      setActiveTab('articles');
+    } catch (error) {
+      console.error("Translation/Publish error:", error);
+      setMessage({ type: 'error', text: `Erreur: ${error.message}` });
+    } finally {
+      setLoading(false);
+      setIsTranslating(false);
+    }
+  };
+
+  const handleEnglishToBothReview = async () => {
+    if (!reviewForm.title) return;
+    setLoading(true);
+    setIsTranslating(true);
+    setMessage({ type: '', text: '' });
+    try {
+      // 1. Translate EN to FR and save to FR Database
+      const frForm = { ...reviewForm };
+      frForm.title = await translateText(reviewForm.title, 'en', 'fr');
+      frForm.review = await translateText(reviewForm.review, 'en', 'fr');
+      frForm.excerpt = await translateText(reviewForm.excerpt, 'en', 'fr');
+      frForm.tourdetails.type = await translateText(reviewForm.tourdetails.type, 'en', 'fr');
+      frForm.tourdetails.duration = await translateText(reviewForm.tourdetails.duration, 'en', 'fr');
+      frForm.tourdetails.group = await translateText(reviewForm.tourdetails.group, 'en', 'fr');
+      frForm.guide.quote = await translateText(reviewForm.guide.quote, 'en', 'fr');
+
+      let newFrId = editingReviewId;
+      if (editingReviewId) {
+        await updateReview(editingReviewId, frForm);
+      } else {
+        newFrId = await addReview(frForm);
+      }
+
+      // 2. Translate EN to DE and save to DE Database
+      const deForm = { ...frForm, id: newFrId };
+      deForm.title = await translateText(reviewForm.title, 'en', 'de');
+      deForm.review = await translateText(reviewForm.review, 'en', 'de');
+      deForm.excerpt = await translateText(reviewForm.excerpt, 'en', 'de');
+      deForm.tourdetails.type = await translateText(reviewForm.tourdetails.type, 'en', 'de');
+      deForm.tourdetails.duration = await translateText(reviewForm.tourdetails.duration, 'en', 'de');
+      deForm.tourdetails.group = await translateText(reviewForm.tourdetails.group, 'en', 'de');
+      deForm.guide.quote = await translateText(reviewForm.guide.quote, 'en', 'de');
+
+      const { error: err } = await supabase.from('reviews_de').upsert(deForm);
+      if (err) throw err;
+
+      setMessage({ type: 'success', text: 'Avis publié en FR et DE depuis l\'Anglais !' });
+      resetReviewForm();
+      fetchContent();
+      setActiveTab('reviews');
+    } catch (error) {
+      console.error("Translation/Publish error:", error);
+      setMessage({ type: 'error', text: `Erreur: ${error.message}` });
+    } finally {
+      setLoading(false);
+      setIsTranslating(false);
+    }
+  };
+
+  const handleEnglishToBothItinerary = async () => {
+    if (!itineraryForm.title) return;
+    setLoading(true);
+    setIsTranslating(true);
+    setMessage({ type: '', text: '' });
+    try {
+      // 1. Translate EN to FR and save to FR Database
+      const frData = { 
+        ...itineraryForm,
+        icons: (itineraryForm.icons || '').split(',').map(i => i.trim()).filter(i => i !== '') 
+      };
+      frData.title = await translateText(itineraryForm.title, 'en', 'fr');
+      frData.description = await translateText(itineraryForm.description, 'en', 'fr');
+      frData.effort = await translateText(itineraryForm.effort, 'en', 'fr');
+      frData.group = await translateText(itineraryForm.group, 'en', 'fr');
+      frData.seo_title = await translateText(itineraryForm.seo_title, 'en', 'fr');
+      frData.seo_description = await translateText(itineraryForm.seo_description, 'en', 'fr');
+      frData.seo_keywords = await translateText(itineraryForm.seo_keywords, 'en', 'fr');
+      frData.days = await Promise.all(itineraryDays.map(async (day) => {
+        return {
+          ...day,
+          location: await translateText(day.location, 'en', 'fr'),
+          description: await translateText(day.description, 'en', 'fr'),
+          highlights: await translateText(day.highlights, 'en', 'fr'),
+          accommodation: await translateText(day.accommodation, 'en', 'fr'),
+          meals: await translateText(day.meals, 'en', 'fr'),
+          travel: await translateText(day.travel, 'en', 'fr'),
+          displayLabel: await translateText(day.displayLabel, 'en', 'fr')
+        };
+      }));
+
+      let newFrId = editingItineraryId;
+      if (editingItineraryId) {
+        await updateItinerary(editingItineraryId, frData);
+      } else {
+        newFrId = await addItinerary(frData);
+      }
+
+      // 2. Translate EN to DE and save to DE Database
+      const deData = { ...frData, id: newFrId };
+      deData.title = await translateText(itineraryForm.title, 'en', 'de');
+      deData.description = await translateText(itineraryForm.description, 'en', 'de');
+      deData.effort = await translateText(itineraryForm.effort, 'en', 'de');
+      deData.group = await translateText(itineraryForm.group, 'en', 'de');
+      deData.seo_title = await translateText(itineraryForm.seo_title, 'en', 'de');
+      deData.seo_description = await translateText(itineraryForm.seo_description, 'en', 'de');
+      deData.seo_keywords = await translateText(itineraryForm.seo_keywords, 'en', 'de');
+      deData.days = await Promise.all(itineraryDays.map(async (day) => {
+        return {
+          ...day,
+          location: await translateText(day.location, 'en', 'de'),
+          description: await translateText(day.description, 'en', 'de'),
+          highlights: await translateText(day.highlights, 'en', 'de'),
+          accommodation: await translateText(day.accommodation, 'en', 'de'),
+          meals: await translateText(day.meals, 'en', 'de'),
+          travel: await translateText(day.travel, 'en', 'de'),
+          displayLabel: await translateText(day.displayLabel, 'en', 'de')
+        };
+      }));
+
+      const { error: err } = await supabase.from('itineraries_de').upsert(deData);
+      if (err) throw err;
+
+      setMessage({ type: 'success', text: 'Itinéraire publié en FR et DE depuis l\'Anglais !' });
+      resetItineraryForm();
+      fetchContent();
+      setActiveTab('itineraries');
+    } catch (error) {
+      console.error("Translation/Publish error:", error);
+      setMessage({ type: 'error', text: `Erreur: ${error.message}` });
+    } finally {
+      setLoading(false);
+      setIsTranslating(false);
     }
   };
 
@@ -808,9 +1176,16 @@ const Admin = () => {
                     <h2 className="text-3xl font-serif font-bold text-primary mb-2">{editingArticleId ? 'Edit Article' : 'New Article'}</h2>
                     <p className="text-gray-400 font-medium">Create captivating travel guides</p>
                   </div>
-                  {editingArticleId && (
-                    <button type="button" onClick={resetArticleForm} className="bg-gray-50 text-gray-400 hover:text-red-500 w-10 h-10 rounded-full flex items-center justify-center transition-colors">✕</button>
-                  )}
+                  <div className="flex gap-3">
+                    
+          <button type="button" onClick={handleEnglishToBothArticle} disabled={isTranslating || loading} className="px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-full font-medium transition-colors flex items-center justify-center min-w-[200px] shadow-md hover:shadow-lg">
+            {isTranslating ? '🌐 Traduction...' : '🌐 Publier depuis l\'Anglais'}
+          </button>
+          
+                    {editingArticleId && (
+                      <button type="button" onClick={resetArticleForm} className="bg-gray-50 text-gray-400 hover:text-red-500 w-10 h-10 rounded-full flex items-center justify-center transition-colors flex-shrink-0">✕</button>
+                    )}
+                  </div>
                 </div>
 
                 <form onSubmit={handleArticleSubmit} className="space-y-10 relative z-10">
@@ -1014,9 +1389,16 @@ const Admin = () => {
                     <h2 className="text-3xl font-serif font-bold text-primary mb-2">{editingReviewId ? 'Edit Experience' : 'Share Experience'}</h2>
                     <p className="text-gray-400 font-medium">Turn feedback into a luxury story</p>
                   </div>
-                  {editingReviewId && (
-                    <button type="button" onClick={resetReviewForm} className="bg-gray-50 text-gray-400 hover:text-red-500 w-10 h-10 rounded-full flex items-center justify-center transition-colors">✕</button>
-                  )}
+                  <div className="flex gap-3">
+                    
+          <button type="button" onClick={handleEnglishToBothReview} disabled={isTranslating || loading} className="px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-full font-medium transition-colors flex items-center justify-center min-w-[200px] shadow-md hover:shadow-lg">
+            {isTranslating ? '🌐 Traduction...' : '🌐 Publier depuis l\'Anglais'}
+          </button>
+          
+                    {editingReviewId && (
+                      <button type="button" onClick={resetReviewForm} className="bg-gray-50 text-gray-400 hover:text-red-500 w-10 h-10 rounded-full flex items-center justify-center transition-colors flex-shrink-0">✕</button>
+                    )}
+                  </div>
                 </div>
 
                 <form onSubmit={handleReviewSubmit} className="space-y-12 relative z-10">
@@ -1116,9 +1498,16 @@ const Admin = () => {
                     <h2 className="text-3xl font-serif font-bold text-primary mb-2">{editingItineraryId ? 'Fine-tune Journey' : 'Draft New Journey'}</h2>
                     <p className="text-gray-400 font-medium">Design the ultimate luxury itinerary</p>
                   </div>
-                  {editingItineraryId && (
-                    <button type="button" onClick={resetItineraryForm} className="bg-gray-50 text-gray-400 hover:text-red-500 w-10 h-10 rounded-full flex items-center justify-center transition-colors">✕</button>
-                  )}
+                  <div className="flex gap-3">
+                    
+          <button type="button" onClick={handleEnglishToBothItinerary} disabled={isTranslating || loading} className="px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-full font-medium transition-colors flex items-center justify-center min-w-[200px] shadow-md hover:shadow-lg">
+            {isTranslating ? '🌐 Traduction...' : '🌐 Publier depuis l\'Anglais'}
+          </button>
+          
+                    {editingItineraryId && (
+                      <button type="button" onClick={resetItineraryForm} className="bg-gray-50 text-gray-400 hover:text-red-500 w-10 h-10 rounded-full flex items-center justify-center transition-colors flex-shrink-0">✕</button>
+                    )}
+                  </div>
                 </div>
 
                 <form onSubmit={handleItinerarySubmit} className="space-y-12 relative z-10">
@@ -1130,20 +1519,16 @@ const Admin = () => {
                     <div className="space-y-2">
                       <label className={labelClass}>Category</label>
                       <select value={itineraryForm.category} onChange={(e) => setItineraryForm({...itineraryForm, category: e.target.value})} className={inputClass}>
-                        <option value="History">History</option>
-                        <option value="Nature">Nature</option>
-                        <option value="Culture">Culture</option>
-                        <option value="Adventure">Adventure</option>
-                        <option value="Luxury">Luxury</option>
+                        <option value="Popular">Popular</option>
                         <option value="Honeymoon">Honeymoon</option>
                         <option value="Family">Family</option>
+                        <option value="Luxury">Luxury</option>
                         <option value="Golf">Golf</option>
                         <option value="Surf">Surf</option>
-                        <option value="Discovery">Discovery</option>
-                        <option value="Waterfalls">Waterfalls</option>
-                        <option value="Beach">Beach</option>
-                        <option value="Islands">Islands</option>
-                        <option value="Popular">Popular</option>
+                        <option value="Adventure">Adventure</option>
+                        <option value="Perahera">Perahera</option>
+                        <option value="8days">8 Days</option>
+                        <option value="Interests">Interests</option>
                       </select>
                     </div>
                   </div>
@@ -1248,8 +1633,18 @@ const Admin = () => {
                             <div className="space-y-2">
                               <label className={labelClass}>Key Highlights</label>
                               <input type="text" value={day.highlights} onChange={e => {
+                                const value = e.target.value;
                                 const newDays = [...itineraryDays];
-                                newDays[idx].highlights = e.target.value;
+                                newDays[idx].highlights = value;
+                                
+                                const lowerValue = value.toLowerCase();
+                                for (const [city, coords] of Object.entries(CITY_COORDINATES)) {
+                                  if (lowerValue.includes(city)) {
+                                    newDays[idx].coords = { x: coords.x, y: coords.y };
+                                    break;
+                                  }
+                                }
+                                
                                 setItineraryDays(newDays);
                               }} className="w-full bg-gray-50/50 border border-gray-100 rounded-2xl py-4 px-6 outline-none focus:ring-4 focus:ring-primary/5 transition-all font-medium text-primary shadow-inner" placeholder="Temple, Jungle, Tea..." />
                             </div>

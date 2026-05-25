@@ -25,9 +25,9 @@ const Navbar = () => {
   ];
 
   const flags = [
-    { code: 'it', url: 'https://flagcdn.com/w40/it.png', alt: 'Italy', link: 'https://srilankaviaggieden.com/' },
-    { code: 'es', url: 'https://flagcdn.com/w40/es.png', alt: 'Spain', link: 'https://srilankaviajeseden.es/' },
-    { code: 'gb', url: 'https://flagcdn.com/w40/gb.png', alt: 'UK', link: 'https://srilankaedentravels.com/' },
+    { code: 'it', url: 'https://flagcdn.com/w40/it.png', alt: 'Italie', link: 'https://srilankaviaggieden.com/' },
+    { code: 'es', url: 'https://flagcdn.com/w40/es.png', alt: 'Espagne', link: 'https://srilankaviajeseden.es/' },
+    { code: 'gb', url: 'https://flagcdn.com/w40/gb.png', alt: 'Royaume-Uni', link: 'https://srilankaedentravels.com/' },
   ];
 
   return (
@@ -127,7 +127,7 @@ const Navbar = () => {
           </ul>
 
           <div className="mt-auto pb-10 border-t pt-10">
-            <p className="text-gray-500 mb-6 font-medium">Change Language</p>
+            <p className="text-gray-500 mb-6 font-medium">Changer de langue</p>
             <div className='flex flex-col space-y-6'>
               {flags.map((flag) => (
                 <a
