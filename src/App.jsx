@@ -9,18 +9,14 @@ import ItineraryDetail from './pages/ItineraryDetail';
 import BlogDetail from './pages/BlogDetail';
 import Reviews from './pages/Reviews';
 import ReviewDetail from './pages/ReviewDetail';
-import Admin from './pages/Admin';
 import Footer from './components/Footer/Footer';
 import WhatsAppButton from './components/WhatsAppButton/WhatsAppButton';
 import ScrollToTop from './components/ScrollToTop';
 
 function AppContent() {
-  const location = useLocation();
-  const isAdminPage = location.pathname === '/admin';
-
   return (
     <div className="flex flex-col min-h-screen">
-      {!isAdminPage && <Navbar />}
+      <Navbar />
       <main className="flex-grow">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -32,11 +28,10 @@ function AppContent() {
           <Route path="/blog/:id" element={<BlogDetail />} />
           <Route path="/reviews" element={<Reviews />} />
           <Route path="/review/:id" element={<ReviewDetail />} />
-          <Route path="/admin" element={<Admin />} />
         </Routes>
       </main>
-      {!isAdminPage && <Footer />}
-      {!isAdminPage && <WhatsAppButton />}
+      <Footer />
+      <WhatsAppButton />
     </div>
   );
 }
