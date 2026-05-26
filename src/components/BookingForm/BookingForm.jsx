@@ -151,17 +151,24 @@ const BookingForm = ({ itineraryTitle }) => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className={labelClass}>Dates d'arrivée et de départ</label>
-                <DatePicker
-                  selectsRange={true}
-                  startDate={startDate}
-                  endDate={endDate}
-                  onChange={(update) => setDateRange(update)}
-                  isClearable={true}
-                  placeholderText="Sélectionnez la période"
-                  className={inputClass}
-                  minDate={new Date()}
-                  dateFormat="dd/MM/yyyy"
-                />
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-10">
+                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                  <DatePicker
+                    selectsRange={true}
+                    startDate={startDate}
+                    endDate={endDate}
+                    onChange={(update) => setDateRange(update)}
+                    isClearable={true}
+                    placeholderText="Sélectionnez la période"
+                    className={`${inputClass} pl-11`}
+                    minDate={new Date()}
+                    dateFormat="dd/MM/yyyy"
+                  />
+                </div>
               </div>
               <div>
                 <label className={labelClass}>Nombre de voyageurs</label>
