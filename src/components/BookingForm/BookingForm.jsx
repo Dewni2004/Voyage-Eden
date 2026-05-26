@@ -1,5 +1,7 @@
 import React, { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const SectionIcon = ({ d }) => (
   <div className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center text-white flex-shrink-0 shadow-md">
@@ -13,11 +15,23 @@ const BookingForm = ({ itineraryTitle }) => {
   const form = useRef();
   const [isSending, setIsSending] = useState(false);
   const [messageStatus, setMessageStatus] = useState({ type: '', text: '' });
+  const [dateRange, setDateRange] = useState([null, null]);
+  const [startDate, endDate] = dateRange;
 
   const sendEmail = (e) => {
     e.preventDefault();
     setIsSending(true);
     setMessageStatus({ type: '', text: '' });
+
+    // Validate that dates are selected
+    if (!startDate || !endDate) {
+      setMessageStatus({ 
+        type: 'error', 
+        text: 'Veuillez sélectionner vos dates d\'arrivée et de départ.' 
+      });
+      setIsSending(false);
+      return;
+    }
 
     const SERVICE_ID = "service_xxxxxx"; 
     const TEMPLATE_ID = "template_xxxxxx";
@@ -30,6 +44,7 @@ const BookingForm = ({ itineraryTitle }) => {
             text: 'Merci ! Votre demande a été envoyée avec succès. Nous vous contacterons bientôt.' 
           });
           form.current.reset();
+          setDateRange([null, null]);
       }, (error) => {
           setMessageStatus({ 
             type: 'error', 
@@ -45,6 +60,10 @@ const BookingForm = ({ itineraryTitle }) => {
 
   return (
     <section id="booking-form" className="max-w-7xl mx-auto px-6 py-16">
+      <style dangerouslySetInnerHTML={{__html: `
+        .react-datepicker-wrapper { width: 100%; }
+        .react-datepicker__input-container input { width: 100%; }
+      `}} />
       <div className="bg-white rounded-[40px] shadow-2xl p-8 md:p-12 lg:p-16 border border-gray-100 relative overflow-hidden">
         
         {/* Background decorative blob */}
@@ -67,6 +86,10 @@ const BookingForm = ({ itineraryTitle }) => {
 
         <form ref={form} onSubmit={sendEmail} className="space-y-10 relative z-10">
           
+          {/* Hidden inputs for DateRange to pass to EmailJS */}
+          <input type="hidden" name="arrival_date" value={startDate ? startDate.toLocaleDateString('fr-FR') : ''} />
+          <input type="hidden" name="departure_date" value={endDate ? endDate.toLocaleDateString('fr-FR') : ''} />
+
           {/* Section 1: Informations Personnelles */}
           <div className="bg-[#f8f9fa] rounded-[32px] p-6 md:p-10 border border-gray-100 shadow-sm transition-all hover:shadow-md">
             <div className="mb-8 flex items-center gap-5">
@@ -82,19 +105,28 @@ const BookingForm = ({ itineraryTitle }) => {
                 <input type="text" name="full_name" required placeholder="Votre nom complet" className={inputClass} />
               </div>
               <div>
-                <label className={labelClass}>Numéro de téléphone</label>
-                <input type="tel" name="phone_number" required placeholder="Ex: +33 6 12 34 56 78" className={inputClass} />
+                <label className={labelClass}>Numéro Whatsapp</label>
+                <input type="tel" name="whatsapp_number" required placeholder="Ex: +33 6 12 34 56 78" className={inputClass} />
               </div>
               <div>
-                <label className={labelClass}>Nationalité (Passeport)</label>
-                <select name="nationality" required className={inputClass} defaultValue="">
-                  <option value="" disabled>Sélectionner...</option>
-                  <option value="France">France</option>
-                  <option value="Belgique">Belgique</option>
-                  <option value="Suisse">Suisse</option>
-                  <option value="Canada">Canada</option>
-                  <option value="Autre">Autre</option>
-                </select>
+                <label className={labelClass}>Nationalité</label>
+                <input 
+                  type="text" 
+                  name="nationality" 
+                  list="nationalities" 
+                  required 
+                  placeholder="Tapez ou sélectionnez..." 
+                  className={inputClass} 
+                  autoComplete="off"
+                />
+                <datalist id="nationalities">
+                  <option value="France" />
+                  <option value="Belgique" />
+                  <option value="Suisse" />
+                  <option value="Canada" />
+                  <option value="Royaume-Uni" />
+                  <option value="Allemagne" />
+                </datalist>
               </div>
             </div>
           </div>
@@ -110,28 +142,30 @@ const BookingForm = ({ itineraryTitle }) => {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-              <div>
+              <div className="md:col-span-2">
                 <label className={labelClass}>Nom du circuit / itinéraire</label>
                 <input type="text" name="tour_name" defaultValue={itineraryTitle} readOnly className={`${inputClass} bg-gray-100 text-gray-500 font-medium cursor-not-allowed`} />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className={labelClass}>Dates d'arrivée et de départ</label>
+                <DatePicker
+                  selectsRange={true}
+                  startDate={startDate}
+                  endDate={endDate}
+                  onChange={(update) => setDateRange(update)}
+                  isClearable={true}
+                  placeholderText="Sélectionnez la période"
+                  className={inputClass}
+                  minDate={new Date()}
+                  dateFormat="dd/MM/yyyy"
+                />
               </div>
               <div>
                 <label className={labelClass}>Nombre de voyageurs</label>
                 <input type="number" name="num_travelers" min="1" required placeholder="Ex: 2" className={inputClass} />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div>
-                <label className={labelClass}>Date d'arrivée approximative</label>
-                <input type="date" name="arrival_date" required className={inputClass} />
-              </div>
-              <div>
-                <label className={labelClass}>Date de départ approximative</label>
-                <input type="date" name="departure_date" required className={inputClass} />
-              </div>
-              <div>
-                <label className={labelClass}>Nombre de jours</label>
-                <input type="number" name="num_days" min="1" required placeholder="Ex: 7" className={inputClass} />
               </div>
             </div>
           </div>
@@ -159,69 +193,38 @@ const BookingForm = ({ itineraryTitle }) => {
                 </select>
               </div>
               <div>
-                <label className={labelClass}>Nombre de chambres</label>
-                <input type="number" name="num_rooms" min="1" required placeholder="Ex: 1" className={inputClass} />
-              </div>
-              <div>
                 <label className={labelClass}>Répartition des chambres</label>
                 <input type="text" name="room_distribution" required placeholder="Ex: 1 Double, 2 Simples" className={inputClass} />
+              </div>
+              <div>
+                <label className={labelClass}>Préférence de repas (Meal Plan)</label>
+                <select name="meal_plan" required className={inputClass} defaultValue="">
+                  <option value="" disabled>Sélectionner...</option>
+                  <option value="BB - Bed & Breakfast">BB - Bed & Breakfast</option>
+                  <option value="HB - Breakfast & Dinner">HB - Breakfast & Dinner</option>
+                  <option value="FB - Breakfast + Lunch + Dinner">FB - Breakfast + Lunch + Dinner</option>
+                </select>
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className={labelClass}>Préférence de repas</label>
-                <select name="meal_plan" required className={inputClass} defaultValue="">
-                  <option value="" disabled>Sélectionner...</option>
-                  <option value="Petit-déjeuner uniquement">Petit-déjeuner uniquement</option>
-                  <option value="Demi-pension">Demi-pension</option>
-                  <option value="Pension complète">Pension complète</option>
-                </select>
-              </div>
-              <div>
-                <label className={labelClass}>Langue souhaitée pour le chauffeur</label>
+                <label className={labelClass}>Langue du chauffeur</label>
                 <select name="chauffeur_language" required className={inputClass} defaultValue="">
                   <option value="" disabled>Sélectionner...</option>
                   <option value="Francophone">Francophone</option>
                   <option value="Anglophone">Anglophone</option>
                 </select>
               </div>
-            </div>
-          </div>
-
-          {/* Section 4: Préférences & Extras */}
-          <div className="bg-[#f8f9fa] rounded-[32px] p-6 md:p-10 border border-gray-100 shadow-sm transition-all hover:shadow-md">
-            <div className="mb-8 flex items-center gap-5">
-              <SectionIcon d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
               <div>
-                <h3 className="text-xl font-bold text-primary font-serif">Préférences & Extras</h3>
-                <p className="text-xs text-gray-500 mt-1 font-medium">Pour un voyage parfaitement personnalisé</p>
+                <label className={labelClass}>Exigences particulières (Optionnel)</label>
+                <input 
+                  type="text"
+                  name="special_requirements" 
+                  className={inputClass}
+                  placeholder="Allergies, accessibilité, etc."
+                />
               </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-              <div>
-                <label className={labelClass}>Activités (Optionnel)</label>
-                <input type="text" name="activities" placeholder="Plongée, Safari..." className={inputClass} />
-              </div>
-              <div>
-                <label className={labelClass}>Hôtels préférés (Optionnel)</label>
-                <input type="text" name="preferred_hotels" placeholder="Noms des hôtels" className={inputClass} />
-              </div>
-              <div>
-                <label className={labelClass}>Budget approx. (Optionnel)</label>
-                <input type="text" name="budget" placeholder="Ex: 1500€ / personne" className={inputClass} />
-              </div>
-            </div>
-
-            <div>
-              <label className={labelClass}>Exigences particulières (Optionnel)</label>
-              <textarea 
-                name="special_requirements" 
-                rows="4" 
-                className={`${inputClass} resize-none`}
-                placeholder="Avez-vous des allergies, des besoins d'accessibilité, ou célébrez-vous une occasion spéciale ?"
-              ></textarea>
             </div>
           </div>
 
