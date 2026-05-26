@@ -37,7 +37,7 @@ const BookingForm = ({ itineraryTitle }) => {
   const labelClass = "block text-xs font-bold text-gray-700 mb-1.5";
 
   return (
-    <section id="booking-form" className="max-w-4xl mx-auto px-6 py-12">
+    <section id="booking-form" className="max-w-7xl mx-auto px-6 py-12">
       <div className="bg-white rounded-[32px] shadow-2xl p-8 md:p-12 border border-gray-100">
         <div className="text-center mb-10">
           <h2 className="text-primary text-3xl md:text-4xl font-bold font-serif mb-4">Demander un devis</h2>
