@@ -6,8 +6,7 @@ import { Helmet } from 'react-helmet-async';
 import IncludedExcluded from '../components/IncludedExcluded/IncludedExcluded';
 import PaymentPolicy from '../components/PaymentPolicy/PaymentPolicy';
 import BookingCard from '../components/BookingCard/BookingCard';
-import map from '../assets/Tra.png';
-
+import AnimatedMap from '../components/InteractiveMap/AnimatedMap';
 const ItineraryDetail = () => {
   const { id } = useParams();
   const [itinerary, setItinerary] = useState(null);
@@ -184,76 +183,14 @@ const ItineraryDetail = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-stretch">
           
           {/* Left Column: Interactive Map */}
-          <div className="relative group/map h-full">
+          <div className="relative group/map h-[850px]">
             <div className="absolute -inset-4 bg-gradient-to-tr from-primary/5 to-luxury/5 rounded-[48px] blur-2xl opacity-0 group-hover/map:opacity-100 transition-duration-700"></div>
-            <div className="bg-white rounded-[48px] p-2 flex items-center justify-center h-full border border-gray-100 shadow-2xl relative z-10 overflow-hidden group/map-inner">
-              {/* Subtle Texture Overlay */}
-              <div className="absolute inset-0 opacity-[0.02] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/pinstriped-suit.png')]"></div>
-              
-              <div className="relative w-full h-full flex items-center justify-center p-4">
-                <div className="relative w-full h-full max-w-[450px] aspect-[3/4]">
-                  <svg viewBox="0 0 300 450" className="w-full h-full drop-shadow-2xl">
-                    <image href={map} x="0" y="0" width="300" height="450" preserveAspectRatio="xMidYMid meet" className="opacity-100" />
-                    
-                    {/* Route Lines */}
-                    <g className="route-lines">
-                      {days.map((day, index) => {
-                        if (index === 0) return null;
-                        const prevDay = days[index - 1];
-                        return (
-                          <line 
-                            key={`line-${day.id}`}
-                            x1={prevDay.coords.x} y1={prevDay.coords.y} x2={day.coords.x} y2={day.coords.y} 
-                            stroke="#b02a30" strokeWidth="2" strokeDasharray="5,5" strokeLinecap="round"
-                            className={`transition-all duration-1000 ${activeDay >= day.id ? 'opacity-40' : 'opacity-0'}`}
-                          />
-                        );
-                      })}
-                    </g>
-
-                    {/* Day Markers */}
-                    {days.map((day) => (
-                      <g 
-                        key={day.id} 
-                        onClick={() => { setActiveDay(day.id); if (window.innerWidth < 1024) setIsModalOpen(true); }} 
-                        className="cursor-pointer group/marker"
-                      >
-                        {/* Marker Shadow */}
-                        <circle cx={day.coords.x} cy={day.coords.y} r="14" className="fill-black/5" transform="translate(1,1)" />
-                        
-                        {/* Main Marker Circle */}
-                        <circle 
-                          cx={day.coords.x} cy={day.coords.y} 
-                          r={activeDay === day.id ? "14" : "12"} 
-                          className={`transition-all duration-300 ${activeDay === day.id ? 'fill-primary shadow-lg' : 'fill-primary/70 group-hover/marker:fill-primary'}`} 
-                        />
-                        
-                        {/* Day Number */}
-                        <text 
-                          x={day.coords.x} y={day.coords.y} dy=".35em" textAnchor="middle" 
-                          className="fill-white text-[9px] font-bold pointer-events-none select-none"
-                        >
-                          {day.id}
-                        </text>
-                      </g>
-                    ))}
-                  </svg>
-                </div>
-              </div>
-
-              {/* Map Label Overlay */}
-              <div className="absolute top-8 left-8">
-                <div className="flex items-center gap-3">
-                  <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></div>
-                  <span className="text-[10px] font-bold text-primary uppercase tracking-[0.3em]">Live Route</span>
-                </div>
-              </div>
-
-              {/* Interaction Guide */}
-              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-white/80 backdrop-blur-md px-4 py-2 rounded-full border border-gray-100 shadow-sm opacity-0 group-hover/map-inner:opacity-100 transition-opacity duration-300">
-                <p className="text-[9px] font-bold text-gray-500 uppercase tracking-wider">Cliquez sur un jour pour explorer</p>
-              </div>
-            </div>
+            <AnimatedMap 
+              days={days} 
+              activeDay={activeDay} 
+              setActiveDay={setActiveDay} 
+              setIsModalOpen={setIsModalOpen} 
+            />
           </div>
 
           {/* Right Column: Day Details Card */}
