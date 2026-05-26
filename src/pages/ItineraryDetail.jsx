@@ -6,6 +6,7 @@ import { Helmet } from 'react-helmet-async';
 import IncludedExcluded from '../components/IncludedExcluded/IncludedExcluded';
 import PaymentPolicy from '../components/PaymentPolicy/PaymentPolicy';
 import BookingCard from '../components/BookingCard/BookingCard';
+import BookingForm from '../components/BookingForm/BookingForm';
 import AnimatedMap from '../components/InteractiveMap/AnimatedMap';
 const ItineraryDetail = () => {
   const { id } = useParams();
@@ -300,9 +301,10 @@ const ItineraryDetail = () => {
         </div>
       )}
 
+      <BookingForm itineraryTitle={itinerary.title} />
       <IncludedExcluded />
       <PaymentPolicy />
-      <BookingCard price={itinerary.price} itineraryTitle={itinerary.title} />
+      <BookingCard price={itinerary.price} />
       
       {/* Lightbox Modal */}
       {selectedGalleryImage && (
