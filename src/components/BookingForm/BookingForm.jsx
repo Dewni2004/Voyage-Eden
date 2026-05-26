@@ -223,14 +223,14 @@ const BookingForm = ({ itineraryTitle }) => {
                   <option value="Anglophone">Anglophone</option>
                 </select>
               </div>
-              <div>
+              <div className="md:col-span-2">
                 <label className={labelClass}>Exigences particulières (Optionnel)</label>
-                <input 
-                  type="text"
+                <textarea 
                   name="special_requirements" 
-                  className={inputClass}
-                  placeholder="Allergies, accessibilité, etc."
-                />
+                  rows="4"
+                  className={`${inputClass} resize-none`}
+                  placeholder="Avez-vous des allergies, des besoins d'accessibilité, ou célébrez-vous une occasion spéciale ?"
+                ></textarea>
               </div>
             </div>
           </div>
