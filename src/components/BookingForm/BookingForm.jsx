@@ -1,6 +1,14 @@
 import React, { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 
+const SectionIcon = ({ d }) => (
+  <div className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center text-white flex-shrink-0 shadow-md">
+    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={d} />
+    </svg>
+  </div>
+);
+
 const BookingForm = ({ itineraryTitle }) => {
   const form = useRef();
   const [isSending, setIsSending] = useState(false);
@@ -11,7 +19,6 @@ const BookingForm = ({ itineraryTitle }) => {
     setIsSending(true);
     setMessageStatus({ type: '', text: '' });
 
-    // IMPORTANT: replace these with actual IDs from emailjs.com
     const SERVICE_ID = "service_xxxxxx"; 
     const TEMPLATE_ID = "template_xxxxxx";
     const PUBLIC_KEY = "xxxxxxxxxxxx";
@@ -33,159 +40,209 @@ const BookingForm = ({ itineraryTitle }) => {
       .finally(() => setIsSending(false));
   };
 
-  const inputClass = "w-full bg-white border border-gray-300 rounded-md py-3 px-4 text-sm focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary text-gray-700 placeholder-gray-400";
-  const labelClass = "block text-xs font-bold text-gray-700 mb-1.5";
+  const inputClass = "w-full bg-white border border-gray-200 rounded-xl py-3.5 px-4 text-[15px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 placeholder-gray-400 transition-all shadow-sm";
+  const labelClass = "block text-xs font-bold text-gray-600 mb-2 uppercase tracking-wider";
 
   return (
-    <section id="booking-form" className="max-w-7xl mx-auto px-6 py-12">
-      <div className="bg-white rounded-[32px] shadow-2xl p-8 md:p-12 border border-gray-100">
-        <div className="text-center mb-10">
-          <h2 className="text-primary text-3xl md:text-4xl font-bold font-serif mb-4">Demander un devis</h2>
-          <p className="text-gray-500 text-sm md:text-base">Remplissez ce formulaire pour recevoir un devis personnalisé pour votre voyage.</p>
+    <section id="booking-form" className="max-w-7xl mx-auto px-6 py-16">
+      <div className="bg-white rounded-[40px] shadow-2xl p-8 md:p-12 lg:p-16 border border-gray-100 relative overflow-hidden">
+        
+        {/* Background decorative blob */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-luxury/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 pointer-events-none"></div>
+
+        <div className="text-center mb-16 relative z-10">
+          <span className="text-luxury text-[10px] font-bold tracking-[0.2em] uppercase mb-3 block">Votre voyage sur mesure</span>
+          <h2 className="text-primary text-4xl md:text-5xl font-bold font-serif mb-4">Demander un devis</h2>
+          <p className="text-gray-500 text-base max-w-2xl mx-auto font-medium leading-relaxed">
+            Remplissez ce formulaire détaillé et laissez-nous concevoir l'escapade parfaite pour vous au Sri Lanka.
+          </p>
         </div>
 
         {messageStatus.text && (
-          <div className={`p-4 rounded-xl text-sm font-bold mb-8 ${messageStatus.type === 'success' ? 'bg-green-50 text-green-600 border border-green-100' : 'bg-red-50 text-red-600 border border-red-100'}`}>
+          <div className={`p-4 rounded-2xl text-sm font-bold mb-10 text-center shadow-sm relative z-10 ${messageStatus.type === 'success' ? 'bg-green-50 text-green-700 border border-green-200' : 'bg-red-50 text-red-700 border border-red-200'}`}>
             {messageStatus.text}
           </div>
         )}
 
-        <form ref={form} onSubmit={sendEmail} className="space-y-6">
-          {/* Row 1 */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label className={labelClass}>Nom du circuit / itinéraire</label>
-              <input type="text" name="tour_name" defaultValue={itineraryTitle} readOnly className={`${inputClass} bg-gray-50 text-gray-500 cursor-not-allowed`} />
+        <form ref={form} onSubmit={sendEmail} className="space-y-10 relative z-10">
+          
+          {/* Section 1: Informations Personnelles */}
+          <div className="bg-[#f8f9fa] rounded-[32px] p-6 md:p-10 border border-gray-100 shadow-sm transition-all hover:shadow-md">
+            <div className="mb-8 flex items-center gap-5">
+              <SectionIcon d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              <div>
+                <h3 className="text-xl font-bold text-primary font-serif">Informations Personnelles</h3>
+                <p className="text-xs text-gray-500 mt-1 font-medium">Vos coordonnées pour vous recontacter</p>
+              </div>
             </div>
-            <div>
-              <label className={labelClass}>Nom complet</label>
-              <input type="text" name="full_name" required placeholder="Votre nom complet" className={inputClass} />
-            </div>
-          </div>
-
-          {/* Row 2 */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div>
-              <label className={labelClass}>Numéro de téléphone</label>
-              <input type="tel" name="phone_number" required placeholder="Ex: +33 6 12 34 56 78" className={inputClass} />
-            </div>
-            <div>
-              <label className={labelClass}>Nationalité (Passeport)</label>
-              <select name="nationality" required className={inputClass} defaultValue="">
-                <option value="" disabled>Sélectionner...</option>
-                <option value="France">France</option>
-                <option value="Belgique">Belgique</option>
-                <option value="Suisse">Suisse</option>
-                <option value="Canada">Canada</option>
-                <option value="Autre">Autre</option>
-              </select>
-            </div>
-            <div>
-              <label className={labelClass}>Nombre de voyageurs</label>
-              <input type="number" name="num_travelers" min="1" required placeholder="2" className={inputClass} />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div>
+                <label className={labelClass}>Nom complet</label>
+                <input type="text" name="full_name" required placeholder="Votre nom complet" className={inputClass} />
+              </div>
+              <div>
+                <label className={labelClass}>Numéro de téléphone</label>
+                <input type="tel" name="phone_number" required placeholder="Ex: +33 6 12 34 56 78" className={inputClass} />
+              </div>
+              <div>
+                <label className={labelClass}>Nationalité (Passeport)</label>
+                <select name="nationality" required className={inputClass} defaultValue="">
+                  <option value="" disabled>Sélectionner...</option>
+                  <option value="France">France</option>
+                  <option value="Belgique">Belgique</option>
+                  <option value="Suisse">Suisse</option>
+                  <option value="Canada">Canada</option>
+                  <option value="Autre">Autre</option>
+                </select>
+              </div>
             </div>
           </div>
 
-          {/* Row 3 */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div>
-              <label className={labelClass}>Nombre de jours</label>
-              <input type="number" name="num_days" min="1" required placeholder="7" className={inputClass} />
+          {/* Section 2: Détails du Voyage */}
+          <div className="bg-[#f8f9fa] rounded-[32px] p-6 md:p-10 border border-gray-100 shadow-sm transition-all hover:shadow-md">
+            <div className="mb-8 flex items-center gap-5">
+              <SectionIcon d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              <div>
+                <h3 className="text-xl font-bold text-primary font-serif">Détails du Voyage</h3>
+                <p className="text-xs text-gray-500 mt-1 font-medium">Dates et nombre de participants</p>
+              </div>
             </div>
-            <div>
-              <label className={labelClass}>Catégorie d'hôtel souhaitée</label>
-              <select name="hotel_category" required className={inputClass} defaultValue="">
-                <option value="" disabled>Sélectionner...</option>
-                <option value="3 Étoiles">3 Étoiles</option>
-                <option value="4 Étoiles">4 Étoiles</option>
-                <option value="5 Étoiles">5 Étoiles</option>
-                <option value="Boutique Hôtel">Boutique Hôtel</option>
-                <option value="Mixte">Mixte</option>
-              </select>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <div>
+                <label className={labelClass}>Nom du circuit / itinéraire</label>
+                <input type="text" name="tour_name" defaultValue={itineraryTitle} readOnly className={`${inputClass} bg-gray-100 text-gray-500 font-medium cursor-not-allowed`} />
+              </div>
+              <div>
+                <label className={labelClass}>Nombre de voyageurs</label>
+                <input type="number" name="num_travelers" min="1" required placeholder="Ex: 2" className={inputClass} />
+              </div>
             </div>
-            <div>
-              <label className={labelClass}>Date d'arrivée approximative</label>
-              <input type="date" name="arrival_date" required className={inputClass} />
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div>
+                <label className={labelClass}>Date d'arrivée approximative</label>
+                <input type="date" name="arrival_date" required className={inputClass} />
+              </div>
+              <div>
+                <label className={labelClass}>Date de départ approximative</label>
+                <input type="date" name="departure_date" required className={inputClass} />
+              </div>
+              <div>
+                <label className={labelClass}>Nombre de jours</label>
+                <input type="number" name="num_days" min="1" required placeholder="Ex: 7" className={inputClass} />
+              </div>
             </div>
           </div>
 
-          {/* Row 4 */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div>
-              <label className={labelClass}>Date de départ approximative</label>
-              <input type="date" name="departure_date" required className={inputClass} />
+          {/* Section 3: Hébergement & Logistique */}
+          <div className="bg-[#f8f9fa] rounded-[32px] p-6 md:p-10 border border-gray-100 shadow-sm transition-all hover:shadow-md">
+            <div className="mb-8 flex items-center gap-5">
+              <SectionIcon d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              <div>
+                <h3 className="text-xl font-bold text-primary font-serif">Hébergement & Logistique</h3>
+                <p className="text-xs text-gray-500 mt-1 font-medium">Vos préférences de séjour</p>
+              </div>
             </div>
-            <div>
-              <label className={labelClass}>Nombre de chambres</label>
-              <input type="number" name="num_rooms" min="1" required placeholder="1" className={inputClass} />
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+              <div>
+                <label className={labelClass}>Catégorie d'hôtel souhaitée</label>
+                <select name="hotel_category" required className={inputClass} defaultValue="">
+                  <option value="" disabled>Sélectionner...</option>
+                  <option value="3 Étoiles">3 Étoiles</option>
+                  <option value="4 Étoiles">4 Étoiles</option>
+                  <option value="5 Étoiles">5 Étoiles</option>
+                  <option value="Boutique Hôtel">Boutique Hôtel</option>
+                  <option value="Mixte">Mixte</option>
+                </select>
+              </div>
+              <div>
+                <label className={labelClass}>Nombre de chambres</label>
+                <input type="number" name="num_rooms" min="1" required placeholder="Ex: 1" className={inputClass} />
+              </div>
+              <div>
+                <label className={labelClass}>Répartition des chambres</label>
+                <input type="text" name="room_distribution" required placeholder="Ex: 1 Double, 2 Simples" className={inputClass} />
+              </div>
             </div>
-            <div>
-              <label className={labelClass}>Répartition des chambres</label>
-              <input type="text" name="room_distribution" required placeholder="Ex: 1 Double, 2 Simples" className={inputClass} />
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className={labelClass}>Préférence de repas</label>
+                <select name="meal_plan" required className={inputClass} defaultValue="">
+                  <option value="" disabled>Sélectionner...</option>
+                  <option value="Petit-déjeuner uniquement">Petit-déjeuner uniquement</option>
+                  <option value="Demi-pension">Demi-pension</option>
+                  <option value="Pension complète">Pension complète</option>
+                </select>
+              </div>
+              <div>
+                <label className={labelClass}>Langue souhaitée pour le chauffeur</label>
+                <select name="chauffeur_language" required className={inputClass} defaultValue="">
+                  <option value="" disabled>Sélectionner...</option>
+                  <option value="Francophone">Francophone</option>
+                  <option value="Anglophone">Anglophone</option>
+                </select>
+              </div>
             </div>
           </div>
 
-          {/* Row 5 */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div>
-              <label className={labelClass}>Préférence de repas</label>
-              <select name="meal_plan" required className={inputClass} defaultValue="">
-                <option value="" disabled>Sélectionner...</option>
-                <option value="Petit-déjeuner uniquement">Petit-déjeuner uniquement</option>
-                <option value="Demi-pension">Demi-pension</option>
-                <option value="Pension complète">Pension complète</option>
-              </select>
+          {/* Section 4: Préférences & Extras */}
+          <div className="bg-[#f8f9fa] rounded-[32px] p-6 md:p-10 border border-gray-100 shadow-sm transition-all hover:shadow-md">
+            <div className="mb-8 flex items-center gap-5">
+              <SectionIcon d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+              <div>
+                <h3 className="text-xl font-bold text-primary font-serif">Préférences & Extras</h3>
+                <p className="text-xs text-gray-500 mt-1 font-medium">Pour un voyage parfaitement personnalisé</p>
+              </div>
             </div>
-            <div>
-              <label className={labelClass}>Langue souhaitée pour le chauffeur</label>
-              <select name="chauffeur_language" required className={inputClass} defaultValue="">
-                <option value="" disabled>Sélectionner...</option>
-                <option value="Francophone">Francophone</option>
-                <option value="Anglophone">Anglophone</option>
-              </select>
-            </div>
-            <div>
-              <label className={labelClass}>Activités (Optionnel)</label>
-              <input type="text" name="activities" placeholder="Plongée, Safari, etc." className={inputClass} />
-            </div>
-          </div>
 
-          {/* Row 6 */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label className={labelClass}>Hôtels préférés (Optionnel)</label>
-              <input type="text" name="preferred_hotels" placeholder="Noms des hôtels" className={inputClass} />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+              <div>
+                <label className={labelClass}>Activités (Optionnel)</label>
+                <input type="text" name="activities" placeholder="Plongée, Safari..." className={inputClass} />
+              </div>
+              <div>
+                <label className={labelClass}>Hôtels préférés (Optionnel)</label>
+                <input type="text" name="preferred_hotels" placeholder="Noms des hôtels" className={inputClass} />
+              </div>
+              <div>
+                <label className={labelClass}>Budget approx. (Optionnel)</label>
+                <input type="text" name="budget" placeholder="Ex: 1500€ / personne" className={inputClass} />
+              </div>
             </div>
-            <div>
-              <label className={labelClass}>Budget approximatif (Optionnel)</label>
-              <input type="text" name="budget" placeholder="Ex: 1500€ par personne" className={inputClass} />
-            </div>
-          </div>
 
-          {/* Special Requirements */}
-          <div>
-            <label className={labelClass}>Exigences particulières</label>
-            <textarea 
-              name="special_requirements" 
-              rows="4" 
-              className={`${inputClass} resize-none`}
-              placeholder="Allergies, accessibilité, occasions spéciales..."
-            ></textarea>
+            <div>
+              <label className={labelClass}>Exigences particulières (Optionnel)</label>
+              <textarea 
+                name="special_requirements" 
+                rows="4" 
+                className={`${inputClass} resize-none`}
+                placeholder="Avez-vous des allergies, des besoins d'accessibilité, ou célébrez-vous une occasion spéciale ?"
+              ></textarea>
+            </div>
           </div>
 
           {/* Footer / Submit */}
-          <div className="pt-6 border-t border-gray-100 flex justify-center mt-8">
+          <div className="pt-8 flex justify-center">
             <button 
               type="submit"
               disabled={isSending}
-              className="btn-premium-primary py-4 px-12 rounded-full text-base w-full md:w-auto shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+              className="btn-premium-primary py-5 px-14 rounded-full text-base md:text-lg font-bold w-full md:w-auto shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
             >
               {isSending ? (
                 <>
-                  <div className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
-                  Envoi...
+                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                  Envoi en cours...
                 </>
-              ) : 'ENVOYER MA DEMANDE'}
+              ) : (
+                <>
+                  ENVOYER MA DEMANDE
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                </>
+              )}
             </button>
           </div>
         </form>
