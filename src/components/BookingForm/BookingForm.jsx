@@ -18,6 +18,10 @@ const BookingForm = ({ itineraryTitle }) => {
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
 
+  const numDays = (startDate && endDate) 
+    ? Math.round((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1 
+    : '';
+
   const sendEmail = (e) => {
     e.preventDefault();
     setIsSending(true);
@@ -148,7 +152,7 @@ const BookingForm = ({ itineraryTitle }) => {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
                 <label className={labelClass}>Dates d'arrivée et de départ</label>
                 <div className="relative">
@@ -169,6 +173,17 @@ const BookingForm = ({ itineraryTitle }) => {
                     dateFormat="dd/MM/yyyy"
                   />
                 </div>
+              </div>
+              <div>
+                <label className={labelClass}>Nombre de jours</label>
+                <input 
+                  type="text" 
+                  name="num_days" 
+                  value={numDays ? `${numDays} jours` : ''} 
+                  readOnly 
+                  className={`${inputClass} bg-gray-100 text-gray-500 font-medium cursor-not-allowed`} 
+                  placeholder="Auto-calculé" 
+                />
               </div>
               <div>
                 <label className={labelClass}>Nombre de voyageurs</label>

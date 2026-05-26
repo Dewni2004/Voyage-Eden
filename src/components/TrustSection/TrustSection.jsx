@@ -121,7 +121,6 @@ const TrustSection = () => {
                 className="flex flex-1 items-center justify-center gap-1 bg-transparent border border-[#FF0000] text-[#FF0000] hover:bg-red-50 font-bold px-1 py-1.5 rounded-lg transition-all shadow-sm text-[9px]"
               >
                 <svg className="w-3 h-3 text-red-600 fill-current shrink-0" viewBox="0 0 24 24">
-                  <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92(4285F4)" fill="none"/>
                   <path d="M19.78 4.22c-1.87-.5-9.37-.5-9.37-.5s-7.51 0-9.38.5A3 3 0 0 0 .5 7.19C0 9.07 0 13 0 13s0 3.93.5 5.81a3 3 0 0 0 2.12 2.12c1.87.5 9.38.5 9.38.5s7.5 0 9.37-.5a3 3 0 0 0 2.13-2.12c.5-1.88.5-5.81.5-5.81s0-3.93-.5-5.81a3 3 0 0 0-2.13-2.12zM9.54 16.57V9.43L15.82 13l-6.28 3.57z" fill="currentColor"/>
                 </svg>
                 <span className="truncate">YouTube</span>
