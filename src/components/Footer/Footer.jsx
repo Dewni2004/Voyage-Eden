@@ -1,7 +1,24 @@
 import React from 'react';
-import logo from '../../assets/French-t.png';
-
+import { useTranslation } from 'react-i18next';
+import logoColorFR from '../../assets/French-t.png';
+import logoColorEN from '../../assets/English-Logo-scaled.png';
+import logoColorES from '../../assets/Spanish-Logo-scaled.png';
+import logoColorIT from '../../assets/Italy-Logo-scaled.png';
 const Footer = () => {
+  const { t, i18n } = useTranslation();
+  const currentYear = new Date().getFullYear();
+  const yearsExp = currentYear - 2013;
+
+  const colorLogos = {
+    fr: logoColorFR,
+    en: logoColorEN,
+    es: logoColorES,
+    it: logoColorIT,
+    de: logoColorFR
+  };
+
+  const currentLogoColor = colorLogos[i18n.language] || logoColorFR;
+
   return (
     <footer className="bg-[#102a43] text-white py-16">
       <div className="container mx-auto px-6">
@@ -10,12 +27,16 @@ const Footer = () => {
           {/* Company Info Section */}
           <div className="lg:col-span-4 flex flex-col items-center lg:items-start space-y-6">
             <img 
-              src={logo} 
+              key={i18n.language}
+              src={currentLogoColor} 
               alt="Eden Travels Logo" 
-              className="h-20 md:h-24 w-auto object-contain self-center lg:self-start transition-transform duration-300 hover:scale-105"
+              className="h-20 md:h-24 w-auto object-contain self-center lg:self-start transition-transform duration-300 hover:scale-105 origin-center lg:origin-left"
+              style={{
+                transform: (i18n.language !== 'fr' && i18n.language !== 'de') ? 'scale(1.65)' : 'none'
+              }}
             />
             <p className="text-sm text-gray-300 leading-relaxed max-w-sm text-center lg:text-left mx-auto lg:mx-0">
-              Sri Lanka Eden Travels fait partie d'un groupe d'entreprises bien établi dans le secteur du tourisme réceptif au Sri Lanka. Forts de plus de {new Date().getFullYear() - 2013} ans d'expérience, nous nous spécialisons dans la création de voyages authentiques et personnalisés qui mettent en valeur la beauté et la culture du Sri Lanka.
+              {t('footer.description', { years: yearsExp })}
             </p>
             {/* Social Icons */}
             <div className="flex space-x-4 justify-center lg:justify-start">
@@ -43,6 +64,19 @@ const Footer = () => {
                 </a>
               ))}
             </div>
+
+            {/* B2B Contacts Button */}
+            <div className="pt-4 flex justify-center lg:justify-start">
+              <a 
+                href="mailto:srilankavoyageeden@gmail.com,nethmi.srilankaedentravels@gmail.com"
+                className="inline-flex items-center gap-2 bg-white/10 border border-white/20 hover:border-white/60 text-white px-6 py-3 rounded-full text-sm font-bold tracking-wider transition-all duration-300 hover:bg-white/20"
+              >
+                {t('footer.b2b')}
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
           </div>
 
           {/* Cards Section */}
@@ -50,7 +84,7 @@ const Footer = () => {
             
             {/* Contact Card */}
             <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/10">
-              <h4 className="text-lg font-bold mb-4 uppercase tracking-wider text-luxury">Entrer en contact</h4>
+              <h4 className="text-lg font-bold mb-4 uppercase tracking-wider text-luxury">{t('footer.contact_title')}</h4>
               <div className="space-y-2 text-sm text-gray-300">
                 <p><a href="mailto:srilankavoyageeden@gmail.com,nethmi.srilankaedentravels@gmail.com" className="hover:text-white transition-colors">srilankavoyageeden@gmail.com</a></p>
                 <p><a href="mailto:srilankavoyageeden@gmail.com,nethmi.srilankaedentravels@gmail.com" className="hover:text-white transition-colors">nethmi.srilankaedentravels@gmail.com</a></p>
@@ -60,33 +94,33 @@ const Footer = () => {
 
             {/* Inscription Card */}
             <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/10">
-              <h4 className="text-lg font-bold mb-4 uppercase tracking-wider text-luxury">Inscription</h4>
+              <h4 className="text-lg font-bold mb-4 uppercase tracking-wider text-luxury">{t('footer.registration_title')}</h4>
               <div className="space-y-2 text-sm text-gray-300">
                 <div>
                   <p>SLTDA : SLTDA/SQA/TA/02233</p>
-                  <p className="text-[11px] text-gray-400 font-light italic mt-0.5">(Autorité de développement du tourisme du Sri Lanka)</p>
+                  <p className="text-[11px] text-gray-400 font-light italic mt-0.5">{t('footer.sltda_desc')}</p>
                 </div>
-                <p>N° d'immatriculation au registre du commerce : PV 00242848</p>
-                <p>Plus de 13 ans d'expérience</p>
+                <p>{t('footer.reg_no')}</p>
+                <p>{t('footer.experience')}</p>
               </div>
             </div>
 
             {/* Offices Card */}
             <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/10">
-              <h4 className="text-lg font-bold mb-4 uppercase tracking-wider text-luxury">Nos bureaux</h4>
+              <h4 className="text-lg font-bold mb-4 uppercase tracking-wider text-luxury">{t('footer.offices_title')}</h4>
               <div className="space-y-2 text-sm text-gray-300">
-                <p>Kandy : Stone House Suites, n° 29, Nittawela Road</p>
-                <p>Kurunegala : n° 64, unité 01, complexe Siripathi</p>
+                <p>Kandy : Stone House Suites, No. 29, Nittawela Road</p>
+                <p>Kurunegala : No. 64, Unit 01, Siripathi Complex</p>
               </div>
             </div>
 
             {/* Office Hours Card */}
             <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/10">
-              <h4 className="text-lg font-bold mb-4 uppercase tracking-wider text-luxury">Heures de bureau</h4>
+              <h4 className="text-lg font-bold mb-4 uppercase tracking-wider text-luxury">{t('footer.hours_title')}</h4>
               <div className="space-y-2 text-sm text-gray-300">
-                <p>Du lundi au vendredi : 8h30 – 17h30</p>
-                <p>Samedi : 8h30 – 12h30</p>
-                <p className="text-red-400 font-semibold">Dimanche : Fermé</p>
+                <p>{t('footer.hours_weekdays')}</p>
+                <p>{t('footer.hours_saturday')}</p>
+                <p className="text-red-400 font-semibold">{t('footer.hours_sunday')}</p>
               </div>
             </div>
 
@@ -95,7 +129,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <div className="mt-16 pt-8 border-t border-white/5 text-center text-xs text-gray-500">
-          <p>© {new Date().getFullYear()} Sri Lanka Voyage Eden. Tous droits réservés.</p>
+          <p>{t('footer.copyright', { year: currentYear }).replace('{{year}}', currentYear)}</p>
         </div>
       </div>
     </footer>

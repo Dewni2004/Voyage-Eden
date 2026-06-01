@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import emailjs from '@emailjs/browser';
 import PageHero from '../components/UI/PageHero';
 import officeStaff2 from '../assets/Office - staff 2.jpg';
@@ -6,6 +7,7 @@ import nethmiImg from '../assets/Nethmi.webp';
 
 const ContactUs = () => {
   const form = useRef();
+  const { t } = useTranslation();
   const [isSending, setIsSending] = useState(false);
   const [messageStatus, setMessageStatus] = useState({ type: '', text: '' });
 
@@ -39,8 +41,8 @@ const ContactUs = () => {
   return (
     <div>
       <PageHero
-        title="Contactez-nous"
-        description="Nous sommes là pour vous aider à planifier votre voyage de rêve au Sri Lanka. N'hésitez pas à nous contacter."
+        title={t("contactUs.heroTitle")}
+        description={t("contactUs.heroDesc")}
         image={officeStaff2}
         overlayOpacity="bg-black/60"
         bgPosition="object-[center_20%]"
@@ -58,11 +60,11 @@ const ContactUs = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
               </div>
-              <h3 className="text-primary text-xl md:text-2xl font-bold mb-4 md:mb-6">Nos Bureaux</h3>
+              <h3 className="text-primary text-xl md:text-2xl font-bold mb-4 md:mb-6">{t("contactUs.offices.title")}</h3>
               <div className="space-y-3 text-gray-600 font-medium leading-relaxed text-sm md:text-base">
-                <p>Kandy: Sri Lanka Viajes Eden, n° 29, Nittawela Road.</p>
+                <p>Kandy: Sri Lanka Viajes Eden, No. 29, Nittawela Road.</p>
                 <p className="pt-4 font-bold text-primary underline decoration-luxury">Kurunegala:</p>
-                <p>n° 64, unité 01, complexe Siripathi, Bauddhaloka Rd.</p>
+                <p>No. 64, Unit 01, Siripathi Complex, Bauddhaloka Rd.</p>
               </div>
             </div>
 
@@ -73,7 +75,7 @@ const ContactUs = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
               </div>
-              <h3 className="text-primary text-xl md:text-2xl font-bold mb-4 md:mb-6">Contact Direct</h3>
+              <h3 className="text-primary text-xl md:text-2xl font-bold mb-4 md:mb-6">{t("contactUs.directContact.title")}</h3>
               <div className="space-y-6 text-gray-600 font-medium leading-relaxed text-sm md:text-base">
                 <div className="space-y-2 mb-4">
                   <a href="mailto:srilankavoyageeden@gmail.com,nethmi.srilankaedentravels@gmail.com" className="block text-primary hover:text-primary/80 transition-colors underline decoration-primary/50 underline-offset-4 break-words text-xs md:text-sm">
@@ -84,7 +86,7 @@ const ContactUs = () => {
                   </a>
                 </div>
                 <div className="space-y-3">
-                  <p className="text-primary font-bold">+94 37 220 1747 <span className="text-gray-500 font-normal">(Bureau)</span></p>
+                  <p className="text-primary font-bold">+94 37 220 1747 <span className="text-gray-500 font-normal">{t("contactUs.directContact.office")}</span></p>
                   <p className="text-primary font-bold"><a href="https://wa.me/94771470150" target="_blank" rel="noopener noreferrer" className="hover:text-primary/80">+94 77 147 0150</a> <span className="text-gray-500 font-normal">(WhatsApp)</span></p>
                 </div>
               </div>
@@ -97,13 +99,13 @@ const ContactUs = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
                 </svg>
               </div>
-              <h3 className="text-primary text-xl md:text-2xl font-bold mb-4 md:mb-6">Support Global</h3>
+              <h3 className="text-primary text-xl md:text-2xl font-bold mb-4 md:mb-6">{t("contactUs.support.title")}</h3>
               <div className="space-y-3 text-gray-600 font-medium leading-relaxed text-sm md:text-base">
-                <p>Fuseau horaire : UTC +5:30 (IST)</p>
+                <p>{t("contactUs.support.timezone")}</p>
                 <p className="pt-4">Langues : Anglais, Espagnol,</p>
                 <p>Italien, Français.</p>
                 <p className="mt-6 text-[10px] md:text-xs text-primary font-bold bg-primary/10 py-2.5 px-4 rounded-full inline-block text-center">
-                  Service 24h/24 pour les clients arrivés (en anglais uniquement)
+                  {t("contactUs.support.service24h")}
                 </p>
               </div>
             </div>
@@ -114,8 +116,8 @@ const ContactUs = () => {
 
             {/* Left Column: Contact Form */}
             <div className="lg:w-2/3 bg-white p-8 md:p-12 rounded-[40px] shadow-xl border border-gray-100">
-              <h2 className="text-primary text-2xl md:text-3xl font-bold mb-4">Envoyez-nous un message</h2>
-              <p className="text-gray-600 mb-8 md:mb-10 text-sm md:text-base">Vous avez des questions sur un circuit personnalisé ? Écrivez-nous ci-dessous et nous vous répondrons immédiatement.</p>
+              <h2 className="text-primary text-2xl md:text-3xl font-bold mb-4">{t("contactUs.form.title")}</h2>
+              <p className="text-gray-600 mb-8 md:mb-10 text-sm md:text-base">{t("contactUs.form.desc")}</p>
 
               <form ref={form} onSubmit={sendEmail} className="space-y-6">
                 {messageStatus.text && (
@@ -125,7 +127,7 @@ const ContactUs = () => {
                 )}
 
                 <div className="space-y-2">
-                  <label className="text-sm font-bold text-primary ml-1">Nom*</label>
+                  <label className="text-sm font-bold text-primary ml-1">{t("contactUs.form.name")}</label>
                   <input
                     name="user_name"
                     type="text"
@@ -136,7 +138,7 @@ const ContactUs = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-sm font-bold text-primary ml-1">Téléphone*</label>
+                    <label className="text-sm font-bold text-primary ml-1">{t("contactUs.form.phone")}</label>
                     <input
                       name="user_phone"
                       type="tel"
@@ -145,7 +147,7 @@ const ContactUs = () => {
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-bold text-primary ml-1">E-mail*</label>
+                    <label className="text-sm font-bold text-primary ml-1">{t("contactUs.form.email")}</label>
                     <input
                       name="user_email"
                       type="email"
@@ -156,7 +158,7 @@ const ContactUs = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-bold text-primary ml-1">Écrivez votre message*</label>
+                  <label className="text-sm font-bold text-primary ml-1">{t("contactUs.form.messageLabel")}</label>
                   <textarea
                     name="message"
                     rows="6"
@@ -174,9 +176,9 @@ const ContactUs = () => {
                     {isSending ? (
                       <>
                         <div className="w-4 h-4 border-2 border-primary/20 border-t-primary rounded-full animate-spin"></div>
-                        Envoi en cours...
+                        {t("contactUs.form.sending")}
                       </>
-                    ) : 'Envoyez votre message'}
+                    ) : t("contactUs.form.submitBtn")}
                   </button>
                 </div>
               </form>
@@ -184,7 +186,7 @@ const ContactUs = () => {
 
             {/* Right Column: Consultant and Reg Info */}
             <div className="lg:w-1/3 space-y-8">
-              <h2 className="text-primary text-2xl md:text-3xl font-bold ml-2">Rencontrez vos conseillers</h2>
+              <h2 className="text-primary text-2xl md:text-3xl font-bold ml-2">{t("contactUs.consultants.title")}</h2>
 
               {/* Consultant Card */}
               <div className="bg-gray-100/50 p-8 md:p-10 rounded-[40px] border border-white shadow-lg backdrop-blur-sm">
@@ -194,12 +196,12 @@ const ContactUs = () => {
                   </div>
                   <div>
                     <h3 className="text-primary text-xl md:text-2xl font-bold">Nethmi</h3>
-                    <p className="text-primary/70 font-semibold text-xs md:text-sm">Conseillère en voyages</p>
+                    <p className="text-primary/70 font-semibold text-xs md:text-sm">{t("contactUs.consultants.nethmiRole")}</p>
                   </div>
                 </div>
 
                 <p className="text-gray-600 text-sm leading-relaxed mb-10">
-                  Notre agent de voyage dynamique qui fait tout son possible pour organiser des voyages passionnants et bien organisés, en veillant à ce que chaque détail soit parfaitement planifié.
+                  {t("contactUs.consultants.nethmiDesc")}
                 </p>
 
                 <div className="flex flex-col gap-4">
@@ -209,13 +211,13 @@ const ContactUs = () => {
                     rel="noopener noreferrer"
                     className="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba59] text-white border border-[#25D366] hover:border-[#20ba59] transition-all duration-300 transform active:scale-95 py-3 px-4 sm:py-3.5 sm:px-6 rounded-2xl font-bold text-sm sm:text-base"
                   >
-                    Message WhatsApp
+                    {t("contactUs.consultants.whatsapp")}
                   </a>
                   <a 
                     href="mailto:srilankavoyageeden@gmail.com,nethmi.srilankaedentravels@gmail.com"
                     className="w-full flex items-center justify-center gap-2 bg-primary hover:bg-[#1a355c] text-white border border-primary hover:border-[#1a355c] transition-all duration-300 transform active:scale-95 py-3 px-4 sm:py-3.5 sm:px-6 rounded-2xl font-bold text-sm sm:text-base"
                   >
-                    Envoyer un e-mail
+                    {t("contactUs.consultants.email")}
                   </a>
                 </div>
 
@@ -249,10 +251,10 @@ const ContactUs = () => {
 
               {/* Company Registration Card */}
               <div className="bg-primary p-8 md:p-10 rounded-[40px] text-white shadow-2xl shadow-primary/30 border border-primary/50">
-                <h3 className="text-xl md:text-2xl font-bold mb-6">Enregistrement de la société</h3>
+                <h3 className="text-xl md:text-2xl font-bold mb-6">{t("contactUs.registration.title")}</h3>
                 <div className="space-y-3 font-medium opacity-90 text-sm md:text-base">
                   <p>SLTDA : SLTDA/SQASTA/02238</p>
-                  <p>N° d'immatriculation : PV 106406</p>
+                  <p>Registration No : PV 106406</p>
                 </div>
               </div>
             </div>
@@ -264,7 +266,7 @@ const ContactUs = () => {
 
               {/* Kurunegala Map */}
               <div className="space-y-6">
-                <h2 className="text-primary text-3xl font-bold text-center">Notre bureau de Kurunegala</h2>
+                <h2 className="text-primary text-3xl font-bold text-center">{t("contactUs.mapKurunegala")}</h2>
                 <div className="w-full h-[400px] rounded-[40px] overflow-hidden shadow-2xl border-4 border-white">
                   <iframe
                     src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d1717.815548545442!2d80.35759254140284!3d7.482394977206857!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sNo.%2064%2C%204th%20floor%2C%20Unit%2001%2C%20Siripathi%20Complex%2C%20Bauddaloka%20Rd%2C%20Kurunegala%2C%20Sri%20Lanka!5e0!3m2!1sen!2slk!4v1778821295527!5m2!1sen!2slk"
@@ -281,7 +283,7 @@ const ContactUs = () => {
 
               {/* Kandy Map */}
               <div className="space-y-6">
-                <h2 className="text-primary text-3xl font-bold text-center">Notre bureau de Kandy</h2>
+                <h2 className="text-primary text-3xl font-bold text-center">{t("contactUs.mapKandy")}</h2>
                 <div className="w-full h-[400px] rounded-[40px] overflow-hidden shadow-2xl border-4 border-white">
                   <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.347146777132!2d80.63299187365601!3d7.314843613464585!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae368bb2537d1f7%3A0x4209f9e5c6dab6c4!2sSri%20Lanka%20Viajes%20Eden!5e0!3m2!1sen!2slk!4v1778821110221!5m2!1sen!2slk"

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { getArticles } from '../services/contentService';
 import blogSafari from '../assets/blog-safari.png';
 import blogCity from '../assets/blog-city.png';
@@ -11,6 +12,7 @@ import guideBanner from '../assets/itinerary-hero.png';
 import { blogArticles } from '../data/blogData';
 
 const TravelGuide = () => {
+  const { t, i18n } = useTranslation();
   const [dynamicArticles, setDynamicArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
@@ -29,12 +31,12 @@ const TravelGuide = () => {
 
   useEffect(() => {
     const fetchArticles = async () => {
-      const data = await getArticles();
+      const data = await getArticles(i18n.language);
       setDynamicArticles(data);
       setLoading(false);
     };
     fetchArticles();
-  }, []);
+  }, [i18n.language]);
 
   useEffect(() => {
     setVisibleCount(6);
@@ -42,7 +44,7 @@ const TravelGuide = () => {
 
   const allArticles = [...dynamicArticles, ...blogArticles];
 
-  const translateToFrench = (word) => {
+  const getTranslatedCategory = (word) => {
     const translations = {
       'History': 'Histoire',
       'Adventure': 'Aventure',
@@ -63,28 +65,28 @@ const TravelGuide = () => {
   };
   
   const filteredArticles = allArticles.filter(article => {
-    const categoryFr = translateToFrench(article.category);
+    const categoryFr = getTranslatedCategory(article.category);
     const matchesSearch = article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       categoryFr.toLowerCase().includes(searchQuery.toLowerCase()) ||
       (article.excerpt && article.excerpt.toLowerCase().includes(searchQuery.toLowerCase()));
     
     const matchesCategory = selectedCategory === 'All' || article.category === selectedCategory || categoryFr === selectedCategory;
-    const matchesTag = selectedTag === 'All' || (article.tags && article.tags.some(t => t === selectedTag || translateToFrench(t) === selectedTag));
+    const matchesTag = selectedTag === 'All' || (article.tags && article.tags.some(t => t === selectedTag || getTranslatedCategory(t) === selectedTag));
     
     return matchesSearch && matchesCategory && matchesTag;
   });
 
   const categories = [
     { name: "All", count: allArticles.length },
-    ...Array.from(new Set(allArticles.map(a => translateToFrench(a.category))))
+    ...Array.from(new Set(allArticles.map(a => getTranslatedCategory(a.category))))
       .filter(Boolean)
       .map(cat => ({
         name: cat,
-        count: allArticles.filter(a => translateToFrench(a.category) === cat).length
+        count: allArticles.filter(a => getTranslatedCategory(a.category) === cat).length
       }))
   ];
 
-  const allTags = ['All', ...Array.from(new Set(allArticles.flatMap(a => (a.tags || []).map(translateToFrench))))].filter(Boolean);
+  const allTags = ['All', ...Array.from(new Set(allArticles.flatMap(a => (a.tags || []).map(getTranslatedCategory))))].filter(Boolean);
 
   const ArticleCard = ({ article }) => (
     <article className="bg-white rounded-2xl sm:rounded-[32px] overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 group flex flex-col">
@@ -95,7 +97,7 @@ const TravelGuide = () => {
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
         <div className="absolute top-2 left-2 sm:top-4 sm:left-4 bg-primary text-white text-[9px] sm:text-xs font-bold px-2 py-1 sm:px-4 sm:py-2 rounded-full shadow-lg">
-          {translateToFrench(article.category)}
+          {getTranslatedCategory(article.category)}
         </div>
       </div>
       
@@ -119,7 +121,7 @@ const TravelGuide = () => {
         </div>
         
         <Link to={`/blog/${article.id}`} className="text-primary font-bold text-[10px] sm:text-sm flex items-center group/btn hover:text-primary/80 transition-all mt-2 sm:mt-0">
-          Lire la suite
+          {t('travelGuide.readMore')}
           <svg className="w-3 h-3 sm:w-4 sm:h-4 ml-1 sm:ml-2 transform group-hover/btn:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
@@ -131,8 +133,8 @@ const TravelGuide = () => {
   return (
     <div>
       <PageHero 
-        title="Guide de Voyage"
-        description="Découvrez nos conseils, histoires et guides pour explorer le Sri Lanka comme un local."
+        title={t('travelGuide.heroTitle')}
+        description={t('travelGuide.heroDesc')}
         image={guideBanner}
       />
       <div className="py-16 bg-[#f8fbff]">
@@ -142,22 +144,22 @@ const TravelGuide = () => {
           {/* Left Column: Articles */}
           <div className="lg:w-2/3 order-2 lg:order-1">
             
-            <h2 className="text-primary text-2xl font-bold mb-6 uppercase tracking-widest border-l-4 border-primary pl-4">Sri Lanka dans l'actualité</h2>
+            <h2 className="text-primary text-2xl font-bold mb-6 uppercase tracking-widest border-l-4 border-primary pl-4">{t('travelGuide.newsTitle')}</h2>
             <div className="grid grid-cols-2 md:grid-cols-2 gap-4 md:gap-10 mb-12">
               {allArticles.slice(0, 2).map(article => <ArticleCard key={article.id} article={article} />)}
             </div>
 
-            <h2 className="text-primary text-2xl font-bold mb-6 uppercase tracking-widest border-l-4 border-primary pl-4">Lisez nos articles les plus utiles</h2>
+            <h2 className="text-primary text-2xl font-bold mb-6 uppercase tracking-widest border-l-4 border-primary pl-4">{t('travelGuide.usefulTitle')}</h2>
             <div className="grid grid-cols-2 md:grid-cols-2 gap-4 md:gap-10 mb-12">
               {allArticles.slice(2, 4).map(article => <ArticleCard key={article.id} article={article} />)}
             </div>
 
-            <h2 className="text-primary text-2xl font-bold mb-6 uppercase tracking-widest border-l-4 border-primary pl-4">Les articles les plus populaires</h2>
+            <h2 className="text-primary text-2xl font-bold mb-6 uppercase tracking-widest border-l-4 border-primary pl-4">{t('travelGuide.popularTitle')}</h2>
             <div className="grid grid-cols-2 md:grid-cols-2 gap-4 md:gap-10 mb-12">
               {allArticles.slice(4, 6).map(article => <ArticleCard key={article.id} article={article} />)}
             </div>
 
-            <h2 className="text-primary text-2xl font-bold mb-6 uppercase tracking-widest border-l-4 border-primary pl-4">Tous les articles</h2>
+            <h2 className="text-primary text-2xl font-bold mb-6 uppercase tracking-widest border-l-4 border-primary pl-4">{t('travelGuide.allArticlesTitle')}</h2>
             <div className="grid grid-cols-2 md:grid-cols-2 gap-4 md:gap-10">
               {filteredArticles.length > 0 ? (
                 (isMobile ? filteredArticles.slice(0, visibleCount) : filteredArticles).map((article) => (
@@ -166,13 +168,13 @@ const TravelGuide = () => {
               ) : (
                 <div className="col-span-full py-20 text-center bg-white rounded-[40px] shadow-sm border border-gray-100">
                   <div className="text-6xl mb-6">🔎</div>
-                  <h3 className="text-2xl font-bold text-primary mb-2">Aucun article trouvé</h3>
-                  <p className="text-gray-400 max-w-xs mx-auto">Nous n'avons trouvé aucun article correspondant à vos filtres.</p>
+                  <h3 className="text-2xl font-bold text-primary mb-2">{t('travelGuide.noArticlesTitle')}</h3>
+                  <p className="text-gray-400 max-w-xs mx-auto">{t('travelGuide.noArticlesDesc')}</p>
                   <button 
                     onClick={() => { setSearchQuery(''); setSelectedCategory('All'); setSelectedTag('All'); }} 
                     className="mt-6 text-primary font-bold hover:underline"
                   >
-                    Effacer tous les filtres
+                    {t('travelGuide.clearFilters')}
                   </button>
                 </div>
               )}
@@ -184,7 +186,7 @@ const TravelGuide = () => {
                   onClick={() => setVisibleCount(prev => prev + 6)}
                   className="bg-primary hover:bg-primary/95 text-white font-bold px-8 py-3.5 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5"
                 >
-                  Afficher plus
+                  {t('travelGuide.showMore')}
                 </button>
               </div>
             )}
@@ -195,11 +197,11 @@ const TravelGuide = () => {
             
             {/* Search */}
             <div className="bg-white p-10 rounded-[32px] shadow-lg border border-gray-100">
-              <h3 className="text-primary text-xl font-bold mb-6">Rechercher ici</h3>
+              <h3 className="text-primary text-xl font-bold mb-6">{t('travelGuide.searchTitle')}</h3>
               <div className="relative">
                 <input 
                   type="text" 
-                  placeholder="Chercher Ici..." 
+                  placeholder={t('travelGuide.searchPlaceholder')} 
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full bg-gray-50 border border-gray-200 rounded-2xl py-4 px-6 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all text-gray-700"
@@ -214,7 +216,7 @@ const TravelGuide = () => {
 
             {/* Categories */}
             <div className="bg-white p-8 md:p-10 rounded-[32px] shadow-lg border border-gray-100">
-              <h3 className="text-primary text-xl font-bold mb-8">Catégories</h3>
+              <h3 className="text-primary text-xl font-bold mb-8">{t('travelGuide.categoriesTitle')}</h3>
               <ul className="space-y-4">
                 {categories.map((cat, index) => (
                   <li 
@@ -223,7 +225,7 @@ const TravelGuide = () => {
                     className={`flex justify-between items-center group cursor-pointer p-3 md:p-4 rounded-xl transition-all border-b border-gray-50 last:border-0 ${selectedCategory === cat.name ? 'bg-primary/5' : 'hover:bg-gray-50'}`}
                   >
                     <span className={`font-medium transition-colors ${selectedCategory === cat.name ? 'text-primary font-bold' : 'text-gray-700 group-hover:text-primary'}`}>
-                      {cat.name === 'All' ? 'Toutes les catégories' : cat.name}
+                      {cat.name === 'All' ? t('travelGuide.allCategories') : cat.name}
                     </span>
                     <span className={`text-xs font-bold w-8 h-8 flex items-center justify-center rounded-lg transition-all ${selectedCategory === cat.name ? 'bg-primary text-white' : 'bg-primary/5 text-primary group-hover:bg-primary group-hover:text-white'}`}>
                       {cat.count}
@@ -235,7 +237,7 @@ const TravelGuide = () => {
 
             {/* Recent Posts */}
             <div className="bg-white p-10 rounded-[32px] shadow-lg border border-gray-100">
-              <h3 className="text-primary text-xl font-bold mb-8">Articles récents</h3>
+              <h3 className="text-primary text-xl font-bold mb-8">{t('travelGuide.recentTitle')}</h3>
               <div className="space-y-8">
                 {allArticles.slice(0, 3).map((article) => (
                   <div key={article.id} className="flex gap-4 group cursor-pointer">
@@ -255,7 +257,7 @@ const TravelGuide = () => {
 
             {/* Tags */}
             <div className="bg-white p-10 rounded-[32px] shadow-lg border border-gray-100">
-              <h3 className="text-primary text-xl font-bold mb-8">Balises</h3>
+              <h3 className="text-primary text-xl font-bold mb-8">{t('travelGuide.tagsTitle')}</h3>
               <div className="flex flex-wrap gap-3">
                 {allTags.map((tag, index) => (
                   <button 
@@ -263,7 +265,7 @@ const TravelGuide = () => {
                     onClick={() => setSelectedTag(tag)}
                     className={`text-xs font-bold px-5 py-2.5 rounded-xl transition-all border ${selectedTag === tag ? 'bg-primary text-white border-primary shadow-lg shadow-primary/20' : 'bg-gray-100 text-gray-600 border-transparent hover:bg-primary hover:text-white'}`}
                   >
-                    {tag === 'All' ? 'Toutes' : tag}
+                    {tag === 'All' ? t('travelGuide.allTags') : tag}
                   </button>
                 ))}
               </div>

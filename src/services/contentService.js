@@ -1,26 +1,36 @@
 import { supabase } from "../supabase";
 
+const getTableName = (baseName, lang) => {
+  const shortLang = lang?.split('-')[0] || 'fr';
+  if (shortLang === 'fr') return baseName;
+  return `${baseName}_${shortLang}`;
+};
+
 // --- REVIEWS ---
 
-export const getReviews = async () => {
+export const getReviews = async (lang = 'fr') => {
   try {
     const { data, error } = await supabase
-      .from('reviews')
+      .from(getTableName('reviews', lang))
       .select('*')
       .order('created_at', { ascending: false });
     
     if (error) throw error;
     return data || [];
   } catch (error) {
+    if (lang !== 'fr') {
+      console.warn(`Fallback to French for reviews due to error:`, error.message);
+      return getReviews('fr');
+    }
     console.error("Error fetching reviews:", error);
     return [];
   }
 };
 
-export const addReview = async (reviewData) => {
+export const addReview = async (reviewData, lang = 'fr') => {
   try {
     const { data, error } = await supabase
-      .from('reviews')
+      .from(getTableName('reviews', lang))
       .insert([reviewData])
       .select();
     
@@ -32,10 +42,10 @@ export const addReview = async (reviewData) => {
   }
 };
 
-export const updateReview = async (id, reviewData) => {
+export const updateReview = async (id, reviewData, lang = 'fr') => {
   try {
     const { error } = await supabase
-      .from('reviews')
+      .from(getTableName('reviews', lang))
       .update(reviewData)
       .eq('id', id);
     
@@ -46,10 +56,10 @@ export const updateReview = async (id, reviewData) => {
   }
 };
 
-export const deleteReview = async (id) => {
+export const deleteReview = async (id, lang = 'fr') => {
   try {
     const { error } = await supabase
-      .from('reviews')
+      .from(getTableName('reviews', lang))
       .delete()
       .eq('id', id);
     
@@ -61,25 +71,29 @@ export const deleteReview = async (id) => {
 };
 
 // --- ITINERARIES ---
-export const getItineraries = async () => {
+export const getItineraries = async (lang = 'fr') => {
   try {
     const { data, error } = await supabase
-      .from('itineraries')
+      .from(getTableName('itineraries', lang))
       .select('*')
       .order('created_at', { ascending: false });
     
     if (error) throw error;
     return data || [];
   } catch (e) {
+    if (lang !== 'fr') {
+      console.warn(`Fallback to French for itineraries due to error:`, e.message);
+      return getItineraries('fr');
+    }
     console.error("Error fetching itineraries: ", e);
     return [];
   }
 };
 
-export const addItinerary = async (itineraryData) => {
+export const addItinerary = async (itineraryData, lang = 'fr') => {
   try {
     const { data, error } = await supabase
-      .from('itineraries')
+      .from(getTableName('itineraries', lang))
       .insert([itineraryData])
       .select();
     
@@ -91,10 +105,10 @@ export const addItinerary = async (itineraryData) => {
   }
 };
 
-export const updateItinerary = async (id, itineraryData) => {
+export const updateItinerary = async (id, itineraryData, lang = 'fr') => {
   try {
     const { error } = await supabase
-      .from('itineraries')
+      .from(getTableName('itineraries', lang))
       .update(itineraryData)
       .eq('id', id);
     
@@ -105,10 +119,10 @@ export const updateItinerary = async (id, itineraryData) => {
   }
 };
 
-export const deleteItinerary = async (id) => {
+export const deleteItinerary = async (id, lang = 'fr') => {
   try {
     const { error } = await supabase
-      .from('itineraries')
+      .from(getTableName('itineraries', lang))
       .delete()
       .eq('id', id);
     
@@ -121,25 +135,29 @@ export const deleteItinerary = async (id) => {
 
 // --- ARTICLES (TRAVEL GUIDE) ---
 
-export const getArticles = async () => {
+export const getArticles = async (lang = 'fr') => {
   try {
     const { data, error } = await supabase
-      .from('articles')
+      .from(getTableName('articles', lang))
       .select('*')
       .order('created_at', { ascending: false });
     
     if (error) throw error;
     return data || [];
   } catch (error) {
+    if (lang !== 'fr') {
+      console.warn(`Fallback to French for articles due to error:`, error.message);
+      return getArticles('fr');
+    }
     console.error("Error fetching articles:", error);
     return [];
   }
 };
 
-export const addArticle = async (articleData) => {
+export const addArticle = async (articleData, lang = 'fr') => {
   try {
     const { data, error } = await supabase
-      .from('articles')
+      .from(getTableName('articles', lang))
       .insert([articleData])
       .select();
     
@@ -151,10 +169,10 @@ export const addArticle = async (articleData) => {
   }
 };
 
-export const updateArticle = async (id, articleData) => {
+export const updateArticle = async (id, articleData, lang = 'fr') => {
   try {
     const { error } = await supabase
-      .from('articles')
+      .from(getTableName('articles', lang))
       .update(articleData)
       .eq('id', id);
     
@@ -165,10 +183,10 @@ export const updateArticle = async (id, articleData) => {
   }
 };
 
-export const deleteArticle = async (id) => {
+export const deleteArticle = async (id, lang = 'fr') => {
   try {
     const { error } = await supabase
-      .from('articles')
+      .from(getTableName('articles', lang))
       .delete()
       .eq('id', id);
     
@@ -178,27 +196,60 @@ export const deleteArticle = async (id) => {
     throw error;
   }
 };
-// --- CATEGORIES ---
+// --- TAGS ---
 
-export const getCategories = async () => {
+export const getTags = async (lang = 'fr') => {
   try {
     const { data, error } = await supabase
-      .from('categories')
+      .from(getTableName('tags', lang))
+      .select('*')
+      .order('name', { ascending: true });
+    
+    if (error) throw error;
+    if ((!data || data.length === 0) && lang !== 'fr') {
+      console.warn(`Fallback to French for tags due to empty data.`);
+      return getTags('fr');
+    }
+    return data || [];
+  } catch (error) {
+    if (lang !== 'fr') {
+      console.warn(`Fallback to French for tags due to error:`, error.message);
+      return getTags('fr');
+    }
+    console.error("Error fetching tags:", error);
+    return [];
+  }
+};
+
+// --- CATEGORIES ---
+
+export const getCategories = async (lang = 'fr') => {
+  try {
+    const { data, error } = await supabase
+      .from(getTableName('categories', lang))
       .select('*')
       .order('id', { ascending: true });
     
     if (error) throw error;
+    if ((!data || data.length === 0) && lang !== 'fr') {
+      console.warn(`Fallback to French for categories due to empty data.`);
+      return getCategories('fr');
+    }
     return data || [];
   } catch (error) {
+    if (lang !== 'fr') {
+      console.warn(`Fallback to French for categories due to error:`, error.message);
+      return getCategories('fr');
+    }
     console.error("Error fetching categories:", error);
     return [];
   }
 };
 
-export const addCategory = async (categoryData) => {
+export const addCategory = async (categoryData, lang = 'fr') => {
   try {
     const { data, error } = await supabase
-      .from('categories')
+      .from(getTableName('categories', lang))
       .insert([categoryData])
       .select();
     
@@ -210,10 +261,10 @@ export const addCategory = async (categoryData) => {
   }
 };
 
-export const updateCategory = async (id, categoryData) => {
+export const updateCategory = async (id, categoryData, lang = 'fr') => {
   try {
     const { error } = await supabase
-      .from('categories')
+      .from(getTableName('categories', lang))
       .update(categoryData)
       .eq('id', id);
     
@@ -224,10 +275,10 @@ export const updateCategory = async (id, categoryData) => {
   }
 };
 
-export const deleteCategory = async (id) => {
+export const deleteCategory = async (id, lang = 'fr') => {
   try {
     const { error } = await supabase
-      .from('categories')
+      .from(getTableName('categories', lang))
       .delete()
       .eq('id', id);
     

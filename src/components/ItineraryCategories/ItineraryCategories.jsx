@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { getCategories } from '../../services/contentService';
 import honeymoonImg from '../../assets/Honeymoon - Trips Card.webp';
 import adventureImg from '../../assets/Adventure - Trips Card.webp';
@@ -10,6 +11,7 @@ import popularImg from '../../assets/Popularies.jpg';
 import interestsImg from '../../assets/Intrests.jpg';
 
 const ItineraryCategories = ({ showTitle = false }) => {
+  const { t, i18n } = useTranslation();
   const [categories, setCategories] = useState([
     { id: 'popular', title: 'Populaires', image: popularImg },
     { id: 'honeymoon', title: 'Voyages de noces', image: honeymoonImg },
@@ -25,7 +27,7 @@ const ItineraryCategories = ({ showTitle = false }) => {
 
   useEffect(() => {
     const fetch = async () => {
-      const dynamicCats = await getCategories();
+      const dynamicCats = await getCategories(i18n.language);
       if (dynamicCats && dynamicCats.length > 0) {
         const combined = [...categories];
         dynamicCats.forEach(dCat => {
@@ -40,7 +42,7 @@ const ItineraryCategories = ({ showTitle = false }) => {
       }
     };
     fetch();
-  }, []);
+  }, [i18n.language]);
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
@@ -54,9 +56,7 @@ const ItineraryCategories = ({ showTitle = false }) => {
       <div className="container mx-auto px-4">
         {showTitle && (
           <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-4xl md:text-5xl font-serif font-bold text-primary mb-4">
-              itinéraires basés sur les centres d'intérêt
-            </h2>
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-primary mb-4">{t("itinerariesPage.basedOnInterests")}</h2>
             <div className="w-24 h-1 bg-luxury mx-auto"></div>
           </div>
         )}
@@ -71,13 +71,13 @@ const ItineraryCategories = ({ showTitle = false }) => {
             >
               <img 
                 src={category.image} 
-                alt={category.title}
+                alt={t(`itinerariesPage.categories.${category.id}`, { defaultValue: category.title })}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent"></div>
               <div className="absolute bottom-0 left-0 right-0 p-6">
                 <h3 className="text-white font-bold text-lg leading-tight group-hover:text-luxury transition-colors">
-                  {category.title}
+                  {t(`itinerariesPage.categories.${category.id}`, { defaultValue: category.title })}
                 </h3>
               </div>
             </div>

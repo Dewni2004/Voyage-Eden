@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import swipeHandImg from '../assets/swipe-hand-transparent.png';
 import { getReviews } from '../services/contentService';
 import { staticTextReviews } from '../data/reviewsData';
@@ -8,6 +9,7 @@ import PageHero from '../components/UI/PageHero';
 import reviewsBanner from '../assets/Review page Banner.jpeg';
 
 const Reviews = () => {
+  const { t, i18n } = useTranslation();
   const [dynamicReviews, setDynamicReviews] = useState([]);
   const [selectedReview, setSelectedReview] = useState(null);
   const [selectedVideo, setSelectedVideo] = useState(null);
@@ -35,12 +37,12 @@ const Reviews = () => {
 
   useEffect(() => {
     const fetchReviews = async () => {
-      const data = await getReviews();
+      const data = await getReviews(i18n.language);
       setDynamicReviews(data);
       setLoading(false);
     };
     fetchReviews();
-  }, []);
+  }, [i18n.language]);
 
   const textReviews = [...dynamicReviews, ...staticTextReviews];
 
@@ -64,10 +66,10 @@ const Reviews = () => {
               <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
             ))}
           </div>
-          <h1 className="text-5xl md:text-7xl font-bold font-serif mb-4">Histoires réelles</h1>
-          <p className="text-xl md:text-3xl font-medium tracking-wide uppercase opacity-90">Voyages inoubliables</p>
+          <h1 className="text-5xl md:text-7xl font-bold font-serif mb-4">{t("reviews.heroTitle")}</h1>
+          <p className="text-xl md:text-3xl font-medium tracking-wide uppercase opacity-90">{t("reviews.heroSubtitle")}</p>
           <p className="mt-8 text-white/80 max-w-2xl mx-auto text-lg">
-            Découvrez comment nos voyageurs ont vécu la magie du Sri Lanka, des collines brumeuses aux rivages dorés.
+            {t("reviews.heroDesc")}
           </p>
         </div>
       </div>
@@ -91,10 +93,10 @@ const Reviews = () => {
               
               <div className="w-full text-left">
                 <div className="flex items-center gap-2.5">
-                  <span className="text-xl sm:text-2xl font-bold text-primary tracking-tight font-serif">Avis Google</span>
+                  <span className="text-xl sm:text-2xl font-bold text-primary tracking-tight font-serif">{t("reviews.googleReviews")}</span>
                   <span className="bg-emerald-50 text-emerald-600 text-[10px] font-bold px-2.5 py-0.5 rounded-full flex items-center gap-1">
                     <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-ping"></span>
-                    Vérifié
+                    {t("reviews.verified")}
                   </span>
                 </div>
                 <div className="flex items-center gap-2 mt-1.5 justify-start">
@@ -106,9 +108,9 @@ const Reviews = () => {
                       </svg>
                     ))}
                   </div>
-                  <span className="text-gray-400 text-xs font-normal">(416+ avis voyageurs)</span>
+                  <span className="text-gray-400 text-xs font-normal">{t("reviews.googleCount")}</span>
                 </div>
-                <p className="text-gray-400 text-[11px] sm:text-xs mt-2 font-normal leading-relaxed text-left">Note moyenne basée sur les retours d'expérience de nos clients.</p>
+                <p className="text-gray-400 text-[11px] sm:text-xs mt-2 font-normal leading-relaxed text-left">{t("reviews.googleDesc")}</p>
               </div>
             </div>
             
@@ -123,7 +125,7 @@ const Reviews = () => {
                 <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
-                Consulter
+                {t("reviews.consult")}
               </a>
               <a 
                 href="https://www.google.com/search?q=Sri+Lanka+Eden+Travels#lrd=0x3ae3662a67e2a9b3:0xd9099db1070ff22,3"
@@ -134,7 +136,7 @@ const Reviews = () => {
                 <svg className="w-3.5 h-3.5 text-amber-500 fill-current" viewBox="0 0 20 20">
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </svg>
-                Écrire
+                {t("reviews.write")}
               </a>
             </div>
           </div>
@@ -151,7 +153,7 @@ const Reviews = () => {
               
               <div className="w-full text-left">
                 <div className="flex items-center gap-2.5">
-                  <span className="text-xl sm:text-2xl font-bold text-primary tracking-tight font-serif">Avis Vidéo</span>
+                  <span className="text-xl sm:text-2xl font-bold text-primary tracking-tight font-serif">{t("reviews.videoReviews")}</span>
                   <span className="bg-red-50 text-red-600 text-[10px] font-bold px-2.5 py-0.5 rounded-full flex items-center gap-1">
                     YouTube
                   </span>
@@ -161,9 +163,9 @@ const Reviews = () => {
                   <svg className="w-4 h-3.5 text-red-600 fill-current" viewBox="0 0 24 24">
                     <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z" />
                   </svg>
-                  <span className="text-gray-400 text-xs font-normal">(Témoignages de nos clients)</span>
+                  <span className="text-gray-400 text-xs font-normal">{t("reviews.videoTestimonials")}</span>
                 </div>
-                <p className="text-gray-400 text-[11px] sm:text-xs mt-2 font-normal leading-relaxed text-left">Découvrez l'aventure en images à travers les yeux de nos voyageurs.</p>
+                <p className="text-gray-400 text-[11px] sm:text-xs mt-2 font-normal leading-relaxed text-left">{t("reviews.videoDesc")}</p>
               </div>
             </div>
             
@@ -179,7 +181,7 @@ const Reviews = () => {
                 <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
                   <path d="M8 5v14l11-7z" />
                 </svg>
-                Visionner
+                {t("reviews.watch")}
               </button>
               <a 
                 href="https://www.youtube.com/@srilankaviajeseden"
@@ -201,9 +203,9 @@ const Reviews = () => {
       {/* Recent Videos Section */}
       <section className="py-16 max-w-7xl mx-auto px-6 relative">
         <div className="mb-16 text-center md:text-left">
-          <span className="text-primary text-sm font-bold uppercase tracking-widest mb-2 block">Souvenirs visuels</span>
-          <h2 className="text-primary text-4xl font-bold font-serif">Vidéos récentes</h2>
-          <p className="text-gray-400 mt-2">Courts moments forts en vidéo des voyages incroyables de nos clients.</p>
+          <span className="text-primary text-sm font-bold uppercase tracking-widest mb-2 block">{t("reviews.visualMemories")}</span>
+          <h2 className="text-primary text-4xl font-bold font-serif">{t("reviews.recentVideos")}</h2>
+          <p className="text-gray-400 mt-2">{t("reviews.recentVideosDesc")}</p>
         </div>
 
         {/* Mobile Swipe Hint Overlay */}
@@ -238,7 +240,7 @@ const Reviews = () => {
               </div>
               <div className="p-6 text-center">
                 <h4 className="text-primary font-bold text-lg">{video.name}</h4>
-                <p className="text-gray-400 text-sm mt-1">Voyage en {video.date}</p>
+                <p className="text-gray-400 text-sm mt-1">{t("reviews.tripIn")} {video.date}</p>
               </div>
             </div>
           ))}
@@ -250,7 +252,7 @@ const Reviews = () => {
             rel="noreferrer"
             className="group inline-flex items-center gap-2 sm:gap-3 border border-primary bg-transparent text-primary hover:bg-primary hover:text-white px-5 py-2.5 sm:px-8 sm:py-3 rounded-full text-xs sm:text-sm md:text-base font-bold shadow-sm hover:shadow-md transition-all duration-300 transform active:scale-95"
           >
-            <span>Voir toutes les vidéos</span>
+            <span>{t("reviews.seeAllVideos")}</span>
             <div className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 rounded-full bg-primary/5 group-hover:bg-white flex items-center justify-center transition-all duration-300 transform group-hover:translate-x-1.5 shadow-sm">
               <svg className="w-2.5 h-2.5 sm:w-3 h-3 md:w-4 md:h-4 text-primary transition-colors duration-300" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
@@ -264,9 +266,9 @@ const Reviews = () => {
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6 relative">
           <div className="mb-16 text-center md:text-left">
-            <span className="text-primary text-sm font-bold uppercase tracking-widest mb-2 block">Avis des voyageurs</span>
-            <h2 className="text-primary text-4xl font-bold font-serif">Avis récents</h2>
-            <p className="text-gray-400 mt-2">Histoires et expériences authentiques partagées by nos clients précieux.</p>
+            <span className="text-primary text-sm font-bold uppercase tracking-widest mb-2 block">{t("reviews.travelerReviewsTitle")}</span>
+            <h2 className="text-primary text-4xl font-bold font-serif">{t("reviews.recentReviews")}</h2>
+            <p className="text-gray-400 mt-2">{t("reviews.recentReviewsDesc")}</p>
           </div>
 
           {/* Mobile Swipe Hint Overlay */}
@@ -333,15 +335,15 @@ const Reviews = () => {
       {/* Why Travelers Love Us Section */}
       <section className="py-20 max-w-7xl mx-auto px-6">
         <div className="text-center mb-20">
-          <h2 className="text-primary text-4xl md:text-5xl font-bold font-serif mb-6">Pourquoi les voyageurs nous aiment</h2>
+          <h2 className="text-primary text-4xl md:text-5xl font-bold font-serif mb-6">{t("reviews.whyLoveUsTitle")}</h2>
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
           {[
-            { title: "Voyages sur mesure", icon: "M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4", desc: "Créer chaque voyage selon votre style personnel." },
-            { title: "Guides experts", icon: "M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z", desc: "Des experts locaux qui connaissent les secrets les mieux gardés de l'île." },
-            { title: "Hôtels de prestige", icon: "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4", desc: "Seulement les meilleurs hébergements pour votre confort." },
-            { title: "Sûr et privé", icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z", desc: "Votre sécurité et votre vie privée sont nos priorités absolues." }
+            { title: t("reviews.features.custom.title"), icon: "M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4", desc: t("reviews.features.custom.desc") },
+            { title: t("reviews.features.experts.title"), icon: "M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z", desc: t("reviews.features.experts.desc") },
+            { title: t("reviews.features.hotels.title"), icon: "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4", desc: t("reviews.features.hotels.desc") },
+            { title: t("reviews.features.safe.title"), icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z", desc: t("reviews.features.safe.desc") }
           ].map((feature, i) => (
             <div key={i} className="bg-white p-4 sm:p-10 rounded-2xl sm:rounded-[1.75rem] border border-primary/20 shadow-[0_15px_35px_-5px_rgba(30,64,111,0.06)] text-center flex flex-col justify-between">
               <div>
@@ -374,15 +376,15 @@ const Reviews = () => {
           <div className="relative z-10 p-6 md:p-10 text-center">
             <div className="max-w-2xl mx-auto flex flex-col items-center">
               <div className="inline-block px-3 py-1 bg-white/10 backdrop-blur-md border border-white/20 rounded-full mb-4">
-                <span className="text-white text-[8px] font-bold uppercase tracking-[0.3em]">Commencez l'aventure</span>
+                <span className="text-white text-[8px] font-bold uppercase tracking-[0.3em]">{t("reviews.ctaPrefix")}</span>
               </div>
               
               <h2 className="text-2xl md:text-4xl font-bold font-serif text-white mb-4 leading-tight">
-                Prêt à écrire votre <span className="italic opacity-80">propre histoire ?</span>
+                {t("reviews.ctaTitle")}
               </h2>
               
               <p className="text-white/70 text-sm md:text-base mb-8 font-light max-w-lg">
-                Rejoignez des centaines de voyageurs heureux et vivez le voyage de votre vie avec Eden Travels.
+                {t("reviews.ctaDesc")}
               </p>
 
               <div className="flex flex-col sm:flex-row justify-center items-center gap-3">
@@ -390,7 +392,7 @@ const Reviews = () => {
                   to="/contact" 
                   className="btn-premium-white px-8 py-2.5 rounded-2xl text-sm"
                 >
-                  Planifier mon voyage
+                  {t("reviews.planTrip")}
                 </Link>
                 
                 <a 
@@ -474,12 +476,12 @@ const Reviews = () => {
               
               <div className="border-t border-gray-100 pt-8">
                 <h4 className="text-primary font-bold text-2xl mb-1">{selectedReview.name}</h4>
-                <p className="text-gray-400 text-sm font-bold uppercase tracking-[0.2em]">Voyage en {selectedReview.date}</p>
+                <p className="text-gray-400 text-sm font-bold uppercase tracking-[0.2em]">{t("reviews.tripIn")} {selectedReview.date}</p>
                 <Link
                   to={`/review/${selectedReview.id}`}
                   className="mt-6 text-primary font-bold text-sm flex items-center gap-2 group/btn hover:text-primary/80 transition-all"
                 >
-                  Lire l'histoire complète
+                  {t("reviews.readFullStory")}
                   <svg className="w-4 h-4 transform group-hover/btn:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>

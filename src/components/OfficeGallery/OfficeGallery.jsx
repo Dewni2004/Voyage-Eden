@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import img1 from '../../assets/Office Image 1.jpg';
 import img2 from '../../assets/Office Image 2.jpg';
@@ -27,6 +28,7 @@ const items = [
 ];
 
 const OfficeGallery = () => {
+  const { t } = useTranslation();
   const [selectedImage, setSelectedImage] = useState(null);
 
   return (
@@ -35,15 +37,11 @@ const OfficeGallery = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <p className="text-luxury text-sm font-bold uppercase tracking-[0.2em] mb-4">
-            Derrière les décors
+            {t('gallery.subtitle', 'Derrière les décors')}
           </p>
           <h2 className="text-primary text-4xl md:text-5xl font-serif font-bold">
-            Notre Bureau et Notre Équipe
+            {t('gallery.title', 'Notre Bureau et Notre Équipe')}
           </h2>
-          <p className="text-gray-500 mt-6 max-w-2xl mx-auto font-medium">
-            Rencontrez les visages passionnés et découvrez le cœur de nos opérations au Sri Lanka. 
-            Nous travaillons sans relâche pour rendre vos voyages inoubliables.
-          </p>
         </div>
 
         {/* Layout Container: Video and Image Grid */}

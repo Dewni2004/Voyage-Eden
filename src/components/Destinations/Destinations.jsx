@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { getArticles } from '../../services/contentService';
 import { Link } from 'react-router-dom';
 import sigiriya from '../../assets/Sigiriya.jpg';
@@ -9,6 +10,7 @@ import taprobane from '../../assets/itinerary-hero.png';
 import diyaluma from '../../assets/blog-safari.png';
 
 const Destinations = () => {
+  const { t, i18n } = useTranslation();
   const [articles, setArticles] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -32,13 +34,13 @@ const Destinations = () => {
 
   useEffect(() => {
     const fetchArticles = async () => {
-      const data = await getArticles();
+      const data = await getArticles(i18n.language);
       setTotalCount(data.length);
       setArticles(data.slice(0, 4));
       setLoading(false);
     };
     fetchArticles();
-  }, []);
+  }, [i18n.language]);
 
   const displayItems = articles.length >= 4 ? articles : fallbackDestinations;
 
@@ -51,9 +53,9 @@ const Destinations = () => {
       <div className="container mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-8 md:mb-16">
-          <h2 className="mb-4">Le Journal d’Eden</h2>
+          <h2 className="mb-4">{t('destinations.title')}</h2>
           <p className="text-gray-600 max-w-2xl mx-auto text-lg font-light mb-3">
-            Inspiration et découvertes du monde.
+            {t('destinations.subtitle')}
           </p>
           <span className="inline-block bg-primary/5 text-primary text-[11px] px-3.5 py-1 rounded-full font-bold uppercase tracking-wider">
             {totalCount} {totalCount <= 1 ? 'article publié' : 'articles publiés'}

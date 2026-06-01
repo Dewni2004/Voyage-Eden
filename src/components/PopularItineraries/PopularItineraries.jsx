@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import swipeHandImg from '../../assets/swipe-hand-transparent.png';
 
 const getIconSvg = (iconText, iconTextColorClass) => {
@@ -60,7 +61,7 @@ const getIconSvg = (iconText, iconTextColorClass) => {
   );
 };
 
-const formatItineraryTitle = (title, duration) => {
+const formatItineraryTitle = (title, duration, t) => {
   if (!title) return '';
   const daysRegex = /\s*\(\s*(\d+)\s*[jJ]ours?\s*\)\s*$/;
   const match = title.match(daysRegex);
@@ -69,13 +70,13 @@ const formatItineraryTitle = (title, duration) => {
   
   if (match) {
     const days = parseInt(match[1], 10);
-    daysText = `${days} jours`;
+    daysText = `${days} ${t("itineraryCard.days")}`;
     cleanTitle = title.replace(daysRegex, '').trim();
   } else if (duration) {
     const numMatch = duration.match(/(\d+)/);
     if (numMatch) {
       const days = parseInt(numMatch[1], 10);
-      daysText = `${days} jours`;
+      daysText = `${days} ${t("itineraryCard.days")}`;
     } else {
       daysText = duration;
     }
@@ -86,6 +87,7 @@ const formatItineraryTitle = (title, duration) => {
 
 const PopularItineraries = ({ title, id, itineraries, isDark, isGreen }) => {
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
   const [hasScrolled, setHasScrolled] = useState(false);
   const scrollRef = useRef(null);
 
@@ -153,8 +155,8 @@ const PopularItineraries = ({ title, id, itineraries, isDark, isGreen }) => {
               </div>
 
               <div className="p-8 flex flex-col flex-grow">
-                <p className={`text-[10px] ${isGreen ? 'text-green-300' : isDark ? 'text-luxury' : 'text-green-600'} font-bold uppercase tracking-widest mb-2`}>Les plus populaires</p>
-                <h3 className={`text-xl font-bold mb-4 ${isGreen || isDark ? 'text-white' : 'text-primary'}`}>{formatItineraryTitle(item.title, item.duration)}</h3>
+                <p className={`text-[10px] ${isGreen ? 'text-green-300' : isDark ? 'text-luxury' : 'text-green-600'} font-bold uppercase tracking-widest mb-2`}>{t("popularItin.mostPopular")}</p>
+                <h3 className={`text-xl font-bold mb-4 ${isGreen || isDark ? 'text-white' : 'text-primary'}`}>{formatItineraryTitle(item.title, item.duration, t)}</h3>
                 
                 {/* Icon Bar */}
                 <div className={`flex items-center space-x-4 mb-6 py-2 px-3 ${isGreen ? 'bg-black/20' : isDark ? 'bg-white/5' : 'bg-gray-50'} rounded-lg`}>
@@ -166,7 +168,7 @@ const PopularItineraries = ({ title, id, itineraries, isDark, isGreen }) => {
                   ))}
                 </div>
 
-                <p className={`text-[13px] leading-relaxed mb-8 flex-grow font-light ${isGreen || isDark ? 'text-white/80' : 'text-gray-500'}`}>
+                <p className={`text-[14px] leading-relaxed mb-8 flex-grow font-light ${isGreen || isDark ? 'text-white/80' : 'text-gray-500'}`}>
                   {item.description}
                 </p>
 
@@ -174,11 +176,11 @@ const PopularItineraries = ({ title, id, itineraries, isDark, isGreen }) => {
                   <div className="flex flex-col">
                     <span className={`font-bold text-lg ${isGreen || isDark ? 'text-white' : 'text-primary'}`}>
                       €{item.price}
-                      <span className={`${isGreen || isDark ? 'text-white/50' : 'text-gray-400'} text-[10px] font-normal uppercase ml-1`}>/ Personne</span>
+                      <span className={`${isGreen || isDark ? 'text-white/50' : 'text-gray-400'} text-[10px] font-normal uppercase ml-1`}>{t("popularItin.perPerson")}</span>
                     </span>
                   </div>
                   <button 
-                    onClick={() => navigate(`/itinerary/${item.id}`)}
+                    onClick={() => navigate(`/${i18n.language}/itinerary/${item.id}`)}
                     className={`${
                       isGreen 
                         ? 'border border-white bg-transparent text-white hover:bg-white hover:text-green-800' 
@@ -187,7 +189,7 @@ const PopularItineraries = ({ title, id, itineraries, isDark, isGreen }) => {
                           : 'border border-primary bg-transparent text-primary hover:bg-primary hover:text-white'
                     } w-full sm:w-auto px-6 py-2 rounded-xl text-sm font-bold transition-all duration-300 flex items-center justify-center gap-2 transform hover:-translate-y-0.5 group/btn`}
                   >
-                    Réserver
+                    {t("popularItin.book")}
                     <svg className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                     </svg>

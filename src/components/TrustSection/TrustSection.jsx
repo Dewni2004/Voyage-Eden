@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const TrustSection = () => {
+  const { t } = useTranslation();
   return (
     <section className="py-8 md:py-12 bg-[#f8fbff]">
       <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
@@ -24,10 +26,10 @@ const TrustSection = () => {
             {/* Content */}
             <div className="flex flex-col items-center w-full gap-1">
               <div className="flex items-center justify-center gap-1">
-                <span className="text-[14px] font-extrabold text-primary tracking-tight font-serif leading-none">Avis Google</span>
+                <span className="text-[14px] font-extrabold text-primary tracking-tight font-serif leading-none">{t('trust.google', 'Avis Google')}</span>
                 <span className="bg-green-100 text-green-800 text-[8px] font-bold px-1.5 py-0.5 rounded-full flex items-center gap-1">
                   <span className="w-1 h-1 bg-green-500 rounded-full animate-ping"></span>
-                  Vérifié
+                  {t('trust.verified', 'Vérifié')}
                 </span>
               </div>
               
@@ -42,7 +44,7 @@ const TrustSection = () => {
                 </div>
               </div>
               
-              <span className="text-gray-400 text-[10px] font-medium">(416+ avis)</span>
+              <span className="text-gray-400 text-[10px] font-medium">({t('trust.reviewsCount', '416+ avis voyageurs')})</span>
             </div>
 
             {/* Buttons */}
@@ -56,7 +58,7 @@ const TrustSection = () => {
                 <svg className="w-3 h-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
-                <span className="truncate">Consulter</span>
+                <span className="truncate">{t('trust.consult', 'Consulter')}</span>
               </a>
               <a 
                 href="https://www.google.com/search?q=Sri+Lanka+Eden+Travels#lrd=0x3ae3662a67e2a9b3:0xd9099db1070ff22,3"
@@ -67,7 +69,7 @@ const TrustSection = () => {
                 <svg className="w-3 h-3 text-yellow-500 fill-current shrink-0" viewBox="0 0 20 20">
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </svg>
-                <span className="truncate">Écrire</span>
+                <span className="truncate">{t('trust.write', 'Écrire')}</span>
               </a>
             </div>
           </div>
@@ -84,10 +86,10 @@ const TrustSection = () => {
             {/* Content */}
             <div className="flex flex-col items-center w-full gap-1">
               <div className="flex items-center justify-center gap-1">
-                <span className="text-[14px] font-extrabold text-primary tracking-tight font-serif leading-none">Avis Vidéo</span>
+                <span className="text-[14px] font-extrabold text-primary tracking-tight font-serif leading-none">{t('trust.video', 'Avis Vidéo')}</span>
                 <span className="bg-red-100 text-red-800 text-[8px] font-bold px-1.5 py-0.5 rounded-full flex items-center gap-1">
                   <span className="w-1 h-1 bg-red-500 rounded-full animate-ping"></span>
-                  YouTube
+                  {t('trust.youtube', 'YouTube')}
                 </span>
               </div>
               
@@ -100,30 +102,30 @@ const TrustSection = () => {
                 </div>
               </div>
               
-              <span className="text-gray-400 text-[10px] font-medium">(Témoignages)</span>
+              <span className="text-gray-400 text-[10px] font-medium">({t('trust.testimonials', 'Témoignages de nos clients')})</span>
             </div>
 
             {/* Buttons */}
             <div className="flex flex-row gap-1.5 w-full justify-center mt-2 px-1">
               <Link 
                 to="/reviews"
-                className="flex flex-1 items-center justify-center gap-1 bg-transparent border border-[#FF0000] text-[#FF0000] hover:bg-red-50 font-bold px-1 py-1.5 rounded-lg transition-all shadow-sm text-[9px]"
+                className="flex flex-1 items-center justify-center gap-1 bg-transparent border border-primary text-[#FF0000] hover:bg-primary/5 font-bold px-1 py-1.5 rounded-lg transition-all shadow-sm text-[9px]"
               >
                 <svg className="w-3 h-3 shrink-0" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M8 5v14l11-7z" />
                 </svg>
-                <span className="truncate">Visionner</span>
+                <span className="truncate">{t('trust.watch', 'Visionner')}</span>
               </Link>
               <a 
                 href="https://www.youtube.com/@srilankaviajeseden"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex flex-1 items-center justify-center gap-1 bg-transparent border border-[#FF0000] text-[#FF0000] hover:bg-red-50 font-bold px-1 py-1.5 rounded-lg transition-all shadow-sm text-[9px]"
+                className="flex flex-1 items-center justify-center gap-1 bg-transparent border border-primary text-[#FF0000] hover:bg-primary/5 font-bold px-1 py-1.5 rounded-lg transition-all shadow-sm text-[9px]"
               >
                 <svg className="w-3 h-3 text-red-600 fill-current shrink-0" viewBox="0 0 24 24">
                   <path d="M19.78 4.22c-1.87-.5-9.37-.5-9.37-.5s-7.51 0-9.38.5A3 3 0 0 0 .5 7.19C0 9.07 0 13 0 13s0 3.93.5 5.81a3 3 0 0 0 2.12 2.12c1.87.5 9.38.5 9.38.5s7.5 0 9.37-.5a3 3 0 0 0 2.13-2.12c.5-1.88.5-5.81.5-5.81s0-3.93-.5-5.81a3 3 0 0 0-2.13-2.12zM9.54 16.57V9.43L15.82 13l-6.28 3.57z" fill="currentColor"/>
                 </svg>
-                <span className="truncate">YouTube</span>
+                <span className="truncate">{t('trust.youtube', 'YouTube')}</span>
               </a>
             </div>
           </div>
@@ -148,10 +150,10 @@ const TrustSection = () => {
               
               <div className="w-full text-left">
                 <div className="flex items-center gap-2.5">
-                  <span className="text-xl sm:text-2xl font-bold text-primary tracking-tight font-serif">Avis Google</span>
+                  <span className="text-xl sm:text-2xl font-bold text-primary tracking-tight font-serif">{t('trust.google', 'Avis Google')}</span>
                   <span className="bg-emerald-50 text-emerald-600 text-[10px] font-bold px-2.5 py-0.5 rounded-full flex items-center gap-1">
                     <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-ping"></span>
-                    Vérifié
+                    {t('trust.verified', 'Vérifié')}
                   </span>
                 </div>
                 <div className="flex items-center gap-2 mt-1.5 justify-start">
@@ -163,9 +165,9 @@ const TrustSection = () => {
                       </svg>
                     ))}
                   </div>
-                  <span className="text-gray-400 text-xs font-normal">(416+ avis voyageurs)</span>
+                  <span className="text-gray-400 text-xs font-normal">({t('trust.reviewsCount', '416+ avis voyageurs')})</span>
                 </div>
-                <p className="text-gray-400 text-[11px] sm:text-xs mt-2 font-normal leading-relaxed text-left">Note moyenne basée sur les retours d'expérience de nos clients.</p>
+                <p className="text-gray-400 text-[11px] sm:text-xs mt-2 font-normal leading-relaxed text-left">{t('trust.averageNote', "Note moyenne basée sur les retours d'expérience de nos clients.")}</p>
               </div>
             </div>
 
@@ -180,7 +182,7 @@ const TrustSection = () => {
                 <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
-                Consulter
+                {t('trust.consult', 'Consulter')}
               </a>
               <a 
                 href="https://www.google.com/search?q=Sri+Lanka+Eden+Travels#lrd=0x3ae3662a67e2a9b3:0xd9099db1070ff22,3"
@@ -191,7 +193,7 @@ const TrustSection = () => {
                 <svg className="w-3.5 h-3.5 text-amber-500 fill-current" viewBox="0 0 20 20">
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </svg>
-                Écrire
+                {t('trust.write', 'Écrire')}
               </a>
             </div>
           </div>
@@ -208,9 +210,9 @@ const TrustSection = () => {
               
               <div className="w-full text-left">
                 <div className="flex items-center gap-2.5">
-                  <span className="text-xl sm:text-2xl font-bold text-primary tracking-tight font-serif">Avis Vidéo</span>
+                  <span className="text-xl sm:text-2xl font-bold text-primary tracking-tight font-serif">{t('trust.video', 'Avis Vidéo')}</span>
                   <span className="bg-red-50 text-red-600 text-[10px] font-bold px-2.5 py-0.5 rounded-full flex items-center gap-1">
-                    YouTube
+                    {t('trust.youtube', 'YouTube')}
                   </span>
                 </div>
                 <div className="flex items-center gap-1.5 mt-1.5 justify-start">
@@ -218,9 +220,9 @@ const TrustSection = () => {
                   <svg className="w-4 h-3.5 text-red-600 fill-current" viewBox="0 0 24 24">
                     <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z" />
                   </svg>
-                  <span className="text-gray-400 text-xs font-normal">(Témoignages de nos clients)</span>
+                  <span className="text-gray-400 text-xs font-normal">({t('trust.testimonials', 'Témoignages de nos clients')})</span>
                 </div>
-                <p className="text-gray-400 text-[11px] sm:text-xs mt-2 font-normal leading-relaxed text-left">Découvrez l'aventure en images à travers les yeux de nos voyageurs.</p>
+                <p className="text-gray-400 text-[11px] sm:text-xs mt-2 font-normal leading-relaxed text-left">{t('trust.discoverVideo', "Découvrez l'aventure en images à travers les yeux de nos voyageurs.")}</p>
               </div>
             </div>
 
@@ -228,23 +230,23 @@ const TrustSection = () => {
             <div className="flex gap-3 mt-6 justify-start">
               <Link 
                 to="/reviews"
-                className="flex items-center justify-center gap-1.5 bg-white border border-red-600 hover:bg-red-50 text-red-600 font-bold px-4 py-2.5 rounded-xl transition-all shadow-sm text-xs"
+                className="flex items-center justify-center gap-1.5 bg-white border border-[#1e406f] hover:bg-[#1e406f]/5 text-red-600 font-bold px-4 py-2.5 rounded-xl transition-all shadow-sm text-xs"
               >
                 <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
                   <path d="M8 5v14l11-7z" />
                 </svg>
-                Visionner
+                {t('trust.watch', 'Visionner')}
               </Link>
               <a 
                 href="https://www.youtube.com/@srilankaviajeseden"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-1.5 bg-white border border-red-600 hover:bg-red-50 text-red-600 font-bold px-4 py-2.5 rounded-xl transition-all shadow-sm text-xs"
+                className="flex items-center justify-center gap-1.5 bg-white border border-[#1e406f] hover:bg-[#1e406f]/5 text-red-600 font-bold px-4 py-2.5 rounded-xl transition-all shadow-sm text-xs"
               >
                 <svg className="w-3.5 h-3.5 text-red-600 fill-current" viewBox="0 0 24 24">
                   <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.108C19.524 3.545 12 3.545 12 3.545s-7.525 0-9.388.51a3.003 3.003 0 0 0-2.11 2.108C0 8.026 0 12 0 12s0 3.974.502 5.837a3.003 3.003 0 0 0 2.11 2.108c1.863.51 9.388.51 9.388.51s7.524 0 9.388-.51a3.002 3.002 0 0 0 2.11-2.108C24 15.974 24 12 24 12s0-3.974-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                 </svg>
-                YouTube
+                {t('trust.youtube', 'YouTube')}
               </a>
             </div>
           </div>

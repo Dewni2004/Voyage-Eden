@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import officeStaff from '../assets/Office- staff.jpg';
 import officeStaff2 from '../assets/Office - staff 2.jpg';
 import guidesImage from '../assets/Guides.jpg';
@@ -35,11 +36,12 @@ import chinthakaImg from '../assets/Chinthaka.webp';
 import PageHero from '../components/UI/PageHero';
 
 const AboutUs = () => {
+  const { t } = useTranslation();
   return (
     <div>
       <PageHero 
-        title="Apprenez à nous connaître"
-        description="Nous sommes une équipe multiculturelle dédiée à la création d'expériences de voyage authentiques et personnalisées au Sri Lanka."
+        title={t('aboutUs.heroTitle')}
+        description={t('aboutUs.heroDesc')}
         image={officeStaff}
         overlayOpacity="bg-black/60"
       />
@@ -50,14 +52,14 @@ const AboutUs = () => {
           <div className="flex flex-col lg:flex-row gap-16 items-center">
             {/* Left Content */}
             <div className="lg:w-1/2">
-              <h2 className="text-primary text-2xl sm:text-3xl md:text-4xl font-bold mb-8">Qui sommes-nous</h2>
+              <h2 className="text-primary text-2xl sm:text-3xl md:text-4xl font-bold mb-8">{t('aboutUs.whoWeAreTitle')}</h2>
               
               <div className="space-y-6 text-gray-700 text-lg leading-relaxed mb-8 md:mb-12">
                 <p>
-                  Nous sommes une équipe multiculturelle basée à Kandy et Kurunegala, au cœur du Sri Lanka, spécialisée dans les expériences de voyage personnalisées qui mettent en valeur la beauté authentique de notre nation insulaire.
+                  {t('aboutUs.whoWeAreDesc1')}
                 </p>
                 <p>
-                  Fiers de faire partie du groupe Sri Lanka Viajes Eden, nous partageons la même passion, le même professionnalisme et le même engagement envers l'excellence. Toutes nos opérations sont basées au Sri Lanka, soutenues par une équipe locale dévouée de spécialistes du voyage, de guides expérimentés et de chauffeurs professionnels.
+                  {t('aboutUs.whoWeAreDesc2')}
                 </p>
               </div>
 
@@ -65,17 +67,17 @@ const AboutUs = () => {
               <div className="grid grid-cols-3 gap-3 sm:gap-6 md:gap-8 relative z-10">
                 {[
                   { 
-                    label: "Années d'expérience", 
+                    label: t('aboutUs.statsYears'), 
                     value: `${new Date().getFullYear() - 2013}+`,
                     icon: <svg className="w-5 h-5 md:w-8 md:h-8 mb-2 md:mb-4 text-luxury opacity-80 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                   },
                   { 
-                    label: "Experts locaux", 
+                    label: t('aboutUs.statsExperts'), 
                     value: "100%",
                     icon: <svg className="w-5 h-5 md:w-8 md:h-8 mb-2 md:mb-4 text-luxury opacity-80 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
                   },
                   { 
-                    label: "Avis Étoilés", 
+                    label: t('aboutUs.statsReviews'), 
                     value: "4.9",
                     icon: <svg className="w-5 h-5 md:w-8 md:h-8 mb-2 md:mb-4 text-luxury opacity-80 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" /></svg>
                   },
@@ -118,17 +120,17 @@ const AboutUs = () => {
       <section className="py-12 md:py-16 bg-white">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-primary text-4xl font-bold mb-4">Ce qui nous distingue ?</h2>
+            <h2 className="text-primary text-4xl font-bold mb-4">{t('aboutUs.whatSetsUsApartTitle')}</h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              Notre équipe diversifiée réunit le meilleur des connaissances locales et des normes de service internationales.
+              {t('aboutUs.whatSetsUsApartSubtitle')}
             </p>
           </div>
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
             {[
               {
-                title: "Pas d'achats forcés",
-                desc: "Votre séjour au Sri Lanka doit être synonyme de découverte, pas de discours commerciaux. Nous nous concentrons uniquement sur la création d'expériences significatives qui montrent le vrai Sri Lanka.",
+                title: t('aboutUs.apart1Title'),
+                desc: t('aboutUs.apart1Desc'),
                 icon: (
                   <svg className="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
@@ -136,8 +138,8 @@ const AboutUs = () => {
                 )
               },
               {
-                title: "Connectés à la vie locale",
-                desc: "Être basés ici même à Kandy nous permet de rester connectés au pouls du Sri Lanka. Nous nous tenons au courant des festivals locaux et des expériences culturelles authentiques avec nos hôtels de catégorie Supérieure.",
+                title: t('aboutUs.apart2Title'),
+                desc: t('aboutUs.apart2Desc'),
                 icon: (
                   <svg className="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
@@ -145,8 +147,8 @@ const AboutUs = () => {
                 )
               },
               {
-                title: "Normes de conduite internationales",
-                desc: "Nos chauffeurs sont spécialement formés pour répondre aux attentes européennes en matière de sécurité et de confort, offrant un service fluide et prévisible.",
+                title: t('aboutUs.apart3Title'),
+                desc: t('aboutUs.apart3Desc'),
                 icon: (
                   <svg className="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -155,8 +157,8 @@ const AboutUs = () => {
                 )
               },
               {
-                title: "Une expérience confirmée",
-                desc: "Notre réputation s'exprime à travers la voix de ceux qui ont voyagé avec nous. Parcourez nos témoignages clients pour entendre directement d'autres voyageurs.",
+                title: t('aboutUs.apart4Title'),
+                desc: t('aboutUs.apart4Desc'),
                 icon: (
                   <svg className="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.382-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
@@ -182,7 +184,7 @@ const AboutUs = () => {
       <section className="py-12 md:py-16 bg-[#f8fbff]">
         <div className="container mx-auto px-6">
           <div className="text-center mb-20">
-            <h2 className="text-primary text-4xl font-bold mb-4">Rencontrez les fondateurs et représentants</h2>
+            <h2 className="text-primary text-4xl font-bold mb-4">{t('aboutUs.foundersTitle')}</h2>
           </div>
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-12">
@@ -223,9 +225,9 @@ const AboutUs = () => {
                   </div>
                 </div>
                 <h3 className="text-primary text-base sm:text-2xl font-bold mb-0.5 sm:mb-1">{member.name}</h3>
-                <p className="text-primary/70 font-semibold text-xs sm:text-base mb-2 sm:mb-4">{member.role}</p>
+                <p className="text-primary/70 font-semibold text-xs sm:text-base mb-2 sm:mb-4">{t(`aboutUs.team.${member.name}.role`, { defaultValue: member.role })}</p>
                 <p className="text-gray-600 text-[11px] sm:text-sm leading-relaxed max-w-[250px]">
-                  {member.desc}
+                  {t(`aboutUs.team.${member.name}.desc`, { defaultValue: member.desc })}
                 </p>
               </div>
             ))}
@@ -237,9 +239,9 @@ const AboutUs = () => {
       <section className="py-12 md:py-16 bg-white">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-primary text-4xl font-bold mb-4">Notre équipe au bureau</h2>
+            <h2 className="text-primary text-4xl font-bold mb-4">{t('aboutUs.teamTitle')}</h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              Les professionnels dévoués qui font de votre voyage de rêve une réalité dans les coulisses.
+              {t('aboutUs.teamSubtitle')}
             </p>
           </div>
 
@@ -327,9 +329,9 @@ const AboutUs = () => {
                   />
                 </div>
                 <h3 className="text-primary text-sm sm:text-lg md:text-xl font-bold mb-0.5 sm:mb-1">{member.name}</h3>
-                <p className="text-primary/70 font-semibold text-[10px] sm:text-xs md:text-sm mb-2 sm:mb-4">{member.role}</p>
+                <p className="text-primary/70 font-semibold text-[10px] sm:text-xs md:text-sm mb-2 sm:mb-4">{t(`aboutUs.team.${member.name}.role`, { defaultValue: member.role })}</p>
                 <p className="text-gray-500 text-[10px] sm:text-[11px] leading-relaxed line-clamp-3 group-hover:line-clamp-none transition-all duration-300">
-                  {member.desc}
+                  {t(`aboutUs.team.${member.name}.desc`, { defaultValue: member.desc })}
                 </p>
               </div>
             ))}
@@ -341,9 +343,9 @@ const AboutUs = () => {
       <section className="py-12 md:py-16 bg-[#f8fbff]">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-primary text-4xl font-bold mb-4">Nos guides et chauffeurs</h2>
+            <h2 className="text-primary text-4xl font-bold mb-4">{t('aboutUs.guidesTitle')}</h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              Vos compagnons de route. Des experts locaux qui transforment chaque circuit en une expérience authentique.
+              {t('aboutUs.guidesSubtitle')}
             </p>
           </div>
 
@@ -407,9 +409,9 @@ const AboutUs = () => {
                   />
                 </div>
                 <h3 className="text-primary text-sm sm:text-lg md:text-xl font-bold mb-0.5 sm:mb-1">{guide.name}</h3>
-                <p className="text-primary/70 font-semibold text-[10px] sm:text-xs md:text-sm mb-2 sm:mb-4">{guide.role}</p>
+                <p className="text-primary/70 font-semibold text-[10px] sm:text-xs md:text-sm mb-2 sm:mb-4">{t(`aboutUs.team.${guide.name}.role`, { defaultValue: guide.role })}</p>
                 <p className="text-gray-500 text-[10px] sm:text-[11px] leading-relaxed line-clamp-3 group-hover:line-clamp-none transition-all duration-300">
-                  {guide.desc}
+                  {t(`aboutUs.team.${guide.name}.desc`, { defaultValue: guide.desc })}
                 </p>
               </div>
             ))}

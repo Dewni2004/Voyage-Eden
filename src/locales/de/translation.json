@@ -1,0 +1,612 @@
+{
+  "translation": {
+    "nav": {
+      "home": "Startseite",
+      "itineraries": "Reiserouten",
+      "about": "Über Uns",
+      "guide": "Reiseführer",
+      "reviews": "Bewertungen",
+      "contact": "Kontakt",
+      "quote": "Individuelles Angebot",
+      "changeLanguage": "Sprache ändern"
+    },
+    "hero": {
+      "welcome": "Willkommen bei",
+      "subtitle": "Unsere lokalen Experten in Sri Lanka bieten private und maßgeschneiderte Touren.",
+      "explore": "Pakete Entdecken",
+      "contact": "Kontaktiere Uns",
+      "brandName": "Sri Lanka Eden Reisen"
+    },
+    "footer": {
+      "description": "Sri Lanka Eden Reisen ist Teil einer gut etablierten Unternehmensgruppe im Incoming-Tourismussektor in Sri Lanka. Mit über {{years}} Jahren Erfahrung sind wir auf die Gestaltung authentischer, maßgeschneiderter Reisen spezialisiert, die die Schönheit und Kultur Sri Lankas präsentieren.",
+      "b2b": "Für B2B-Partnerschaften",
+      "contact_title": "Kontakt aufnehmen",
+      "registration_title": "Registrierung",
+      "sltda_desc": "(Sri Lanka Tourismusentwicklungsbehörde)",
+      "reg_no": "Handelsregisternummer : PV 00242848",
+      "experience": "Über 13 Jahre Erfahrung",
+      "offices_title": "Unsere Büros",
+      "hours_title": "Bürozeiten",
+      "hours_weekdays": "Montag bis Freitag: 8:30 – 17:30 Uhr",
+      "hours_saturday": "Samstag: 8:30 – 12:30 Uhr",
+      "hours_sunday": "Sonntag: Geschlossen",
+      "copyright": "Sri Lanka Eden Reisen. Alle Rechte vorbehalten."
+    },
+    "trust": {
+      "google": "Google Bewertungen",
+      "verified": "Verifiziert",
+      "reviewsCount": "416+ Reisebewertungen",
+      "averageNote": "Durchschnittsbewertung basierend auf Kundenfeedback.",
+      "consult": "Ansehen",
+      "write": "Schreiben",
+      "video": "Video-Bewertungen",
+      "testimonials": "Kundenstimmen",
+      "discoverVideo": "Entdecken Sie das Abenteuer in Bildern durch die Augen unserer Reisenden.",
+      "watch": "Ansehen",
+      "youtube": "YouTube"
+    },
+    "tours": {
+      "title": "Unsere empfohlenen anpassbaren Touren",
+      "subtitle": "Von nebligen Bergen bis zu goldenen Stränden, entdecken Sie eine Insel unendlicher Wunder mit den größten Reiseexperten Sri Lankas.",
+      "more": "Entdecken Sie unsere anderen Reiserouten"
+    },
+    "why": {
+      "title": "Warum mit uns reisen?",
+      "subtitle": "Wir sind stolz darauf, authentische und personalisierte Reiseerlebnisse anzubieten.",
+      "t1": "Lokale Expertise",
+      "d1": "Unsere Reiseleiter sind Einheimische, die die verborgenen Schätze und geheimen Geschichten Sri Lankas kennen.",
+      "t2": "Sicher und geschützt",
+      "d2": "Ihre Sicherheit ist unsere Priorität. Wir bieten rund um die Uhr Unterstützung und geprüfte Unterkünfte.",
+      "t3": "Maßgeschneiderte Reisen",
+      "d3": "Jeder Reisende ist einzigartig. Wir passen jede Reiseroute Ihren Vorlieben an.",
+      "t4": "24/7 Unterstützung",
+      "d4": "Wir stehen Ihnen bei jedem Schritt Ihrer Reise für ein sorgenfreies Erlebnis zur Seite."
+    },
+    "destinations": {
+      "title": "Das Eden Journal",
+      "subtitle": "Inspiration und Entdeckungen aus der ganzen Welt."
+    },
+    "reviews": {
+      "title": "Was unsere Kunden sagen",
+      "subtitle": "Reisende, die unsere Dienstleistungen erlebt haben",
+      "heroTitle": "Wahre Geschichten",
+      "heroSubtitle": "Unvergessliche Reisen",
+      "heroDesc": "Entdecken Sie, wie unsere Reisenden die Magie Sri Lankas von nebligen Hügeln bis zu goldenen Küsten erlebten.",
+      "googleReviews": "Google Bewertungen",
+      "verified": "Verifiziert",
+      "googleCount": "(416+ Reisebewertungen)",
+      "googleDesc": "Durchschnittsbewertung basierend auf dem Feedback unserer Kunden.",
+      "consult": "Ansehen",
+      "write": "Schreiben",
+      "videoReviews": "Video Bewertungen",
+      "videoTestimonials": "(Kundenbewertungen)",
+      "videoDesc": "Entdecken Sie das Abenteuer in Bildern durch die Augen unserer Reisenden.",
+      "watch": "Ansehen",
+      "visualMemories": "Visuelle Erinnerungen",
+      "recentVideos": "Aktuelle Videos",
+      "recentVideosDesc": "Kurze Video-Highlights der unglaublichen Reisen unserer Kunden.",
+      "tripIn": "Reise im",
+      "seeAllVideos": "Alle Videos ansehen",
+      "travelerReviewsTitle": "Reisebewertungen",
+      "recentReviews": "Aktuelle Bewertungen",
+      "recentReviewsDesc": "Authentische Geschichten und Erlebnisse unserer wertvollen Kunden.",
+      "readFullStory": "Ganze Geschichte lesen",
+      "whyLoveUsTitle": "Warum Reisende uns lieben",
+      "features": {
+        "custom": {
+          "title": "Maßgeschneiderte Reisen",
+          "desc": "Erstellen Sie jede Reise nach Ihrem persönlichen Stil."
+        },
+        "experts": {
+          "title": "Experten-Guides",
+          "desc": "Lokale Experten, die die bestgehüteten Geheimnisse der Insel kennen."
+        },
+        "hotels": {
+          "title": "Prestige-Hotels",
+          "desc": "Nur die besten Unterkünfte für Ihren Komfort."
+        },
+        "safe": {
+          "title": "Sicher und Privat",
+          "desc": "Ihre Sicherheit und Privatsphäre stehen bei uns an erster Stelle."
+        }
+      },
+      "ctaPrefix": "Starten Sie das Abenteuer",
+      "ctaTitle": "Bereit, Ihre eigene Geschichte zu schreiben?",
+      "ctaDesc": "Schließen Sie sich hunderten glücklichen Reisenden an und erleben Sie die Reise Ihres Lebens mit Eden Travels.",
+      "planTrip": "Meine Reise planen"
+    },
+    "gallery": {
+      "subtitle": "Hinter den Kulissen",
+      "title": "Unser Büro und unser Team"
+    },
+    "salons": {
+      "title": "Internationale Messen, an denen Sri Lanka Eden Reisen teilgenommen hat",
+      "subtitle": "Entdecken Sie die internationalen Tourismusmessen, auf denen wir die Ehre hatten, unsere Organisation zu vertreten."
+    },
+    "banner": {
+      "title": "GESTALTEN SIE IHRE TRAUMREISE MIT UNS",
+      "subtitle": "Einfach durch Ausfüllen eines Formulars. Ohne zusätzliche Gebühren.",
+      "button": "Gestalten Sie Ihre individuelle Reise"
+    },
+    "customTrip": {
+      "heroTitle": "DESIGN YOUR CUSTOM TRIP",
+      "heroDesc": "We know that the best way to travel to Sri Lanka is tailor-made and private. Tell us your travel idea and we will prepare the trip you have always dreamed of.",
+      "whoWith": "Who are you traveling with?",
+      "couple": "As a couple",
+      "family": "With family",
+      "group": "In a group",
+      "whereAt": "Where are you at?",
+      "lookingForInfo": "I'm currently looking for information",
+      "startingToOrganize": "I'm starting to organize my trip",
+      "boughtTickets": "I have already bought the plane tickets",
+      "yes": "Yes",
+      "no": "No",
+      "numTravelers": "Number of travelers?",
+      "adults": "No. Adults",
+      "teens": "Teens <16 years",
+      "children": "Children <11 years",
+      "infants": "Infants <2 years",
+      "numDays": "Number of days",
+      "arrivalDate": "Approximate Arrival date",
+      "departureDate": "Approximate departure date",
+      "interestsTitle": "What are you particularly interested in? (Several options are possible)",
+      "monuments": "Monuments",
+      "temples": "Temples",
+      "nature": "Nature/Animal Life",
+      "beach": "Beach",
+      "adventure": "Adventure",
+      "hiking": "Hiking",
+      "accommodationType": "Type of accommodation",
+      "standard": "Standard (3 stars approx.)",
+      "superior": "Superior (4/5 stars approx.)",
+      "luxury": "Luxury Hotels",
+      "superLuxury": "Super Luxury",
+      "roomDist": "Room Distribution",
+      "singleRooms": "Single Rooms",
+      "doubleRooms": "Double Rooms (DBL)",
+      "tripleRooms": "Triple Rooms",
+      "mealPlan": "Meal Plan",
+      "bb": "Bread & Breakfast",
+      "hb": "Half Board (Breakfast + Dinner)",
+      "fb": "Full Board (Breakfast + Lunch + Dinner)",
+      "accompaniment": "Select Type of Accompaniment:",
+      "driver": "Tourist Driver",
+      "chauffeur": "Licensed Chauffeur Guide",
+      "nationalGuide": "Licensed National Guide [ For Group ]",
+      "languagePref": "Preferred Language of Accompaniment:",
+      "english": "English",
+      "spanish": "Spanish",
+      "italian": "Italian",
+      "arabic": "Arabic",
+      "otherLanguage": "Other Language",
+      "fullName": "Full Name",
+      "nationality": "Nationality",
+      "whatsapp": "Whatsapp Contact Number",
+      "email": "E-mail",
+      "comments": "Comments",
+      "commentsPlaceholder": "Holidays, Photography trips, Birdwatching, Trekking etc...",
+      "send": "SEND",
+      "sending": "Sending...",
+      "success": "Your request has been sent successfully!",
+      "error": "An error occurred. Please try again."
+    },
+    "itineraries": {
+      "popular": "Unsere beliebtesten Reiserouten",
+      "honeymoon": "Flitterwochen",
+      "family": "Familienreisen",
+      "luxury": "Luxus-Kollektion",
+      "golf": "Golfaufenthalte",
+      "surf": "Surf- und Tauchreisen",
+      "adventure": "Abenteuerreisen",
+      "perahera": "Esela Perahera-Specials",
+      "days8": "8-tägige Reiserouten",
+      "interests": "Interessenbasierte Reiserouten"
+    },
+    "aboutUs": {
+      "heroTitle": "Lernen Sie uns kennen",
+      "heroDesc": "Wir sind ein multikulturelles Team, das authentische und persönliche Reiseerlebnisse in Sri Lanka schafft.",
+      "whoWeAreTitle": "Wer wir sind",
+      "whoWeAreDesc1": "Wir sind ein multikulturelles Team mit Sitz in Kandy und Kurunegala, im Herzen Sri Lankas, das sich auf personalisierte Reiseerlebnisse spezialisiert hat, die die authentische Schönheit unseres Inselstaates zeigen.",
+      "whoWeAreDesc2": "Als stolzer Teil der Sri Lanka Viajes Eden Gruppe teilen wir dieselbe Leidenschaft, Professionalität und dasselbe Engagement für Exzellenz. Alle unsere Aktivitäten finden in Sri Lanka statt, unterstützt von einem engagierten lokalen Team aus Reisespezialisten, erfahrenen Guides und professionellen Fahrern.",
+      "statsYears": "Jahre Erfahrung",
+      "statsExperts": "Lokale Experten",
+      "statsReviews": "Sterne-Bewertungen",
+      "whatSetsUsApartTitle": "Was Uns Auszeichnet?",
+      "whatSetsUsApartSubtitle": "Unser vielfältiges Team vereint das Beste aus lokalem Wissen und internationalen Servicestandards.",
+      "apart1Title": "Kein Zwangskauf",
+      "apart1Desc": "Ihr Aufenthalt in Sri Lanka sollte von Entdeckungen geprägt sein, nicht von Verkaufsgesprächen. Wir konzentrieren uns ausschließlich darauf, bedeutungsvolle Erlebnisse zu schaffen, die das wahre Sri Lanka zeigen.",
+      "apart2Title": "Mit dem lokalen Leben verbunden",
+      "apart2Desc": "Die Tatsache, dass wir hier in Kandy ansässig sind, ermöglicht es uns, mit dem Puls Sri Lankas verbunden zu bleiben. Wir bleiben auf dem Laufenden über lokale Feste und authentische kulturelle Erlebnisse in unseren Superior-Hotels.",
+      "apart3Title": "Internationale Fahrstandards",
+      "apart3Desc": "Unsere Fahrer sind speziell geschult, um die europäischen Erwartungen an Sicherheit und Komfort zu erfüllen und einen reibungslosen und vorhersehbaren Service zu bieten.",
+      "apart4Title": "Eine bewährte Erfolgsbilanz",
+      "apart4Desc": "Unser Ruf spricht durch die Stimmen derer, die mit uns gereist sind. Durchsuchen Sie unsere Kundenmeinungen, um direkt von anderen Reisenden zu hören.",
+      "foundersTitle": "Lernen Sie die Gründer und Vertreter kennen",
+      "teamTitle": "Unser Team im Büro",
+      "teamSubtitle": "Die engagierten Profis, die Ihre Traumreise hinter den Kulissen verwirklichen.",
+      "guidesTitle": "Unsere Guides & Fahrer",
+      "guidesSubtitle": "Ihre Reisebegleiter. Lokale Experten, die jede Tour in ein authentisches Erlebnis verwandeln.",
+      "team": {
+        "Sanji": {
+          "role": "Mitbegründer",
+          "desc": "Geboren in Sri Lanka mit Berufserfahrung in Europa, ist er der Mitbegründer der Agentur. Spezialisiert auf die Betreuung spanischsprachiger Reisender."
+        },
+        "Ana": {
+          "role": "Mitbegründerin",
+          "desc": "Sie ist darauf spezialisiert, maßgeschneiderte Reisen zu entwerfen und sorgt für jedes Detail, um einzigartige und unvergessliche Erlebnisse zu schaffen."
+        },
+        "Jose": {
+          "role": "Vertreter in Spanien",
+          "desc": "Jose entwirft maßgeschneiderte Reisen für spanische und lateinamerikanische Reisende. Leidenschaftlich und detailverliebt."
+        },
+        "Marco": {
+          "role": "Vertreter in Italien",
+          "desc": "Marco entwirft personalisierte Reiserouten und koordiniert Viaggi Eden und sorgt so für eine wichtige Verbindung zwischen Italien und Sri Lanka."
+        },
+        "Manjula": {
+          "role": "Geschäftsführer",
+          "desc": "Herr Manjula sorgt für den reibungslosen Ablauf des Tagesgeschäfts, koordiniert Teams und überwacht Arbeitsabläufe, um die Effizienz zu erhalten."
+        },
+        "Rasika": {
+          "role": "Finanzmanagement",
+          "desc": "Rasika kümmert sich mit Fachwissen und Präzision um das Finanzmanagement und sorgt für Effizienz und Stabilität im Unternehmen."
+        },
+        "Nethmi": {
+          "role": "Reiseberaterin",
+          "desc": "Nethmi bietet persönliche Unterstützung beim Entwerfen von Reisen, die Kultur und Komfort für ein erfolgreiches Erlebnis verbinden."
+        },
+        "Thakshila": {
+          "role": "Digitale Operationen",
+          "desc": "Thakshila leitet die digitalen Operationen und verwaltet Systeme, CRM und die Website, um Innovationen auf allen Plattformen sicherzustellen."
+        },
+        "Anjan": {
+          "role": "Buchhalter",
+          "desc": "Anjan verwaltet Rechnungen, Zahlungen und das Budget mit Liebe zum Detail und sorgt für eine effiziente Finanzkontrolle."
+        },
+        "Dewni": {
+          "role": "IT-Support",
+          "desc": "Dewni bietet IT-Support und kümmert sich um Updates und Fehlerbehebung für einen reibungslosen technischen Betrieb."
+        },
+        "Oshadhi": {
+          "role": "Bodenassistent (Ausbildung)",
+          "desc": "Oshadhi unterstützt tägliche Ausflüge und hilft bei der Planung und Koordination von Reiserouten."
+        },
+        "Sewmini": {
+          "role": "Buchhaltungsassistentin (Ausbildung)",
+          "desc": "Sewmini unterstützt Buchhaltungs-, Kalkulations- und Angebotsdienste mit Genauigkeit."
+        },
+        "Kasun": {
+          "role": "Assistenzberaterin (Ausbildung)",
+          "desc": "Kasun hilft bei der Vorbereitung personalisierter Reiserouten und kümmert sich um die Kundenkommunikation für deren Buchungen."
+        },
+        "Thenura": {
+          "role": "CRM-Entwickler",
+          "desc": "Thenura entwickelt das benutzerdefinierte CRM der Agentur und erstellt Tools, die Prozesse rationalisieren und den Service optimieren."
+        },
+        "Sithmi": {
+          "role": "Reiseberaterin (Ausbildung)",
+          "desc": "Sithmi konzentriert sich auf das Kundenmanagement und das Entwerfen maßgeschneiderter Reiserouten, die den Erwartungen der Reisenden entsprechen."
+        },
+        "Theekshana": {
+          "role": "Inhaltserstellung (Ausbildung)",
+          "desc": "Theekshana unterstützt Marketingaktivitäten und hilft bei der Vorbereitung von Reiserouten durch die Erstellung von Social-Media-Inhalten."
+        },
+        "Sampath": {
+          "role": "Spanisch sprechender Chauffeur-Guide",
+          "desc": "Unser Star-Chauffeur-Guide, einer der besten Spanischsprecher. Erfahren und herzlich sorgt er für unvergessliche Erlebnisse."
+        },
+        "Nalinda": {
+          "role": "Spanisch sprechender Chauffeur-Guide",
+          "desc": "Fließend in Spanisch, bekannt für seine Freundlichkeit und besondere Aufmerksamkeit gegenüber Kindern. Vorsichtig und immer positiv."
+        },
+        "Nazri": {
+          "role": "Spanisch sprechender Chauffeur-Guide",
+          "desc": "Sehr aufmerksam gegenüber Familien, kennt er die lokalen Bräuche perfekt und tut alles, um Reisende zufrieden zu stellen."
+        },
+        "Chammi": {
+          "role": "Spanisch sprechender Chauffeur-Guide",
+          "desc": "Freundlich und professionell kümmert er sich um alle logistischen Details. Seine sichere Fahrweise und Zuverlässigkeit machen jede Reise angenehm."
+        },
+        "Chamara": {
+          "role": "Professioneller Chauffeur-Guide",
+          "desc": "Kämmert sich um alle logistischen Details, um eine komfortable Reise zu gewährleisten. Zuverlässig mit einer herzlichen Persönlichkeit."
+        },
+        "Ajeeb": {
+          "role": "Professioneller Chauffeur-Guide",
+          "desc": "Der ideale Begleiter für eine friedliche Reise. Seine Verfügbarkeit und Professionalität garantieren absolute Gelassenheit."
+        },
+        "Noel": {
+          "role": "Italienisch sprechender Chauffeur",
+          "desc": "Noel spricht fließend Italienisch und kümmert sich um alles, damit Sie in vollen Zügen genießen können. Seine Freundlichkeit sorgt für Ihr Wohlbefinden."
+        },
+        "Chinthaka": {
+          "role": "Italienisch sprechender Chauffeur",
+          "desc": "Freundlicher und erfahrener italienischsprachiger Chauffeur. Professionell und aufmerksam garantiert er ein sicheres und unvergessliches Erlebnis."
+        }
+      }
+    },
+    "travelGuide": {
+      "heroTitle": "Reiseführer",
+      "heroDesc": "Entdecken Sie unsere Tipps, Geschichten und Reiseführer, um Sri Lanka wie ein Einheimischer zu erkunden.",
+      "newsTitle": "Sri Lanka in den Nachrichten",
+      "usefulTitle": "Lesen Sie unsere nützlichsten Artikel",
+      "popularTitle": "Beliebteste Artikel",
+      "allArticlesTitle": "Alle Artikel",
+      "noArticlesTitle": "Keine Artikel gefunden",
+      "noArticlesDesc": "Wir haben keine Artikel gefunden, die Ihren Filtern entsprechen.",
+      "clearFilters": "Alle Filter löschen",
+      "showMore": "Mehr anzeigen",
+      "searchTitle": "Hier suchen",
+      "searchPlaceholder": "Hier Suchen...",
+      "categoriesTitle": "Kategorien",
+      "allCategories": "Alle Kategorien",
+      "recentTitle": "Neueste Artikel",
+      "tagsTitle": "Schlagwörter",
+      "allTags": "Alle",
+      "readMore": "Weiterlesen",
+      "catHistory": "Geschichte",
+      "catAdventure": "Abenteuer",
+      "catNature": "Natur",
+      "catCulture": "Kultur",
+      "catDiscovery": "Entdeckung",
+      "catWaterfalls": "Wasserfälle",
+      "catBeach": "Strand",
+      "catIslands": "Inseln",
+      "catPrivateIsland": "Privatinsel"
+    },
+    "contactUs": {
+      "heroTitle": "Kontaktiere uns",
+      "heroDesc": "Wir sind hier, um Ihnen bei der Planung Ihrer Traumreise nach Sri Lanka zu helfen. Kontaktieren Sie uns gerne.",
+      "offices": {
+        "title": "Unsere Büros"
+      },
+      "directContact": {
+        "title": "Direkter Kontakt",
+        "office": "(Büro)"
+      },
+      "support": {
+        "title": "Globaler Support",
+        "timezone": "Zeitzone: UTC +5:30 (IST)",
+        "languages": "Sprachen: Englisch, Spanisch, Italienisch, Französisch.",
+        "service24h": "24/7-Service für angekommene Kunden (nur auf Englisch)"
+      },
+      "form": {
+        "title": "Senden Sie uns eine Nachricht",
+        "desc": "Haben Sie Fragen zu einer maßgeschneiderten Tour? Schreiben Sie uns unten und wir melden uns umgehend bei Ihnen.",
+        "name": "Name*",
+        "phone": "Telefon*",
+        "email": "E-Mail*",
+        "messageLabel": "Schreiben Sie Ihre Nachricht*",
+        "submitBtn": "Nachricht senden",
+        "sending": "Senden..."
+      },
+      "consultants": {
+        "title": "Lernen Sie Ihre Berater kennen",
+        "nethmiRole": "Reiseberaterin",
+        "nethmiDesc": "Unsere dynamische Reisebüromitarbeiterin, die alles daran setzt, spannende und gut organisierte Reisen zu organisieren und dafür zu sorgen, dass jedes Detail perfekt geplant ist.",
+        "whatsapp": "WhatsApp-Nachricht",
+        "email": "E-Mail senden"
+      },
+      "registration": {
+        "title": "Firmenregistrierung"
+      },
+      "mapKurunegala": "Unser Büro in Kurunegala",
+      "mapKandy": "Unser Büro in Kandy"
+    },
+    "itinerariesPage": {
+      "heroTitle": "reiserouten",
+      "heroDesc": "Personalisierte Reisen, nach Ihren Wünschen gestaltet. Entdecken Sie die schönsten Erlebnisse in Sri Lanka, für den anspruchsvollen Reisenden.",
+      "basedOnInterests": "reiserouten basierend auf interessen",
+      "categories": {
+        "popular": "Beliebt",
+        "honeymoon": "Flitterwochen",
+        "family": "Familienreisen",
+        "luxury": "Luxuskollektion",
+        "golf": "Golfaufenthalte",
+        "surf": "Surfen & Tauchen",
+        "adventure": "Abenteuer",
+        "pererahera": "Esela Perahera",
+        "8days": "8 Tage",
+        "interests": "Interessen"
+      }
+    },
+    "popularItin": {
+      "mostPopular": "Am beliebtesten",
+      "perPerson": "/ Person",
+      "book": "Buchen",
+      "daysText": "tage"
+    },
+    "hotelOptions": {
+      "sectionTag": "Unterkünfte",
+      "sectionTitle": "Hotels und Resorts in Sri Lanka",
+      "sectionDesc": "Entdecken Sie unsere sorgfältige Auswahl an Unterkünften, um Ihren Aufenthalt zu bereichern, kategorisiert nach all Ihren Wünschen.",
+      "discoverBtn": "Entdecken",
+      "categories": {
+        "standard": {
+          "title": "Standard",
+          "subtitle": "Authentisch & Angenehm",
+          "description": "Komfortable Unterkünfte mit hervorragendem Preis-Leistungs-Verhältnis."
+        },
+        "superior": {
+          "title": "Superior",
+          "subtitle": "Premium-Komfort",
+          "description": "Eine perfekte Allianz zwischen Authentizität und modernem Komfort."
+        },
+        "luxury": {
+          "title": "Luxus",
+          "subtitle": "Unvergessliche Erlebnisse",
+          "description": "Entdecken Sie Raffinesse mit unserer Auswahl der renommiertesten Hotels."
+        },
+        "superLuxury": {
+          "title": "Super-Luxus",
+          "subtitle": "Der Gipfel der Eleganz",
+          "description": "Außergewöhnliche Einrichtungen mit außergewöhnlichem Service und Annehmlichkeiten."
+        },
+        "eastSouthCoast": {
+          "title": "Ostküste & Südküste",
+          "subtitle": "Küstenwunder",
+          "description": "Entdecken Sie die schönsten Resorts entlang der herrlichen Küste Sri Lankas."
+        }
+      }
+    },
+    "newsletter": {
+      "title": "Abonnieren Sie den Newsletter",
+      "subtitle": "Um unsere besten monatlichen Angebote zu erhalten",
+      "placeholder": "Ihre E-Mail-Adresse...",
+      "subscribe": "Abonnieren",
+      "loading": "Wird geladen...",
+      "success": "Danke! Sie sind jetzt abonniert.",
+      "error": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut."
+    },
+    "itineraryDetail": {
+      "duration": "Dauer",
+      "group": "Gruppe",
+      "effort": "Anstrengung",
+      "highlightsVisits": "Höhepunkte und Besuche",
+      "day": "Tag",
+      "highlights": "Höhepunkte",
+      "accommodation": "Unterkunft",
+      "tourFinished": "Tour beendet",
+      "nextDay": "Nächster Tag",
+      "close": "Schließen",
+      "loading": "Laden der Reisedetails...",
+      "notFound": "Reise nicht gefunden"
+    },
+    "bookingForm": {
+      "subtitle": "Ihre maßgeschneiderte Reise",
+      "title": "Angebot anfordern",
+      "desc": "Füllen Sie dieses detaillierte Formular aus und lassen Sie uns den perfekten Kurzurlaub für Sie in Sri Lanka gestalten.",
+      "errorDates": "Bitte wählen Sie Ihr An- und Abreisedatum aus.",
+      "successMsg": "Danke! Ihre Anfrage wurde erfolgreich gesendet. Wir werden uns in Kürze mit Ihnen in Verbindung setzen.",
+      "errorMsg": "Entschuldigung, es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt.",
+      "step1Title": "Persönliche Informationen",
+      "step1Desc": "Ihre Kontaktdaten, um Sie zu erreichen",
+      "fullName": "Vollständiger Name",
+      "fullNameHolder": "Ihr vollständiger Name",
+      "whatsapp": "WhatsApp-Nummer",
+      "nationality": "Nationalität",
+      "nationalityHolder": "Eintippen oder auswählen",
+      "next": "Weiter",
+      "step2Title": "Reisedetails",
+      "step2Desc": "Daten und Teilnehmerzahl",
+      "tourName": "Name der Tour / Reiseroute",
+      "dates": "An- und Abreisedaten",
+      "selectPeriod": "Zeitraum auswählen",
+      "numDaysTitle": "Anzahl der Tage",
+      "autoCalc": "Automatisch berechnet",
+      "daysSuffix": "Tage",
+      "numTravelers": "Anzahl der Reisenden",
+      "back": "Zurück",
+      "step3Title": "Unterkunft & Logistik",
+      "step3Desc": "Ihre Aufenthaltspräferenzen",
+      "hotelCat": "Gewünschte Hotelkategorie",
+      "select": "Auswählen...",
+      "roomDist": "Zimmeraufteilung",
+      "roomHolder": "Bsp: 1 Doppel, 2 Einzel",
+      "mealPlan": "Verpflegungspräferenz",
+      "driverLang": "Fahrersprache",
+      "french": "Französischsprachig",
+      "english": "Englischsprachig",
+      "specialReq": "Besondere Anforderungen (Optional)",
+      "specialHolder": "Haben Sie Allergien...",
+      "sending": "Senden...",
+      "sendingDesktop": "Senden...",
+      "send": "SENDEN",
+      "sendDesktop": "MEINE ANFRAGE SENDEN"
+    },
+    "includedExcluded": {
+      "title": "Was inbegriffen und nicht inbegriffen ist",
+      "included": "Im Preis inbegriffen",
+      "excluded": "Im Preis nicht inbegriffen",
+      "inc1": "Hotelunterkunft (gemäß ausgewähltem Paket)",
+      "inc2": "Frühstück und Abendessen in Hotels",
+      "inc3": "Privates klimatisiertes Fahrzeug",
+      "inc4": "Professioneller Fahrer-Guide",
+      "inc5": "Flughafentransfers",
+      "inc6": "Kraftstoff, Kfz-Steuer, staatliche Steuern, Parkgebühren und Fahrzeugversicherung",
+      "exc1": "Internationale Flüge",
+      "exc2": "Eintrittsgelder für Sehenswürdigkeiten",
+      "exc3": "Optionale Ausflüge und persönliche Ausgaben",
+      "exc4": "Trinkgelder, alkoholische oder alkoholfreie Getränke",
+      "exc5": "Visumgebühren für Sri Lanka"
+    },
+    "paymentPolicy": {
+      "title": "Zahlungsmethode und Stornierungsbedingungen",
+      "paymentMethod": "Zahlungsmethode:",
+      "pay1": "Gebührenfreie Banküberweisungsoption.",
+      "pay2": "Zahlung per Kredit-/Debitkarte – Es fällt eine Bearbeitungsgebühr von 2 % an.",
+      "bookingTerms": "Buchungsbedingungen",
+      "term1": "Zum Zeitpunkt der Buchung ist eine Anzahlung von 40 % erforderlich, um Ihren Aufenthalt zu bestätigen.",
+      "term2": "Der Restbetrag von 60 % muss spätestens 30 Tage vor der Ankunft bezahlt werden.",
+      "term3": "Nach Erhalt der Anzahlung wird eine Bestätigung ausgestellt. Eine offizielle Rechnung folgt nach vollständiger Zahlung.",
+      "cancellation": "Stornierungsbedingungen",
+      "canc1": "Bis zu 45 Tage: 100 % der Anzahlung zurückerstattet.",
+      "canc2": "Von 44 bis 31 Tagen: 50 % Vertragsstrafe auf die Anzahlung.",
+      "canc3": "Weniger als 30 Tage: Die Anzahlung wird nicht zurückerstattet.",
+      "canc4": "Hinweis: Für alle Stornierungen wird eine Verwaltungsgebühr von 120 € pro Person erhoben."
+    },
+    "bookingCard": {
+      "bookYour": "Buchen Sie Ihre",
+      "trip": "Reise",
+      "desc": "Flexible Termine verfügbar. Wir passen jedes Detail an Ihr Tempo an und sorgen so für einen unvergesslichen Kurzurlaub in Sri Lanka.",
+      "perPerson": "/ pro Person",
+      "secure": "Meine Buchung sichern",
+      "note": "*Der Preis kann je nach Anpassung und saisonaler Verfügbarkeit variieren"
+    },
+    "itineraryCard": {
+      "days": "Tage",
+      "perPerson": "/ Person",
+      "book": "Buchen"
+    },
+    "hotels": {
+      "breadcrumb": "Hotels",
+      "loading": "Wird geladen...",
+      "noHotels": "Keine Hotels in dieser Kategorie gefunden.",
+      "backToCategories": "Zurück zu den Kategorien",
+      "details": "Hoteldetails",
+      "history": "Geschichte",
+      "about": "Über",
+      "aboutSuffix": "das Hotel",
+      "mainAmenities": "Hauptausstattung",
+      "preview": "Vorschau",
+      "amenities": "Ausstattung",
+      "popularServices": "Beliebteste Services",
+      "photoGallery": "Fotogalerie",
+      "categories": {
+        "standard": {
+          "title": "Standard",
+          "subtitle": "Authentisch & Angenehm",
+          "desc": "Komfortable Unterkünfte mit hervorragendem Preis-Leistungs-Verhältnis."
+        },
+        "superior": {
+          "title": "Superior",
+          "subtitle": "Premium-Komfort",
+          "desc": "Eine perfekte Mischung aus Authentizität und modernem Komfort."
+        },
+        "luxury": {
+          "title": "Luxus",
+          "subtitle": "Unvergessliche Erlebnisse",
+          "desc": "Entdecken Sie Raffinesse mit unserer Auswahl der prestigeträchtigsten Hotels."
+        },
+        "superLuxury": {
+          "title": "Superluxus",
+          "subtitle": "Der Gipfel der Eleganz",
+          "desc": "Außergewöhnliche Einrichtungen, die außergewöhnlichen Service und Annehmlichkeiten bieten."
+        },
+        "eastSouth": {
+          "title": "Ostküste & Südküste",
+          "subtitle": "Küstenwunder",
+          "desc": "Entdecken Sie die schönsten Resorts entlang der herrlichen Küste von Sri Lanka."
+        }
+      },
+      "galleryTabs": {
+        "all": "Alle",
+        "room": "Zimmer",
+        "restaurant": "Restaurant",
+        "panorama": "Panorama",
+        "other": "Andere"
+      },
+      "viewDetails": "Details ansehen"
+    }
+  }
+}

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { subscribeToNewsletter } from '../../services/contentService';
 
 const Newsletter = () => {
+  const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState('idle'); // idle, loading, success, error
 
@@ -45,12 +47,8 @@ const Newsletter = () => {
                   </div>
                   <span className="text-[9px] font-bold uppercase tracking-[0.3em] opacity-80">Newsletter</span>
                 </div>
-                <h2 className="text-2xl md:text-3xl font-serif font-bold mb-1 tracking-tight drop-shadow-md">
-                  Abonnez-vous à la newsletter
-                </h2>
-                <p className="opacity-80 text-xs font-light italic">
-                  Pour recevoir nos meilleures offres mensuelles
-                </p>
+                <h2 className="text-2xl md:text-3xl font-serif font-bold mb-1 tracking-tight drop-shadow-md">{t("newsletter.title")}</h2>
+                <p className="opacity-80 text-xs font-light italic">{t("newsletter.subtitle")}</p>
               </div>
 
               {/* Form Side */}
@@ -63,7 +61,7 @@ const Newsletter = () => {
                     type="email" 
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Votre adresse e-mail..." 
+                    placeholder={t("newsletter.placeholder")} 
                     className="flex-1 bg-transparent border-none px-5 py-3 text-white placeholder:text-white/60 outline-none text-xs font-medium"
                     required
                     disabled={status === 'loading'}
@@ -73,14 +71,14 @@ const Newsletter = () => {
                     disabled={status === 'loading'}
                     className="px-6 py-2 rounded-[1.2rem] btn-premium-white whitespace-nowrap disabled:opacity-40 disabled:pointer-events-none"
                   >
-                    {status === 'loading' ? 'Chargement...' : "S'abonner"}
+                    {status === 'loading' ? t('newsletter.loading') : t('newsletter.subscribe')}
                   </button>
                 </form>
                 {status === 'success' && (
-                  <p className="text-green-300 text-[10px] mt-2 ml-4 font-bold animate-pulse">Merci ! Vous êtes maintenant abonné.</p>
+                  <p className="text-green-300 text-[10px] mt-2 ml-4 font-bold animate-pulse">{t("newsletter.success")}</p>
                 )}
                 {status === 'error' && (
-                  <p className="text-red-300 text-[10px] mt-2 ml-4 font-bold">Une erreur est survenue. Veuillez réessayer.</p>
+                  <p className="text-red-300 text-[10px] mt-2 ml-4 font-bold">{t("newsletter.error")}</p>
                 )}
               </div>
             </div>

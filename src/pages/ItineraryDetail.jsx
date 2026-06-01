@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { getItineraries } from '../services/contentService';
 
 import { Helmet } from 'react-helmet-async';
@@ -8,8 +9,10 @@ import PaymentPolicy from '../components/PaymentPolicy/PaymentPolicy';
 import BookingCard from '../components/BookingCard/BookingCard';
 import BookingForm from '../components/BookingForm/BookingForm';
 import AnimatedMap from '../components/InteractiveMap/AnimatedMap';
+
 const ItineraryDetail = () => {
   const { id } = useParams();
+  const { t, i18n } = useTranslation();
   const [itinerary, setItinerary] = useState(null);
   const [loading, setLoading] = useState(true);
   const [activeDay, setActiveDay] = useState(1);
@@ -19,7 +22,7 @@ const ItineraryDetail = () => {
   useEffect(() => {
     const fetchItinerary = async () => {
       try {
-        const dynamicData = await getItineraries();
+        const dynamicData = await getItineraries(i18n.language);
         const all = dynamicData;
         // ID can be string or number depending on source
         const found = all.find(it => it.id.toString() === id.toString());
@@ -30,7 +33,7 @@ const ItineraryDetail = () => {
       setLoading(false);
     };
     fetchItinerary();
-  }, [id]);
+  }, [id, i18n.language]);
 
   useEffect(() => {
     if (isModalOpen) {
@@ -60,7 +63,7 @@ const ItineraryDetail = () => {
         <meta property="og:type" content="website" />
       </Helmet>
       {/* Hero Section */}
-      <section className="relative h-[80vh] flex items-center justify-center">
+      <section className="relative h-[65vh] md:h-[80vh] flex items-center justify-center">
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
           <img 
@@ -73,14 +76,15 @@ const ItineraryDetail = () => {
         </div>
 
         {/* Hero Content */}
-        <div className="relative z-10 flex flex-col items-center w-full text-white text-center px-6 -mt-20">
+        <div className="relative z-10 flex flex-col items-center w-full text-white text-center px-6 -mt-20 md:-mt-10">
           <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight drop-shadow-xl mb-6 leading-tight">
             {itinerary.title}
           </h1>
         </div>
+      </section>
 
-        {/* Info Bar (Floating Half-on-Half) */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-full max-w-5xl px-4 z-20">
+      {/* Info Bar (Floating overlapping via negative margin) */}
+      <div className="relative z-20 w-full max-w-5xl mx-auto px-4 -mt-32 md:-mt-40 mb-6 md:mb-8">
           <div className="bg-white rounded-[40px] shadow-2xl py-6 md:py-8 px-6 md:px-12 border border-gray-50 flex flex-col items-center">
             {/* Stats Row */}
             <div className="grid grid-cols-3 md:grid-cols-3 gap-4 md:gap-8 w-full text-center">
@@ -92,7 +96,7 @@ const ItineraryDetail = () => {
                   </svg>
                 </div>
                 <div>
-                  <p className="text-gray-400 text-[8px] md:text-[10px] font-bold uppercase tracking-[0.1em] md:tracking-[0.2em] mb-0.5 md:mb-1">Durée</p>
+                  <p className="text-gray-400 text-[8px] md:text-[10px] font-bold uppercase tracking-[0.1em] md:tracking-[0.2em] mb-0.5 md:mb-1">{t("itineraryDetail.duration")}</p>
                   <p className="text-primary text-sm md:text-xl font-bold whitespace-nowrap">{itinerary.duration}</p>
                 </div>
               </div>
@@ -105,7 +109,7 @@ const ItineraryDetail = () => {
                   </svg>
                 </div>
                 <div>
-                  <p className="text-gray-400 text-[8px] md:text-[10px] font-bold uppercase tracking-[0.1em] md:tracking-[0.2em] mb-0.5 md:mb-1">Groupe</p>
+                  <p className="text-gray-400 text-[8px] md:text-[10px] font-bold uppercase tracking-[0.1em] md:tracking-[0.2em] mb-0.5 md:mb-1">{t("itineraryDetail.group")}</p>
                   <p className="text-primary text-sm md:text-xl font-bold whitespace-nowrap">{itinerary.group}</p>
                 </div>
               </div>
@@ -118,21 +122,27 @@ const ItineraryDetail = () => {
                   </svg>
                 </div>
                 <div>
-                  <p className="text-gray-400 text-[8px] md:text-[10px] font-bold uppercase tracking-[0.1em] md:tracking-[0.2em] mb-0.5 md:mb-1">Effort</p>
+                  <p className="text-gray-400 text-[8px] md:text-[10px] font-bold uppercase tracking-[0.1em] md:tracking-[0.2em] mb-0.5 md:mb-1">{t("itineraryDetail.effort")}</p>
                   <p className="text-primary text-sm md:text-xl font-bold whitespace-nowrap">{itinerary.effort}</p>
                 </div>
               </div>
             </div>
 
-            {/* Separator */}
-            <div className="w-full flex items-center gap-4 my-6">
-              <div className="flex-grow h-px bg-gray-100"></div>
-              <p className="text-gray-400 text-[8px] font-bold uppercase tracking-[0.3em] whitespace-nowrap">Points forts et visites</p>
-              <div className="flex-grow h-px bg-gray-100"></div>
+          </div>
+      </div>
+
+      {/* Points forts et visites (Full Width of bottom section) */}
+      <div className="relative z-20 w-full max-w-7xl mx-auto px-6 mb-16 md:mb-24">
+          <div className="bg-white rounded-[40px] shadow-2xl py-6 md:py-8 px-6 md:px-12 border border-gray-50 flex flex-col items-center">
+            {/* Title / Separator */}
+            <div className="w-full flex items-center gap-4 mb-6 md:mb-10">
+              <div className="flex-grow h-px bg-gray-200"></div>
+              <h2 className="text-primary text-sm md:text-lg font-extrabold uppercase tracking-[0.2em] whitespace-nowrap drop-shadow-sm">{t("itineraryDetail.highlightsVisits")}</h2>
+              <div className="flex-grow h-px bg-gray-200"></div>
             </div>
 
             {/* Highlights Thumbnails */}
-            <div className="flex flex-wrap justify-center items-start gap-y-10 gap-x-6 md:gap-x-8">
+            <div className="flex flex-wrap justify-center items-start gap-y-6 md:gap-y-10 gap-x-6 md:gap-x-8">
               {itinerary.days?.map((day, idx) => (
                 <div 
                   key={idx} 
@@ -166,7 +176,7 @@ const ItineraryDetail = () => {
                     />
                     <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 to-transparent py-3 px-4">
                       <p className="text-white text-xs font-bold truncate leading-tight">{day.location.split(' - ')[0]}</p>
-                      <p className="text-white/70 text-[10px] font-medium uppercase tracking-wider">{day.displayLabel || `Jour ${day.id}`}</p>
+                      <p className="text-white/70 text-[10px] font-medium uppercase tracking-wider">{day.displayLabel || `${t("itineraryDetail.day")} ${day.id}`}</p>
                     </div>
                   </div>
                 </div>
@@ -174,17 +184,13 @@ const ItineraryDetail = () => {
             </div>
           </div>
         </div>
-      </section>
-
-      {/* Spacer for the floating info bar */}
-      <div className="h-40 md:h-48"></div>
 
       {/* Interactive Itinerary Section */}
-      <section id="itinerary-section" className="max-w-7xl mx-auto px-6 pb-24">
+      <section id="itinerary-section" className="max-w-7xl mx-auto px-6 pb-12 md:pb-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-stretch">
           
           {/* Left Column: Interactive Map */}
-          <div className="relative group/map h-[850px]">
+          <div className="relative group/map h-[500px] md:h-[600px] lg:h-[850px]">
             <div className="absolute -inset-4 bg-gradient-to-tr from-primary/5 to-luxury/5 rounded-[48px] blur-2xl opacity-0 group-hover/map:opacity-100 transition-duration-700"></div>
             <AnimatedMap 
               days={days} 
@@ -206,7 +212,7 @@ const ItineraryDetail = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
               <div className="absolute bottom-6 left-8 flex flex-col items-start gap-2">
                     <span className="bg-white/20 backdrop-blur-md text-white px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest border border-white/30">
-                  {days[activeDay - 1].displayLabel || `Jour ${days[activeDay - 1].id}`}
+                  {days[activeDay - 1].displayLabel || `${t("itineraryDetail.day")} ${days[activeDay - 1].id}`}
                 </span>
                 <h3 className="text-white text-2xl md:text-3xl font-bold drop-shadow-xl leading-tight">
                   {days[activeDay - 1].location.split(' - ')[0]}
@@ -228,7 +234,7 @@ const ItineraryDetail = () => {
                   <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L16 4m0 13V4m0 0L9 7" /></svg>
                 </div>
                 <div>
-                  <h4 className="text-primary font-bold text-sm uppercase tracking-wider mb-0.5">Points forts</h4>
+                  <h4 className="text-primary font-bold text-sm uppercase tracking-wider mb-0.5">{t("itineraryDetail.highlights")}</h4>
                   <p className="text-gray-500 text-xs font-medium leading-relaxed">{days[activeDay - 1].highlights}</p>
                 </div>
               </div>
@@ -240,7 +246,7 @@ const ItineraryDetail = () => {
                     <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
                   </div>
                   <div>
-                    <h4 className="text-primary font-bold text-sm uppercase tracking-wider mb-0.5">Hébergement</h4>
+                    <h4 className="text-primary font-bold text-sm uppercase tracking-wider mb-0.5">{t("itineraryDetail.accommodation")}</h4>
                     <p className="text-gray-500 text-xs font-medium leading-relaxed">{days[activeDay - 1].accommodation}</p>
                   </div>
                 </div>
@@ -263,10 +269,15 @@ const ItineraryDetail = () => {
             {/* Next Day Button */}
             <button 
               onClick={() => activeDay < days.length && setActiveDay(activeDay + 1)}
-              className="mt-12 w-full btn-premium-primary py-4 rounded-2xl shadow-sm disabled:opacity-40 disabled:pointer-events-none"
+              className="mt-12 w-full btn-premium-primary py-4 rounded-2xl shadow-sm disabled:opacity-40 disabled:pointer-events-none flex items-center justify-center gap-2"
               disabled={activeDay === days.length}
             >
-              {activeDay === days.length ? 'Tour terminé' : 'Jour suivant'}
+              {activeDay === days.length ? t("itineraryDetail.tourFinished") : (
+                <>
+                  {t("itineraryDetail.nextDay")} 
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                </>
+              )}
             </button>
           </div>
         </div>
@@ -291,11 +302,16 @@ const ItineraryDetail = () => {
               </button>
             </div>
 
-            <span className="text-luxury text-[10px] font-bold uppercase tracking-widest mb-2 block">{days[activeDay - 1].displayLabel || `Jour ${days[activeDay - 1].id}`}</span>
+            <span className="text-luxury text-[10px] font-bold uppercase tracking-widest mb-2 block">{days[activeDay - 1].displayLabel || `${t("itineraryDetail.day")} ${days[activeDay - 1].id}`}</span>
             <h3 className="text-primary text-2xl font-bold mb-3">{days[activeDay - 1].location}</h3>
             <p className="text-gray-600 text-[15px] leading-relaxed mb-6">{days[activeDay - 1].description}</p>
-            <button onClick={() => { if (activeDay < days.length) setActiveDay(activeDay + 1); else setIsModalOpen(false); }} className="w-full btn-premium-primary py-3.5 rounded-2xl shadow-sm">
-              {activeDay === days.length ? 'Fermer' : 'Jour suivant'}
+            <button onClick={() => { if (activeDay < days.length) setActiveDay(activeDay + 1); else setIsModalOpen(false); }} className="w-full btn-premium-primary py-3.5 rounded-2xl shadow-sm flex items-center justify-center gap-2">
+              {activeDay === days.length ? t("itineraryDetail.close") : (
+                <>
+                  {t("itineraryDetail.nextDay")} 
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                </>
+              )}
             </button>
           </div>
         </div>

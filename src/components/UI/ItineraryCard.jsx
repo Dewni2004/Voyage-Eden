@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const getIconSvg = (iconText, iconTextColorClass) => {
   const text = iconText.toLowerCase();
@@ -59,7 +60,7 @@ const getIconSvg = (iconText, iconTextColorClass) => {
   );
 };
 
-const formatItineraryTitle = (title, duration) => {
+const formatItineraryTitle = (title, duration, t) => {
   if (!title) return '';
   const daysRegex = /\s*\(\s*(\d+)\s*[jJ]ours?\s*\)\s*$/;
   const match = title.match(daysRegex);
@@ -68,13 +69,13 @@ const formatItineraryTitle = (title, duration) => {
   
   if (match) {
     const days = parseInt(match[1], 10);
-    daysText = `${days} jours`;
+    daysText = `${days} ${t("itineraryCard.days")}`;
     cleanTitle = title.replace(daysRegex, '').trim();
   } else if (duration) {
     const numMatch = duration.match(/(\d+)/);
     if (numMatch) {
       const days = parseInt(numMatch[1], 10);
-      daysText = `${days} jours`;
+      daysText = `${days} ${t("itineraryCard.days")}`;
     } else {
       daysText = duration;
     }
@@ -86,16 +87,18 @@ const formatItineraryTitle = (title, duration) => {
 const ItineraryCard = ({ 
   id, 
   title, 
-  image, 
+  duration, 
   description, 
   price, 
-  icons = [], 
-  duration,
-  tag = "Les plus populaires", 
-  isDark = false, 
-  isGreen = false 
+  image, 
+  isGreen = false, 
+  isDark = false,
+  features = [],
+  icons = [],
+  tag = "Les plus populaires"
 }) => {
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
 
   const bgClass = isGreen 
     ? 'bg-[#064e3b] border-white/5 hover:border-luxury/80 shadow-2xl hover:shadow-[0_20px_45px_-12px_rgba(0,0,0,0.3),0_0_25px_3px_rgba(197,160,89,0.2)]' 
@@ -126,7 +129,7 @@ const ItineraryCard = ({
         {tag && (
           <p className={`text-[10px] ${textTag} font-bold uppercase tracking-widest mb-2`}>{tag}</p>
         )}
-        <h3 className={`text-xl font-bold mb-4 ${textTitle}`}>{formatItineraryTitle(title, duration)}</h3>
+        <h3 className={`text-xl font-bold mb-4 ${textTitle}`}>{formatItineraryTitle(title, duration, t)}</h3>
         
         {/* Icon Bar */}
         <div className={`flex items-center space-x-4 mb-6 py-2 px-3 ${iconBg} rounded-lg`}>
@@ -138,7 +141,7 @@ const ItineraryCard = ({
           ))}
         </div>
 
-        <p className={`text-[13px] leading-relaxed mb-8 flex-grow font-light ${textSecondary}`}>
+        <p className={`text-[14px] leading-relaxed mb-8 flex-grow font-light ${textSecondary}`}>
           {description}
         </p>
 
@@ -146,11 +149,11 @@ const ItineraryCard = ({
           <div className="flex flex-col">
             <span className={`font-bold text-lg ${textTitle}`}>
               {price?.toString().toLowerCase().includes('€') ? price : `€ ${price}`}
-              <span className={`${isGreen || isDark ? 'text-white/50' : 'text-gray-400'} text-[10px] font-normal uppercase ml-1`}>/ Personne</span>
+              <span className={`${isGreen || isDark ? 'text-white/50' : 'text-gray-400'} text-[10px] font-normal uppercase ml-1`}>{t("itineraryCard.perPerson")}</span>
             </span>
           </div>
           <button 
-            onClick={() => navigate(`/itinerary/${id}`)}
+            onClick={() => navigate(`/${i18n.language}/itinerary/${id}`)}
             className={`${
               isGreen 
                 ? 'border border-white bg-transparent text-white hover:bg-white hover:text-green-800' 
@@ -158,9 +161,7 @@ const ItineraryCard = ({
                   ? 'border border-white bg-transparent text-white hover:bg-white hover:text-primary' 
                   : 'btn-premium-primary'
             } px-6 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap min-w-[120px] text-center`}
-          >
-            Réserver
-          </button>
+          >{t("itineraryCard.book")}</button>
         </div>
       </div>
     </div>

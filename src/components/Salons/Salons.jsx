@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import fitur1 from '../../assets/Fitur image 1.jpg';
 import fitur2 from '../../assets/Fitur image 2.jpg';
 import fitur3 from '../../assets/Fitur image 3.jpg';
@@ -6,6 +7,7 @@ import fitur4 from '../../assets/Fitur image 4.jpg';
 import fitur5 from '../../assets/Fitur image 5.png';
 
 const Salons = () => {
+  const { t } = useTranslation();
   const images = [fitur1, fitur2, fitur3, fitur4, fitur5];
 
   return (
@@ -13,10 +15,10 @@ const Salons = () => {
       <div className="max-w-[1600px] mx-auto px-6">
         <div className="text-center mb-10 md:mb-16">
           <h2 className="text-3xl md:text-5xl font-bold text-primary mb-4">
-            Salons internationaux auxquels Sri Lanka Eden Travels a participé
+            {t('salons.title', 'Salons internationaux auxquels Sri Lanka Eden Travels a participé')}
           </h2>
           <p className="text-gray-600 text-sm md:text-base max-w-3xl mx-auto leading-relaxed">
-            Découvrez les salons internationaux du tourisme où nous avons eu l’honneur de représenter notre organisation.
+            {t('salons.subtitle', 'Découvrez les salons internationaux du tourisme où nous avons eu l’honneur de représenter notre organisation.')}
           </p>
         </div>
 

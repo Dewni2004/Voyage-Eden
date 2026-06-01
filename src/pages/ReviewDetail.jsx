@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { getReviews } from '../services/contentService';
 import { staticTextReviews } from '../data/reviewsData';
 
 const ReviewDetail = () => {
   const { id } = useParams();
+  const { i18n } = useTranslation();
   const [review, setReview] = useState(null);
   const [allReviews, setAllReviews] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -12,7 +14,7 @@ const ReviewDetail = () => {
   useEffect(() => {
     const fetchData = async () => {
       // 1. Fetch dynamic reviews from Firestore
-      const dynamicData = await getReviews();
+      const dynamicData = await getReviews(i18n.language);
       
       // 2. Combine with static reviews
       const combinedData = [...dynamicData, ...staticTextReviews];
@@ -24,7 +26,7 @@ const ReviewDetail = () => {
       setLoading(false);
     };
     fetchData();
-  }, [id]);
+  }, [id, i18n.language]);
 
   if (loading) return <div className="min-h-screen flex items-center justify-center bg-[#f8fbff] text-primary font-bold">Loading traveler story...</div>;
   if (!review) return <div className="min-h-screen flex items-center justify-center bg-[#f8fbff] text-center px-6"><div><h2 className="text-2xl font-bold text-primary mb-4">Review not found</h2><Link to="/reviews" className="text-luxury font-bold hover:underline">← Back to all reviews</Link></div></div>;

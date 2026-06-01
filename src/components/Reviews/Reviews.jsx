@@ -1,9 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { getReviews } from '../../services/contentService';
 import swipeHandImg from '../../assets/swipe-hand-transparent.png';
 
 const Reviews = () => {
+  const { t, i18n } = useTranslation();
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [hasScrolled, setHasScrolled] = useState(false);
@@ -19,12 +21,12 @@ const Reviews = () => {
 
   useEffect(() => {
     const fetchReviews = async () => {
-      const data = await getReviews();
+      const data = await getReviews(i18n.language);
       setReviews(data);
       setLoading(false);
     };
     fetchReviews();
-  }, []);
+  }, [i18n.language]);
 
   if (loading || reviews.length === 0) return null;
 
@@ -34,9 +36,9 @@ const Reviews = () => {
       <div className="max-w-[1600px] mx-auto px-6 relative">
         {/* Header */}
         <div className="text-center mb-8 md:mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold text-primary mb-3">Ce que disent nos clients</h2>
+          <h2 className="text-3xl md:text-5xl font-bold text-primary mb-3">{t('reviews.title')}</h2>
           <span className="inline-block bg-primary/5 text-primary text-[11px] px-3.5 py-1 rounded-full font-bold uppercase tracking-wider">
-            {reviews.length} {reviews.length <= 1 ? 'avis client' : 'avis clients'}
+            {reviews.length} {reviews.length <= 1 ? t('nav.reviews', 'avis client') : t('nav.reviews', 'avis clients')}
           </span>
         </div>
 
@@ -102,7 +104,7 @@ const Reviews = () => {
             to="/reviews" 
             className="group inline-flex items-center gap-2 sm:gap-3 border border-primary bg-transparent text-primary hover:bg-primary hover:text-white px-5 py-2.5 sm:px-8 sm:py-3 rounded-full text-[10px] sm:text-xs md:text-sm font-bold tracking-wider uppercase shadow-sm hover:shadow-md transition-all duration-300 transform active:scale-95"
           >
-            <span>Voir tous les avis</span>
+            <span>{t('nav.reviews')}</span>
             <div className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 rounded-full bg-primary/5 group-hover:bg-white flex items-center justify-center transition-all duration-300 transform group-hover:translate-x-1.5 shadow-sm">
               <svg className="w-2.5 h-2.5 sm:w-3 h-3 md:w-4 md:h-4 text-primary transition-colors duration-300" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />

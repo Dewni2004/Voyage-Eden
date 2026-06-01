@@ -181,3 +181,31 @@ export const convertGPSToPercentage = ([lat, lng], day = null) => {
 
   return { x: 50, y: 50 };
 };
+
+/**
+ * Extracts an array of coordinates for all cities mentioned in a route string in order.
+ */
+export const getRouteWaypoints = (locationString) => {
+  if (!locationString) return [];
+  const parts = locationString.split(/ - | → | -> | et /i);
+  const waypoints = [];
+
+  for (const part of parts) {
+    const lowerPart = part.toLowerCase();
+    let foundCity = null;
+    let earliestIdx = 999999;
+    
+    for (const city of Object.keys(CITY_PERCENTAGE_COORDINATES)) {
+      const idx = lowerPart.indexOf(city);
+      if (idx !== -1 && idx < earliestIdx) {
+        earliestIdx = idx;
+        foundCity = city;
+      }
+    }
+    
+    if (foundCity) {
+      waypoints.push(CITY_PERCENTAGE_COORDINATES[foundCity]);
+    }
+  }
+  return waypoints;
+};

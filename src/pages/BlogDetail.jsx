@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { blogArticles } from '../data/blogData';
 import { getArticles } from '../services/contentService';
 import PageHero from '../components/UI/PageHero';
@@ -7,6 +8,7 @@ import { Helmet } from 'react-helmet-async';
 
 const BlogDetail = () => {
   const { id } = useParams();
+  const { i18n } = useTranslation();
   const [article, setArticle] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -41,7 +43,7 @@ const BlogDetail = () => {
       
       if (!found) {
         // Try Firestore
-        const dynamicArticles = await getArticles();
+        const dynamicArticles = await getArticles(i18n.language);
         found = dynamicArticles.find(item => item.id === id);
       }
       
@@ -49,7 +51,7 @@ const BlogDetail = () => {
       setLoading(false);
     };
     fetchArticle();
-  }, [id]);
+  }, [id, i18n.language]);
 
   if (loading) {
     return (
