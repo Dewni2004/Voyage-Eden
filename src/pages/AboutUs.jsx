@@ -61,6 +61,11 @@ const AboutUs = () => {
                 <p>
                   {t('aboutUs.whoWeAreDesc2')}
                 </p>
+                {t('aboutUs.whoWeAreBoldText') && (
+                  <p className="font-bold text-primary whitespace-pre-line">
+                    {t('aboutUs.whoWeAreBoldText')}
+                  </p>
+                )}
               </div>
 
               {/* Stats Cards */}
@@ -330,7 +335,7 @@ const AboutUs = () => {
                 </div>
                 <h3 className="text-primary text-sm sm:text-lg md:text-xl font-bold mb-0.5 sm:mb-1">{member.name}</h3>
                 <p className="text-primary/70 font-semibold text-[10px] sm:text-xs md:text-sm mb-2 sm:mb-4">{t(`aboutUs.team.${member.name}.role`, { defaultValue: member.role })}</p>
-                <p className="text-gray-500 text-[10px] sm:text-[11px] leading-relaxed line-clamp-3 group-hover:line-clamp-none transition-all duration-300">
+                <p className="text-gray-500 text-[10px] sm:text-[11px] leading-relaxed transition-all duration-300">
                   {t(`aboutUs.team.${member.name}.desc`, { defaultValue: member.desc })}
                 </p>
               </div>
@@ -410,7 +415,7 @@ const AboutUs = () => {
                 </div>
                 <h3 className="text-primary text-sm sm:text-lg md:text-xl font-bold mb-0.5 sm:mb-1">{guide.name}</h3>
                 <p className="text-primary/70 font-semibold text-[10px] sm:text-xs md:text-sm mb-2 sm:mb-4">{t(`aboutUs.team.${guide.name}.role`, { defaultValue: guide.role })}</p>
-                <p className="text-gray-500 text-[10px] sm:text-[11px] leading-relaxed line-clamp-3 group-hover:line-clamp-none transition-all duration-300">
+                <p className="text-gray-500 text-[10px] sm:text-[11px] leading-relaxed transition-all duration-300">
                   {t(`aboutUs.team.${guide.name}.desc`, { defaultValue: guide.desc })}
                 </p>
               </div>

@@ -60,6 +60,26 @@ const getIconSvg = (iconText, iconTextColorClass) => {
   );
 };
 
+const translateIconText = (text, i18n) => {
+  if (!text) return '';
+  const lower = text.toLowerCase();
+  const isEn = i18n.language && i18n.language.startsWith('en');
+  if (!isEn) return text;
+  
+  if (lower.includes('étoile') || lower.includes('etoile')) {
+    const num = lower.match(/\d+/);
+    return num ? `${num[0]} Stars` : 'Stars';
+  }
+  if (lower.includes('demi-pension')) return 'Half-Board';
+  if (lower.includes('pension complète')) return 'Full-Board';
+  if (lower.includes('petit déjeuner')) return 'Breakfast';
+  if (lower.includes('voiture')) return 'Car';
+  if (lower.includes('train')) return 'Train';
+  if (lower.includes('safari')) return 'Safari';
+  if (lower.includes('guide')) return 'Guide';
+  return text;
+};
+
 const formatItineraryTitle = (title, duration, t) => {
   if (!title) return '';
   const daysRegex = /\s*\(\s*(\d+)\s*[jJ]ours?\s*\)\s*$/;
@@ -136,7 +156,7 @@ const ItineraryCard = ({
           {icons.map((icon, i) => (
             <div key={i} className="flex items-center space-x-1.5">
               {getIconSvg(icon, iconTextColor)}
-              <span className={`text-[10px] font-bold uppercase tracking-tighter ${iconTextColor}`}>{icon}</span>
+              <span className={`text-[10px] font-bold uppercase tracking-tighter ${iconTextColor}`}>{translateIconText(icon, i18n)}</span>
             </div>
           ))}
         </div>

@@ -31,13 +31,9 @@ const CustomTripBanner = () => {
           <div className="relative z-10 w-full p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-10">
             
             <div className="flex-1 text-center md:text-left">
-              <h2 className="text-2xl md:text-4xl lg:text-4xl font-serif font-bold text-[#d4af37] mb-3 leading-tight drop-shadow-md">
+              <h2 className="text-2xl md:text-4xl lg:text-4xl font-serif font-bold text-white mb-0 leading-snug drop-shadow-md whitespace-pre-line">
                 {t('banner.title', 'DESIGN YOUR DREAM ITINERARY WITH US')}
               </h2>
-              
-              <p className="text-white/90 text-sm md:text-lg font-light max-w-2xl drop-shadow-sm">
-                {t('banner.subtitle', 'Just by filling out a form. For no additional fees.')}
-              </p>
             </div>
             
             <div className="flex-shrink-0">

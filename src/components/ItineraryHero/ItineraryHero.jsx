@@ -18,8 +18,8 @@ const ItineraryHero = () => {
 
       {/* Content */}
       <div className="relative z-10 text-center text-white px-6">
-        <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight lowercase">{t("itinerariesPage.heroTitle")}</h1>
-        <p className="text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">{t("itinerariesPage.heroDesc")}</p>
+        <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">{t("itinerariesPage.heroTitle")}</h1>
+        <p className="text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed whitespace-pre-line">{t("itinerariesPage.heroDesc")}</p>
       </div>
     </section>
   );

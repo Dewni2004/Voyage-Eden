@@ -3,16 +3,16 @@
     "nav": {
       "home": "Inicio",
       "itineraries": "Itinerarios",
-      "about": "Sobre Nosotros",
-      "guide": "Guía de Viaje",
-      "reviews": "Opiniones",
+      "about": "Quienes Somos",
+      "guide": "Guía Práctica",
+      "reviews": "Opinión de los viajeros",
       "contact": "Contacto",
       "quote": "Presupuesto a Medida",
       "changeLanguage": "Cambiar idioma"
     },
     "hero": {
       "welcome": "Bienvenido a",
-      "subtitle": "Nuestros expertos locales en Sri Lanka ofrecen tours privados y a medida.",
+      "subtitle": "Descubre Sri Lanka a tu medida: Viajes privados, personalizados y con guías en español. Incluye entradas a monumentos, safaris, hoteles con encanto y un coche con chofer privado exclusivo para ti.",
       "explore": "Explorar Paquetes",
       "contact": "Contáctenos",
       "brandName": "Sri Lanka Viyajes Eden"
@@ -30,18 +30,24 @@
       "hours_weekdays": "Lunes a Viernes: 8:30 AM – 5:30 PM",
       "hours_saturday": "Sábado: 8:30 AM – 12:30 PM",
       "hours_sunday": "Domingo: Cerrado",
-      "copyright": "Sri Lanka Viyajes Eden. Todos los derechos reservados."
+      "copyright": "Copyright © 2012-2026 Viajes Eden (pvt) Ltd. All Rights Reserved.",
+      "email1": "srilankavoyageeden@gmail.com",
+      "email2": "nethmi.srilankaedentravels@gmail.com",
+      "phone": "+94 77 147 0150 (Nethmi)",
+      "sltda_reg": "SLTDA : SLTDA/SQA/TA/02233",
+      "office1": "Sucursal en Kandy: Stone House Suites, No 38, Nittawela Road Kandy, Sri Lanka",
+      "office2": "Sucursal en Kurunegala: No. 64, 4th floor, Siripathi Complex, Bauddaloka Rd, Kurunegala, Sri Lanka"
     },
     "trust": {
       "google": "Reseñas de Google",
       "verified": "Verificado",
       "reviewsCount": "416+ opiniones de viajeros",
-      "averageNote": "Calificación promedio basada en los comentarios de nuestros clientes.",
+      "averageNote": "Haga clic aquí para ver nuestras reseñas de Google",
       "consult": "Consultar",
       "write": "Escribir",
       "video": "Reseñas en Video",
       "testimonials": "Testimonios de Clientes",
-      "discoverVideo": "Descubre la aventura en imágenes a través de los ojos de nuestros viajeros.",
+      "discoverVideo": "Mira videos y lee más reseñas de nuestros clientes aquí",
       "watch": "Ver",
       "youtube": "YouTube"
     },
@@ -51,45 +57,45 @@
       "more": "Descubra nuestros otros itinerarios"
     },
     "why": {
-      "title": "¿Por qué viajar con nosotros?",
+      "title": "Razones para elegir viajar con Sri Lanka Viajes Eden",
       "subtitle": "Nos enorgullece ofrecer experiencias de viaje auténticas y personalizadas.",
-      "t1": "Experiencia Local",
-      "d1": "Nuestros guías son locales que conocen los tesoros ocultos y las historias secretas de Sri Lanka.",
-      "t2": "Seguro y Protegido",
-      "d2": "Su seguridad es nuestra prioridad. Ofrecemos asistencia 24/7 y alojamientos verificados.",
-      "t3": "Viajes a Medida",
-      "d3": "Cada viajero es único. Personalizamos cada itinerario según sus preferencias.",
-      "t4": "Asistencia 24/7",
-      "d4": "Estamos a su lado en cada paso de su viaje para una experiencia sin preocupaciones."
+      "t1": "Precios sin intermediarios",
+      "d1": "Tarifas directas de proveedores locales, garantizando el mejor precio para tu viaje sin comisiones ocultas.",
+      "t2": "Estamos en Sri Lanka",
+      "d2": "Nuestro equipo y guías locales están sobre el terreno para mostrarte los secretos y tesoros ocultos del país.",
+      "t3": "Viaje personalizado",
+      "d3": "Diseñamos un itinerario a tu medida. Cada viajero es único, por lo que adaptamos cada ruta a tus gustos y ritmo.",
+      "t4": "Turismo responsable",
+      "d4": "Apoyamos a las comunidades locales y protegemos el medio ambiente para que tu impacto sea siempre positivo."
     },
     "destinations": {
-      "title": "El Diario de Eden",
-      "subtitle": "Inspiración y descubrimientos del mundo."
+      "title": "Guía práctica de Sri Lanka",
+      "subtitle": "Información útil para tu viaje a Sri Lanka"
     },
     "reviews": {
-      "title": "Lo que dicen nuestros clientes",
+      "title": "Opiniones de nuestros clientes mas recientes",
       "subtitle": "Viajeros que han experimentado nuestros servicios",
-      "heroTitle": "Historias Reales",
+      "heroTitle": "Que Opinon Los Clients De Sri Lanka Viyajes Eden",
       "heroSubtitle": "Viajes Inolvidables",
       "heroDesc": "Descubre cómo nuestros viajeros vivieron la magia de Sri Lanka, desde colinas neblinosas hasta costas doradas.",
       "googleReviews": "Reseñas de Google",
       "verified": "Verificado",
       "googleCount": "(416+ reseñas de viajeros)",
-      "googleDesc": "Calificación promedio basada en los comentarios de nuestros clientes.",
+      "googleDesc": "Haga clic aquí para ver nuestras reseñas de Google",
       "consult": "Consultar",
       "write": "Escribir",
       "videoReviews": "Reseñas en Video",
       "videoTestimonials": "(Testimonios de Clientes)",
-      "videoDesc": "Descubre la aventura en imágenes a través de los ojos de nuestros viajeros.",
+      "videoDesc": "Mira videos y lee más reseñas de nuestros clientes aquí",
       "watch": "Ver",
       "visualMemories": "Recuerdos Visuales",
       "recentVideos": "Videos Recientes",
-      "recentVideosDesc": "Breves momentos destacados en video de los increíbles viajes de nuestros clientes.",
+      "recentVideosDesc": "Videos más recientes de nuestros clientes que explican la experiencia de viajar a Sri Lanka con Viajes Edén",
       "tripIn": "Viaje en",
-      "seeAllVideos": "Ver todos los videos",
+      "seeAllVideos": "Ver más videos",
       "travelerReviewsTitle": "Reseñas de Viajeros",
       "recentReviews": "Reseñas Recientes",
-      "recentReviewsDesc": "Historias y experiencias auténticas compartidas por nuestros valiosos clientes.",
+      "recentReviewsDesc": "Lee la valoración que hacen los clientes al acabar su viaje a Sri Lanka con Viajes Eden.\nHaz click en la foto para leer lo que dicen nuestros clientes de SLVE",
       "readFullStory": "Leer historia completa",
       "whyLoveUsTitle": "Por qué los viajeros nos aman",
       "features": {
@@ -112,7 +118,7 @@
       },
       "ctaPrefix": "Comienza la Aventura",
       "ctaTitle": "¿Listo para escribir tu propia historia?",
-      "ctaDesc": "Únete a cientos de viajeros felices y vive el viaje de tu vida con Eden Travels.",
+      "ctaDesc": "Únete a cientos de viajeros felices y vive el viaje de tu vida con Viyajes Eden.",
       "planTrip": "Planificar mi viaje"
     },
     "gallery": {
@@ -120,94 +126,98 @@
       "title": "Nuestra Oficina y Nuestro Equipo"
     },
     "salons": {
-      "title": "Exposiciones internacionales en las que participó Sri Lanka Viyajes Eden",
+      "title": "Ferias internacionales en las que participó Sri Lanka Viajes Edén.",
       "subtitle": "Descubra las ferias internacionales de turismo en las que tuvimos el honor de representar a nuestra organización."
     },
     "banner": {
-      "title": "DISEÑE SU ITINERARIO DE SUEÑO CON NOSOTROS",
-      "subtitle": "Simplemente llenando un formulario. Sin cargos adicionales.",
-      "button": "Diseñe su viaje personalizado"
+      "title": "Podemos personalizar todas las rutas, según tus gustos e intereses\nSIN COSTE ADICIONAL ALGUNO",
+      "subtitle": "",
+      "button": "Diseña tu viaje personalizado"
     },
     "customTrip": {
-      "heroTitle": "DESIGN YOUR CUSTOM TRIP",
+      "heroTitle": "DISEÑA TU VIAJE A MEDIDA",
       "heroDesc": "We know that the best way to travel to Sri Lanka is tailor-made and private. Tell us your travel idea and we will prepare the trip you have always dreamed of.",
-      "whoWith": "Who are you traveling with?",
-      "couple": "As a couple",
-      "family": "With family",
-      "group": "In a group",
-      "whereAt": "Where are you at?",
-      "lookingForInfo": "I'm currently looking for information",
-      "startingToOrganize": "I'm starting to organize my trip",
-      "boughtTickets": "I have already bought the plane tickets",
-      "yes": "Yes",
+      "whoWith": "¿Con quién viajas?",
+      "couple": "En pareja",
+      "family": "En familia",
+      "group": "En grupo",
+      "whereAt": "¿En qué punto te encuentras?",
+      "lookingForInfo": "Actualmente busco información",
+      "startingToOrganize": "Estoy empezando a organizar mi viaje",
+      "boughtTickets": "Ya he comprado los billetes de avión",
+      "yes": "Sí",
       "no": "No",
-      "numTravelers": "Number of travelers?",
-      "adults": "No. Adults",
-      "teens": "Teens <16 years",
-      "children": "Children <11 years",
-      "infants": "Infants <2 years",
-      "numDays": "Number of days",
-      "arrivalDate": "Approximate Arrival date",
-      "departureDate": "Approximate departure date",
-      "interestsTitle": "What are you particularly interested in? (Several options are possible)",
+      "numTravelers": "¿Número de viajeros?",
+      "adults": "Nº de adultos",
+      "teens": "Adolescentes <16 años",
+      "children": "Niños <11 años",
+      "infants": "Bebés <2 años",
+      "numDays": "Número de días",
+      "arrivalDate": "Fecha de llegada",
+      "departureDate": "Fecha de salida",
+      "interestsTitle": "¿Qué te interesa especialmente? (Puedes marcar varias opciones)",
       "monuments": "Monuments",
       "temples": "Temples",
       "nature": "Nature/Animal Life",
       "beach": "Beach",
       "adventure": "Adventure",
       "hiking": "Hiking",
-      "accommodationType": "Type of accommodation",
-      "standard": "Standard (3 stars approx.)",
-      "superior": "Superior (4/5 stars approx.)",
-      "luxury": "Luxury Hotels",
-      "superLuxury": "Super Luxury",
-      "roomDist": "Room Distribution",
-      "singleRooms": "Single Rooms",
-      "doubleRooms": "Double Rooms (DBL)",
-      "tripleRooms": "Triple Rooms",
-      "mealPlan": "Meal Plan",
-      "bb": "Bread & Breakfast",
-      "hb": "Half Board (Breakfast + Dinner)",
-      "fb": "Full Board (Breakfast + Lunch + Dinner)",
-      "accompaniment": "Select Type of Accompaniment:",
-      "driver": "Tourist Driver",
-      "chauffeur": "Licensed Chauffeur Guide",
-      "nationalGuide": "Licensed National Guide [ For Group ]",
+      "accommodationType": "Categoría de hoteles preferida",
+      "standard": "Estándar (3 estrellas aprox.)",
+      "superior": "Superior (4/5 estrellas aprox.)",
+      "luxury": "Hoteles de Lujo",
+      "superLuxury": "Súper Lujo",
+      "roomDist": "Distribución de habitaciones",
+      "singleRooms": "Habitaciones Individuales",
+      "doubleRooms": "Habitaciones Dobles",
+      "tripleRooms": "Habitaciones Triples",
+      "mealPlan": "Plan de comidas",
+      "bb": "Alojamiento y desayuno",
+      "hb": "Media Pensión",
+      "fb": "Pensión Completa",
+      "accompaniment": "Tipo de acompañamiento:",
+      "driver": "Conductor turístico",
+      "chauffeur": "Chófer guía",
+      "nationalGuide": "Guía Nacional",
       "languagePref": "Preferred Language of Accompaniment:",
       "english": "English",
       "spanish": "Spanish",
       "italian": "Italian",
       "arabic": "Arabic",
       "otherLanguage": "Other Language",
-      "fullName": "Full Name",
-      "nationality": "Nationality",
-      "whatsapp": "Whatsapp Contact Number",
-      "email": "E-mail",
-      "comments": "Comments",
-      "commentsPlaceholder": "Holidays, Photography trips, Birdwatching, Trekking etc...",
-      "send": "SEND",
-      "sending": "Sending...",
+      "fullName": "Nombre completo",
+      "nationality": "Nacionalidad",
+      "whatsapp": "Número de contacto de Whatsapp",
+      "email": "Correo electrónico",
+      "comments": "Comentarios",
+      "commentsPlaceholder": "Vacaciones, viajes de fotografía, observación de aves, senderismo, etc...",
+      "send": "ENVIAR SOLICITUD",
+      "sending": "Enviando...",
       "success": "Your request has been sent successfully!",
-      "error": "An error occurred. Please try again."
+      "error": "An error occurred. Please try again.",
+      "nextBtn": "Siguiente",
+      "backBtn": "Atrás",
+      "startPlanningBtn": "Comenzar a planificar"
     },
     "itineraries": {
-      "popular": "Nuestros itinerarios más populares",
-      "honeymoon": "Viajes de luna de miel",
-      "family": "Viajes en familia",
-      "luxury": "Colección de lujo",
-      "golf": "Estancias de golf",
+      "popular": "Los viajes imprescindibles que no te puedes perder​",
+      "honeymoon": "Viajes de Lunas de Miel",
+      "family": "Viajes en Familia",
+      "luxury": "Viajes de Lujo",
+      "golf": "Viajes de Golf",
       "surf": "Viajes de surf y buceo",
       "adventure": "Viajes de aventura",
-      "perahera": "Especiales de Esela Perahera",
+      "perahera": "Especial Esala Perahera",
       "days8": "Itinerarios de 8 días",
-      "interests": "Itinerarios basados en intereses"
+      "interests": "Rutas de sri lanka extra largas para no perderse nada"
     },
     "aboutUs": {
-      "heroTitle": "Conócenos",
-      "heroDesc": "Somos un equipo multicultural dedicado a crear experiencias de viaje auténticas y personalizadas en Sri Lanka.",
-      "whoWeAreTitle": "Quiénes Somos",
-      "whoWeAreDesc1": "Somos un equipo multicultural con sede en Kandy y Kurunegala, en el corazón de Sri Lanka, especializados en experiencias de viaje personalizadas que muestran la auténtica belleza de nuestra nación insular.",
-      "whoWeAreDesc2": "Orgullosos de formar parte del grupo Sri Lanka Viajes Eden, compartimos la misma pasión, profesionalidad y compromiso con la excelencia. Todas nuestras operaciones tienen su sede en Sri Lanka, apoyadas por un dedicado equipo local de especialistas en viajes, guías experimentados y conductores profesionales.",
+      "heroTitle": "Conócenos Personalmente",
+      "heroDesc": "En Viajes Edén organizamos viajes privados a medida por Sri Lanka, con atención y asistencia en español 24/7 para que disfrutes de una experiencia inolvidable.",
+      "whoWeAreTitle": "Nuestro Equipo principal: Guiando Aventuras Inolvidables en Sri Lanka",
+      "whoWeAreDesc1": "En Sri Lanka Viajes Edén, creemos que un gran viaje comienza con un gran equipo. Somos un grupo de profesionales locales apasionados por mostrar lo mejor de nuestra isla, con un trato cercano, amable y en tu idioma. Cada miembro de nuestro equipo aporta su conocimiento, experiencia y cariño para diseñar viajes auténticos, personalizados y llenos de momentos inolvidables.",
+      "whoWeAreDesc2": "Desde tu primer contacto hasta tu último día en Sri Lanka, estaremos a tu lado, asegurándonos de que vivas una experiencia única, segura y perfectamente organizada.",
+      "whoWeAreBoldText": "Déjanos acompañarte en esta aventura. Sri Lanka te espera, y nosotros también.",
       "statsYears": "Años de experiencia",
       "statsExperts": "Expertos locales",
       "statsReviews": "Reseñas de estrellas",
@@ -221,116 +231,116 @@
       "apart3Desc": "Nuestros conductores están especialmente entrenados para cumplir con las expectativas europeas de seguridad y comodidad, brindando un servicio fluido y predecible.",
       "apart4Title": "Una Experiencia Comprobada",
       "apart4Desc": "Nuestra reputación habla a través de las voces de aquellos que han viajado con nosotros. Explora nuestros testimonios de clientes para escuchar directamente de otros viajeros.",
-      "foundersTitle": "Conoce a los Fundadores y Representantes",
+      "foundersTitle": "Conozca a nuestro equipo",
       "teamTitle": "Nuestro Equipo en la Oficina",
-      "teamSubtitle": "Los profesionales dedicados que hacen de su viaje soñado una realidad detrás de escena.",
-      "guidesTitle": "Nuestros Guías y Conductores",
-      "guidesSubtitle": "Sus compañeros de viaje. Expertos locales que transforman cada recorrido en una experiencia auténtica.",
+      "teamSubtitle": "La fuerza detrás de cada viaje perfecto: planificación, coordinación y dedicación al detalle.",
+      "guidesTitle": "Nuestros Guías y Chóferes",
+      "guidesSubtitle": "Tu compañía en ruta: expertos locales que convierten cada recorrido en una experiencia auténtica.",
       "team": {
         "Sanji": {
           "role": "Co-fundador",
-          "desc": "Nacido en Sri Lanka y con experiencia profesional en Europa, es cofundador de la agencia. Especializado en el acompañamiento de viajeros hispanohablantes."
+          "desc": "Nacido en Sri Lanka y con experiencia en Europa, es uno de los fundadores de la agencia. Experto en viajeros hispanohablantes, coordina al equipo de chóferes y guías, y asume responsabilidades clave en la gestión de la empresa para garantizar calidad y eficiencia."
         },
         "Ana": {
           "role": "Co-fundadora",
-          "desc": "Se especializa en diseñar viajes a medida, cuidando cada detalle para crear experiencias únicas y memorables."
+          "desc": "Es cofundadora de la agencia y especialista en diseñar viajes a medida, cuidando cada detalle para ofrecer experiencias únicas. Participa activamente en la gestión diaria y se encarga de la atención al cliente desde Sri Lanka, garantizando un servicio cercano, eficiente y completamente personalizado."
         },
         "Jose": {
           "role": "Representante en España",
-          "desc": "Jose diseña viajes a medida para viajeros españoles y latinoamericanos. Apasionado y atento a los detalles."
+          "desc": "Nuestro representante en España, José, es un experto en diseñar viajes a medida para los mercados español y latinoamericano. Apasionado y atento a cada detalle, garantiza que tu experiencia en Sri Lanka sea perfecta, sin contratiempos y llena de momentos inolvidables. Con José, tus sueños están en buenas manos."
         },
         "Marco": {
           "role": "Representante en Italia",
-          "desc": "Marco diseña itinerarios personalizados y coordina Viaggi Eden, asegurando un enlace esencial entre Italia y Sri Lanka."
+          "desc": "Nuestro representante en Europa e Italia, Marco, diseña rutas y coordina como enlace entre Europa y Sri Lanka Viajes Edén. Con amplia experiencia internacional y pasión por Sri Lanka, combina su conocimiento y entusiasmo para ofrecerte una experiencia única y personalizada."
         },
         "Manjula": {
           "role": "Director General",
-          "desc": "El Sr. Manjula asegura el buen funcionamiento de las operaciones diarias, coordina equipos y supervisa los flujos de trabajo para mantener la eficiencia."
+          "desc": "El Sr. Manjula, Gerente General de Sri Viajes Eden, aporta su experiencia en finanzas y administración para garantizar operaciones eficientes, estabilidad financiera y experiencias de viaje de alta calidad para los clientes."
         },
         "Rasika": {
           "role": "Gestión Financiera",
-          "desc": "Rasika maneja la gestión financiera con experiencia y precisión, asegurando eficiencia y estabilidad dentro de la empresa."
+          "desc": "Rasika supervisa todas las operaciones internas con dedicación y orden. Desde la coordinación del personal hasta la gestión del flujo de trabajo entre departamentos, desempeña un papel clave para mantener la oficina organizada, eficiente y siempre atenta a las necesidades de los clientes."
         },
         "Nethmi": {
           "role": "Asesora de Viajes",
-          "desc": "Nethmi ofrece apoyo personalizado, diseñando viajes que combinan cultura y comodidad para una experiencia exitosa."
+          "desc": "Nethmi, consultora de viajes en Sri Lanka Eden Travels, diseña itinerarios a medida que combinan cultura, comodidad y experiencias memorables, garantizando una atención personalizada y una coordinación impecable."
         },
         "Thakshila": {
           "role": "Operaciones Digitales",
-          "desc": "Thakshila lidera las operaciones digitales, gestionando sistemas, CRM y el sitio web, asegurando la innovación en todas las plataformas."
+          "desc": "Thakshila lidera las operaciones digitales, gestionando sistemas internos, plataformas CRM, y la funcionalidad del sitio web y la marca. Supervisa la dirección creativa de contenido multimedia y mantiene una sólida presencia online para la agencia, asegurando innovación y coherencia."
         },
         "Anjan": {
           "role": "Contador",
-          "desc": "Anjan gestiona la facturación, los pagos y el presupuesto con atención al detalle, asegurando un control financiero eficiente."
+          "desc": "Anjan se encarga de las tareas financieras diarias, como la facturación, el seguimiento de pagos y la elaboración de presupuestos. Su precisión y consistencia contribuyen a mantener la precisión y el control financiero dentro de la agencia."
         },
         "Dewni": {
           "role": "Soporte Informático",
-          "desc": "Dewni proporciona soporte informático, gestionando actualizaciones y solución de problemas para operaciones técnicas fluidas."
+          "desc": "Dewni ofrece soporte integral en TI, gestionando actualizaciones de sistemas, asegurando la precisión de datos, resolviendo problemas y supervisando procesos de backend, garantizando operaciones técnicas diarias. "
         },
         "Oshadhi": {
           "role": "Asistente de Tierra (Formación)",
-          "desc": "Oshadhi apoya las excursiones diarias, ayudando con la planificación de itinerarios y la coordinación."
+          "desc": "Oshadhi, en formación como Asistente de Operaciones en Tierra, apoya las excursiones diarias, asistiendo con los itinerarios, el transporte y la coordinación con proveedores para garantizar operaciones fluidas y eficientes."
         },
         "Sewmini": {
           "role": "Asistente Contable (Formación)",
-          "desc": "Sewmini apoya los servicios de contabilidad, cálculo de costes y cotizaciones con exactitud."
+          "desc": "Sewmini, en formación como Asistente de Contabilidad, apoya en cuentas, costes y presupuestos, manteniendo registros, verificando facturas y preparando desgloses detallados para garantizar la precisión."
         },
         "Kasun": {
           "role": "Asistente Consultora (Formación)",
-          "desc": "Kasun ayuda a preparar itinerarios personalizados y gestiona la comunicación con los clientes para sus reservas."
+          "desc": "Kasun, en formación como Asistente de Consultor de Viajes, ayuda a preparar itinerarios y presupuestos personalizados, apoyando la comunicación con los clientes y las reservas para experiencias de viaje."
         },
         "Thenura": {
           "role": "Desarrollador CRM",
-          "desc": "Thenura desarrolla el CRM personalizado de la agencia, creando herramientas que agilizan los procesos y optimizan el servicio."
+          "desc": "Thenura es el desarrollador del CRM de Viajes Eden. Crea herramientas digitales eficientes y fáciles que optimizan la gestión de consultas y presupuestos, mejoran la coordinación entre equipos y fortalecen la transformación digital."
         },
         "Sithmi": {
           "role": "Asesora de Viajes (Formación)",
-          "desc": "Sithmi se centra en la gestión de clientes y el diseño de itinerarios a medida que cumplen con las expectativas de los viajeros."
+          "desc": "Formación como asesor de viajes, centrada en la atención al cliente y en el diseño de itinerarios personalizados para satisfacer las preferencias y expectativas individuales de cada viajero."
         },
         "Theekshana": {
           "role": "Creación de Contenido (Formación)",
-          "desc": "Theekshana apoya las actividades de marketing y ayuda a preparar itinerarios a través de la creación de contenido social."
+          "desc": "Formación en creación de contenido para redes sociales, apoyando las actividades de marketing y colaborando en la preparación de itinerarios."
         },
         "Sampath": {
           "role": "Chófer-Guía Español",
-          "desc": "Nuestro chófer-guía estrella, uno de los mejores hispanohablantes. Experimentado y cálido, crea experiencias inolvidables."
+          "desc": "Sampath, nuestro chófer-guía “Number 1”, es uno de los mejores hispanohablantes de Sri Lanka. Con experiencia diversa y gran amabilidad, garantiza seguridad y comodidad. Amigo de muchos españoles, hará todo lo posible para mostrarte lo mejor del país."
         },
         "Nalinda": {
           "role": "Chófer-Guía Español",
-          "desc": "Fluido en español, conocido por su amabilidad y especial atención a los niños. Cuidadoso y siempre positivo."
+          "desc": "Nalinda, chófer-guía de confianza, habla muy bien español. Destaca por su amabilidad, paciencia y cariño especial hacia los niños. Prudente al volante y siempre positivo, se esfuerza por mostrar la esencia de Sri Lanka y que los viajeros se sientan cómodos y bien cuidados."
         },
         "Nazri": {
           "role": "Chófer-Guía Español",
-          "desc": "Muy atento con las familias, conoce perfectamente las costumbres locales y hace todo lo posible para satisfacer a los viajeros."
+          "desc": "Nasri, chófer-guía ideal para familias, habla bien español y conoce las costumbres locales. Se asegura de que todos estén cómodos y ofrece extras como paseos en tuk-tuk por Kandy y recomendaciones de los mejores curries en cada lugar."
         },
         "Chammi": {
           "role": "Chófer-Guía Español",
-          "desc": "Amigable y profesional, gestiona todos los detalles logísticos. Su conducción segura y fiabilidad hacen que cada viaje sea agradable."
+          "desc": "Chammi, chófer-guía amable y profesional, domina el español y se encarga de los detalles logísticos para que disfrutes del viaje sin preocupaciones. Su conducción segura y su actitud cordial hacen que cada trayecto sea cómodo y una experiencia inolvidable."
         },
         "Chamara": {
           "role": "Chófer-Guía Profesional",
-          "desc": "Se encarga de todos los detalles logísticos para garantizar un viaje cómodo. Confiable con una personalidad cálida."
+          "desc": "Chamara, chófer-guía amable y profesional, domina el español y se encarga de los detalles logísticos para que disfrutes del viaje sin preocupaciones. Su conducción segura y su actitud cordial hacen que cada trayecto sea cómodo y una experiencia inolvidable."
         },
         "Ajeeb": {
           "role": "Chófer-Guía Profesional",
-          "desc": "El compañero ideal para un viaje tranquilo. Su disponibilidad y profesionalidad le garantizan total serenidad."
+          "desc": "Ajeeb es el compañero ideal para un viaje tranquilo y confortable. Con una actitud servicial, se encarga de la logística para que solo te relajes y disfrutes. Su conducción segura y profesionalismo brindan tranquilidad, haciendo cada trayecto una experiencia inolvidable."
         },
         "Noel": {
           "role": "Chófer Italiano",
-          "desc": "Fluido en italiano, Noel se ocupa de todo para que disfrutes plenamente. Su amabilidad asegura tu bienestar."
+          "desc": "Nuestro conductor Noel habla italiano con fluidez y es tu aliado para un viaje cómodo y agradable. Se encarga de los detalles logísticos para que puedas relajarte. Su conducción segura y amabilidad garantizan que te sientas cómodo y acompañado en todo momento."
         },
         "Chinthaka": {
           "role": "Chófer Italiano",
-          "desc": "Chófer de habla italiana amigable y experimentado. Profesional y atento, garantiza una experiencia segura e inolvidable."
+          "desc": "Chinthaka, nuestro conductor amable y con fluidez en italiano, te acompaña a descubrir Sri Lanka con comodidad y seguridad. Con experiencia turística, cuida cada detalle logístico para que puedas relajarte. Profesional y atento, hace de tu tour una experiencia auténtica e inolvidable."
         }
       }
     },
     "travelGuide": {
-      "heroTitle": "Guía de Viaje",
-      "heroDesc": "Descubre nuestros consejos, historias y guías para explorar Sri Lanka como un local.",
-      "newsTitle": "Sri Lanka en las Noticias",
+      "heroTitle": "Guía práctica de Sri Lanka",
+      "heroDesc": "Información útil para tu viaje a Sri Lanka",
+      "newsTitle": "Los artículos más populares",
       "usefulTitle": "Lee nuestros artículos más útiles",
-      "popularTitle": "Artículos más populares",
+      "popularTitle": "Sri Lanka en Noticias",
       "allArticlesTitle": "Todos los artículos",
       "noArticlesTitle": "No se encontraron artículos",
       "noArticlesDesc": "No encontramos artículos que coincidan con sus filtros.",
@@ -355,29 +365,40 @@
       "catPrivateIsland": "Isla privada"
     },
     "contactUs": {
-      "heroTitle": "Contáctenos",
-      "heroDesc": "Estamos aquí para ayudarle a planificar su viaje de ensueño a Sri Lanka. No dude en contactarnos.",
-      "offices": {
-        "title": "Nuestras Oficinas"
-      },
-      "directContact": {
-        "title": "Contacto Directo",
-        "office": "(Oficina)"
-      },
-      "support": {
-        "title": "Soporte Global",
-        "timezone": "Zona horaria: UTC +5:30 (IST)",
-        "languages": "Idiomas: Inglés, Español, Italiano, Francés.",
-        "service24h": "Servicio 24/7 para clientes que han llegado (solo en inglés)"
+      "heroTitle": "Contacto",
+      "heroDesc": "¡Bienvenido a Nuestras Oficinas en Kandy y Kurunegala, Sri Lanka!",
+      "cards": {
+        "registro": {
+          "title": "REGISTRO",
+          "line1": "Registro Ministerio de turismo en Sri Lanka: SLTDA/SQASTA/02238",
+          "line2": "Número de registro mercantil en Sri Lanka: PV 106460"
+        },
+        "direccion": {
+          "title": "LA DIRECCIÓN",
+          "line1": "Oficina en Kandy: 38/01, Stone House Suite, Nittawela Road, Kandy, Sri Lanka",
+          "line2": "Oficina en Kurunegala: No. 64, 4th floor, Siripathi Complex, Bauddaloka Rd, Kurunegala, Sri Lanka"
+        },
+        "email": {
+          "title": "E-MAIL",
+          "line1": "info@srilankaviajeseden.com",
+          "line2": "srilankaviajeseden@gmail.com"
+        },
+        "telefono": {
+          "title": "TELÉFONO",
+          "line1": "Oficina en Sri Lanka +94 372201747",
+          "line2": "Movil/WhatsApp Sri Lanka +94 764409650",
+          "line3": "Movil/WhatsApp Sri Lanka +94 766490800"
+        }
       },
       "form": {
-        "title": "Envíenos un mensaje",
+        "title": "Contacto",
         "desc": "¿Tiene preguntas sobre un recorrido personalizado? Escríbanos a continuación y le responderemos de inmediato.",
         "name": "Nombre*",
         "phone": "Teléfono*",
-        "email": "Correo electrónico*",
+        "whatsappContact": "Autorizo el contacto a través de WhatsApp",
+        "email": "E mail",
         "messageLabel": "Escribe tu mensaje*",
-        "submitBtn": "Enviar su mensaje",
+        "submitBtn": "Enviar",
         "sending": "Enviando..."
       },
       "consultants": {
@@ -388,26 +409,28 @@
         "email": "Enviar un correo"
       },
       "registration": {
-        "title": "Registro de Empresa"
+        "title": "Registro de Empresa",
+        "sltda": "SLTDA : SLTDA/SQASTA/02238",
+        "regNo": "Número de registro : PV 106406"
       },
       "mapKurunegala": "Nuestra oficina en Kurunegala",
       "mapKandy": "Nuestra oficina en Kandy"
     },
     "itinerariesPage": {
-      "heroTitle": "itinerarios",
-      "heroDesc": "Viajes personalizados, diseñados según sus deseos. Descubra las experiencias más hermosas de Sri Lanka, pensadas para el viajero exigente.",
+      "heroTitle": "Itinerarios",
+      "heroDesc": "Consulte nuestras rutas de Sri Lanka para su viaje. \nEn cada una de nuestras rutas de Sri Lanka ponemos algo especial que nos diferencia de los demás. Descúbrelo!",
       "basedOnInterests": "itinerarios basados en intereses",
       "categories": {
-        "popular": "Populares",
-        "honeymoon": "Luna de miel",
-        "family": "Viajes en familia",
-        "luxury": "Colección de lujo",
-        "golf": "Estancias de golf",
-        "surf": "Surf y Buceo",
+        "popular": "Ofertas Media Pensión",
+        "honeymoon": "Viajes De Lunas de Miel",
+        "family": "Viajes En Familia",
+        "luxury": "Viajes De Súper Lujo",
+        "golf": "Viajes De Golf",
+        "surf": "Viajes De Buceo ​y Surf",
         "adventure": "Aventura",
-        "pererahera": "Esela Perahera",
-        "8days": "8 Días",
-        "interests": "Intereses"
+        "pererahera": "Especial Esala Perahera",
+        "8days": "Itinerarios De 8 días",
+        "interests": "Rutas Extra Largas"
       }
     },
     "popularItin": {
@@ -418,8 +441,8 @@
     },
     "hotelOptions": {
       "sectionTag": "Alojamientos",
-      "sectionTitle": "Hoteles y Resorts en Sri Lanka",
-      "sectionDesc": "Descubra nuestra meticulosa selección de establecimientos para mejorar su estancia, categorizados para satisfacer todos sus deseos.",
+      "sectionTitle": "Hoteles en Sri Lanka",
+      "sectionDesc": "Una exclusiva selección de hoteles con encanto, una amplia oferta de actividades y emocionantes excursiones, todo en un entorno paradisíaco inigualable.",
       "discoverBtn": "Descubrir",
       "categories": {
         "standard": {
@@ -450,6 +473,7 @@
       }
     },
     "newsletter": {
+      "tag": "Boletín informativo",
       "title": "Suscríbase al boletín",
       "subtitle": "Para recibir nuestras mejores ofertas mensuales",
       "placeholder": "Su dirección de correo electrónico...",
@@ -516,34 +540,34 @@
     },
     "includedExcluded": {
       "title": "Lo que está incluido y excluido",
-      "included": "El precio incluye",
-      "excluded": "El precio no incluye",
-      "inc1": "Alojamiento en hotel (según el paquete seleccionado)",
-      "inc2": "Desayuno y cena en hoteles",
-      "inc3": "Vehículo privado con aire acondicionado",
-      "inc4": "Conductor-guía profesional",
-      "inc5": "Traslados al aeropuerto",
-      "inc6": "Combustible, impuesto de circulación, impuestos gubernamentales, estacionamiento y seguro de vehículo",
-      "exc1": "Vuelos internacionales",
-      "exc2": "Entradas a atracciones",
-      "exc3": "Excursiones opcionales y gastos personales",
-      "exc4": "Propinas, bebidas alcohólicas o refrescos",
-      "exc5": "Tasas de visado para Sri Lanka"
+      "included": "En el precio se INCLUYEN",
+      "excluded": "En el precio NO SE INCLUYEN",
+      "inc1": "Alojamiento con cena y desayuno en los hoteles indicados. En caso de que estén llenos estos hoteles en el momento de hacer las reservas, se ofrecerán otros de categoría similar.",
+      "inc2": "Transporte privado todo el circuito con chófer asistente con conocimientos de español atendiendo a la disponibilidad. En su defecto, chófer-asistente habla inglesa.",
+      "inc3": "Servicio de recogida y acompañamiento al aeropuerto a la llegada y salida del país.",
+      "inc4": "Asistencia telefónica en español las 24 horas desde Sri Lanka.",
+      "inc5": "Todas las entradas a monumentos y templos del itinerario.",
+      "inc6": "El salario, el alojamiento y las comidas del conductor.",
+      "inc7": "Gasolina, impuestos de circulación, aparcamiento y seguro.",
+      "exc1": "Los vuelos internacionales.",
+      "exc2": "Los almuerzos y las bebidas.",
+      "exc3": "Las excursiones y actividades opcionales.",
+      "exc4": "Las propinas.",
+      "exc5": "Los gastos del visado de entrada a Sri Lanka."
     },
     "paymentPolicy": {
       "title": "Método de pago y política de cancelación",
-      "paymentMethod": "Método de pago:",
-      "pay1": "Opción de transferencia bancaria sin cargo.",
-      "pay2": "Pago con tarjeta de crédito/débito: se aplicará un recargo del 2 %.",
-      "bookingTerms": "Términos de reserva",
-      "term1": "Se requiere un depósito del 40 % en el momento de la reserva para confirmar su estancia.",
-      "term2": "El saldo restante del 60 % debe pagarse a más tardar 30 días antes de la llegada.",
-      "term3": "Tras la recepción del depósito, se emitirá un recibo de confirmación. Una factura oficial seguirá al pago completo.",
-      "cancellation": "Política de cancelación",
-      "canc1": "Hasta 45 días: se reembolsa el 100 % del depósito.",
-      "canc2": "De 44 a 31 días: penalización del 50 % sobre el depósito.",
-      "canc3": "Menos de 30 días: el depósito no es reembolsable.",
-      "canc4": "Nota: Todas las cancelaciones están sujetas a una tasa administrativa de 120 € por persona."
+      "paymentMethod": "Forma de pago:",
+      "pay1": "La forma de pago en EUROS es el 10% o 20% (dependiendo de si es temporada baja o alta) mediante transferencia bancaria a una cuenta bancaria en España.",
+      "pay2": "El 90% u 80% restante, también en EUROS, se paga en efectivo a la llegada a Sri Lanka o mediante transferencia bancaria internacional a Sri Lanka.",
+      "pay3": "Si se desea pagar mediante transferencia bancaria internacional, este importe se incrementará en un 5% en concepto de gastos bancarios.",
+      "bookingTerms": "",
+      "cancellation": "Política de cancelación:",
+      "canc1": "Hasta 30 días antes del viaje se devuelve el 100% del depósito si se cancela el viaje.",
+      "canc2": "Entre 29 días antes y 15 días antes del inicio del viaje hay una penalización del 50% del importe del depósito.",
+      "canc3": "Las cancelaciones realizadas dentro de los 14 días anteriores al viaje no tienen devolución del depósito.",
+      "cancellationNote": "Nota sobre cancelaciones:",
+      "cancNote1": "Todas las cancelaciones tienen una tasa de gestión de 90 euros por persona."
     },
     "bookingCard": {
       "bookYour": "Reserva tu",
@@ -607,6 +631,29 @@
         "other": "Otro"
       },
       "viewDetails": "Ver detalles"
+    },
+    "reviewDetail": {
+      "loading": "Cargando historia del viajero...",
+      "notFound": "Opinión no encontrada",
+      "backToReviews": "← Volver a todas las opiniones",
+      "travelerStory": "Historia de Viajero",
+      "journey": "Viaje a Sri Lanka",
+      "memories": "Recuerdos del viaje",
+      "aboutTour": "Acerca del Tour",
+      "date": "Fecha",
+      "travelerType": "Tipo de viajero",
+      "group": "Grupo",
+      "planMyTrip": "Planificar mi viaje",
+      "featuredGuide": "Guía Destacado",
+      "edenGuide": "Guía de Eden Travels",
+      "couple": "Pareja",
+      "private": "Privado",
+      "defaultGuideName": "Hasindu",
+      "defaultGuideQuote": "\"Fue un placer mostrarles los tesoros escondidos de nuestra hermosa isla. ¡Una pareja verdaderamente maravillosa!\"",
+      "ourGuests": "Nuestros Clientes",
+      "moreStories": "Más historias de viajeros",
+      "viewAll": "Ver todas las historias",
+      "readFullStory": "Leer historia completa"
     }
   }
 }

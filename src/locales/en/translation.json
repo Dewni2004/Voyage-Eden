@@ -30,7 +30,13 @@
       "hours_weekdays": "Monday to Friday: 8:30 AM – 5:30 PM",
       "hours_saturday": "Saturday: 8:30 AM – 12:30 PM",
       "hours_sunday": "Sunday: Closed",
-      "copyright": "Sri Lanka Eden Travels. All rights reserved."
+      "copyright": "Sri Lanka Eden Travels. All rights reserved.",
+      "email1": "srilankavoyageeden@gmail.com",
+      "email2": "nethmi.srilankaedentravels@gmail.com",
+      "phone": "+94 77 147 0150 (Nethmi)",
+      "sltda_reg": "SLTDA : SLTDA/SQA/TA/02233",
+      "office1": "Kandy : Stone House Suites, No. 29, Nittawela Road",
+      "office2": "Kurunegala : No. 64, Unit 01, Siripathi Complex"
     },
     "trust": {
       "google": "Google Reviews",
@@ -188,7 +194,10 @@
       "send": "SEND",
       "sending": "Sending...",
       "success": "Your request has been sent successfully!",
-      "error": "An error occurred. Please try again."
+      "error": "An error occurred. Please try again.",
+      "nextBtn": "Next",
+      "backBtn": "Back",
+      "startPlanningBtn": "Start Planning"
     },
     "itineraries": {
       "popular": "Our most popular itineraries",
@@ -208,6 +217,7 @@
       "whoWeAreTitle": "Who We Are",
       "whoWeAreDesc1": "We are a multicultural team based in Kandy and Kurunegala, in the heart of Sri Lanka, specializing in personalized travel experiences that showcase the authentic beauty of our island nation.",
       "whoWeAreDesc2": "Proud to be part of the Sri Lanka Viajes Eden group, we share the same passion, professionalism, and commitment to excellence. All our operations are based in Sri Lanka, supported by a dedicated local team of travel specialists, experienced guides, and professional drivers.",
+      "whoWeAreBoldText": "This is a bold text.",
       "statsYears": "Years of experience",
       "statsExperts": "Local experts",
       "statsReviews": "Star Reviews",
@@ -395,7 +405,7 @@
     },
     "itinerariesPage": {
       "heroTitle": "itineraries",
-      "heroDesc": "Personalized trips, designed according to your desires. Discover the most beautiful experiences in Sri Lanka, designed for the demanding traveler.",
+      "heroDesc": "Personalized trips, designed according to your desires.\nDiscover the most beautiful experiences in Sri Lanka, designed for the demanding traveler.",
       "basedOnInterests": "itineraries based on interests",
       "categories": {
         "popular": "Popular",
@@ -450,6 +460,7 @@
       }
     },
     "newsletter": {
+      "tag": "Newsletter",
       "title": "Subscribe to the newsletter",
       "subtitle": "To receive our best monthly offers",
       "placeholder": "Your email address...",
@@ -607,6 +618,29 @@
         "other": "Other"
       },
       "viewDetails": "View details"
+    },
+    "reviewDetail": {
+      "loading": "Loading traveler story...",
+      "notFound": "Review not found",
+      "backToReviews": "← Back to all reviews",
+      "travelerStory": "Traveler Story",
+      "journey": "Sri Lanka Journey",
+      "memories": "Memories from the trip",
+      "aboutTour": "About The Tour",
+      "date": "Date",
+      "travelerType": "Traveler Type",
+      "group": "Group",
+      "planMyTrip": "Plan My Trip",
+      "featuredGuide": "Featured Guide",
+      "edenGuide": "Eden Travels Guide",
+      "couple": "Couple",
+      "private": "Private",
+      "defaultGuideName": "Hasindu",
+      "defaultGuideQuote": "\"It was a pleasure showing them the hidden gems of our beautiful island. A truly wonderful couple!\"",
+      "ourGuests": "Our Guests",
+      "moreStories": "More Traveler Stories",
+      "viewAll": "View All Stories",
+      "readFullStory": "Read Full Story"
     }
   }
 }

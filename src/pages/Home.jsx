@@ -9,6 +9,7 @@ import Reviews from '../components/Reviews/Reviews';
 import OfficeGallery from '../components/OfficeGallery/OfficeGallery';
 import Salons from '../components/Salons/Salons';
 import CustomTripBanner from '../components/CustomTripBanner/CustomTripBanner';
+import HotelOptions from '../components/HotelOptions/HotelOptions';
 
 const Home = () => {
   return (
@@ -16,6 +17,7 @@ const Home = () => {
       <Hero />
       <TrustSection />
       <TourCards />
+      <HotelOptions />
       {/* <CustomTripCTA /> */}
       <WhyChooseUs />
       <CustomTripBanner />

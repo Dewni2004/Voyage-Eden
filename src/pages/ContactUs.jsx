@@ -50,65 +50,54 @@ const ContactUs = () => {
 
       <div className="py-12 md:py-16 bg-[#f8fbff]">
         <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-[90rem] mx-auto">
 
-            {/* Card 1: Nos Bureaux */}
-            <div className="bg-white p-10 md:p-12 rounded-[40px] shadow-xl border border-gray-100 flex flex-col items-center text-center transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
-              <div className="w-16 h-16 md:w-20 md:h-20 bg-primary rounded-full flex items-center justify-center mb-6 md:mb-8 shadow-lg shadow-primary/30">
-                <svg className="w-8 h-8 md:w-10 md:h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-              </div>
-              <h3 className="text-primary text-xl md:text-2xl font-bold mb-4 md:mb-6">{t("contactUs.offices.title")}</h3>
-              <div className="space-y-3 text-gray-600 font-medium leading-relaxed text-sm md:text-base">
-                <p>Kandy: Sri Lanka Viajes Eden, No. 29, Nittawela Road.</p>
-                <p className="pt-4 font-bold text-primary underline decoration-luxury">Kurunegala:</p>
-                <p>No. 64, Unit 01, Siripathi Complex, Bauddhaloka Rd.</p>
-              </div>
-            </div>
-
-            {/* Card 2: Contact Direct */}
-            <div className="bg-white p-10 md:p-12 rounded-[40px] shadow-xl border border-gray-100 flex flex-col items-center text-center transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
-              <div className="w-16 h-16 md:w-20 md:h-20 bg-primary rounded-full flex items-center justify-center mb-6 md:mb-8 shadow-lg shadow-primary/30">
-                <svg className="w-8 h-8 md:w-10 md:h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                </svg>
-              </div>
-              <h3 className="text-primary text-xl md:text-2xl font-bold mb-4 md:mb-6">{t("contactUs.directContact.title")}</h3>
-              <div className="space-y-6 text-gray-600 font-medium leading-relaxed text-sm md:text-base">
-                <div className="space-y-2 mb-4">
-                  <a href="mailto:srilankavoyageeden@gmail.com,nethmi.srilankaedentravels@gmail.com" className="block text-primary hover:text-primary/80 transition-colors underline decoration-primary/50 underline-offset-4 break-words text-xs md:text-sm">
-                    srilankavoyageeden@gmail.com
-                  </a>
-                  <a href="mailto:srilankavoyageeden@gmail.com,nethmi.srilankaedentravels@gmail.com" className="block text-primary hover:text-primary/80 transition-colors underline decoration-primary/50 underline-offset-4 break-words text-xs md:text-sm">
-                    nethmi.srilankaedentravels@gmail.com
-                  </a>
+            {[
+              {
+                id: 'registro',
+                icon: (
+                  <svg className="w-8 h-8 md:w-10 md:h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h3m-6 0a3 3 0 003-3v-1m-3 4a3 3 0 01-3-3v-1" />
+                  </svg>
+                )
+              },
+              {
+                id: 'direccion',
+                icon: (
+                  <svg className="w-8 h-8 md:w-10 md:h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                  </svg>
+                )
+              },
+              {
+                id: 'email',
+                icon: (
+                  <svg className="w-8 h-8 md:w-10 md:h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                )
+              },
+              {
+                id: 'telefono',
+                icon: (
+                  <svg className="w-8 h-8 md:w-10 md:h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                )
+              }
+            ].map((card, index) => (
+              <div key={index} className="bg-white p-10 md:p-12 rounded-[40px] shadow-xl border border-gray-100 flex flex-col items-center text-center transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                <div className="w-16 h-16 md:w-20 md:h-20 bg-primary rounded-full flex items-center justify-center mb-6 md:mb-8 shadow-lg shadow-primary/30">
+                  {card.icon}
                 </div>
-                <div className="space-y-3">
-                  <p className="text-primary font-bold">+94 37 220 1747 <span className="text-gray-500 font-normal">{t("contactUs.directContact.office")}</span></p>
-                  <p className="text-primary font-bold"><a href="https://wa.me/94771470150" target="_blank" rel="noopener noreferrer" className="hover:text-primary/80">+94 77 147 0150</a> <span className="text-gray-500 font-normal">(WhatsApp)</span></p>
+                <h3 className="text-primary text-xl md:text-2xl font-bold mb-4 md:mb-6 uppercase">{t(`contactUs.cards.${card.id}.title`)}</h3>
+                <div className="space-y-3 text-gray-600 font-medium leading-relaxed text-sm md:text-base">
+                  {t(`contactUs.cards.${card.id}.line1`) && <p>{t(`contactUs.cards.${card.id}.line1`)}</p>}
+                  {t(`contactUs.cards.${card.id}.line2`) && <p>{t(`contactUs.cards.${card.id}.line2`)}</p>}
+                  {t(`contactUs.cards.${card.id}.line3`) !== `contactUs.cards.${card.id}.line3` && <p>{t(`contactUs.cards.${card.id}.line3`)}</p>}
                 </div>
               </div>
-            </div>
-
-            {/* Card 3: Support Global */}
-            <div className="bg-white p-10 md:p-12 rounded-[40px] shadow-xl border border-gray-100 flex flex-col items-center text-center transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
-              <div className="w-16 h-16 md:w-20 md:h-20 bg-primary rounded-full flex items-center justify-center mb-6 md:mb-8 shadow-lg shadow-primary/30">
-                <svg className="w-8 h-8 md:w-10 md:h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-                </svg>
-              </div>
-              <h3 className="text-primary text-xl md:text-2xl font-bold mb-4 md:mb-6">{t("contactUs.support.title")}</h3>
-              <div className="space-y-3 text-gray-600 font-medium leading-relaxed text-sm md:text-base">
-                <p>{t("contactUs.support.timezone")}</p>
-                <p className="pt-4">Langues : Anglais, Espagnol,</p>
-                <p>Italien, Français.</p>
-                <p className="mt-6 text-[10px] md:text-xs text-primary font-bold bg-primary/10 py-2.5 px-4 rounded-full inline-block text-center">
-                  {t("contactUs.support.service24h")}
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
 
           {/* Form and Info Section */}
@@ -137,14 +126,27 @@ const ContactUs = () => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-primary ml-1">{t("contactUs.form.phone")}</label>
-                    <input
-                      name="user_phone"
-                      type="tel"
-                      required
-                      className="w-full bg-gray-50 border border-gray-200 rounded-2xl py-4 px-6 focus:outline-none focus:ring-2 focus:ring-luxury/50 transition-all text-sm md:text-base"
-                    />
+                  <div className="flex flex-col">
+                    <div className="space-y-2">
+                      <label className="text-sm font-bold text-primary ml-1">{t("contactUs.form.phone")}</label>
+                      <input
+                        name="user_phone"
+                        type="tel"
+                        required
+                        className="w-full bg-gray-50 border border-gray-200 rounded-2xl py-4 px-6 focus:outline-none focus:ring-2 focus:ring-luxury/50 transition-all text-sm md:text-base"
+                      />
+                    </div>
+                    <div className="flex items-center ml-1 mt-3">
+                      <input
+                        type="checkbox"
+                        id="whatsappAuth"
+                        name="whatsapp_auth"
+                        className="w-4 h-4 text-primary bg-gray-50 border-gray-300 rounded focus:ring-primary focus:ring-2 cursor-pointer flex-shrink-0"
+                      />
+                      <label htmlFor="whatsappAuth" className="ml-2 text-sm text-gray-600 cursor-pointer select-none whitespace-nowrap">
+                        {t("contactUs.form.whatsappContact")}
+                      </label>
+                    </div>
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-bold text-primary ml-1">{t("contactUs.form.email")}</label>
@@ -253,8 +255,8 @@ const ContactUs = () => {
               <div className="bg-primary p-8 md:p-10 rounded-[40px] text-white shadow-2xl shadow-primary/30 border border-primary/50">
                 <h3 className="text-xl md:text-2xl font-bold mb-6">{t("contactUs.registration.title")}</h3>
                 <div className="space-y-3 font-medium opacity-90 text-sm md:text-base">
-                  <p>SLTDA : SLTDA/SQASTA/02238</p>
-                  <p>Registration No : PV 106406</p>
+                  <p>{t("contactUs.registration.sltda")}</p>
+                  <p>{t("contactUs.registration.regNo")}</p>
                 </div>
               </div>
             </div>

@@ -18,11 +18,7 @@ export const getReviews = async (lang = 'fr') => {
     if (error) throw error;
     return data || [];
   } catch (error) {
-    if (lang !== 'fr') {
-      console.warn(`Fallback to French for reviews due to error:`, error.message);
-      return getReviews('fr');
-    }
-    console.error("Error fetching reviews:", error);
+    console.error(`Error fetching reviews for ${lang}:`, error.message);
     return [];
   }
 };
@@ -81,11 +77,7 @@ export const getItineraries = async (lang = 'fr') => {
     if (error) throw error;
     return data || [];
   } catch (e) {
-    if (lang !== 'fr') {
-      console.warn(`Fallback to French for itineraries due to error:`, e.message);
-      return getItineraries('fr');
-    }
-    console.error("Error fetching itineraries: ", e);
+    console.error(`Error fetching itineraries for ${lang}:`, e.message);
     return [];
   }
 };
@@ -145,11 +137,7 @@ export const getArticles = async (lang = 'fr') => {
     if (error) throw error;
     return data || [];
   } catch (error) {
-    if (lang !== 'fr') {
-      console.warn(`Fallback to French for articles due to error:`, error.message);
-      return getArticles('fr');
-    }
-    console.error("Error fetching articles:", error);
+    console.error(`Error fetching articles for ${lang}:`, error.message);
     return [];
   }
 };
@@ -206,17 +194,9 @@ export const getTags = async (lang = 'fr') => {
       .order('name', { ascending: true });
     
     if (error) throw error;
-    if ((!data || data.length === 0) && lang !== 'fr') {
-      console.warn(`Fallback to French for tags due to empty data.`);
-      return getTags('fr');
-    }
     return data || [];
   } catch (error) {
-    if (lang !== 'fr') {
-      console.warn(`Fallback to French for tags due to error:`, error.message);
-      return getTags('fr');
-    }
-    console.error("Error fetching tags:", error);
+    console.error(`Error fetching tags for ${lang}:`, error.message);
     return [];
   }
 };
@@ -231,17 +211,9 @@ export const getCategories = async (lang = 'fr') => {
       .order('id', { ascending: true });
     
     if (error) throw error;
-    if ((!data || data.length === 0) && lang !== 'fr') {
-      console.warn(`Fallback to French for categories due to empty data.`);
-      return getCategories('fr');
-    }
     return data || [];
   } catch (error) {
-    if (lang !== 'fr') {
-      console.warn(`Fallback to French for categories due to error:`, error.message);
-      return getCategories('fr');
-    }
-    console.error("Error fetching categories:", error);
+    console.error(`Error fetching categories for ${lang}:`, error.message);
     return [];
   }
 };

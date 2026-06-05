@@ -67,7 +67,6 @@ const Reviews = () => {
             ))}
           </div>
           <h1 className="text-5xl md:text-7xl font-bold font-serif mb-4">{t("reviews.heroTitle")}</h1>
-          <p className="text-xl md:text-3xl font-medium tracking-wide uppercase opacity-90">{t("reviews.heroSubtitle")}</p>
           <p className="mt-8 text-white/80 max-w-2xl mx-auto text-lg">
             {t("reviews.heroDesc")}
           </p>
@@ -268,7 +267,7 @@ const Reviews = () => {
           <div className="mb-16 text-center md:text-left">
             <span className="text-primary text-sm font-bold uppercase tracking-widest mb-2 block">{t("reviews.travelerReviewsTitle")}</span>
             <h2 className="text-primary text-4xl font-bold font-serif">{t("reviews.recentReviews")}</h2>
-            <p className="text-gray-400 mt-2">{t("reviews.recentReviewsDesc")}</p>
+            <p className="text-gray-400 mt-2 whitespace-pre-line">{t("reviews.recentReviewsDesc")}</p>
           </div>
 
           {/* Mobile Swipe Hint Overlay */}
@@ -317,7 +316,7 @@ const Reviews = () => {
                       <p className="text-primary text-[10px] font-bold uppercase tracking-widest mt-1">{review.tourdetails?.travelertype || review.tourDetails?.travelerType || 'Traveler'}</p>
                     </div>
                     <Link 
-                      to={`/review/${review.id}`}
+                      to={`/${i18n.language?.split('-')[0] || 'fr'}/review/${review.id}`}
                       onClick={(e) => e.stopPropagation()}
                       className="w-10 h-10 bg-white/10 hover:bg-white text-white hover:text-primary rounded-full flex items-center justify-center transition-all group/btn backdrop-blur-sm"
                     >
@@ -478,7 +477,7 @@ const Reviews = () => {
                 <h4 className="text-primary font-bold text-2xl mb-1">{selectedReview.name}</h4>
                 <p className="text-gray-400 text-sm font-bold uppercase tracking-[0.2em]">{t("reviews.tripIn")} {selectedReview.date}</p>
                 <Link
-                  to={`/review/${selectedReview.id}`}
+                  to={`/${i18n.language?.split('-')[0] || 'fr'}/review/${selectedReview.id}`}
                   className="mt-6 text-primary font-bold text-sm flex items-center gap-2 group/btn hover:text-primary/80 transition-all"
                 >
                   {t("reviews.readFullStory")}

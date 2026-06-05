@@ -61,6 +61,26 @@ const getIconSvg = (iconText, iconTextColorClass) => {
   );
 };
 
+const translateIconText = (text, i18n) => {
+  if (!text) return '';
+  const lower = text.toLowerCase();
+  const isEn = i18n.language && i18n.language.startsWith('en');
+  if (!isEn) return text;
+  
+  if (lower.includes('étoile') || lower.includes('etoile')) {
+    const num = lower.match(/\d+/);
+    return num ? `${num[0]} Stars` : 'Stars';
+  }
+  if (lower.includes('demi-pension')) return 'Half-Board';
+  if (lower.includes('pension complète')) return 'Full-Board';
+  if (lower.includes('petit déjeuner')) return 'Breakfast';
+  if (lower.includes('voiture')) return 'Car';
+  if (lower.includes('train')) return 'Train';
+  if (lower.includes('safari')) return 'Safari';
+  if (lower.includes('guide')) return 'Guide';
+  return text;
+};
+
 const formatItineraryTitle = (title, duration, t) => {
   if (!title) return '';
   const daysRegex = /\s*\(\s*(\d+)\s*[jJ]ours?\s*\)\s*$/;
@@ -113,8 +133,8 @@ const PopularItineraries = ({ title, id, itineraries, isDark, isGreen }) => {
       <div className="container mx-auto px-6 relative z-10">
         {/* Header */}
         <div className="flex items-center justify-between mb-16">
-          <h2 className={`text-3xl font-bold capitalize tracking-tight ${isDark ? 'text-luxury' : isGreen ? 'text-green-600' : 'text-primary'}`}>{title}</h2>
-          <div className={`flex-grow ml-12 h-[1px] hidden md:block ${isDark ? 'bg-luxury/40' : isGreen ? 'bg-green-600/30' : 'bg-gray-200'}`}></div>
+          <h2 className={`text-3xl font-bold capitalize tracking-tight ${isDark ? 'text-[#c5a059]' : isGreen ? 'text-green-600' : 'text-primary'}`}>{title}</h2>
+          <div className={`flex-grow ml-12 h-[1px] hidden md:block ${isDark ? 'bg-[#c5a059]/40' : isGreen ? 'bg-green-600/30' : 'bg-gray-200'}`}></div>
         </div>
 
         {/* Mobile Swipe Hint Overlay */}
@@ -163,7 +183,7 @@ const PopularItineraries = ({ title, id, itineraries, isDark, isGreen }) => {
                   {(item.icons || []).map((icon, i) => (
                     <div key={i} className="flex items-center space-x-1.5">
                       {getIconSvg(icon, isGreen || isDark ? 'text-white/90' : 'text-gray-500')}
-                      <span className={`text-[10px] font-bold uppercase tracking-tighter ${isGreen || isDark ? 'text-white/90' : 'text-gray-500'}`}>{icon}</span>
+                      <span className={`text-[10px] font-bold uppercase tracking-tighter ${isGreen || isDark ? 'text-white/90' : 'text-gray-500'}`}>{translateIconText(icon, i18n)}</span>
                     </div>
                   ))}
                 </div>

@@ -3,22 +3,17 @@ import { useTranslation } from 'react-i18next';
 
 const IncludedExcluded = () => {
   const { t } = useTranslation();
-  const inclusions = [
-    t("includedExcluded.inc1"),
-    t("includedExcluded.inc2"),
-    t("includedExcluded.inc3"),
-    t("includedExcluded.inc4"),
-    t("includedExcluded.inc5"),
-    t("includedExcluded.inc6")
-  ];
+  const includedExcludedData = t("includedExcluded", { returnObjects: true });
 
-  const exclusions = [
-    t("includedExcluded.exc1"),
-    t("includedExcluded.exc2"),
-    t("includedExcluded.exc3"),
-    t("includedExcluded.exc4"),
-    t("includedExcluded.exc5")
-  ];
+  const inclusions = Object.keys(includedExcludedData)
+    .filter(key => key.startsWith('inc') && key !== 'included')
+    .sort((a, b) => parseInt(a.replace('inc', '')) - parseInt(b.replace('inc', '')))
+    .map(key => includedExcludedData[key]);
+
+  const exclusions = Object.keys(includedExcludedData)
+    .filter(key => key.startsWith('exc') && key !== 'excluded')
+    .sort((a, b) => parseInt(a.replace('exc', '')) - parseInt(b.replace('exc', '')))
+    .map(key => includedExcludedData[key]);
 
   return (
     <section className="max-w-7xl mx-auto px-6 py-16">

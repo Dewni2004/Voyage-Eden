@@ -24,7 +24,7 @@ const Hero = () => {
       <div className="container mx-auto px-6 relative z-10 text-center text-white">
         <h1 className="home-hero-title max-w-4xl mx-auto mb-6 text-[32px] sm:text-4xl md:text-6xl lg:text-7xl font-bold leading-tight drop-shadow-lg">
           {t('hero.welcome')} <br />
-          <span className="text-luxury">{t('hero.brandName')}</span>
+          <span className="text-[#c5a059]">{t('hero.brandName')}</span>
         </h1>
 
         <p className="text-sm md:text-xl max-w-2xl mx-auto mb-10 opacity-90 leading-relaxed font-light">

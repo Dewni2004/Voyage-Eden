@@ -86,9 +86,9 @@ const Footer = () => {
             <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/10">
               <h4 className="text-lg font-bold mb-4 uppercase tracking-wider text-luxury">{t('footer.contact_title')}</h4>
               <div className="space-y-2 text-sm text-gray-300">
-                <p><a href="mailto:srilankavoyageeden@gmail.com,nethmi.srilankaedentravels@gmail.com" className="hover:text-white transition-colors">srilankavoyageeden@gmail.com</a></p>
-                <p><a href="mailto:srilankavoyageeden@gmail.com,nethmi.srilankaedentravels@gmail.com" className="hover:text-white transition-colors">nethmi.srilankaedentravels@gmail.com</a></p>
-                <p className="pt-2 font-semibold text-white"><a href="https://wa.me/94771470150" target="_blank" rel="noopener noreferrer" className="hover:text-green-400 transition-colors">+94 77 147 0150 (Nethmi)</a></p>
+                <p><a href={`mailto:${t('footer.email1')},${t('footer.email2')}`} className="hover:text-white transition-colors">{t('footer.email1')}</a></p>
+                <p><a href={`mailto:${t('footer.email1')},${t('footer.email2')}`} className="hover:text-white transition-colors">{t('footer.email2')}</a></p>
+                <p className="pt-2 font-semibold text-white"><a href="https://wa.me/94771470150" target="_blank" rel="noopener noreferrer" className="hover:text-green-400 transition-colors">{t('footer.phone')}</a></p>
               </div>
             </div>
 
@@ -97,7 +97,7 @@ const Footer = () => {
               <h4 className="text-lg font-bold mb-4 uppercase tracking-wider text-luxury">{t('footer.registration_title')}</h4>
               <div className="space-y-2 text-sm text-gray-300">
                 <div>
-                  <p>SLTDA : SLTDA/SQA/TA/02233</p>
+                  <p>{t('footer.sltda_reg')}</p>
                   <p className="text-[11px] text-gray-400 font-light italic mt-0.5">{t('footer.sltda_desc')}</p>
                 </div>
                 <p>{t('footer.reg_no')}</p>
@@ -109,8 +109,8 @@ const Footer = () => {
             <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/10">
               <h4 className="text-lg font-bold mb-4 uppercase tracking-wider text-luxury">{t('footer.offices_title')}</h4>
               <div className="space-y-2 text-sm text-gray-300">
-                <p>Kandy : Stone House Suites, No. 29, Nittawela Road</p>
-                <p>Kurunegala : No. 64, Unit 01, Siripathi Complex</p>
+                <p>{t('footer.office1')}</p>
+                <p>{t('footer.office2')}</p>
               </div>
             </div>
 

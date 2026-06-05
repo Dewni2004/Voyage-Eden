@@ -45,7 +45,7 @@ const Newsletter = () => {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                   </div>
-                  <span className="text-[9px] font-bold uppercase tracking-[0.3em] opacity-80">Newsletter</span>
+                  <span className="text-[9px] font-bold uppercase tracking-[0.3em] opacity-80">{t("newsletter.tag")}</span>
                 </div>
                 <h2 className="text-2xl md:text-3xl font-serif font-bold mb-1 tracking-tight drop-shadow-md">{t("newsletter.title")}</h2>
                 <p className="opacity-80 text-xs font-light italic">{t("newsletter.subtitle")}</p>

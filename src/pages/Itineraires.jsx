@@ -16,8 +16,12 @@ const Itineraires = () => {
   useEffect(() => {
     const fetch = async () => {
       try {
-        const dynamicData = await getItineraries(i18n.language);
-        setItineraries(dynamicData);
+        if (i18n.language.startsWith('fr')) {
+          const dynamicData = await getItineraries(i18n.language);
+          setItineraries(dynamicData);
+        } else {
+          setItineraries([]); // Temporarily show no cards for other languages
+        }
       } catch (e) {
         console.error(e);
       }

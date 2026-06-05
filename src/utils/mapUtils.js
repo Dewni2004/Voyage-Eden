@@ -187,7 +187,7 @@ export const convertGPSToPercentage = ([lat, lng], day = null) => {
  */
 export const getRouteWaypoints = (locationString) => {
   if (!locationString) return [];
-  const parts = locationString.split(/ - | → | -> | et /i);
+  const parts = locationString.split(/\s*-\s*|\s*→\s*|\s*->\s*|\s+et\s+/i);
   const waypoints = [];
 
   for (const part of parts) {

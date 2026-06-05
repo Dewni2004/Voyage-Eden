@@ -21,7 +21,7 @@ export default {
       },
       colors: {
         primary: "#1e406f",
-        luxury: "#c5a059",
+        luxury: "#0ea5e9",
       }
     },
   },

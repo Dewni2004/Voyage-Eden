@@ -109,10 +109,10 @@ const TrustSection = () => {
             <div className="flex flex-row gap-1.5 w-full justify-center mt-2 px-1">
               <Link 
                 to="/reviews"
-                className="flex flex-1 items-center justify-center gap-1 bg-transparent border border-primary text-[#FF0000] hover:bg-primary/5 font-bold px-1 py-1.5 rounded-lg transition-all shadow-sm text-[9px]"
+                className="flex flex-1 items-center justify-center gap-1 bg-transparent border border-primary text-primary hover:bg-primary/5 font-bold px-1 py-1.5 rounded-lg transition-all shadow-sm text-[9px]"
               >
-                <svg className="w-3 h-3 shrink-0" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M8 5v14l11-7z" />
+                <svg className="w-3 h-3 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
                 <span className="truncate">{t('trust.watch', 'Visionner')}</span>
               </Link>
@@ -120,7 +120,7 @@ const TrustSection = () => {
                 href="https://www.youtube.com/@srilankaviajeseden"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex flex-1 items-center justify-center gap-1 bg-transparent border border-primary text-[#FF0000] hover:bg-primary/5 font-bold px-1 py-1.5 rounded-lg transition-all shadow-sm text-[9px]"
+                className="flex flex-1 items-center justify-center gap-1 bg-transparent border border-primary text-primary hover:bg-primary/5 font-bold px-1 py-1.5 rounded-lg transition-all shadow-sm text-[9px]"
               >
                 <svg className="w-3 h-3 text-red-600 fill-current shrink-0" viewBox="0 0 24 24">
                   <path d="M19.78 4.22c-1.87-.5-9.37-.5-9.37-.5s-7.51 0-9.38.5A3 3 0 0 0 .5 7.19C0 9.07 0 13 0 13s0 3.93.5 5.81a3 3 0 0 0 2.12 2.12c1.87.5 9.38.5 9.38.5s7.5 0 9.37-.5a3 3 0 0 0 2.13-2.12c.5-1.88.5-5.81.5-5.81s0-3.93-.5-5.81a3 3 0 0 0-2.13-2.12zM9.54 16.57V9.43L15.82 13l-6.28 3.57z" fill="currentColor"/>
@@ -230,10 +230,10 @@ const TrustSection = () => {
             <div className="flex gap-3 mt-6 justify-start">
               <Link 
                 to="/reviews"
-                className="flex items-center justify-center gap-1.5 bg-white border border-[#1e406f] hover:bg-[#1e406f]/5 text-red-600 font-bold px-4 py-2.5 rounded-xl transition-all shadow-sm text-xs"
+                className="flex items-center justify-center gap-1.5 bg-white border border-[#1e406f] hover:bg-[#1e406f]/5 text-[#1e406f] font-bold px-4 py-2.5 rounded-xl transition-all shadow-sm text-xs"
               >
-                <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-                  <path d="M8 5v14l11-7z" />
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
                 {t('trust.watch', 'Visionner')}
               </Link>
@@ -241,7 +241,7 @@ const TrustSection = () => {
                 href="https://www.youtube.com/@srilankaviajeseden"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-1.5 bg-white border border-[#1e406f] hover:bg-[#1e406f]/5 text-red-600 font-bold px-4 py-2.5 rounded-xl transition-all shadow-sm text-xs"
+                className="flex items-center justify-center gap-1.5 bg-white border border-[#1e406f] hover:bg-[#1e406f]/5 text-[#1e406f] font-bold px-4 py-2.5 rounded-xl transition-all shadow-sm text-xs"
               >
                 <svg className="w-3.5 h-3.5 text-red-600 fill-current" viewBox="0 0 24 24">
                   <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.108C19.524 3.545 12 3.545 12 3.545s-7.525 0-9.388.51a3.003 3.003 0 0 0-2.11 2.108C0 8.026 0 12 0 12s0 3.974.502 5.837a3.003 3.003 0 0 0 2.11 2.108c1.863.51 9.388.51 9.388.51s7.524 0 9.388-.51a3.002 3.002 0 0 0 2.11-2.108C24 15.974 24 12 24 12s0-3.974-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>

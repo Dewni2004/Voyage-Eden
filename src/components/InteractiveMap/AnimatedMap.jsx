@@ -36,6 +36,7 @@ const AnimatedMap = ({ days, activeDay, setActiveDay, setIsModalOpen }) => {
   }, [days]);
 
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
+  const [aspectRatio, setAspectRatio] = useState(null);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 1024);
@@ -47,13 +48,29 @@ const AnimatedMap = ({ days, activeDay, setActiveDay, setIsModalOpen }) => {
   // We'll generate segments in the render loop.
 
   return (
-    <div className="relative w-full h-full z-10 flex items-center justify-center">
+    <div className="relative w-full h-full z-10 flex items-center justify-center px-2 md:px-0">
       {/* Inner shrink-wrap container to match exact image dimensions */}
-      <div className="relative max-w-full max-h-full h-full flex items-center justify-center">
+      <div 
+        className="relative flex items-center justify-center"
+        style={aspectRatio ? { 
+          aspectRatio: aspectRatio, 
+          maxWidth: '100%', 
+          maxHeight: '100%' 
+        } : { 
+          maxWidth: '100%', 
+          maxHeight: '100%' 
+        }}
+      >
         <img 
           src={newMapImg} 
           alt="Sri Lanka Map" 
-          className="max-w-full max-h-full object-contain block drop-shadow-md rounded-[48px]" 
+          onLoad={(e) => {
+            const { naturalWidth, naturalHeight } = e.target;
+            if (naturalWidth && naturalHeight) {
+              setAspectRatio(naturalWidth / naturalHeight);
+            }
+          }}
+          className="w-full h-full object-contain block drop-shadow-md rounded-[32px] md:rounded-[48px]" 
         />
         
         {/* Overlay SVG for Routes */}
@@ -63,11 +80,11 @@ const AnimatedMap = ({ days, activeDay, setActiveDay, setIsModalOpen }) => {
           preserveAspectRatio="none"
           style={{ zIndex: 2, filter: 'drop-shadow(0px 3px 3px rgba(176, 42, 48, 0.4))' }}
         >
-          {/* Draw a single continuous smooth route line */}
+          {/* Draw a single continuous route line */}
           {(() => {
             const allWaypoints = [];
             pointsData.forEach(day => {
-               const wps = day.routeWaypoints || [day.coords];
+               const wps = (day.routeWaypoints && day.routeWaypoints.length > 0) ? day.routeWaypoints : [day.coords];
                wps.forEach(wp => {
                   if (allWaypoints.length === 0) {
                      allWaypoints.push(wp);
@@ -83,40 +100,10 @@ const AnimatedMap = ({ days, activeDay, setActiveDay, setIsModalOpen }) => {
 
             if (allWaypoints.length < 2) return null;
 
-            // Helper to compute control points for smooth spline
-            const getControlPoints = (x0, y0, x1, y1, x2, y2, t = 0.25) => {
-              const d01 = Math.sqrt(Math.pow(x1 - x0, 2) + Math.pow(y1 - y0, 2));
-              const d12 = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-              const fa = t * d01 / (d01 + d12 || 1);
-              const fb = t * d12 / (d01 + d12 || 1);
-              const p1x = x1 - fa * (x2 - x0);
-              const p1y = y1 - fa * (y2 - y0);
-              const p2x = x1 + fb * (x2 - x0);
-              const p2y = y1 + fb * (y2 - y0);
-              return [{ x: p1x || x1, y: p1y || y1 }, { x: p2x || x1, y: p2y || y1 }];
-            };
-
-            // Generate organic smooth path through all points
+            // Generate path using simple straight lines for stability
             let pathString = `M ${allWaypoints[0].x} ${allWaypoints[0].y}`;
-            if (allWaypoints.length === 2) {
-              const p0 = allWaypoints[0];
-              const p1 = allWaypoints[1];
-              const dx = p1.x - p0.x;
-              const dy = p1.y - p0.y;
-              // slight organic curve
-              pathString += ` Q ${p0.x + dx*0.5 - dy*0.1} ${p0.y + dy*0.5 + dx*0.1} ${p1.x} ${p1.y}`;
-            } else {
-              for (let i = 0; i < allWaypoints.length - 1; i++) {
-                const p0 = i === 0 ? allWaypoints[0] : allWaypoints[i - 1];
-                const p1 = allWaypoints[i];
-                const p2 = allWaypoints[i + 1];
-                const p3 = i + 2 < allWaypoints.length ? allWaypoints[i + 2] : p2;
-                
-                const cp1 = getControlPoints(p0.x, p0.y, p1.x, p1.y, p2.x, p2.y, 0.25)[1];
-                const cp2 = getControlPoints(p1.x, p1.y, p2.x, p2.y, p3.x, p3.y, 0.25)[0];
-                
-                pathString += ` C ${cp1.x} ${cp1.y}, ${cp2.x} ${cp2.y}, ${p2.x} ${p2.y}`;
-              }
+            for (let i = 1; i < allWaypoints.length; i++) {
+              pathString += ` L ${allWaypoints[i].x} ${allWaypoints[i].y}`;
             }
 
             return (
@@ -124,13 +111,17 @@ const AnimatedMap = ({ days, activeDay, setActiveDay, setIsModalOpen }) => {
                 d={pathString}
                 fill="transparent"
                 stroke="#e6192b"
-                strokeWidth="2.5"
+                strokeWidth="1.8"
                 strokeLinecap="round"
                 strokeLinejoin="round"
+                strokeDasharray="3 3"
                 vectorEffect="non-scaling-stroke"
-                initial={{ opacity: 0, pathLength: 0 }}
-                animate={{ opacity: 1, pathLength: 1 }}
-                transition={{ duration: 2.5, ease: "easeInOut" }}
+                initial={{ opacity: 0, strokeDashoffset: 40 }}
+                animate={{ opacity: 1, strokeDashoffset: 0 }}
+                transition={{ 
+                  opacity: { duration: 1.5 },
+                  strokeDashoffset: { repeat: Infinity, duration: 4, ease: "linear" }
+                }}
               />
             );
           })()}
@@ -164,6 +155,26 @@ const AnimatedMap = ({ days, activeDay, setActiveDay, setIsModalOpen }) => {
               />
             ));
           })()}
+
+          {/* Connector Lines for Images */}
+          {pointsData.map((day, i) => {
+             const isRight = day.coords.x > 50;
+             const isBottom = day.coords.y > 50;
+             const pushX = isRight ? 5 : -5;
+             const pushY = isBottom ? 6 : -6;
+             return (
+               <line 
+                 key={`conn-${i}`}
+                 x1={day.coords.x} 
+                 y1={day.coords.y}
+                 x2={day.coords.x + pushX}
+                 y2={day.coords.y + pushY}
+                 stroke="#1f2937"
+                 strokeWidth="0.3"
+                 strokeDasharray="0.8 0.8"
+               />
+             );
+          })}
 
           {/* Colored Region for Yala (only if Yala is in itinerary) */}
           {pointsData.some(day => getMatchedCity(day) === 'yala') && (
@@ -223,30 +234,19 @@ const AnimatedMap = ({ days, activeDay, setActiveDay, setIsModalOpen }) => {
             const isRight = day.coords.x > 50;
             const isBottom = day.coords.y > 50;
             
-            let circleStyle = {};
-            let labelStyle = {};
+            const pushX = isRight ? 5 : -5;
+            const pushY = isBottom ? 6 : -6;
             
-            if (isRight && !isBottom) { // Top Right
-               circleStyle = { bottom: '100%', left: '100%', transform: 'translate(8px, -8px)' };
-               labelStyle = { top: '100%', left: '50%', transform: 'translateX(-50%)', marginTop: '4px' };
-            } else if (!isRight && !isBottom) { // Top Left
-               circleStyle = { bottom: '100%', right: '100%', transform: 'translate(-8px, -8px)' };
-               labelStyle = { top: '100%', left: '50%', transform: 'translateX(-50%)', marginTop: '4px' };
-            } else if (isRight && isBottom) { // Bottom Right
-               circleStyle = { top: '100%', left: '100%', transform: 'translate(8px, 8px)' };
-               labelStyle = { bottom: '100%', left: '50%', transform: 'translateX(-50%)', marginBottom: '4px' };
-            } else { // Bottom Left
-               circleStyle = { top: '100%', right: '100%', transform: 'translate(-8px, 8px)' };
-               labelStyle = { bottom: '100%', left: '50%', transform: 'translateX(-50%)', marginBottom: '4px' };
-            }
+            const targetX = day.coords.x + pushX;
+            const targetY = day.coords.y + pushY;
 
             return (
               <motion.div
                 key={day.id}
                 className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center pointer-events-auto cursor-pointer"
                 style={{ 
-                  left: `${day.coords.x}%`, 
-                  top: `${day.coords.y}%`,
+                  left: `${targetX}%`, 
+                  top: `${targetY}%`,
                   zIndex: isActive ? 30 : (isReached ? 20 : 10)
                 }}
                 initial={false}
@@ -261,8 +261,7 @@ const AnimatedMap = ({ days, activeDay, setActiveDay, setIsModalOpen }) => {
 
                 {/* The Marker / Circle with Image */}
                 <motion.div 
-                  className={`absolute rounded-full overflow-hidden shadow-2xl transition-colors duration-300 ${isActive ? 'border-[3px] border-primary z-20' : 'border-[3px] border-white hover:border-primary/50 z-10'}`}
-                  style={circleStyle}
+                  className={`relative rounded-full overflow-hidden shadow-2xl transition-colors duration-300 ${isActive ? 'border-[3px] border-primary z-20' : 'border-[3px] border-white hover:border-primary/50 z-10'}`}
                   animate={{
                     width: isReached ? (isActive ? (isMobile ? 40 : 56) : (isMobile ? 32 : 48)) : 16,
                     height: isReached ? (isActive ? (isMobile ? 40 : 56) : (isMobile ? 32 : 48)) : 16,
@@ -282,7 +281,8 @@ const AnimatedMap = ({ days, activeDay, setActiveDay, setIsModalOpen }) => {
                 {/* Day label */}
                 <motion.div 
                   className={`absolute text-[10px] md:text-xs font-bold px-1 whitespace-nowrap transition-colors duration-300 ${isActive ? 'text-primary scale-110' : 'text-gray-900 bg-white/60 rounded backdrop-blur-sm'}`}
-                  style={labelStyle}
+                  style={{ top: '100%', left: '50%', transform: 'translateX(-50%)', marginTop: '4px' }}
+
                   animate={{
                     opacity: 1,
                     scale: isActive ? 1.1 : 1
