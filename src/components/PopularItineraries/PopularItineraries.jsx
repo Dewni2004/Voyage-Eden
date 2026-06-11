@@ -119,6 +119,13 @@ const PopularItineraries = ({ title, id, itineraries, isDark, isGreen }) => {
     }
   };
   
+  const getGridClass = (len) => {
+    if (len === 1) return 'lg:grid-cols-1 lg:max-w-[400px] lg:mx-auto';
+    if (len === 2) return 'lg:grid-cols-2 lg:max-w-[800px] lg:mx-auto';
+    if (len === 3) return 'lg:grid-cols-3';
+    return 'lg:grid-cols-4';
+  };
+
   return (
     <section id={id} className={`py-10 md:py-16 relative overflow-hidden ${isDark ? 'bg-[#050b18]' : 'bg-white'}`}>
       {/* Premium Background for Luxury Section */}
@@ -152,7 +159,7 @@ const PopularItineraries = ({ title, id, itineraries, isDark, isGreen }) => {
         <div 
           ref={scrollRef}
           onScroll={handleScroll}
-          className="flex md:grid overflow-x-auto snap-x snap-mandatory hide-scrollbar md:overflow-visible pb-8 md:pb-0 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 -mx-6 px-6 md:mx-0 md:px-0"
+          className={`flex md:grid overflow-x-auto snap-x snap-mandatory hide-scrollbar md:overflow-visible pb-8 md:pb-0 grid-cols-1 sm:grid-cols-2 ${getGridClass(itineraries.length)} gap-6 md:gap-10 -mx-6 px-6 md:mx-0 md:px-0`}
         >
           {itineraries.map((item) => (
             <div 

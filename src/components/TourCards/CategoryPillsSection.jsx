@@ -20,7 +20,7 @@ const CategoryPillsSection = () => {
     { id: 'golf', title: 'Séjours golfiques', image: 'https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?auto=format&fit=crop&q=80' },
     { id: 'surf', title: 'Surf & Plongée', image: 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&q=80' },
     { id: 'adventure', title: 'Aventure', image: adventureImg },
-    { id: 'pererahera', title: 'Esela Perahera', image: esalaImg },
+    { id: 'perahera', title: 'Esela Perahera', image: esalaImg },
     { id: '8days', title: '8 Jours', image: eightDaysImg },
     { id: 'interests', title: "Centres d'intérêt", image: interestsImg }
   ]);
@@ -54,7 +54,7 @@ const CategoryPillsSection = () => {
         {categories.map((category, idx) => (
           <a 
             key={category.id}
-            href={`/itineraires#${category.id}`}
+            href={`/${i18n.language?.split('-')[0] || 'fr'}/itineraires#${category.id}`}
             className="group flex flex-col items-center gap-3 md:gap-4 shrink-0 mx-auto"
           >
             <div className="relative w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-[70px] lg:h-[70px] xl:w-[80px] xl:h-[80px] 2xl:w-[90px] 2xl:h-[90px] rounded-full flex items-center justify-center">

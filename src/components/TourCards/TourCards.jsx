@@ -18,6 +18,13 @@ const TourCategorySection = ({ title, subtitle, tours, hasScrolled, handleScroll
     }
   };
 
+  const getGridClass = (len) => {
+    if (len === 1) return 'lg:grid-cols-1 lg:max-w-[400px] lg:mx-auto';
+    if (len === 2) return 'lg:grid-cols-2 lg:max-w-[800px] lg:mx-auto';
+    if (len === 3) return 'lg:grid-cols-3';
+    return 'lg:grid-cols-4';
+  };
+
   return (
     <div className="mb-12 md:mb-20">
       {/* Header */}
@@ -46,7 +53,7 @@ const TourCategorySection = ({ title, subtitle, tours, hasScrolled, handleScroll
         <div 
           ref={localScrollRef}
           onScroll={onScroll}
-          className="flex md:grid overflow-x-auto snap-x snap-mandatory hide-scrollbar md:overflow-visible pb-8 md:pb-0 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 -mx-6 px-6 md:mx-0 md:px-0"
+          className={`flex md:grid overflow-x-auto snap-x snap-mandatory hide-scrollbar md:overflow-visible pb-8 md:pb-0 grid-cols-1 md:grid-cols-2 ${getGridClass(tours.length)} gap-6 md:gap-8 -mx-6 px-6 md:mx-0 md:px-0`}
         >
           {tours.map((tour) => (
             <div key={tour.id} className="min-w-[280px] w-[85vw] sm:w-[45vw] md:w-auto shrink-0 snap-center flex">
