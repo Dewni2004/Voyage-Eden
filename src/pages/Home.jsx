@@ -17,9 +17,9 @@ const Home = () => {
       <Hero />
       <TrustSection />
       <TourCards />
-      <HotelOptions />
-      {/* <CustomTripCTA /> */}
       <WhyChooseUs />
+      {/* <CustomTripCTA /> */}
+      {/* <HotelOptions /> */}
       <CustomTripBanner />
       <Destinations />
       <Reviews />

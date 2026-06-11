@@ -48,7 +48,7 @@ const Destinations = () => {
         </div>
 
         {/* Dynamic Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 h-auto lg:h-[700px]">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 h-auto lg:h-[400px]">
           {articles.map((article, index) => {
             let colSpanClass = 'col-span-1';
             let rowSpanClass = '';

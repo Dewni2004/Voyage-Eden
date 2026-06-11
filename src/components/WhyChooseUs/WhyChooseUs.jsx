@@ -65,10 +65,10 @@ const WhyChooseUs = () => {
           {features.map((feature) => (
             <div 
               key={feature.id} 
-              className="group bg-white p-4 sm:p-10 rounded-2xl sm:rounded-[1.75rem] border border-primary/20 shadow-[0_15px_35px_-5px_rgba(30,64,111,0.06)] text-center flex flex-col justify-start transition-all duration-300"
+              className="group bg-white p-4 sm:p-6 rounded-2xl sm:rounded-[1.75rem] border border-primary/20 shadow-[0_15px_35px_-5px_rgba(30,64,111,0.06)] text-center flex flex-col justify-start transition-all duration-300"
             >
               <div>
-                <div className="mb-4 sm:mb-6 flex justify-center">
+                <div className="mb-4 sm:mb-4 flex justify-center">
                   <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-primary/5 flex items-center justify-center transition-all duration-300 transform group-hover:scale-110 group-hover:bg-primary/10">
                     <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-primary text-white flex items-center justify-center shadow-md">
                       <div className="scale-75 sm:scale-100 flex items-center justify-center">
