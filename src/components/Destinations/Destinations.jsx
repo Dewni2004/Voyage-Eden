@@ -74,7 +74,7 @@ const Destinations = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
                 <div className="absolute bottom-4 left-4 right-4 md:bottom-8 md:left-8 md:right-8 text-white">
                   <span className="bg-primary/80 text-white text-[9px] sm:text-xs font-bold px-2 py-1 rounded-full uppercase tracking-wider mb-2 inline-block">
-                    {article.category || 'Histoire'}
+                    {t(`travelGuide.cat${article.category || 'History'}`, article.category || 'Histoire')}
                   </span>
                   <h3 className="text-[13px] xs:text-sm sm:text-lg md:text-2xl font-bold mb-1 drop-shadow-lg leading-tight">{article.title}</h3>
                 </div>

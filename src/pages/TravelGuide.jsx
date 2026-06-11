@@ -39,23 +39,10 @@ const TravelGuide = () => {
   const allArticles = [...dynamicArticles];
 
   const getTranslatedCategory = (word) => {
-    const translations = {
-      'History': 'Histoire',
-      'Adventure': 'Aventure',
-      'Nature': 'Nature',
-      'Culture': 'Culture',
-      'Discovery': 'Découverte',
-      'Waterfalls': 'Cascades',
-      'Beach': 'Plage',
-      'Islands': 'Îles',
-      'Private Island': 'Île privée',
-      '#History': '#Histoire',
-      '#Adventure': '#Aventure',
-      '#Nature': '#Nature',
-      '#Culture': '#Culture',
-      '#Waterfalls': '#Cascades'
-    };
-    return translations[word] || word;
+    if (!word) return word;
+    const cleanWord = word.startsWith('#') ? word.substring(1) : word;
+    const translated = t(`travelGuide.cat${cleanWord}`, cleanWord);
+    return word.startsWith('#') ? `#${translated}` : translated;
   };
   
   const filteredArticles = allArticles.filter(article => {

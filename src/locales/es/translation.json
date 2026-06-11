@@ -140,7 +140,14 @@
     "banner": {
       "title": "Podemos personalizar todas las rutas, según tus gustos e intereses\nSIN COSTE ADICIONAL ALGUNO",
       "subtitle": "",
-      "button": "Diseña tu viaje personalizado"
+      "button": "Diseña tu viaje personalizado",
+      "steps": {
+        "step1": "Cuéntenos",
+        "step2": "Diseñamos",
+        "step3": "Revise",
+        "step4": "Confirme",
+        "step5": "Viaje"
+      }
     },
     "customTrip": {
       "heroTitle": "DISEÑA TU VIAJE A MEDIDA",
@@ -712,7 +719,19 @@
       "introTo": "Introducción a",
       "travelTips": "Consejos de viaje",
       "expertAdvice": "Consejo de expertos",
-      "signatureGuide": "Guía de firma Eden Travels"
+      "signatureGuide": "Guía de firma Eden Travels",
+      "sidebar": {
+        "categoriesTitle": "Categorías",
+        "catAttractions": "Atracciones turísticas",
+        "catNews": "Noticias y curiosidades",
+        "catCulture": "Cultura y religiones",
+        "catTips": "Consejos útiles",
+        "popularReadsTitle": "Lecturas populares",
+        "joinTitle": "Únete a la aventura",
+        "joinDesc": "Recibe consejos de viaje exclusivos y destinos secretos en tu bandeja de entrada.",
+        "emailPlaceholder": "Dirección de correo electrónico",
+        "subscribeBtn": "Suscribirse"
+      }
     }
   }
 }

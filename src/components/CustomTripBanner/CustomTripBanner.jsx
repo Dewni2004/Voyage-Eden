@@ -31,9 +31,35 @@ const CustomTripBanner = () => {
           <div className="relative z-10 w-full p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-10">
             
             <div className="flex-1 text-center md:text-left">
-              <h2 className="text-2xl md:text-4xl lg:text-4xl font-serif font-bold text-white mb-0 leading-snug drop-shadow-md whitespace-pre-line">
+              <h2 className="text-2xl md:text-4xl lg:text-4xl font-serif font-bold text-white mb-4 leading-snug drop-shadow-md whitespace-pre-line">
                 {t('banner.title', 'DESIGN YOUR DREAM ITINERARY WITH US')}
               </h2>
+              
+              <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 md:gap-3 mt-4">
+                {[
+                  { num: '1', key: 'step1', default: 'Tell Us' },
+                  { num: '2', key: 'step2', default: 'We Design' },
+                  { num: '3', key: 'step3', default: 'Review' },
+                  { num: '4', key: 'step4', default: 'Confirm' },
+                  { num: '5', key: 'step5', default: 'Travel' }
+                ].map((step, index) => (
+                  <React.Fragment key={step.num}>
+                    <div className="flex items-center gap-1.5 md:gap-2">
+                      <span className="flex items-center justify-center w-6 h-6 rounded-full bg-blue-500/20 border border-blue-400/50 text-blue-200 text-xs font-bold backdrop-blur-sm">
+                        {step.num}
+                      </span>
+                      <span className="text-white/90 text-[11px] md:text-xs font-medium tracking-wider uppercase">
+                        {t(`banner.steps.${step.key}`, step.default)}
+                      </span>
+                    </div>
+                    {index < 4 && (
+                      <svg className="w-3 h-3 text-white/30 hidden sm:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                      </svg>
+                    )}
+                  </React.Fragment>
+                ))}
+              </div>
             </div>
             
             <div className="flex-shrink-0">

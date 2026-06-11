@@ -140,7 +140,14 @@
     "banner": {
       "title": "DESIGN YOUR DREAM ITINERARY WITH US",
       "subtitle": "Just by filling out a form. For no additional fees.",
-      "button": "Design your personalized trip"
+      "button": "Design your personalized trip",
+      "steps": {
+        "step1": "Tell Us",
+        "step2": "We Design",
+        "step3": "Review",
+        "step4": "Confirm",
+        "step5": "Travel"
+      }
     },
     "customTrip": {
       "heroTitle": "DESIGN YOUR CUSTOM TRIP",
@@ -699,7 +706,19 @@
       "introTo": "Introduction to",
       "travelTips": "Travel Tips",
       "expertAdvice": "Expert Advice",
-      "signatureGuide": "Eden Travels Signature Guide"
+      "signatureGuide": "Eden Travels Signature Guide",
+      "sidebar": {
+        "categoriesTitle": "Categories",
+        "catAttractions": "Tourist Attractions",
+        "catNews": "News & Curiosities",
+        "catCulture": "Culture & Religions",
+        "catTips": "Useful Tips",
+        "popularReadsTitle": "Popular Reads",
+        "joinTitle": "Join The Journey",
+        "joinDesc": "Receive exclusive travel tips and secret destinations in your inbox.",
+        "emailPlaceholder": "Email address",
+        "subscribeBtn": "Subscribe"
+      }
     }
   }
 }

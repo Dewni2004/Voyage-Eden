@@ -140,7 +140,14 @@
     "banner": {
       "title": "CRÉEZ VOTRE ITINÉRAIRE DE RÊVE AVEC NOUS",
       "subtitle": "Simplement en remplissant un formulaire. Sans frais supplémentaires.",
-      "button": "Concevez votre voyage personnalisé"
+      "button": "Concevez votre voyage personnalisé",
+      "steps": {
+        "step1": "Dites-nous",
+        "step2": "Nous Créons",
+        "step3": "Révisez",
+        "step4": "Confirmez",
+        "step5": "Voyagez"
+      }
     },
     "customTrip": {
       "heroTitle": "CRÉEZ VOTRE VOYAGE SUR MESURE",
@@ -674,7 +681,19 @@
       "introTo": "Introduction à",
       "travelTips": "Conseils de voyage",
       "expertAdvice": "Avis d'expert",
-      "signatureGuide": "Guide signature Eden Travels"
+      "signatureGuide": "Guide signature Eden Travels",
+      "sidebar": {
+        "categoriesTitle": "Catégories",
+        "catAttractions": "Attractions touristiques",
+        "catNews": "Actualités & Curiosités",
+        "catCulture": "Culture & Religions",
+        "catTips": "Conseils utiles",
+        "popularReadsTitle": "Lectures populaires",
+        "joinTitle": "Rejoignez l'aventure",
+        "joinDesc": "Recevez des conseils de voyage exclusifs et des destinations secrètes dans votre boîte de réception.",
+        "emailPlaceholder": "Adresse e-mail",
+        "subscribeBtn": "S'abonner"
+      }
     }
   }
 }

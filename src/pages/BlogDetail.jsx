@@ -13,29 +13,7 @@ const BlogDetail = () => {
 
   const [popularReads, setPopularReads] = useState([]);
 
-  const translateToFrench = (word) => {
-    const translations = {
-      'History': 'Histoire',
-      'Adventure': 'Aventure',
-      'Nature': 'Nature',
-      'Culture': 'Culture',
-      'Discovery': 'Découverte',
-      'Waterfalls': 'Cascades',
-      'Beach': 'Plage',
-      'Islands': 'Îles',
-      'Private Island': 'Île privée',
-      'Tourist Attractions': 'Attractions touristiques',
-      'News & Curiosities': 'Actualités & Curiosités',
-      'Cultural & Religions': 'Culture & Religions',
-      'Useful Tips': 'Conseils utiles',
-      '#History': '#Histoire',
-      '#Adventure': '#Aventure',
-      '#Nature': '#Nature',
-      '#Culture': '#Culture',
-      '#Waterfalls': '#Cascades'
-    };
-    return translations[word] || word;
-  };
+
 
   useEffect(() => {
     const fetchArticle = async () => {
@@ -70,10 +48,10 @@ const BlogDetail = () => {
 
   // Sidebar data
   const categories = [
-    { name: "Attractions touristiques", count: 12 },
-    { name: "Actualités & Curiosités", count: 3 },
-    { name: "Culture & Religions", count: 9 },
-    { name: "Conseils utiles", count: 10 },
+    { name: t('blogDetail.sidebar.catAttractions', "Attractions touristiques"), count: 12 },
+    { name: t('blogDetail.sidebar.catNews', "Actualités & Curiosités"), count: 3 },
+    { name: t('blogDetail.sidebar.catCulture', "Culture & Religions"), count: 9 },
+    { name: t('blogDetail.sidebar.catTips', "Conseils utiles"), count: 10 },
   ];
 
 
@@ -95,7 +73,7 @@ const BlogDetail = () => {
       />
 
       {/* Main Content Area */}
-      <div className="max-w-7xl mx-auto px-6 py-16 md:py-24">
+      <div className="max-w-[1500px] mx-auto px-6 lg:px-10 py-16 md:py-24">
         <div className="flex flex-col lg:flex-row gap-16">
           
           {/* Left Column: Article Content */}
@@ -195,11 +173,14 @@ const BlogDetail = () => {
                 })}
 
                 <div className="pt-8 border-t border-gray-100 flex flex-wrap gap-4">
-                  {(typeof article.tags === 'string' ? JSON.parse(article.tags || '[]') : (article.tags || [])).map((tag) => (
-                    <span key={tag} className="bg-gray-50 text-gray-400 font-bold px-6 py-2 rounded-full text-sm border border-gray-100">
-                      {translateToFrench(tag)}
-                    </span>
-                  ))}
+                  {(typeof article.tags === 'string' ? JSON.parse(article.tags || '[]') : (article.tags || [])).map((tag) => {
+                    const cleanTag = tag.startsWith('#') ? tag.substring(1) : tag;
+                    return (
+                      <span key={tag} className="bg-gray-50 text-gray-400 font-bold px-6 py-2 rounded-full text-sm border border-gray-100">
+                        #{t(`travelGuide.cat${cleanTag}`, cleanTag)}
+                      </span>
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -211,7 +192,7 @@ const BlogDetail = () => {
             {/* Categories Card */}
             <div className="bg-white p-10 rounded-[32px] shadow-lg border border-gray-100">
               <h3 className="text-primary text-xl font-bold mb-8 relative inline-block">
-                Catégories
+                {t('blogDetail.sidebar.categoriesTitle', 'Catégories')}
                 <span className="absolute -bottom-2 left-0 w-12 h-1 bg-luxury rounded-full"></span>
               </h3>
               <ul className="space-y-4">
@@ -230,7 +211,7 @@ const BlogDetail = () => {
             {/* Popular Reads Card */}
             <div className="bg-white p-10 rounded-[32px] shadow-lg border border-gray-100">
               <h3 className="text-primary text-xl font-bold mb-8 relative inline-block">
-                Lectures populaires
+                {t('blogDetail.sidebar.popularReadsTitle', 'Lectures populaires')}
                 <span className="absolute -bottom-2 left-0 w-12 h-1 bg-luxury rounded-full"></span>
               </h3>
               <div className="space-y-8">
@@ -251,24 +232,24 @@ const BlogDetail = () => {
             </div>
 
             {/* Join The Journey Card */}
-            <div className="bg-[#1e406f] p-10 rounded-[32px] shadow-2xl relative overflow-hidden group">
+            <div className="bg-[#1e406f] p-10 rounded-[32px] shadow-2xl relative overflow-hidden group sticky top-32">
               {/* Decorative Glow */}
               <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
               
               <div className="relative z-10 text-center">
-                <h3 className="text-white text-2xl font-bold mb-4">Rejoignez l'aventure</h3>
+                <h3 className="text-white text-2xl font-bold mb-4">{t('blogDetail.sidebar.joinTitle', "Rejoignez l'aventure")}</h3>
                 <p className="text-white/70 text-sm mb-8">
-                  Recevez des conseils de voyage exclusifs et des destinations secrètes dans ඔබේ boite de réception.
+                  {t('blogDetail.sidebar.joinDesc', "Recevez des conseils de voyage exclusifs et des destinations secrètes dans votre boîte de réception.")}
                 </p>
                 
                 <div className="space-y-4">
                   <input 
                     type="email" 
-                    placeholder="Adresse e-mail" 
+                    placeholder={t('blogDetail.sidebar.emailPlaceholder', "Adresse e-mail")} 
                     className="w-full bg-white/10 border border-white/20 rounded-2xl py-4 px-6 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all text-white placeholder-white/40 text-sm"
                   />
                   <button className="w-full bg-[#0d213f] hover:bg-[#0a1a33] text-white font-bold py-4 rounded-2xl shadow-xl transition-all duration-300 transform active:scale-95 text-sm">
-                    S'abonner
+                    {t('blogDetail.sidebar.subscribeBtn', "S'abonner")}
                   </button>
                 </div>
               </div>

@@ -140,7 +140,14 @@
     "banner": {
       "title": "GESTALTEN SIE IHRE TRAUMREISE MIT UNS",
       "subtitle": "Einfach durch Ausfüllen eines Formulars. Ohne zusätzliche Gebühren.",
-      "button": "Gestalten Sie Ihre individuelle Reise"
+      "button": "Gestalten Sie Ihre individuelle Reise",
+      "steps": {
+        "step1": "Erzählen Sie uns",
+        "step2": "Wir entwerfen",
+        "step3": "Überprüfen",
+        "step4": "Bestätigen",
+        "step5": "Reisen"
+      }
     },
     "customTrip": {
       "heroTitle": "GESTALTEN SIE IHRE MASSGESCHNEIDERTE REISE",
@@ -674,7 +681,19 @@
       "introTo": "Einführung in",
       "travelTips": "Reisetipps",
       "expertAdvice": "Expertenrat",
-      "signatureGuide": "Eden Travels Signature Guide"
+      "signatureGuide": "Eden Travels Signature Guide",
+      "sidebar": {
+        "categoriesTitle": "Kategorien",
+        "catAttractions": "Touristenattraktionen",
+        "catNews": "Neuigkeiten & Kuriositäten",
+        "catCulture": "Kultur & Religionen",
+        "catTips": "Nützliche Tipps",
+        "popularReadsTitle": "Beliebte Lektüren",
+        "joinTitle": "Begleiten Sie die Reise",
+        "joinDesc": "Erhalten Sie exklusive Reisetipps und geheime Ziele in Ihrem Posteingang.",
+        "emailPlaceholder": "E-Mail Adresse",
+        "subscribeBtn": "Abonnieren"
+      }
     }
   }
 }

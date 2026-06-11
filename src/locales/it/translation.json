@@ -140,7 +140,14 @@
     "banner": {
       "title": "CREA IL TUO ITINERARIO DA SOGNO CON NOI",
       "subtitle": "Semplicemente compilando un modulo. Senza costi aggiuntivi.",
-      "button": "Progetta il tuo viaggio personalizzato"
+      "button": "Progetta il tuo viaggio personalizzato",
+      "steps": {
+        "step1": "Dicci",
+        "step2": "Progettiamo",
+        "step3": "Revisiona",
+        "step4": "Conferma",
+        "step5": "Viaggia"
+      }
     },
     "customTrip": {
       "heroTitle": "CREA IL TUO VIAGGIO SU MISURA",
@@ -674,7 +681,19 @@
       "introTo": "Introduzione a",
       "travelTips": "Consigli di viaggio",
       "expertAdvice": "Il parere dell'esperto",
-      "signatureGuide": "Eden Travels Signature Guide"
+      "signatureGuide": "Eden Travels Signature Guide",
+      "sidebar": {
+        "categoriesTitle": "Categorie",
+        "catAttractions": "Attrazioni turistiche",
+        "catNews": "Notizie e curiosità",
+        "catCulture": "Cultura e religioni",
+        "catTips": "Consigli utili",
+        "popularReadsTitle": "Letture popolari",
+        "joinTitle": "Unisciti al viaggio",
+        "joinDesc": "Ricevi consigli di viaggio esclusivi e destinazioni segrete nella tua casella di posta.",
+        "emailPlaceholder": "Indirizzo email",
+        "subscribeBtn": "Iscriviti"
+      }
     }
   }
 }
