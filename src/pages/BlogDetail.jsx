@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { blogArticles } from '../data/blogData';
 import { getArticles } from '../services/contentService';
 import PageHero from '../components/UI/PageHero';
 import { Helmet } from 'react-helmet-async';
 
 const BlogDetail = () => {
   const { id } = useParams();
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [article, setArticle] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const [popularReads, setPopularReads] = useState([]);
 
   const translateToFrench = (word) => {
     const translations = {
@@ -38,16 +39,10 @@ const BlogDetail = () => {
 
   useEffect(() => {
     const fetchArticle = async () => {
-      // First try static data
-      let found = blogArticles.find(item => item.id.toString() === id);
-      
-      if (!found) {
-        // Try Firestore
-        const dynamicArticles = await getArticles(i18n.language);
-        found = dynamicArticles.find(item => item.id === id);
-      }
-      
+      const dynamicArticles = await getArticles(i18n.language);
+      const found = dynamicArticles.find(item => item.id === id);
       setArticle(found);
+      setPopularReads(dynamicArticles.filter(item => item.id !== id).slice(0, 3));
       setLoading(false);
     };
     fetchArticle();
@@ -56,7 +51,7 @@ const BlogDetail = () => {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#f8fbff]">
-        <div className="text-primary font-bold">Chargement de l'article...</div>
+        <div className="text-primary font-bold">{t('blogDetail.loading', "Chargement de l'article...")}</div>
       </div>
     );
   }
@@ -66,8 +61,8 @@ const BlogDetail = () => {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#f8fbff]">
         <div className="text-center">
-          <h2 className="text-3xl font-bold text-primary mb-4">Article non trouvé</h2>
-          <Link to={`/${i18n.language?.split('-')[0] || 'fr'}/travel-guide`} className="text-luxury font-bold hover:underline">Retour au guide de voyage</Link>
+          <h2 className="text-3xl font-bold text-primary mb-4">{t('blogDetail.notFound', "Article non trouvé")}</h2>
+          <Link to={`/${i18n.language?.split('-')[0] || 'fr'}/travel-guide`} className="text-luxury font-bold hover:underline">{t('blogDetail.backBtn', "Retour au guide de voyage")}</Link>
         </div>
       </div>
     );
@@ -81,7 +76,6 @@ const BlogDetail = () => {
     { name: "Conseils utiles", count: 10 },
   ];
 
-  const popularReads = blogArticles.slice(0, 3);
 
   return (
     <div className="bg-[#f8fbff] min-h-screen">
@@ -107,12 +101,17 @@ const BlogDetail = () => {
           {/* Left Column: Article Content */}
           <div className="lg:w-2/3">
             <div className="bg-white rounded-[40px] p-10 md:p-16 shadow-xl border border-gray-100">
-              <h2 className="text-primary text-3xl md:text-4xl font-bold mb-10 leading-tight">
-                Introduction à {article.title}
-              </h2>
+              <div className="mb-16">
+                <h3 className="text-xl md:text-2xl font-bold text-primary mb-6">
+                  {t('blogDetail.introTo', "Introduction à")} {article.title}
+                </h3>
+                <p className="text-gray-600 text-base md:text-lg leading-relaxed font-medium">
+                  {article.description}
+                </p>
+              </div>
               
               <div className="prose prose-lg max-w-none text-gray-700 font-medium leading-relaxed">
-                {article.content.map((block, index) => {
+                {(typeof article.content === 'string' ? JSON.parse(article.content || '[]') : (article.content || [])).map((block, index) => {
                   if (block.type === 'paragraph') {
                     return (
                       <p key={index} className={`mb-8 ${index === 0 ? 'relative pl-16 first-letter:text-7xl first-letter:font-bold first-letter:text-primary first-letter:float-left first-letter:mr-4 first-letter:mt-2' : ''}`}>
@@ -152,8 +151,8 @@ const BlogDetail = () => {
                               💡
                             </div>
                             <div>
-                              <h4 className="text-white text-2xl font-bold font-serif tracking-wide">Conseils de voyage</h4>
-                              <p className="text-luxury text-xs font-bold uppercase tracking-widest">Avis d'expert</p>
+                              <h4 className="text-white text-2xl font-bold font-serif tracking-wide">{t('blogDetail.travelTips', "Conseils de voyage")}</h4>
+                              <p className="text-luxury text-xs font-bold uppercase tracking-widest">{t('blogDetail.expertAdvice', "Avis d'expert")}</p>
                             </div>
                           </div>
                           
@@ -169,7 +168,7 @@ const BlogDetail = () => {
                           </div>
                           
                           <div className="mt-8 pt-8 border-t border-white/10 flex items-center justify-between">
-                            <span className="text-white/40 text-[10px] font-bold uppercase tracking-widest">Guide signature Eden Travels</span>
+                            <span className="text-white/40 text-[10px] font-bold uppercase tracking-widest">{t('blogDetail.signatureGuide', "Guide signature Eden Travels")}</span>
                             <div className="flex gap-1">
                               {[1,2,3].map(i => <div key={i} className="w-1 h-1 bg-luxury rounded-full opacity-50"></div>)}
                             </div>
@@ -196,7 +195,7 @@ const BlogDetail = () => {
                 })}
 
                 <div className="pt-8 border-t border-gray-100 flex flex-wrap gap-4">
-                  {(article.tags || []).map((tag) => (
+                  {(typeof article.tags === 'string' ? JSON.parse(article.tags || '[]') : (article.tags || [])).map((tag) => (
                     <span key={tag} className="bg-gray-50 text-gray-400 font-bold px-6 py-2 rounded-full text-sm border border-gray-100">
                       {translateToFrench(tag)}
                     </span>

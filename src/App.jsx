@@ -13,6 +13,7 @@ import BlogDetail from './pages/BlogDetail';
 import Reviews from './pages/Reviews';
 import ReviewDetail from './pages/ReviewDetail';
 import HotelCategoryPage from './pages/HotelCategoryPage';
+import Restaurants from './pages/Restaurants';
 import Footer from './components/Footer/Footer';
 import WhatsAppButton from './components/WhatsAppButton/WhatsAppButton';
 import ScrollToTop from './components/ScrollToTop';
@@ -34,8 +35,8 @@ function LanguageWrapper() {
 // Redirects the root (/) to the user's detected language (e.g. /fr)
 function RootRedirect() {
   const { i18n } = useTranslation();
-  const lang = i18n.language?.split('-')[0] || 'fr';
-  const targetLang = ['fr', 'en', 'de', 'es', 'it'].includes(lang) ? lang : 'fr';
+  const lang = i18n.language?.split('-')[0] || 'es';
+  const targetLang = ['fr', 'en', 'de', 'es', 'it'].includes(lang) ? lang : 'es';
   return <Navigate to={`/${targetLang}`} replace />;
 }
 
@@ -58,6 +59,7 @@ function AppContent() {
             <Route path="reviews" element={<Reviews />} />
             <Route path="review/:id" element={<ReviewDetail />} />
             <Route path="hotels/:category" element={<HotelCategoryPage />} />
+            <Route path="restaurants" element={<Restaurants />} />
           </Route>
         </Routes>
       </main>

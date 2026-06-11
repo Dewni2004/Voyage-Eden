@@ -6,6 +6,7 @@ import PopularItineraries from '../components/PopularItineraries/PopularItinerar
 import Newsletter from '../components/Newsletter/Newsletter';
 import { getItineraries } from '../services/contentService';
 import HotelOptions from '../components/HotelOptions/HotelOptions';
+import RestaurantBanner from '../components/RestaurantBanner/RestaurantBanner';
 
 
 const Itineraires = () => {
@@ -16,12 +17,8 @@ const Itineraires = () => {
   useEffect(() => {
     const fetch = async () => {
       try {
-        if (i18n.language.startsWith('fr')) {
-          const dynamicData = await getItineraries(i18n.language);
-          setItineraries(dynamicData);
-        } else {
-          setItineraries([]); // Temporarily show no cards for other languages
-        }
+        const dynamicData = await getItineraries(i18n.language);
+        setItineraries(dynamicData);
       } catch (e) {
         console.error(e);
       }
@@ -50,6 +47,7 @@ const Itineraires = () => {
       <PopularItineraries title={t('itineraries.interests')} id="interests" itineraries={getByCategory('interests')} />
 
       <HotelOptions />
+      <RestaurantBanner />
       <Newsletter />
     </div>
   );

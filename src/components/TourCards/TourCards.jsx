@@ -3,72 +3,34 @@ import { useTranslation } from 'react-i18next';
 import ItineraryCard from '../UI/ItineraryCard';
 import swipeHandImg from '../../assets/swipe-hand-transparent.png';
 import { getItineraries } from '../../services/contentService';
+import CategoryPillsSection from './CategoryPillsSection';
 
-const TourCards = () => {
-  const { t, i18n } = useTranslation();
-  const [hasScrolled, setHasScrolled] = useState(false);
-  const [tours, setTours] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const scrollRef = useRef(null);
+const TourCategorySection = ({ title, subtitle, tours, hasScrolled, handleScroll, t }) => {
+  const localScrollRef = useRef(null);
+  
+  if (!tours || tours.length === 0) return null;
 
-  const handleScroll = () => {
-    if (!hasScrolled && scrollRef.current) {
-      if (scrollRef.current.scrollLeft > 20) {
-        setHasScrolled(true);
+  const onScroll = () => {
+    if (!hasScrolled && localScrollRef.current) {
+      if (localScrollRef.current.scrollLeft > 20) {
+        handleScroll();
       }
     }
   };
 
-  useEffect(() => {
-    const fetchTours = async () => {
-      try {
-        const allItineraries = await getItineraries(i18n.language);
-        
-        // Get 3 from popular
-        const popular = allItineraries.filter(it => it.category?.toLowerCase() === 'popular').slice(0, 3);
-        // Get 1 from honeymoon
-        const honeymoon = allItineraries.filter(it => it.category?.toLowerCase() === 'honeymoon').slice(0, 1);
-        
-        // Combine them
-        const combined = [...popular, ...honeymoon];
-        
-        // Map to format expected by ItineraryCard
-        const formattedTours = combined.map(it => ({
-          id: it.id,
-          title: it.title,
-          duration: `${it.days?.length || 0} ${t("itineraryCard.days")}`,
-          image: it.image,
-          icons: it.icons || [],
-          description: it.description || '',
-          price: it.price || '',
-          categoryTag: it.category?.toLowerCase() === 'honeymoon' ? 'Voyages de noces' : 'Populaire'
-        }));
-        
-        setTours(formattedTours);
-      } catch (error) {
-        console.error("Error fetching home itineraries:", error);
-      }
-      setLoading(false);
-    };
-    
-    fetchTours();
-  }, [i18n.language]);
-
-  if (loading) {
-    return <div className="py-16 text-center text-gray-500">Chargement des itinéraires...</div>;
-  }
-
   return (
-    <section className="py-8 md:py-16 bg-white relative">
-      <div className="container mx-auto px-6 relative z-10">
-        {/* Header */}
-        <div className="text-center mb-8 md:mb-16">
-          <h2 className="mb-4">{t('tours.title')}</h2>
+    <div className="mb-12 md:mb-20">
+      {/* Header */}
+      <div className="text-center mb-10 md:mb-16">
+        <h2 className="mb-4">{title}</h2>
+        {subtitle && (
           <p className="text-gray-600 max-w-3xl mx-auto text-lg font-light">
-            {t('tours.subtitle')}
+            {subtitle}
           </p>
-        </div>
+        )}
+      </div>
 
+      <div className="relative">
         {/* Mobile Swipe Hint Overlay */}
         {!hasScrolled && tours.length > 1 && (
           <div className="md:hidden absolute top-0 right-0 bottom-0 left-0 z-20 pointer-events-none transition-opacity duration-700 flex justify-center items-center">
@@ -82,8 +44,8 @@ const TourCards = () => {
 
         {/* Grid */}
         <div 
-          ref={scrollRef}
-          onScroll={handleScroll}
+          ref={localScrollRef}
+          onScroll={onScroll}
           className="flex md:grid overflow-x-auto snap-x snap-mandatory hide-scrollbar md:overflow-visible pb-8 md:pb-0 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 -mx-6 px-6 md:mx-0 md:px-0"
         >
           {tours.map((tour) => (
@@ -101,12 +63,112 @@ const TourCards = () => {
             </div>
           ))}
         </div>
+      </div>
+    </div>
+  );
+};
+
+const TourCards = () => {
+  const { t, i18n } = useTranslation();
+  const [hasScrolled, setHasScrolled] = useState(false);
+  const [allTours, setAllTours] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const handleScroll = () => {
+    if (!hasScrolled) {
+      setHasScrolled(true);
+    }
+  };
+
+  useEffect(() => {
+    const fetchTours = async () => {
+      try {
+        const allItineraries = await getItineraries(i18n.language);
+        
+        const formattedTours = allItineraries.map(it => ({
+          id: it.id,
+          title: it.title,
+          duration: `${it.days?.length || 0} ${t("itineraryCard.days")}`,
+          image: it.image,
+          icons: it.icons || [],
+          description: it.description || '',
+          price: it.price || '',
+          category: it.category?.toLowerCase() || 'popular', // fallback to popular if empty
+          categoryTag: it.category?.toLowerCase() === 'honeymoon' ? t('tours.honeymoonTours') : 
+                       it.category?.toLowerCase() === 'family' ? t('tours.familyTours') : 
+                       it.category?.toLowerCase() === 'luxury' ? t('tours.luxuryTours') : 
+                       t('tours.mostSold')
+        }));
+        
+        setAllTours(formattedTours);
+      } catch (error) {
+        console.error("Error fetching home itineraries:", error);
+      }
+      setLoading(false);
+    };
+    
+    fetchTours();
+  }, [i18n.language, t]);
+
+  if (loading) {
+    return <div className="py-16 text-center text-gray-500">Chargement des itinéraires...</div>;
+  }
+
+  // Filter tours by categories
+  const popularTours = allTours.filter(t => t.category === 'popular');
+  const familyTours = allTours.filter(t => t.category === 'family');
+  const honeymoonTours = allTours.filter(t => t.category === 'honeymoon');
+  const luxuryTours = allTours.filter(t => t.category === 'luxury');
+
+  return (
+    <section className="py-8 md:py-16 bg-gray-50 relative">
+      <div className="container mx-auto px-6 relative z-10">
+        
+
+
+        {/* Sections */}
+        <TourCategorySection 
+          title={t('tours.mostSold')} 
+          subtitle={t('tours.mostSoldSubtitle')}
+          tours={popularTours} 
+          hasScrolled={hasScrolled} 
+          handleScroll={handleScroll} 
+          t={t} 
+        />
+        <TourCategorySection 
+          title={t('tours.familyTours')} 
+          subtitle={t('tours.familyToursSubtitle')}
+          tours={familyTours} 
+          hasScrolled={hasScrolled} 
+          handleScroll={handleScroll} 
+          t={t} 
+        />
+        <TourCategorySection 
+          title={t('tours.honeymoonTours')} 
+          subtitle={t('tours.honeymoonToursSubtitle')}
+          tours={honeymoonTours} 
+          hasScrolled={hasScrolled} 
+          handleScroll={handleScroll} 
+          t={t} 
+        />
+        <TourCategorySection 
+          title={t('tours.luxuryTours')} 
+          subtitle={t('tours.luxuryToursSubtitle')}
+          tours={luxuryTours} 
+          hasScrolled={hasScrolled} 
+          handleScroll={handleScroll} 
+          t={t} 
+        />
+
+
+        {/* Category Pills Section */}
+        <CategoryPillsSection />
 
         {/* View All Button */}
-        <div className="mt-4 md:mt-16 text-center">
+        <div className="mt-8 md:mt-12 text-center mb-12">
           <a 
             href="/itineraires" 
-            className="group inline-flex items-center gap-2 sm:gap-3 border border-primary bg-transparent text-primary hover:bg-primary hover:text-white px-5 py-2.5 sm:px-8 sm:py-3 rounded-full text-xs sm:text-sm md:text-base font-bold shadow-sm hover:shadow-md transition-all duration-300 transform active:scale-95"
+            className="group inline-flex items-center gap-2 sm:gap-3 border border-primary bg-white text-primary hover:bg-primary hover:text-white px-5 py-2.5 sm:px-8 sm:py-3 rounded-full text-xs sm:text-sm md:text-base font-bold shadow-sm hover:shadow-md transition-all duration-300 transform active:scale-95"
           >
             <span>{t('tours.more')}</span>
             <div className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 rounded-full bg-primary/5 group-hover:bg-white flex items-center justify-center transition-all duration-300 transform group-hover:translate-x-1.5 shadow-sm">
@@ -116,6 +178,7 @@ const TourCards = () => {
             </div>
           </a>
         </div>
+
       </div>
     </section>
   );

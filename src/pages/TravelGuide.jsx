@@ -2,14 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { getArticles } from '../services/contentService';
-import blogSafari from '../assets/blog-safari.png';
-import blogCity from '../assets/blog-city.png';
-import blogBoat from '../assets/blog-boat.png';
-
 import PageHero from '../components/UI/PageHero';
 import guideBanner from '../assets/itinerary-hero.png';
-
-import { blogArticles } from '../data/blogData';
 
 const TravelGuide = () => {
   const { t, i18n } = useTranslation();
@@ -42,7 +36,7 @@ const TravelGuide = () => {
     setVisibleCount(6);
   }, [searchQuery, selectedCategory, selectedTag]);
 
-  const allArticles = [...dynamicArticles, ...blogArticles];
+  const allArticles = [...dynamicArticles];
 
   const getTranslatedCategory = (word) => {
     const translations = {

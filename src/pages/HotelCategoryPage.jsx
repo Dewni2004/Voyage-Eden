@@ -206,11 +206,11 @@ const HotelCategoryPage = () => {
             className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm"
           >
             <motion.div 
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              exit={{ y: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="absolute inset-x-0 bottom-0 h-[90vh] md:h-[95vh] bg-white rounded-t-[40px] md:rounded-t-[50px] shadow-2xl flex flex-col overflow-hidden"
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="relative w-[95%] max-w-[1400px] h-[90vh] bg-white rounded-[2rem] shadow-2xl flex flex-col overflow-hidden my-auto"
             >
               {/* Modal Header */}
               <div className="relative flex-shrink-0 bg-white z-20 px-6 py-4 md:px-12 md:py-6 border-b border-gray-100 flex items-center justify-between">

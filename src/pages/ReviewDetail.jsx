@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { getReviews } from '../services/contentService';
-import { staticTextReviews } from '../data/reviewsData';
 
 const ReviewDetail = () => {
   const { id } = useParams();
@@ -17,7 +16,7 @@ const ReviewDetail = () => {
       const dynamicData = await getReviews(i18n.language);
       
       // 2. Combine with static reviews
-      const combinedData = [...dynamicData, ...staticTextReviews];
+      const combinedData = [...dynamicData];
       setAllReviews(combinedData);
       
       // 3. Find the review (handle both string and number IDs)

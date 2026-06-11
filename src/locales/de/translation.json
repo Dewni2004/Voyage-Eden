@@ -54,7 +54,15 @@
     "tours": {
       "title": "Unsere empfohlenen anpassbaren Touren",
       "subtitle": "Von nebligen Bergen bis zu goldenen Stränden, entdecken Sie eine Insel unendlicher Wunder mit den größten Reiseexperten Sri Lankas.",
-      "more": "Entdecken Sie unsere anderen Reiserouten"
+      "more": "Entdecken Sie unsere anderen Reiserouten",
+      "mostSold": "Meistverkaufte Touren",
+      "mostSoldSubtitle": "Entdecken Sie unsere beliebtesten Reiserouten, die von Reisenden geliebt werden.",
+      "familyTours": "Familientouren",
+      "familyToursSubtitle": "Schaffen Sie unvergessliche Erinnerungen mit unseren familienfreundlichen Touren.",
+      "honeymoonTours": "Flitterwochen",
+      "honeymoonToursSubtitle": "Romantische Kurzurlaube für perfekte gemeinsame Momente.",
+      "luxuryTours": "Luxus-Touren",
+      "luxuryToursSubtitle": "Erleben Sie Sri Lanka in ultimativem Komfort und Eleganz."
     },
     "why": {
       "title": "Warum mit uns reisen?",
@@ -616,6 +624,57 @@
         "other": "Andere"
       },
       "viewDetails": "Details ansehen"
+    },
+    "restaurants": {
+      "subtitle": "Gastronomie",
+      "title": "Restaurants",
+      "description": "Entdecken Sie die besten kulinarischen Erlebnisse, ausgewählt für Ihre Reise.",
+      "searchTitle": "Hier suchen",
+      "searchPlaceholder": "Restaurant, Küche suchen...",
+      "cuisine": "Kategorien",
+      "allCategories": "Alle Kategorien",
+      "city": "Stadt",
+      "allCities": "Alle Städte",
+      "starRating": "Sternebewertung",
+      "amenities": "Ausstattung",
+      "results": "ergebnisse",
+      "rating": "Bewertung",
+      "viewDetails": "Details ansehen",
+      "quickFacts": "Kurzfakten",
+      "cuisineLabel": "Küche",
+      "hoursLabel": "Öffnungszeiten",
+      "addressLabel": "Adresse",
+      "amenitiesTitle": "Ausstattung & Merkmale",
+      "contactTitle": "Kontaktiere Uns",
+      "emailLabel": "E-Mail",
+      "phoneLabel": "Telefon",
+      "visitWebsite": "Website Besuchen",
+      "backBtn": "Zurück zu Restaurants",
+      "galleryTitle": "Fotogalerie",
+      "bannerTitle": "Entdecken Sie unsere Restaurants",
+      "bannerDesc": "Erleben Sie authentische Aromen und kulinarische Meisterwerke auf Ihrer Reise.",
+      "bannerBtn": "Restaurants ansehen",
+      "noResults": "Keine Ergebnisse gefunden",
+      "noResultsDesc": "Versuchen Sie, Ihre Suchfilter anzupassen",
+      "clearFilters": "Filter löschen",
+      "filterCategory": "Kategorie",
+      "filterLocation": "Ort",
+      "filterAmenities": "Ausstattung",
+      "filterRating": "Bewertung"
+    },
+    "blogDetail": {
+      "loading": "Artikel wird geladen...",
+      "notFound": "Artikel nicht gefunden",
+      "backBtn": "Zurück zum Reiseführer",
+      "categories": "Kategorien",
+      "popularTags": "Beliebte Tags",
+      "needHelp": "Brauchen Sie Hilfe?",
+      "contactExperts": "Kontaktieren Sie unsere Experten",
+      "share": "Teilen",
+      "introTo": "Einführung in",
+      "travelTips": "Reisetipps",
+      "expertAdvice": "Expertenrat",
+      "signatureGuide": "Eden Travels Signature Guide"
     }
   }
 }

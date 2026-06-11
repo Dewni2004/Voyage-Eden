@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import swipeHandImg from '../assets/swipe-hand-transparent.png';
 import { getReviews } from '../services/contentService';
-import { staticTextReviews } from '../data/reviewsData';
 
 import PageHero from '../components/UI/PageHero';
 import reviewsBanner from '../assets/Review page Banner.jpeg';
@@ -44,7 +43,7 @@ const Reviews = () => {
     fetchReviews();
   }, [i18n.language]);
 
-  const textReviews = [...dynamicReviews, ...staticTextReviews];
+  const textReviews = [...dynamicReviews];
 
   const videoReviews = [
     { id: "Pjdej3Rz-OM", name: "Tharindu & Anne", date: "Jan 2024", thumbnail: "https://img.youtube.com/vi/Pjdej3Rz-OM/hqdefault.jpg" },

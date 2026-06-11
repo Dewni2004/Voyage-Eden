@@ -15,23 +15,6 @@ const Destinations = () => {
   const [totalCount, setTotalCount] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  const fallbackDestinations = [
-    {
-      id: 1,
-      title: "L'île de Taprobane",
-      excerpt: "Explorez la villa hexagonale du comte de Mauny sur cette île rocheuse privée au sud du Sri Lanka.",
-      image: taprobane
-    },
-    {
-      id: 2,
-      title: "Upper Diyaluma Falls",
-      excerpt: "Découvrez la deuxième plus haute cascade du Sri Lanka et ses piscines naturelles cachées.",
-      image: diyaluma
-    },
-    { id: 'kandy', title: 'Kandy', excerpt: 'Cœur culturel', image: kandy },
-    { id: 'mirissa', title: 'Mirissa', excerpt: 'Côte d’Or', image: mirissa },
-  ];
-
   useEffect(() => {
     const fetchArticles = async () => {
       const data = await getArticles(i18n.language);
@@ -42,10 +25,12 @@ const Destinations = () => {
     fetchArticles();
   }, [i18n.language]);
 
-  const displayItems = articles.length >= 4 ? articles : fallbackDestinations;
-
-  if (loading && articles.length === 0) {
+  if (loading) {
     return <div className="py-24 text-center text-gray-400">Chargement du guide...</div>;
+  }
+
+  if (articles.length === 0) {
+    return null; // Return nothing if there are no articles published
   }
 
   return (
@@ -62,71 +47,40 @@ const Destinations = () => {
           </span>
         </div>
 
-        {/* Masonry-style Grid */}
+        {/* Dynamic Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 h-auto lg:h-[700px]">
-          {/* Large Card (Left) */}
-          <Link
-            to={articles.length >= 1 ? `/blog/${displayItems[0].id}` : '/travel-guide'}
-            className="col-span-1 lg:col-span-2 lg:row-span-2 relative rounded-2xl md:rounded-[1.75rem] overflow-hidden group cursor-pointer h-[180px] sm:h-[220px] lg:h-full hover:-translate-y-1 hover:shadow-xl transition-all duration-500"
-          >
-            <img
-              src={displayItems[0].image}
-              alt={displayItems[0].title}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-            <div className="absolute bottom-4 left-4 right-4 md:bottom-10 md:left-10 md:right-10 text-white">
-              <h3 className="text-[13px] xs:text-sm sm:text-lg md:text-3xl font-bold mb-1 md:mb-2 drop-shadow-lg leading-tight">{displayItems[0].title}</h3>
-            </div>
-          </Link>
+          {articles.map((article, index) => {
+            let colSpanClass = 'col-span-1';
+            let rowSpanClass = '';
+            
+            if (index === 0) {
+              colSpanClass = 'col-span-1 lg:col-span-2';
+              rowSpanClass = 'lg:row-span-2';
+            } else if (index === 1) {
+              colSpanClass = 'col-span-1 lg:col-span-2';
+            }
 
-          {/* Medium Card (Top Right) */}
-          <Link
-            to={articles.length >= 2 ? `/blog/${displayItems[1].id}` : '/travel-guide'}
-            className="col-span-1 lg:col-span-2 relative rounded-2xl md:rounded-[1.75rem] overflow-hidden group cursor-pointer h-[180px] sm:h-[220px] lg:h-full hover:-translate-y-1 hover:shadow-xl transition-all duration-500"
-          >
-            <img
-              src={displayItems[1].image}
-              alt={displayItems[1].title}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-            <div className="absolute bottom-4 left-4 right-4 md:bottom-8 md:left-8 md:right-8 text-white">
-              <h3 className="text-[13px] xs:text-sm sm:text-lg md:text-2xl font-bold mb-1 drop-shadow-lg leading-tight">{displayItems[1].title}</h3>
-            </div>
-          </Link>
-
-          {/* Small Card 1 (Bottom Right 1) */}
-          <Link
-            to={articles.length >= 3 ? `/blog/${displayItems[2].id}` : '/travel-guide'}
-            className="col-span-1 relative rounded-2xl md:rounded-[1.75rem] overflow-hidden group cursor-pointer h-[180px] sm:h-[220px] lg:h-full hover:-translate-y-1 hover:shadow-xl transition-all duration-500"
-          >
-            <img
-              src={displayItems[2].image}
-              alt={displayItems[2].title}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-            <div className="absolute bottom-4 left-4 right-4 text-white">
-              <h3 className="text-[13px] xs:text-sm sm:text-lg md:text-xl font-bold mb-1 drop-shadow-lg leading-tight">{displayItems[2].title}</h3>
-            </div>
-          </Link>
-
-          {/* Small Card 2 (Bottom Right 2) */}
-          <Link
-            to={articles.length >= 4 ? `/blog/${displayItems[3].id}` : '/travel-guide'}
-            className="col-span-1 relative rounded-2xl md:rounded-[1.75rem] overflow-hidden group cursor-pointer h-[180px] sm:h-[220px] lg:h-full hover:-translate-y-1 hover:shadow-xl transition-all duration-500"
-          >
-            <img
-              src={displayItems[3].image}
-              alt={displayItems[3].title}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-            <div className="absolute bottom-4 left-4 right-4 text-white">
-              <h3 className="text-[13px] xs:text-sm sm:text-lg md:text-xl font-bold mb-1 drop-shadow-lg leading-tight">{displayItems[3].title}</h3>
-            </div>
-          </Link>
+            return (
+              <Link
+                key={article.id}
+                to={`/${i18n.language?.split('-')[0] || 'fr'}/blog/${article.id}`}
+                className={`${colSpanClass} ${rowSpanClass} relative rounded-2xl md:rounded-[1.75rem] overflow-hidden group cursor-pointer h-[180px] sm:h-[220px] lg:h-full hover:-translate-y-1 hover:shadow-xl transition-all duration-500`}
+              >
+                <img
+                  src={article.image}
+                  alt={article.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                <div className="absolute bottom-4 left-4 right-4 md:bottom-8 md:left-8 md:right-8 text-white">
+                  <span className="bg-primary/80 text-white text-[9px] sm:text-xs font-bold px-2 py-1 rounded-full uppercase tracking-wider mb-2 inline-block">
+                    {article.category || 'Histoire'}
+                  </span>
+                  <h3 className="text-[13px] xs:text-sm sm:text-lg md:text-2xl font-bold mb-1 drop-shadow-lg leading-tight">{article.title}</h3>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </section>
