@@ -75,6 +75,69 @@ const TourCategorySection = ({ title, subtitle, tours, hasScrolled, handleScroll
   );
 };
 
+const FamilyTourSplitSection = ({ title, subtitle, standardTours, premiumTours, t }) => {
+  if ((!standardTours || standardTours.length === 0) && (!premiumTours || premiumTours.length === 0)) return null;
+
+  return (
+    <div className="mb-12 md:mb-20">
+      {/* Header */}
+      <div className="text-center mb-10 md:mb-16">
+        <h2 className="mb-4 text-3xl md:text-4xl font-bold text-primary">{title}</h2>
+        {subtitle && (
+          <p className="text-gray-600 max-w-3xl mx-auto text-lg font-light">
+            {subtitle}
+          </p>
+        )}
+      </div>
+
+      {/* Split Grid */}
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 md:gap-10">
+        
+        {/* Left Column: 3/4 Star */}
+        <div className="bg-white border shadow-xl p-4 md:p-6 flex flex-col rounded-xl">
+          <h3 className="text-center text-lg md:text-xl font-bold uppercase tracking-wide text-primary mb-6 border-b pb-4">{t('tours.familyStandardHotels', 'RUTAS EN HOTELES 3/4*')}</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-grow">
+            {standardTours && standardTours.map((tour) => (
+              <ItineraryCard
+                key={tour.id}
+                id={tour.id}
+                title={tour.title}
+                image={tour.image}
+                icons={tour.icons}
+                description={tour.description}
+                price={tour.price}
+                duration={tour.duration}
+                tag={tour.categoryTag}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Right Column: 4/5 Star Superior */}
+        <div className="bg-white border shadow-xl p-4 md:p-6 flex flex-col rounded-xl">
+          <h3 className="text-center text-lg md:text-xl font-bold uppercase tracking-wide text-primary mb-6 border-b pb-4">{t('tours.familyPremiumHotels', 'RUTAS EN HOTELES SUPERIOR 4/5*')}</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-grow">
+            {premiumTours && premiumTours.map((tour) => (
+              <ItineraryCard
+                key={tour.id}
+                id={tour.id}
+                title={tour.title}
+                image={tour.image}
+                icons={tour.icons}
+                description={tour.description}
+                price={tour.price}
+                duration={tour.duration}
+                tag={tour.categoryTag}
+              />
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+};
+
 const TourCards = () => {
   const { t, i18n } = useTranslation();
   const [hasScrolled, setHasScrolled] = useState(false);
@@ -127,6 +190,11 @@ const TourCards = () => {
   const honeymoonTours = allTours.filter(t => t.category === 'honeymoon');
   const luxuryTours = allTours.filter(t => t.category === 'luxury');
 
+  // Split family tours
+  // Using title to split because currently all family tours have the "5 STAR" icon in the DB
+  const familyPremiumTours = familyTours.filter(t => t.title.toLowerCase().includes('luxury') || t.title.toLowerCase().includes('luxurious') || t.title.toLowerCase().includes('lujo'));
+  const familyStandardTours = familyTours.filter(t => !t.title.toLowerCase().includes('luxury') && !t.title.toLowerCase().includes('luxurious') && !t.title.toLowerCase().includes('lujo'));
+
   return (
     <section className="py-8 md:py-16 bg-gray-50 relative">
       <div className="container mx-auto px-6 relative z-10">
@@ -142,13 +210,12 @@ const TourCards = () => {
           handleScroll={handleScroll} 
           t={t} 
         />
-        <TourCategorySection 
-          title={t('tours.familyTours')} 
+        <FamilyTourSplitSection
+          title={t('tours.familyTours')}
           subtitle={t('tours.familyToursSubtitle')}
-          tours={familyTours} 
-          hasScrolled={hasScrolled} 
-          handleScroll={handleScroll} 
-          t={t} 
+          standardTours={familyStandardTours}
+          premiumTours={familyPremiumTours}
+          t={t}
         />
         <TourCategorySection 
           title={t('tours.honeymoonTours')} 
