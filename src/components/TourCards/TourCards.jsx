@@ -4,8 +4,9 @@ import ItineraryCard from '../UI/ItineraryCard';
 import swipeHandImg from '../../assets/swipe-hand-transparent.png';
 import { getItineraries } from '../../services/contentService';
 import CategoryPillsSection from './CategoryPillsSection';
+import PopularItineraries from '../PopularItineraries/PopularItineraries';
 
-const TourCategorySection = ({ title, subtitle, tours, hasScrolled, handleScroll, t }) => {
+const TourCategorySection = ({ title, subtitle, tours, hasScrolled, handleScroll, t, noBottomMargin }) => {
   const localScrollRef = useRef(null);
   
   if (!tours || tours.length === 0) return null;
@@ -20,13 +21,13 @@ const TourCategorySection = ({ title, subtitle, tours, hasScrolled, handleScroll
 
   const getGridClass = (len) => {
     if (len === 1) return 'lg:grid-cols-1 lg:max-w-[400px] lg:mx-auto';
-    if (len === 2) return 'lg:grid-cols-2 lg:max-w-[800px] lg:mx-auto';
+    if (len === 2) return 'lg:grid-cols-2';
     if (len === 3) return 'lg:grid-cols-3';
     return 'lg:grid-cols-4';
   };
 
   return (
-    <div className="mb-12 md:mb-20">
+    <div className={noBottomMargin ? "" : "mb-12 md:mb-20"}>
       {/* Header */}
       <div className="text-center mb-10 md:mb-16">
         <h2 className="mb-4">{title}</h2>
@@ -82,7 +83,7 @@ const FamilyTourSplitSection = ({ title, subtitle, standardTours, premiumTours, 
     <div className="mb-12 md:mb-20">
       {/* Header */}
       <div className="text-center mb-10 md:mb-16">
-        <h2 className="mb-4 text-3xl md:text-4xl font-bold text-primary">{title}</h2>
+        <h2 className="mb-4">{title}</h2>
         {subtitle && (
           <p className="text-gray-600 max-w-3xl mx-auto text-lg font-light">
             {subtitle}
@@ -192,69 +193,73 @@ const TourCards = () => {
 
   // Split family tours
   // Using title to split because currently all family tours have the "5 STAR" icon in the DB
-  const familyPremiumTours = familyTours.filter(t => t.title.toLowerCase().includes('luxury') || t.title.toLowerCase().includes('luxurious') || t.title.toLowerCase().includes('lujo'));
-  const familyStandardTours = familyTours.filter(t => !t.title.toLowerCase().includes('luxury') && !t.title.toLowerCase().includes('luxurious') && !t.title.toLowerCase().includes('lujo'));
-
+  const isPremium = (title) => /luxur|lujo|luxe|luxus|lusso/i.test(title);
+  const familyPremiumTours = familyTours.filter(t => isPremium(t.title));
+  const familyStandardTours = familyTours.filter(t => !isPremium(t.title));
   return (
-    <section className="py-8 md:py-16 bg-gray-50 relative">
-      <div className="container mx-auto px-6 relative z-10">
-        
+    <>
+      <section className="py-8 md:py-16 bg-gray-50 relative">
+        <div className="container mx-auto px-6 relative z-10">
+          {/* Sections */}
+          <TourCategorySection 
+            title={t('tours.mostSold')} 
+            subtitle={t('tours.mostSoldSubtitle')}
+            tours={popularTours} 
+            hasScrolled={hasScrolled} 
+            handleScroll={handleScroll} 
+            t={t} 
+          />
+          <FamilyTourSplitSection
+            title={t('tours.familyTours')}
+            subtitle={t('tours.familyToursSubtitle')}
+            standardTours={familyStandardTours}
+            premiumTours={familyPremiumTours}
+            t={t}
+          />
+          <TourCategorySection 
+            title={t('tours.honeymoonTours')} 
+            subtitle={t('tours.honeymoonToursSubtitle')}
+            tours={honeymoonTours} 
+            hasScrolled={hasScrolled} 
+            handleScroll={handleScroll} 
+            t={t} 
+            noBottomMargin={true}
+          />
+        </div>
+      </section>
 
-
-        {/* Sections */}
-        <TourCategorySection 
-          title={t('tours.mostSold')} 
-          subtitle={t('tours.mostSoldSubtitle')}
-          tours={popularTours} 
-          hasScrolled={hasScrolled} 
-          handleScroll={handleScroll} 
-          t={t} 
-        />
-        <FamilyTourSplitSection
-          title={t('tours.familyTours')}
-          subtitle={t('tours.familyToursSubtitle')}
-          standardTours={familyStandardTours}
-          premiumTours={familyPremiumTours}
-          t={t}
-        />
-        <TourCategorySection 
-          title={t('tours.honeymoonTours')} 
-          subtitle={t('tours.honeymoonToursSubtitle')}
-          tours={honeymoonTours} 
-          hasScrolled={hasScrolled} 
-          handleScroll={handleScroll} 
-          t={t} 
-        />
-        <TourCategorySection 
+      {luxuryTours && luxuryTours.length > 0 && (
+        <PopularItineraries 
           title={t('tours.luxuryTours')} 
           subtitle={t('tours.luxuryToursSubtitle')}
-          tours={luxuryTours} 
-          hasScrolled={hasScrolled} 
-          handleScroll={handleScroll} 
-          t={t} 
+          id="home-luxury" 
+          itineraries={luxuryTours} 
+          isDark={true} 
         />
+      )}
 
+      <section className="py-8 md:py-16 bg-gray-50 relative">
+        <div className="container mx-auto px-6 relative z-10">
+          {/* Category Pills Section */}
+          <CategoryPillsSection />
 
-        {/* Category Pills Section */}
-        <CategoryPillsSection />
-
-        {/* View All Button */}
-        <div className="mt-8 md:mt-12 text-center mb-12">
-          <a 
-            href="/itineraires" 
-            className="group inline-flex items-center gap-2 sm:gap-3 border border-primary bg-white text-primary hover:bg-primary hover:text-white px-5 py-2.5 sm:px-8 sm:py-3 rounded-full text-xs sm:text-sm md:text-base font-bold shadow-sm hover:shadow-md transition-all duration-300 transform active:scale-95"
-          >
-            <span>{t('tours.more')}</span>
-            <div className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 rounded-full bg-primary/5 group-hover:bg-white flex items-center justify-center transition-all duration-300 transform group-hover:translate-x-1.5 shadow-sm">
-              <svg className="w-2.5 h-2.5 sm:w-3 h-3 md:w-4 md:h-4 text-primary transition-colors duration-300" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-              </svg>
-            </div>
-          </a>
+          {/* View All Button */}
+          <div className="mt-2 md:mt-6 text-center mb-2 md:mb-6">
+            <a 
+              href={`/${i18n.language}/itineraires`} 
+              className="group inline-flex items-center gap-2 sm:gap-3 border border-primary bg-white text-primary hover:bg-primary hover:text-white px-5 py-2.5 sm:px-8 sm:py-3 rounded-full text-xs sm:text-sm md:text-base font-bold shadow-sm hover:shadow-md transition-all duration-300 transform active:scale-95"
+            >
+              <span>{t('tours.more')}</span>
+              <div className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 rounded-full bg-primary/5 group-hover:bg-white flex items-center justify-center transition-all duration-300 transform group-hover:translate-x-1.5 shadow-sm">
+                <svg className="w-2.5 h-2.5 sm:w-3 h-3 md:w-4 md:h-4 text-primary transition-colors duration-300" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
+            </a>
+          </div>
         </div>
-
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 

@@ -32,7 +32,7 @@ const OfficeGallery = () => {
   const [selectedImage, setSelectedImage] = useState(null);
 
   return (
-    <section className="py-24 bg-white relative">
+    <section className="pb-8 md:pb-16 pt-0 md:pt-4 bg-white relative">
       <div className="max-w-[1600px] mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">

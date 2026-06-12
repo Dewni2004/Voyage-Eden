@@ -46,8 +46,8 @@ const Itineraires = () => {
       
       <PopularItineraries title={t('itineraries.interests')} id="interests" itineraries={getByCategory('interests')} />
 
-      <HotelOptions />
-      <RestaurantBanner />
+      {/* <HotelOptions /> */}
+      {/* <RestaurantBanner /> */}
       <Newsletter />
     </div>
   );

@@ -105,7 +105,7 @@ const formatItineraryTitle = (title, duration, t) => {
   return daysText ? `${daysText} - ${cleanTitle}` : cleanTitle;
 };
 
-const PopularItineraries = ({ title, id, itineraries, isDark, isGreen }) => {
+const PopularItineraries = ({ title, subtitle, id, itineraries, isDark, isGreen }) => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const [hasScrolled, setHasScrolled] = useState(false);
@@ -121,7 +121,7 @@ const PopularItineraries = ({ title, id, itineraries, isDark, isGreen }) => {
   
   const getGridClass = (len) => {
     if (len === 1) return 'lg:grid-cols-1 lg:max-w-[400px] lg:mx-auto';
-    if (len === 2) return 'lg:grid-cols-2 lg:max-w-[800px] lg:mx-auto';
+    if (len === 2) return 'lg:grid-cols-2';
     if (len === 3) return 'lg:grid-cols-3';
     return 'lg:grid-cols-4';
   };
@@ -139,10 +139,19 @@ const PopularItineraries = ({ title, id, itineraries, isDark, isGreen }) => {
 
       <div className="container mx-auto px-6 relative z-10">
         {/* Header */}
-        <div className="flex items-center justify-between mb-16">
-          <h2 className={`text-3xl font-bold capitalize tracking-tight ${isDark ? 'text-[#c5a059]' : isGreen ? 'text-green-600' : 'text-primary'}`}>{title}</h2>
-          <div className={`flex-grow ml-12 h-[1px] hidden md:block ${isDark ? 'bg-[#c5a059]/40' : isGreen ? 'bg-green-600/30' : 'bg-gray-200'}`}></div>
-        </div>
+        {subtitle ? (
+          <div className="text-center mb-10 md:mb-16">
+            <h2 className={`mb-4 ${isDark ? 'text-[#c5a059]' : ''}`}>{title}</h2>
+            <p className={`max-w-3xl mx-auto text-lg font-light ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+              {subtitle}
+            </p>
+          </div>
+        ) : (
+          <div className="flex items-center justify-between mb-16">
+            <h2 className={`text-3xl font-bold capitalize tracking-tight ${isDark ? 'text-[#c5a059]' : isGreen ? 'text-green-600' : 'text-primary'}`}>{title}</h2>
+            <div className={`flex-grow ml-12 h-[1px] hidden md:block ${isDark ? 'bg-[#c5a059]/40' : isGreen ? 'bg-green-600/30' : 'bg-gray-200'}`}></div>
+          </div>
+        )}
 
         {/* Mobile Swipe Hint Overlay */}
         {!hasScrolled && itineraries.length > 1 && (
