@@ -62,21 +62,89 @@ const getIconSvg = (iconText, iconTextColorClass) => {
 
 const translateIconText = (text, i18n) => {
   if (!text) return '';
+  const lang = i18n.language ? i18n.language.split('-')[0] : 'fr';
   const lower = text.toLowerCase();
-  const isEn = i18n.language && i18n.language.startsWith('en');
-  if (!isEn) return text;
   
-  if (lower.includes('étoile') || lower.includes('etoile')) {
+  let key = '';
+  if (lower.includes('star') || lower.includes('étoile') || lower.includes('etoile')) {
     const num = lower.match(/\d+/);
-    return num ? `${num[0]} Stars` : 'Stars';
+    key = num ? `${num[0]}_star` : 'star';
+  } else if (lower.includes('half board') || lower.includes('demi-pension')) {
+    key = 'half_board';
+  } else if (lower.includes('full board') || lower.includes('pension complète')) {
+    key = 'full_board';
+  } else if (lower.includes('breakfast') || lower.includes('petit déjeuner')) {
+    key = 'breakfast';
+  } else if (lower.includes('car') || lower.includes('voiture')) {
+    key = 'car';
+  } else if (lower.includes('train')) {
+    key = 'train';
+  } else if (lower.includes('safari')) {
+    key = 'safari';
+  } else if (lower.includes('guide')) {
+    key = 'guide';
+  } else {
+    return text;
   }
-  if (lower.includes('demi-pension')) return 'Half-Board';
-  if (lower.includes('pension complète')) return 'Full-Board';
-  if (lower.includes('petit déjeuner')) return 'Breakfast';
-  if (lower.includes('voiture')) return 'Car';
-  if (lower.includes('train')) return 'Train';
-  if (lower.includes('safari')) return 'Safari';
-  if (lower.includes('guide')) return 'Guide';
+
+  switch (lang) {
+    case 'fr':
+      if (key.endsWith('_star')) return `${key.split('_')[0]} Étoiles`;
+      if (key === 'star') return 'Étoiles';
+      if (key === 'half_board') return 'Demi-Pension';
+      if (key === 'full_board') return 'Pension Complète';
+      if (key === 'breakfast') return 'Petit Déjeuner';
+      if (key === 'car') return 'Voiture';
+      if (key === 'train') return 'Train';
+      if (key === 'safari') return 'Safari';
+      if (key === 'guide') return 'Guide';
+      break;
+    case 'es':
+      if (key.endsWith('_star')) return `${key.split('_')[0]} Estrellas`;
+      if (key === 'star') return 'Estrellas';
+      if (key === 'half_board') return 'Media Pensión';
+      if (key === 'full_board') return 'Pensión Completa';
+      if (key === 'breakfast') return 'Desayuno';
+      if (key === 'car') return 'Coche';
+      if (key === 'train') return 'Tren';
+      if (key === 'safari') return 'Safari';
+      if (key === 'guide') return 'Guía';
+      break;
+    case 'it':
+      if (key.endsWith('_star')) return `${key.split('_')[0]} Stelle`;
+      if (key === 'star') return 'Stelle';
+      if (key === 'half_board') return 'Mezza Pensione';
+      if (key === 'full_board') return 'Pensione Completa';
+      if (key === 'breakfast') return 'Colazione';
+      if (key === 'car') return 'Auto';
+      if (key === 'train') return 'Treno';
+      if (key === 'safari') return 'Safari';
+      if (key === 'guide') return 'Guida';
+      break;
+    case 'de':
+      if (key.endsWith('_star')) return `${key.split('_')[0]} Sterne`;
+      if (key === 'star') return 'Sterne';
+      if (key === 'half_board') return 'Halbpension';
+      if (key === 'full_board') return 'Vollpension';
+      if (key === 'breakfast') return 'Frühstück';
+      if (key === 'car') return 'Auto';
+      if (key === 'train') return 'Zug';
+      if (key === 'safari') return 'Safari';
+      if (key === 'guide') return 'Reiseführer';
+      break;
+    case 'en':
+    default:
+      if (key.endsWith('_star')) return `${key.split('_')[0]} Stars`;
+      if (key === 'star') return 'Stars';
+      if (key === 'half_board') return 'Half Board';
+      if (key === 'full_board') return 'Full Board';
+      if (key === 'breakfast') return 'Breakfast';
+      if (key === 'car') return 'Car';
+      if (key === 'train') return 'Train';
+      if (key === 'safari') return 'Safari';
+      if (key === 'guide') return 'Guide';
+      break;
+  }
   return text;
 };
 

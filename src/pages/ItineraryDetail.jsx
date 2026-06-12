@@ -9,6 +9,82 @@ import BookingCard from '../components/BookingCard/BookingCard';
 import BookingForm from '../components/BookingForm/BookingForm';
 import AnimatedMap from '../components/InteractiveMap/AnimatedMap';
 
+const capitalizeFirstLetter = (string) => {
+  if (!string) return '';
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
+const translateDuration = (duration, lang, t) => {
+  if (!duration) return '';
+  const numMatch = duration.match(/(\d+)/);
+  if (numMatch) {
+    const days = parseInt(numMatch[1], 10);
+    const unit = t("itineraryCard.days") || 'days';
+    return `${days} ${capitalizeFirstLetter(unit)}`;
+  }
+  return duration;
+};
+
+const translateGroup = (group, lang) => {
+  if (!group) return '';
+  const clean = group.trim().toLowerCase();
+  if (['private', 'privé', 'privat', 'privato', 'privado'].includes(clean)) {
+    const cleanLang = lang?.split('-')[0] || 'fr';
+    switch (cleanLang) {
+      case 'fr': return 'Privé';
+      case 'de': return 'Privat';
+      case 'it': return 'Privato';
+      case 'es': return 'Privado';
+      case 'en':
+      default:
+        return 'Private';
+    }
+  }
+  return group;
+};
+
+const translateEffort = (effort, lang) => {
+  if (!effort) return '';
+  const clean = effort.trim().toLowerCase();
+  if (['moderate', 'modéré', 'mäßig', 'maessig', 'moderato', 'moderado'].includes(clean)) {
+    const cleanLang = lang?.split('-')[0] || 'fr';
+    switch (cleanLang) {
+      case 'fr': return 'Modéré';
+      case 'de': return 'Mäßig';
+      case 'it': return 'Moderato';
+      case 'es': return 'Moderado';
+      case 'en':
+      default:
+        return 'Moderate';
+    }
+  }
+  if (['easy', 'facile', 'einfach', 'fácil', 'facil'].includes(clean)) {
+    const cleanLang = lang?.split('-')[0] || 'fr';
+    switch (cleanLang) {
+      case 'fr': return 'Facile';
+      case 'de': return 'Einfach';
+      case 'it': return 'Facile';
+      case 'es': return 'Fácil';
+      case 'en':
+      default:
+        return 'Easy';
+    }
+  }
+  if (['hard', 'difficult', 'difficile', 'schwer', 'difícil', 'dificil'].includes(clean)) {
+    const cleanLang = lang?.split('-')[0] || 'fr';
+    switch (cleanLang) {
+      case 'fr': return 'Difficile';
+      case 'de': return 'Schwer';
+      case 'it': return 'Difficile';
+      case 'es': return 'Difícil';
+      case 'en':
+      default:
+        return 'Difficult';
+    }
+  }
+  return effort;
+};
+
 const ItineraryDetail = () => {
   const { id } = useParams();
   const { t, i18n } = useTranslation();
@@ -89,7 +165,7 @@ const ItineraryDetail = () => {
                 </div>
                 <div>
                   <p className="text-gray-400 text-[8px] md:text-[10px] font-bold uppercase tracking-[0.1em] md:tracking-[0.2em] mb-0.5 md:mb-1">{t("itineraryDetail.duration")}</p>
-                  <p className="text-primary text-sm md:text-xl font-bold whitespace-nowrap">{itinerary.duration}</p>
+                  <p className="text-primary text-sm md:text-xl font-bold whitespace-nowrap">{translateDuration(itinerary.duration, i18n.language, t)}</p>
                 </div>
               </div>
 
@@ -102,7 +178,7 @@ const ItineraryDetail = () => {
                 </div>
                 <div>
                   <p className="text-gray-400 text-[8px] md:text-[10px] font-bold uppercase tracking-[0.1em] md:tracking-[0.2em] mb-0.5 md:mb-1">{t("itineraryDetail.group")}</p>
-                  <p className="text-primary text-sm md:text-xl font-bold whitespace-nowrap">{itinerary.group}</p>
+                  <p className="text-primary text-sm md:text-xl font-bold whitespace-nowrap">{translateGroup(itinerary.group, i18n.language)}</p>
                 </div>
               </div>
 
@@ -115,7 +191,7 @@ const ItineraryDetail = () => {
                 </div>
                 <div>
                   <p className="text-gray-400 text-[8px] md:text-[10px] font-bold uppercase tracking-[0.1em] md:tracking-[0.2em] mb-0.5 md:mb-1">{t("itineraryDetail.effort")}</p>
-                  <p className="text-primary text-sm md:text-xl font-bold whitespace-nowrap">{itinerary.effort}</p>
+                  <p className="text-primary text-sm md:text-xl font-bold whitespace-nowrap">{translateEffort(itinerary.effort, i18n.language)}</p>
                 </div>
               </div>
             </div>
