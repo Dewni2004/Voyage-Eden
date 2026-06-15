@@ -5,7 +5,7 @@ import itineraryBanner from '../../assets/Itinerari - Banner.webp';
 const ItineraryHero = () => {
   const { t } = useTranslation();
   return (
-    <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
+    <section className="relative h-[40vh] sm:h-[50vh] md:h-[60vh] flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
         <img 

@@ -20,7 +20,7 @@ const ItineraryCategories = ({ showTitle = false, itineraries = [] }) => {
     { id: 'golf', title: 'Séjours golfiques', image: 'https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?auto=format&fit=crop&q=80' },
     { id: 'surf', title: 'Surf & Plongée', image: 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&q=80' },
     { id: 'adventure', title: 'Aventure', image: adventureImg },
-    { id: 'pererahera', title: 'Esela Perahera', image: esalaImg },
+    { id: 'perahera', title: 'Esela Perahera', image: esalaImg },
     { id: '8days', title: '8 Jours', image: eightDaysImg },
     { id: 'interests', title: "Centres d'intérêt", image: interestsImg }
   ]);
@@ -51,12 +51,10 @@ const ItineraryCategories = ({ showTitle = false, itineraries = [] }) => {
     }
   };
 
-  const visibleCategories = itineraries.length > 0
-    ? categories.filter(c => itineraries.some(it => it.category?.toLowerCase() === c.id.toLowerCase()))
-    : categories;
+  const visibleCategories = categories;
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-6 md:py-20 bg-white">
       <div className="container mx-auto px-4">
         {showTitle && (
           <div className="text-center mb-16 animate-fade-in">
