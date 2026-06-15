@@ -54,7 +54,7 @@ const ItineraryCategories = ({ showTitle = false, itineraries = [] }) => {
   const visibleCategories = categories;
 
   return (
-    <section className="py-6 md:py-20 bg-white">
+    <section className="pt-6 pb-4 md:pt-12 md:pb-8 bg-white">
       <div className="container mx-auto px-4">
         {showTitle && (
           <div className="text-center mb-16 animate-fade-in">

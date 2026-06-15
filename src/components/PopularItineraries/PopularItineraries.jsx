@@ -246,7 +246,7 @@ const PopularItineraries = ({ title, subtitle, id, itineraries, isDark, isGreen 
   };
 
   return (
-    <section id={id} className={`py-6 md:py-16 relative overflow-hidden ${isDark ? 'bg-[#050b18]' : 'bg-white'}`}>
+    <section id={id} className={`py-8 md:py-14 relative overflow-hidden ${isDark ? 'bg-[#050b18]' : 'bg-white'}`}>
       {/* Premium Background for Luxury Section */}
       {isDark && (
         <div className="absolute inset-0 pointer-events-none">
@@ -259,14 +259,14 @@ const PopularItineraries = ({ title, subtitle, id, itineraries, isDark, isGreen 
       <div className="container mx-auto px-6 relative z-10">
         {/* Header */}
         {subtitle ? (
-          <div className="text-center mb-4 md:mb-16">
+          <div className="text-center mb-4 md:mb-8">
             <h2 className={`mb-4 ${isDark ? 'text-[#c5a059]' : ''}`}>{title}</h2>
             <p className={`max-w-3xl mx-auto text-lg font-light ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
               {subtitle}
             </p>
           </div>
         ) : (
-          <div className="flex items-center justify-between mb-4 md:mb-16">
+          <div className="flex items-center justify-between mb-4 md:mb-8">
             <h2 className={`text-3xl font-bold capitalize tracking-tight ${isDark ? 'text-[#c5a059]' : isGreen ? 'text-green-600' : 'text-primary'}`}>{title}</h2>
             <div className={`flex-grow ml-12 h-[1px] hidden md:block ${isDark ? 'bg-[#c5a059]/40' : isGreen ? 'bg-green-600/30' : 'bg-gray-200'}`}></div>
           </div>
