@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { getReviews } from '../../services/contentService';
+import swipeHandImg from '../../assets/swipe-hand-transparent.png';
 
 
 const Reviews = () => {
@@ -9,6 +10,7 @@ const Reviews = () => {
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const scrollRef = useRef(null);
+  const [showSwipeHint, setShowSwipeHint] = useState(false);
   useEffect(() => {
     const fetchReviews = async () => {
       const data = await getReviews(i18n.language);
@@ -30,6 +32,9 @@ const Reviews = () => {
           if (entry.isIntersecting && !animated) {
             animated = true;
             
+            // Show hand overlay during swipe animation
+            setShowSwipeHint(true);
+
             // Auto swipe peek animation
             setTimeout(() => {
               if (container) {
@@ -43,6 +48,8 @@ const Reviews = () => {
                     // Restore scroll snapping after animation completes
                     setTimeout(() => {
                       if (container) container.style.scrollSnapType = '';
+                      // Hide hand overlay
+                      setShowSwipeHint(false);
                     }, 500);
                   }
                 }, 700);
@@ -78,6 +85,17 @@ const Reviews = () => {
             {reviews.length} {reviews.length <= 1 ? t('nav.reviews', 'avis client') : t('nav.reviews', 'avis clients')}
           </span>
         </div>
+
+        {/* Mobile Swipe Hint Overlay */}
+        {showSwipeHint && (
+          <div className="md:hidden absolute top-0 right-0 bottom-0 left-0 z-20 pointer-events-none transition-opacity duration-700 flex justify-center items-center">
+            <img 
+              src={swipeHandImg} 
+              alt="Swipe Gesture" 
+              className="w-16 h-16 object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)] animate-swipe-gesture"
+            />
+          </div>
+        )}
 
         {/* Grid/Slider */}
         <div 

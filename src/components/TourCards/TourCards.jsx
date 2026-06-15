@@ -5,9 +5,11 @@ import ItineraryCard from '../UI/ItineraryCard';
 import { getItineraries } from '../../services/contentService';
 import CategoryPillsSection from './CategoryPillsSection';
 import PopularItineraries from '../PopularItineraries/PopularItineraries';
+import swipeHandImg from '../../assets/swipe-hand-transparent.png';
 
 const TourCategorySection = ({ title, subtitle, tours, t, noBottomMargin }) => {
   const localScrollRef = useRef(null);
+  const [showSwipeHint, setShowSwipeHint] = useState(false);
 
   useEffect(() => {
     if (window.innerWidth >= 768 || !localScrollRef.current || !tours || tours.length <= 1) return;
@@ -20,6 +22,7 @@ const TourCategorySection = ({ title, subtitle, tours, t, noBottomMargin }) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && !animated) {
             animated = true;
+            setShowSwipeHint(true);
             setTimeout(() => {
               if (container) {
                 container.style.scrollSnapType = 'none';
@@ -29,6 +32,7 @@ const TourCategorySection = ({ title, subtitle, tours, t, noBottomMargin }) => {
                     container.scrollTo({ left: 0, behavior: 'smooth' });
                     setTimeout(() => {
                       if (container) container.style.scrollSnapType = '';
+                      setShowSwipeHint(false);
                     }, 500);
                   }
                 }, 700);
@@ -70,6 +74,15 @@ const TourCategorySection = ({ title, subtitle, tours, t, noBottomMargin }) => {
       </div>
 
       <div className="relative">
+        {showSwipeHint && (
+          <div className="md:hidden absolute top-0 right-0 bottom-0 left-0 z-20 pointer-events-none transition-opacity duration-700 flex justify-center items-center">
+            <img 
+              src={swipeHandImg} 
+              alt="Swipe Gesture" 
+              className="w-16 h-16 object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)] animate-swipe-gesture"
+            />
+          </div>
+        )}
         {/* Grid */}
         <div 
           ref={localScrollRef}
@@ -98,6 +111,8 @@ const TourCategorySection = ({ title, subtitle, tours, t, noBottomMargin }) => {
 const FamilyTourSplitSection = ({ title, subtitle, standardTours, premiumTours, t }) => {
   const standardScrollRef = useRef(null);
   const premiumScrollRef = useRef(null);
+  const [showStandardHint, setShowStandardHint] = useState(false);
+  const [showPremiumHint, setShowPremiumHint] = useState(false);
 
   useEffect(() => {
     if (window.innerWidth >= 640 || !standardScrollRef.current || !standardTours || standardTours.length <= 1) return;
@@ -110,6 +125,7 @@ const FamilyTourSplitSection = ({ title, subtitle, standardTours, premiumTours, 
         entries.forEach((entry) => {
           if (entry.isIntersecting && !animated) {
             animated = true;
+            setShowStandardHint(true);
             setTimeout(() => {
               if (container) {
                 container.style.scrollSnapType = 'none';
@@ -119,6 +135,7 @@ const FamilyTourSplitSection = ({ title, subtitle, standardTours, premiumTours, 
                     container.scrollTo({ left: 0, behavior: 'smooth' });
                     setTimeout(() => {
                       if (container) container.style.scrollSnapType = '';
+                      setShowStandardHint(false);
                     }, 500);
                   }
                 }, 700);
@@ -149,6 +166,7 @@ const FamilyTourSplitSection = ({ title, subtitle, standardTours, premiumTours, 
         entries.forEach((entry) => {
           if (entry.isIntersecting && !animated) {
             animated = true;
+            setShowPremiumHint(true);
             setTimeout(() => {
               if (container) {
                 container.style.scrollSnapType = 'none';
@@ -158,6 +176,7 @@ const FamilyTourSplitSection = ({ title, subtitle, standardTours, premiumTours, 
                     container.scrollTo({ left: 0, behavior: 'smooth' });
                     setTimeout(() => {
                       if (container) container.style.scrollSnapType = '';
+                      setShowPremiumHint(false);
                     }, 500);
                   }
                 }, 700);
@@ -199,6 +218,15 @@ const FamilyTourSplitSection = ({ title, subtitle, standardTours, premiumTours, 
           <h3 className="text-center text-lg md:text-xl font-bold uppercase tracking-wide text-primary mb-6 border-b pb-4">{t('tours.familyStandardHotels', 'RUTAS EN HOTELES 3/4*')}</h3>
           
           <div className="relative flex-grow flex flex-col">
+            {showStandardHint && (
+              <div className="sm:hidden absolute top-0 right-0 bottom-0 left-0 z-20 pointer-events-none transition-opacity duration-700 flex justify-center items-center">
+                <img 
+                  src={swipeHandImg} 
+                  alt="Swipe Gesture" 
+                  className="w-16 h-16 object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)] animate-swipe-gesture"
+                />
+              </div>
+            )}
             <div 
               ref={standardScrollRef}
               className="flex sm:grid overflow-x-auto snap-x snap-mandatory hide-scrollbar sm:overflow-visible pb-4 sm:pb-0 grid-cols-1 sm:grid-cols-2 gap-4 -mx-4 px-4 sm:mx-0 sm:px-0 flex-grow"
@@ -226,6 +254,15 @@ const FamilyTourSplitSection = ({ title, subtitle, standardTours, premiumTours, 
           <h3 className="text-center text-lg md:text-xl font-bold uppercase tracking-wide text-primary mb-6 border-b pb-4">{t('tours.familyPremiumHotels', 'RUTAS EN HOTELES SUPERIOR 4/5*')}</h3>
           
           <div className="relative flex-grow flex flex-col">
+            {showPremiumHint && (
+              <div className="sm:hidden absolute top-0 right-0 bottom-0 left-0 z-20 pointer-events-none transition-opacity duration-700 flex justify-center items-center">
+                <img 
+                  src={swipeHandImg} 
+                  alt="Swipe Gesture" 
+                  className="w-16 h-16 object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)] animate-swipe-gesture"
+                />
+              </div>
+            )}
             <div 
               ref={premiumScrollRef}
               className="flex sm:grid overflow-x-auto snap-x snap-mandatory hide-scrollbar sm:overflow-visible pb-4 sm:pb-0 grid-cols-1 sm:grid-cols-2 gap-4 -mx-4 px-4 sm:mx-0 sm:px-0 flex-grow"

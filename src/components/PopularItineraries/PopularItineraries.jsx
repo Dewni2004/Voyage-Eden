@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-
+import swipeHandImg from '../../assets/swipe-hand-transparent.png';
 
 const formatPrice = (price, t) => {
   if (!price) return '';
@@ -129,6 +129,8 @@ const PopularItineraries = ({ title, subtitle, id, itineraries, isDark, isGreen 
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const scrollRef = useRef(null);
+  const [showSwipeHint, setShowSwipeHint] = useState(false);
+
   useEffect(() => {
     if (window.innerWidth >= 768 || !scrollRef.current || itineraries.length <= 1) return;
 
@@ -141,6 +143,9 @@ const PopularItineraries = ({ title, subtitle, id, itineraries, isDark, isGreen 
           if (entry.isIntersecting && !animated) {
             animated = true;
             
+            // Show hand overlay during swipe animation
+            setShowSwipeHint(true);
+
             // Auto swipe peek animation
             setTimeout(() => {
               if (container) {
@@ -154,6 +159,8 @@ const PopularItineraries = ({ title, subtitle, id, itineraries, isDark, isGreen 
                     // Restore scroll snapping after animation completes
                     setTimeout(() => {
                       if (container) container.style.scrollSnapType = '';
+                      // Hide hand overlay
+                      setShowSwipeHint(false);
                     }, 500);
                   }
                 }, 700);
@@ -305,6 +312,17 @@ const PopularItineraries = ({ title, subtitle, id, itineraries, isDark, isGreen 
           <div className="flex items-center justify-between mb-4 md:mb-8">
             <h2 className={`text-3xl font-bold capitalize tracking-tight ${isDark ? 'text-[#c5a059]' : isGreen ? 'text-green-600' : 'text-primary'}`}>{title}</h2>
             <div className={`flex-grow ml-12 h-[1px] hidden md:block ${isDark ? 'bg-[#c5a059]/40' : isGreen ? 'bg-green-600/30' : 'bg-gray-200'}`}></div>
+          </div>
+        )}
+
+        {/* Mobile Swipe Hint Overlay */}
+        {showSwipeHint && (
+          <div className="md:hidden absolute top-0 right-0 bottom-0 left-0 z-20 pointer-events-none transition-opacity duration-700 flex justify-center items-center">
+            <img 
+              src={swipeHandImg} 
+              alt="Swipe Gesture" 
+              className="w-16 h-16 object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)] animate-swipe-gesture"
+            />
           </div>
         )}
 

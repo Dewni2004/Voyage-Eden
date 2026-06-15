@@ -6,6 +6,7 @@ import { getReviews } from '../services/contentService';
 
 import PageHero from '../components/UI/PageHero';
 import reviewsBanner from '../assets/Review page Banner.jpeg';
+import swipeHandImg from '../assets/swipe-hand-transparent.png';
 
 const videoReviews = [
   { id: "Pjdej3Rz-OM", name: "Tharindu & Anne", date: "Jan 2024", thumbnail: "https://img.youtube.com/vi/Pjdej3Rz-OM/hqdefault.jpg" },
@@ -24,6 +25,8 @@ const Reviews = () => {
   const [loading, setLoading] = useState(true);
   const videosScrollRef = useRef(null);
   const textScrollRef = useRef(null);
+  const [showSwipeHintVideos, setShowSwipeHintVideos] = useState(false);
+  const [showSwipeHintText, setShowSwipeHintText] = useState(false);
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -49,6 +52,7 @@ const Reviews = () => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && !animated) {
             animated = true;
+            setShowSwipeHintVideos(true);
             setTimeout(() => {
               if (container) {
                 container.style.scrollSnapType = 'none';
@@ -58,6 +62,7 @@ const Reviews = () => {
                     container.scrollTo({ left: 0, behavior: 'smooth' });
                     setTimeout(() => {
                       if (container) container.style.scrollSnapType = '';
+                      setShowSwipeHintVideos(false);
                     }, 500);
                   }
                 }, 700);
@@ -88,6 +93,7 @@ const Reviews = () => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && !animated) {
             animated = true;
+            setShowSwipeHintText(true);
             setTimeout(() => {
               if (container) {
                 container.style.scrollSnapType = 'none';
@@ -97,6 +103,7 @@ const Reviews = () => {
                     container.scrollTo({ left: 0, behavior: 'smooth' });
                     setTimeout(() => {
                       if (container) container.style.scrollSnapType = '';
+                      setShowSwipeHintText(false);
                     }, 500);
                   }
                 }, 700);
@@ -118,10 +125,10 @@ const Reviews = () => {
 
   return (
     <div className="bg-[#f8fbff] min-h-screen">
-      <div className="relative h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
+      <div className="relative h-[60vh] flex items-center justify-center overflow-hidden">
         <img src={reviewsBanner} alt="" className="absolute inset-0 w-full h-full object-cover object-center" />
         <div className="absolute inset-0 bg-black/60"></div>
-        <div className="relative z-10 text-center text-white px-6">
+        <div className="relative z-10 text-center text-white px-6 mt-16">
           <div className="flex justify-center text-yellow-400 gap-1 mb-6">
             {[...Array(5)].map((_, i) => (
               <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
@@ -268,30 +275,41 @@ const Reviews = () => {
           <p className="text-gray-400 mt-2">{t("reviews.recentVideosDesc")}</p>
         </div>
 
-        <div 
-          ref={videosScrollRef}
-          className="flex sm:grid overflow-x-auto snap-x snap-mandatory hide-scrollbar sm:overflow-visible pb-8 sm:pb-0 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 -mx-6 px-6 sm:mx-0 sm:px-0"
-        >
-          {videoReviews.map((video) => (
-            <div 
-              key={video.id} 
-              onClick={() => setSelectedVideo(video)}
-              className="min-w-[280px] w-[85vw] sm:w-auto shrink-0 snap-center bg-white rounded-[32px] overflow-hidden shadow-xl group cursor-pointer border border-gray-100"
-            >
-              <div className="relative h-64">
-                <img src={video.thumbnail} alt="" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors flex items-center justify-center">
-                  <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center shadow-2xl group-hover:scale-110 transition-all">
-                    <svg className="w-6 h-6 text-primary ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+        <div className="relative">
+          {showSwipeHintVideos && (
+            <div className="sm:hidden absolute top-0 right-0 bottom-0 left-0 z-20 pointer-events-none transition-opacity duration-700 flex justify-center items-center">
+              <img 
+                src={swipeHandImg} 
+                alt="Swipe Gesture" 
+                className="w-16 h-16 object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)] animate-swipe-gesture"
+              />
+            </div>
+          )}
+          <div 
+            ref={videosScrollRef}
+            className="flex sm:grid overflow-x-auto snap-x snap-mandatory hide-scrollbar sm:overflow-visible pb-8 sm:pb-0 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 -mx-6 px-6 sm:mx-0 sm:px-0"
+          >
+            {videoReviews.map((video) => (
+              <div 
+                key={video.id} 
+                onClick={() => setSelectedVideo(video)}
+                className="min-w-[280px] w-[85vw] sm:w-auto shrink-0 snap-center bg-white rounded-[32px] overflow-hidden shadow-xl group cursor-pointer border border-gray-100"
+              >
+                <div className="relative h-64">
+                  <img src={video.thumbnail} alt="" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors flex items-center justify-center">
+                    <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center shadow-2xl group-hover:scale-110 transition-all">
+                      <svg className="w-6 h-6 text-primary ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+                    </div>
                   </div>
                 </div>
+                <div className="p-6 text-center">
+                  <h4 className="text-primary font-bold text-lg">{video.name}</h4>
+                  <p className="text-gray-400 text-sm mt-1">{t("reviews.tripIn")} {video.date}</p>
+                </div>
               </div>
-              <div className="p-6 text-center">
-                <h4 className="text-primary font-bold text-lg">{video.name}</h4>
-                <p className="text-gray-400 text-sm mt-1">{t("reviews.tripIn")} {video.date}</p>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
         <div className="mt-12 text-center">
           <a 
@@ -319,50 +337,61 @@ const Reviews = () => {
             <p className="text-gray-400 mt-2 whitespace-pre-line">{t("reviews.recentReviewsDesc")}</p>
           </div>
 
-          <div 
-            ref={textScrollRef}
-            className="flex sm:grid overflow-x-auto snap-x snap-mandatory hide-scrollbar sm:overflow-visible pb-8 sm:pb-0 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 -mx-6 px-6 sm:mx-0 sm:px-0"
-          >
-            {textReviews.map((review, i) => (
-              <div 
-                key={i} 
-                onClick={() => setSelectedReview(review)}
-                className="min-w-[280px] w-[85vw] sm:w-auto shrink-0 snap-center relative h-[500px] rounded-[40px] overflow-hidden group shadow-xl hover:-translate-y-2 transition-all duration-500 cursor-pointer"
-              >
-                {/* Background Image */}
-                <img src={review.img} alt="" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20"></div>
-                
-                {/* Content Overlay */}
-                <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                  <div className="flex text-yellow-400 gap-1 mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <svg key={i} className="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                      </svg>
-                    ))}
-                  </div>
+          <div className="relative">
+            {showSwipeHintText && (
+              <div className="sm:hidden absolute top-0 right-0 bottom-0 left-0 z-20 pointer-events-none transition-opacity duration-700 flex justify-center items-center">
+                <img 
+                  src={swipeHandImg} 
+                  alt="Swipe Gesture" 
+                  className="w-16 h-16 object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)] animate-swipe-gesture"
+                />
+              </div>
+            )}
+            <div 
+              ref={textScrollRef}
+              className="flex sm:grid overflow-x-auto snap-x snap-mandatory hide-scrollbar sm:overflow-visible pb-8 sm:pb-0 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 -mx-6 px-6 sm:mx-0 sm:px-0"
+            >
+              {textReviews.map((review, i) => (
+                <div 
+                  key={i} 
+                  onClick={() => setSelectedReview(review)}
+                  className="min-w-[280px] w-[85vw] sm:w-auto shrink-0 snap-center relative h-[500px] rounded-[40px] overflow-hidden group shadow-xl hover:-translate-y-2 transition-all duration-500 cursor-pointer"
+                >
+                  {/* Background Image */}
+                  <img src={review.img} alt="" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20"></div>
                   
-                  <p className="text-white text-sm italic leading-relaxed mb-8">
-                    "{review.text}"
-                  </p>
-                  
-                  <div className="border-t border-white/20 pt-6 flex items-end justify-between">
-                    <div>
-                      <h4 className="text-white font-bold text-xl leading-tight font-serif">{review.name}</h4>
-                      <p className="text-primary text-[10px] font-bold uppercase tracking-widest mt-1">{review.tourdetails?.travelertype || review.tourDetails?.travelerType || 'Traveler'}</p>
+                  {/* Content Overlay */}
+                  <div className="absolute inset-0 p-8 flex flex-col justify-end">
+                    <div className="flex text-yellow-400 gap-1 mb-4">
+                      {[...Array(5)].map((_, i) => (
+                        <svg key={i} className="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                      ))}
                     </div>
-                    <Link 
-                      to={`/${i18n.language?.split('-')[0] || 'fr'}/review/${review.id}`}
-                      onClick={(e) => e.stopPropagation()}
-                      className="w-10 h-10 bg-white/10 hover:bg-white text-white hover:text-primary rounded-full flex items-center justify-center transition-all group/btn backdrop-blur-sm"
-                    >
-                      <svg className="w-5 h-5 transform group-hover/btn:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-                    </Link>
+                    
+                    <p className="text-white text-sm italic leading-relaxed mb-8">
+                      "{review.text}"
+                    </p>
+                    
+                    <div className="border-t border-white/20 pt-6 flex items-end justify-between">
+                      <div>
+                        <h4 className="text-white font-bold text-xl leading-tight font-serif">{review.name}</h4>
+                        <p className="text-primary text-[10px] font-bold uppercase tracking-widest mt-1">{review.tourdetails?.travelertype || review.tourDetails?.travelerType || 'Traveler'}</p>
+                      </div>
+                      <Link 
+                        to={`/${i18n.language?.split('-')[0] || 'fr'}/review/${review.id}`}
+                        onClick={(e) => e.stopPropagation()}
+                        className="w-10 h-10 bg-white/10 hover:bg-white text-white hover:text-primary rounded-full flex items-center justify-center transition-all group/btn backdrop-blur-sm"
+                      >
+                        <svg className="w-5 h-5 transform group-hover/btn:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                      </Link>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
 
         </div>
