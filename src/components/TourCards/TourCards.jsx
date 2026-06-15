@@ -27,9 +27,9 @@ const TourCategorySection = ({ title, subtitle, tours, hasScrolled, handleScroll
   };
 
   return (
-    <div className={noBottomMargin ? "" : "mb-12 md:mb-20"}>
+    <div className={noBottomMargin ? "" : "mb-8 md:mb-20"}>
       {/* Header */}
-      <div className="text-center mb-10 md:mb-16">
+      <div className="text-center mb-6 md:mb-16">
         <h2 className="mb-4">{title}</h2>
         {subtitle && (
           <p className="text-gray-600 max-w-3xl mx-auto text-lg font-light">
@@ -77,12 +77,34 @@ const TourCategorySection = ({ title, subtitle, tours, hasScrolled, handleScroll
 };
 
 const FamilyTourSplitSection = ({ title, subtitle, standardTours, premiumTours, t }) => {
+  const [hasScrolledStandard, setHasScrolledStandard] = useState(false);
+  const [hasScrolledPremium, setHasScrolledPremium] = useState(false);
+  
+  const standardScrollRef = useRef(null);
+  const premiumScrollRef = useRef(null);
+
   if ((!standardTours || standardTours.length === 0) && (!premiumTours || premiumTours.length === 0)) return null;
 
+  const handleStandardScroll = () => {
+    if (!hasScrolledStandard && standardScrollRef.current) {
+      if (standardScrollRef.current.scrollLeft > 20) {
+        setHasScrolledStandard(true);
+      }
+    }
+  };
+
+  const handlePremiumScroll = () => {
+    if (!hasScrolledPremium && premiumScrollRef.current) {
+      if (premiumScrollRef.current.scrollLeft > 20) {
+        setHasScrolledPremium(true);
+      }
+    }
+  };
+
   return (
-    <div className="mb-12 md:mb-20">
+    <div className="mb-8 md:mb-20">
       {/* Header */}
-      <div className="text-center mb-10 md:mb-16">
+      <div className="text-center mb-6 md:mb-16">
         <h2 className="mb-4">{title}</h2>
         {subtitle && (
           <p className="text-gray-600 max-w-3xl mx-auto text-lg font-light">
@@ -95,42 +117,80 @@ const FamilyTourSplitSection = ({ title, subtitle, standardTours, premiumTours, 
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 md:gap-10">
         
         {/* Left Column: 3/4 Star */}
-        <div className="bg-white border shadow-xl p-4 md:p-6 flex flex-col rounded-xl">
+        <div className="bg-white border shadow-xl p-4 md:p-6 flex flex-col rounded-xl relative">
           <h3 className="text-center text-lg md:text-xl font-bold uppercase tracking-wide text-primary mb-6 border-b pb-4">{t('tours.familyStandardHotels', 'RUTAS EN HOTELES 3/4*')}</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-grow">
-            {standardTours && standardTours.map((tour) => (
-              <ItineraryCard
-                key={tour.id}
-                id={tour.id}
-                title={tour.title}
-                image={tour.image}
-                icons={tour.icons}
-                description={tour.description}
-                price={tour.price}
-                duration={tour.duration}
-                tag={tour.categoryTag}
-              />
-            ))}
+          
+          <div className="relative flex-grow flex flex-col">
+            {/* Mobile Swipe Hint Overlay */}
+            {!hasScrolledStandard && standardTours && standardTours.length > 1 && (
+              <div className="sm:hidden absolute top-0 right-0 bottom-0 left-0 z-20 pointer-events-none transition-opacity duration-700 flex justify-center items-center">
+                <img 
+                  src={swipeHandImg} 
+                  alt="Swipe Gesture" 
+                  className="w-16 h-16 object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)] animate-swipe-gesture"
+                />
+              </div>
+            )}
+
+            <div 
+              ref={standardScrollRef}
+              onScroll={handleStandardScroll}
+              className="flex sm:grid overflow-x-auto snap-x snap-mandatory hide-scrollbar sm:overflow-visible pb-4 sm:pb-0 grid-cols-1 sm:grid-cols-2 gap-4 -mx-4 px-4 sm:mx-0 sm:px-0 flex-grow"
+            >
+              {standardTours && standardTours.map((tour) => (
+                <div key={tour.id} className="min-w-[280px] w-[85vw] sm:w-auto shrink-0 snap-center flex">
+                  <ItineraryCard
+                    id={tour.id}
+                    title={tour.title}
+                    image={tour.image}
+                    icons={tour.icons}
+                    description={tour.description}
+                    price={tour.price}
+                    duration={tour.duration}
+                    tag={tour.categoryTag}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
         {/* Right Column: 4/5 Star Superior */}
-        <div className="bg-white border shadow-xl p-4 md:p-6 flex flex-col rounded-xl">
+        <div className="bg-white border shadow-xl p-4 md:p-6 flex flex-col rounded-xl relative">
           <h3 className="text-center text-lg md:text-xl font-bold uppercase tracking-wide text-primary mb-6 border-b pb-4">{t('tours.familyPremiumHotels', 'RUTAS EN HOTELES SUPERIOR 4/5*')}</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-grow">
-            {premiumTours && premiumTours.map((tour) => (
-              <ItineraryCard
-                key={tour.id}
-                id={tour.id}
-                title={tour.title}
-                image={tour.image}
-                icons={tour.icons}
-                description={tour.description}
-                price={tour.price}
-                duration={tour.duration}
-                tag={tour.categoryTag}
-              />
-            ))}
+          
+          <div className="relative flex-grow flex flex-col">
+            {/* Mobile Swipe Hint Overlay */}
+            {!hasScrolledPremium && premiumTours && premiumTours.length > 1 && (
+              <div className="sm:hidden absolute top-0 right-0 bottom-0 left-0 z-20 pointer-events-none transition-opacity duration-700 flex justify-center items-center">
+                <img 
+                  src={swipeHandImg} 
+                  alt="Swipe Gesture" 
+                  className="w-16 h-16 object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)] animate-swipe-gesture"
+                />
+              </div>
+            )}
+
+            <div 
+              ref={premiumScrollRef}
+              onScroll={handlePremiumScroll}
+              className="flex sm:grid overflow-x-auto snap-x snap-mandatory hide-scrollbar sm:overflow-visible pb-4 sm:pb-0 grid-cols-1 sm:grid-cols-2 gap-4 -mx-4 px-4 sm:mx-0 sm:px-0 flex-grow"
+            >
+              {premiumTours && premiumTours.map((tour) => (
+                <div key={tour.id} className="min-w-[280px] w-[85vw] sm:w-auto shrink-0 snap-center flex">
+                  <ItineraryCard
+                    id={tour.id}
+                    title={tour.title}
+                    image={tour.image}
+                    icons={tour.icons}
+                    description={tour.description}
+                    price={tour.price}
+                    duration={tour.duration}
+                    tag={tour.categoryTag}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -198,7 +258,7 @@ const TourCards = () => {
   const familyStandardTours = familyTours.filter(t => !isPremium(t.title));
   return (
     <>
-      <section className="py-8 md:py-16 bg-gray-50 relative">
+      <section className="py-6 md:py-16 bg-gray-50 relative">
         <div className="container mx-auto px-6 relative z-10">
           {/* Sections */}
           <TourCategorySection 
@@ -216,15 +276,17 @@ const TourCards = () => {
             premiumTours={familyPremiumTours}
             t={t}
           />
-          <TourCategorySection 
-            title={t('tours.honeymoonTours')} 
-            subtitle={t('tours.honeymoonToursSubtitle')}
-            tours={honeymoonTours} 
-            hasScrolled={hasScrolled} 
-            handleScroll={handleScroll} 
-            t={t} 
-            noBottomMargin={true}
-          />
+          <div className="pt-10 md:pt-0">
+            <TourCategorySection 
+              title={t('tours.honeymoonTours')} 
+              subtitle={t('tours.honeymoonToursSubtitle')}
+              tours={honeymoonTours} 
+              hasScrolled={hasScrolled} 
+              handleScroll={handleScroll} 
+              t={t} 
+              noBottomMargin={true}
+            />
+          </div>
         </div>
       </section>
 
@@ -238,13 +300,13 @@ const TourCards = () => {
         />
       )}
 
-      <section className="py-8 md:py-16 bg-gray-50 relative">
+      <section className="py-6 md:py-16 bg-gray-50 relative">
         <div className="container mx-auto px-6 relative z-10">
           {/* Category Pills Section */}
           <CategoryPillsSection />
 
           {/* View All Button */}
-          <div className="mt-2 md:mt-6 text-center mb-2 md:mb-6">
+          <div className="mt-1 md:mt-6 text-center mb-0 md:mb-6">
             <a 
               href={`/${i18n.language}/itineraires`} 
               className="group inline-flex items-center gap-2 sm:gap-3 border border-primary bg-white text-primary hover:bg-primary hover:text-white px-5 py-2.5 sm:px-8 sm:py-3 rounded-full text-xs sm:text-sm md:text-base font-bold shadow-sm hover:shadow-md transition-all duration-300 transform active:scale-95"

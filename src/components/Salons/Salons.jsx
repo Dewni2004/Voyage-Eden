@@ -11,9 +11,9 @@ const Salons = () => {
   const images = [fitur1, fitur2, fitur3, fitur4, fitur5];
 
   return (
-    <section className="py-12 md:py-20 bg-gray-50">
+    <section className="py-6 md:py-20 bg-gray-50">
       <div className="max-w-[1600px] mx-auto px-6">
-        <div className="text-center mb-10 md:mb-16">
+        <div className="text-center mb-6 md:mb-16">
           <h2 className="text-3xl md:text-5xl font-bold text-primary mb-4">
             {t('salons.title', 'Salons internationaux auxquels Sri Lanka Eden Travels a participé')}
           </h2>

@@ -50,10 +50,10 @@ const WhyChooseUs = () => {
   ];
 
   return (
-    <section className="py-8 md:py-16 bg-white">
+    <section className="py-6 md:py-16 bg-white">
       <div className="container mx-auto px-6">
         {/* Header */}
-        <div className="text-center mb-8 md:mb-16">
+        <div className="text-center mb-6 md:mb-16">
           <h2 className="mb-4">{t('why.title')}</h2>
           <p className="text-gray-600 max-w-2xl mx-auto text-lg font-light">
             {t('why.subtitle')}

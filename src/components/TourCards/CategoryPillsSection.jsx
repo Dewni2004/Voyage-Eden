@@ -49,8 +49,8 @@ const CategoryPillsSection = () => {
   }, [i18n.language]);
 
   return (
-    <div className="mt-10 pt-10 border-t border-gray-100">
-      <div className="flex overflow-x-auto hide-scrollbar gap-4 lg:gap-2 xl:gap-4 2xl:gap-8 pb-12 px-4 max-w-[1400px] mx-auto justify-start lg:justify-center">
+    <div className="mt-4 pt-4 sm:mt-10 sm:pt-10 border-t border-gray-100">
+      <div className="flex overflow-x-auto hide-scrollbar gap-4 lg:gap-2 xl:gap-4 2xl:gap-8 pb-6 sm:pb-12 px-4 max-w-[1400px] mx-auto justify-start lg:justify-center">
         {categories.map((category, idx) => (
           <a 
             key={category.id}

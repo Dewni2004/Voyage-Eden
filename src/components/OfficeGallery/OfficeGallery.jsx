@@ -32,10 +32,10 @@ const OfficeGallery = () => {
   const [selectedImage, setSelectedImage] = useState(null);
 
   return (
-    <section className="pb-8 md:pb-16 pt-0 md:pt-4 bg-white relative">
+    <section className="pb-6 md:pb-16 pt-0 md:pt-4 bg-white relative">
       <div className="max-w-[1600px] mx-auto px-6">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-6 md:mb-16">
           <p className="text-luxury text-sm font-bold uppercase tracking-[0.2em] mb-4">
             {t('gallery.subtitle', 'Derrière les décors')}
           </p>

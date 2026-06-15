@@ -32,10 +32,10 @@ const Reviews = () => {
 
 
   return (
-    <section className="py-8 md:py-16 bg-white">
+    <section className="py-6 md:py-16 bg-white">
       <div className="max-w-[1600px] mx-auto px-6 relative">
         {/* Header */}
-        <div className="text-center mb-8 md:mb-16">
+        <div className="text-center mb-6 md:mb-16">
           <h2 className="text-3xl md:text-5xl font-bold text-primary mb-3">{t('reviews.title')}</h2>
           <span className="inline-block bg-primary/5 text-primary text-[11px] px-3.5 py-1 rounded-full font-bold uppercase tracking-wider">
             {reviews.length} {reviews.length <= 1 ? t('nav.reviews', 'avis client') : t('nav.reviews', 'avis clients')}
