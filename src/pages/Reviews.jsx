@@ -277,12 +277,14 @@ const Reviews = () => {
 
         <div className="relative">
           {showSwipeHintVideos && (
-            <div className="sm:hidden absolute top-0 right-0 bottom-0 left-0 z-20 pointer-events-none transition-opacity duration-700 flex justify-center items-center">
-              <img 
-                src={swipeHandImg} 
-                alt="Swipe Gesture" 
-                className="w-16 h-16 object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)] animate-swipe-gesture"
-              />
+            <div className="sm:hidden absolute top-0 right-0 bottom-0 left-0 z-20 pointer-events-none flex justify-center items-center">
+              <div className="p-4 rounded-full bg-white/25 backdrop-blur-md border border-white/40 shadow-[0_8px_32px_rgba(31,38,135,0.08)] flex items-center justify-center animate-glass-swipe">
+                <img 
+                  src={swipeHandImg} 
+                  alt="Swipe Gesture" 
+                  className="w-12 h-12 object-contain"
+                />
+              </div>
             </div>
           )}
           <div 
@@ -339,12 +341,14 @@ const Reviews = () => {
 
           <div className="relative">
             {showSwipeHintText && (
-              <div className="sm:hidden absolute top-0 right-0 bottom-0 left-0 z-20 pointer-events-none transition-opacity duration-700 flex justify-center items-center">
-                <img 
-                  src={swipeHandImg} 
-                  alt="Swipe Gesture" 
-                  className="w-16 h-16 object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)] animate-swipe-gesture"
-                />
+              <div className="sm:hidden absolute top-0 right-0 bottom-0 left-0 z-20 pointer-events-none flex justify-center items-center">
+                <div className="p-4 rounded-full bg-white/25 backdrop-blur-md border border-white/40 shadow-[0_8px_32px_rgba(31,38,135,0.08)] flex items-center justify-center animate-glass-swipe">
+                  <img 
+                    src={swipeHandImg} 
+                    alt="Swipe Gesture" 
+                    className="w-12 h-12 object-contain"
+                  />
+                </div>
               </div>
             )}
             <div 

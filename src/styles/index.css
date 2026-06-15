@@ -170,15 +170,41 @@ p, span, li, a, button {
 }
 .animate-swipe-hand {
   animation: swipe-hand 2s ease-in-out infinite;
+  filter: brightness(0) opacity(0.8);
 }
 
-/* Premium full swipe gesture coming from side */
-@keyframes swipe-gesture {
-  0% { transform: translateX(100px); opacity: 0; }
-  15% { transform: translateX(60px); opacity: 1; }
-  65% { transform: translateX(-60px); opacity: 1; }
-  85%, 100% { transform: translateX(-100px); opacity: 0; }
+/* Premium Glassmorphic Swipe Hint Animation */
+@keyframes glass-swipe-hint {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateX(60px);
+  }
+  15% {
+    opacity: 1;
+    transform: scale(1) translateX(40px);
+  }
+  35% {
+    opacity: 1;
+    transform: scale(1) translateX(40px);
+  }
+  75% {
+    opacity: 1;
+    transform: scale(1) translateX(-40px);
+  }
+  90%, 100% {
+    opacity: 0;
+    transform: scale(0.85) translateX(-60px);
+  }
 }
-.animate-swipe-gesture {
-  animation: swipe-gesture 2.5s ease-in-out infinite;
+.animate-glass-swipe {
+  animation: glass-swipe-hint 1.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+.animate-glass-swipe img {
+  filter: brightness(0) opacity(0.85);
+}
+.animate-glass-swipe-white {
+  animation: glass-swipe-hint 1.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+.animate-glass-swipe-white img {
+  filter: brightness(0) invert(1) opacity(0.85);
 }
