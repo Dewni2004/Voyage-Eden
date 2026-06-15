@@ -246,7 +246,7 @@ const PopularItineraries = ({ title, subtitle, id, itineraries, isDark, isGreen 
   };
 
   return (
-    <section id={id} className={`py-10 md:py-16 relative overflow-hidden ${isDark ? 'bg-[#050b18]' : 'bg-white'}`}>
+    <section id={id} className={`py-8 md:py-16 relative overflow-hidden ${isDark ? 'bg-[#050b18]' : 'bg-white'}`}>
       {/* Premium Background for Luxury Section */}
       {isDark && (
         <div className="absolute inset-0 pointer-events-none">

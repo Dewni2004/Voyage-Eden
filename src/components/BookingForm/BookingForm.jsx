@@ -160,7 +160,7 @@ const BookingForm = ({ itineraryTitle }) => {
   const labelClass = "block text-xs font-bold text-gray-600 mb-2 uppercase tracking-wider";
 
   return (
-    <section id="booking-form" className="max-w-7xl mx-auto px-6 py-10 md:py-16 pb-2 md:pb-16">
+    <section id="booking-form" className="max-w-7xl mx-auto px-6 py-8 md:py-16 pb-2 md:pb-16">
       <style dangerouslySetInnerHTML={{__html: `
         .react-datepicker-wrapper { width: 100%; }
         .react-datepicker__input-container input { width: 100%; }

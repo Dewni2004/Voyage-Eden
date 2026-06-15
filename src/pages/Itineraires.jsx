@@ -32,19 +32,38 @@ const Itineraires = () => {
   return (
     <div>
       <ItineraryHero />
-      <ItineraryCategories />
+      <ItineraryCategories itineraries={itineraries} />
       
-      <PopularItineraries title={t('itineraries.popular')} id="popular" itineraries={getByCategory('popular')} />
-      <PopularItineraries title={t('itineraries.honeymoon')} id="honeymoon" itineraries={getByCategory('honeymoon')} />
-      <PopularItineraries title={t('itineraries.family')} id="family" itineraries={getByCategory('family')} />
-      <PopularItineraries title={t('itineraries.luxury')} id="luxury" itineraries={getByCategory('luxury')} isDark={true} />
-      <PopularItineraries title={t('itineraries.golf')} id="golf" itineraries={getByCategory('golf')} isGreen={true} />
-      <PopularItineraries title={t('itineraries.surf')} id="surf" itineraries={getByCategory('surf')} />
-      <PopularItineraries title={t('itineraries.adventure')} id="adventure" itineraries={getByCategory('adventure')} />
-      <PopularItineraries title={t('itineraries.perahera')} id="perahera" itineraries={getByCategory('perahera')} />
-      <PopularItineraries title={t('itineraries.days8')} id="8days" itineraries={getByCategory('8days')} />
-      
-      <PopularItineraries title={t('itineraries.interests')} id="interests" itineraries={getByCategory('interests')} />
+      {getByCategory('popular').length > 0 && (
+        <PopularItineraries title={t('itineraries.popular')} id="popular" itineraries={getByCategory('popular')} />
+      )}
+      {getByCategory('honeymoon').length > 0 && (
+        <PopularItineraries title={t('itineraries.honeymoon')} id="honeymoon" itineraries={getByCategory('honeymoon')} />
+      )}
+      {getByCategory('family').length > 0 && (
+        <PopularItineraries title={t('itineraries.family')} id="family" itineraries={getByCategory('family')} />
+      )}
+      {getByCategory('luxury').length > 0 && (
+        <PopularItineraries title={t('itineraries.luxury')} id="luxury" itineraries={getByCategory('luxury')} isDark={true} />
+      )}
+      {getByCategory('golf').length > 0 && (
+        <PopularItineraries title={t('itineraries.golf')} id="golf" itineraries={getByCategory('golf')} isGreen={true} />
+      )}
+      {getByCategory('surf').length > 0 && (
+        <PopularItineraries title={t('itineraries.surf')} id="surf" itineraries={getByCategory('surf')} />
+      )}
+      {getByCategory('adventure').length > 0 && (
+        <PopularItineraries title={t('itineraries.adventure')} id="adventure" itineraries={getByCategory('adventure')} />
+      )}
+      {getByCategory('perahera').length > 0 && (
+        <PopularItineraries title={t('itineraries.perahera')} id="perahera" itineraries={getByCategory('perahera')} />
+      )}
+      {getByCategory('8days').length > 0 && (
+        <PopularItineraries title={t('itineraries.days8')} id="8days" itineraries={getByCategory('8days')} />
+      )}
+      {getByCategory('interests').length > 0 && (
+        <PopularItineraries title={t('itineraries.interests')} id="interests" itineraries={getByCategory('interests')} />
+      )}
 
       {/* <HotelOptions /> */}
       {/* <RestaurantBanner /> */}

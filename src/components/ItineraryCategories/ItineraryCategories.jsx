@@ -10,7 +10,7 @@ import eightDaysImg from '../../assets/8Days - Trip Card.webp';
 import popularImg from '../../assets/Popularies.jpg';
 import interestsImg from '../../assets/Intrests.jpg';
 
-const ItineraryCategories = ({ showTitle = false }) => {
+const ItineraryCategories = ({ showTitle = false, itineraries = [] }) => {
   const { t, i18n } = useTranslation();
   const [categories, setCategories] = useState([
     { id: 'popular', title: 'Populaires', image: popularImg },
@@ -51,6 +51,10 @@ const ItineraryCategories = ({ showTitle = false }) => {
     }
   };
 
+  const visibleCategories = itineraries.length > 0
+    ? categories.filter(c => itineraries.some(it => it.category?.toLowerCase() === c.id.toLowerCase()))
+    : categories;
+
   return (
     <section className="py-20 bg-white">
       <div className="container mx-auto px-4">
@@ -62,7 +66,7 @@ const ItineraryCategories = ({ showTitle = false }) => {
         )}
         
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
-          {categories.map((category, index) => (
+          {visibleCategories.map((category, index) => (
             <div 
               key={category.id}
               onClick={() => scrollToSection(category.id)}

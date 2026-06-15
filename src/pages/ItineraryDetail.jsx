@@ -152,7 +152,7 @@ const ItineraryDetail = () => {
       </section>
 
       {/* Info Bar (Floating overlapping via negative margin) */}
-      <div className="relative z-20 w-full max-w-5xl mx-auto px-4 -mt-32 md:-mt-40 mb-6 md:mb-8">
+      <div className="relative z-20 w-full max-w-5xl mx-auto px-4 -mt-24 md:-mt-40 mb-4 md:mb-8">
           <div className="bg-white rounded-[40px] shadow-2xl py-6 md:py-8 px-6 md:px-12 border border-gray-50 flex flex-col items-center">
             {/* Stats Row */}
             <div className="grid grid-cols-3 md:grid-cols-3 gap-4 md:gap-8 w-full text-center">
@@ -200,11 +200,11 @@ const ItineraryDetail = () => {
       </div>
 
       {/* Interactive Itinerary Section */}
-      <section id="itinerary-section" className="max-w-7xl mx-auto px-0 md:px-6 pb-12 md:pb-24">
+      <section id="itinerary-section" className="max-w-7xl mx-auto px-0 md:px-6 pb-6 md:pb-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-stretch">
           
           {/* Left Column: Interactive Map */}
-          <div className="relative group/map h-[600px] md:h-[600px] lg:h-[850px]">
+          <div className="relative group/map h-[450px] sm:h-[550px] md:h-[600px] lg:h-[850px]">
             <div className="absolute -inset-4 bg-gradient-to-tr from-primary/5 to-luxury/5 rounded-[48px] blur-2xl opacity-0 group-hover/map:opacity-100 transition-duration-700"></div>
             <AnimatedMap 
               days={days} 

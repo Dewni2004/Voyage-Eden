@@ -16,7 +16,7 @@ const IncludedExcluded = () => {
     .map(key => includedExcludedData[key]);
 
   return (
-    <section className="max-w-7xl mx-auto px-6 py-16">
+    <section className="max-w-7xl mx-auto px-6 py-8 md:py-16">
       <h2 className="text-primary text-3xl md:text-4xl font-bold mb-10">{t("includedExcluded.title")}</h2>
       
       <div className="bg-[#f8fbff] rounded-[40px] p-8 md:p-16 border border-gray-100 shadow-inner grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24">
