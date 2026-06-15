@@ -4,9 +4,12 @@
     <meta charset="utf-8">
     <title>Voyage Eden</title>
     <script type="text/javascript">
-      // Single Page Apps for GitHub Pages
-      // Mitigates 404 errors when using BrowserRouter on GH Pages
-      var pathSegmentsToKeep = 1; // 1 for repo name, 0 for custom domain
+      // Single Page Apps for GitHub Pages / Render
+      // Detect if we are on GitHub Pages subdirectory or custom domain/Render
+      var pathSegmentsToKeep = 0;
+      if (window.location.hostname.indexOf('github.io') !== -1) {
+        pathSegmentsToKeep = 1;
+      }
       var l = window.location;
       l.replace(
         l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
