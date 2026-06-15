@@ -1,7 +1,7 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import swipeHandImg from '../../assets/swipe-hand-transparent.png';
+
 
 const formatPrice = (price, t) => {
   if (!price) return '';
@@ -128,17 +128,53 @@ const formatItineraryTitle = (title, duration, t) => {
 const PopularItineraries = ({ title, subtitle, id, itineraries, isDark, isGreen }) => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
-  const [hasScrolled, setHasScrolled] = useState(false);
   const scrollRef = useRef(null);
+  useEffect(() => {
+    if (window.innerWidth >= 768 || !scrollRef.current || itineraries.length <= 1) return;
 
-  const handleScroll = () => {
-    if (!hasScrolled && scrollRef.current) {
-      if (scrollRef.current.scrollLeft > 20) {
-        setHasScrolled(true);
+    const container = scrollRef.current;
+    let animated = false;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !animated) {
+            animated = true;
+            
+            // Auto swipe peek animation
+            setTimeout(() => {
+              if (container) {
+                // Temporarily disable scroll snapping
+                container.style.scrollSnapType = 'none';
+                container.scrollTo({ left: 70, behavior: 'smooth' });
+                
+                setTimeout(() => {
+                  if (container) {
+                    container.scrollTo({ left: 0, behavior: 'smooth' });
+                    // Restore scroll snapping after animation completes
+                    setTimeout(() => {
+                      if (container) container.style.scrollSnapType = '';
+                    }, 500);
+                  }
+                }, 700);
+              }
+            }, 500);
+
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.05 }
+    );
+
+    observer.observe(container);
+
+    return () => {
+      if (container) {
+        observer.unobserve(container);
       }
-    }
-  };
-  
+    };
+  }, [itineraries]);
   const getGridClass = (len) => {
     if (len === 1) return 'lg:grid-cols-1 lg:max-w-[400px] lg:mx-auto';
     if (len === 2) return 'lg:grid-cols-2';
@@ -246,7 +282,7 @@ const PopularItineraries = ({ title, subtitle, id, itineraries, isDark, isGreen 
   };
 
   return (
-    <section id={id} className={`py-8 md:py-14 relative overflow-hidden ${isDark ? 'bg-[#050b18]' : 'bg-white'}`}>
+    <section id={id} className={`pt-6 pb-3 md:py-14 relative overflow-hidden ${isDark ? 'bg-[#050b18]' : 'bg-white'}`}>
       {/* Premium Background for Luxury Section */}
       {isDark && (
         <div className="absolute inset-0 pointer-events-none">
@@ -272,22 +308,10 @@ const PopularItineraries = ({ title, subtitle, id, itineraries, isDark, isGreen 
           </div>
         )}
 
-        {/* Mobile Swipe Hint Overlay */}
-        {!hasScrolled && itineraries.length > 1 && (
-          <div className="md:hidden absolute top-0 right-0 bottom-0 left-0 z-20 pointer-events-none transition-opacity duration-700 flex justify-center items-center">
-            <img 
-              src={swipeHandImg} 
-              alt="Swipe Gesture" 
-              className="w-16 h-16 object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)] animate-swipe-gesture"
-            />
-          </div>
-        )}
-
         {/* Grid / Slider */}
         <div 
           ref={scrollRef}
-          onScroll={handleScroll}
-          className={`flex md:grid overflow-x-auto snap-x snap-mandatory hide-scrollbar md:overflow-visible pb-8 md:pb-0 grid-cols-1 sm:grid-cols-2 ${getGridClass(itineraries.length)} gap-6 md:gap-10 -mx-6 px-6 md:mx-0 md:px-0`}
+          className={`flex md:grid overflow-x-auto snap-x snap-mandatory hide-scrollbar md:overflow-visible pb-4 md:pb-0 grid-cols-1 sm:grid-cols-2 ${getGridClass(itineraries.length)} gap-6 md:gap-10 -mx-6 px-6 md:mx-0 md:px-0`}
         >
           {itineraries.map((item) => (
             <div 

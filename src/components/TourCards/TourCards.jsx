@@ -1,23 +1,54 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import ItineraryCard from '../UI/ItineraryCard';
-import swipeHandImg from '../../assets/swipe-hand-transparent.png';
+
 import { getItineraries } from '../../services/contentService';
 import CategoryPillsSection from './CategoryPillsSection';
 import PopularItineraries from '../PopularItineraries/PopularItineraries';
 
-const TourCategorySection = ({ title, subtitle, tours, hasScrolled, handleScroll, t, noBottomMargin }) => {
+const TourCategorySection = ({ title, subtitle, tours, t, noBottomMargin }) => {
   const localScrollRef = useRef(null);
+
+  useEffect(() => {
+    if (window.innerWidth >= 768 || !localScrollRef.current || !tours || tours.length <= 1) return;
+
+    const container = localScrollRef.current;
+    let animated = false;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !animated) {
+            animated = true;
+            setTimeout(() => {
+              if (container) {
+                container.style.scrollSnapType = 'none';
+                container.scrollTo({ left: 70, behavior: 'smooth' });
+                setTimeout(() => {
+                  if (container) {
+                    container.scrollTo({ left: 0, behavior: 'smooth' });
+                    setTimeout(() => {
+                      if (container) container.style.scrollSnapType = '';
+                    }, 500);
+                  }
+                }, 700);
+              }
+            }, 500);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.05 }
+    );
+
+    observer.observe(container);
+
+    return () => {
+      if (container) observer.unobserve(container);
+    };
+  }, [tours]);
   
   if (!tours || tours.length === 0) return null;
-
-  const onScroll = () => {
-    if (!hasScrolled && localScrollRef.current) {
-      if (localScrollRef.current.scrollLeft > 20) {
-        handleScroll();
-      }
-    }
-  };
 
   const getGridClass = (len) => {
     if (len === 1) return 'lg:grid-cols-1 lg:max-w-[400px] lg:mx-auto';
@@ -39,21 +70,9 @@ const TourCategorySection = ({ title, subtitle, tours, hasScrolled, handleScroll
       </div>
 
       <div className="relative">
-        {/* Mobile Swipe Hint Overlay */}
-        {!hasScrolled && tours.length > 1 && (
-          <div className="md:hidden absolute top-0 right-0 bottom-0 left-0 z-20 pointer-events-none transition-opacity duration-700 flex justify-center items-center">
-            <img 
-              src={swipeHandImg} 
-              alt="Swipe Gesture" 
-              className="w-16 h-16 object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)] animate-swipe-gesture"
-            />
-          </div>
-        )}
-
         {/* Grid */}
         <div 
           ref={localScrollRef}
-          onScroll={onScroll}
           className={`flex md:grid overflow-x-auto snap-x snap-mandatory hide-scrollbar md:overflow-visible pb-8 md:pb-0 grid-cols-1 md:grid-cols-2 ${getGridClass(tours.length)} gap-6 md:gap-8 -mx-6 px-6 md:mx-0 md:px-0`}
         >
           {tours.map((tour) => (
@@ -77,29 +96,88 @@ const TourCategorySection = ({ title, subtitle, tours, hasScrolled, handleScroll
 };
 
 const FamilyTourSplitSection = ({ title, subtitle, standardTours, premiumTours, t }) => {
-  const [hasScrolledStandard, setHasScrolledStandard] = useState(false);
-  const [hasScrolledPremium, setHasScrolledPremium] = useState(false);
-  
   const standardScrollRef = useRef(null);
   const premiumScrollRef = useRef(null);
 
+  useEffect(() => {
+    if (window.innerWidth >= 640 || !standardScrollRef.current || !standardTours || standardTours.length <= 1) return;
+
+    const container = standardScrollRef.current;
+    let animated = false;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !animated) {
+            animated = true;
+            setTimeout(() => {
+              if (container) {
+                container.style.scrollSnapType = 'none';
+                container.scrollTo({ left: 70, behavior: 'smooth' });
+                setTimeout(() => {
+                  if (container) {
+                    container.scrollTo({ left: 0, behavior: 'smooth' });
+                    setTimeout(() => {
+                      if (container) container.style.scrollSnapType = '';
+                    }, 500);
+                  }
+                }, 700);
+              }
+            }, 500);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.05 }
+    );
+
+    observer.observe(container);
+
+    return () => {
+      if (container) observer.unobserve(container);
+    };
+  }, [standardTours]);
+
+  useEffect(() => {
+    if (window.innerWidth >= 640 || !premiumScrollRef.current || !premiumTours || premiumTours.length <= 1) return;
+
+    const container = premiumScrollRef.current;
+    let animated = false;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !animated) {
+            animated = true;
+            setTimeout(() => {
+              if (container) {
+                container.style.scrollSnapType = 'none';
+                container.scrollTo({ left: 70, behavior: 'smooth' });
+                setTimeout(() => {
+                  if (container) {
+                    container.scrollTo({ left: 0, behavior: 'smooth' });
+                    setTimeout(() => {
+                      if (container) container.style.scrollSnapType = '';
+                    }, 500);
+                  }
+                }, 700);
+              }
+            }, 500);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.05 }
+    );
+
+    observer.observe(container);
+
+    return () => {
+      if (container) observer.unobserve(container);
+    };
+  }, [premiumTours]);
+
   if ((!standardTours || standardTours.length === 0) && (!premiumTours || premiumTours.length === 0)) return null;
-
-  const handleStandardScroll = () => {
-    if (!hasScrolledStandard && standardScrollRef.current) {
-      if (standardScrollRef.current.scrollLeft > 20) {
-        setHasScrolledStandard(true);
-      }
-    }
-  };
-
-  const handlePremiumScroll = () => {
-    if (!hasScrolledPremium && premiumScrollRef.current) {
-      if (premiumScrollRef.current.scrollLeft > 20) {
-        setHasScrolledPremium(true);
-      }
-    }
-  };
 
   return (
     <div className="mb-8 md:mb-20">
@@ -121,20 +199,8 @@ const FamilyTourSplitSection = ({ title, subtitle, standardTours, premiumTours, 
           <h3 className="text-center text-lg md:text-xl font-bold uppercase tracking-wide text-primary mb-6 border-b pb-4">{t('tours.familyStandardHotels', 'RUTAS EN HOTELES 3/4*')}</h3>
           
           <div className="relative flex-grow flex flex-col">
-            {/* Mobile Swipe Hint Overlay */}
-            {!hasScrolledStandard && standardTours && standardTours.length > 1 && (
-              <div className="sm:hidden absolute top-0 right-0 bottom-0 left-0 z-20 pointer-events-none transition-opacity duration-700 flex justify-center items-center">
-                <img 
-                  src={swipeHandImg} 
-                  alt="Swipe Gesture" 
-                  className="w-16 h-16 object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)] animate-swipe-gesture"
-                />
-              </div>
-            )}
-
             <div 
               ref={standardScrollRef}
-              onScroll={handleStandardScroll}
               className="flex sm:grid overflow-x-auto snap-x snap-mandatory hide-scrollbar sm:overflow-visible pb-4 sm:pb-0 grid-cols-1 sm:grid-cols-2 gap-4 -mx-4 px-4 sm:mx-0 sm:px-0 flex-grow"
             >
               {standardTours && standardTours.map((tour) => (
@@ -160,20 +226,8 @@ const FamilyTourSplitSection = ({ title, subtitle, standardTours, premiumTours, 
           <h3 className="text-center text-lg md:text-xl font-bold uppercase tracking-wide text-primary mb-6 border-b pb-4">{t('tours.familyPremiumHotels', 'RUTAS EN HOTELES SUPERIOR 4/5*')}</h3>
           
           <div className="relative flex-grow flex flex-col">
-            {/* Mobile Swipe Hint Overlay */}
-            {!hasScrolledPremium && premiumTours && premiumTours.length > 1 && (
-              <div className="sm:hidden absolute top-0 right-0 bottom-0 left-0 z-20 pointer-events-none transition-opacity duration-700 flex justify-center items-center">
-                <img 
-                  src={swipeHandImg} 
-                  alt="Swipe Gesture" 
-                  className="w-16 h-16 object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)] animate-swipe-gesture"
-                />
-              </div>
-            )}
-
             <div 
               ref={premiumScrollRef}
-              onScroll={handlePremiumScroll}
               className="flex sm:grid overflow-x-auto snap-x snap-mandatory hide-scrollbar sm:overflow-visible pb-4 sm:pb-0 grid-cols-1 sm:grid-cols-2 gap-4 -mx-4 px-4 sm:mx-0 sm:px-0 flex-grow"
             >
               {premiumTours && premiumTours.map((tour) => (
@@ -201,15 +255,8 @@ const FamilyTourSplitSection = ({ title, subtitle, standardTours, premiumTours, 
 
 const TourCards = () => {
   const { t, i18n } = useTranslation();
-  const [hasScrolled, setHasScrolled] = useState(false);
   const [allTours, setAllTours] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  const handleScroll = () => {
-    if (!hasScrolled) {
-      setHasScrolled(true);
-    }
-  };
 
   useEffect(() => {
     const fetchTours = async () => {
@@ -265,8 +312,6 @@ const TourCards = () => {
             title={t('tours.mostSold')} 
             subtitle={t('tours.mostSoldSubtitle')}
             tours={popularTours} 
-            hasScrolled={hasScrolled} 
-            handleScroll={handleScroll} 
             t={t} 
           />
           <FamilyTourSplitSection
@@ -281,8 +326,6 @@ const TourCards = () => {
               title={t('tours.honeymoonTours')} 
               subtitle={t('tours.honeymoonToursSubtitle')}
               tours={honeymoonTours} 
-              hasScrolled={hasScrolled} 
-              handleScroll={handleScroll} 
               t={t} 
               noBottomMargin={true}
             />

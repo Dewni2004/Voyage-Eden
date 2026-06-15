@@ -2,23 +2,13 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { getReviews } from '../../services/contentService';
-import swipeHandImg from '../../assets/swipe-hand-transparent.png';
+
 
 const Reviews = () => {
   const { t, i18n } = useTranslation();
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [hasScrolled, setHasScrolled] = useState(false);
   const scrollRef = useRef(null);
-
-  const handleScroll = () => {
-    if (!hasScrolled && scrollRef.current) {
-      if (scrollRef.current.scrollLeft > 20) {
-        setHasScrolled(true);
-      }
-    }
-  };
-
   useEffect(() => {
     const fetchReviews = async () => {
       const data = await getReviews(i18n.language);
@@ -27,6 +17,53 @@ const Reviews = () => {
     };
     fetchReviews();
   }, [i18n.language]);
+
+  useEffect(() => {
+    if (window.innerWidth >= 768 || !scrollRef.current || reviews.length <= 1) return;
+
+    const container = scrollRef.current;
+    let animated = false;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !animated) {
+            animated = true;
+            
+            // Auto swipe peek animation
+            setTimeout(() => {
+              if (container) {
+                // Temporarily disable scroll snapping
+                container.style.scrollSnapType = 'none';
+                container.scrollTo({ left: 70, behavior: 'smooth' });
+                
+                setTimeout(() => {
+                  if (container) {
+                    container.scrollTo({ left: 0, behavior: 'smooth' });
+                    // Restore scroll snapping after animation completes
+                    setTimeout(() => {
+                      if (container) container.style.scrollSnapType = '';
+                    }, 500);
+                  }
+                }, 700);
+              }
+            }, 500);
+
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.05 }
+    );
+
+    observer.observe(container);
+
+    return () => {
+      if (container) {
+        observer.unobserve(container);
+      }
+    };
+  }, [reviews]);
 
   if (loading || reviews.length === 0) return null;
 
@@ -42,21 +79,9 @@ const Reviews = () => {
           </span>
         </div>
 
-        {/* Mobile Swipe Hint Overlay */}
-        {!hasScrolled && reviews.length > 1 && (
-          <div className="md:hidden absolute top-0 right-0 bottom-0 left-0 z-20 pointer-events-none transition-opacity duration-700 flex justify-center items-center">
-            <img 
-              src={swipeHandImg} 
-              alt="Swipe Gesture" 
-              className="w-16 h-16 object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)] animate-swipe-gesture"
-            />
-          </div>
-        )}
-
         {/* Grid/Slider */}
         <div 
           ref={scrollRef}
-          onScroll={handleScroll}
           className="flex md:grid overflow-x-auto snap-x snap-mandatory hide-scrollbar md:overflow-visible pb-8 md:pb-0 grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 -mx-6 px-6 md:mx-0 md:px-0"
         >
           {reviews.slice(0, 5).map((review) => (

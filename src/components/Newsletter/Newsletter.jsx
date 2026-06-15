@@ -22,7 +22,7 @@ const Newsletter = () => {
   };
 
   return (
-    <section className="py-12 bg-white">
+    <section className="py-6 md:py-12 bg-white">
       <div className="container mx-auto px-6">
         <div className="relative rounded-[2.5rem] overflow-hidden min-h-[200px] flex items-center shadow-xl">
           {/* Background Image with Overlay */}

@@ -1,11 +1,20 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import swipeHandImg from '../assets/swipe-hand-transparent.png';
+
 import { getReviews } from '../services/contentService';
 
 import PageHero from '../components/UI/PageHero';
 import reviewsBanner from '../assets/Review page Banner.jpeg';
+
+const videoReviews = [
+  { id: "Pjdej3Rz-OM", name: "Tharindu & Anne", date: "Jan 2024", thumbnail: "https://img.youtube.com/vi/Pjdej3Rz-OM/hqdefault.jpg" },
+  { id: "T5pHb4KrFJg", name: "The Wilson Family", date: "Dec 2023", thumbnail: "https://img.youtube.com/vi/T5pHb4KrFJg/hqdefault.jpg" },
+  { id: "iZbmWFCZrKQ", name: "Elena & Marco", date: "Nov 2023", thumbnail: "https://img.youtube.com/vi/iZbmWFCZrKQ/hqdefault.jpg" },
+  { id: "iPXf_9b4AQ8", name: "Sophie Laurent", date: "Oct 2023", thumbnail: "https://img.youtube.com/vi/iPXf_9b4AQ8/hqdefault.jpg" },
+  { id: "6APcyO3HLqM", name: "James Wilson", date: "Sep 2023", thumbnail: "https://img.youtube.com/vi/6APcyO3HLqM/hqdefault.jpg" },
+  { id: "Rcp6ilHKp8Q", name: "The Rossi Group", date: "Aug 2023", thumbnail: "https://img.youtube.com/vi/Rcp6ilHKp8Q/hqdefault.jpg" }
+];
 
 const Reviews = () => {
   const { t, i18n } = useTranslation();
@@ -13,26 +22,8 @@ const Reviews = () => {
   const [selectedReview, setSelectedReview] = useState(null);
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [hasScrolledVideos, setHasScrolledVideos] = useState(false);
-  const [hasScrolledText, setHasScrolledText] = useState(false);
   const videosScrollRef = useRef(null);
   const textScrollRef = useRef(null);
-
-  const handleVideosScroll = () => {
-    if (!hasScrolledVideos && videosScrollRef.current) {
-      if (videosScrollRef.current.scrollLeft > 20) {
-        setHasScrolledVideos(true);
-      }
-    }
-  };
-
-  const handleTextScroll = () => {
-    if (!hasScrolledText && textScrollRef.current) {
-      if (textScrollRef.current.scrollLeft > 20) {
-        setHasScrolledText(true);
-      }
-    }
-  };
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -45,14 +36,85 @@ const Reviews = () => {
 
   const textReviews = [...dynamicReviews];
 
-  const videoReviews = [
-    { id: "Pjdej3Rz-OM", name: "Tharindu & Anne", date: "Jan 2024", thumbnail: "https://img.youtube.com/vi/Pjdej3Rz-OM/hqdefault.jpg" },
-    { id: "T5pHb4KrFJg", name: "The Wilson Family", date: "Dec 2023", thumbnail: "https://img.youtube.com/vi/T5pHb4KrFJg/hqdefault.jpg" },
-    { id: "iZbmWFCZrKQ", name: "Elena & Marco", date: "Nov 2023", thumbnail: "https://img.youtube.com/vi/iZbmWFCZrKQ/hqdefault.jpg" },
-    { id: "iPXf_9b4AQ8", name: "Sophie Laurent", date: "Oct 2023", thumbnail: "https://img.youtube.com/vi/iPXf_9b4AQ8/hqdefault.jpg" },
-    { id: "6APcyO3HLqM", name: "James Wilson", date: "Sep 2023", thumbnail: "https://img.youtube.com/vi/6APcyO3HLqM/hqdefault.jpg" },
-    { id: "Rcp6ilHKp8Q", name: "The Rossi Group", date: "Aug 2023", thumbnail: "https://img.youtube.com/vi/Rcp6ilHKp8Q/hqdefault.jpg" }
-  ];
+
+
+  useEffect(() => {
+    if (window.innerWidth >= 640 || !videosScrollRef.current || videoReviews.length <= 1) return;
+
+    const container = videosScrollRef.current;
+    let animated = false;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !animated) {
+            animated = true;
+            setTimeout(() => {
+              if (container) {
+                container.style.scrollSnapType = 'none';
+                container.scrollTo({ left: 70, behavior: 'smooth' });
+                setTimeout(() => {
+                  if (container) {
+                    container.scrollTo({ left: 0, behavior: 'smooth' });
+                    setTimeout(() => {
+                      if (container) container.style.scrollSnapType = '';
+                    }, 500);
+                  }
+                }, 700);
+              }
+            }, 500);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.05 }
+    );
+
+    observer.observe(container);
+
+    return () => {
+      if (container) observer.unobserve(container);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (window.innerWidth >= 640 || !textScrollRef.current || dynamicReviews.length <= 1) return;
+
+    const container = textScrollRef.current;
+    let animated = false;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !animated) {
+            animated = true;
+            setTimeout(() => {
+              if (container) {
+                container.style.scrollSnapType = 'none';
+                container.scrollTo({ left: 70, behavior: 'smooth' });
+                setTimeout(() => {
+                  if (container) {
+                    container.scrollTo({ left: 0, behavior: 'smooth' });
+                    setTimeout(() => {
+                      if (container) container.style.scrollSnapType = '';
+                    }, 500);
+                  }
+                }, 700);
+              }
+            }, 500);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.05 }
+    );
+
+    observer.observe(container);
+
+    return () => {
+      if (container) observer.unobserve(container);
+    };
+  }, [dynamicReviews]);
 
   return (
     <div className="bg-[#f8fbff] min-h-screen">
@@ -206,20 +268,8 @@ const Reviews = () => {
           <p className="text-gray-400 mt-2">{t("reviews.recentVideosDesc")}</p>
         </div>
 
-        {/* Mobile Swipe Hint Overlay */}
-        {!hasScrolledVideos && videoReviews.length > 1 && (
-          <div className="sm:hidden absolute top-0 right-0 bottom-0 left-0 z-20 pointer-events-none transition-opacity duration-700 flex justify-center items-center">
-            <img 
-              src={swipeHandImg} 
-              alt="Swipe Gesture" 
-              className="w-16 h-16 object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)] animate-swipe-gesture"
-            />
-          </div>
-        )}
-
         <div 
           ref={videosScrollRef}
-          onScroll={handleVideosScroll}
           className="flex sm:grid overflow-x-auto snap-x snap-mandatory hide-scrollbar sm:overflow-visible pb-8 sm:pb-0 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 -mx-6 px-6 sm:mx-0 sm:px-0"
         >
           {videoReviews.map((video) => (
@@ -269,20 +319,8 @@ const Reviews = () => {
             <p className="text-gray-400 mt-2 whitespace-pre-line">{t("reviews.recentReviewsDesc")}</p>
           </div>
 
-          {/* Mobile Swipe Hint Overlay */}
-          {!hasScrolledText && textReviews.length > 1 && (
-            <div className="sm:hidden absolute top-0 right-0 bottom-0 left-0 z-20 pointer-events-none transition-opacity duration-700 flex justify-center items-center">
-              <img 
-                src={swipeHandImg} 
-                alt="Swipe Gesture" 
-                className="w-16 h-16 object-contain drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)] animate-swipe-gesture"
-              />
-            </div>
-          )}
-
           <div 
             ref={textScrollRef}
-            onScroll={handleTextScroll}
             className="flex sm:grid overflow-x-auto snap-x snap-mandatory hide-scrollbar sm:overflow-visible pb-8 sm:pb-0 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 -mx-6 px-6 sm:mx-0 sm:px-0"
           >
             {textReviews.map((review, i) => (
