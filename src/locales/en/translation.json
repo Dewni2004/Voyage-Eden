@@ -584,7 +584,8 @@
     "itineraryCard": {
       "days": "days",
       "perPerson": "/ Person",
-      "book": "Book"
+      "book": "Book",
+      "pidePresupuesto": "Request Quote"
     },
     "hotels": {
       "breadcrumb": "Hotels",

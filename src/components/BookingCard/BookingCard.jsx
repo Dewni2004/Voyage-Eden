@@ -2,6 +2,17 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import luxuryBg from '../../assets/luxury-bg.png';
 
+const formatPrice = (price, t) => {
+  if (!price) return '';
+  const priceStr = price.toString().trim();
+  if (priceStr.toLowerCase() === 'pide presupuesto') {
+    return t ? t('itineraryCard.pidePresupuesto', 'Pide Presupuesto') : priceStr;
+  }
+  if (priceStr.includes('€')) return priceStr;
+  if (/[a-zA-Z]/.test(priceStr)) return priceStr;
+  return `€ ${priceStr}`;
+};
+
 const BookingCard = ({ price = "1,250" }) => {
   const { t } = useTranslation();
   return (
@@ -24,7 +35,7 @@ const BookingCard = ({ price = "1,250" }) => {
 
           <div className="flex flex-col items-center md:items-end gap-6 w-full md:w-auto">
             <div className="flex items-baseline gap-2">
-              <span className="text-luxury text-4xl md:text-6xl font-serif font-bold">€ {price}</span>
+              <span className="text-luxury text-4xl md:text-6xl font-serif font-bold">{formatPrice(price, t)}</span>
               <span className="text-white/50 text-lg md:text-xl font-light">{t("bookingCard.perPerson")}</span>
             </div>
             

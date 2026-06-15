@@ -3,11 +3,31 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import swipeHandImg from '../../assets/swipe-hand-transparent.png';
 
+const formatPrice = (price, t) => {
+  if (!price) return '';
+  const priceStr = price.toString().trim();
+  if (priceStr.toLowerCase() === 'pide presupuesto') {
+    return t ? t('itineraryCard.pidePresupuesto', 'Pide Presupuesto') : priceStr;
+  }
+  if (priceStr.includes('€')) return priceStr;
+  if (/[a-zA-Z]/.test(priceStr)) return priceStr;
+  return `€ ${priceStr}`;
+};
+
 const getIconSvg = (iconText, iconTextColorClass) => {
   const text = iconText.toLowerCase();
   
-  // 1. Star / Hotel / Rating / Luxury
-  if (text.includes('étoile') || text.includes('hotel') || text.includes('hôtel') || text.includes('boutique') || text.includes('resort') || text.includes('camp') || text.includes('*')) {
+  // 1. Hotel / Accommodation / Superior Category
+  if (text.includes('hotel') || text.includes('hôtel') || text.includes('boutique') || text.includes('resort') || text.includes('camp') || text.includes('superior') || text.includes('standard') || text.includes('premium') || text.includes('luxury') || text.includes('lodge') || text.includes('hebergement') || text.includes('hébergement')) {
+    return (
+      <svg className={`w-3.5 h-3.5 ${iconTextColorClass} flex-shrink-0`} fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 16.5h1.5M13.5 16.5H15" />
+      </svg>
+    );
+  }
+
+  // 1b. Star Rating
+  if (text.includes('étoile') || text.includes('star') || text.includes('*')) {
     return (
       <svg className={`w-3.5 h-3.5 ${iconTextColorClass} flex-shrink-0`} fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
@@ -126,6 +146,105 @@ const PopularItineraries = ({ title, subtitle, id, itineraries, isDark, isGreen 
     return 'lg:grid-cols-4';
   };
 
+  const renderDescription = (descText) => {
+    if (!descText) return null;
+    
+    const lines = descText.split(/\r?\n/).map(line => line.trim()).filter(Boolean);
+    
+    const hasBullets = descText.includes('•') || 
+                       descText.includes('●') || 
+                       descText.includes('·') || 
+                       descText.includes('\u2022') || 
+                       descText.includes('\u25cf') || 
+                       descText.includes('\u00b7') ||
+                       lines.some(l => l.startsWith('-') || l.startsWith('*'));
+    
+    const hasPins = descText.includes('📍') || descText.includes('📌') || descText.includes('🗺️');
+    
+    // Treat as list if we have explicit bullets, pins, or multiple short lines representing route locations
+    const isList = hasBullets || hasPins || (lines.length > 1 && lines.every(l => l.length < 35));
+    
+    if (isList) {
+      const inclusions = [];
+      const locations = [];
+      
+      lines.forEach(line => {
+        if (/^[•●·\u2022\u25cf\u00b7\-\*]/.test(line)) {
+          const clean = line.replace(/^[•●·\u2022\u25cf\u00b7\-\*]\s*/, '').trim();
+          if (clean) inclusions.push(clean);
+        } else {
+          if (line.includes('📍') || line.includes('📌') || line.includes('🗺️')) {
+            const parts = line.split(/[📍📌🗺️]/).map(p => p.trim()).filter(Boolean);
+            locations.push(...parts);
+          } else {
+            const clean = line.replace(/[📍📌🗺️]/g, '').trim();
+            if (clean) locations.push(clean);
+          }
+        }
+      });
+      
+      const checkIconColor = isGreen ? 'text-green-300' : isDark ? 'text-[#c5a059]' : 'text-green-600';
+      const textColor = isGreen || isDark ? 'text-white/80' : 'text-gray-500';
+      
+      return (
+        <div className="flex flex-col flex-grow mb-8 text-left">
+          {/* Inclusions / Details */}
+          {inclusions.length > 0 && (
+            <ul className="space-y-2 text-[13px] leading-relaxed font-light mb-4">
+              {inclusions.map((part, idx) => (
+                <li key={idx} className="flex items-start gap-2">
+                  <svg className={`w-4 h-4 ${checkIconColor} mt-0.5 flex-shrink-0`} fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                  </svg>
+                  <span className={textColor}>{part}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+          
+          {/* Route Badges */}
+          {locations.length > 0 && (
+            <div className="mt-2">
+              <p className={`text-[10px] uppercase tracking-wider font-bold mb-2 ${isGreen || isDark ? 'text-white/40' : 'text-gray-400'}`}>
+                {t ? t("itineraryCard.route", "Ruta / Route") : "Ruta / Route"}
+              </p>
+              <div className="flex flex-wrap items-center gap-y-2 gap-x-1">
+                {locations.map((loc, i) => (
+                  <React.Fragment key={i}>
+                    <span className={`text-[11px] font-medium px-2.5 py-1 rounded-full flex items-center gap-1 ${
+                      isGreen 
+                        ? 'bg-white/10 text-white border border-white/10' 
+                        : isDark 
+                          ? 'bg-white/5 text-white/95 border border-white/5' 
+                          : 'bg-gray-50 text-gray-700 border border-gray-200 shadow-sm'
+                    }`}>
+                      <svg className={`w-2.5 h-2.5 ${checkIconColor} flex-shrink-0`} fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                      </svg>
+                      {loc}
+                    </span>
+                    {i < locations.length - 1 && (
+                      <svg className={`w-3.5 h-3.5 ${isGreen || isDark ? 'text-white/30' : 'text-gray-400'} mx-0.5`} fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                      </svg>
+                    )}
+                  </React.Fragment>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      );
+    }
+    
+    return (
+      <p className={`text-[14px] leading-relaxed mb-8 flex-grow font-light whitespace-pre-line ${isGreen || isDark ? 'text-white/80' : 'text-gray-500'}`}>
+        {descText}
+      </p>
+    );
+  };
+
   return (
     <section id={id} className={`py-10 md:py-16 relative overflow-hidden ${isDark ? 'bg-[#050b18]' : 'bg-white'}`}>
       {/* Premium Background for Luxury Section */}
@@ -204,14 +323,12 @@ const PopularItineraries = ({ title, subtitle, id, itineraries, isDark, isGreen 
                   ))}
                 </div>
 
-                <p className={`text-[14px] leading-relaxed mb-8 flex-grow font-light ${isGreen || isDark ? 'text-white/80' : 'text-gray-500'}`}>
-                  {item.description}
-                </p>
+                {renderDescription(item.description)}
 
                 <div className={`pt-6 border-t flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${isGreen || isDark ? 'border-white/10' : 'border-gray-100'}`}>
                   <div className="flex flex-col">
                     <span className={`font-bold text-lg ${isGreen || isDark ? 'text-white' : 'text-primary'}`}>
-                      €{item.price}
+                      {formatPrice(item.price, t)}
                       <span className={`${isGreen || isDark ? 'text-white/50' : 'text-gray-400'} text-[10px] font-normal uppercase ml-1`}>{t("popularItin.perPerson")}</span>
                     </span>
                   </div>
