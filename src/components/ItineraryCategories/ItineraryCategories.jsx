@@ -68,7 +68,7 @@ const ItineraryCategories = ({ showTitle = false, itineraries = [] }) => {
             <div 
               key={category.id}
               onClick={() => scrollToSection(category.id)}
-              className="group relative h-48 rounded-3xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 animate-fade-in"
+              className="group relative h-32 sm:h-36 md:h-48 rounded-2xl md:rounded-3xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 animate-fade-in"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               <img 
@@ -77,8 +77,8 @@ const ItineraryCategories = ({ showTitle = false, itineraries = [] }) => {
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent"></div>
-              <div className="absolute bottom-0 left-0 right-0 p-6">
-                <h3 className="text-white font-bold text-lg leading-tight group-hover:text-luxury transition-colors">
+              <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
+                <h3 className="text-white font-bold text-sm md:text-lg leading-tight group-hover:text-luxury transition-colors">
                   {t(`itinerariesPage.categories.${category.id}`, { defaultValue: category.title })}
                 </h3>
               </div>
