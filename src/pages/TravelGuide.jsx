@@ -46,16 +46,40 @@ const TravelGuide = () => {
   };
   
   const filteredArticles = allArticles.filter(article => {
-    const categoryFr = getTranslatedCategory(article.category);
-    const matchesSearch = article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      categoryFr.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (article.excerpt && article.excerpt.toLowerCase().includes(searchQuery.toLowerCase()));
+    if (!article) return false;
+    const title = article.title || '';
+    const excerpt = article.excerpt || '';
+    const category = article.category || '';
+    const categoryFr = getTranslatedCategory(category) || '';
+
+    const query = searchQuery.toLowerCase();
+    const matchesSearch = title.toLowerCase().includes(query) ||
+      categoryFr.toLowerCase().includes(query) ||
+      excerpt.toLowerCase().includes(query);
     
-    const matchesCategory = selectedCategory === 'All' || article.category === selectedCategory || categoryFr === selectedCategory;
+    const matchesCategory = selectedCategory === 'All' || category === selectedCategory || categoryFr === selectedCategory;
     const matchesTag = selectedTag === 'All' || (article.tags && article.tags.some(t => t === selectedTag || getTranslatedCategory(t) === selectedTag));
     
     return matchesSearch && matchesCategory && matchesTag;
   });
+
+  const isFiltered = searchQuery !== '' || selectedCategory !== 'All' || selectedTag !== 'All';
+
+  const getSearchResultsTitle = () => {
+    const lang = i18n.language?.split('-')[0] || 'en';
+    switch (lang) {
+      case 'es':
+        return 'Resultados de búsqueda';
+      case 'fr':
+        return 'Résultats de recherche';
+      case 'de':
+        return 'Suchergebnisse';
+      case 'it':
+        return 'Risultati della ricerca';
+      default:
+        return 'Search Results';
+    }
+  };
 
   const categories = [
     { name: "All", count: allArticles.length },
@@ -125,43 +149,91 @@ const TravelGuide = () => {
         <div className="flex flex-col lg:flex-row gap-12">
           
           {/* Left Column: Articles */}
-          <div className="lg:w-2/3 order-2 lg:order-1">
+          <div className="lg:w-2/3">
             
-            <h2 className="text-primary text-2xl font-bold mb-6 uppercase tracking-widest border-l-4 border-primary pl-4">{t('travelGuide.newsTitle')}</h2>
-            <div className="grid grid-cols-2 md:grid-cols-2 gap-4 md:gap-10 mb-12">
-              {allArticles.slice(0, 2).map(article => <ArticleCard key={article.id} article={article} />)}
-            </div>
-
-            <h2 className="text-primary text-2xl font-bold mb-6 uppercase tracking-widest border-l-4 border-primary pl-4">{t('travelGuide.usefulTitle')}</h2>
-            <div className="grid grid-cols-2 md:grid-cols-2 gap-4 md:gap-10 mb-12">
-              {allArticles.slice(2, 4).map(article => <ArticleCard key={article.id} article={article} />)}
-            </div>
-
-            <h2 className="text-primary text-2xl font-bold mb-6 uppercase tracking-widest border-l-4 border-primary pl-4">{t('travelGuide.popularTitle')}</h2>
-            <div className="grid grid-cols-2 md:grid-cols-2 gap-4 md:gap-10 mb-12">
-              {allArticles.slice(4, 6).map(article => <ArticleCard key={article.id} article={article} />)}
-            </div>
-
-            <h2 className="text-primary text-2xl font-bold mb-6 uppercase tracking-widest border-l-4 border-primary pl-4">{t('travelGuide.allArticlesTitle')}</h2>
-            <div className="grid grid-cols-2 md:grid-cols-2 gap-4 md:gap-10">
-              {filteredArticles.length > 0 ? (
-                (isMobile ? filteredArticles.slice(0, visibleCount) : filteredArticles).map((article) => (
-                  <ArticleCard key={article.id} article={article} />
-                ))
-              ) : (
-                <div className="col-span-full py-20 text-center bg-white rounded-[40px] shadow-sm border border-gray-100">
-                  <div className="text-6xl mb-6">🔎</div>
-                  <h3 className="text-2xl font-bold text-primary mb-2">{t('travelGuide.noArticlesTitle')}</h3>
-                  <p className="text-gray-400 max-w-xs mx-auto">{t('travelGuide.noArticlesDesc')}</p>
-                  <button 
-                    onClick={() => { setSearchQuery(''); setSelectedCategory('All'); setSelectedTag('All'); }} 
-                    className="mt-6 text-primary font-bold hover:underline"
-                  >
-                    {t('travelGuide.clearFilters')}
-                  </button>
+            {/* Mobile Search Bar */}
+            <div className="block lg:hidden mb-8 bg-white p-6 sm:p-10 rounded-[32px] shadow-lg border border-gray-100">
+              <h3 className="text-primary text-xl font-bold mb-6">{t('travelGuide.searchTitle')}</h3>
+              <div className="relative">
+                <input 
+                  type="text" 
+                  placeholder={t('travelGuide.searchPlaceholder')} 
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full bg-gray-50 border border-gray-200 rounded-2xl py-4 px-6 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all text-gray-700"
+                />
+                <div className="absolute right-4 top-1/2 -translate-y-1/2 text-primary">
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
                 </div>
-              )}
+              </div>
             </div>
+            
+            {isFiltered ? (
+              <>
+                <h2 className="text-primary text-2xl font-bold mb-6 uppercase tracking-widest border-l-4 border-primary pl-4">
+                  {getSearchResultsTitle()}
+                </h2>
+                <div className="grid grid-cols-2 md:grid-cols-2 gap-4 md:gap-10">
+                  {filteredArticles.length > 0 ? (
+                    (isMobile ? filteredArticles.slice(0, visibleCount) : filteredArticles).map((article) => (
+                      <ArticleCard key={article.id} article={article} />
+                    ))
+                  ) : (
+                    <div className="col-span-full py-20 text-center bg-white rounded-[40px] shadow-sm border border-gray-100">
+                      <div className="text-6xl mb-6">🔎</div>
+                      <h3 className="text-2xl font-bold text-primary mb-2">{t('travelGuide.noArticlesTitle')}</h3>
+                      <p className="text-gray-400 max-w-xs mx-auto">{t('travelGuide.noArticlesDesc')}</p>
+                      <button 
+                        onClick={() => { setSearchQuery(''); setSelectedCategory('All'); setSelectedTag('All'); }} 
+                        className="mt-6 text-primary font-bold hover:underline"
+                      >
+                        {t('travelGuide.clearFilters')}
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </>
+            ) : (
+              <>
+                <h2 className="text-primary text-2xl font-bold mb-6 uppercase tracking-widest border-l-4 border-primary pl-4">{t('travelGuide.newsTitle')}</h2>
+                <div className="grid grid-cols-2 md:grid-cols-2 gap-4 md:gap-10 mb-12">
+                  {allArticles.slice(0, 2).map(article => <ArticleCard key={article.id} article={article} />)}
+                </div>
+
+                <h2 className="text-primary text-2xl font-bold mb-6 uppercase tracking-widest border-l-4 border-primary pl-4">{t('travelGuide.usefulTitle')}</h2>
+                <div className="grid grid-cols-2 md:grid-cols-2 gap-4 md:gap-10 mb-12">
+                  {allArticles.slice(2, 4).map(article => <ArticleCard key={article.id} article={article} />)}
+                </div>
+
+                <h2 className="text-primary text-2xl font-bold mb-6 uppercase tracking-widest border-l-4 border-primary pl-4">{t('travelGuide.popularTitle')}</h2>
+                <div className="grid grid-cols-2 md:grid-cols-2 gap-4 md:gap-10 mb-12">
+                  {allArticles.slice(4, 6).map(article => <ArticleCard key={article.id} article={article} />)}
+                </div>
+
+                <h2 className="text-primary text-2xl font-bold mb-6 uppercase tracking-widest border-l-4 border-primary pl-4">{t('travelGuide.allArticlesTitle')}</h2>
+                <div className="grid grid-cols-2 md:grid-cols-2 gap-4 md:gap-10">
+                  {filteredArticles.length > 0 ? (
+                    (isMobile ? filteredArticles.slice(0, visibleCount) : filteredArticles).map((article) => (
+                      <ArticleCard key={article.id} article={article} />
+                    ))
+                  ) : (
+                    <div className="col-span-full py-20 text-center bg-white rounded-[40px] shadow-sm border border-gray-100">
+                      <div className="text-6xl mb-6">🔎</div>
+                      <h3 className="text-2xl font-bold text-primary mb-2">{t('travelGuide.noArticlesTitle')}</h3>
+                      <p className="text-gray-400 max-w-xs mx-auto">{t('travelGuide.noArticlesDesc')}</p>
+                      <button 
+                        onClick={() => { setSearchQuery(''); setSelectedCategory('All'); setSelectedTag('All'); }} 
+                        className="mt-6 text-primary font-bold hover:underline"
+                      >
+                        {t('travelGuide.clearFilters')}
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </>
+            )}
 
             {isMobile && filteredArticles.length > visibleCount && (
               <div className="flex justify-center mt-12">
@@ -176,10 +248,10 @@ const TravelGuide = () => {
           </div>
 
           {/* Right Column: Sidebar */}
-          <div className="lg:w-1/3 space-y-12 order-1 lg:order-2 lg:sticky lg:top-28 lg:self-start lg:max-h-[calc(100vh-140px)] lg:overflow-y-auto hide-scrollbar">
+          <div className="lg:w-1/3 space-y-12 lg:sticky lg:top-28 lg:self-start lg:max-h-[calc(100vh-140px)] lg:overflow-y-auto hide-scrollbar">
             
-            {/* Search */}
-            <div className="bg-white p-10 rounded-[32px] shadow-lg border border-gray-100">
+            {/* Search - Desktop only */}
+            <div className="hidden lg:block bg-white p-10 rounded-[32px] shadow-lg border border-gray-100">
               <h3 className="text-primary text-xl font-bold mb-6">{t('travelGuide.searchTitle')}</h3>
               <div className="relative">
                 <input 

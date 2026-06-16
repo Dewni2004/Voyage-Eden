@@ -47,7 +47,7 @@ const AboutUs = () => {
       />
 
       {/* Who We Are Section */}
-      <section className="py-12 md:py-16 bg-[#f8fbff]">
+      <section className="py-10 md:py-14 bg-[#f8fbff]">
         <div className="container mx-auto px-6">
           <div className="flex flex-col lg:flex-row gap-16 items-center">
             {/* Left Content */}
@@ -122,9 +122,9 @@ const AboutUs = () => {
       </section>
 
       {/* What Sets Us Apart Section */}
-      <section className="py-12 md:py-16 bg-white">
+      <section className="py-10 md:py-14 bg-white">
         <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
+          <div className="text-center mb-8 md:mb-12">
             <h2 className="text-primary text-4xl font-bold mb-4">{t('aboutUs.whatSetsUsApartTitle')}</h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
               {t('aboutUs.whatSetsUsApartSubtitle')}
@@ -186,13 +186,13 @@ const AboutUs = () => {
       </section>
 
       {/* Meet the Founders & Representatives Section */}
-      <section className="py-12 md:py-16 bg-[#f8fbff]">
+      <section className="py-10 md:py-14 bg-[#f8fbff]">
         <div className="container mx-auto px-6">
-          <div className="text-center mb-20">
+          <div className="text-center mb-8 md:mb-12">
             <h2 className="text-primary text-4xl font-bold mb-4">{t('aboutUs.foundersTitle')}</h2>
           </div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-12">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
             {[
               { 
                 name: "Sanji", 
@@ -241,9 +241,9 @@ const AboutUs = () => {
       </section>
 
       {/* Our Team at the Office Section */}
-      <section className="py-12 md:py-16 bg-white">
+      <section className="py-10 md:py-14 bg-white">
         <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
+          <div className="text-center mb-8 md:mb-12">
             <h2 className="text-primary text-4xl font-bold mb-4">{t('aboutUs.teamTitle')}</h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
               {t('aboutUs.teamSubtitle')}
@@ -345,16 +345,16 @@ const AboutUs = () => {
       </section>
 
       {/* Our Guides & Drivers Section */}
-      <section className="py-12 md:py-16 bg-[#f8fbff]">
+      <section className="py-10 md:py-14 bg-[#f8fbff]">
         <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
+          <div className="text-center mb-8 md:mb-12">
             <h2 className="text-primary text-4xl font-bold mb-4">{t('aboutUs.guidesTitle')}</h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
               {t('aboutUs.guidesSubtitle')}
             </p>
           </div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-12">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
             {[
               { 
                 name: "Sampath", 
