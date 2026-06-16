@@ -86,9 +86,40 @@ const Footer = () => {
             <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/10">
               <h4 className="text-lg font-bold mb-4 uppercase tracking-wider text-luxury">{t('footer.contact_title')}</h4>
               <div className="space-y-2 text-sm text-gray-300">
-                <p><a href={`mailto:${t('footer.email1')},${t('footer.email2')}`} className="hover:text-white transition-colors">{t('footer.email1')}</a></p>
-                <p><a href={`mailto:${t('footer.email1')},${t('footer.email2')}`} className="hover:text-white transition-colors">{t('footer.email2')}</a></p>
-                <p className="pt-2 font-semibold text-white"><a href="https://wa.me/94771470150" target="_blank" rel="noopener noreferrer" className="hover:text-green-400 transition-colors">{t('footer.phone')}</a></p>
+                <p className="flex items-center gap-2">
+                  <svg className="w-4 h-4 text-gray-400 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.62a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                  </svg>
+                  <a href={`mailto:${t('footer.email1')}`} className="hover:text-white transition-colors truncate">{t('footer.email1')}</a>
+                </p>
+                <p className="flex items-center gap-2">
+                  <svg className="w-4 h-4 text-gray-400 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.62a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                  </svg>
+                  <a href={`mailto:${t('footer.email2')}`} className="hover:text-white transition-colors truncate">{t('footer.email2')}</a>
+                </p>
+                <div className="flex flex-wrap gap-x-4 gap-y-1.5 pt-1.5">
+                  <p className="flex items-center gap-2">
+                    <svg className="w-4 h-4 text-[#25D366] shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 11.957.01c3.18.001 6.167 1.24 8.413 3.488 2.247 2.248 3.485 5.237 3.483 8.417-.004 6.557-5.342 11.897-11.9 11.897h-.008c-1.988 0-3.943-.546-5.683-1.448L0 24zM6.305 20.78a9.882 9.882 0 005.683 1.448h.005c5.385 0 9.768-4.386 9.771-9.771.002-2.61-1.013-5.064-2.859-6.91a9.712 9.712 0 00-6.91-2.859C6.545 2.688 2.16 7.072 2.158 12.457c-.001 1.72.45 3.397 1.305 4.887l-1.01 3.693 3.852-.957zM16.098 13.1c-.26-.13-1.53-.756-1.77-.84-.23-.09-.4-.13-.57.13-.17.26-.66.83-.81.99-.15.17-.3.19-.56.06-.26-.13-1.1-.4-2.1-1.3-.77-.69-1.3-1.54-1.45-1.8-.15-.26-.02-.4.11-.53.12-.12.26-.31.39-.46.13-.15.17-.26.26-.43.09-.17.04-.32-.02-.45-.06-.13-.57-1.37-.78-1.88-.2-.5-.4-.43-.57-.44-.14-.01-.31-.01-.48-.01s-.44.06-.67.31c-.23.25-.87.85-.87 2.07s.89 2.4 1.01 2.56c.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.53-.62 1.74-1.21.21-.59.21-1.09.15-1.21-.06-.12-.22-.19-.48-.32z"/>
+                    </svg>
+                    <a href="https://wa.me/94764409650" target="_blank" rel="noopener noreferrer" className="hover:text-green-400 transition-colors font-semibold text-white">+94 764409650</a>
+                  </p>
+                  <p className="flex items-center gap-2">
+                    <svg className="w-4 h-4 text-[#25D366] shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 11.957.01c3.18.001 6.167 1.24 8.413 3.488 2.247 2.248 3.485 5.237 3.483 8.417-.004 6.557-5.342 11.897-11.9 11.897h-.008c-1.988 0-3.943-.546-5.683-1.448L0 24zM6.305 20.78a9.882 9.882 0 005.683 1.448h.005c5.385 0 9.768-4.386 9.771-9.771.002-2.61-1.013-5.064-2.859-6.91a9.712 9.712 0 00-6.91-2.859C6.545 2.688 2.16 7.072 2.158 12.457c-.001 1.72.45 3.397 1.305 4.887l-1.01 3.693 3.852-.957zM16.098 13.1c-.26-.13-1.53-.756-1.77-.84-.23-.09-.4-.13-.57.13-.17.26-.66.83-.81.99-.15.17-.3.19-.56.06-.26-.13-1.1-.4-2.1-1.3-.77-.69-1.3-1.54-1.45-1.8-.15-.26-.02-.4.11-.53.12-.12.26-.31.39-.46.13-.15.17-.26.26-.43.09-.17.04-.32-.02-.45-.06-.13-.57-1.37-.78-1.88-.2-.5-.4-.43-.57-.44-.14-.01-.31-.01-.48-.01s-.44.06-.67.31c-.23.25-.87.85-.87 2.07s.89 2.4 1.01 2.56c.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.53-.62 1.74-1.21.21-.59.21-1.09.15-1.21-.06-.12-.22-.19-.48-.32z"/>
+                    </svg>
+                    <a href="https://wa.me/94771470150" target="_blank" rel="noopener noreferrer" className="hover:text-green-400 transition-colors font-semibold text-white">+94 77147 0150</a>
+                  </p>
+                </div>
+                <p className="flex items-center gap-2">
+                  <svg className="w-4 h-4 text-blue-400 shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-2.824-1.806-5.122-4.104-6.926-6.927l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+                  </svg>
+                  <a href="tel:+94372201747" className="hover:text-white transition-colors font-medium text-gray-300">
+                    +94 372201747 <span className="text-xs text-gray-400">({t('footer.office_label', 'Oficina en Sri Lanka')})</span>
+                  </a>
+                </p>
               </div>
             </div>
 
