@@ -24,16 +24,22 @@ const Reviews = () => {
     if (window.innerWidth >= 768 || !scrollRef.current || reviews.length <= 1) return;
 
     const container = scrollRef.current;
-    let animated = false;
+    let observerActive = true;
+    let isAutoScrolling = false;
+
+    const handleScroll = () => {
+      if (isAutoScrolling) return;
+      setShowSwipeHint(false);
+      container.removeEventListener('scroll', handleScroll);
+    };
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && !animated) {
-            animated = true;
-            
-            // Show hand overlay during swipe animation
+          if (entry.isIntersecting && observerActive) {
             setShowSwipeHint(true);
+            isAutoScrolling = true;
+            container.addEventListener('scroll', handleScroll, { passive: true });
 
             // Auto swipe peek animation
             setTimeout(() => {
@@ -48,8 +54,7 @@ const Reviews = () => {
                     // Restore scroll snapping after animation completes
                     setTimeout(() => {
                       if (container) container.style.scrollSnapType = '';
-                      // Hide hand overlay
-                      setShowSwipeHint(false);
+                      isAutoScrolling = false;
                     }, 500);
                   }
                 }, 700);
@@ -57,6 +62,7 @@ const Reviews = () => {
             }, 500);
 
             observer.unobserve(entry.target);
+            observerActive = false;
           }
         });
       },
@@ -68,6 +74,7 @@ const Reviews = () => {
     return () => {
       if (container) {
         observer.unobserve(container);
+        container.removeEventListener('scroll', handleScroll);
       }
     };
   }, [reviews]);

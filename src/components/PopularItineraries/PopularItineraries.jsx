@@ -135,16 +135,22 @@ const PopularItineraries = ({ title, subtitle, id, itineraries, isDark, isGreen 
     if (window.innerWidth >= 768 || !scrollRef.current || itineraries.length <= 1) return;
 
     const container = scrollRef.current;
-    let animated = false;
+    let observerActive = true;
+    let isAutoScrolling = false;
+
+    const handleScroll = () => {
+      if (isAutoScrolling) return;
+      setShowSwipeHint(false);
+      container.removeEventListener('scroll', handleScroll);
+    };
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && !animated) {
-            animated = true;
-            
-            // Show hand overlay during swipe animation
+          if (entry.isIntersecting && observerActive) {
             setShowSwipeHint(true);
+            isAutoScrolling = true;
+            container.addEventListener('scroll', handleScroll, { passive: true });
 
             // Auto swipe peek animation
             setTimeout(() => {
@@ -159,8 +165,7 @@ const PopularItineraries = ({ title, subtitle, id, itineraries, isDark, isGreen 
                     // Restore scroll snapping after animation completes
                     setTimeout(() => {
                       if (container) container.style.scrollSnapType = '';
-                      // Hide hand overlay
-                      setShowSwipeHint(false);
+                      isAutoScrolling = false;
                     }, 500);
                   }
                 }, 700);
@@ -168,6 +173,7 @@ const PopularItineraries = ({ title, subtitle, id, itineraries, isDark, isGreen 
             }, 500);
 
             observer.unobserve(entry.target);
+            observerActive = false;
           }
         });
       },
@@ -179,6 +185,7 @@ const PopularItineraries = ({ title, subtitle, id, itineraries, isDark, isGreen 
     return () => {
       if (container) {
         observer.unobserve(container);
+        container.removeEventListener('scroll', handleScroll);
       }
     };
   }, [itineraries]);

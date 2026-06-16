@@ -15,14 +15,24 @@ const TourCategorySection = ({ title, subtitle, tours, t, noBottomMargin }) => {
     if (window.innerWidth >= 768 || !localScrollRef.current || !tours || tours.length <= 1) return;
 
     const container = localScrollRef.current;
-    let animated = false;
+    let observerActive = true;
+    let isAutoScrolling = false;
+
+    const handleScroll = () => {
+      if (isAutoScrolling) return;
+      setShowSwipeHint(false);
+      container.removeEventListener('scroll', handleScroll);
+    };
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && !animated) {
-            animated = true;
+          if (entry.isIntersecting && observerActive) {
             setShowSwipeHint(true);
+            isAutoScrolling = true;
+            container.addEventListener('scroll', handleScroll, { passive: true });
+
+            // Auto swipe peek animation
             setTimeout(() => {
               if (container) {
                 container.style.scrollSnapType = 'none';
@@ -32,13 +42,15 @@ const TourCategorySection = ({ title, subtitle, tours, t, noBottomMargin }) => {
                     container.scrollTo({ left: 0, behavior: 'smooth' });
                     setTimeout(() => {
                       if (container) container.style.scrollSnapType = '';
-                      setShowSwipeHint(false);
+                      isAutoScrolling = false;
                     }, 500);
                   }
                 }, 700);
               }
             }, 500);
+
             observer.unobserve(entry.target);
+            observerActive = false;
           }
         });
       },
@@ -48,7 +60,10 @@ const TourCategorySection = ({ title, subtitle, tours, t, noBottomMargin }) => {
     observer.observe(container);
 
     return () => {
-      if (container) observer.unobserve(container);
+      if (container) {
+        observer.unobserve(container);
+        container.removeEventListener('scroll', handleScroll);
+      }
     };
   }, [tours]);
   
@@ -120,14 +135,24 @@ const FamilyTourSplitSection = ({ title, subtitle, standardTours, premiumTours, 
     if (window.innerWidth >= 640 || !standardScrollRef.current || !standardTours || standardTours.length <= 1) return;
 
     const container = standardScrollRef.current;
-    let animated = false;
+    let observerActive = true;
+    let isAutoScrolling = false;
+
+    const handleScroll = () => {
+      if (isAutoScrolling) return;
+      setShowStandardHint(false);
+      container.removeEventListener('scroll', handleScroll);
+    };
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && !animated) {
-            animated = true;
+          if (entry.isIntersecting && observerActive) {
             setShowStandardHint(true);
+            isAutoScrolling = true;
+            container.addEventListener('scroll', handleScroll, { passive: true });
+
+            // Auto swipe peek animation
             setTimeout(() => {
               if (container) {
                 container.style.scrollSnapType = 'none';
@@ -137,13 +162,15 @@ const FamilyTourSplitSection = ({ title, subtitle, standardTours, premiumTours, 
                     container.scrollTo({ left: 0, behavior: 'smooth' });
                     setTimeout(() => {
                       if (container) container.style.scrollSnapType = '';
-                      setShowStandardHint(false);
+                      isAutoScrolling = false;
                     }, 500);
                   }
                 }, 700);
               }
             }, 500);
+
             observer.unobserve(entry.target);
+            observerActive = false;
           }
         });
       },
@@ -153,7 +180,10 @@ const FamilyTourSplitSection = ({ title, subtitle, standardTours, premiumTours, 
     observer.observe(container);
 
     return () => {
-      if (container) observer.unobserve(container);
+      if (container) {
+        observer.unobserve(container);
+        container.removeEventListener('scroll', handleScroll);
+      }
     };
   }, [standardTours]);
 
@@ -161,14 +191,24 @@ const FamilyTourSplitSection = ({ title, subtitle, standardTours, premiumTours, 
     if (window.innerWidth >= 640 || !premiumScrollRef.current || !premiumTours || premiumTours.length <= 1) return;
 
     const container = premiumScrollRef.current;
-    let animated = false;
+    let observerActive = true;
+    let isAutoScrolling = false;
+
+    const handleScroll = () => {
+      if (isAutoScrolling) return;
+      setShowPremiumHint(false);
+      container.removeEventListener('scroll', handleScroll);
+    };
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && !animated) {
-            animated = true;
+          if (entry.isIntersecting && observerActive) {
             setShowPremiumHint(true);
+            isAutoScrolling = true;
+            container.addEventListener('scroll', handleScroll, { passive: true });
+
+            // Auto swipe peek animation
             setTimeout(() => {
               if (container) {
                 container.style.scrollSnapType = 'none';
@@ -178,13 +218,15 @@ const FamilyTourSplitSection = ({ title, subtitle, standardTours, premiumTours, 
                     container.scrollTo({ left: 0, behavior: 'smooth' });
                     setTimeout(() => {
                       if (container) container.style.scrollSnapType = '';
-                      setShowPremiumHint(false);
+                      isAutoScrolling = false;
                     }, 500);
                   }
                 }, 700);
               }
             }, 500);
+
             observer.unobserve(entry.target);
+            observerActive = false;
           }
         });
       },
@@ -194,7 +236,10 @@ const FamilyTourSplitSection = ({ title, subtitle, standardTours, premiumTours, 
     observer.observe(container);
 
     return () => {
-      if (container) observer.unobserve(container);
+      if (container) {
+        observer.unobserve(container);
+        container.removeEventListener('scroll', handleScroll);
+      }
     };
   }, [premiumTours]);
 

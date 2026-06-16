@@ -24,9 +24,18 @@ const Reviews = () => {
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [loading, setLoading] = useState(true);
   const videosScrollRef = useRef(null);
-  const textScrollRef = useRef(null);
   const [showSwipeHintVideos, setShowSwipeHintVideos] = useState(false);
-  const [showSwipeHintText, setShowSwipeHintText] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [expandedTextReviews, setExpandedTextReviews] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -38,21 +47,32 @@ const Reviews = () => {
   }, [i18n.language]);
 
   const textReviews = [...dynamicReviews];
-
-
+  const displayedReviews = (isMobile && !expandedTextReviews) 
+    ? textReviews.slice(0, 2) 
+    : textReviews;
 
   useEffect(() => {
     if (window.innerWidth >= 640 || !videosScrollRef.current || videoReviews.length <= 1) return;
 
     const container = videosScrollRef.current;
-    let animated = false;
+    let observerActive = true;
+    let isAutoScrolling = false;
+
+    const handleScroll = () => {
+      if (isAutoScrolling) return;
+      setShowSwipeHintVideos(false);
+      container.removeEventListener('scroll', handleScroll);
+    };
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && !animated) {
-            animated = true;
+          if (entry.isIntersecting && observerActive) {
             setShowSwipeHintVideos(true);
+            isAutoScrolling = true;
+            container.addEventListener('scroll', handleScroll, { passive: true });
+
+            // Auto swipe peek animation
             setTimeout(() => {
               if (container) {
                 container.style.scrollSnapType = 'none';
@@ -62,13 +82,15 @@ const Reviews = () => {
                     container.scrollTo({ left: 0, behavior: 'smooth' });
                     setTimeout(() => {
                       if (container) container.style.scrollSnapType = '';
-                      setShowSwipeHintVideos(false);
+                      isAutoScrolling = false;
                     }, 500);
                   }
                 }, 700);
               }
             }, 500);
+
             observer.unobserve(entry.target);
+            observerActive = false;
           }
         });
       },
@@ -78,50 +100,12 @@ const Reviews = () => {
     observer.observe(container);
 
     return () => {
-      if (container) observer.unobserve(container);
+      if (container) {
+        observer.unobserve(container);
+        container.removeEventListener('scroll', handleScroll);
+      }
     };
   }, []);
-
-  useEffect(() => {
-    if (window.innerWidth >= 640 || !textScrollRef.current || dynamicReviews.length <= 1) return;
-
-    const container = textScrollRef.current;
-    let animated = false;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !animated) {
-            animated = true;
-            setShowSwipeHintText(true);
-            setTimeout(() => {
-              if (container) {
-                container.style.scrollSnapType = 'none';
-                container.scrollTo({ left: 70, behavior: 'smooth' });
-                setTimeout(() => {
-                  if (container) {
-                    container.scrollTo({ left: 0, behavior: 'smooth' });
-                    setTimeout(() => {
-                      if (container) container.style.scrollSnapType = '';
-                      setShowSwipeHintText(false);
-                    }, 500);
-                  }
-                }, 700);
-              }
-            }, 500);
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.05 }
-    );
-
-    observer.observe(container);
-
-    return () => {
-      if (container) observer.unobserve(container);
-    };
-  }, [dynamicReviews]);
 
   return (
     <div className="bg-[#f8fbff] min-h-screen">
@@ -143,7 +127,136 @@ const Reviews = () => {
 
       {/* Google & Video Reviews Badges Section */}
       <section className="relative z-10 -mt-10 sm:-mt-16 max-w-7xl mx-auto px-4 sm:px-6 mb-12 animate-fade-in">
-        <div className="bg-white rounded-[24px] sm:rounded-[32px] shadow-2xl border border-gray-100 grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-gray-100 overflow-hidden backdrop-blur-md">
+        
+        {/* Mobile View: Keep EXACTLY as it is, untouched */}
+        <div className="md:hidden bg-white rounded-[20px] shadow-[0_10px_40px_-10px_rgba(30,64,111,0.08)] border border-gray-100 grid grid-cols-2 divide-x divide-gray-100 w-full overflow-hidden">
+          
+          {/* Widget 1: Google Reviews (Mobile) */}
+          <div className="flex flex-col items-center text-center p-4 gap-3">
+            {/* Icon */}
+            <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-white shadow-sm border border-gray-100 shrink-0">
+              <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22c-.87-2.6-2.3-4.53-4.18-4.53z" fill="#FBBC05"/>
+                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/>
+              </svg>
+            </div>
+            
+            {/* Content */}
+            <div className="flex flex-col items-center w-full gap-1">
+              <div className="flex items-center justify-center gap-1">
+                <span className="text-[14px] font-extrabold text-primary tracking-tight font-serif leading-none">{t('trust.google', 'Avis Google')}</span>
+                <span className="bg-green-100 text-green-800 text-[8px] font-bold px-1.5 py-0.5 rounded-full flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-ping"></span>
+                  {t('trust.verified', 'Vérifié')}
+                </span>
+              </div>
+              
+              <div className="flex items-center justify-center gap-1">
+                <span className="text-sm font-black text-yellow-500">5.0</span>
+                <div className="flex text-yellow-400 gap-0.5">
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} className="w-3 h-3 fill-current" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+              </div>
+              
+              <span className="text-gray-400 text-[10px] font-medium">({t('trust.reviewsCount', '416+ avis voyageurs')})</span>
+            </div>
+
+            {/* Buttons */}
+            <div className="flex flex-row gap-1.5 w-full justify-center mt-2 px-1">
+              <a 
+                href="https://www.google.com/search?q=Sri+Lanka+Eden+Travels"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-1 items-center justify-center gap-1 bg-transparent border border-primary text-primary hover:bg-primary/5 font-bold px-1 py-1.5 rounded-lg transition-all shadow-sm text-[9px]"
+              >
+                <svg className="w-3 h-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+                <span className="truncate">{t('trust.consult', 'Consulter')}</span>
+              </a>
+              <a 
+                href="https://www.google.com/search?q=Sri+Lanka+Eden+Travels#lrd=0x3ae3662a67e2a9b3:0xd9099db1070ff22,3"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-1 items-center justify-center gap-1 bg-transparent border border-primary text-primary hover:bg-primary/5 font-bold px-1 py-1.5 rounded-lg transition-all shadow-sm text-[9px]"
+              >
+                <svg className="w-3 h-3 text-yellow-500 fill-current shrink-0" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                <span className="truncate">{t('trust.write', 'Écrire')}</span>
+              </a>
+            </div>
+          </div>
+
+          {/* Widget 2: YouTube Videos (Mobile) */}
+          <div className="flex flex-col items-center text-center p-4 gap-3">
+            {/* Icon */}
+            <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-white shadow-sm border border-gray-100 shrink-0">
+              <svg className="w-7 h-7" viewBox="0 0 24 24" fill="#FF0000">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+              </svg>
+            </div>
+            
+            {/* Content */}
+            <div className="flex flex-col items-center w-full gap-1">
+              <div className="flex items-center justify-center gap-1">
+                <span className="text-[14px] font-extrabold text-primary tracking-tight font-serif leading-none">{t('trust.video', 'Avis Vidéo')}</span>
+                <span className="bg-red-100 text-red-800 text-[8px] font-bold px-1.5 py-0.5 rounded-full flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 bg-red-500 rounded-full animate-ping"></span>
+                  {t('trust.youtube', 'YouTube')}
+                </span>
+              </div>
+              
+              <div className="flex items-center justify-center gap-1">
+                <span className="text-sm font-black text-red-600">4K HD</span>
+                <div className="flex text-red-500 gap-0.5 items-center">
+                  <svg className="w-3 h-3 fill-current" viewBox="0 0 24 24">
+                    <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/>
+                  </svg>
+                </div>
+              </div>
+              
+              <span className="text-gray-400 text-[10px] font-medium">({t('trust.testimonials', 'Témoignages de nos clients')})</span>
+            </div>
+
+            {/* Buttons */}
+            <div className="flex flex-row gap-1.5 w-full justify-center mt-2 px-1">
+              <button 
+                onClick={() => {
+                  const el = document.getElementById('recent-videos');
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="flex flex-1 items-center justify-center gap-1 bg-transparent border border-primary text-primary hover:bg-primary/5 font-bold px-1 py-1.5 rounded-lg transition-all shadow-sm text-[9px]"
+              >
+                <svg className="w-3 h-3 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+                <span className="truncate">{t('trust.watch', 'Visionner')}</span>
+              </button>
+              <a 
+                href="https://www.youtube.com/@srilankaviajeseden"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-1 items-center justify-center gap-1 bg-transparent border border-primary text-primary hover:bg-primary/5 font-bold px-1 py-1.5 rounded-lg transition-all shadow-sm text-[9px]"
+              >
+                <svg className="w-3 h-3 text-red-600 fill-current shrink-0" viewBox="0 0 24 24">
+                  <path d="M19.78 4.22c-1.87-.5-9.37-.5-9.37-.5s-7.51 0-9.38.5A3 3 0 0 0 .5 7.19C0 9.07 0 13 0 13s0 3.93.5 5.81a3 3 0 0 0 2.12 2.12c1.87.5 9.38.5 9.38.5s7.5 0 9.37-.5a3 3 0 0 0 2.13-2.12c.5-1.88.5-5.81.5-5.81s0-3.93-.5-5.81a3 3 0 0 0-2.13-2.12zM9.54 16.57V9.43L15.82 13l-6.28 3.57z" fill="currentColor"/>
+                </svg>
+                <span className="truncate">{t('trust.youtube', 'YouTube')}</span>
+              </a>
+            </div>
+          </div>
+          
+        </div>
+
+        {/* Desktop View: Dual Widget Panel (Side-by-Side matching mockup) */}
+        <div className="hidden md:grid bg-white rounded-[32px] shadow-2xl border border-gray-100 grid-cols-2 divide-x divide-gray-100 overflow-hidden">
           
           {/* Left Column: Google Reviews */}
           <div className="p-6 sm:p-10 flex flex-col justify-between">
@@ -160,10 +273,10 @@ const Reviews = () => {
               
               <div className="w-full text-left">
                 <div className="flex items-center gap-2.5">
-                  <span className="text-xl sm:text-2xl font-bold text-primary tracking-tight font-serif">{t("reviews.googleReviews")}</span>
+                  <span className="text-xl sm:text-2xl font-bold text-primary tracking-tight font-serif">{t('trust.google', 'Avis Google')}</span>
                   <span className="bg-emerald-50 text-emerald-600 text-[10px] font-bold px-2.5 py-0.5 rounded-full flex items-center gap-1">
                     <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-ping"></span>
-                    {t("reviews.verified")}
+                    {t('trust.verified', 'Vérifié')}
                   </span>
                 </div>
                 <div className="flex items-center gap-2 mt-1.5 justify-start">
@@ -175,9 +288,9 @@ const Reviews = () => {
                       </svg>
                     ))}
                   </div>
-                  <span className="text-gray-400 text-xs font-normal">{t("reviews.googleCount")}</span>
+                  <span className="text-gray-400 text-xs font-normal">({t('trust.reviewsCount', '416+ avis voyageurs')})</span>
                 </div>
-                <p className="text-gray-400 text-[11px] sm:text-xs mt-2 font-normal leading-relaxed text-left">{t("reviews.googleDesc")}</p>
+                <p className="text-gray-400 text-[11px] sm:text-xs mt-2 font-normal leading-relaxed text-left">{t('trust.averageNote', "Note moyenne basée sur les retours d'expérience de nos clients.")}</p>
               </div>
             </div>
             
@@ -192,7 +305,7 @@ const Reviews = () => {
                 <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
-                {t("reviews.consult")}
+                {t('trust.consult', 'Consulter')}
               </a>
               <a 
                 href="https://www.google.com/search?q=Sri+Lanka+Eden+Travels#lrd=0x3ae3662a67e2a9b3:0xd9099db1070ff22,3"
@@ -203,11 +316,11 @@ const Reviews = () => {
                 <svg className="w-3.5 h-3.5 text-amber-500 fill-current" viewBox="0 0 20 20">
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </svg>
-                {t("reviews.write")}
+                {t('trust.write', 'Écrire')}
               </a>
             </div>
           </div>
-          
+
           {/* Right Column: Video Reviews */}
           <div className="p-6 sm:p-10 flex flex-col justify-between">
             <div className="flex items-start gap-4 sm:gap-6 text-left">
@@ -220,9 +333,9 @@ const Reviews = () => {
               
               <div className="w-full text-left">
                 <div className="flex items-center gap-2.5">
-                  <span className="text-xl sm:text-2xl font-bold text-primary tracking-tight font-serif">{t("reviews.videoReviews")}</span>
+                  <span className="text-xl sm:text-2xl font-bold text-primary tracking-tight font-serif">{t('trust.video', 'Avis Vidéo')}</span>
                   <span className="bg-red-50 text-red-600 text-[10px] font-bold px-2.5 py-0.5 rounded-full flex items-center gap-1">
-                    YouTube
+                    {t('trust.youtube', 'YouTube')}
                   </span>
                 </div>
                 <div className="flex items-center gap-1.5 mt-1.5 justify-start">
@@ -230,12 +343,12 @@ const Reviews = () => {
                   <svg className="w-4 h-3.5 text-red-600 fill-current" viewBox="0 0 24 24">
                     <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z" />
                   </svg>
-                  <span className="text-gray-400 text-xs font-normal">{t("reviews.videoTestimonials")}</span>
+                  <span className="text-gray-400 text-xs font-normal">({t('trust.testimonials', 'Témoignages de nos clients')})</span>
                 </div>
-                <p className="text-gray-400 text-[11px] sm:text-xs mt-2 font-normal leading-relaxed text-left">{t("reviews.videoDesc")}</p>
+                <p className="text-gray-400 text-[11px] sm:text-xs mt-2 font-normal leading-relaxed text-left">{t('trust.discoverVideo', "Découvrez l'aventure en images à travers les yeux de nos voyageurs.")}</p>
               </div>
             </div>
-            
+
             {/* Actions for Video */}
             <div className="flex gap-3 mt-6 justify-start">
               <button 
@@ -243,33 +356,33 @@ const Reviews = () => {
                   const el = document.getElementById('recent-videos');
                   if (el) el.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className="flex items-center justify-center gap-1.5 bg-white border border-red-600 hover:bg-red-50 text-red-600 font-bold px-4 py-2.5 rounded-xl transition-all shadow-sm text-xs"
+                className="flex items-center justify-center gap-1.5 bg-white border border-[#1e406f] hover:bg-[#1e406f]/5 text-[#1e406f] font-bold px-4 py-2.5 rounded-xl transition-all shadow-sm text-xs"
               >
-                <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-                  <path d="M8 5v14l11-7z" />
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
-                {t("reviews.watch")}
+                {t('trust.watch', 'Visionner')}
               </button>
               <a 
                 href="https://www.youtube.com/@srilankaviajeseden"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-1.5 bg-white border border-red-600 hover:bg-red-50 text-red-600 font-bold px-4 py-2.5 rounded-xl transition-all shadow-sm text-xs"
+                className="flex items-center justify-center gap-1.5 bg-white border border-[#1e406f] hover:bg-[#1e406f]/5 text-[#1e406f] font-bold px-4 py-2.5 rounded-xl transition-all shadow-sm text-xs"
               >
-                <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                <svg className="w-3.5 h-3.5 text-red-600 fill-current" viewBox="0 0 24 24">
                   <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.108C19.524 3.545 12 3.545 12 3.545s-7.525 0-9.388.51a3.003 3.003 0 0 0-2.11 2.108C0 8.026 0 12 0 12s0 3.974.502 5.837a3.003 3.003 0 0 0 2.11 2.108c1.863.51 9.388.51 9.388.51s7.524 0 9.388-.51a3.002 3.002 0 0 0 2.11-2.108C24 15.974 24 12 24 12s0-3.974-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                 </svg>
-                YouTube
+                {t('trust.youtube', 'YouTube')}
               </a>
             </div>
           </div>
-          
+
         </div>
       </section>
 
       {/* Recent Videos Section */}
-      <section className="py-16 max-w-7xl mx-auto px-6 relative">
-        <div className="mb-16 text-center md:text-left">
+      <section id="recent-videos" className="py-10 md:py-14 max-w-7xl mx-auto px-6 relative">
+        <div className="mb-8 md:mb-12 text-center md:text-left">
           <span className="text-primary text-sm font-bold uppercase tracking-widest mb-2 block">{t("reviews.visualMemories")}</span>
           <h2 className="text-primary text-4xl font-bold font-serif">{t("reviews.recentVideos")}</h2>
           <p className="text-gray-400 mt-2">{t("reviews.recentVideosDesc")}</p>
@@ -331,79 +444,83 @@ const Reviews = () => {
       </section>
 
       {/* Recent Reviews Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-10 md:py-14 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6 relative">
-          <div className="mb-16 text-center md:text-left">
+          <div className="mb-8 md:mb-12 text-center md:text-left">
             <span className="text-primary text-sm font-bold uppercase tracking-widest mb-2 block">{t("reviews.travelerReviewsTitle")}</span>
             <h2 className="text-primary text-4xl font-bold font-serif">{t("reviews.recentReviews")}</h2>
             <p className="text-gray-400 mt-2 whitespace-pre-line">{t("reviews.recentReviewsDesc")}</p>
           </div>
 
           <div className="relative">
-            {showSwipeHintText && (
-              <div className="sm:hidden absolute top-0 right-0 bottom-0 left-0 z-20 pointer-events-none flex justify-center items-center">
-                <div className="p-4 rounded-full bg-white/25 backdrop-blur-md border border-white/40 shadow-[0_8px_32px_rgba(31,38,135,0.08)] flex items-center justify-center animate-glass-swipe">
-                  <img 
-                    src={swipeHandImg} 
-                    alt="Swipe Gesture" 
-                    className="w-12 h-12 object-contain"
-                  />
-                </div>
-              </div>
-            )}
             <div 
-              ref={textScrollRef}
-              className="flex sm:grid overflow-x-auto snap-x snap-mandatory hide-scrollbar sm:overflow-visible pb-8 sm:pb-0 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 -mx-6 px-6 sm:mx-0 sm:px-0"
+              className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"
             >
-              {textReviews.map((review, i) => (
+              {displayedReviews.map((review, i) => (
                 <div 
                   key={i} 
                   onClick={() => setSelectedReview(review)}
-                  className="min-w-[280px] w-[85vw] sm:w-auto shrink-0 snap-center relative h-[500px] rounded-[40px] overflow-hidden group shadow-xl hover:-translate-y-2 transition-all duration-500 cursor-pointer"
+                  className="w-full relative h-[280px] xs:h-[350px] sm:h-[500px] rounded-[24px] sm:rounded-[40px] overflow-hidden group shadow-xl hover:-translate-y-2 transition-all duration-500 cursor-pointer"
                 >
                   {/* Background Image */}
                   <img src={review.img} alt="" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20"></div>
                   
                   {/* Content Overlay */}
-                  <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                    <div className="flex text-yellow-400 gap-1 mb-4">
+                  <div className="absolute inset-0 p-4 xs:p-6 sm:p-8 flex flex-col justify-end">
+                    <div className="flex text-yellow-400 gap-0.5 sm:gap-1 mb-2 sm:mb-4">
                       {[...Array(5)].map((_, i) => (
-                        <svg key={i} className="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20">
+                        <svg key={i} className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 fill-current" viewBox="0 0 20 20">
                           <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                         </svg>
                       ))}
                     </div>
                     
-                    <p className="text-white text-sm italic leading-relaxed mb-8">
+                    <p className="text-white text-[11px] xs:text-xs sm:text-sm italic leading-relaxed mb-4 sm:mb-8 line-clamp-4 xs:line-clamp-5 sm:line-clamp-none">
                       "{review.text}"
                     </p>
                     
-                    <div className="border-t border-white/20 pt-6 flex items-end justify-between">
-                      <div>
-                        <h4 className="text-white font-bold text-xl leading-tight font-serif">{review.name}</h4>
-                        <p className="text-primary text-[10px] font-bold uppercase tracking-widest mt-1">{review.tourdetails?.travelertype || review.tourDetails?.travelerType || 'Traveler'}</p>
+                    <div className="border-t border-white/20 pt-3 sm:pt-6 flex items-end justify-between">
+                      <div className="min-w-0 pr-2">
+                        <h4 className="text-white font-bold text-xs xs:text-base sm:text-xl leading-tight font-serif truncate">{review.name}</h4>
+                        <p className="text-primary text-[8px] sm:text-[10px] font-bold uppercase tracking-widest mt-0.5 sm:mt-1 truncate">{review.tourdetails?.travelertype || review.tourDetails?.travelerType || 'Traveler'}</p>
                       </div>
                       <Link 
                         to={`/${i18n.language?.split('-')[0] || 'fr'}/review/${review.id}`}
                         onClick={(e) => e.stopPropagation()}
-                        className="w-10 h-10 bg-white/10 hover:bg-white text-white hover:text-primary rounded-full flex items-center justify-center transition-all group/btn backdrop-blur-sm"
+                        className="w-7 h-7 xs:w-8 xs:h-8 sm:w-10 sm:h-10 bg-white/10 hover:bg-white text-white hover:text-primary rounded-full flex items-center justify-center transition-all group/btn backdrop-blur-sm shrink-0"
                       >
-                        <svg className="w-5 h-5 transform group-hover/btn:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                        <svg className="w-3.5 h-3.5 sm:w-5 sm:h-5 transform group-hover/btn:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                       </Link>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
+
+            {isMobile && textReviews.length > 2 && !expandedTextReviews && (
+              <div className="mt-8 text-center sm:hidden">
+                <button
+                  onClick={() => setExpandedTextReviews(true)}
+                  className="group inline-flex items-center gap-2 border border-primary bg-transparent text-primary hover:bg-primary hover:text-white px-6 py-2.5 rounded-full text-xs font-bold shadow-sm hover:shadow-md transition-all duration-300 transform active:scale-95"
+                >
+                  <span>{t("travelGuide.showMore", "Afficher plus")}</span>
+                  <div className="w-5 h-5 rounded-full bg-primary/5 group-hover:bg-white flex items-center justify-center transition-all duration-300 transform group-hover:translate-x-1.5 shadow-sm">
+                    <svg className="w-2.5 h-2.5 text-primary transition-colors duration-300 transform rotate-90" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </button>
+              </div>
+            )}
           </div>
 
         </div>
       </section>
 
       {/* Why Travelers Love Us Section */}
-      <section className="py-20 max-w-7xl mx-auto px-6">
-        <div className="text-center mb-20">
+      <section className="py-10 md:py-14 max-w-7xl mx-auto px-6">
+        <div className="text-center mb-8 md:mb-12">
           <h2 className="text-primary text-4xl md:text-5xl font-bold font-serif mb-6">{t("reviews.whyLoveUsTitle")}</h2>
         </div>
 
@@ -430,7 +547,7 @@ const Reviews = () => {
       </section>
 
       {/* Footer CTA */}
-      <section className="px-6 pb-12">
+      <section className="px-6 pb-10 md:pb-14">
         <div className="max-w-7xl mx-auto relative rounded-[2.5rem] overflow-hidden shadow-xl group">
           {/* Background Image & Overlays */}
           <div className="absolute inset-0">

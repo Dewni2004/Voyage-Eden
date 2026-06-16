@@ -170,7 +170,7 @@ p, span, li, a, button {
 }
 .animate-swipe-hand {
   animation: swipe-hand 2s ease-in-out infinite;
-  filter: brightness(0) opacity(0.8);
+  filter: invert(65%) sepia(90%) saturate(1200%) hue-rotate(165deg) brightness(100%) contrast(100%) opacity(0.95);
 }
 
 /* Premium Glassmorphic Swipe Hint Animation */
@@ -196,14 +196,18 @@ p, span, li, a, button {
     transform: scale(0.85) translateX(-60px);
   }
 }
-.animate-glass-swipe {
-  animation: glass-swipe-hint 1.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+.animate-glass-swipe,
+.animate-glass-swipe-white {
+  animation: glass-swipe-hint 1.8s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  padding: 0 !important;
 }
 .animate-glass-swipe img {
-  filter: brightness(0) opacity(0.85);
-}
-.animate-glass-swipe-white {
-  animation: glass-swipe-hint 1.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  filter: invert(65%) sepia(90%) saturate(1200%) hue-rotate(165deg) brightness(100%) contrast(100%) opacity(0.95);
 }
 .animate-glass-swipe-white img {
   filter: brightness(0) invert(1) opacity(0.85);
