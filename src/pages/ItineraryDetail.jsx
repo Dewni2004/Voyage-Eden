@@ -261,9 +261,9 @@ const ItineraryDetail = () => {
 
                       {days[activeDay - 1].accommodationImages && days[activeDay - 1].accommodationImages.some(img => img) && (
                         <div className="w-full mt-2">
-                          <div className="grid grid-cols-2 gap-2">
+                          <div className="grid grid-cols-4 gap-2">
                             {days[activeDay - 1].accommodationImages.map((img, idx) => img ? (
-                              <div key={idx} onClick={() => setSelectedGalleryImage(img)} className="h-20 rounded-xl overflow-hidden shadow-sm relative">
+                              <div key={idx} onClick={() => setSelectedGalleryImage(img)} className="h-14 sm:h-20 rounded-xl overflow-hidden shadow-sm relative cursor-pointer hover:opacity-90 transition-opacity">
                                 <img src={img} alt="" className="w-full h-full object-cover" />
                               </div>
                             ) : null)}
@@ -304,7 +304,7 @@ const ItineraryDetail = () => {
           {/* Right Column: Day Details Card */}
           <div className="bg-[#e9ecef] rounded-[40px] p-8 md:p-10 shadow-2xl border border-white h-[850px] overflow-y-auto hidden lg:flex flex-col transition-all duration-500 hide-scrollbar">
             {/* Day Image */}
-            <div className="relative h-80 rounded-[32px] overflow-hidden mb-10 shadow-xl group/img flex-shrink-0">
+            <div className="relative h-60 rounded-[32px] overflow-hidden mb-6 shadow-xl group/img flex-shrink-0">
               <img 
                 src={days[activeDay - 1].image} 
                 alt={days[activeDay - 1].location} 
@@ -354,9 +354,9 @@ const ItineraryDetail = () => {
 
                 {days[activeDay - 1].accommodationImages && days[activeDay - 1].accommodationImages.some(img => img) && (
                   <div className="mt-4 w-full">
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-4 gap-3">
                       {days[activeDay - 1].accommodationImages.map((img, idx) => img ? (
-                        <div key={idx} onClick={() => setSelectedGalleryImage(img)} className="h-32 rounded-2xl overflow-hidden shadow-md group/acc-img cursor-pointer relative">
+                        <div key={idx} onClick={() => setSelectedGalleryImage(img)} className="h-20 sm:h-24 md:h-28 rounded-2xl overflow-hidden shadow-md group/acc-img cursor-pointer relative">
                           <img src={img} alt="" className="w-full h-full object-cover transition-transform duration-700 group-hover/acc-img:scale-110" />
                           <div className="absolute inset-0 bg-black/10 group-hover/acc-img:bg-transparent transition-colors"></div>
                         </div>

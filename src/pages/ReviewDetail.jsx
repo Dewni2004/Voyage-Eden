@@ -67,16 +67,18 @@ const ReviewDetail = () => {
               </div>
             </div>
 
-            <div className="pt-16 border-t border-gray-100">
-              <h3 className="text-primary text-2xl font-bold mb-10">{t('reviewDetail.memories')}</h3>
-              <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
-                {review.gallery && review.gallery.filter(img => img).map((img, i) => (
-                  <div key={i} className={`rounded-3xl overflow-hidden shadow-lg h-48 md:h-64 ${i === 3 ? 'md:col-span-2' : ''}`}>
-                    <img src={img} alt="" className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" />
-                  </div>
-                ))}
+            {review.gallery && review.gallery.filter(img => img).length > 0 && (
+              <div className="pt-16 border-t border-gray-100">
+                <h3 className="text-primary text-2xl font-bold mb-10">{t('reviewDetail.memories')}</h3>
+                <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
+                  {review.gallery.filter(img => img).map((img, i) => (
+                    <div key={i} className={`rounded-3xl overflow-hidden shadow-lg h-48 md:h-64 ${i === 3 ? 'md:col-span-2' : ''}`}>
+                      <img src={img} alt="" className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" />
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
           </div>
 
           {/* Sidebar */}

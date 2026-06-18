@@ -192,8 +192,8 @@ const PopularItineraries = ({ title, subtitle, id, itineraries, isDark, isGreen 
   const getGridClass = (len) => {
     if (len === 1) return 'lg:grid-cols-1 lg:max-w-[400px] lg:mx-auto';
     if (len === 2) return 'lg:grid-cols-2';
-    if (len === 3) return 'lg:grid-cols-3';
-    return 'lg:grid-cols-4';
+    if (len === 4) return 'lg:grid-cols-4';
+    return 'lg:grid-cols-3';
   };
 
   const renderDescription = (descText) => {

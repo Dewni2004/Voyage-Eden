@@ -1,11 +1,52 @@
 import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { getGPSForDay, convertGPSToPercentage, getMatchedCity, getRouteWaypoints } from '../../utils/mapUtils';
 import newMapImg from '../../assets/New_Map.png';
+const CUSTOM_CITY_OFFSETS = {
+  'negombo': { x: -8, y: -4 },
+  'aéroport': { x: -8, y: -4 },
+  'airport': { x: -8, y: -4 },
+  'colombo': { x: -8, y: 4 },
+  'mount lavinia': { x: -8, y: 4 },
+  'galle': { x: -8, y: 8 },
+  'unawatuna': { x: -8, y: 8 },
+  'hikkaduwa': { x: -8, y: 8 },
+  'weligama': { x: -4, y: 8 },
+  'mirissa': { x: 0, y: 8 },
+  'matara': { x: 4, y: 8 },
+  'bentota': { x: -8, y: 4 },
+  'anuradhapura': { x: -8, y: -8 },
+  'sigiriya': { x: -7, y: -8 },
+  'dambulla': { x: -8, y: 0 },
+  'habarana': { x: 8, y: -8 },
+  'polonnaruwa': { x: 8, y: 2 },
+  'minneriya': { x: 8, y: 2 },
+  'trincomalee': { x: 8, y: -8 },
+  'kandy': { x: -8, y: 4 },
+  'nuwara eliya': { x: 8, y: 6 },
+  'ella': { x: 8, y: -4 },
+  'yala': { x: 8, y: 4 },
+  'kataragama': { x: 8, y: 4 },
+  'tangalle': { x: 8, y: 8 },
+};
+
+const getCityOffset = (day) => {
+  const matchedCity = getMatchedCity(day);
+  if (matchedCity && CUSTOM_CITY_OFFSETS[matchedCity]) {
+    return CUSTOM_CITY_OFFSETS[matchedCity];
+  }
+  const isRight = day.coords?.x > 50;
+  const isBottom = day.coords?.y > 50;
+  return {
+    x: isRight ? 5 : -5,
+    y: isBottom ? 6 : -6
+  };
+};
 
 const AnimatedMap = ({ days, activeDay, setActiveDay, setIsModalOpen }) => {
   const [pointsData, setPointsData] = useState([]);
   const [hasInteracted, setHasInteracted] = useState(false);
+  const [hoveredDayId, setHoveredDayId] = useState(null);
 
   useEffect(() => {
     if (!days || days.length === 0) return;
@@ -158,17 +199,14 @@ const AnimatedMap = ({ days, activeDay, setActiveDay, setIsModalOpen }) => {
 
           {/* Connector Lines for Images */}
           {pointsData.map((day, i) => {
-             const isRight = day.coords.x > 50;
-             const isBottom = day.coords.y > 50;
-             const pushX = isRight ? 5 : -5;
-             const pushY = isBottom ? 6 : -6;
+             const offset = getCityOffset(day);
              return (
                <line 
                  key={`conn-${i}`}
                  x1={day.coords.x} 
                  y1={day.coords.y}
-                 x2={day.coords.x + pushX}
-                 y2={day.coords.y + pushY}
+                 x2={day.coords.x + offset.x}
+                 y2={day.coords.y + offset.y}
                  stroke="#1f2937"
                  strokeWidth="0.3"
                  strokeDasharray="0.8 0.8"
@@ -230,15 +268,9 @@ const AnimatedMap = ({ days, activeDay, setActiveDay, setIsModalOpen }) => {
             const isReached = true; // Always visible
             const isActive = day.id === activeDay;
 
-            // Dynamically push the circle OUTWARDS from the center (50, 50)
-            const isRight = day.coords.x > 50;
-            const isBottom = day.coords.y > 50;
-            
-            const pushX = isRight ? 5 : -5;
-            const pushY = isBottom ? 6 : -6;
-            
-            const targetX = day.coords.x + pushX;
-            const targetY = day.coords.y + pushY;
+            const offset = getCityOffset(day);
+            const targetX = day.coords.x + offset.x;
+            const targetY = day.coords.y + offset.y;
 
             return (
               <motion.div
@@ -247,7 +279,7 @@ const AnimatedMap = ({ days, activeDay, setActiveDay, setIsModalOpen }) => {
                 style={{ 
                   left: `${targetX}%`, 
                   top: `${targetY}%`,
-                  zIndex: isActive ? 30 : (isReached ? 20 : 10)
+                  zIndex: hoveredDayId === day.id ? 50 : (isActive ? 30 : (isReached ? 20 : 10))
                 }}
                 initial={false}
                 onClick={() => {
@@ -257,7 +289,30 @@ const AnimatedMap = ({ days, activeDay, setActiveDay, setIsModalOpen }) => {
                     setIsModalOpen(true);
                   }
                 }}
+                onMouseEnter={() => setHoveredDayId(day.id)}
+                onMouseLeave={() => setHoveredDayId(null)}
               >
+                
+                {/* Hover Tooltip */}
+                <AnimatePresence>
+                  {hoveredDayId === day.id && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10, scale: 0.9, x: '-50%' }}
+                      animate={{ opacity: 1, y: 0, scale: 1, x: '-50%' }}
+                      exit={{ opacity: 0, y: 10, scale: 0.9, x: '-50%' }}
+                      transition={{ duration: 0.15, ease: "easeOut" }}
+                      className="absolute z-50 bg-[#102a43]/95 text-white text-[11px] md:text-xs font-bold py-2 px-3.5 rounded-xl shadow-2xl border border-white/10 whitespace-nowrap flex flex-col items-center gap-0.5"
+                      style={{ bottom: '115%', left: '50%' }}
+                    >
+                      <span className="text-[9px] uppercase tracking-widest text-[#f0f4f9]/60">
+                        {day.displayLabel || `Day ${day.id}`}
+                      </span>
+                      <span>{day.location}</span>
+                      {/* Tooltip Arrow */}
+                      <div className="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[6px] border-t-[#102a43]/95"></div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
                 {/* The Marker / Circle with Image */}
                 <motion.div 
@@ -267,6 +322,7 @@ const AnimatedMap = ({ days, activeDay, setActiveDay, setIsModalOpen }) => {
                     height: isReached ? (isActive ? (isMobile ? 40 : 56) : (isMobile ? 32 : 48)) : 16,
                     scale: isActive ? 1.1 : 1
                   }}
+                  whileHover={{ scale: 1.18 }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 >
                   {isReached && (

@@ -11,6 +11,10 @@ const ContactUs = () => {
   const [isSending, setIsSending] = useState(false);
   const [messageStatus, setMessageStatus] = useState({ type: '', text: '' });
 
+  const email1 = t('footer.email1', 'srilankavoyageeden@gmail.com');
+  const email2 = t('footer.email2', '');
+  const contactEmails = [email1, email2].filter(Boolean).join(',');
+
   const sendEmail = (e) => {
     e.preventDefault();
     setIsSending(true);
@@ -92,9 +96,11 @@ const ContactUs = () => {
                 </div>
                 <h3 className="text-primary text-xl md:text-2xl font-bold mb-4 md:mb-6 uppercase">{t(`contactUs.cards.${card.id}.title`)}</h3>
                 <div className="space-y-3 text-gray-600 font-medium leading-relaxed text-sm md:text-base">
-                  {t(`contactUs.cards.${card.id}.line1`) && <p>{t(`contactUs.cards.${card.id}.line1`)}</p>}
-                  {t(`contactUs.cards.${card.id}.line2`) && <p>{t(`contactUs.cards.${card.id}.line2`)}</p>}
-                  {t(`contactUs.cards.${card.id}.line3`) !== `contactUs.cards.${card.id}.line3` && <p>{t(`contactUs.cards.${card.id}.line3`)}</p>}
+                  {[1, 2, 3, 4].map(num => {
+                    const lineKey = `contactUs.cards.${card.id}.line${num}`;
+                    const lineVal = t(lineKey);
+                    return lineVal && lineVal !== lineKey ? <p key={num}>{lineVal}</p> : null;
+                  })}
                 </div>
               </div>
             ))}
@@ -216,7 +222,7 @@ const ContactUs = () => {
                     {t("contactUs.consultants.whatsapp")}
                   </a>
                   <a 
-                    href="mailto:srilankavoyageeden@gmail.com,nethmi.srilankaedentravels@gmail.com"
+                    href={`mailto:${contactEmails}`}
                     className="w-full flex items-center justify-center gap-2 bg-primary hover:bg-[#1a355c] text-white border border-primary hover:border-[#1a355c] transition-all duration-300 transform active:scale-95 py-3 px-4 sm:py-3.5 sm:px-6 rounded-2xl font-bold text-sm sm:text-base"
                   >
                     {t("contactUs.consultants.email")}

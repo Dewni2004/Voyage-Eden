@@ -125,7 +125,7 @@ const TourCategorySection = ({ title, subtitle, tours, t, noBottomMargin }) => {
   );
 };
 
-const FamilyTourSplitSection = ({ title, subtitle, standardTours, premiumTours, t }) => {
+export const FamilyTourSplitSection = ({ title, subtitle, standardTours, premiumTours, t }) => {
   const standardScrollRef = useRef(null);
   const premiumScrollRef = useRef(null);
   const [showStandardHint, setShowStandardHint] = useState(false);
@@ -351,7 +351,16 @@ const TourCards = () => {
       try {
         const allItineraries = await getItineraries(i18n.language);
         
-        const formattedTours = allItineraries.map(it => ({
+        // Hide specific itineraries from home page
+        const hiddenHomeItineraryIds = [
+          'ef67877f-92f9-4113-9880-94a03f79413f', // Sri Lanka 15 Días - En Hoteles Superior
+          'c9492146-5f0f-46b8-98b0-3575fc7b6e5a', // Srilanka 10 días Experiencia Ayurveda para tu bienestar
+          'd3285989-25c1-4f88-b018-493d85751509'  // Sri Lanka 9 Días - Viaje Al Corazón De Ceilán
+        ];
+        
+        const filteredItineraries = allItineraries.filter(it => !hiddenHomeItineraryIds.includes(it.id));
+        
+        const formattedTours = filteredItineraries.map(it => ({
           id: it.id,
           title: it.title,
           duration: `${it.days?.length || 0} ${t("itineraryCard.days")}`,

@@ -18,28 +18,29 @@
       "brandName": "Sri Lanka Viaggi Eden"
     },
     "footer": {
-      "description": "Sri Lanka Viaggi Eden fa parte di un affermato gruppo di aziende nel settore del turismo incoming nello Sri Lanka. Con oltre {{years}} anni di esperienza, siamo specializzati nella creazione di viaggi autentici e personalizzati che mettono in risalto la bellezza e la cultura dello Sri Lanka.",
+      "description": "Sri Lanka Viaggi Eden fa parte di un gruppo di aziende ben consolidato che opera nel settore del turismo in entrata in Sri Lanka. Con oltre 13 anni di esperienza nel settore, siamo specializzati nel fornire esperienze di viaggio autentiche e su misura che mostrano la vera bellezza e cultura dello Sri Lanka, mantenendo pratiche etiche e promuovendo il turismo responsabile.",
       "b2b": "Per partnership B2B",
       "contact_title": "Mettiti in contatto",
       "registration_title": "Registrazione",
       "sltda_desc": "(Autorità per lo Sviluppo del Turismo dello Sri Lanka)",
-      "reg_no": "N. di registrazione commerciale : PV 00242848",
+      "reg_no": "Registrazione aziendale : PV 00343667",
       "experience": "Oltre 13 anni di esperienza",
       "offices_title": "I nostri uffici",
       "hours_title": "Orari di ufficio",
-      "hours_weekdays": "Dal lunedì al venerdì: 8:30 – 17:30",
+      "hours_weekdays": "Lunedì a Venerdì: 8:30 – 17:30",
       "hours_saturday": "Sabato: 8:30 – 12:30",
       "hours_sunday": "Domenica: Chiuso",
       "copyright": "Sri Lanka Voyage Eden. Tutti i diritti riservati.",
-      "email1": "srilankavoyageeden@gmail.com",
-      "email2": "nethmi.srilankaedentravels@gmail.com",
-      "phone1": "+94 764409650",
-      "phone2": "+94 77147 0150",
-      "phone3": "+94 372201747",
-      "office_label": "Ufficio in Sri Lanka",
-      "sltda_reg": "SLTDA : SLTDA/SQA/TA/02233",
-      "office1": "Kandy : Stone House Suites, No. 29, Nittawela Road",
-      "office2": "Kurunegala : No. 64, Unit 01, Siripathi Complex"
+      "email1": "srilankaviaggieden@gmail.com",
+      "email2": "",
+      "phone1": "+393 336 449 849",
+      "phone2": "+94 76 440 9656",
+      "whatsapp3": "+94 76 281 0100",
+      "phone3": "+94 372 201 747",
+      "office_label": "Ufficio di Kurunegala",
+      "sltda_reg": "SLTDA : SLTDA/SQASTA/02238",
+      "office1": "Ufficio in Kandy: 38/03, Stone House Suites, Nittawela Road, Kandy, Sri Lanka",
+      "office2": "Ufficio in Kurunegala: No. 64, 4th floor, Unit 02, Siripathi Complex, Bauddaloka Rd, Kurunegala, Sri Lanka"
     },
     "trust": {
       "google": "Recensioni Google",
@@ -386,6 +387,30 @@
     "contactUs": {
       "heroTitle": "Contattaci",
       "heroDesc": "Siamo qui per aiutarti a pianificare il tuo viaggio da sogno in Sri Lanka. Non esitare a contattarci.",
+      "cards": {
+        "registro": {
+          "title": "REGISTRAZIONE",
+          "line1": "Registrazione del Ministero del turismo dello Sri Lanka: SLTDA/SQASTA/02238",
+          "line2": "N. di registrazione commerciale: PV 00343667"
+        },
+        "direccion": {
+          "title": "INDIRIZZO",
+          "line1": "Ufficio Kandy: Stone House Suites, No. 29, Nittawela Road, Kandy, Sri Lanka",
+          "line2": "Ufficio Kurunegala: No. 64, Unit 01, Siripathi Complex, Kurunegala, Sri Lanka"
+        },
+        "email": {
+          "title": "E-MAIL",
+          "line1": "srilankaviaggieden@gmail.com",
+          "line2": ""
+        },
+        "telefono": {
+          "title": "TELEFONO",
+          "line1": "Ufficio in Sri Lanka: +94 372201747",
+          "line2": "Cellulare/WhatsApp Italia: +39 3336449849",
+          "line3": "Cellulare/WhatsApp Sri Lanka: +94 76 440 9656",
+          "line4": "Cellulare/WhatsApp Sri Lanka: +94 77 147 0150"
+        }
+      },
       "offices": {
         "title": "I Nostri Uffici"
       },
@@ -417,7 +442,9 @@
         "email": "Invia un'email"
       },
       "registration": {
-        "title": "Registrazione della Società"
+        "title": "Registrazione della Società",
+        "sltda": "SLTDA : SLTDA/SQASTA/02238",
+        "regNo": "Numero di registrazione : PV 00343667"
       },
       "mapKurunegala": "Il nostro ufficio di Kurunegala",
       "mapKandy": "Il nostro ufficio di Kandy"
