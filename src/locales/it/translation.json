@@ -613,7 +613,8 @@
       "days": "giorni",
       "perPerson": "/ Persona",
       "book": "Prenota",
-      "pidePresupuesto": "Su richiesta"
+      "pidePresupuesto": "Su richiesta",
+      "route": "Punti salienti del tour"
     },
     "hotels": {
       "breadcrumb": "Hotel",

@@ -586,7 +586,8 @@
       "days": "Tage",
       "perPerson": "/ Person",
       "book": "Buchen",
-      "pidePresupuesto": "Auf Anfrage"
+      "pidePresupuesto": "Auf Anfrage",
+      "route": "Reise-Highlights"
     },
     "hotels": {
       "breadcrumb": "Hotels",

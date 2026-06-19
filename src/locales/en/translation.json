@@ -588,7 +588,8 @@
       "days": "days",
       "perPerson": "/ Person",
       "book": "Book",
-      "pidePresupuesto": "Request Quote"
+      "pidePresupuesto": "Request Quote",
+      "route": "Tour Highlights"
     },
     "hotels": {
       "breadcrumb": "Hotels",

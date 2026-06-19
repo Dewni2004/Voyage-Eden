@@ -587,7 +587,8 @@
       "days": "jours",
       "perPerson": "/ Personne",
       "book": "Réserver",
-      "pidePresupuesto": "Sur demande"
+      "pidePresupuesto": "Sur demande",
+      "route": "Points forts du voyage"
     },
     "hotels": {
       "breadcrumb": "Hôtels",

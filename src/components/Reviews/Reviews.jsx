@@ -112,9 +112,10 @@ const Reviews = () => {
           className="flex md:grid overflow-x-auto snap-x snap-mandatory hide-scrollbar md:overflow-visible pb-8 md:pb-0 grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 -mx-6 px-6 md:mx-0 md:px-0"
         >
           {reviews.slice(0, 5).map((review) => (
-            <div 
+            <Link 
               key={review.id} 
-              className="relative h-[450px] min-w-[280px] w-[85vw] sm:w-auto md:w-auto md:min-w-0 snap-center rounded-[2.5rem] overflow-hidden shadow-2xl cursor-pointer shrink-0 md:shrink"
+              to={`/${i18n.language?.split('-')[0] || 'fr'}/review/${review.id}`}
+              className="relative h-[450px] min-w-[280px] w-[85vw] sm:w-auto md:w-auto md:min-w-0 snap-center rounded-[2.5rem] overflow-hidden shadow-2xl cursor-pointer shrink-0 md:shrink block"
             >
               {/* Background Image */}
               <img 
@@ -137,16 +138,21 @@ const Reviews = () => {
                   ))}
                 </div>
 
-                <p className="text-white/90 italic mb-6 leading-relaxed text-sm md:text-base line-clamp-4">
+                <p className="text-white/90 italic mb-6 leading-relaxed text-sm md:text-base line-clamp-4 text-left">
                   {review.text}
                 </p>
 
-                <div className="border-t border-white/20 pt-6">
-                  <h4 className="font-bold text-xl mb-1">{review.name}</h4>
-                  <p className="text-luxury text-xs font-bold uppercase tracking-widest">{review.date}</p>
+                <div className="border-t border-white/20 pt-6 flex items-end justify-between text-left">
+                  <div>
+                    <h4 className="font-bold text-xl mb-1">{review.name}</h4>
+                    <p className="text-luxury text-xs font-bold uppercase tracking-widest">{review.date}</p>
+                  </div>
+                  <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center transition-all group-hover:bg-white group-hover:text-primary backdrop-blur-sm shrink-0">
+                    <svg className="w-4 h-4 transform group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                  </div>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 

@@ -601,7 +601,8 @@
       "days": "días",
       "perPerson": "/ Persona",
       "book": "Reservar",
-      "pidePresupuesto": "Pide Presupuesto"
+      "pidePresupuesto": "Pide Presupuesto",
+      "route": "Puntos destacados del viaje"
     },
     "hotels": {
       "breadcrumb": "Hoteles",
