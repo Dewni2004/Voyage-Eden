@@ -64,7 +64,7 @@ const CategoryPillsSection = () => {
               {/* Image container */}
               <div className="w-[88%] h-[88%] rounded-full overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.08)] group-hover:shadow-[0_15px_40px_rgb(0,0,0,0.12)] transition-all duration-500 z-10 relative bg-white">
                 <img 
-                  src={category.image} 
+                  src={category.image || null} 
                   alt={t(`itinerariesPage.categories.${category.id}`, { defaultValue: category.title })}
                   className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                 />

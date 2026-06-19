@@ -206,7 +206,7 @@ export const getTags = async (lang = 'fr') => {
 export const getCategories = async (lang = 'fr') => {
   try {
     const { data, error } = await supabase
-      .from(getTableName('categories', lang))
+      .from('categories')
       .select('*')
       .order('id', { ascending: true });
     
@@ -221,7 +221,7 @@ export const getCategories = async (lang = 'fr') => {
 export const addCategory = async (categoryData, lang = 'fr') => {
   try {
     const { data, error } = await supabase
-      .from(getTableName('categories', lang))
+      .from('categories')
       .insert([categoryData])
       .select();
     
@@ -236,7 +236,7 @@ export const addCategory = async (categoryData, lang = 'fr') => {
 export const updateCategory = async (id, categoryData, lang = 'fr') => {
   try {
     const { error } = await supabase
-      .from(getTableName('categories', lang))
+      .from('categories')
       .update(categoryData)
       .eq('id', id);
     
@@ -250,7 +250,7 @@ export const updateCategory = async (id, categoryData, lang = 'fr') => {
 export const deleteCategory = async (id, lang = 'fr') => {
   try {
     const { error } = await supabase
-      .from(getTableName('categories', lang))
+      .from('categories')
       .delete()
       .eq('id', id);
     

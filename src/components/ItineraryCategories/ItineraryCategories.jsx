@@ -72,7 +72,7 @@ const ItineraryCategories = ({ showTitle = false, itineraries = [] }) => {
               style={{ animationDelay: `${index * 100}ms` }}
             >
               <img 
-                src={category.image} 
+                src={category.image || null} 
                 alt={t(`itinerariesPage.categories.${category.id}`, { defaultValue: category.title })}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
