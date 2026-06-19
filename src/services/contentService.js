@@ -210,9 +210,17 @@ export const getCategories = async (lang = 'fr') => {
       .select('*')
       .order('id', { ascending: true });
     
-    if (error) throw error;
+    if (error) {
+      if (error.message?.includes('Could not find the table') || error.code === 'PGRST116') {
+        return [];
+      }
+      throw error;
+    }
     return data || [];
   } catch (error) {
+    if (error.message?.includes('Could not find the table') || error.code === 'PGRST116') {
+      return [];
+    }
     console.error(`Error fetching categories for ${lang}:`, error.message);
     return [];
   }
