@@ -168,8 +168,8 @@ const translateIconText = (text, i18n) => {
   return text;
 };
 
-const formatItineraryTitle = (title, duration, t) => {
-  if (!title) return '';
+const parseItineraryTitleAndDays = (title, duration, t) => {
+  if (!title) return { cleanTitle: '', daysText: '' };
   const daysRegex = /\s*\(\s*(\d+)\s*[jJ]ours?\s*\)\s*$/;
   const match = title.match(daysRegex);
   let cleanTitle = title;
@@ -189,7 +189,7 @@ const formatItineraryTitle = (title, duration, t) => {
     }
   }
   
-  return daysText ? `${daysText} - ${cleanTitle}` : cleanTitle;
+  return { cleanTitle, daysText };
 };
 
 const ItineraryCard = ({ 
@@ -207,6 +207,7 @@ const ItineraryCard = ({
 }) => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
+  const { cleanTitle, daysText } = parseItineraryTitleAndDays(title, duration, t);
 
   const bgClass = isGreen 
     ? 'bg-[#064e3b] border-white/5 hover:border-luxury/80 shadow-2xl hover:shadow-[0_20px_45px_-12px_rgba(0,0,0,0.3),0_0_25px_3px_rgba(197,160,89,0.2)]' 
@@ -321,17 +322,25 @@ const ItineraryCard = ({
       <div className="h-64 overflow-hidden relative flex-shrink-0">
         <img 
           src={image || 'https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&q=80&w=800'} 
-          alt={title} 
-          className="w-full h-full object-cover"
+          alt={cleanTitle} 
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
           onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&q=80&w=800'; }}
         />
+        {daysText && (
+          <div className="absolute top-4 left-4 z-10 bg-white/95 backdrop-blur-md text-gray-800 text-[11px] font-bold px-3 py-1.5 rounded-full shadow-md border border-white/20 flex items-center gap-1.5 transition-transform duration-300 group-hover:scale-105">
+            <svg className={`w-3.5 h-3.5 ${isGreen ? 'text-green-600' : isDark ? 'text-[#c5a059]' : 'text-green-600'}`} fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            {daysText}
+          </div>
+        )}
       </div>
 
       <div className="p-8 flex flex-col flex-grow">
         {tag && (
           <p className={`text-[10px] ${textTag} font-bold uppercase tracking-widest mb-2`}>{tag}</p>
         )}
-        <h3 className={`text-xl font-bold mb-4 ${textTitle}`}>{formatItineraryTitle(title, duration, t)}</h3>
+        <h3 className={`text-xl font-bold mb-4 ${textTitle}`}>{cleanTitle}</h3>
         
         {/* Icon Bar */}
         <div className={`flex items-center space-x-4 mb-6 py-2 px-3 ${iconBg} rounded-lg`}>

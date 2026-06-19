@@ -101,8 +101,8 @@ const translateIconText = (text, i18n) => {
   return text;
 };
 
-const formatItineraryTitle = (title, duration, t) => {
-  if (!title) return '';
+const parseItineraryTitleAndDays = (title, duration, t) => {
+  if (!title) return { cleanTitle: '', daysText: '' };
   const daysRegex = /\s*\(\s*(\d+)\s*[jJ]ours?\s*\)\s*$/;
   const match = title.match(daysRegex);
   let cleanTitle = title;
@@ -122,7 +122,7 @@ const formatItineraryTitle = (title, duration, t) => {
     }
   }
   
-  return daysText ? `${daysText} - ${cleanTitle}` : cleanTitle;
+  return { cleanTitle, daysText };
 };
 
 const PopularItineraries = ({ title, subtitle, id, itineraries, isDark, isGreen }) => {
@@ -336,68 +336,79 @@ const PopularItineraries = ({ title, subtitle, id, itineraries, isDark, isGreen 
           ref={scrollRef}
           className={`flex md:grid overflow-x-auto snap-x snap-mandatory hide-scrollbar md:overflow-visible pb-4 md:pb-0 grid-cols-1 sm:grid-cols-2 ${getGridClass(itineraries.length)} gap-6 md:gap-10 -mx-6 px-6 md:mx-0 md:px-0`}
         >
-          {itineraries.map((item) => (
-            <div 
-              key={item.id} 
-              className={`min-w-[280px] w-[85vw] sm:w-[45vw] md:w-auto shrink-0 snap-center ${
-                isGreen 
-                  ? 'bg-[#064e3b] border-white/5 hover:border-luxury/80 shadow-2xl hover:shadow-[0_20px_45px_-12px_rgba(0,0,0,0.3),0_0_25px_3px_rgba(197,160,89,0.2)]' 
-                  : isDark 
-                    ? 'bg-[#0a152e] border-white/10 hover:border-luxury/80 shadow-2xl hover:shadow-[0_20px_45px_-12px_rgba(0,0,0,0.3),0_0_25px_3px_rgba(197,160,89,0.2)]' 
-                    : 'bg-white border-primary/20 hover:border-primary/55 shadow-[0_8px_30px_rgb(0,0,0,0.015)] hover:shadow-[0_20px_45px_-12px_rgba(30,64,111,0.08)]'
-              } rounded-[1.75rem] overflow-hidden transition-all duration-500 border group flex flex-col`}
-            >
-              <div className="h-64 overflow-hidden relative">
-                <img 
-                  src={item.image || 'https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&q=80&w=800'} 
-                  alt={item.title} 
-                  className="w-full h-full object-cover"
-                  onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&q=80&w=800'; }}
-                />
-              </div>
-
-              <div className="p-8 flex flex-col flex-grow">
-                <p className={`text-[10px] ${isGreen ? 'text-green-300' : isDark ? 'text-luxury' : 'text-green-600'} font-bold uppercase tracking-widest mb-2`}>{t("popularItin.mostPopular")}</p>
-                <h3 className={`text-xl font-bold mb-4 ${isGreen || isDark ? 'text-white' : 'text-primary'}`}>{formatItineraryTitle(item.title, item.duration, t)}</h3>
-                
-                {/* Icon Bar */}
-                <div className={`flex items-center space-x-4 mb-6 py-2 px-3 ${isGreen ? 'bg-black/20' : isDark ? 'bg-white/5' : 'bg-gray-50'} rounded-lg`}>
-                  {(item.icons || []).map((icon, i) => (
-                    <div key={i} className="flex items-center space-x-1.5">
-                      {getIconSvg(icon, isGreen || isDark ? 'text-white/90' : 'text-gray-500')}
-                      <span className={`text-[10px] font-bold uppercase tracking-tighter ${isGreen || isDark ? 'text-white/90' : 'text-gray-500'}`}>{translateIconText(icon, i18n)}</span>
+          {itineraries.map((item) => {
+            const { cleanTitle, daysText } = parseItineraryTitleAndDays(item.title, item.duration, t);
+            return (
+              <div 
+                key={item.id} 
+                className={`min-w-[280px] w-[85vw] sm:w-[45vw] md:w-auto shrink-0 snap-center ${
+                  isGreen 
+                    ? 'bg-[#064e3b] border-white/5 hover:border-luxury/80 shadow-2xl hover:shadow-[0_20px_45px_-12px_rgba(0,0,0,0.3),0_0_25px_3px_rgba(197,160,89,0.2)]' 
+                    : isDark 
+                      ? 'bg-[#0a152e] border-white/10 hover:border-luxury/80 shadow-2xl hover:shadow-[0_20px_45px_-12px_rgba(0,0,0,0.3),0_0_25px_3px_rgba(197,160,89,0.2)]' 
+                      : 'bg-white border-primary/20 hover:border-primary/55 shadow-[0_8px_30px_rgb(0,0,0,0.015)] hover:shadow-[0_20px_45px_-12px_rgba(30,64,111,0.08)]'
+                } rounded-[1.75rem] overflow-hidden transition-all duration-500 border group flex flex-col`}
+              >
+                <div className="h-64 overflow-hidden relative">
+                  <img 
+                    src={item.image || 'https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&q=80&w=800'} 
+                    alt={cleanTitle} 
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&q=80&w=800'; }}
+                  />
+                  {daysText && (
+                    <div className="absolute top-4 left-4 z-10 bg-white/95 backdrop-blur-md text-gray-800 text-[11px] font-bold px-3 py-1.5 rounded-full shadow-md border border-white/20 flex items-center gap-1.5 transition-transform duration-300 group-hover:scale-105">
+                      <svg className={`w-3.5 h-3.5 ${isGreen ? 'text-green-600' : isDark ? 'text-[#c5a059]' : 'text-green-600'}`} fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      {daysText}
                     </div>
-                  ))}
+                  )}
                 </div>
 
-                {renderDescription(item.description)}
-
-                <div className={`pt-6 border-t flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${isGreen || isDark ? 'border-white/10' : 'border-gray-100'}`}>
-                  <div className="flex flex-col">
-                    <span className={`font-bold text-lg ${isGreen || isDark ? 'text-white' : 'text-primary'}`}>
-                      {formatPrice(item.price, t)}
-                      <span className={`${isGreen || isDark ? 'text-white/50' : 'text-gray-400'} text-[10px] font-normal uppercase ml-1`}>{t("popularItin.perPerson")}</span>
-                    </span>
+                <div className="p-8 flex flex-col flex-grow">
+                  <p className={`text-[10px] ${isGreen ? 'text-green-300' : isDark ? 'text-luxury' : 'text-green-600'} font-bold uppercase tracking-widest mb-2`}>{t("popularItin.mostPopular")}</p>
+                  <h3 className={`text-xl font-bold mb-4 ${isGreen || isDark ? 'text-white' : 'text-primary'}`}>{cleanTitle}</h3>
+                  
+                  {/* Icon Bar */}
+                  <div className={`flex items-center space-x-4 mb-6 py-2 px-3 ${isGreen ? 'bg-black/20' : isDark ? 'bg-white/5' : 'bg-gray-50'} rounded-lg`}>
+                    {(item.icons || []).map((icon, i) => (
+                      <div key={i} className="flex items-center space-x-1.5">
+                        {getIconSvg(icon, isGreen || isDark ? 'text-white/90' : 'text-gray-500')}
+                        <span className={`text-[10px] font-bold uppercase tracking-tighter ${isGreen || isDark ? 'text-white/90' : 'text-gray-500'}`}>{translateIconText(icon, i18n)}</span>
+                      </div>
+                    ))}
                   </div>
-                  <button 
-                    onClick={() => navigate(`/${i18n.language}/itinerary/${item.id}`)}
-                    className={`${
-                      isGreen 
-                        ? 'border border-white bg-transparent text-white hover:bg-white hover:text-green-800' 
-                        : isDark 
-                          ? 'border border-white bg-transparent text-white hover:bg-white hover:text-primary' 
-                          : 'border border-primary bg-transparent text-primary hover:bg-primary hover:text-white'
-                    } w-full sm:w-auto px-6 py-2 rounded-xl text-sm font-bold transition-all duration-300 flex items-center justify-center gap-2 transform hover:-translate-y-0.5 group/btn`}
-                  >
-                    {t("popularItin.book")}
-                    <svg className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                    </svg>
-                  </button>
+
+                  {renderDescription(item.description)}
+
+                  <div className={`pt-6 border-t flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${isGreen || isDark ? 'border-white/10' : 'border-gray-100'}`}>
+                    <div className="flex flex-col">
+                      <span className={`font-bold text-lg ${isGreen || isDark ? 'text-white' : 'text-primary'}`}>
+                        {formatPrice(item.price, t)}
+                        <span className={`${isGreen || isDark ? 'text-white/50' : 'text-gray-400'} text-[10px] font-normal uppercase ml-1`}>{t("popularItin.perPerson")}</span>
+                      </span>
+                    </div>
+                    <button 
+                      onClick={() => navigate(`/${i18n.language}/itinerary/${item.id}`)}
+                      className={`${
+                        isGreen 
+                          ? 'border border-white bg-transparent text-white hover:bg-white hover:text-green-800' 
+                          : isDark 
+                            ? 'border border-white bg-transparent text-white hover:bg-white hover:text-primary' 
+                            : 'border border-primary bg-transparent text-primary hover:bg-primary hover:text-white'
+                      } w-full sm:w-auto px-6 py-2 rounded-xl text-sm font-bold transition-all duration-300 flex items-center justify-center gap-2 transform hover:-translate-y-0.5 group/btn`}
+                    >
+                      {t("popularItin.book")}
+                      <svg className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
