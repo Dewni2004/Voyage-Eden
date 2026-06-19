@@ -398,9 +398,56 @@ const TourCards = () => {
 
   // Filter tours by categories
   const popularTours = allTours.filter(t => t.category === 'popular');
+  const customOrder = [
+    '9be862d3-2cb3-424e-b56a-aaaf384bb8ef', // 8 días - Sri Lanka 8 días - La isla de los colores
+    'e43b5dec-05c3-48a2-854e-45fef616675e', // 12 días - Sri Lanka en 12 días - Explora La Mítica Ceylán
+    'f889e49c-89be-40fa-8f75-1a96be58664a', // 15 días - Sri Lanka en 15 días - El País de las Especias
+    'd3285989-25c1-4f88-b018-493d85751509', // Sri Lanka 9 Días - Viaje Al Corazón De Ceilán
+    'c9492146-5f0f-46b8-98b0-3575fc7b6e5a', // Srilanka 10 días Experiencia Ayurveda para tu bienestar
+    'ef67877f-92f9-4113-9880-94a03f79413f'  // Sri Lanka 15 Días - En Hoteles Superior
+  ];
+  popularTours.sort((a, b) => {
+    const indexA = customOrder.indexOf(a.id);
+    const indexB = customOrder.indexOf(b.id);
+    if (indexA !== -1 && indexB !== -1) {
+      return indexA - indexB;
+    }
+    if (indexA !== -1) return -1;
+    if (indexB !== -1) return 1;
+    return 0;
+  });
   const familyTours = allTours.filter(t => t.category === 'family');
   const honeymoonTours = allTours.filter(t => t.category === 'honeymoon');
+  const honeymoonOrder = [
+    '5786c88e-6e80-404c-9e67-c7c8b9594f4f', // 9-Day Honeymoon in Paradise in Sri Lanka
+    '6b5bdec5-93a6-4f5d-8f55-4de8b0637f17', // Sri Lanka: 11-Day Honeymoon in Paradise
+    'e6ed3219-8240-47aa-bc18-2e30ab4aa8c1'  // Sri Lanka: 14-Day Honeymoon in Paradise
+  ];
+  honeymoonTours.sort((a, b) => {
+    const indexA = honeymoonOrder.indexOf(a.id);
+    const indexB = honeymoonOrder.indexOf(b.id);
+    if (indexA !== -1 && indexB !== -1) {
+      return indexA - indexB;
+    }
+    if (indexA !== -1) return -1;
+    if (indexB !== -1) return 1;
+    return 0;
+  });
   const luxuryTours = allTours.filter(t => t.category === 'luxury');
+  const luxuryOrder = [
+    'c1264913-ac00-4e83-acfd-73e139efd628', // 10-Day Ultra-Luxury Family Adventure in Sri Lanka
+    '8c630a0f-b4e0-44f6-9a38-af954d0d8cf8'  // Sri Lanka: 12 Days – An Exclusive Luxury Tour
+  ];
+  luxuryTours.sort((a, b) => {
+    const indexA = luxuryOrder.indexOf(a.id);
+    const indexB = luxuryOrder.indexOf(b.id);
+    if (indexA !== -1 && indexB !== -1) {
+      return indexA - indexB;
+    }
+    if (indexA !== -1) return -1;
+    if (indexB !== -1) return 1;
+    return 0;
+  });
 
   // Split family tours
   // Using title to split because currently all family tours have the "5 STAR" icon in the DB
