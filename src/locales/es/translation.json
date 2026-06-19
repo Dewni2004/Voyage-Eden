@@ -556,7 +556,12 @@
       "sending": "Enviando...",
       "sendingDesktop": "Enviando...",
       "send": "ENVIAR",
-      "sendDesktop": "ENVIAR MI SOLICITUD"
+      "sendDesktop": "ENVIAR MI SOLICITUD",
+      "stars3": "3 Estrellas",
+      "stars4": "4 Estrellas",
+      "stars5": "5 Estrellas",
+      "boutique": "Hotel Boutique",
+      "mixed": "Mixto"
     },
     "includedExcluded": {
       "title": "Lo que está incluido y excluido",

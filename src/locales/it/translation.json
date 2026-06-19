@@ -568,7 +568,12 @@
       "sending": "Invio in corso...",
       "sendingDesktop": "Invio in corso...",
       "send": "INVIA",
-      "sendDesktop": "INVIA LA MIA RICHIESTA"
+      "sendDesktop": "INVIA LA MIA RICHIESTA",
+      "stars3": "3 Stelle",
+      "stars4": "4 Stelle",
+      "stars5": "5 Stelle",
+      "boutique": "Boutique Hotel",
+      "mixed": "Misto"
     },
     "includedExcluded": {
       "title": "Cosa è incluso ed escluso",

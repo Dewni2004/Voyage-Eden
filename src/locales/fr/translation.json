@@ -542,7 +542,12 @@
       "sending": "Envoi...",
       "sendingDesktop": "Envoi en cours...",
       "send": "ENVOYER",
-      "sendDesktop": "ENVOYER MA DEMANDE"
+      "sendDesktop": "ENVOYER MA DEMANDE",
+      "stars3": "3 Étoiles",
+      "stars4": "4 Étoiles",
+      "stars5": "5 Étoiles",
+      "boutique": "Boutique Hôtel",
+      "mixed": "Mixte"
     },
     "includedExcluded": {
       "title": "Ce qui est inclus et exclu",

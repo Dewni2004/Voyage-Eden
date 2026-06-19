@@ -543,7 +543,12 @@
       "sending": "Sending...",
       "sendingDesktop": "Sending...",
       "send": "SEND",
-      "sendDesktop": "SEND MY REQUEST"
+      "sendDesktop": "SEND MY REQUEST",
+      "stars3": "3 Stars",
+      "stars4": "4 Stars",
+      "stars5": "5 Stars",
+      "boutique": "Boutique Hotel",
+      "mixed": "Mixed"
     },
     "includedExcluded": {
       "title": "What is included and excluded",

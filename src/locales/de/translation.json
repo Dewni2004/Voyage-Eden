@@ -541,7 +541,12 @@
       "sending": "Senden...",
       "sendingDesktop": "Senden...",
       "send": "SENDEN",
-      "sendDesktop": "MEINE ANFRAGE SENDEN"
+      "sendDesktop": "MEINE ANFRAGE SENDEN",
+      "stars3": "3 Sterne",
+      "stars4": "4 Sterne",
+      "stars5": "5 Sterne",
+      "boutique": "Boutique-Hotel",
+      "mixed": "Gemischt"
     },
     "includedExcluded": {
       "title": "Was inbegriffen und nicht inbegriffen ist",
