@@ -67,7 +67,7 @@ const ItineraryCategories = ({ showTitle = false, itineraries = [] }) => {
           {visibleCategories.map((category, index) => (
             <div 
               key={category.id}
-              onClick={() => scrollToSection(category.id)}
+              onClick={() => scrollToSection(category.id === 'interests' ? 'popular' : category.id)}
               className="group relative h-24 sm:h-32 md:h-48 rounded-xl md:rounded-3xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 animate-fade-in"
               style={{ animationDelay: `${index * 100}ms` }}
             >

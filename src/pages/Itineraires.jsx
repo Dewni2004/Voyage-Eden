@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router-dom';
 import ItineraryHero from '../components/ItineraryHero/ItineraryHero';
 import ItineraryCategories from '../components/ItineraryCategories/ItineraryCategories';
 import PopularItineraries from '../components/PopularItineraries/PopularItineraries';
@@ -13,6 +14,7 @@ import { FamilyTourSplitSection } from '../components/TourCards/TourCards';
 
 const Itineraires = () => {
   const { t, i18n } = useTranslation();
+  const location = useLocation();
   const [itineraries, setItineraries] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -28,6 +30,18 @@ const Itineraires = () => {
     };
     fetch();
   }, [i18n.language]);
+
+  useEffect(() => {
+    if (!loading && location.hash) {
+      const id = location.hash.replace('#', '');
+      const element = document.getElementById(id);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      }
+    }
+  }, [loading, location.hash]);
 
   const getByCategory = (category) => {
     const filtered = itineraries.filter(it => it.category?.toLowerCase() === category.toLowerCase());

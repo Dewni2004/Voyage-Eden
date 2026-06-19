@@ -54,7 +54,7 @@ const CategoryPillsSection = () => {
         {categories.map((category, idx) => (
           <a 
             key={category.id}
-            href={`/${i18n.language?.split('-')[0] || 'fr'}/itineraires#${category.id}`}
+            href={`/${i18n.language?.split('-')[0] || 'fr'}/itineraires#${category.id === 'interests' ? 'popular' : category.id}`}
             className="group flex flex-col items-center gap-3 md:gap-4 shrink-0 mx-auto"
           >
             <div className="relative w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-[70px] lg:h-[70px] xl:w-[80px] xl:h-[80px] 2xl:w-[90px] 2xl:h-[90px] rounded-full flex items-center justify-center">
