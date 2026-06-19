@@ -221,7 +221,7 @@ const ItineraryCard = ({
   const bgClass = isGreen 
     ? 'bg-[#064e3b] border-white/5 hover:border-luxury/80 shadow-2xl hover:shadow-[0_20px_45px_-12px_rgba(0,0,0,0.3),0_0_25px_3px_rgba(197,160,89,0.2)]' 
     : isDark 
-      ? 'bg-[#0a152e] border-white/10 hover:border-luxury/80 shadow-2xl hover:shadow-[0_20px_45px_-12px_rgba(0,0,0,0.3),0_0_25px_3px_rgba(197,160,89,0.2)]' 
+      ? 'bg-gradient-to-b from-[#16294d] to-[#0c1730] border-[#c5a059]/30 hover:border-[#c5a059]/80 shadow-[0_20px_50px_rgba(0,0,0,0.5)] hover:shadow-[0_20px_45px_-12px_rgba(0,0,0,0.4),0_0_25px_3px_rgba(197,160,89,0.3)]' 
       : 'bg-white border-primary/20 hover:border-primary/55 shadow-[0_8px_30px_rgb(0,0,0,0.015)] hover:shadow-[0_20px_45px_-12px_rgba(30,64,111,0.08)]';
   
   const textTitle = isGreen ? 'text-white' : isDark ? 'text-[#c5a059]' : 'text-primary';
