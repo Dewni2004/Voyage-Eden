@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import i18n from 'i18next';
 import luxuryBg from '../../assets/luxury-bg.png';
 
 const formatPrice = (price, t) => {
@@ -8,9 +9,17 @@ const formatPrice = (price, t) => {
   if (priceStr.toLowerCase() === 'pide presupuesto') {
     return t ? t('itineraryCard.pidePresupuesto', 'Pide Presupuesto') : priceStr;
   }
-  if (priceStr.includes('€')) return priceStr;
-  if (/[a-zA-Z]/.test(priceStr)) return priceStr;
-  return `€ ${priceStr}`;
+  const isEn = i18n.language && i18n.language.startsWith('en');
+  if (isEn) {
+    if (priceStr.includes('USD') || priceStr.includes('$')) return priceStr;
+    if (priceStr.includes('€')) return priceStr.replace('€', 'USD');
+    if (/[a-zA-Z]/.test(priceStr)) return priceStr;
+    return `USD ${priceStr}`;
+  } else {
+    if (priceStr.includes('€')) return priceStr;
+    if (/[a-zA-Z]/.test(priceStr)) return priceStr;
+    return `€ ${priceStr}`;
+  }
 };
 
 const BookingCard = ({ price = "1,250" }) => {

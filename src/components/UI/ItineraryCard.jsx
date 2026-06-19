@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import i18n from 'i18next';
 
 const formatPrice = (price, t) => {
   if (!price) return '';
@@ -8,9 +9,17 @@ const formatPrice = (price, t) => {
   if (priceStr.toLowerCase() === 'pide presupuesto') {
     return t ? t('itineraryCard.pidePresupuesto', 'Pide Presupuesto') : priceStr;
   }
-  if (priceStr.includes('€')) return priceStr;
-  if (/[a-zA-Z]/.test(priceStr)) return priceStr;
-  return `€ ${priceStr}`;
+  const isEn = i18n.language && i18n.language.startsWith('en');
+  if (isEn) {
+    if (priceStr.includes('USD') || priceStr.includes('$')) return priceStr;
+    if (priceStr.includes('€')) return priceStr.replace('€', 'USD');
+    if (/[a-zA-Z]/.test(priceStr)) return priceStr;
+    return `USD ${priceStr}`;
+  } else {
+    if (priceStr.includes('€')) return priceStr;
+    if (/[a-zA-Z]/.test(priceStr)) return priceStr;
+    return `€ ${priceStr}`;
+  }
 };
 
 const getIconSvg = (iconText, iconTextColorClass) => {
@@ -215,7 +224,7 @@ const ItineraryCard = ({
       ? 'bg-[#0a152e] border-white/10 hover:border-luxury/80 shadow-2xl hover:shadow-[0_20px_45px_-12px_rgba(0,0,0,0.3),0_0_25px_3px_rgba(197,160,89,0.2)]' 
       : 'bg-white border-primary/20 hover:border-primary/55 shadow-[0_8px_30px_rgb(0,0,0,0.015)] hover:shadow-[0_20px_45px_-12px_rgba(30,64,111,0.08)]';
   
-  const textTitle = isGreen || isDark ? 'text-white' : 'text-primary';
+  const textTitle = isGreen ? 'text-white' : isDark ? 'text-[#c5a059]' : 'text-primary';
   const textTag = isGreen ? 'text-green-300' : isDark ? 'text-luxury' : 'text-green-600';
   const textSecondary = isGreen || isDark ? 'text-white/80' : 'text-gray-500';
   const dividerClass = isGreen || isDark ? 'border-white/10' : 'border-gray-100';
@@ -323,11 +332,11 @@ const ItineraryCard = ({
         <img 
           src={image || 'https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&q=80&w=800'} 
           alt={cleanTitle} 
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          className="w-full h-full object-cover"
           onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&q=80&w=800'; }}
         />
         {daysText && (
-          <div className="absolute top-4 left-4 z-10 bg-white/95 backdrop-blur-md text-gray-800 text-[11px] font-bold px-3 py-1.5 rounded-full shadow-md border border-white/20 flex items-center gap-1.5 transition-transform duration-300 group-hover:scale-105">
+          <div className="absolute top-4 left-4 z-10 bg-white/95 backdrop-blur-md text-gray-800 text-[11px] font-bold px-3 py-1.5 rounded-full shadow-md border border-white/20 flex items-center gap-1.5">
             <svg className={`w-3.5 h-3.5 ${isGreen ? 'text-green-600' : isDark ? 'text-[#c5a059]' : 'text-green-600'}`} fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>

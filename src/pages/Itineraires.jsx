@@ -91,6 +91,7 @@ const Itineraires = () => {
               standardTours={familyStandardTours}
               premiumTours={familyPremiumTours}
               t={t}
+              isPage={true}
             />
           </div>
         </section>

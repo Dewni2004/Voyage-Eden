@@ -125,7 +125,7 @@ const TourCategorySection = ({ title, subtitle, tours, t, noBottomMargin }) => {
   );
 };
 
-export const FamilyTourSplitSection = ({ title, subtitle, standardTours, premiumTours, t }) => {
+export const FamilyTourSplitSection = ({ title, subtitle, standardTours, premiumTours, t, isPage = false }) => {
   const standardScrollRef = useRef(null);
   const premiumScrollRef = useRef(null);
   const [showStandardHint, setShowStandardHint] = useState(false);
@@ -248,14 +248,21 @@ export const FamilyTourSplitSection = ({ title, subtitle, standardTours, premium
   return (
     <div className="mb-8 md:mb-20">
       {/* Header */}
-      <div className="text-center mb-6 md:mb-16">
-        <h2 className="mb-4">{title}</h2>
-        {subtitle && (
-          <p className="text-gray-600 max-w-3xl mx-auto text-lg font-light">
-            {subtitle}
-          </p>
-        )}
-      </div>
+      {isPage ? (
+        <div className="flex items-center justify-between mb-4 md:mb-8">
+          <h2 className="text-3xl font-bold capitalize tracking-tight text-primary">{title}</h2>
+          <div className="flex-grow ml-12 h-[1px] hidden md:block bg-gray-200"></div>
+        </div>
+      ) : (
+        <div className="text-center mb-6 md:mb-16">
+          <h2 className="mb-4">{title}</h2>
+          {subtitle && (
+            <p className="text-gray-600 max-w-3xl mx-auto text-lg font-light">
+              {subtitle}
+            </p>
+          )}
+        </div>
+      )}
 
       {/* Split Grid */}
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 md:gap-10">
