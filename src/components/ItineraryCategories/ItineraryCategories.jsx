@@ -74,7 +74,7 @@ const ItineraryCategories = ({ showTitle = false, itineraries = [] }) => {
               <img 
                 src={category.image || null} 
                 alt={t(`itinerariesPage.categories.${category.id}`, { defaultValue: category.title })}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent"></div>
               <div className="absolute bottom-0 left-0 right-0 p-3 md:p-6">

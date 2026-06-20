@@ -5,7 +5,9 @@ import logoColorFR from '../../assets/French-t.png';
 import logoColorEN from '../../assets/English-Logo-scaled.png';
 import logoColorES from '../../assets/Spanish-Logo-scaled.png';
 import logoColorIT from '../../assets/Italy-Logo-scaled.png';
+import logoColorDE from '../../assets/Geman logo.png';
 import logoWhiteText from '../../assets/French-t-white-text.png';
+import logoWhiteDE from '../../assets/Geman logo2.png';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -28,7 +30,12 @@ const Navbar = () => {
     en: logoColorEN,
     es: logoColorES,
     it: logoColorIT,
-    de: logoColorFR // Fallback to French until German logo is added
+    de: logoColorDE
+  };
+
+  const whiteLogos = {
+    fr: logoWhiteText,
+    de: logoWhiteDE
   };
 
   const currentLogoColor = colorLogos[i18n.language] || logoColorFR;
@@ -79,7 +86,7 @@ const Navbar = () => {
         >
           <img
             key={i18n.language}
-            src={(i18n.language === 'fr' || i18n.language === 'de') && !isScrolled && !isMenuOpen ? logoWhiteText : currentLogoColor}
+            src={(!isScrolled && !isMenuOpen && whiteLogos[i18n.language]) ? whiteLogos[i18n.language] : currentLogoColor}
             alt="Eden Travels Logo"
             className={`h-16 md:h-20 w-auto object-contain transition-all duration-300 origin-left`}
             style={{

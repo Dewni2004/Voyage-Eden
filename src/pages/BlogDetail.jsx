@@ -218,7 +218,7 @@ const BlogDetail = () => {
                 {popularReads.map((read, index) => (
                   <div key={index} className="flex gap-4 group cursor-pointer">
                     <div className="w-20 h-20 rounded-2xl overflow-hidden flex-shrink-0 shadow-md">
-                      <img src={read.image} alt="" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                      <img src={read.image} alt="" className="w-full h-full object-cover" />
                     </div>
                     <div className="flex flex-col justify-center">
                       <h4 className="text-primary text-sm font-bold leading-snug group-hover:text-luxury transition-colors line-clamp-2 mb-1">

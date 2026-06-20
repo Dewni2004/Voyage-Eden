@@ -100,7 +100,7 @@ const AboutUs = () => {
             {/* Right Content - Overlapping Images */}
             <div className="lg:w-1/2 relative h-[350px] sm:h-[450px] md:h-[600px] w-full mt-8 lg:mt-0 px-4 sm:px-0">
               {/* Top Image */}
-              <div className="absolute top-0 left-0 w-[80%] h-[200px] sm:h-[300px] md:h-[350px] z-10 transition-transform duration-500 hover:scale-[1.02]">
+              <div className="absolute top-0 left-0 w-[80%] h-[200px] sm:h-[300px] md:h-[350px] z-10">
                 <img 
                   src={officeStaff2} 
                   alt="Eden Travels Office Staff" 
@@ -109,7 +109,7 @@ const AboutUs = () => {
               </div>
               
               {/* Bottom Image */}
-              <div className="absolute bottom-0 right-0 w-[70%] h-[200px] sm:h-[300px] md:h-[350px] z-20 transition-transform duration-500 hover:scale-[1.02]">
+              <div className="absolute bottom-0 right-0 w-[70%] h-[200px] sm:h-[300px] md:h-[350px] z-20">
                 <img 
                   src={guidesImage} 
                   alt="Eden Travels Guides" 

@@ -100,7 +100,7 @@ const TravelGuide = () => {
           <img 
             src={article.image} 
             alt={article.title} 
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            className="w-full h-full object-cover"
           />
           <div className="absolute top-2 left-2 sm:top-4 sm:left-4 bg-primary text-white text-[9px] sm:text-xs font-bold px-2 py-1 sm:px-4 sm:py-2 rounded-full shadow-lg">
             {getTranslatedCategory(article.category)}
@@ -297,7 +297,7 @@ const TravelGuide = () => {
                 {allArticles.slice(0, 3).map((article) => (
                   <div key={article.id} className="flex gap-4 group cursor-pointer">
                     <div className="w-24 h-24 rounded-2xl overflow-hidden flex-shrink-0 shadow-md">
-                      <img src={article.image} alt="" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                      <img src={article.image} alt="" className="w-full h-full object-cover" />
                     </div>
                     <div className="flex flex-col justify-center">
                       <span className="text-primary/70 text-[10px] font-bold uppercase tracking-wider mb-1">{article.date}</span>

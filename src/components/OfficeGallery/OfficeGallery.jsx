@@ -81,7 +81,7 @@ const OfficeGallery = () => {
                     src={item.src} 
                     alt={`Office view ${idx + 1}`} 
                     loading="lazy"
-                    className={`w-full h-full object-cover ${item.objectPosition || 'object-center'} group-hover:scale-110 transition-transform duration-700`}
+                    className={`w-full h-full object-cover ${item.objectPosition || 'object-center'}`}
                   />
                   {/* Subtle hover overlay indicating clickability */}
                   <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/30 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">

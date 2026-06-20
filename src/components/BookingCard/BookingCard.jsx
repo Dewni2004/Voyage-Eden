@@ -6,7 +6,14 @@ import luxuryBg from '../../assets/luxury-bg.png';
 const formatPrice = (price, t) => {
   if (!price) return '';
   const priceStr = price.toString().trim();
-  if (priceStr.toLowerCase() === 'pide presupuesto') {
+  const lowerPrice = priceStr.toLowerCase();
+  if (
+    lowerPrice === 'pide presupuesto' || 
+    lowerPrice === 'precio a consultar' || 
+    lowerPrice === 'a consultar' || 
+    lowerPrice === 'consultar' || 
+    lowerPrice === 'consultar precio'
+  ) {
     return t ? t('itineraryCard.pidePresupuesto', 'Pide Presupuesto') : priceStr;
   }
   const isEn = i18n.language && i18n.language.startsWith('en');

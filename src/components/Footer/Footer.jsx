@@ -4,6 +4,8 @@ import logoColorFR from '../../assets/French-t.png';
 import logoColorEN from '../../assets/English-Logo-scaled.png';
 import logoColorES from '../../assets/Spanish-Logo-scaled.png';
 import logoColorIT from '../../assets/Italy-Logo-scaled.png';
+import logoColorDE from '../../assets/Geman logo.png';
+
 const Footer = () => {
   const { t, i18n } = useTranslation();
   const currentYear = new Date().getFullYear();
@@ -14,7 +16,7 @@ const Footer = () => {
     en: logoColorEN,
     es: logoColorES,
     it: logoColorIT,
-    de: logoColorFR
+    de: logoColorDE
   };
 
   const currentLogoColor = colorLogos[i18n.language] || logoColorFR;
