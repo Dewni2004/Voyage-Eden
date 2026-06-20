@@ -224,7 +224,7 @@
       "honeymoon": "Honeymoon trips",
       "family": "Family trips",
       "luxury": "Luxury collection",
-      "golf": "Golf stays",
+      "golf": "Golf Tours",
       "surf": "Surf and diving trips",
       "adventure": "Adventure trips",
       "perahera": "Esela Perahera specials",
@@ -424,15 +424,15 @@
       "mapKandy": "Our Kandy Office"
     },
     "itinerariesPage": {
-      "heroTitle": "itineraries",
+      "heroTitle": "Itineraries",
       "heroDesc": "Personalized trips, designed according to your desires.\nDiscover the most beautiful experiences in Sri Lanka, designed for the demanding traveler.",
-      "basedOnInterests": "itineraries based on interests",
+      "basedOnInterests": "Itineraries based on interests",
       "categories": {
         "popular": "Popular",
         "honeymoon": "Honeymoon",
         "family": "Family trips",
         "luxury": "Luxury collection",
-        "golf": "Golf stays",
+        "golf": "Golf Tours",
         "surf": "Surf & Diving",
         "adventure": "Adventure",
         "pererahera": "Esela Perahera",
