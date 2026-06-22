@@ -109,7 +109,7 @@ const CustomTrip = () => {
     : 'https://www.w3schools.com/html/mov_bbb.mp4'; // Placeholder for other slides
 
   return (
-    <div className="relative h-[100dvh] md:min-h-screen bg-gray-900 md:overflow-hidden flex flex-col">
+    <div className="relative h-[100dvh] md:min-h-screen bg-gray-50 md:bg-gray-900 md:overflow-hidden flex flex-col">
       {/* Video Background - Banner on mobile, Fullscreen on desktop */}
       <div className="relative md:absolute top-0 left-0 w-full aspect-video md:h-full z-0 shrink-0 bg-black">
         <video
@@ -133,7 +133,7 @@ const CustomTrip = () => {
           {[1, 2, 3, 4, 5].map((step) => (
             <div 
               key={step} 
-              className={`h-2 rounded-full transition-all duration-300 ${currentSlide === step ? 'w-8 bg-primary' : 'w-2 bg-white/40'}`} 
+              className={`h-2 rounded-full transition-all duration-300 ${currentSlide === step ? 'w-8 bg-primary' : 'w-2 bg-gray-300 md:bg-white/40'}`} 
             />
           ))}
         </div>
@@ -149,23 +149,23 @@ const CustomTrip = () => {
                 initial="hidden"
                 animate="visible"
                 exit="exit"
-                className="bg-white/5 backdrop-blur-sm p-6 md:p-10 rounded-2xl shadow-2xl w-full max-w-xl border border-white/20"
+                className="bg-white/95 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-2xl w-full max-w-xl border border-white/20"
               >
-                <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 text-center drop-shadow-md">
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6 text-center">
                   {t('customTrip.heroTitle', 'DESIGN YOUR CUSTOM TRIP')}
                 </h2>
                 <form onSubmit={(e) => { e.preventDefault(); nextSlide(); }} className="space-y-4">
                   <div>
-                    <label className="block mb-1 text-white font-medium text-sm drop-shadow-sm">{t('customTrip.fullName', 'Full Name')} <span className="text-red-400">*</span></label>
-                    <input type="text" name="fullName" value={formData.fullName} onChange={handleInputChange} required className="w-full bg-white/20 text-white placeholder-white/70 border border-white/30 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all backdrop-blur-sm" />
+                    <label className="block mb-1 text-gray-700 font-medium text-sm">{t('customTrip.fullName', 'Full Name')} <span className="text-red-500">*</span></label>
+                    <input type="text" name="fullName" value={formData.fullName} onChange={handleInputChange} required className="w-full bg-white border border-gray-300 text-gray-800 placeholder-gray-400 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all" />
                   </div>
                   <div>
-                    <label className="block mb-1 text-white font-medium text-sm drop-shadow-sm">{t('customTrip.whatsapp', 'Whatsapp Contact Number')} <span className="text-red-400">*</span></label>
-                    <input type="tel" name="whatsapp" value={formData.whatsapp} onChange={handleInputChange} required className="w-full bg-white/20 text-white placeholder-white/70 border border-white/30 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all backdrop-blur-sm" />
+                    <label className="block mb-1 text-gray-700 font-medium text-sm">{t('customTrip.whatsapp', 'Whatsapp Contact Number')} <span className="text-red-500">*</span></label>
+                    <input type="tel" name="whatsapp" value={formData.whatsapp} onChange={handleInputChange} required className="w-full bg-white border border-gray-300 text-gray-800 placeholder-gray-400 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all" />
                   </div>
                   <div>
-                    <label className="block mb-1 text-white font-medium text-sm drop-shadow-sm">{t('customTrip.nationality', 'Nationality')} <span className="text-red-400">*</span></label>
-                    <select name="nationality" value={formData.nationality} onChange={handleInputChange} required className="w-full bg-white/20 text-white border border-white/30 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all backdrop-blur-sm [&>option]:text-gray-800">
+                    <label className="block mb-1 text-gray-700 font-medium text-sm">{t('customTrip.nationality', 'Nationality')} <span className="text-red-500">*</span></label>
+                    <select name="nationality" value={formData.nationality} onChange={handleInputChange} required className="w-full bg-white border border-gray-300 text-gray-800 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all">
                       <option value="">Select Nationality</option>
                       <option value="Sri Lankan">Sri Lankan</option>
                       <option value="French">French</option>
@@ -177,8 +177,8 @@ const CustomTrip = () => {
                     </select>
                   </div>
                   <div>
-                    <label className="block mb-1 text-white font-medium text-sm drop-shadow-sm">{t('customTrip.email', 'E-mail')} <span className="text-red-400">*</span></label>
-                    <input type="email" name="email" value={formData.email} onChange={handleInputChange} required className="w-full bg-white/20 text-white placeholder-white/70 border border-white/30 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all backdrop-blur-sm" />
+                    <label className="block mb-1 text-gray-700 font-medium text-sm">{t('customTrip.email', 'E-mail')} <span className="text-red-500">*</span></label>
+                    <input type="email" name="email" value={formData.email} onChange={handleInputChange} required className="w-full bg-white border border-gray-300 text-gray-800 placeholder-gray-400 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all" />
                   </div>
                   
                   <div className="mt-8 flex justify-end">
@@ -198,15 +198,15 @@ const CustomTrip = () => {
                 initial="hidden"
                 animate="visible"
                 exit="exit"
-                className="text-center text-white px-4"
+                className="text-center text-gray-800 md:text-white px-4"
               >
-                <h1 className="text-5xl md:text-7xl font-extrabold mb-4 drop-shadow-2xl text-transparent bg-clip-text bg-gradient-to-r from-white to-primary/30">
+                <h1 className="text-5xl md:text-7xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-primary to-luxury md:from-white md:to-primary/30 animate-pulse">
                   Hello {formData.fullName ? formData.fullName.split(' ')[0] : ''}!
                 </h1>
-                <p className="text-2xl md:text-4xl font-light drop-shadow-md mb-12">
+                <p className="text-2xl md:text-4xl font-light mb-12 text-gray-600 md:text-white">
                   Let's plan your dream trip!
                 </p>
-                <button type="button" onClick={nextSlide} className="bg-white text-primary font-bold py-4 px-10 rounded-full text-lg shadow-xl hover:bg-gray-100 transition-all hover:scale-105 active:scale-95">
+                <button type="button" onClick={nextSlide} className="bg-primary text-white md:bg-white md:text-primary font-bold py-4 px-10 rounded-full text-lg shadow-xl hover:bg-primary/90 md:hover:bg-gray-100 transition-all hover:scale-105 active:scale-95">
                   {t('customTrip.startPlanningBtn', 'Start Planning')}
                 </button>
               </motion.div>

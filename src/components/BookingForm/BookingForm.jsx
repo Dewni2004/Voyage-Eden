@@ -151,9 +151,11 @@ const BookingForm = ({ itineraryTitle }) => {
       return;
     }
 
-    const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || "service_rr0njpl"; 
+    const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || "service_t8ls4md"; 
     const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "template_1w4ymtk";
     const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "NgNgKSh6lkDB3OdZH";
+
+    console.log("EmailJS Params being sent:", { SERVICE_ID, TEMPLATE_ID, PUBLIC_KEY });
 
     emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY)
       .then((result) => {
@@ -168,7 +170,7 @@ const BookingForm = ({ itineraryTitle }) => {
             type: 'error', 
             text: t("bookingForm.errorMsg") || "Sorry, an error occurred. Please try again or contact us directly." 
           });
-          console.error('EmailJS Error:', error);
+          console.error('EmailJS Error Details:', { status: error.status, text: error.text });
       })
       .finally(() => setIsSending(false));
   };
