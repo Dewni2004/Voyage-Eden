@@ -6,7 +6,6 @@ import { getReviews } from '../services/contentService';
 
 import PageHero from '../components/UI/PageHero';
 import reviewsBanner from '../assets/Review page Banner.jpeg';
-import swipeHandImg from '../assets/swipe-hand-transparent.png';
 
 const videoReviews = [
   { id: "Pjdej3Rz-OM", name: "Tharindu & Anne", date: "Jan 2024", thumbnail: "https://img.youtube.com/vi/Pjdej3Rz-OM/hqdefault.jpg" },
@@ -24,7 +23,6 @@ const Reviews = () => {
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [loading, setLoading] = useState(true);
   const videosScrollRef = useRef(null);
-  const [showSwipeHintVideos, setShowSwipeHintVideos] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [expandedTextReviews, setExpandedTextReviews] = useState(false);
 
@@ -50,44 +48,53 @@ const Reviews = () => {
   const displayedReviews = (isMobile && !expandedTextReviews) 
     ? textReviews.slice(0, 2) 
     : textReviews;
-
   useEffect(() => {
-    if (window.innerWidth >= 640 || !videosScrollRef.current || videoReviews.length <= 1) return;
+    if (window.innerWidth >= 640 || !videosScrollRef.current) return;
 
     const container = videosScrollRef.current;
     let observerActive = true;
     let isAutoScrolling = false;
+    let currentIndex = 0;
+    let autoplayInterval = null;
 
     const handleScroll = () => {
       if (isAutoScrolling) return;
-      setShowSwipeHintVideos(false);
+      // User interacted manually, stop autoplay to prevent jumpy behavior
+      clearInterval(autoplayInterval);
       container.removeEventListener('scroll', handleScroll);
+    };
+
+    const startAutoplay = () => {
+      const totalCards = container.children.length;
+      if (totalCards <= 1) return;
+
+      container.addEventListener('scroll', handleScroll, { passive: true });
+
+      autoplayInterval = setInterval(() => {
+        const firstCard = container.firstElementChild;
+        if (!firstCard) return;
+
+        isAutoScrolling = true;
+        currentIndex = (currentIndex + 1) % totalCards;
+        const cardWidth = firstCard.clientWidth;
+        const gap = 32; // gap-8 is 32px
+        container.scrollTo({ left: currentIndex * (cardWidth + gap), behavior: 'smooth' });
+
+        setTimeout(() => {
+          isAutoScrolling = false;
+        }, 600);
+      }, 3000);
     };
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && observerActive) {
-            setShowSwipeHintVideos(true);
-            isAutoScrolling = true;
-            container.addEventListener('scroll', handleScroll, { passive: true });
-
-            // Auto swipe peek animation
             setTimeout(() => {
-              if (container) {
-                container.style.scrollSnapType = 'none';
-                container.scrollTo({ left: 70, behavior: 'smooth' });
-                setTimeout(() => {
-                  if (container) {
-                    container.scrollTo({ left: 0, behavior: 'smooth' });
-                    setTimeout(() => {
-                      if (container) container.style.scrollSnapType = '';
-                      isAutoScrolling = false;
-                    }, 500);
-                  }
-                }, 700);
+              if (observerActive) {
+                startAutoplay();
               }
-            }, 500);
+            }, 1000);
 
             observer.unobserve(entry.target);
             observerActive = false;
@@ -104,6 +111,7 @@ const Reviews = () => {
         observer.unobserve(container);
         container.removeEventListener('scroll', handleScroll);
       }
+      clearInterval(autoplayInterval);
     };
   }, []);
 
@@ -389,17 +397,6 @@ const Reviews = () => {
         </div>
 
         <div className="relative">
-          {showSwipeHintVideos && (
-            <div className="sm:hidden absolute top-0 right-0 bottom-0 left-0 z-20 pointer-events-none flex justify-center items-center">
-              <div className="p-4 rounded-full bg-white/25 backdrop-blur-md border border-white/40 shadow-[0_8px_32px_rgba(31,38,135,0.08)] flex items-center justify-center animate-glass-swipe">
-                <img 
-                  src={swipeHandImg} 
-                  alt="Swipe Gesture" 
-                  className="w-12 h-12 object-contain"
-                />
-              </div>
-            </div>
-          )}
           <div 
             ref={videosScrollRef}
             className="flex sm:grid overflow-x-auto snap-x snap-mandatory hide-scrollbar sm:overflow-visible pb-8 sm:pb-0 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 -mx-6 px-6 sm:mx-0 sm:px-0"

@@ -5,49 +5,56 @@ import ItineraryCard from '../UI/ItineraryCard';
 import { getItineraries } from '../../services/contentService';
 import CategoryPillsSection from './CategoryPillsSection';
 import PopularItineraries from '../PopularItineraries/PopularItineraries';
-import swipeHandImg from '../../assets/swipe-hand-transparent.png';
 
 const TourCategorySection = ({ title, subtitle, tours, t, noBottomMargin }) => {
   const localScrollRef = useRef(null);
-  const [showSwipeHint, setShowSwipeHint] = useState(false);
 
   useEffect(() => {
-    if (window.innerWidth >= 768 || !localScrollRef.current || !tours || tours.length <= 1) return;
+    if (window.innerWidth >= 768 || !localScrollRef.current) return;
 
     const container = localScrollRef.current;
     let observerActive = true;
     let isAutoScrolling = false;
+    let currentIndex = 0;
+    let autoplayInterval = null;
 
     const handleScroll = () => {
       if (isAutoScrolling) return;
-      setShowSwipeHint(false);
+      clearInterval(autoplayInterval);
       container.removeEventListener('scroll', handleScroll);
+    };
+
+    const startAutoplay = () => {
+      const totalCards = container.children.length;
+      if (totalCards <= 1) return;
+
+      container.addEventListener('scroll', handleScroll, { passive: true });
+
+      autoplayInterval = setInterval(() => {
+        const firstCard = container.firstElementChild;
+        if (!firstCard) return;
+
+        isAutoScrolling = true;
+        currentIndex = (currentIndex + 1) % totalCards;
+        const cardWidth = firstCard.clientWidth;
+        const gap = 24; // gap-6 is 24px
+        container.scrollTo({ left: currentIndex * (cardWidth + gap), behavior: 'smooth' });
+
+        setTimeout(() => {
+          isAutoScrolling = false;
+        }, 600);
+      }, 3000);
     };
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && observerActive) {
-            setShowSwipeHint(true);
-            isAutoScrolling = true;
-            container.addEventListener('scroll', handleScroll, { passive: true });
-
-            // Auto swipe peek animation
             setTimeout(() => {
-              if (container) {
-                container.style.scrollSnapType = 'none';
-                container.scrollTo({ left: 70, behavior: 'smooth' });
-                setTimeout(() => {
-                  if (container) {
-                    container.scrollTo({ left: 0, behavior: 'smooth' });
-                    setTimeout(() => {
-                      if (container) container.style.scrollSnapType = '';
-                      isAutoScrolling = false;
-                    }, 500);
-                  }
-                }, 700);
+              if (observerActive) {
+                startAutoplay();
               }
-            }, 500);
+            }, 1000);
 
             observer.unobserve(entry.target);
             observerActive = false;
@@ -64,6 +71,7 @@ const TourCategorySection = ({ title, subtitle, tours, t, noBottomMargin }) => {
         observer.unobserve(container);
         container.removeEventListener('scroll', handleScroll);
       }
+      clearInterval(autoplayInterval);
     };
   }, [tours]);
   
@@ -89,17 +97,6 @@ const TourCategorySection = ({ title, subtitle, tours, t, noBottomMargin }) => {
       </div>
 
       <div className="relative">
-        {showSwipeHint && (
-          <div className="md:hidden absolute top-0 right-0 bottom-0 left-0 z-20 pointer-events-none flex justify-center items-center">
-            <div className="p-4 rounded-full bg-white/25 backdrop-blur-md border border-white/40 shadow-[0_8px_32px_rgba(31,38,135,0.08)] flex items-center justify-center animate-glass-swipe">
-              <img 
-                src={swipeHandImg} 
-                alt="Swipe Gesture" 
-                className="w-12 h-12 object-contain"
-              />
-            </div>
-          </div>
-        )}
         {/* Grid */}
         <div 
           ref={localScrollRef}
@@ -128,46 +125,53 @@ const TourCategorySection = ({ title, subtitle, tours, t, noBottomMargin }) => {
 export const FamilyTourSplitSection = ({ title, subtitle, standardTours, premiumTours, t, isPage = false }) => {
   const standardScrollRef = useRef(null);
   const premiumScrollRef = useRef(null);
-  const [showStandardHint, setShowStandardHint] = useState(false);
-  const [showPremiumHint, setShowPremiumHint] = useState(false);
 
   useEffect(() => {
-    if (window.innerWidth >= 640 || !standardScrollRef.current || !standardTours || standardTours.length <= 1) return;
+    if (window.innerWidth >= 640 || !standardScrollRef.current) return;
 
     const container = standardScrollRef.current;
     let observerActive = true;
     let isAutoScrolling = false;
+    let currentIndex = 0;
+    let autoplayInterval = null;
 
     const handleScroll = () => {
       if (isAutoScrolling) return;
-      setShowStandardHint(false);
+      clearInterval(autoplayInterval);
       container.removeEventListener('scroll', handleScroll);
+    };
+
+    const startAutoplay = () => {
+      const totalCards = container.children.length;
+      if (totalCards <= 1) return;
+
+      container.addEventListener('scroll', handleScroll, { passive: true });
+
+      autoplayInterval = setInterval(() => {
+        const firstCard = container.firstElementChild;
+        if (!firstCard) return;
+
+        isAutoScrolling = true;
+        currentIndex = (currentIndex + 1) % totalCards;
+        const cardWidth = firstCard.clientWidth;
+        const gap = 16; // gap-4 is 16px
+        container.scrollTo({ left: currentIndex * (cardWidth + gap), behavior: 'smooth' });
+
+        setTimeout(() => {
+          isAutoScrolling = false;
+        }, 600);
+      }, 3000);
     };
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && observerActive) {
-            setShowStandardHint(true);
-            isAutoScrolling = true;
-            container.addEventListener('scroll', handleScroll, { passive: true });
-
-            // Auto swipe peek animation
             setTimeout(() => {
-              if (container) {
-                container.style.scrollSnapType = 'none';
-                container.scrollTo({ left: 70, behavior: 'smooth' });
-                setTimeout(() => {
-                  if (container) {
-                    container.scrollTo({ left: 0, behavior: 'smooth' });
-                    setTimeout(() => {
-                      if (container) container.style.scrollSnapType = '';
-                      isAutoScrolling = false;
-                    }, 500);
-                  }
-                }, 700);
+              if (observerActive) {
+                startAutoplay();
               }
-            }, 500);
+            }, 1000);
 
             observer.unobserve(entry.target);
             observerActive = false;
@@ -184,46 +188,56 @@ export const FamilyTourSplitSection = ({ title, subtitle, standardTours, premium
         observer.unobserve(container);
         container.removeEventListener('scroll', handleScroll);
       }
+      clearInterval(autoplayInterval);
     };
   }, [standardTours]);
 
   useEffect(() => {
-    if (window.innerWidth >= 640 || !premiumScrollRef.current || !premiumTours || premiumTours.length <= 1) return;
+    if (window.innerWidth >= 640 || !premiumScrollRef.current) return;
 
     const container = premiumScrollRef.current;
     let observerActive = true;
     let isAutoScrolling = false;
+    let currentIndex = 0;
+    let autoplayInterval = null;
 
     const handleScroll = () => {
       if (isAutoScrolling) return;
-      setShowPremiumHint(false);
+      clearInterval(autoplayInterval);
       container.removeEventListener('scroll', handleScroll);
+    };
+
+    const startAutoplay = () => {
+      const totalCards = container.children.length;
+      if (totalCards <= 1) return;
+
+      container.addEventListener('scroll', handleScroll, { passive: true });
+
+      autoplayInterval = setInterval(() => {
+        const firstCard = container.firstElementChild;
+        if (!firstCard) return;
+
+        isAutoScrolling = true;
+        currentIndex = (currentIndex + 1) % totalCards;
+        const cardWidth = firstCard.clientWidth;
+        const gap = 16; // gap-4 is 16px
+        container.scrollTo({ left: currentIndex * (cardWidth + gap), behavior: 'smooth' });
+
+        setTimeout(() => {
+          isAutoScrolling = false;
+        }, 600);
+      }, 3000);
     };
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && observerActive) {
-            setShowPremiumHint(true);
-            isAutoScrolling = true;
-            container.addEventListener('scroll', handleScroll, { passive: true });
-
-            // Auto swipe peek animation
             setTimeout(() => {
-              if (container) {
-                container.style.scrollSnapType = 'none';
-                container.scrollTo({ left: 70, behavior: 'smooth' });
-                setTimeout(() => {
-                  if (container) {
-                    container.scrollTo({ left: 0, behavior: 'smooth' });
-                    setTimeout(() => {
-                      if (container) container.style.scrollSnapType = '';
-                      isAutoScrolling = false;
-                    }, 500);
-                  }
-                }, 700);
+              if (observerActive) {
+                startAutoplay();
               }
-            }, 500);
+            }, 1000);
 
             observer.unobserve(entry.target);
             observerActive = false;
@@ -240,6 +254,7 @@ export const FamilyTourSplitSection = ({ title, subtitle, standardTours, premium
         observer.unobserve(container);
         container.removeEventListener('scroll', handleScroll);
       }
+      clearInterval(autoplayInterval);
     };
   }, [premiumTours]);
 
@@ -272,17 +287,6 @@ export const FamilyTourSplitSection = ({ title, subtitle, standardTours, premium
           <h3 className="text-center text-lg md:text-xl font-bold uppercase tracking-wide text-primary mb-6 border-b pb-4">{t('tours.familyStandardHotels', 'RUTAS EN HOTELES 3/4*')}</h3>
           
           <div className="relative flex-grow flex flex-col">
-            {showStandardHint && (
-              <div className="sm:hidden absolute top-0 right-0 bottom-0 left-0 z-20 pointer-events-none flex justify-center items-center">
-                <div className="p-4 rounded-full bg-white/25 backdrop-blur-md border border-white/40 shadow-[0_8px_32px_rgba(31,38,135,0.08)] flex items-center justify-center animate-glass-swipe">
-                  <img 
-                    src={swipeHandImg} 
-                    alt="Swipe Gesture" 
-                    className="w-12 h-12 object-contain"
-                  />
-                </div>
-              </div>
-            )}
             <div 
               ref={standardScrollRef}
               className="flex sm:grid overflow-x-auto snap-x snap-mandatory hide-scrollbar sm:overflow-visible pb-4 sm:pb-0 grid-cols-1 sm:grid-cols-2 gap-4 -mx-4 px-4 sm:mx-0 sm:px-0 flex-grow"
@@ -310,17 +314,6 @@ export const FamilyTourSplitSection = ({ title, subtitle, standardTours, premium
           <h3 className="text-center text-lg md:text-xl font-bold uppercase tracking-wide text-primary mb-6 border-b pb-4">{t('tours.familyPremiumHotels', 'RUTAS EN HOTELES SUPERIOR 4/5*')}</h3>
           
           <div className="relative flex-grow flex flex-col">
-            {showPremiumHint && (
-              <div className="sm:hidden absolute top-0 right-0 bottom-0 left-0 z-20 pointer-events-none flex justify-center items-center">
-                <div className="p-4 rounded-full bg-white/25 backdrop-blur-md border border-white/40 shadow-[0_8px_32px_rgba(31,38,135,0.08)] flex items-center justify-center animate-glass-swipe">
-                  <img 
-                    src={swipeHandImg} 
-                    alt="Swipe Gesture" 
-                    className="w-12 h-12 object-contain"
-                  />
-                </div>
-              </div>
-            )}
             <div 
               ref={premiumScrollRef}
               className="flex sm:grid overflow-x-auto snap-x snap-mandatory hide-scrollbar sm:overflow-visible pb-4 sm:pb-0 grid-cols-1 sm:grid-cols-2 gap-4 -mx-4 px-4 sm:mx-0 sm:px-0 flex-grow"

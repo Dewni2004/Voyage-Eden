@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import i18n from 'i18next';
-import swipeHandImg from '../../assets/swipe-hand-transparent.png';
 
 const formatPrice = (price, t) => {
   if (!price) return '';
@@ -145,48 +144,53 @@ const PopularItineraries = ({ title, subtitle, id, itineraries, isDark, isGreen 
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const scrollRef = useRef(null);
-  const [showSwipeHint, setShowSwipeHint] = useState(false);
 
   useEffect(() => {
-    if (window.innerWidth >= 768 || !scrollRef.current || itineraries.length <= 1) return;
+    if (window.innerWidth >= 768 || !scrollRef.current) return;
 
     const container = scrollRef.current;
     let observerActive = true;
     let isAutoScrolling = false;
+    let currentIndex = 0;
+    let autoplayInterval = null;
 
     const handleScroll = () => {
       if (isAutoScrolling) return;
-      setShowSwipeHint(false);
+      clearInterval(autoplayInterval);
       container.removeEventListener('scroll', handleScroll);
+    };
+
+    const startAutoplay = () => {
+      const totalCards = container.children.length;
+      if (totalCards <= 1) return;
+
+      container.addEventListener('scroll', handleScroll, { passive: true });
+
+      autoplayInterval = setInterval(() => {
+        const firstCard = container.firstElementChild;
+        if (!firstCard) return;
+
+        isAutoScrolling = true;
+        currentIndex = (currentIndex + 1) % totalCards;
+        const cardWidth = firstCard.clientWidth;
+        const gap = 24; // gap-6 is 24px
+        container.scrollTo({ left: currentIndex * (cardWidth + gap), behavior: 'smooth' });
+
+        setTimeout(() => {
+          isAutoScrolling = false;
+        }, 600);
+      }, 3000);
     };
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && observerActive) {
-            setShowSwipeHint(true);
-            isAutoScrolling = true;
-            container.addEventListener('scroll', handleScroll, { passive: true });
-
-            // Auto swipe peek animation
             setTimeout(() => {
-              if (container) {
-                // Temporarily disable scroll snapping
-                container.style.scrollSnapType = 'none';
-                container.scrollTo({ left: 70, behavior: 'smooth' });
-                
-                setTimeout(() => {
-                  if (container) {
-                    container.scrollTo({ left: 0, behavior: 'smooth' });
-                    // Restore scroll snapping after animation completes
-                    setTimeout(() => {
-                      if (container) container.style.scrollSnapType = '';
-                      isAutoScrolling = false;
-                    }, 500);
-                  }
-                }, 700);
+              if (observerActive) {
+                startAutoplay();
               }
-            }, 500);
+            }, 1000);
 
             observer.unobserve(entry.target);
             observerActive = false;
@@ -203,6 +207,7 @@ const PopularItineraries = ({ title, subtitle, id, itineraries, isDark, isGreen 
         observer.unobserve(container);
         container.removeEventListener('scroll', handleScroll);
       }
+      clearInterval(autoplayInterval);
     };
   }, [itineraries]);
   const getGridClass = (len) => {
@@ -334,18 +339,7 @@ const PopularItineraries = ({ title, subtitle, id, itineraries, isDark, isGreen 
           </div>
         )}
 
-        {/* Mobile Swipe Hint Overlay */}
-        {showSwipeHint && (
-          <div className="md:hidden absolute top-0 right-0 bottom-0 left-0 z-20 pointer-events-none flex justify-center items-center">
-            <div className={`p-4 rounded-full bg-white/25 backdrop-blur-md border border-white/40 shadow-[0_8px_32px_rgba(31,38,135,0.08)] flex items-center justify-center ${isDark ? 'animate-glass-swipe-white' : 'animate-glass-swipe'}`}>
-              <img 
-                src={swipeHandImg} 
-                alt="Swipe Gesture" 
-                className="w-12 h-12 object-contain"
-              />
-            </div>
-          </div>
-        )}
+
 
         {/* Grid / Slider */}
         <div 
