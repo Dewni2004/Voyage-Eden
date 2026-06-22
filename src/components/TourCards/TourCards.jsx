@@ -43,7 +43,7 @@ const TourCategorySection = ({ title, subtitle, tours, t, noBottomMargin }) => {
         setTimeout(() => {
           isAutoScrolling = false;
         }, 600);
-      }, 1000);
+      }, 2000);
     };
 
     const observer = new IntersectionObserver(
@@ -158,7 +158,7 @@ export const FamilyTourSplitSection = ({ title, subtitle, standardTours, premium
         setTimeout(() => {
           isAutoScrolling = false;
         }, 600);
-      }, 1000);
+      }, 2000);
     };
 
     const observer = new IntersectionObserver(
@@ -222,7 +222,7 @@ export const FamilyTourSplitSection = ({ title, subtitle, standardTours, premium
         setTimeout(() => {
           isAutoScrolling = false;
         }, 600);
-      }, 1000);
+      }, 2000);
     };
 
     const observer = new IntersectionObserver(

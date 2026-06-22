@@ -179,7 +179,7 @@ const PopularItineraries = ({ title, subtitle, id, itineraries, isDark, isGreen 
         setTimeout(() => {
           isAutoScrolling = false;
         }, 600);
-      }, 1000);
+      }, 2000);
     };
 
     const observer = new IntersectionObserver(

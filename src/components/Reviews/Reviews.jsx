@@ -52,7 +52,7 @@ const Reviews = () => {
         setTimeout(() => {
           isAutoScrolling = false;
         }, 600);
-      }, 1000);
+      }, 2000);
     };
 
     const observer = new IntersectionObserver(
