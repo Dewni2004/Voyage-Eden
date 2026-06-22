@@ -570,7 +570,7 @@ const Reviews = () => {
 
               <div className="flex flex-col sm:flex-row justify-center items-center gap-3">
                 <Link 
-                  to="/contact" 
+                  to={`/${i18n.language}/contact`} 
                   className="btn-premium-white px-8 py-2.5 rounded-2xl text-sm"
                 >
                   {t("reviews.planTrip")}

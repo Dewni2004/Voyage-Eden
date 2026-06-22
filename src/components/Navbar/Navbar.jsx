@@ -80,7 +80,7 @@ const Navbar = () => {
     >
       <div className='container mx-auto px-6 flex justify-between items-center'>
         <Link
-          to="/"
+          to={`/${i18n.language}/`}
           className="flex items-center cursor-pointer transition-all duration-300"
           onClick={() => setIsMenuOpen(false)}
         >

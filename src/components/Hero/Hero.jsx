@@ -5,7 +5,7 @@ import heroImage from '../../assets/Galle-Fort.jpg';
 
 const Hero = () => {
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   return (
     <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
@@ -33,13 +33,13 @@ const Hero = () => {
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
           <button 
-            onClick={() => navigate('/itineraires')}
+            onClick={() => navigate(`/${i18n.language}/itineraires`)}
             className="w-full sm:w-auto border border-white bg-transparent text-white hover:bg-white hover:text-primary transition-all duration-300 transform active:scale-95 px-8 md:px-10 py-3 md:py-3.5 rounded-full text-base md:text-lg font-semibold"
           >
             {t('hero.explore')}
           </button>
           <button 
-            onClick={() => navigate('/contact')}
+            onClick={() => navigate(`/${i18n.language}/contact`)}
             className="w-full sm:w-auto border border-white bg-transparent text-white hover:bg-white hover:text-primary transition-all duration-300 transform active:scale-95 px-8 md:px-10 py-3 md:py-3.5 rounded-full text-base md:text-lg font-semibold"
           >
             {t('hero.contact')}

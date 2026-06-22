@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 const TrustSection = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   return (
     <section className="py-8 md:py-12 bg-[#f8fbff]">
       <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
@@ -108,7 +108,7 @@ const TrustSection = () => {
             {/* Buttons */}
             <div className="flex flex-row gap-1.5 w-full justify-center mt-2 px-1">
               <Link 
-                to="/reviews"
+                to={`/${i18n.language}/reviews`}
                 className="flex flex-1 items-center justify-center gap-1 bg-transparent border border-primary text-primary hover:bg-primary/5 font-bold px-1 py-1.5 rounded-lg transition-all shadow-sm text-[9px]"
               >
                 <svg className="w-3 h-3 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -229,7 +229,7 @@ const TrustSection = () => {
             {/* Actions for Video */}
             <div className="flex gap-3 mt-6 justify-start">
               <Link 
-                to="/reviews"
+                to={`/${i18n.language}/reviews`}
                 className="flex items-center justify-center gap-1.5 bg-white border border-[#1e406f] hover:bg-[#1e406f]/5 text-[#1e406f] font-bold px-4 py-2.5 rounded-xl transition-all shadow-sm text-xs"
               >
                 <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
