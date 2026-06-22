@@ -43,7 +43,7 @@ const TourCategorySection = ({ title, subtitle, tours, t, noBottomMargin }) => {
         setTimeout(() => {
           isAutoScrolling = false;
         }, 600);
-      }, 3000);
+      }, 1000);
     };
 
     const observer = new IntersectionObserver(
@@ -51,9 +51,7 @@ const TourCategorySection = ({ title, subtitle, tours, t, noBottomMargin }) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && observerActive) {
             setTimeout(() => {
-              if (observerActive) {
-                startAutoplay();
-              }
+              startAutoplay();
             }, 1000);
 
             observer.unobserve(entry.target);
@@ -160,7 +158,7 @@ export const FamilyTourSplitSection = ({ title, subtitle, standardTours, premium
         setTimeout(() => {
           isAutoScrolling = false;
         }, 600);
-      }, 3000);
+      }, 1000);
     };
 
     const observer = new IntersectionObserver(
@@ -168,9 +166,7 @@ export const FamilyTourSplitSection = ({ title, subtitle, standardTours, premium
         entries.forEach((entry) => {
           if (entry.isIntersecting && observerActive) {
             setTimeout(() => {
-              if (observerActive) {
-                startAutoplay();
-              }
+              startAutoplay();
             }, 1000);
 
             observer.unobserve(entry.target);
@@ -226,7 +222,7 @@ export const FamilyTourSplitSection = ({ title, subtitle, standardTours, premium
         setTimeout(() => {
           isAutoScrolling = false;
         }, 600);
-      }, 3000);
+      }, 1000);
     };
 
     const observer = new IntersectionObserver(
@@ -234,9 +230,7 @@ export const FamilyTourSplitSection = ({ title, subtitle, standardTours, premium
         entries.forEach((entry) => {
           if (entry.isIntersecting && observerActive) {
             setTimeout(() => {
-              if (observerActive) {
-                startAutoplay();
-              }
+              startAutoplay();
             }, 1000);
 
             observer.unobserve(entry.target);

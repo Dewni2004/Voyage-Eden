@@ -52,7 +52,7 @@ const Reviews = () => {
         setTimeout(() => {
           isAutoScrolling = false;
         }, 600);
-      }, 3000);
+      }, 1000);
     };
 
     const observer = new IntersectionObserver(
@@ -60,9 +60,7 @@ const Reviews = () => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && observerActive) {
             setTimeout(() => {
-              if (observerActive) {
-                startAutoplay();
-              }
+              startAutoplay();
             }, 1000);
 
             observer.unobserve(entry.target);
