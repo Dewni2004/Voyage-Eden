@@ -5,6 +5,7 @@ import PageHero from '../components/UI/PageHero';
 import officeStaff2 from '../assets/Office - staff 2.jpg';
 import nethmiImg from '../assets/Nethmi.webp';
 import marcoImg from '../assets/Marco.webp';
+import anaImg from '../assets/Ana.webp';
 
 const ContactUs = () => {
   const form = useRef();
@@ -20,7 +21,13 @@ const ContactUs = () => {
   const consultantRole = t("contactUs.consultants.role", "Travel Advisor");
   const consultantDesc = t("contactUs.consultants.desc", "Our dynamic travel agent...");
   const whatsappNum = t("contactUs.consultants.whatsappNum", "94771470150");
-  const consultantImg = consultantName === "Marco" ? marcoImg : nethmiImg;
+
+  let consultantImg = nethmiImg;
+  if (consultantName === "Marco") {
+    consultantImg = marcoImg;
+  } else if (consultantName === "Ana") {
+    consultantImg = anaImg;
+  }
 
   const sendEmail = (e) => {
     e.preventDefault();

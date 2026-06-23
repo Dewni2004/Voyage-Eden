@@ -5,11 +5,13 @@ const WhatsAppButton = () => {
   const { t, i18n } = useTranslation();
   const lang = i18n.language?.split('-')[0] || 'es';
   
-  // Use Marco's number for Italian, Nethmi's for others
-  const phoneNumber = lang === 'it' ? '393336449849' : '94771470150';
+  // Use Marco's number for Italian, Ana's for Spanish, Nethmi's for others
+  const phoneNumber = lang === 'it' ? '393336449849' : lang === 'es' ? '94764409650' : '94771470150';
   const message = lang === 'it' 
     ? "Ciao Eden Travels, sono interessato a un tour!" 
-    : "Hi Eden Travels, I'm interested in a tour!";
+    : lang === 'es'
+      ? "¡Hola Eden Travels, estoy interesado en un viaje!"
+      : "Hi Eden Travels, I'm interested in a tour!";
   
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
@@ -23,7 +25,7 @@ const WhatsAppButton = () => {
     >
       {/* Tooltip */}
       <span className="absolute right-full mr-3 bg-white text-primary text-xs font-bold px-3 py-1.5 rounded-full shadow-lg opacity-0 whitespace-nowrap border border-gray-100">
-        {lang === 'it' ? 'Contattaci' : 'Contact us'}
+        {lang === 'it' ? 'Contattaci' : lang === 'es' ? 'Contáctanos' : 'Contact us'}
       </span>
       
       {/* Button */}
