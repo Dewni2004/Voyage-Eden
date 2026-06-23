@@ -211,14 +211,14 @@ const CustomTrip = () => {
                     <div>
                       <label className="block text-xs font-bold text-gray-600 mb-2 uppercase tracking-wider">{t('customTrip.nationality', 'Nationality')} <span className="text-red-500">*</span></label>
                       <select name="nationality" value={formData.nationality} onChange={handleInputChange} required className="w-full bg-white border border-gray-200 rounded-xl py-3.5 px-4 text-[15px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 transition-all shadow-sm">
-                        <option value="">Select Nationality</option>
-                        <option value="Sri Lankan">Sri Lankan</option>
-                        <option value="French">French</option>
-                        <option value="British">British</option>
-                        <option value="German">German</option>
-                        <option value="Spanish">Spanish</option>
-                        <option value="Italian">Italian</option>
-                        <option value="Other">Other</option>
+                        <option value="">{t('customTrip.selectNationality', 'Select Nationality')}</option>
+                        <option value="Sri Lankan">{t('customTrip.natSriLankan', 'Sri Lankan')}</option>
+                        <option value="French">{t('customTrip.natFrench', 'French')}</option>
+                        <option value="British">{t('customTrip.natBritish', 'British')}</option>
+                        <option value="German">{t('customTrip.natGerman', 'German')}</option>
+                        <option value="Spanish">{t('customTrip.natSpanish', 'Spanish')}</option>
+                        <option value="Italian">{t('customTrip.natItalian', 'Italian')}</option>
+                        <option value="Other">{t('customTrip.natOther', 'Other')}</option>
                       </select>
                     </div>
                     <div>
@@ -247,10 +247,10 @@ const CustomTrip = () => {
                 className="text-center text-gray-800 px-4"
               >
                 <h1 className="text-5xl md:text-7xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-primary to-luxury animate-pulse">
-                  Hello {formData.fullName ? formData.fullName.split(' ')[0] : ''}!
+                  {t('customTrip.hello', 'Hello')} {formData.fullName ? formData.fullName.split(' ')[0] : ''}!
                 </h1>
                 <p className="text-2xl md:text-4xl font-light mb-12 text-gray-600">
-                  Let's plan your dream trip!
+                  {t('customTrip.letsPlan', "Let's plan your dream trip!")}
                 </p>
                 <button type="button" onClick={nextSlide} className="bg-primary text-white font-bold py-4 px-10 rounded-full text-lg shadow-xl hover:bg-primary/90 transition-all hover:scale-105 active:scale-95">
                   {t('customTrip.startPlanningBtn', 'Start Planning')}
@@ -268,7 +268,7 @@ const CustomTrip = () => {
                 exit="exit"
                 className="bg-white rounded-[32px] md:rounded-[40px] shadow-[0_20px_50px_rgba(0,0,0,0.05)] p-8 md:p-12 w-full max-w-7xl border border-gray-100"
               >
-                <h2 className="text-2xl md:text-3xl font-bold text-primary font-serif mb-6 border-b border-gray-100 pb-3">Trip Details</h2>
+                <h2 className="text-2xl md:text-3xl font-bold text-primary font-serif mb-6 border-b border-gray-100 pb-3">{t('customTrip.tripDetails', 'Trip Details')}</h2>
                 <form onSubmit={(e) => { e.preventDefault(); nextSlide(); }} className="space-y-6">
                   
                   <div>
@@ -358,7 +358,7 @@ const CustomTrip = () => {
                 exit="exit"
                 className="bg-white rounded-[32px] md:rounded-[40px] shadow-[0_20px_50px_rgba(0,0,0,0.05)] p-8 md:p-12 w-full max-w-7xl border border-gray-100"
               >
-                <h2 className="text-2xl md:text-3xl font-bold text-primary font-serif mb-6 border-b border-gray-100 pb-3">Accommodation & Services</h2>
+                <h2 className="text-2xl md:text-3xl font-bold text-primary font-serif mb-6 border-b border-gray-100 pb-3">{t('customTrip.accommodationServices', 'Accommodation & Services')}</h2>
                 
                 <form onSubmit={(e) => { e.preventDefault(); nextSlide(); }} className="space-y-6">
                   <div>
@@ -409,7 +409,7 @@ const CustomTrip = () => {
                     </div>
 
                     <div>
-                      <p className="block text-xs font-bold text-gray-600 mb-3 uppercase tracking-wider">{t('customTrip.chauffeurLanguage', 'Chauffeur/Guide Language:')} <span className="text-red-500">*</span></p>
+                      <p className="block text-xs font-bold text-gray-600 mb-3 uppercase tracking-wider">{t('customTrip.languagePref', 'Preferred Language of Accompaniment:')} <span className="text-red-500">*</span></p>
                       <select 
                         name="langPref" 
                         value={formData.langPref} 
@@ -417,13 +417,13 @@ const CustomTrip = () => {
                         required 
                         className="w-full bg-white border border-gray-200 rounded-xl py-3.5 px-4 text-[15px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 transition-all shadow-sm"
                       >
-                        <option value="">Select Language</option>
-                        <option value="Spanish">Spanish</option>
-                        <option value="English">English</option>
-                        <option value="French">French</option>
-                        <option value="German">German</option>
-                        <option value="Italian">Italian</option>
-                        <option value="Other">Other</option>
+                        <option value="">{t('customTrip.selectLanguage', 'Select Language')}</option>
+                        <option value="Spanish">{t('customTrip.spanish', 'Spanish')}</option>
+                        <option value="English">{t('customTrip.english', 'English')}</option>
+                        <option value="French">{t('customTrip.french', 'French')}</option>
+                        <option value="German">{t('customTrip.german', 'German')}</option>
+                        <option value="Italian">{t('customTrip.italian', 'Italian')}</option>
+                        <option value="Other">{t('customTrip.otherLanguage', 'Other')}</option>
                       </select>
 
                       {formData.langPref === 'Other' && (
@@ -464,7 +464,7 @@ const CustomTrip = () => {
                 exit="exit"
                 className="bg-white rounded-[32px] md:rounded-[40px] shadow-[0_20px_50px_rgba(0,0,0,0.05)] p-8 md:p-12 w-full max-w-7xl border border-gray-100"
               >
-                <h2 className="text-2xl md:text-3xl font-bold text-primary font-serif mb-6 border-b border-gray-100 pb-3">Activities & Interests</h2>
+                <h2 className="text-2xl md:text-3xl font-bold text-primary font-serif mb-6 border-b border-gray-100 pb-3">{t('customTrip.activitiesInterests', 'Activities & Interests')}</h2>
                 
                 {status.message && (
                   <div className={`p-4 mb-6 text-sm font-bold border rounded-lg ${status.type === 'success' ? 'bg-green-50 text-green-700 border-green-200' : 'bg-red-50 text-red-700 border-red-200'}`}>
@@ -533,7 +533,7 @@ const CustomTrip = () => {
                 </div>
 
                 <h2 className="text-4xl md:text-6xl font-extrabold bg-gradient-to-r from-primary via-luxury to-primary bg-clip-text text-transparent font-serif mb-6 leading-tight">
-                  {t('customTrip.thankYou', submittedName ? `Thank You, ${submittedName.split(' ')[0]}!` : 'Thank You!')}
+                  {submittedName ? t('customTrip.thankYouWithName', 'Thank You, {{name}}!', { name: submittedName.split(' ')[0] }) : t('customTrip.thankYou', 'Thank You!')}
                 </h2>
                 
                 <p className="text-gray-700 text-xl md:text-2xl font-semibold max-w-3xl mx-auto mb-6">
