@@ -33,7 +33,7 @@
       "copyright": "Copyright © 2012-2026 Viajes Eden (pvt) Ltd. All Rights Reserved.",
       "email1": "info@srilankaviajeseden.com",
       "email2": "srilankaviajeseden@gmail.com",
-      "phone1": "+94 764409650 - Anna",
+      "phone1": "+94 764409650 - Ana",
       "phone2": "+34 627 26 02 36 - Jose",
       "phone3": "+94 372201747",
       "office_label": "Oficina en Sri Lanka",
@@ -450,10 +450,12 @@
       },
       "consultants": {
         "title": "Conozca a sus asesores",
-        "nethmiRole": "Asesora de viajes",
-        "nethmiDesc": "Nuestra dinámica agente de viajes que se desvive por organizar viajes emocionantes y bien organizados, asegurando que cada detalle esté perfectamente planificado.",
+        "name": "Nethmi",
+        "role": "Asesora de viajes",
+        "desc": "Nuestra dinámica agente de viajes que se desvive por organizar viajes emocionantes y bien organizados, asegurando que cada detalle esté perfectamente planificado.",
         "whatsapp": "Mensaje de WhatsApp",
-        "email": "Enviar un correo"
+        "email": "Enviar un correo",
+        "whatsappNum": "94771470150"
       },
       "registration": {
         "title": "Registro de Empresa",

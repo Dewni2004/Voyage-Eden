@@ -33,8 +33,8 @@
       "copyright": "Sri Lanka Eden Reisen. Alle Rechte vorbehalten.",
       "email1": "",
       "email2": "nethmi.srilankaedentravels@gmail.com",
-      "phone1": "+94 77 147 0150",
-      "phone2": "+94 76 440 9656",
+      "phone1": "+94 77 147 0150 - Nethmi ",
+      "phone2": "+94 76 440 9656 - Rasika",
       "phone3": "+94 372201747",
       "office_label": "Büro in Sri Lanka",
       "sltda_reg": "SLTDA : SLTDA/SQA/TA/02233",
@@ -438,10 +438,12 @@
       },
       "consultants": {
         "title": "Lernen Sie Ihre Berater kennen",
-        "nethmiRole": "Reiseberaterin",
-        "nethmiDesc": "Unsere dynamische Reisebüromitarbeiterin, die alles daran setzt, spannende und gut organisierte Reisen zu organisieren und dafür zu sorgen, dass jedes Detail perfekt geplant ist.",
+        "name": "Nethmi",
+        "role": "Reiseberaterin",
+        "desc": "Unsere dynamische Reisebüromitarbeiterin, die alles daran setzt, spannende und gut organisierte Reisen zu organisieren und dafür zu sorgen, dass jedes Detail perfekt geplant ist.",
         "whatsapp": "WhatsApp-Nachricht",
-        "email": "E-Mail senden"
+        "email": "E-Mail senden",
+        "whatsappNum": "94771470150"
       },
       "registration": {
         "title": "Firmenregistrierung"

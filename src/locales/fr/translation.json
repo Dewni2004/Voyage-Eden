@@ -34,8 +34,8 @@
       "email1": "info@srilankavoyageeden.com",
       "email2": "srilankavoyageeden@gmail.com",
       "email3": "nethmi.srilankaedentravels@gmail.com",
-      "phone1": "+94 77 147 0150",
-      "phone2": "+94 76 440 9656",
+      "phone1": "+94 77 147 0150 - Nethmi ",
+      "phone2": "+94 76 440 9656 - Rasika",
       "phone3": "+94 372201747",
       "office_label": "Bureau au Sri Lanka",
       "sltda_reg": "SLTDA : SLTDA/SQASTA/02238",
@@ -439,10 +439,12 @@
       },
       "consultants": {
         "title": "Rencontrez vos conseillers",
-        "nethmiRole": "Conseillère en voyages",
-        "nethmiDesc": "Notre agent de voyage dynamique qui fait tout son possible pour organiser des voyages passionnants et bien organisés, en veillant à ce que chaque détail soit parfaitement planifié.",
+        "name": "Nethmi",
+        "role": "Conseillère en voyages",
+        "desc": "Notre agent de voyage dynamique qui fait tout son possible pour organiser des voyages passionnants et bien organisés, en veillant à ce que chaque détail soit parfaitement planifié.",
         "whatsapp": "Message WhatsApp",
-        "email": "Envoyer un e-mail"
+        "email": "Envoyer un e-mail",
+        "whatsappNum": "94771470150"
       },
       "registration": {
         "title": "Enregistrement de la société"

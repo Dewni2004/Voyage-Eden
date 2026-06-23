@@ -577,7 +577,7 @@ const Reviews = () => {
                 </Link>
                 
                 <a 
-                  href="https://wa.me/94771470150" 
+                  href={`https://wa.me/${i18n.language?.split('-')[0] === 'it' ? '393336449849' : '94771470150'}`}
                   target="_blank" 
                   rel="noreferrer" 
                   className="flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold px-6 py-3 rounded-2xl shadow-lg shadow-green-500/20 active:scale-95 transition-all text-sm border-none"
