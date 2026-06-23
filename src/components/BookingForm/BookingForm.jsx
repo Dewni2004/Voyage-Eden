@@ -363,11 +363,10 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
                 <label className={labelClass}>{t("bookingForm.hotelCat")}</label>
                 <select name="hotel_category" required className={inputClass} defaultValue="">
                   <option value="" disabled>{t("bookingForm.select")}</option>
-                  <option value="3 Étoiles">{t("bookingForm.stars3")}</option>
-                  <option value="4 Étoiles">{t("bookingForm.stars4")}</option>
-                  <option value="5 Étoiles">{t("bookingForm.stars5")}</option>
-                  <option value="Boutique Hôtel">{t("bookingForm.boutique")}</option>
-                  <option value="Mixte">{t("bookingForm.mixed")}</option>
+                  <option value="Standard (3★)">{t("bookingForm.standard3")}</option>
+                  <option value="Superior (4★)">{t("bookingForm.superior4")}</option>
+                  <option value="Luxury (5★)">{t("bookingForm.luxury5")}</option>
+                  <option value="Super Luxury">{t("bookingForm.superLuxury")}</option>
                 </select>
               </div>
               <div>

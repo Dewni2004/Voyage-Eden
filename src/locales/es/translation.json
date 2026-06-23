@@ -592,11 +592,10 @@
       "sendingDesktop": "Enviando...",
       "send": "ENVIAR",
       "sendDesktop": "ENVIAR MI SOLICITUD",
-      "stars3": "3 Estrellas",
-      "stars4": "4 Estrellas",
-      "stars5": "5 Estrellas",
-      "boutique": "Hotel Boutique",
-      "mixed": "Mixto"
+      "standard3": "Estándar (3★)",
+      "superior4": "Superior (4★)",
+      "luxury5": "Lujo (5★)",
+      "superLuxury": "Súper Lujo"
     },
     "includedExcluded": {
       "title": "Lo que está incluido y excluido",

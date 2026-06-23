@@ -571,11 +571,10 @@
       "sendingDesktop": "Senden...",
       "send": "SENDEN",
       "sendDesktop": "MEINE ANFRAGE SENDEN",
-      "stars3": "3 Sterne",
-      "stars4": "4 Sterne",
-      "stars5": "5 Sterne",
-      "boutique": "Boutique-Hotel",
-      "mixed": "Gemischt"
+      "standard3": "Standard (3★)",
+      "superior4": "Superior (4★)",
+      "luxury5": "Luxus (5★)",
+      "superLuxury": "Super Luxus"
     },
     "includedExcluded": {
       "title": "Was inbegriffen und nicht inbegriffen ist",

@@ -578,11 +578,10 @@
       "sendingDesktop": "Envoi en cours...",
       "send": "ENVOYER",
       "sendDesktop": "ENVOYER MA DEMANDE",
-      "stars3": "3 Étoiles",
-      "stars4": "4 Étoiles",
-      "stars5": "5 Étoiles",
-      "boutique": "Boutique Hôtel",
-      "mixed": "Mixte"
+      "standard3": "Standard (3★)",
+      "superior4": "Supérieur (4★)",
+      "luxury5": "Luxe (5★)",
+      "superLuxury": "Super Luxe"
     },
     "includedExcluded": {
       "title": "Ce qui est inclus et exclu",

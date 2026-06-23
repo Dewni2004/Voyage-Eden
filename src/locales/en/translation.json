@@ -579,11 +579,10 @@
       "sendingDesktop": "Sending...",
       "send": "SEND",
       "sendDesktop": "SEND MY REQUEST",
-      "stars3": "3 Stars",
-      "stars4": "4 Stars",
-      "stars5": "5 Stars",
-      "boutique": "Boutique Hotel",
-      "mixed": "Mixed"
+      "standard3": "Standard (3★)",
+      "superior4": "Superior (4★)",
+      "luxury5": "Luxury (5★)",
+      "superLuxury": "Super Luxury"
     },
     "includedExcluded": {
       "title": "What is included and excluded",
