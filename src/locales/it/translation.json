@@ -470,7 +470,7 @@
       "consultants": {
         "title": "Incontra i tuoi consulenti",
         "name": "Marco",
-        "role": "Rappresentante in Italia",
+        "role": "Consulente di viaggio",
         "desc": "Marco progetta itinerari personalizzati e coordina Viaggi Eden, assicurando un collegamento essenziale tra l'Italia e lo Sri Lanka.",
         "whatsapp": "Messaggio WhatsApp",
         "email": "Invia un'email",
@@ -607,7 +607,10 @@
       "standard3": "Standard (3★)",
       "superior4": "Superiore (4★)",
       "luxury5": "Lusso (5★)",
-      "superLuxury": "Super Lusso"
+      "superLuxury": "Super Lusso",
+      "bb": "BB - Pernottamento e Prima Colazione",
+      "hb": "HB - Mezza Pensione (Colazione e Cena)",
+      "fb": "FB - Pensione Completa (Colazione + Pranzo + Cena)"
     },
     "includedExcluded": {
       "title": "Cosa è incluso ed escluso",

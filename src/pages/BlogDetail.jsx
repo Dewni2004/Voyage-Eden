@@ -77,7 +77,7 @@ const BlogDetail = () => {
         <div className="flex flex-col lg:flex-row gap-16">
           
           {/* Left Column: Article Content */}
-          <div className="lg:w-2/3">
+          <div className="lg:w-3/4">
             <div className="bg-white rounded-[40px] p-10 md:p-16 shadow-xl border border-gray-100">
               <div className="mb-16">
                 <h3 className="text-xl md:text-2xl font-bold text-primary mb-6">
@@ -187,7 +187,7 @@ const BlogDetail = () => {
           </div>
 
           {/* Right Column: Sidebar */}
-          <div className="lg:w-1/3 space-y-12">
+          <div className="lg:w-1/4 space-y-12">
             
             {/* Categories Card */}
             <div className="bg-white p-10 rounded-[32px] shadow-lg border border-gray-100">

@@ -446,7 +446,7 @@
       "consultants": {
         "title": "Meet your consultants",
         "name": "Nethmi",
-        "role": "Travel Advisor",
+        "role": "Travel Consultant",
         "desc": "Our dynamic travel agent who goes out of her way to organize exciting and well-organized trips, ensuring that every detail is perfectly planned.",
         "whatsapp": "WhatsApp Message",
         "email": "Send an email",
@@ -582,7 +582,10 @@
       "standard3": "Standard (3★)",
       "superior4": "Superior (4★)",
       "luxury5": "Luxury (5★)",
-      "superLuxury": "Super Luxury"
+      "superLuxury": "Super Luxury",
+      "bb": "BB - Bed & Breakfast",
+      "hb": "HB - Breakfast & Dinner",
+      "fb": "FB - Breakfast + Lunch + Dinner"
     },
     "includedExcluded": {
       "title": "What is included and excluded",

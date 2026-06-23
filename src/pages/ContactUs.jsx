@@ -222,9 +222,7 @@ const ContactUs = () => {
                   </div>
                 </div>
 
-                <p className="text-gray-600 text-sm leading-relaxed mb-10">
-                  {consultantDesc}
-                </p>
+
 
                 <div className="flex flex-col gap-4">
                   <a 

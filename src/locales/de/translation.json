@@ -574,7 +574,10 @@
       "standard3": "Standard (3★)",
       "superior4": "Superior (4★)",
       "luxury5": "Luxus (5★)",
-      "superLuxury": "Super Luxus"
+      "superLuxury": "Super Luxus",
+      "bb": "BB - Übernachtung & Frühstück",
+      "hb": "HB - Halbpension (Frühstück & Abendessen)",
+      "fb": "FB - Vollpension (Frühstück + Mittagessen + Abendessen)"
     },
     "includedExcluded": {
       "title": "Was inbegriffen und nicht inbegriffen ist",

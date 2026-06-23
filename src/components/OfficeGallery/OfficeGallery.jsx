@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import img1 from '../../assets/Office Image 1.jpg';
+import img1 from '../../assets/Office - staff 2.jpg';
 import img2 from '../../assets/Office Image 2.jpg';
 import img3 from '../../assets/Office Image 3.jpg';
 import img4 from '../../assets/Office Image 4.jpg';

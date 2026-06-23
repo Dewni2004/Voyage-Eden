@@ -47,7 +47,7 @@ const ReviewDetail = () => {
         <div className="flex flex-col lg:flex-row gap-16 relative">
           
           {/* Main Content */}
-          <div className="lg:w-2/3 bg-white p-8 md:p-16 rounded-[40px] shadow-xl border border-gray-100 -mt-32 relative z-20">
+          <div className="lg:w-3/4 bg-white p-8 md:p-16 rounded-[40px] shadow-xl border border-gray-100 -mt-32 relative z-20">
             <div className="mb-10 text-center md:text-left">
               <svg className="w-16 h-16 text-primary/10 mb-6 mx-auto md:mx-0" fill="currentColor" viewBox="0 0 32 32">
                 <path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14H8c0-1.1.9-2 2-2V8zm14 0c-3.3 0-6 2.7-6 6v10h10V14h-6c0-1.1.9-2 2-2V8z" />
@@ -82,7 +82,7 @@ const ReviewDetail = () => {
           </div>
 
           {/* Sidebar */}
-          <div className="lg:w-1/3 space-y-8">
+          <div className="lg:w-1/4 space-y-8">
             {/* About Tour Card */}
             <div className="bg-white p-10 rounded-[40px] shadow-lg border border-gray-100">
               <h3 className="text-primary text-xl font-bold mb-8">{t('reviewDetail.aboutTour')}</h3>

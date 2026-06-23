@@ -377,9 +377,9 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
                 <label className={labelClass}>{t("bookingForm.mealPlan")}</label>
                 <select name="meal_plan" required className={inputClass} defaultValue="">
                   <option value="" disabled>{t("bookingForm.select")}</option>
-                  <option value="BB - Bed & Breakfast">BB - Bed & Breakfast</option>
-                  <option value="HB - Breakfast & Dinner">HB - Breakfast & Dinner</option>
-                  <option value="FB - Breakfast + Lunch + Dinner">FB - Breakfast + Lunch + Dinner</option>
+                  <option value="BB - Bed & Breakfast">{t("bookingForm.bb")}</option>
+                  <option value="HB - Breakfast & Dinner">{t("bookingForm.hb")}</option>
+                  <option value="FB - Breakfast + Lunch + Dinner">{t("bookingForm.fb")}</option>
                 </select>
               </div>
             </div>

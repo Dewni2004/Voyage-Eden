@@ -323,7 +323,7 @@
           "desc": "Thakshila lidera las operaciones digitales, gestionando sistemas internos, plataformas CRM, y la funcionalidad del sitio web y la marca. Supervisa la dirección creativa de contenido multimedia y mantiene una sólida presencia online para la agencia, asegurando innovación y coherencia."
         },
         "Anjan": {
-          "role": "Contador",
+          "role": "contable",
           "desc": "Anjan se encarga de las tareas financieras diarias, como la facturación, el seguimiento de pagos y la elaboración de presupuestos. Su precisión y consistencia contribuyen a mantener la precisión y el control financiero dentro de la agencia."
         },
         "Dewni": {
@@ -331,28 +331,28 @@
           "desc": "Dewni ofrece soporte integral en TI, gestionando actualizaciones de sistemas, asegurando la precisión de datos, resolviendo problemas y supervisando procesos de backend, garantizando operaciones técnicas diarias. "
         },
         "Oshadhi": {
-          "role": "Asistente de Tierra (Formación)",
-          "desc": "Oshadhi, en formación como Asistente de Operaciones en Tierra, apoya las excursiones diarias, asistiendo con los itinerarios, el transporte y la coordinación con proveedores para garantizar operaciones fluidas y eficientes."
+          "role": "Operaciones terrestres y logística",
+          "desc": "Oshadhi apoya las excursiones diarias, asistiendo con los itinerarios, el transporte y la coordinación con proveedores para garantizar operaciones fluidas y eficientes."
         },
         "Sewmini": {
-          "role": "Asistente Contable (Formación)",
-          "desc": "Sewmini, en formación como Asistente de Contabilidad, apoya en cuentas, costes y presupuestos, manteniendo registros, verificando facturas y preparando desgloses detallados para garantizar la precisión."
+          "role": "Asistente Contable",
+          "desc": "Sewmini apoya en cuentas, costes y presupuestos, manteniendo registros, verificando facturas y preparando desgloses detallados para garantizar la precisión."
         },
         "Kasun": {
-          "role": "Asistente Consultora (Formación)",
-          "desc": "Kasun, en formación como Asistente de Consultor de Viajes, ayuda a preparar itinerarios y presupuestos personalizados, apoyando la comunicación con los clientes y las reservas para experiencias de viaje."
+          "role": "Asesor de viajes",
+          "desc": "Kasun ayuda a preparar itinerarios y presupuestos personalizados, apoyando la comunicación con los clientes y las reservas para experiencias de viaje."
         },
         "Thenura": {
           "role": "Desarrollador CRM",
           "desc": "Thenura es el desarrollador del CRM de Viajes Eden. Crea herramientas digitales eficientes y fáciles que optimizan la gestión de consultas y presupuestos, mejoran la coordinación entre equipos y fortalecen la transformación digital."
         },
         "Sithmi": {
-          "role": "Asesora de Viajes (Formación)",
-          "desc": "Formación como asesor de viajes, centrada en la atención al cliente y en el diseño de itinerarios personalizados para satisfacer las preferencias y expectativas individuales de cada viajero."
+          "role": "Asesora de viajes",
+          "desc": "Sithmi se centra en la atención al cliente y en el diseño de itinerarios personalizados para satisfacer las preferencias y expectativas individuales de cada viajero."
         },
         "Theekshana": {
-          "role": "Creación de Contenido (Formación)",
-          "desc": "Formación en creación de contenido para redes sociales, apoyando las actividades de marketing y colaborando en la preparación de itinerarios."
+          "role": "Creación de Contenido",
+          "desc": "Theekshana apoya las actividades de marketing en redes sociales y colabora en la preparación de itinerarios."
         },
         "Sampath": {
           "role": "Chófer-Guía Español",
@@ -457,7 +457,7 @@
       "consultants": {
         "title": "Conozca a sus asesores",
         "name": "Ana",
-        "role": "Co-fundadora",
+        "role": "Consultor de Viajes",
         "desc": "Es cofundadora de la agencia y especialista en diseñar viajes a medida, cuidando cada detalle para ofrecer experiencias únicas. Participa activamente en la gestión diaria y se encarga de la atención al cliente desde Sri Lanka, garantizando un servicio cercano, eficiente y completamente personalizado.",
         "whatsapp": "Mensaje de WhatsApp",
         "email": "Enviar un correo",
@@ -595,7 +595,10 @@
       "standard3": "Estándar (3★)",
       "superior4": "Superior (4★)",
       "luxury5": "Lujo (5★)",
-      "superLuxury": "Súper Lujo"
+      "superLuxury": "Súper Lujo",
+      "bb": "BB - Alojamiento y Desayuno",
+      "hb": "HB - Media Pensión (Desayuno y Cena)",
+      "fb": "FB - Pensión Completa (Desayuno + Almuerzo + Cena)"
     },
     "includedExcluded": {
       "title": "Lo que está incluido y excluido",

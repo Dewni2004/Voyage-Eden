@@ -149,7 +149,7 @@ const TravelGuide = () => {
         <div className="flex flex-col lg:flex-row gap-12">
           
           {/* Left Column: Articles */}
-          <div className="lg:w-2/3">
+          <div className="lg:w-3/4">
             
             {/* Mobile Search Bar */}
             <div className="block lg:hidden mb-8 bg-white p-6 sm:p-10 rounded-[32px] shadow-lg border border-gray-100">
@@ -175,7 +175,7 @@ const TravelGuide = () => {
                 <h2 className="text-primary text-2xl font-bold mb-6 uppercase tracking-widest border-l-4 border-primary pl-4">
                   {getSearchResultsTitle()}
                 </h2>
-                <div className="grid grid-cols-2 md:grid-cols-2 gap-4 md:gap-10">
+                <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-10">
                   {filteredArticles.length > 0 ? (
                     (isMobile ? filteredArticles.slice(0, visibleCount) : filteredArticles).map((article) => (
                       <ArticleCard key={article.id} article={article} />
@@ -198,22 +198,22 @@ const TravelGuide = () => {
             ) : (
               <>
                 <h2 className="text-primary text-2xl font-bold mb-6 uppercase tracking-widest border-l-4 border-primary pl-4">{t('travelGuide.newsTitle')}</h2>
-                <div className="grid grid-cols-2 md:grid-cols-2 gap-4 md:gap-10 mb-12">
-                  {allArticles.slice(0, 2).map(article => <ArticleCard key={article.id} article={article} />)}
+                <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-10 mb-12">
+                  {allArticles.slice(0, 3).map(article => <ArticleCard key={article.id} article={article} />)}
                 </div>
 
                 <h2 className="text-primary text-2xl font-bold mb-6 uppercase tracking-widest border-l-4 border-primary pl-4">{t('travelGuide.usefulTitle')}</h2>
-                <div className="grid grid-cols-2 md:grid-cols-2 gap-4 md:gap-10 mb-12">
-                  {allArticles.slice(2, 4).map(article => <ArticleCard key={article.id} article={article} />)}
+                <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-10 mb-12">
+                  {allArticles.slice(3, 6).map(article => <ArticleCard key={article.id} article={article} />)}
                 </div>
 
                 <h2 className="text-primary text-2xl font-bold mb-6 uppercase tracking-widest border-l-4 border-primary pl-4">{t('travelGuide.popularTitle')}</h2>
-                <div className="grid grid-cols-2 md:grid-cols-2 gap-4 md:gap-10 mb-12">
-                  {allArticles.slice(4, 6).map(article => <ArticleCard key={article.id} article={article} />)}
+                <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-10 mb-12">
+                  {allArticles.slice(6, 9).map(article => <ArticleCard key={article.id} article={article} />)}
                 </div>
 
                 <h2 className="text-primary text-2xl font-bold mb-6 uppercase tracking-widest border-l-4 border-primary pl-4">{t('travelGuide.allArticlesTitle')}</h2>
-                <div className="grid grid-cols-2 md:grid-cols-2 gap-4 md:gap-10">
+                <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-10">
                   {filteredArticles.length > 0 ? (
                     (isMobile ? filteredArticles.slice(0, visibleCount) : filteredArticles).map((article) => (
                       <ArticleCard key={article.id} article={article} />
@@ -248,7 +248,7 @@ const TravelGuide = () => {
           </div>
 
           {/* Right Column: Sidebar */}
-          <div className="lg:w-1/3 space-y-12 lg:sticky lg:top-28 lg:self-start lg:max-h-[calc(100vh-140px)] lg:overflow-y-auto hide-scrollbar">
+          <div className="lg:w-1/4 space-y-12 lg:sticky lg:top-28 lg:self-start lg:max-h-[calc(100vh-140px)] lg:overflow-y-auto hide-scrollbar">
             
             {/* Search - Desktop only */}
             <div className="hidden lg:block bg-white p-10 rounded-[32px] shadow-lg border border-gray-100">
