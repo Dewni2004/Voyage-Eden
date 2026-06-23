@@ -13,7 +13,7 @@ const SectionIcon = ({ d }) => (
   </div>
 );
 
-const BookingForm = ({ itineraryTitle }) => {
+const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
   const { t, i18n } = useTranslation();
   const form = useRef();
   const step1Ref = useRef();
@@ -22,8 +22,12 @@ const BookingForm = ({ itineraryTitle }) => {
 
   const [isSending, setIsSending] = useState(false);
   const [messageStatus, setMessageStatus] = useState({ type: '', text: '' });
-  const [dateRange, setDateRange] = useState([null, null]);
-  const [startDate, endDate] = dateRange;
+  const [startDate, setStartDate] = useState(null);
+  const numMatch = itineraryDuration ? itineraryDuration.match(/(\d+)/) : null;
+  const durationDays = numMatch ? parseInt(numMatch[1], 10) : 0;
+  const endDate = startDate && durationDays
+    ? new Date(startDate.getTime() + (durationDays - 1) * 24 * 60 * 60 * 1000)
+    : null;
 
   const [currentStep, setCurrentStep] = useState(1);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
@@ -71,7 +75,7 @@ const BookingForm = ({ itineraryTitle }) => {
       }
     }
     // Also check dates if moving from step 2
-    if (currentRef === step2Ref && (!startDate || !endDate)) {
+    if (currentRef === step2Ref && !startDate) {
       setMessageStatus({ type: 'error', text: t("bookingForm.errorDates") });
       isValid = false;
     } else if (currentRef === step2Ref) {
@@ -115,9 +119,7 @@ const BookingForm = ({ itineraryTitle }) => {
     }, 150);
   };
 
-  const numDays = (startDate && endDate) 
-    ? Math.round((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1 
-    : '';
+  const numDays = durationDays || '';
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -125,7 +127,7 @@ const BookingForm = ({ itineraryTitle }) => {
     setMessageStatus({ type: '', text: '' });
 
     // Validate that dates are selected
-    if (!startDate || !endDate) {
+    if (!startDate) {
       setMessageStatus({ 
         type: 'error', 
         text: t("bookingForm.errorDates") 
@@ -145,7 +147,7 @@ const BookingForm = ({ itineraryTitle }) => {
           text: t("bookingForm.successMsg") 
         });
         form.current.reset();
-        setDateRange([null, null]);
+        setStartDate(null);
         setIsSending(false);
       }, 1000);
       return;
@@ -164,7 +166,7 @@ const BookingForm = ({ itineraryTitle }) => {
             text: t("bookingForm.successMsg") 
           });
           form.current.reset();
-          setDateRange([null, null]);
+          setStartDate(null);
       }, (error) => {
           setMessageStatus({ 
             type: 'error', 
@@ -306,10 +308,8 @@ const BookingForm = ({ itineraryTitle }) => {
                     </svg>
                   </div>
                   <DatePicker
-                    selectsRange={true}
-                    startDate={startDate}
-                    endDate={endDate}
-                    onChange={(update) => setDateRange(update)}
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}
                     isClearable={true}
                     placeholderText={t("bookingForm.selectPeriod")}
                     className={`${inputClass} pl-11`}

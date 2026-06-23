@@ -402,7 +402,7 @@ const ItineraryDetail = () => {
 
       {/* Mobile Modal Removed - Now a floating card inside map container */}
 
-      <BookingForm itineraryTitle={itinerary.title} />
+      <BookingForm itineraryTitle={itinerary.title} itineraryDuration={itinerary.duration} />
       <IncludedExcluded />
       <BookingCard price={itinerary.price} />
       
