@@ -10,6 +10,12 @@
       "quote": "Custom Quote",
       "changeLanguage": "Change language"
     },
+    "socials": {
+      "facebook": "https://www.facebook.com/people/Sri-Lanka-Eden-Travels/61579302809853/?_rdc=1&_rdr#",
+      "instagram": "https://www.instagram.com/srilankaedentravels/",
+      "tiktok": "https://www.tiktok.com/@srilankaedentravels",
+      "youtube": "https://www.youtube.com/@srilankaedentravels4315"
+    },
     "hero": {
       "welcome": "Welcome to",
       "subtitle": "Our local experts in Sri Lanka offer private and tailor-made tours.",
