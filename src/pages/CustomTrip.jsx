@@ -8,6 +8,14 @@ const CustomTrip = () => {
   const [currentSlide, setCurrentSlide] = useState(1);
   const [isSending, setIsSending] = useState(false);
   const [status, setStatus] = useState({ type: '', message: '' });
+  const [submittedName, setSubmittedName] = useState('');
+
+  const steps = [
+    { number: 1, label: t('customTrip.stepContact', 'Contact') },
+    { number: 2, label: t('customTrip.stepDetails', 'Details') },
+    { number: 3, label: t('customTrip.stepServices', 'Services') },
+    { number: 4, label: t('customTrip.stepActivities', 'Activities') }
+  ];
 
   const [formData, setFormData] = useState({
     // Slide 1
@@ -66,11 +74,12 @@ const CustomTrip = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSending(true);
+    setSubmittedName(formData.fullName || '');
     // Dummy submit for now until backend logic is decided
     setTimeout(() => {
       setIsSending(false);
       setStatus({ type: 'success', message: t('customTrip.success', 'Your request has been sent successfully!') });
-      setCurrentSlide(1);
+      setCurrentSlide(6);
       setFormData({
         fullName: '', whatsapp: '', nationality: '', email: '',
         whoWith: '', whereAt: '', planeTickets: '', numTravelers: '',
@@ -108,37 +117,72 @@ const CustomTrip = () => {
     ? WelcomeVideo 
     : 'https://www.w3schools.com/html/mov_bbb.mp4'; // Placeholder for other slides
 
-  return (
-    <div className="relative h-[100dvh] md:min-h-screen bg-gray-50 md:bg-gray-900 md:overflow-hidden flex flex-col">
-      {/* Video Background - Banner on mobile, Fullscreen on desktop */}
-      <div className="relative md:absolute top-0 left-0 w-full aspect-video md:h-full z-0 shrink-0 bg-black">
-        <video
-          key={currentSlide === 1 ? 'welcome' : (isOfficeVideo ? 'office' : 'hotel')}
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="w-full h-full object-cover object-top opacity-80"
-        >
-          <source src={videoSrc} type="video/mp4" />
-        </video>
-        <div className="absolute top-0 left-0 w-full h-full bg-black/40"></div>
-      </div>
+  const getTrackerStep = (slide) => {
+    if (slide === 1 || slide === 2) return 1;
+    if (slide === 3) return 2;
+    if (slide === 4) return 3;
+    if (slide === 5) return 4;
+    return 1;
+  };
+  const activeStep = getTrackerStep(currentSlide);
 
+  return (
+    <div className="relative min-h-screen bg-gray-50 flex flex-col pt-20 md:pt-28">
       {/* Main Content Area */}
-      <div className="relative z-10 flex flex-col flex-1 overflow-y-auto pt-8 md:pt-24 pb-10 px-4 md:px-0">
+      <div className="relative z-10 flex-grow flex flex-col justify-center py-8 md:py-12 px-4 md:px-0">
         
-        {/* Progress indicators */}
-        <div className="flex justify-center gap-2 mb-8">
-          {[1, 2, 3, 4, 5].map((step) => (
+        {/* Progress Tracker */}
+        <div className="relative w-full max-w-4xl mx-auto mb-10 px-4">
+          <div className="absolute inset-x-0 top-5 md:top-6 px-10">
+            {/* Background Line */}
+            <div className="h-1 bg-gray-200/60 w-full rounded-full" />
+            
+            {/* Active Line */}
             <div 
-              key={step} 
-              className={`h-2 rounded-full transition-all duration-300 ${currentSlide === step ? 'w-8 bg-primary' : 'w-2 bg-gray-300 md:bg-white/40'}`} 
+              className="h-1 bg-gradient-to-r from-primary to-luxury rounded-full transition-all duration-500 ease-out -mt-1" 
+              style={{ width: currentSlide === 6 ? '100%' : `${((activeStep - 1) / 3) * 100}%` }}
             />
-          ))}
+          </div>
+
+          {/* Step Circles */}
+          <div className="relative z-10 flex justify-between items-center px-6">
+            {steps.map((step) => {
+              const isCompleted = currentSlide === 6 || step.number < activeStep;
+              const isActive = currentSlide !== 6 && step.number === activeStep;
+              return (
+                <div key={step.number} className="flex flex-col items-center">
+                  <div 
+                    className={`w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center font-bold text-xs md:text-sm transition-all duration-500 shadow-md relative z-10
+                      ${isCompleted ? 'bg-primary text-white scale-100' : ''}
+                      ${isActive ? 'bg-gradient-to-tr from-primary to-luxury text-white ring-4 ring-primary/10 scale-110 shadow-lg shadow-primary/20' : ''}
+                      ${!isCompleted && !isActive ? 'bg-white text-gray-400 border border-gray-200' : ''}
+                    `}
+                  >
+                    {isActive && (
+                      <span className="absolute -inset-1.5 rounded-full bg-luxury/30 animate-pulse -z-10" />
+                    )}
+                    {isCompleted ? (
+                      <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
+                      </svg>
+                    ) : (
+                      <span className="relative z-10">{step.number}</span>
+                    )}
+                  </div>
+                  <span className={`text-[9px] md:text-[11px] font-bold uppercase tracking-widest mt-4 transition-all duration-300 text-center
+                    ${isActive ? 'text-primary scale-105 font-extrabold' : ''}
+                    ${isCompleted ? 'text-gray-700' : ''}
+                    ${!isCompleted && !isActive ? 'text-gray-400 font-medium' : ''}
+                  `}>
+                    {step.label}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
         </div>
 
-        <div className="flex-1 flex items-center justify-center">
+        <div className="w-full flex items-center justify-center">
           <AnimatePresence mode="wait">
             
             {/* SLIDE 1: Basic Information */}
@@ -149,40 +193,42 @@ const CustomTrip = () => {
                 initial="hidden"
                 animate="visible"
                 exit="exit"
-                className="bg-white/95 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-2xl w-full max-w-xl border border-white/20"
+                className="bg-white rounded-[32px] md:rounded-[40px] shadow-[0_20px_50px_rgba(0,0,0,0.05)] p-8 md:p-12 w-full max-w-7xl border border-gray-100"
               >
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6 text-center">
+                <h2 className="text-2xl md:text-3xl font-bold text-primary font-serif mb-6 text-center">
                   {t('customTrip.heroTitle', 'DESIGN YOUR CUSTOM TRIP')}
                 </h2>
-                <form onSubmit={(e) => { e.preventDefault(); nextSlide(); }} className="space-y-4">
-                  <div>
-                    <label className="block mb-1 text-gray-700 font-medium text-sm">{t('customTrip.fullName', 'Full Name')} <span className="text-red-500">*</span></label>
-                    <input type="text" name="fullName" value={formData.fullName} onChange={handleInputChange} required className="w-full bg-white border border-gray-300 text-gray-800 placeholder-gray-400 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all" />
-                  </div>
-                  <div>
-                    <label className="block mb-1 text-gray-700 font-medium text-sm">{t('customTrip.whatsapp', 'Whatsapp Contact Number')} <span className="text-red-500">*</span></label>
-                    <input type="tel" name="whatsapp" value={formData.whatsapp} onChange={handleInputChange} required className="w-full bg-white border border-gray-300 text-gray-800 placeholder-gray-400 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all" />
-                  </div>
-                  <div>
-                    <label className="block mb-1 text-gray-700 font-medium text-sm">{t('customTrip.nationality', 'Nationality')} <span className="text-red-500">*</span></label>
-                    <select name="nationality" value={formData.nationality} onChange={handleInputChange} required className="w-full bg-white border border-gray-300 text-gray-800 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all">
-                      <option value="">Select Nationality</option>
-                      <option value="Sri Lankan">Sri Lankan</option>
-                      <option value="French">French</option>
-                      <option value="British">British</option>
-                      <option value="German">German</option>
-                      <option value="Spanish">Spanish</option>
-                      <option value="Italian">Italian</option>
-                      <option value="Other">Other</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block mb-1 text-gray-700 font-medium text-sm">{t('customTrip.email', 'E-mail')} <span className="text-red-500">*</span></label>
-                    <input type="email" name="email" value={formData.email} onChange={handleInputChange} required className="w-full bg-white border border-gray-300 text-gray-800 placeholder-gray-400 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all" />
+                <form onSubmit={(e) => { e.preventDefault(); nextSlide(); }} className="space-y-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div>
+                      <label className="block text-xs font-bold text-gray-600 mb-2 uppercase tracking-wider">{t('customTrip.fullName', 'Full Name')} <span className="text-red-500">*</span></label>
+                      <input type="text" name="fullName" value={formData.fullName} onChange={handleInputChange} required className="w-full bg-white border border-gray-200 rounded-xl py-3.5 px-4 text-[15px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 placeholder-gray-400 transition-all shadow-sm" />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-gray-600 mb-2 uppercase tracking-wider">{t('customTrip.whatsapp', 'Whatsapp Contact Number')} <span className="text-red-500">*</span></label>
+                      <input type="tel" name="whatsapp" value={formData.whatsapp} onChange={handleInputChange} required className="w-full bg-white border border-gray-200 rounded-xl py-3.5 px-4 text-[15px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 placeholder-gray-400 transition-all shadow-sm" />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-gray-600 mb-2 uppercase tracking-wider">{t('customTrip.nationality', 'Nationality')} <span className="text-red-500">*</span></label>
+                      <select name="nationality" value={formData.nationality} onChange={handleInputChange} required className="w-full bg-white border border-gray-200 rounded-xl py-3.5 px-4 text-[15px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 transition-all shadow-sm">
+                        <option value="">Select Nationality</option>
+                        <option value="Sri Lankan">Sri Lankan</option>
+                        <option value="French">French</option>
+                        <option value="British">British</option>
+                        <option value="German">German</option>
+                        <option value="Spanish">Spanish</option>
+                        <option value="Italian">Italian</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-gray-600 mb-2 uppercase tracking-wider">{t('customTrip.email', 'E-mail')} <span className="text-red-500">*</span></label>
+                      <input type="email" name="email" value={formData.email} onChange={handleInputChange} required className="w-full bg-white border border-gray-200 rounded-xl py-3.5 px-4 text-[15px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 placeholder-gray-400 transition-all shadow-sm" />
+                    </div>
                   </div>
                   
                   <div className="mt-8 flex justify-end">
-                    <button type="submit" className="bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-lg transition-colors shadow-md hover:shadow-lg">
+                    <button type="submit" className="bg-primary hover:bg-primary/90 text-white font-bold py-3.5 px-10 rounded-xl transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0">
                       {t('customTrip.nextBtn', 'Next')}
                     </button>
                   </div>
@@ -198,15 +244,15 @@ const CustomTrip = () => {
                 initial="hidden"
                 animate="visible"
                 exit="exit"
-                className="text-center text-gray-800 md:text-white px-4"
+                className="text-center text-gray-800 px-4"
               >
-                <h1 className="text-5xl md:text-7xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-primary to-luxury md:from-white md:to-primary/30 animate-pulse">
+                <h1 className="text-5xl md:text-7xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-primary to-luxury animate-pulse">
                   Hello {formData.fullName ? formData.fullName.split(' ')[0] : ''}!
                 </h1>
-                <p className="text-2xl md:text-4xl font-light mb-12 text-gray-600 md:text-white">
+                <p className="text-2xl md:text-4xl font-light mb-12 text-gray-600">
                   Let's plan your dream trip!
                 </p>
-                <button type="button" onClick={nextSlide} className="bg-primary text-white md:bg-white md:text-primary font-bold py-4 px-10 rounded-full text-lg shadow-xl hover:bg-primary/90 md:hover:bg-gray-100 transition-all hover:scale-105 active:scale-95">
+                <button type="button" onClick={nextSlide} className="bg-primary text-white font-bold py-4 px-10 rounded-full text-lg shadow-xl hover:bg-primary/90 transition-all hover:scale-105 active:scale-95">
                   {t('customTrip.startPlanningBtn', 'Start Planning')}
                 </button>
               </motion.div>
@@ -220,73 +266,73 @@ const CustomTrip = () => {
                 initial="hidden"
                 animate="visible"
                 exit="exit"
-                className="bg-white/95 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-2xl w-full max-w-3xl max-h-[80vh] overflow-y-auto custom-scrollbar border border-white/20"
+                className="bg-white rounded-[32px] md:rounded-[40px] shadow-[0_20px_50px_rgba(0,0,0,0.05)] p-8 md:p-12 w-full max-w-7xl border border-gray-100"
               >
-                <h2 className="text-2xl font-bold text-gray-800 mb-6 border-b pb-2">Trip Details</h2>
+                <h2 className="text-2xl md:text-3xl font-bold text-primary font-serif mb-6 border-b border-gray-100 pb-3">Trip Details</h2>
                 <form onSubmit={(e) => { e.preventDefault(); nextSlide(); }} className="space-y-6">
                   
                   <div>
-                    <p className="mb-2 text-gray-800 font-medium text-sm">{t('customTrip.whoWith', 'Who are you traveling with?')} <span className="text-red-500">*</span></p>
+                    <p className="block text-xs font-bold text-gray-600 mb-3 uppercase tracking-wider">{t('customTrip.whoWith', 'Who are you traveling with?')} <span className="text-red-500">*</span></p>
                     <div className="flex flex-wrap gap-4">
-                      <label className="flex items-center gap-2 cursor-pointer"><input type="radio" name="whoWith" value="couple" onChange={handleInputChange} checked={formData.whoWith === 'couple'} required className="accent-primary w-4 h-4" /> <span className="text-sm">{t('customTrip.couple', 'As a couple')}</span></label>
-                      <label className="flex items-center gap-2 cursor-pointer"><input type="radio" name="whoWith" value="family" onChange={handleInputChange} checked={formData.whoWith === 'family'} className="accent-primary w-4 h-4" /> <span className="text-sm">{t('customTrip.family', 'With family')}</span></label>
-                      <label className="flex items-center gap-2 cursor-pointer"><input type="radio" name="whoWith" value="group" onChange={handleInputChange} checked={formData.whoWith === 'group'} className="accent-primary w-4 h-4" /> <span className="text-sm">{t('customTrip.group', 'In a group')}</span></label>
+                      <label className="flex items-center gap-2.5 cursor-pointer bg-white border border-gray-200 py-3 px-4 rounded-xl shadow-sm hover:border-primary/30 transition-all"><input type="radio" name="whoWith" value="couple" onChange={handleInputChange} checked={formData.whoWith === 'couple'} required className="accent-primary w-4 h-4" /> <span className="text-sm font-semibold text-gray-700">{t('customTrip.couple', 'As a couple')}</span></label>
+                      <label className="flex items-center gap-2.5 cursor-pointer bg-white border border-gray-200 py-3 px-4 rounded-xl shadow-sm hover:border-primary/30 transition-all"><input type="radio" name="whoWith" value="family" onChange={handleInputChange} checked={formData.whoWith === 'family'} className="accent-primary w-4 h-4" /> <span className="text-sm font-semibold text-gray-700">{t('customTrip.family', 'With family')}</span></label>
+                      <label className="flex items-center gap-2.5 cursor-pointer bg-white border border-gray-200 py-3 px-4 rounded-xl shadow-sm hover:border-primary/30 transition-all"><input type="radio" name="whoWith" value="group" onChange={handleInputChange} checked={formData.whoWith === 'group'} className="accent-primary w-4 h-4" /> <span className="text-sm font-semibold text-gray-700">{t('customTrip.group', 'In a group')}</span></label>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-gray-50 p-4 rounded-lg">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-gray-50/55 border border-gray-100 p-6 rounded-2xl">
                     <div>
-                      <p className="mb-2 text-gray-800 font-medium text-sm">{t('customTrip.whereAt', 'Where are you at?')}</p>
-                      <div className="flex flex-col gap-2">
-                        <label className="flex items-center gap-2 cursor-pointer"><input type="radio" name="whereAt" value="info" onChange={handleInputChange} checked={formData.whereAt === 'info'} className="accent-primary w-4 h-4" /> <span className="text-sm">{t('customTrip.lookingForInfo', "I'm currently looking for information")}</span></label>
-                        <label className="flex items-center gap-2 cursor-pointer"><input type="radio" name="whereAt" value="organize" onChange={handleInputChange} checked={formData.whereAt === 'organize'} className="accent-primary w-4 h-4" /> <span className="text-sm">{t('customTrip.startingToOrganize', "I'm starting to organize my trip")}</span></label>
+                      <p className="block text-xs font-bold text-gray-600 mb-3 uppercase tracking-wider">{t('customTrip.whereAt', 'Where are you at?')}</p>
+                      <div className="flex flex-col gap-3">
+                        <label className="flex items-center gap-2.5 cursor-pointer bg-white border border-gray-200 py-3 px-4 rounded-xl shadow-sm hover:border-primary/30 transition-all"><input type="radio" name="whereAt" value="info" onChange={handleInputChange} checked={formData.whereAt === 'info'} className="accent-primary w-4 h-4" /> <span className="text-xs sm:text-sm font-semibold text-gray-700">{t('customTrip.lookingForInfo', "I'm currently looking for information")}</span></label>
+                        <label className="flex items-center gap-2.5 cursor-pointer bg-white border border-gray-200 py-3 px-4 rounded-xl shadow-sm hover:border-primary/30 transition-all"><input type="radio" name="whereAt" value="organize" onChange={handleInputChange} checked={formData.whereAt === 'organize'} className="accent-primary w-4 h-4" /> <span className="text-xs sm:text-sm font-semibold text-gray-700">{t('customTrip.startingToOrganize', "I'm starting to organize my trip")}</span></label>
                       </div>
                     </div>
                     <div>
-                      <p className="mb-2 text-gray-800 font-medium text-sm">{t('customTrip.boughtTickets', 'I have already bought the plane tickets')}</p>
-                      <div className="flex flex-col gap-2">
-                        <label className="flex items-center gap-2 cursor-pointer"><input type="radio" name="planeTickets" value="yes" onChange={handleInputChange} checked={formData.planeTickets === 'yes'} className="accent-primary w-4 h-4" /> <span className="text-sm">{t('customTrip.yes', 'Yes')}</span></label>
-                        <label className="flex items-center gap-2 cursor-pointer"><input type="radio" name="planeTickets" value="no" onChange={handleInputChange} checked={formData.planeTickets === 'no'} className="accent-primary w-4 h-4" /> <span className="text-sm">{t('customTrip.no', 'No')}</span></label>
+                      <p className="block text-xs font-bold text-gray-600 mb-3 uppercase tracking-wider">{t('customTrip.boughtTickets', 'I have already bought the plane tickets')}</p>
+                      <div className="flex flex-col gap-3">
+                        <label className="flex items-center gap-2.5 cursor-pointer bg-white border border-gray-200 py-3 px-4 rounded-xl shadow-sm hover:border-primary/30 transition-all"><input type="radio" name="planeTickets" value="yes" onChange={handleInputChange} checked={formData.planeTickets === 'yes'} className="accent-primary w-4 h-4" /> <span className="text-sm font-semibold text-gray-700">{t('customTrip.yes', 'Yes')}</span></label>
+                        <label className="flex items-center gap-2.5 cursor-pointer bg-white border border-gray-200 py-3 px-4 rounded-xl shadow-sm hover:border-primary/30 transition-all"><input type="radio" name="planeTickets" value="no" onChange={handleInputChange} checked={formData.planeTickets === 'no'} className="accent-primary w-4 h-4" /> <span className="text-sm font-semibold text-gray-700">{t('customTrip.no', 'No')}</span></label>
                       </div>
                     </div>
                   </div>
 
                   <div>
-                    <label className="block mb-1 text-gray-800 font-medium text-sm">{t('customTrip.numTravelers', 'Number of travelers?')} <span className="text-red-500">*</span></label>
-                    <input type="text" name="numTravelers" value={formData.numTravelers} onChange={handleInputChange} required className="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" />
+                    <label className="block text-xs font-bold text-gray-600 mb-2 uppercase tracking-wider">{t('customTrip.numTravelers', 'Number of travelers?')} <span className="text-red-500">*</span></label>
+                    <input type="text" name="numTravelers" value={formData.numTravelers} onChange={handleInputChange} required className="w-full bg-white border border-gray-200 rounded-xl py-3.5 px-4 text-[15px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 placeholder-gray-400 transition-all shadow-sm" />
                   </div>
 
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-gray-50/30 p-4 border border-gray-100 rounded-2xl">
                     <div>
-                      <label className="block mb-1 text-gray-600 text-xs">{t('customTrip.adults', 'No. Adults')}</label>
-                      <input type="number" min="0" name="adults" value={formData.adults} onChange={handleInputChange} className="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" />
+                      <label className="block text-[10px] font-bold text-gray-500 mb-1.5 uppercase tracking-wider">{t('customTrip.adults', 'No. Adults')}</label>
+                      <input type="number" min="0" name="adults" value={formData.adults} onChange={handleInputChange} className="w-full bg-white border border-gray-200 rounded-xl py-2 px-3 text-[14px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 transition-all shadow-sm" />
                     </div>
                     <div>
-                      <label className="block mb-1 text-gray-600 text-xs">{t('customTrip.teens', 'Teens <16 years')}</label>
-                      <input type="number" min="0" name="teens" value={formData.teens} onChange={handleInputChange} className="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" />
+                      <label className="block text-[10px] font-bold text-gray-500 mb-1.5 uppercase tracking-wider">{t('customTrip.teens', 'Teens <16 years')}</label>
+                      <input type="number" min="0" name="teens" value={formData.teens} onChange={handleInputChange} className="w-full bg-white border border-gray-200 rounded-xl py-2 px-3 text-[14px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 transition-all shadow-sm" />
                     </div>
                     <div>
-                      <label className="block mb-1 text-gray-600 text-xs">{t('customTrip.children', 'Children <11 years')}</label>
-                      <input type="number" min="0" name="children" value={formData.children} onChange={handleInputChange} className="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" />
+                      <label className="block text-[10px] font-bold text-gray-500 mb-1.5 uppercase tracking-wider">{t('customTrip.children', 'Children <11 years')}</label>
+                      <input type="number" min="0" name="children" value={formData.children} onChange={handleInputChange} className="w-full bg-white border border-gray-200 rounded-xl py-2 px-3 text-[14px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 transition-all shadow-sm" />
                     </div>
                     <div>
-                      <label className="block mb-1 text-gray-600 text-xs">{t('customTrip.infants', 'Infants <2 years')}</label>
-                      <input type="number" min="0" name="infants" value={formData.infants} onChange={handleInputChange} className="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" />
+                      <label className="block text-[10px] font-bold text-gray-500 mb-1.5 uppercase tracking-wider">{t('customTrip.infants', 'Infants <2 years')}</label>
+                      <input type="number" min="0" name="infants" value={formData.infants} onChange={handleInputChange} className="w-full bg-white border border-gray-200 rounded-xl py-2 px-3 text-[14px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 transition-all shadow-sm" />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
-                      <label className="block mb-1 text-gray-800 text-sm font-medium">{t('customTrip.numDays', 'Number of days')} <span className="text-red-500">*</span></label>
-                      <input type="number" name="numDays" value={formData.numDays} onChange={handleInputChange} required className="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" />
+                      <label className="block text-xs font-bold text-gray-600 mb-2 uppercase tracking-wider">{t('customTrip.numDays', 'Number of days')} <span className="text-red-500">*</span></label>
+                      <input type="number" name="numDays" value={formData.numDays} onChange={handleInputChange} required className="w-full bg-white border border-gray-200 rounded-xl py-3.5 px-4 text-[15px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 placeholder-gray-400 transition-all shadow-sm" />
                     </div>
                     <div>
-                      <label className="block mb-1 text-gray-800 text-sm font-medium">{t('customTrip.arrivalDate', 'Arrival date')} <span className="text-red-500">*</span></label>
-                      <input type="date" name="arrivalDate" value={formData.arrivalDate} onChange={handleInputChange} required className="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-white" />
+                      <label className="block text-xs font-bold text-gray-600 mb-2 uppercase tracking-wider">{t('customTrip.arrivalDate', 'Arrival date')} <span className="text-red-500">*</span></label>
+                      <input type="date" name="arrivalDate" value={formData.arrivalDate} onChange={handleInputChange} required className="w-full bg-white border border-gray-200 rounded-xl py-3.5 px-4 text-[15px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 transition-all shadow-sm bg-white" />
                     </div>
                     <div>
-                      <label className="block mb-1 text-gray-800 text-sm font-medium">{t('customTrip.departureDate', 'Departure date')} <span className="text-red-500">*</span></label>
-                      <input type="date" name="departureDate" value={formData.departureDate} onChange={handleInputChange} required className="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-white" />
+                      <label className="block text-xs font-bold text-gray-600 mb-2 uppercase tracking-wider">{t('customTrip.departureDate', 'Departure date')} <span className="text-red-500">*</span></label>
+                      <input type="date" name="departureDate" value={formData.departureDate} onChange={handleInputChange} required className="w-full bg-white border border-gray-200 rounded-xl py-3.5 px-4 text-[15px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 transition-all shadow-sm bg-white" />
                     </div>
                   </div>
 
@@ -302,7 +348,7 @@ const CustomTrip = () => {
               </motion.div>
             )}
 
-            {/* SLIDE 4: Activities */}
+            {/* SLIDE 4: Accommodation & Services */}
             {currentSlide === 4 && (
               <motion.div
                 key="slide4"
@@ -310,32 +356,105 @@ const CustomTrip = () => {
                 initial="hidden"
                 animate="visible"
                 exit="exit"
-                className="bg-white/95 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-2xl w-full max-w-3xl border border-white/20"
+                className="bg-white rounded-[32px] md:rounded-[40px] shadow-[0_20px_50px_rgba(0,0,0,0.05)] p-8 md:p-12 w-full max-w-7xl border border-gray-100"
               >
-                <h2 className="text-2xl font-bold text-gray-800 mb-6 border-b pb-2">Activities & Interests</h2>
+                <h2 className="text-2xl md:text-3xl font-bold text-primary font-serif mb-6 border-b border-gray-100 pb-3">Accommodation & Services</h2>
                 
-                <p className="text-gray-800 font-medium mb-4 text-sm">{t('customTrip.interestsTitle', 'What are you particularly interested in? (Several options are possible)')}</p>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
-                  {['monuments', 'temples', 'nature', 'beach', 'adventure', 'hiking'].map(interest => (
-                    <label key={interest} className={`flex items-center gap-3 p-4 border rounded-xl cursor-pointer transition-all ${formData.interests.includes(interest) ? 'bg-primary/10 border-primary/50 shadow-sm' : 'border-gray-200 hover:bg-gray-50'}`}>
-                      <input type="checkbox" name="interests" value={interest} onChange={handleInputChange} checked={formData.interests.includes(interest)} className="accent-primary w-5 h-5" /> 
-                      <span className="capitalize font-medium text-gray-700">{t(`customTrip.${interest}`, interest)}</span>
-                    </label>
-                  ))}
-                </div>
+                <form onSubmit={(e) => { e.preventDefault(); nextSlide(); }} className="space-y-6">
+                  <div>
+                    <p className="block text-xs font-bold text-gray-600 mb-3 uppercase tracking-wider">{t('customTrip.accommodationType', 'Type of accommodation')} <span className="text-red-500">*</span></p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      <label className="flex items-center gap-2.5 cursor-pointer bg-white border border-gray-200 py-3.5 px-4 rounded-xl shadow-sm hover:border-primary/30 transition-all"><input type="radio" name="accommodation" value="standard" onChange={handleInputChange} checked={formData.accommodation === 'standard'} required className="accent-primary w-4 h-4" /> <span className="text-sm font-semibold text-gray-700">{t('customTrip.standard', 'Standard (3 stars approx.)')}</span></label>
+                      <label className="flex items-center gap-2.5 cursor-pointer bg-white border border-gray-200 py-3.5 px-4 rounded-xl shadow-sm hover:border-primary/30 transition-all"><input type="radio" name="accommodation" value="superior" onChange={handleInputChange} checked={formData.accommodation === 'superior'} className="accent-primary w-4 h-4" /> <span className="text-sm font-semibold text-gray-700">{t('customTrip.superior', 'Superior (4/5 stars approx.)')}</span></label>
+                      <label className="flex items-center gap-2.5 cursor-pointer bg-white border border-gray-200 py-3.5 px-4 rounded-xl shadow-sm hover:border-primary/30 transition-all"><input type="radio" name="accommodation" value="luxury" onChange={handleInputChange} checked={formData.accommodation === 'luxury'} className="accent-primary w-4 h-4" /> <span className="text-sm font-semibold text-gray-700">{t('customTrip.luxury', 'Luxury Hotels')}</span></label>
+                      <label className="flex items-center gap-2.5 cursor-pointer bg-white border border-gray-200 py-3.5 px-4 rounded-xl shadow-sm hover:border-primary/30 transition-all"><input type="radio" name="accommodation" value="superLuxury" onChange={handleInputChange} checked={formData.accommodation === 'superLuxury'} className="accent-primary w-4 h-4" /> <span className="text-sm font-semibold text-gray-700">{t('customTrip.superLuxury', 'Super Luxury')}</span></label>
+                    </div>
+                  </div>
 
-                <div className="mt-12 flex justify-between items-center pt-4 border-t border-gray-200">
-                  <button type="button" onClick={prevSlide} className="text-gray-500 hover:text-gray-800 font-bold py-2 px-4 transition-colors">
-                    {t('customTrip.backBtn', 'Back')}
-                  </button>
-                  <button type="button" onClick={nextSlide} className="bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-lg transition-colors shadow-md hover:shadow-lg">
-                    {t('customTrip.nextBtn', 'Next')}
-                  </button>
-                </div>
+                  <div className="bg-gray-50/55 border border-gray-100 p-6 rounded-2xl">
+                    <p className="block text-xs font-bold text-gray-600 mb-3 uppercase tracking-wider">{t('customTrip.roomDist', 'Room Distribution')}</p>
+                    <div className="grid grid-cols-3 gap-4">
+                      <div>
+                        <label className="block text-[10px] font-bold text-gray-500 mb-1.5 uppercase tracking-wider">{t('customTrip.singleRooms', 'Single')}</label>
+                        <input type="number" min="0" name="singleRooms" value={formData.singleRooms} onChange={handleInputChange} className="w-full bg-white border border-gray-200 rounded-xl py-2 px-3 text-[14px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 transition-all shadow-sm" />
+                      </div>
+                      <div>
+                        <label className="block text-[10px] font-bold text-gray-500 mb-1.5 uppercase tracking-wider">{t('customTrip.doubleRooms', 'Double')}</label>
+                        <input type="number" min="0" name="doubleRooms" value={formData.doubleRooms} onChange={handleInputChange} className="w-full bg-white border border-gray-200 rounded-xl py-2 px-3 text-[14px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 transition-all shadow-sm" />
+                      </div>
+                      <div>
+                        <label className="block text-[10px] font-bold text-gray-500 mb-1.5 uppercase tracking-wider">{t('customTrip.tripleRooms', 'Triple')}</label>
+                        <input type="number" min="0" name="tripleRooms" value={formData.tripleRooms} onChange={handleInputChange} className="w-full bg-white border border-gray-200 rounded-xl py-2 px-3 text-[14px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 transition-all shadow-sm" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-gray-50/30 p-6 border border-gray-100 rounded-2xl">
+                    <div>
+                      <p className="block text-xs font-bold text-gray-600 mb-3 uppercase tracking-wider">{t('customTrip.mealPlan', 'Meal Plan')} <span className="text-red-500">*</span></p>
+                      <div className="flex flex-col gap-2.5">
+                        <label className="flex items-center gap-2.5 cursor-pointer bg-white border border-gray-200 py-3.5 px-4 rounded-xl shadow-sm hover:border-primary/30 transition-all"><input type="radio" name="mealPlan" value="bb" onChange={handleInputChange} checked={formData.mealPlan === 'bb'} required className="accent-primary w-4 h-4" /> <span className="text-sm font-semibold text-gray-700">{t('customTrip.bb', 'Bread & Breakfast')}</span></label>
+                        <label className="flex items-center gap-2.5 cursor-pointer bg-white border border-gray-200 py-3.5 px-4 rounded-xl shadow-sm hover:border-primary/30 transition-all"><input type="radio" name="mealPlan" value="hb" onChange={handleInputChange} checked={formData.mealPlan === 'hb'} className="accent-primary w-4 h-4" /> <span className="text-sm font-semibold text-gray-700">{t('customTrip.hb', 'Half Board')}</span></label>
+                        <label className="flex items-center gap-2.5 cursor-pointer bg-white border border-gray-200 py-3.5 px-4 rounded-xl shadow-sm hover:border-primary/30 transition-all"><input type="radio" name="mealPlan" value="fb" onChange={handleInputChange} checked={formData.mealPlan === 'fb'} className="accent-primary w-4 h-4" /> <span className="text-sm font-semibold text-gray-700">{t('customTrip.fb', 'Full Board')}</span></label>
+                      </div>
+                    </div>
+
+                    <div>
+                      <p className="block text-xs font-bold text-gray-600 mb-3 uppercase tracking-wider">{t('customTrip.accompaniment', 'Type of Accompaniment:')} <span className="text-red-500">*</span></p>
+                      <div className="flex flex-col gap-2.5">
+                        <label className="flex items-center gap-2.5 cursor-pointer bg-white border border-gray-200 py-3.5 px-4 rounded-xl shadow-sm hover:border-primary/30 transition-all"><input type="radio" name="accompaniment" value="driver" onChange={handleInputChange} checked={formData.accompaniment === 'driver'} required className="accent-primary w-4 h-4" /> <span className="text-sm font-semibold text-gray-700">{t('customTrip.driver', 'Tourist Driver')}</span></label>
+                        <label className="flex items-center gap-2.5 cursor-pointer bg-white border border-gray-200 py-3.5 px-4 rounded-xl shadow-sm hover:border-primary/30 transition-all"><input type="radio" name="accompaniment" value="chauffeur" onChange={handleInputChange} checked={formData.accompaniment === 'chauffeur'} className="accent-primary w-4 h-4" /> <span className="text-sm font-semibold text-gray-700">{t('customTrip.chauffeur', 'Chauffeur Guide')}</span></label>
+                        <label className="flex items-center gap-2.5 cursor-pointer bg-white border border-gray-200 py-3.5 px-4 rounded-xl shadow-sm hover:border-primary/30 transition-all"><input type="radio" name="accompaniment" value="nationalGuide" onChange={handleInputChange} checked={formData.accompaniment === 'nationalGuide'} className="accent-primary w-4 h-4" /> <span className="text-sm font-semibold text-gray-700">{t('customTrip.nationalGuide', 'National Guide')}</span></label>
+                      </div>
+                    </div>
+
+                    <div>
+                      <p className="block text-xs font-bold text-gray-600 mb-3 uppercase tracking-wider">{t('customTrip.chauffeurLanguage', 'Chauffeur/Guide Language:')} <span className="text-red-500">*</span></p>
+                      <select 
+                        name="langPref" 
+                        value={formData.langPref} 
+                        onChange={handleInputChange} 
+                        required 
+                        className="w-full bg-white border border-gray-200 rounded-xl py-3.5 px-4 text-[15px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 transition-all shadow-sm"
+                      >
+                        <option value="">Select Language</option>
+                        <option value="Spanish">Spanish</option>
+                        <option value="English">English</option>
+                        <option value="French">French</option>
+                        <option value="German">German</option>
+                        <option value="Italian">Italian</option>
+                        <option value="Other">Other</option>
+                      </select>
+
+                      {formData.langPref === 'Other' && (
+                        <div className="mt-3 animate-in fade-in slide-in-from-top-2 duration-300">
+                          <input 
+                            type="text" 
+                            name="otherLanguage" 
+                            value={formData.otherLanguage} 
+                            onChange={handleInputChange} 
+                            placeholder={t('customTrip.otherLangPlaceholder', 'Specify language...')}
+                            required 
+                            className="w-full bg-white border border-gray-200 rounded-xl py-3 px-4 text-[14px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 placeholder-gray-400 transition-all shadow-sm"
+                          />
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="mt-8 flex justify-between items-center pt-4 border-t border-gray-200">
+                    <button type="button" onClick={prevSlide} className="text-gray-500 hover:text-gray-800 font-bold py-2 px-4 transition-colors">
+                      {t('customTrip.backBtn', 'Back')}
+                    </button>
+                    <button type="submit" className="bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-lg transition-colors shadow-md hover:shadow-lg">
+                      {t('customTrip.nextBtn', 'Next')}
+                    </button>
+                  </div>
+                </form>
               </motion.div>
             )}
 
-            {/* SLIDE 5: Accommodations & Submit */}
+            {/* SLIDE 5: Activities & Submit */}
             {currentSlide === 5 && (
               <motion.div
                 key="slide5"
@@ -343,9 +462,9 @@ const CustomTrip = () => {
                 initial="hidden"
                 animate="visible"
                 exit="exit"
-                className="bg-white/95 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-2xl w-full max-w-3xl max-h-[80vh] overflow-y-auto custom-scrollbar border border-white/20"
+                className="bg-white rounded-[32px] md:rounded-[40px] shadow-[0_20px_50px_rgba(0,0,0,0.05)] p-8 md:p-12 w-full max-w-7xl border border-gray-100"
               >
-                <h2 className="text-2xl font-bold text-gray-800 mb-6 border-b pb-2">Accommodation & Services</h2>
+                <h2 className="text-2xl md:text-3xl font-bold text-primary font-serif mb-6 border-b border-gray-100 pb-3">Activities & Interests</h2>
                 
                 {status.message && (
                   <div className={`p-4 mb-6 text-sm font-bold border rounded-lg ${status.type === 'success' ? 'bg-green-50 text-green-700 border-green-200' : 'bg-red-50 text-red-700 border-red-200'}`}>
@@ -354,63 +473,25 @@ const CustomTrip = () => {
                 )}
 
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  <div>
-                    <p className="mb-2 text-gray-800 font-medium text-sm">{t('customTrip.accommodationType', 'Type of accommodation')} <span className="text-red-500">*</span></p>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                      <label className="flex items-center gap-2 cursor-pointer"><input type="radio" name="accommodation" value="standard" onChange={handleInputChange} checked={formData.accommodation === 'standard'} required className="accent-primary w-4 h-4" /> <span className="text-sm">{t('customTrip.standard', 'Standard (3 stars approx.)')}</span></label>
-                      <label className="flex items-center gap-2 cursor-pointer"><input type="radio" name="accommodation" value="superior" onChange={handleInputChange} checked={formData.accommodation === 'superior'} className="accent-primary w-4 h-4" /> <span className="text-sm">{t('customTrip.superior', 'Superior (4/5 stars approx.)')}</span></label>
-                      <label className="flex items-center gap-2 cursor-pointer"><input type="radio" name="accommodation" value="luxury" onChange={handleInputChange} checked={formData.accommodation === 'luxury'} className="accent-primary w-4 h-4" /> <span className="text-sm">{t('customTrip.luxury', 'Luxury Hotels')}</span></label>
-                      <label className="flex items-center gap-2 cursor-pointer"><input type="radio" name="accommodation" value="superLuxury" onChange={handleInputChange} checked={formData.accommodation === 'superLuxury'} className="accent-primary w-4 h-4" /> <span className="text-sm">{t('customTrip.superLuxury', 'Super Luxury')}</span></label>
-                    </div>
-                  </div>
-
-                  <div className="bg-gray-50 p-4 rounded-lg">
-                    <p className="mb-3 text-gray-800 font-medium text-sm">{t('customTrip.roomDist', 'Room Distribution')}</p>
-                    <div className="grid grid-cols-3 gap-4">
-                      <div>
-                        <label className="block mb-1 text-gray-600 text-xs">{t('customTrip.singleRooms', 'Single')}</label>
-                        <input type="number" min="0" name="singleRooms" value={formData.singleRooms} onChange={handleInputChange} className="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" />
-                      </div>
-                      <div>
-                        <label className="block mb-1 text-gray-600 text-xs">{t('customTrip.doubleRooms', 'Double')}</label>
-                        <input type="number" min="0" name="doubleRooms" value={formData.doubleRooms} onChange={handleInputChange} className="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" />
-                      </div>
-                      <div>
-                        <label className="block mb-1 text-gray-600 text-xs">{t('customTrip.tripleRooms', 'Triple')}</label>
-                        <input type="number" min="0" name="tripleRooms" value={formData.tripleRooms} onChange={handleInputChange} className="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <p className="mb-2 text-gray-800 font-medium text-sm">{t('customTrip.mealPlan', 'Meal Plan')} <span className="text-red-500">*</span></p>
-                      <div className="flex flex-col gap-2">
-                        <label className="flex items-center gap-2 cursor-pointer"><input type="radio" name="mealPlan" value="bb" onChange={handleInputChange} checked={formData.mealPlan === 'bb'} required className="accent-primary w-4 h-4" /> <span className="text-sm">{t('customTrip.bb', 'Bread & Breakfast')}</span></label>
-                        <label className="flex items-center gap-2 cursor-pointer"><input type="radio" name="mealPlan" value="hb" onChange={handleInputChange} checked={formData.mealPlan === 'hb'} className="accent-primary w-4 h-4" /> <span className="text-sm">{t('customTrip.hb', 'Half Board')}</span></label>
-                        <label className="flex items-center gap-2 cursor-pointer"><input type="radio" name="mealPlan" value="fb" onChange={handleInputChange} checked={formData.mealPlan === 'fb'} className="accent-primary w-4 h-4" /> <span className="text-sm">{t('customTrip.fb', 'Full Board')}</span></label>
-                      </div>
-                    </div>
-
-                    <div>
-                      <p className="mb-2 text-gray-800 font-medium text-sm">{t('customTrip.accompaniment', 'Type of Accompaniment:')} <span className="text-red-500">*</span></p>
-                      <div className="flex flex-col gap-2">
-                        <label className="flex items-center gap-2 cursor-pointer"><input type="radio" name="accompaniment" value="driver" onChange={handleInputChange} checked={formData.accompaniment === 'driver'} required className="accent-primary w-4 h-4" /> <span className="text-sm">{t('customTrip.driver', 'Tourist Driver')}</span></label>
-                        <label className="flex items-center gap-2 cursor-pointer"><input type="radio" name="accompaniment" value="chauffeur" onChange={handleInputChange} checked={formData.accompaniment === 'chauffeur'} className="accent-primary w-4 h-4" /> <span className="text-sm">{t('customTrip.chauffeur', 'Chauffeur Guide')}</span></label>
-                        <label className="flex items-center gap-2 cursor-pointer"><input type="radio" name="accompaniment" value="nationalGuide" onChange={handleInputChange} checked={formData.accompaniment === 'nationalGuide'} className="accent-primary w-4 h-4" /> <span className="text-sm">{t('customTrip.nationalGuide', 'National Guide')}</span></label>
-                      </div>
-                    </div>
+                  <p className="text-gray-600 font-medium mb-6 text-sm">{t('customTrip.interestsTitle', 'What are you particularly interested in? (Several options are possible)')}</p>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
+                    {['monuments', 'temples', 'nature', 'beach', 'adventure', 'hiking'].map(interest => (
+                      <label key={interest} className={`flex items-center gap-3 p-4 border rounded-xl cursor-pointer transition-all ${formData.interests.includes(interest) ? 'bg-primary/5 border-primary text-primary shadow-sm' : 'border-gray-200 hover:bg-gray-50'}`}>
+                        <input type="checkbox" name="interests" value={interest} onChange={handleInputChange} checked={formData.interests.includes(interest)} className="accent-primary w-5 h-5" /> 
+                        <span className="capitalize font-semibold text-gray-700">{t(`customTrip.${interest}`, interest)}</span>
+                      </label>
+                    ))}
                   </div>
 
                   <div>
-                    <label className="block mb-2 text-gray-800 font-medium text-sm">{t('customTrip.comments', 'Comments')}</label>
+                    <label className="block text-xs font-bold text-gray-600 mb-2 uppercase tracking-wider">{t('customTrip.comments', 'Comments')}</label>
                     <textarea 
                       name="comments" 
                       value={formData.comments}
                       onChange={handleInputChange}
-                      rows="3" 
+                      rows="4" 
                       placeholder={t('customTrip.commentsPlaceholder', 'Holidays, Photography trips, Birdwatching, Trekking etc...')}
-                      className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary resize-y"
+                      className="w-full bg-white border border-gray-200 rounded-xl py-3.5 px-4 text-[15px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 placeholder-gray-400 transition-all shadow-sm resize-y"
                     ></textarea>
                   </div>
 
@@ -427,6 +508,67 @@ const CustomTrip = () => {
                     </button>
                   </div>
                 </form>
+              </motion.div>
+            )}
+
+            {/* SLIDE 6: Success Screen */}
+            {currentSlide === 6 && (
+              <motion.div
+                key="slide6"
+                variants={slideVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                className="bg-white rounded-[32px] md:rounded-[40px] shadow-[0_20px_50px_rgba(0,0,0,0.05)] p-8 md:p-20 w-full max-w-7xl border border-gray-100 text-center flex flex-col items-center"
+              >
+                {/* Animated Green Check Circle with Premium Styling */}
+                <div className="w-24 h-24 md:w-28 md:h-28 bg-emerald-50 rounded-full flex items-center justify-center mb-10 shadow-inner relative">
+                  <div className="absolute inset-0 rounded-full bg-emerald-100/50 animate-ping opacity-60" style={{ animationDuration: '3s' }} />
+                  <div className="absolute -inset-2 rounded-full bg-emerald-50/30 animate-pulse opacity-80" />
+                  <div className="w-20 h-20 md:w-24 md:h-24 bg-gradient-to-tr from-emerald-500 to-teal-600 rounded-full flex items-center justify-center text-white shadow-lg shadow-emerald-500/30">
+                    <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                </div>
+
+                <h2 className="text-4xl md:text-6xl font-extrabold bg-gradient-to-r from-primary via-luxury to-primary bg-clip-text text-transparent font-serif mb-6 leading-tight">
+                  {t('customTrip.thankYou', submittedName ? `Thank You, ${submittedName.split(' ')[0]}!` : 'Thank You!')}
+                </h2>
+                
+                <p className="text-gray-700 text-xl md:text-2xl font-semibold max-w-3xl mx-auto mb-6">
+                  {t('customTrip.successSub', 'Your dream trip request has been received!')}
+                </p>
+
+                <p className="text-gray-500 text-sm md:text-base max-w-4xl mx-auto mb-12 leading-relaxed">
+                  {t('customTrip.successDetail', 'Our Sri Lankan travel specialist will review your preferences and get in touch with you shortly via WhatsApp or E-mail with a custom itinerary plan.')}
+                </p>
+
+                <div className="flex flex-col sm:flex-row gap-5 justify-center w-full sm:w-auto">
+                  <button 
+                    type="button" 
+                    onClick={() => {
+                      setCurrentSlide(1);
+                      setStatus({ type: '', message: '' });
+                      setSubmittedName('');
+                    }}
+                    className="bg-gradient-to-r from-primary to-luxury hover:from-primary/95 hover:to-luxury/95 text-white font-bold py-4 px-10 rounded-xl transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 active:translate-y-0 text-sm flex items-center justify-center gap-2"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 7.89M9 11l3-3 3 3m-3-3v12" />
+                    </svg>
+                    {t('customTrip.planAnother', 'Plan Another Trip')}
+                  </button>
+                  <a 
+                    href="/" 
+                    className="bg-white hover:bg-gray-50 text-primary border border-primary/20 hover:border-primary/40 font-bold py-4 px-10 rounded-xl transition-all shadow-sm hover:shadow-md transform hover:-translate-y-0.5 active:translate-y-0 text-sm flex items-center justify-center gap-2"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                    {t('customTrip.goHome', 'Back to Home')}
+                  </a>
+                </div>
               </motion.div>
             )}
 

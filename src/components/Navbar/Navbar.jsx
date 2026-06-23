@@ -24,6 +24,7 @@ const Navbar = () => {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
+  const forceSolidNavbar = location.pathname.includes('/custom-trip');
 
   const colorLogos = {
     fr: logoColorFR,
@@ -75,7 +76,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 ${isScrolled || isMenuOpen ? 'bg-white shadow-lg py-4' : 'bg-transparent py-6'
+      className={`fixed top-0 left-0 right-0 z-50 ${isScrolled || isMenuOpen || forceSolidNavbar ? 'bg-white shadow-lg py-4' : 'bg-transparent py-6'
         }`}
     >
       <div className='container mx-auto px-6 flex justify-between items-center'>
@@ -86,12 +87,12 @@ const Navbar = () => {
         >
           <img
             key={i18n.language}
-            src={(!isScrolled && !isMenuOpen && whiteLogos[i18n.language]) ? whiteLogos[i18n.language] : currentLogoColor}
+            src={(!isScrolled && !isMenuOpen && !forceSolidNavbar && whiteLogos[i18n.language]) ? whiteLogos[i18n.language] : currentLogoColor}
             alt="Eden Travels Logo"
             className={`h-16 md:h-20 w-auto object-contain transition-all duration-300 origin-left`}
             style={{
               transform: (i18n.language !== 'fr' && i18n.language !== 'de') ? 'scale(1.65)' : 'none',
-              filter: (!isScrolled && !isMenuOpen && i18n.language !== 'fr' && i18n.language !== 'de') ? 'brightness(0) invert(1)' : 'none'
+              filter: (!isScrolled && !isMenuOpen && !forceSolidNavbar && i18n.language !== 'fr' && i18n.language !== 'de') ? 'brightness(0) invert(1)' : 'none'
             }}
           />
         </Link>
@@ -102,7 +103,7 @@ const Navbar = () => {
             <li key={link.name}>
               <Link
                 to={link.path}
-                className={`text-[17px] font-medium relative ${!isScrolled ? 'text-white' : (link.specialized ? 'text-red-700 font-semibold text-[18px]' : 'text-primary')
+                className={`text-[17px] font-medium relative ${!isScrolled && !forceSolidNavbar ? 'text-white' : (link.specialized ? 'text-red-700 font-semibold text-[18px]' : 'text-primary')
                   }`}
               >
                 {link.name}
@@ -131,7 +132,7 @@ const Navbar = () => {
           </div>
           {/* Mobile Menu Toggle */}
           <button
-            className={`lg:hidden transition-colors ${!isScrolled && !isMenuOpen ? 'text-white' : 'text-primary'}`}
+            className={`lg:hidden transition-colors ${!isScrolled && !isMenuOpen && !forceSolidNavbar ? 'text-white' : 'text-primary'}`}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? (
