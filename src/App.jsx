@@ -14,6 +14,7 @@ import Reviews from './pages/Reviews';
 import ReviewDetail from './pages/ReviewDetail';
 import HotelCategoryPage from './pages/HotelCategoryPage';
 import Restaurants from './pages/Restaurants';
+import B2BPartner from './pages/B2BPartner';
 import Footer from './components/Footer/Footer';
 import WhatsAppButton from './components/WhatsAppButton/WhatsAppButton';
 import ScrollToTop from './components/ScrollToTop';
@@ -60,6 +61,7 @@ function AppContent() {
             <Route path="review/:id" element={<ReviewDetail />} />
             <Route path="hotels/:category" element={<HotelCategoryPage />} />
             <Route path="restaurants" element={<Restaurants />} />
+            <Route path="b2b" element={<B2BPartner />} />
           </Route>
         </Routes>
       </main>

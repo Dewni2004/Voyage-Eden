@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import logoColorFR from '../../assets/French-t.png';
 import logoColorEN from '../../assets/English-Logo-scaled.png';
 import logoColorES from '../../assets/Spanish-Logo-scaled.png';
@@ -84,15 +85,15 @@ const Footer = () => {
 
             {/* B2B Contacts Button */}
             <div className="pt-4 flex justify-center lg:justify-start">
-              <a 
-                href={`mailto:${contactEmails}`}
+              <Link 
+                to={`/${i18n.language}/b2b`}
                 className="inline-flex items-center gap-2 bg-white/10 border border-white/20 hover:border-white/60 text-white px-6 py-3 rounded-full text-sm font-bold tracking-wider transition-all duration-300 hover:bg-white/20"
               >
                 {t('footer.b2b')}
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7" />
                 </svg>
-              </a>
+              </Link>
             </div>
           </div>
 

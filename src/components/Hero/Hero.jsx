@@ -1,18 +1,18 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import heroImage from '../../assets/Galle-Fort.jpg';
+import heroImage from '../../assets/hero-image.jpg';
 
 const Hero = () => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   return (
-    <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
+    <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
       <div
         className="absolute inset-0 z-0"
         style={{
-          backgroundImage: `url(${heroImage})`,
+          backgroundImage: `url("${heroImage}")`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -21,7 +21,7 @@ const Hero = () => {
       </div>
 
       {/* Content */}
-      <div className="container mx-auto px-6 relative z-10 text-center text-white">
+      <div className="container mx-auto px-6 relative z-10 text-center text-white mt-16">
         <h1 className="home-hero-title max-w-4xl mx-auto mb-6 text-[32px] sm:text-4xl md:text-6xl lg:text-7xl font-bold leading-tight drop-shadow-lg">
           {t('hero.welcome')} <br />
           <span className="text-[#c5a059]">{t('hero.brandName')}</span>
