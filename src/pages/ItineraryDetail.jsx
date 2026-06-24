@@ -200,11 +200,11 @@ const ItineraryDetail = () => {
       </div>
 
       {/* Interactive Itinerary Section */}
-      <section id="itinerary-section" className="max-w-7xl mx-auto px-0 md:px-6 pb-6 md:pb-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-stretch">
+      <section id="itinerary-section" className="max-w-[1360px] mx-auto px-0 md:px-6 pb-6 md:pb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-[530px_1fr] gap-4 md:gap-6 items-stretch">
           
           {/* Left Column: Interactive Map */}
-          <div className="relative group/map h-[450px] sm:h-[550px] md:h-[600px] lg:h-[850px]">
+          <div className="relative group/map h-[450px] sm:h-[550px] md:h-[600px] lg:h-[940px]">
             <div className="absolute -inset-4 bg-gradient-to-tr from-primary/5 to-luxury/5 rounded-[48px] blur-2xl opacity-0 group-hover/map:opacity-100 transition-duration-700"></div>
             <AnimatedMap 
               days={days} 
@@ -302,7 +302,7 @@ const ItineraryDetail = () => {
           </div>
 
           {/* Right Column: Day Details Card */}
-          <div className="bg-[#e9ecef] rounded-[40px] p-8 md:p-10 shadow-2xl border border-white h-[850px] overflow-y-auto hidden lg:flex flex-col transition-all duration-500 hide-scrollbar">
+          <div className="bg-[#e9ecef] rounded-[40px] p-6 md:p-8 shadow-2xl border border-white h-[940px] overflow-y-auto hidden lg:flex flex-col transition-all duration-500 hide-scrollbar">
             {/* Day Image */}
             <div className="relative h-60 rounded-[32px] overflow-hidden mb-6 shadow-xl group/img flex-shrink-0">
               <img 

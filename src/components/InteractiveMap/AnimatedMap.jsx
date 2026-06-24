@@ -89,10 +89,10 @@ const AnimatedMap = ({ days, activeDay, setActiveDay, setIsModalOpen }) => {
   // We'll generate segments in the render loop.
 
   return (
-    <div className="relative w-full h-full z-10 flex items-center justify-center px-2 md:px-0">
+    <div className="relative w-full h-full z-10 flex items-center justify-center lg:justify-end px-2 md:px-0">
       {/* Inner shrink-wrap container to match exact image dimensions */}
       <div 
-        className="relative flex items-center justify-center"
+        className="relative flex items-center justify-center lg:justify-end"
         style={aspectRatio ? { 
           aspectRatio: aspectRatio, 
           maxWidth: '100%', 
