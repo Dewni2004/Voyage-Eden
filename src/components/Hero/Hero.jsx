@@ -7,14 +7,15 @@ const Hero = () => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   return (
-    <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
+    <section className="relative h-[70vh] flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
       <div
-        className="absolute inset-0 z-0"
+        className="absolute inset-0 z-0 bg-[#0a192f]"
         style={{
           backgroundImage: `url("${heroImage}")`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
         }}
       >
         <div className="absolute inset-0 bg-black/40"></div>
