@@ -40,9 +40,9 @@
       "email1": "srilankaedentravels@gmail.com",
       "email2": "nethmi.srilankaedentravels@gmail.com",
       "phone1": "+94 77 1470 150 - Nethmi ",
-      "phone2": "+94 76 440 9656 - Rasika",
+      "phone2": "+94 76 440 9656 - Rasika (24/7 Assistance)",
       "phone3": "+94 37 22 01 747",
-      "office_label": "Sri Lanka Office",
+      "office_label": "Monday to Friday, 8:30 AM – 5:30 PM",
       "sltda_reg": "SLTDA : SLTDA/SQA/TA/02233",
       "office1": "Kandy : Stone House Suites, No 38, Nittawela Road Kandy, Sri Lanka",
       "office2": "Kurunegala : No. 64, 4th floor, Unit 01, Siripathi Complex, Bauddaloka Rd, Kurunegala,Sri Lanka"},
@@ -420,6 +420,29 @@
     "contactUs": {
       "heroTitle": "Contact Us",
       "heroDesc": "We are here to help you plan your dream trip to Sri Lanka. Feel free to contact us.",
+      "cards": {
+        "registro": {
+          "title": "REGISTRATION",
+          "line1": "Tourism Ministry Registration in Sri Lanka: SLTDA/SQASTA/02238",
+          "line2": "Business Registration Number in Sri Lanka: PV 106460"
+        },
+        "direccion": {
+          "title": "ADDRESS",
+          "line1": "Kandy Office: 38/01, Stone House Suite, Nittawela Road, Kandy, Sri Lanka",
+          "line2": "Kurunegala Office: No. 64, 4th floor, Siripathi Complex, Bauddaloka Rd, Kurunegala, Sri Lanka"
+        },
+        "email": {
+          "title": "E-MAIL",
+          "line1": "srilankaedentravels@gmail.com",
+          "line2": "nethmi.srilankaedentravels@gmail.com"
+        },
+        "telefono": {
+          "title": "PHONE",
+          "line1": "Sri Lanka Office +94 372201747",
+          "line2": "Mobile/WhatsApp Nethmi +94 77 147 0150",
+          "line3": "Mobile/WhatsApp Rasika +94 76 440 9656"
+        }
+      },
       "offices": {
         "title": "Our Offices"
       },
