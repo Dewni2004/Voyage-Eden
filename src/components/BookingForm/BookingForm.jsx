@@ -136,22 +136,7 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
       return;
     }
 
-    // Only send via EmailJS if the language is English (for testing)
-    const isEnglish = i18n.language?.startsWith('en');
-    
-    if (!isEnglish) {
-      // Mock success for non-English languages for now
-      setTimeout(() => {
-        setMessageStatus({ 
-          type: 'success', 
-          text: t("bookingForm.successMsg") 
-        });
-        form.current.reset();
-        setStartDate(null);
-        setIsSending(false);
-      }, 1000);
-      return;
-    }
+    // Proceed with EmailJS for all languages
 
     const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || "service_t8ls4md"; 
     const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "template_1w4ymtk";
@@ -179,6 +164,18 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
 
   const inputClass = "w-full bg-white border border-gray-200 rounded-xl py-3.5 px-4 text-[15px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 placeholder-gray-400 transition-all shadow-sm";
   const labelClass = "block text-xs font-bold text-gray-600 mb-2 uppercase tracking-wider";
+
+  // Determine agent email based on current language
+  const currentLang = i18n.language?.split('-')[0] || 'fr';
+  let agentEmail = import.meta.env.VITE_AGENT_EMAIL_FR;
+  if (currentLang === 'en') agentEmail = import.meta.env.VITE_AGENT_EMAIL_EN;
+  else if (currentLang === 'de') agentEmail = import.meta.env.VITE_AGENT_EMAIL_DE;
+  else if (currentLang === 'es') agentEmail = import.meta.env.VITE_AGENT_EMAIL_ES;
+  else if (currentLang === 'it') agentEmail = import.meta.env.VITE_AGENT_EMAIL_IT;
+  
+  if (!agentEmail) {
+    agentEmail = import.meta.env.VITE_AGENT_EMAIL || "info@voyage-eden.com";
+  }
 
   return (
     <section id="booking-form" className="max-w-7xl mx-auto px-6 py-8 md:py-16 pb-2 md:pb-16">
@@ -215,9 +212,10 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
             </div>
           )}
 
-          {/* Hidden inputs for DateRange to pass to EmailJS */}
+          {/* Hidden inputs to pass data to EmailJS */}
           <input type="hidden" name="arrival_date" value={startDate ? startDate.toLocaleDateString('fr-FR') : ''} />
           <input type="hidden" name="departure_date" value={endDate ? endDate.toLocaleDateString('fr-FR') : ''} />
+          <input type="hidden" name="agent_email" value={agentEmail} />
 
           <div 
             className={isMobile ? "overflow-hidden -mx-2 px-2 transition-[height] duration-500 ease-in-out" : "space-y-10"}
