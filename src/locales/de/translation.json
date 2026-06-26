@@ -738,6 +738,12 @@
         "emailPlaceholder": "E-Mail Adresse",
         "subscribeBtn": "Abonnieren"
       }
+    },
+    "socials": {
+      "facebook": "https://www.facebook.com/share/1CsHwmUq4t/",
+      "instagram": "https://www.tiktok.com/@srilankaedenreisen?_r=1&_t=ZS-97UoWMGsvyO",
+      "tiktok": "https://www.tiktok.com/@srilankaedenreisen?_r=1&_t=ZS-97UoWMGsvyO",
+      "youtube": "https://youtube.com/@srilankaedenreisen?si=1yD8WPKe7pTxyo7O"
     }
   }
 }

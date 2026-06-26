@@ -44,7 +44,7 @@ const ReviewDetail = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-6 py-16 md:py-24">
-        <div className="flex flex-col lg:flex-row gap-16 relative">
+        <div className="flex flex-col lg:flex-row items-start gap-16 relative">
           
           {/* Main Content */}
           <div className="lg:w-3/4 bg-white p-8 md:p-16 rounded-[40px] shadow-xl border border-gray-100 -mt-32 relative z-20">
@@ -119,25 +119,27 @@ const ReviewDetail = () => {
             </div>
 
             {/* Featured Guide Card */}
-            <div className="bg-gray-100 p-8 rounded-[40px] border border-gray-200">
-              <h3 className="text-primary text-xl font-bold mb-6">{t('reviewDetail.featuredGuide')}</h3>
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-16 h-16 rounded-2xl overflow-hidden bg-white shadow-md">
-                  <img src={review.guide?.photo || 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200'} alt="" className="w-full h-full object-cover" />
+            {review.guide?.name && review.guide.name.toLowerCase() !== 'hasindu' && (
+              <div className="bg-gray-100 p-8 rounded-[40px] border border-gray-200">
+                <h3 className="text-primary text-xl font-bold mb-6">{t('reviewDetail.featuredGuide')}</h3>
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-16 h-16 rounded-2xl overflow-hidden bg-white shadow-md">
+                    <img src={review.guide?.photo || 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200'} alt="" className="w-full h-full object-cover" />
+                  </div>
+                  <div>
+                    <h4 className="text-primary font-bold">{review.guide?.name || t('reviewDetail.defaultGuideName')}</h4>
+                    <div className="flex text-yellow-400 text-[10px]">{'★'.repeat(review.guide?.rating || 5)}</div>
+                    <p className="text-gray-400 text-[10px] font-bold uppercase mt-1">{t('reviewDetail.edenGuide')}</p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="text-primary font-bold">{review.guide?.name || t('reviewDetail.defaultGuideName')}</h4>
-                  <div className="flex text-yellow-400 text-[10px]">{'★'.repeat(review.guide?.rating || 5)}</div>
-                  <p className="text-gray-400 text-[10px] font-bold uppercase mt-1">{t('reviewDetail.edenGuide')}</p>
+                <div className="bg-white p-6 rounded-3xl relative">
+                  <svg className="w-6 h-6 text-primary/5 absolute top-4 left-4" fill="currentColor" viewBox="0 0 32 32"><path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14H8c0-1.1.9-2 2-2V8zm14 0c-3.3 0-6 2.7-6 6v10h10V14h-6c0-1.1.9-2 2-2V8z" /></svg>
+                  <p className="text-gray-600 text-sm italic leading-relaxed pl-6">
+                    {review.guide?.quote ? `"${review.guide.quote}"` : t('reviewDetail.defaultGuideQuote')}
+                  </p>
                 </div>
               </div>
-              <div className="bg-white p-6 rounded-3xl relative">
-                <svg className="w-6 h-6 text-primary/5 absolute top-4 left-4" fill="currentColor" viewBox="0 0 32 32"><path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14H8c0-1.1.9-2 2-2V8zm14 0c-3.3 0-6 2.7-6 6v10h10V14h-6c0-1.1.9-2 2-2V8z" /></svg>
-                <p className="text-gray-600 text-sm italic leading-relaxed pl-6">
-                  {review.guide?.quote ? `"${review.guide.quote}"` : t('reviewDetail.defaultGuideQuote')}
-                </p>
-              </div>
-            </div>
+            )}
           </div>
         </div>
 
