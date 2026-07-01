@@ -219,7 +219,7 @@ const ItineraryDetail = () => {
                 <div className="bg-white/95 backdrop-blur-xl w-full max-h-[75vh] overflow-y-auto rounded-[32px] shadow-2xl p-4 border border-white/50 hide-scrollbar">
                   {/* Image & Close Button Overlay */}
                   <div className="relative h-36 rounded-[24px] overflow-hidden mb-4 shadow-sm">
-                    <img src={days[activeDay - 1].image} alt="" className="w-full h-full object-cover" />
+                    <img src={days[activeDay - 1].image} alt="" className="w-full h-full object-cover" loading="lazy" />
                     <button 
                       onClick={() => setIsModalOpen(false)} 
                       className="absolute top-3 right-3 w-8 h-8 bg-black/40 backdrop-blur-md text-white rounded-full flex items-center justify-center transition-all hover:bg-black/60"
@@ -264,7 +264,7 @@ const ItineraryDetail = () => {
                           <div className="grid grid-cols-4 gap-2">
                             {days[activeDay - 1].accommodationImages.map((img, idx) => img ? (
                               <div key={idx} onClick={() => setSelectedGalleryImage(img)} className="h-14 sm:h-20 rounded-xl overflow-hidden shadow-sm relative cursor-pointer hover:opacity-90 transition-opacity">
-                                <img src={img} alt="" className="w-full h-full object-cover" />
+                                <img src={img} alt="" className="w-full h-full object-cover" loading="lazy" />
                               </div>
                             ) : null)}
                           </div>
@@ -309,6 +309,7 @@ const ItineraryDetail = () => {
                 src={days[activeDay - 1].image} 
                 alt={days[activeDay - 1].location} 
                 className="w-full h-full object-cover transition-all duration-1000 group-hover/img:scale-110"
+                loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
               <div className="absolute bottom-6 left-8 flex flex-col items-start gap-2">
@@ -357,7 +358,7 @@ const ItineraryDetail = () => {
                     <div className="grid grid-cols-4 gap-3">
                       {days[activeDay - 1].accommodationImages.map((img, idx) => img ? (
                         <div key={idx} onClick={() => setSelectedGalleryImage(img)} className="h-20 sm:h-24 md:h-28 rounded-2xl overflow-hidden shadow-md group/acc-img cursor-pointer relative">
-                          <img src={img} alt="" className="w-full h-full object-cover transition-transform duration-700 group-hover/acc-img:scale-110" />
+                          <img src={img} alt="" className="w-full h-full object-cover transition-transform duration-700 group-hover/acc-img:scale-110" loading="lazy" />
                           <div className="absolute inset-0 bg-black/10 group-hover/acc-img:bg-transparent transition-colors"></div>
                         </div>
                       ) : null)}

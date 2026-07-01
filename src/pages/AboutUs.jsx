@@ -105,6 +105,7 @@ const AboutUs = () => {
                   src={officeStaff2} 
                   alt="Eden Travels Office Staff" 
                   className="w-full h-full object-cover rounded-[30px] md:rounded-[40px] shadow-2xl border-4 border-white"
+                  loading="lazy"
                 />
               </div>
               
@@ -114,6 +115,7 @@ const AboutUs = () => {
                   src={guidesImage} 
                   alt="Eden Travels Guides" 
                   className="w-full h-full object-cover rounded-[30px] md:rounded-[40px] shadow-2xl border-4 border-white"
+                  loading="lazy"
                 />
               </div>
             </div>
@@ -226,6 +228,7 @@ const AboutUs = () => {
                       src={member.img} 
                       alt={member.name} 
                       className="w-full h-full object-cover"
+                      loading="lazy"
                     />
                   </div>
                 </div>
@@ -331,6 +334,7 @@ const AboutUs = () => {
                     src={member.img} 
                     alt={member.name} 
                     className="w-full h-full object-cover"
+                    loading="lazy"
                   />
                 </div>
                 <h3 className="text-primary text-sm sm:text-lg md:text-xl font-bold mb-0.5 sm:mb-1">{member.name}</h3>
@@ -411,6 +415,7 @@ const AboutUs = () => {
                     src={guide.img} 
                     alt={guide.name} 
                     className="w-full h-full object-cover"
+                    loading="lazy"
                   />
                 </div>
                 <h3 className="text-primary text-sm sm:text-lg md:text-xl font-bold mb-0.5 sm:mb-1">{guide.name}</h3>

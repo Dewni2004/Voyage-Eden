@@ -7,17 +7,51 @@ import { getReviews } from '../services/contentService';
 import PageHero from '../components/UI/PageHero';
 import reviewsBanner from '../assets/Review page Banner.jpeg';
 
-const videoReviews = [
-  { id: "Pjdej3Rz-OM", name: "Tharindu & Anne", date: "Jan 2024", thumbnail: "https://img.youtube.com/vi/Pjdej3Rz-OM/hqdefault.jpg" },
-  { id: "T5pHb4KrFJg", name: "The Wilson Family", date: "Dec 2023", thumbnail: "https://img.youtube.com/vi/T5pHb4KrFJg/hqdefault.jpg" },
-  { id: "iZbmWFCZrKQ", name: "Elena & Marco", date: "Nov 2023", thumbnail: "https://img.youtube.com/vi/iZbmWFCZrKQ/hqdefault.jpg" },
-  { id: "iPXf_9b4AQ8", name: "Sophie Laurent", date: "Oct 2023", thumbnail: "https://img.youtube.com/vi/iPXf_9b4AQ8/hqdefault.jpg" },
-  { id: "6APcyO3HLqM", name: "James Wilson", date: "Sep 2023", thumbnail: "https://img.youtube.com/vi/6APcyO3HLqM/hqdefault.jpg" },
-  { id: "Rcp6ilHKp8Q", name: "The Rossi Group", date: "Aug 2023", thumbnail: "https://img.youtube.com/vi/Rcp6ilHKp8Q/hqdefault.jpg" }
-];
+const getVideoReviews = (lang) => {
+  const l = lang ? lang.split('-')[0] : 'es';
+  return [
+    { 
+      id: "Pjdej3Rz-OM", 
+      name: l === 'es' ? "Tharindu y Anne" : l === 'it' ? "Tharindu e Anne" : "Tharindu & Anne", 
+      date: l === 'es' ? "Ene 2024" : l === 'it' ? "Gen 2024" : "Jan 2024", 
+      thumbnail: "https://img.youtube.com/vi/Pjdej3Rz-OM/hqdefault.jpg" 
+    },
+    { 
+      id: "T5pHb4KrFJg", 
+      name: l === 'es' ? "Familia Wilson" : l === 'fr' ? "Famille Wilson" : l === 'it' ? "Famiglia Wilson" : l === 'de' ? "Familie Wilson" : "The Wilson Family", 
+      date: l === 'es' ? "Dic 2023" : l === 'fr' ? "Déc 2023" : l === 'de' ? "Dez 2023" : "Dec 2023", 
+      thumbnail: "https://img.youtube.com/vi/T5pHb4KrFJg/hqdefault.jpg" 
+    },
+    { 
+      id: "iZbmWFCZrKQ", 
+      name: l === 'es' ? "Elena y Marco" : l === 'it' ? "Elena e Marco" : "Elena & Marco", 
+      date: "Nov 2023", 
+      thumbnail: "https://img.youtube.com/vi/iZbmWFCZrKQ/hqdefault.jpg" 
+    },
+    { 
+      id: "iPXf_9b4AQ8", 
+      name: "Sophie Laurent", 
+      date: l === 'es' || l === 'fr' ? "Oct 2023" : l === 'it' ? "Ott 2023" : l === 'de' ? "Okt 2023" : "Oct 2023", 
+      thumbnail: "https://img.youtube.com/vi/iPXf_9b4AQ8/hqdefault.jpg" 
+    },
+    { 
+      id: "6APcyO3HLqM", 
+      name: "James Wilson", 
+      date: l === 'es' || l === 'fr' || l === 'de' ? "Sep 2023" : l === 'it' ? "Set 2023" : "Sep 2023", 
+      thumbnail: "https://img.youtube.com/vi/6APcyO3HLqM/hqdefault.jpg" 
+    },
+    { 
+      id: "Rcp6ilHKp8Q", 
+      name: l === 'es' ? "Grupo Rossi" : l === 'fr' ? "Groupe Rossi" : l === 'it' ? "Gruppo Rossi" : l === 'de' ? "Rossi Gruppe" : "The Rossi Group", 
+      date: l === 'es' ? "Ago 2023" : l === 'fr' ? "Août 2023" : l === 'it' ? "Ago 2023" : l === 'de' ? "Aug 2023" : "Aug 2023", 
+      thumbnail: "https://img.youtube.com/vi/Rcp6ilHKp8Q/hqdefault.jpg" 
+    }
+  ];
+};
 
 const Reviews = () => {
   const { t, i18n } = useTranslation();
+  const videoReviews = getVideoReviews(i18n.language);
   const [dynamicReviews, setDynamicReviews] = useState([]);
   const [selectedReview, setSelectedReview] = useState(null);
   const [selectedVideo, setSelectedVideo] = useState(null);
@@ -406,7 +440,7 @@ const Reviews = () => {
                 className="min-w-[280px] w-[85vw] sm:w-auto shrink-0 snap-center bg-white rounded-[32px] overflow-hidden shadow-xl group cursor-pointer border border-gray-100"
               >
                 <div className="relative h-64">
-                  <img src={video.thumbnail} alt="" className="w-full h-full object-cover" />
+                  <img src={video.thumbnail} alt="" className="w-full h-full object-cover" loading="lazy" />
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors flex items-center justify-center">
                     <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center shadow-2xl">
                       <svg className="w-6 h-6 text-primary ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
@@ -458,7 +492,7 @@ const Reviews = () => {
                   className="w-full relative h-[280px] xs:h-[350px] sm:h-[500px] rounded-[24px] sm:rounded-[40px] overflow-hidden group shadow-xl hover:-translate-y-2 transition-all duration-500 cursor-pointer"
                 >
                   {/* Background Image */}
-                  <img src={review.img} alt="" className="absolute inset-0 w-full h-full object-cover" />
+                  <img src={review.img} alt="" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20"></div>
                   
                   {/* Content Overlay */}
@@ -550,6 +584,7 @@ const Reviews = () => {
               src="https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&q=80&w=2000" 
               alt="Travel Background" 
               className="w-full h-full object-cover"
+              loading="lazy"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/90 to-primary/60"></div>
           </div>
@@ -639,6 +674,7 @@ const Reviews = () => {
                 src={selectedReview.img} 
                 alt={selectedReview.name} 
                 className="w-full h-full object-cover"
+                loading="lazy"
               />
             </div>
             

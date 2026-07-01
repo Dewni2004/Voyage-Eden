@@ -1,23 +1,26 @@
 import { BrowserRouter as Router, Routes, Route, Navigate, useParams, Outlet } from 'react-router-dom';
-import { useEffect } from 'react';
+import React, { useEffect, Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
 import Navbar from './components/Navbar/Navbar';
-import Home from './pages/Home';
-import Itineraires from './pages/Itineraires';
-import AboutUs from './pages/AboutUs';
-import TravelGuide from './pages/TravelGuide';
-import ContactUs from './pages/ContactUs';
-import CustomTrip from './pages/CustomTrip';
-import ItineraryDetail from './pages/ItineraryDetail';
-import BlogDetail from './pages/BlogDetail';
-import Reviews from './pages/Reviews';
-import ReviewDetail from './pages/ReviewDetail';
-import HotelCategoryPage from './pages/HotelCategoryPage';
-import Restaurants from './pages/Restaurants';
-import B2BPartner from './pages/B2BPartner';
 import Footer from './components/Footer/Footer';
 import WhatsAppButton from './components/WhatsAppButton/WhatsAppButton';
 import ScrollToTop from './components/ScrollToTop';
+import LoadingSpinner from './components/UI/LoadingSpinner';
+
+// Lazy loading components
+const Home = React.lazy(() => import('./pages/Home'));
+const Itineraires = React.lazy(() => import('./pages/Itineraires'));
+const AboutUs = React.lazy(() => import('./pages/AboutUs'));
+const TravelGuide = React.lazy(() => import('./pages/TravelGuide'));
+const ContactUs = React.lazy(() => import('./pages/ContactUs'));
+const CustomTrip = React.lazy(() => import('./pages/CustomTrip'));
+const ItineraryDetail = React.lazy(() => import('./pages/ItineraryDetail'));
+const BlogDetail = React.lazy(() => import('./pages/BlogDetail'));
+const Reviews = React.lazy(() => import('./pages/Reviews'));
+const ReviewDetail = React.lazy(() => import('./pages/ReviewDetail'));
+const HotelCategoryPage = React.lazy(() => import('./pages/HotelCategoryPage'));
+const Restaurants = React.lazy(() => import('./pages/Restaurants'));
+const B2BPartner = React.lazy(() => import('./pages/B2BPartner'));
 
 // Syncs the URL language parameter with the i18n engine
 function LanguageWrapper() {
@@ -46,24 +49,26 @@ function AppContent() {
     <div className="flex flex-col min-h-screen">
       <Navbar />
       <main className="flex-grow">
-        <Routes>
-          <Route path="/" element={<RootRedirect />} />
-          <Route path="/:lang" element={<LanguageWrapper />}>
-            <Route index element={<Home />} />
-            <Route path="itineraires" element={<Itineraires />} />
-            <Route path="about" element={<AboutUs />} />
-            <Route path="travel-guide" element={<TravelGuide />} />
-            <Route path="contact" element={<ContactUs />} />
-            <Route path="custom-trip" element={<CustomTrip />} />
-            <Route path="itinerary/:id" element={<ItineraryDetail />} />
-            <Route path="blog/:id" element={<BlogDetail />} />
-            <Route path="reviews" element={<Reviews />} />
-            <Route path="review/:id" element={<ReviewDetail />} />
-            <Route path="hotels/:category" element={<HotelCategoryPage />} />
-            <Route path="restaurants" element={<Restaurants />} />
-            <Route path="b2b" element={<B2BPartner />} />
-          </Route>
-        </Routes>
+        <Suspense fallback={<LoadingSpinner />}>
+          <Routes>
+            <Route path="/" element={<RootRedirect />} />
+            <Route path="/:lang" element={<LanguageWrapper />}>
+              <Route index element={<Home />} />
+              <Route path="itineraires" element={<Itineraires />} />
+              <Route path="about" element={<AboutUs />} />
+              <Route path="travel-guide" element={<TravelGuide />} />
+              <Route path="contact" element={<ContactUs />} />
+              <Route path="custom-trip" element={<CustomTrip />} />
+              <Route path="itinerary/:id" element={<ItineraryDetail />} />
+              <Route path="blog/:id" element={<BlogDetail />} />
+              <Route path="reviews" element={<Reviews />} />
+              <Route path="review/:id" element={<ReviewDetail />} />
+              <Route path="hotels/:category" element={<HotelCategoryPage />} />
+              <Route path="restaurants" element={<Restaurants />} />
+              <Route path="b2b" element={<B2BPartner />} />
+            </Route>
+          </Routes>
+        </Suspense>
       </main>
       <Footer />
       <WhatsAppButton />

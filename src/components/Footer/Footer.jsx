@@ -49,6 +49,7 @@ const Footer = () => {
               src={currentLogoColor} 
               alt="Eden Travels Logo" 
               className="h-20 md:h-24 w-auto object-contain self-center lg:self-start transition-transform duration-300 hover:scale-105 origin-center lg:origin-left"
+              loading="lazy"
               style={{
                 transform: (i18n.language !== 'fr' && i18n.language !== 'de') ? 'scale(1.65)' : 'none'
               }}

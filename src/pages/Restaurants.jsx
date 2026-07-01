@@ -171,6 +171,7 @@ const Restaurants = () => {
                         src={restaurant.image} 
                         alt={restaurant.name} 
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        loading="lazy"
                       />
                     </div>
 
@@ -294,7 +295,7 @@ const Restaurants = () => {
 
                   {/* Hero Image */}
                   <div className="w-full h-[40vh] md:h-[50vh] rounded-[2rem] overflow-hidden mb-8 shadow-sm">
-                    <img src={selectedRestaurant.image} alt={selectedRestaurant.name} className="w-full h-full object-cover" />
+                    <img src={selectedRestaurant.image} alt={selectedRestaurant.name} className="w-full h-full object-cover" loading="lazy" />
                   </div>
 
                   {/* Main Details Section - Redesigned to be clean and minimal */}
@@ -413,6 +414,7 @@ const Restaurants = () => {
                               src={img} 
                               alt={`${selectedRestaurant.name} gallery ${idx + 1}`} 
                               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+                              loading="lazy"
                             />
                             <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-300"></div>
                           </div>

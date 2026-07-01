@@ -340,6 +340,7 @@ const ItineraryCard = ({
           src={image || 'https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&q=80&w=800'} 
           alt={cleanTitle} 
           className="w-full h-full object-cover"
+          loading="lazy"
           onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&q=80&w=800'; }}
         />
         {daysText && (

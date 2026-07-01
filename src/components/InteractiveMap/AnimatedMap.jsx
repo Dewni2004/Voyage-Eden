@@ -166,7 +166,6 @@ const AnimatedMap = ({ days, activeDay, setActiveDay, setIsModalOpen }) => {
               />
             );
           })()}
-
           {/* Blue dots for all waypoints */}
           {(() => {
             const allWaypoints = [];
@@ -213,7 +212,6 @@ const AnimatedMap = ({ days, activeDay, setActiveDay, setIsModalOpen }) => {
                />
              );
           })}
-
           {/* Colored Region for Yala (only if Yala is in itinerary) */}
           {pointsData.some(day => getMatchedCity(day) === 'yala') && (
             <g>

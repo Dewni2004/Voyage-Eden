@@ -73,7 +73,7 @@ const ReviewDetail = () => {
                 <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
                   {review.gallery.filter(img => img).map((img, i) => (
                     <div key={i} className={`rounded-3xl overflow-hidden shadow-lg h-48 md:h-64 ${i === 3 ? 'md:col-span-2' : ''}`}>
-                      <img src={img} alt="" className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" />
+                      <img src={img} alt="" className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" loading="lazy" />
                     </div>
                   ))}
                 </div>
@@ -124,7 +124,7 @@ const ReviewDetail = () => {
                 <h3 className="text-primary text-xl font-bold mb-6">{t('reviewDetail.featuredGuide')}</h3>
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-16 h-16 rounded-2xl overflow-hidden bg-white shadow-md">
-                    <img src={review.guide?.photo || 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200'} alt="" className="w-full h-full object-cover" />
+                    <img src={review.guide?.photo || 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200'} alt="" className="w-full h-full object-cover" loading="lazy" />
                   </div>
                   <div>
                     <h4 className="text-primary font-bold">{review.guide?.name || t('reviewDetail.defaultGuideName')}</h4>
@@ -160,7 +160,7 @@ const ReviewDetail = () => {
             {allReviews.filter(r => r.id.toString() !== review.id.toString()).slice(0, 3).map((other) => (
               <div key={other.id} className="bg-white p-8 rounded-[40px] shadow-lg flex flex-col hover:shadow-2xl transition-all group h-full">
                 <div className="w-full h-48 rounded-3xl overflow-hidden shadow-md mb-6">
-                  <img src={other.img} alt="" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                  <img src={other.img} alt="" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
                 </div>
                 <div className="flex flex-col flex-1">
                   <div className="flex text-yellow-400 text-xs mb-3">{'★'.repeat(other.rating || 5)}</div>
