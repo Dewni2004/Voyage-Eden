@@ -34,7 +34,7 @@ const ReviewDetail = () => {
     <div className="bg-[#f8fbff] min-h-screen">
       {/* Custom Hero */}
       <div className="relative h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
-        <img src={review.img} alt="" className="absolute inset-0 w-full h-full object-cover" />
+        <img src={review.img} alt="" className="absolute inset-0 w-full h-full object-cover" width="1600" height="1200" />
         <div className="absolute inset-0 bg-black/40"></div>
         <div className="relative z-10 text-center text-white px-6 mt-20">
           <span className="bg-primary text-white text-xs font-bold px-6 py-2 rounded-full uppercase tracking-widest mb-6 inline-block shadow-lg">{t('reviewDetail.travelerStory')}</span>
@@ -73,7 +73,7 @@ const ReviewDetail = () => {
                 <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
                   {review.gallery.filter(img => img).map((img, i) => (
                     <div key={i} className={`rounded-3xl overflow-hidden shadow-lg h-48 md:h-64 ${i === 3 ? 'md:col-span-2' : ''}`}>
-                      <img src={img} alt="" className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" loading="lazy" />
+                      <img src={img} alt="" className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" loading="lazy" width="800" height="600" />
                     </div>
                   ))}
                 </div>
@@ -124,7 +124,7 @@ const ReviewDetail = () => {
                 <h3 className="text-primary text-xl font-bold mb-6">{t('reviewDetail.featuredGuide')}</h3>
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-16 h-16 rounded-2xl overflow-hidden bg-white shadow-md">
-                    <img src={review.guide?.photo || 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200'} alt="" className="w-full h-full object-cover" loading="lazy" />
+                    <img src={review.guide?.photo || 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200'} alt="" className="w-full h-full object-cover" loading="lazy" width="400" height="400" />
                   </div>
                   <div>
                     <h4 className="text-primary font-bold">{review.guide?.name || t('reviewDetail.defaultGuideName')}</h4>
@@ -160,7 +160,7 @@ const ReviewDetail = () => {
             {allReviews.filter(r => r.id.toString() !== review.id.toString()).slice(0, 3).map((other) => (
               <div key={other.id} className="bg-white p-8 rounded-[40px] shadow-lg flex flex-col hover:shadow-2xl transition-all group h-full">
                 <div className="w-full h-48 rounded-3xl overflow-hidden shadow-md mb-6">
-                  <img src={other.img} alt="" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+                  <img src={other.img} alt="" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" width="800" height="600" />
                 </div>
                 <div className="flex flex-col flex-1">
                   <div className="flex text-yellow-400 text-xs mb-3">{'★'.repeat(other.rating || 5)}</div>

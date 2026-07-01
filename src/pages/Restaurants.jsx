@@ -68,7 +68,7 @@ const Restaurants = () => {
       
       {/* Hero Section */}
       <div className="relative h-[40vh] md:h-[50vh] w-full overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=2000" alt="Restaurants" className="absolute inset-0 w-full h-full object-cover object-center" />
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=2000" alt="Restaurants" className="absolute inset-0 w-full h-full object-cover object-center" width="2000" height="1333" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
         
         <div className="absolute inset-0 max-w-7xl mx-auto px-6 flex flex-col justify-end pb-12 pt-24">
@@ -172,6 +172,8 @@ const Restaurants = () => {
                         alt={restaurant.name} 
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                         loading="lazy"
+                        width="800"
+                        height="600"
                       />
                     </div>
 
@@ -295,7 +297,7 @@ const Restaurants = () => {
 
                   {/* Hero Image */}
                   <div className="w-full h-[40vh] md:h-[50vh] rounded-[2rem] overflow-hidden mb-8 shadow-sm">
-                    <img src={selectedRestaurant.image} alt={selectedRestaurant.name} className="w-full h-full object-cover" loading="lazy" />
+                    <img src={selectedRestaurant.image} alt={selectedRestaurant.name} className="w-full h-full object-cover" loading="lazy" width="800" height="600" />
                   </div>
 
                   {/* Main Details Section - Redesigned to be clean and minimal */}
@@ -415,6 +417,8 @@ const Restaurants = () => {
                               alt={`${selectedRestaurant.name} gallery ${idx + 1}`} 
                               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
                               loading="lazy"
+                              width="800"
+                              height="600"
                             />
                             <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-300"></div>
                           </div>

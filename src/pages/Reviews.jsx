@@ -150,7 +150,7 @@ const Reviews = () => {
   return (
     <div className="bg-[#f8fbff] min-h-screen">
       <div className="relative h-[60vh] flex items-center justify-center overflow-hidden">
-        <img src={reviewsBanner} alt="" className="absolute inset-0 w-full h-full object-cover object-center" />
+        <img src={reviewsBanner} alt="" className="absolute inset-0 w-full h-full object-cover object-center" width="1920" height="1080" />
         <div className="absolute inset-0 bg-black/60"></div>
         <div className="relative z-10 text-center text-white px-6 mt-16">
           <div className="flex justify-center text-yellow-400 gap-1 mb-6">
@@ -440,7 +440,7 @@ const Reviews = () => {
                 className="min-w-[280px] w-[85vw] sm:w-auto shrink-0 snap-center bg-white rounded-[32px] overflow-hidden shadow-xl group cursor-pointer border border-gray-100"
               >
                 <div className="relative h-64">
-                  <img src={video.thumbnail} alt="" className="w-full h-full object-cover" loading="lazy" />
+                  <img src={video.thumbnail} alt="" className="w-full h-full object-cover" loading="lazy" width="640" height="360" />
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors flex items-center justify-center">
                     <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center shadow-2xl">
                       <svg className="w-6 h-6 text-primary ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
@@ -492,7 +492,7 @@ const Reviews = () => {
                   className="w-full relative h-[280px] xs:h-[350px] sm:h-[500px] rounded-[24px] sm:rounded-[40px] overflow-hidden group shadow-xl hover:-translate-y-2 transition-all duration-500 cursor-pointer"
                 >
                   {/* Background Image */}
-                  <img src={review.img} alt="" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+                  <img src={review.img} alt="" className="absolute inset-0 w-full h-full object-cover" loading="lazy" width="800" height="1200" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20"></div>
                   
                   {/* Content Overlay */}
@@ -585,6 +585,8 @@ const Reviews = () => {
               alt="Travel Background" 
               className="w-full h-full object-cover"
               loading="lazy"
+              width="2000"
+              height="1333"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/90 to-primary/60"></div>
           </div>
@@ -675,6 +677,8 @@ const Reviews = () => {
                 alt={selectedReview.name} 
                 className="w-full h-full object-cover"
                 loading="lazy"
+                width="800"
+                height="1200"
               />
             </div>
             
