@@ -1,7 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import heroImage from '../../assets/hero-image.webp';
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -12,7 +11,7 @@ const Hero = () => {
       <div
         className="absolute inset-0 z-0 bg-[#0a192f]"
         style={{
-          backgroundImage: `url("${heroImage}")`,
+          backgroundImage: `url("/hero-image.webp")`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
