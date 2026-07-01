@@ -8,7 +8,7 @@ import ScrollToTop from './components/ScrollToTop';
 import LoadingSpinner from './components/UI/LoadingSpinner';
 
 // Lazy loading components
-const Home = React.lazy(() => import('./pages/Home'));
+import Home from './pages/Home';
 const Itineraires = React.lazy(() => import('./pages/Itineraires'));
 const AboutUs = React.lazy(() => import('./pages/AboutUs'));
 const TravelGuide = React.lazy(() => import('./pages/TravelGuide'));
