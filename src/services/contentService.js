@@ -204,6 +204,8 @@ export const getTags = async (lang = 'fr') => {
 // --- CATEGORIES ---
 
 export const getCategories = async (lang = 'fr') => {
+  return []; // Temporarily disabled to prevent 404 errors in console
+  /*
   try {
     const { data, error } = await supabase
       .from('categories')
@@ -224,6 +226,7 @@ export const getCategories = async (lang = 'fr') => {
     console.error(`Error fetching categories for ${lang}:`, error.message);
     return [];
   }
+  */
 };
 
 export const addCategory = async (categoryData, lang = 'fr') => {

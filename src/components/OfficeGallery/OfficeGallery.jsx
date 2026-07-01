@@ -50,7 +50,7 @@ const OfficeGallery = () => {
           <div className="w-full aspect-video rounded-[1.5rem] md:rounded-[2rem] overflow-hidden shadow-2xl bg-gray-100">
             <iframe 
               className="w-full h-full object-cover"
-              src="https://www.youtube.com/embed/xWWDVeWWAdA?rel=0" 
+              src="https://www.youtube-nocookie.com/embed/xWWDVeWWAdA?rel=0" 
               title="YouTube video player" 
               frameBorder="0" 
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 

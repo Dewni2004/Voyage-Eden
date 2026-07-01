@@ -644,7 +644,7 @@ const Reviews = () => {
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
             <iframe
-              src={`https://www.youtube.com/embed/${selectedVideo.id}?autoplay=1`}
+              src={`https://www.youtube-nocookie.com/embed/${selectedVideo.id}?autoplay=1`}
               title={selectedVideo.name}
               className="w-full h-full border-0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
