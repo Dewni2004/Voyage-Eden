@@ -343,7 +343,7 @@ const ItineraryCard = ({
           loading="lazy"
           width="800"
           height="600"
-          onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&q=80&w=800'; }}
+          onError={(e) => { e.target.onerror = null; e.target.src = 'https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&q=80&w=800'; }}
         />
         {daysText && (
           <div className="absolute top-4 left-4 z-10 bg-white/95 backdrop-blur-md text-gray-800 text-[11px] font-bold px-3 py-1.5 rounded-full shadow-md border border-white/20 flex items-center gap-1.5">

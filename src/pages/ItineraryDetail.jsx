@@ -140,7 +140,7 @@ const ItineraryDetail = () => {
             className="w-full h-full object-cover"
             width="1200"
             height="800"
-            onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&q=80&w=1200'; }}
+            onError={(e) => { e.target.onerror = null; e.target.src = 'https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&q=80&w=1200'; }}
           />
           <div className="absolute inset-0 bg-black/40"></div>
         </div>
