@@ -4,10 +4,10 @@ import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { supabase } from '../supabase';
 
-import standardImg from '../assets/standard.png';
-import superiorImg from '../assets/superior.jpg';
+import standardImg from '../assets/standard.webp';
+import superiorImg from '../assets/superior.webp';
 import luxuryImg from '../assets/luxury.webp';
-import superLuxuryImg from '../assets/super luxury.jfif';
+import superLuxuryImg from '../assets/super luxury.webp';
 import eastCoastImg from '../assets/east coast.webp';
 
 const getCategoriesInfo = (t) => [

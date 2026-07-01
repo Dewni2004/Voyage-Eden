@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import bannerImage from '../../assets/design your itinerary.jpeg';
+import bannerImage from '../../assets/design your itinerary.webp';
 
 const CustomTripBanner = () => {
   const { t, i18n } = useTranslation();

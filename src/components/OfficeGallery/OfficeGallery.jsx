@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import img1 from '../../assets/Office - staff 2.jpg';
-import img2 from '../../assets/Office Image 2.jpg';
-import img3 from '../../assets/Office Image 3.jpg';
-import img4 from '../../assets/Office Image 4.jpg';
-import img5 from '../../assets/Office Image 5.jpg';
-import img6 from '../../assets/Office Image 6.jpg';
-import img7 from '../../assets/Office Image 7.jpg';
-import img8 from '../../assets/Office Image 8.jpg';
-import img9 from '../../assets/Office Image 9.jpg';
-import img10 from '../../assets/Office- staff.jpg';
-import img11 from '../../assets/Guides.jpg';
+import img1 from '../../assets/Office - staff 2.webp';
+import img2 from '../../assets/Office Image 2.webp';
+import img3 from '../../assets/Office Image 3.webp';
+import img4 from '../../assets/Office Image 4.webp';
+import img5 from '../../assets/Office Image 5.webp';
+import img6 from '../../assets/Office Image 6.webp';
+import img7 from '../../assets/Office Image 7.webp';
+import img8 from '../../assets/Office Image 8.webp';
+import img9 from '../../assets/Office Image 9.webp';
+import img10 from '../../assets/Office- staff.webp';
+import img11 from '../../assets/Guides.webp';
 
 const items = [
   { type: 'image', src: img1 },

@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { getArticles } from '../../services/contentService';
 import { Link } from 'react-router-dom';
-import sigiriya from '../../assets/Sigiriya.jpg';
-import ella from '../../assets/Ella.jfif';
-import kandy from '../../assets/Kandy.jpg';
+import sigiriya from '../../assets/Sigiriya.webp';
+import ella from '../../assets/Ella.webp';
+import kandy from '../../assets/Kandy.webp';
 import mirissa from '../../assets/Mirissa.webp';
-import taprobane from '../../assets/itinerary-hero.png';
-import diyaluma from '../../assets/blog-safari.png';
+import taprobane from '../../assets/itinerary-hero.webp';
+import diyaluma from '../../assets/blog-safari.webp';
 
 const Destinations = () => {
   const { t, i18n } = useTranslation();

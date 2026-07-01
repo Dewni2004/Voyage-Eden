@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import heroImage from '../../assets/hero-image.jpg';
+import heroImage from '../../assets/hero-image.webp';
 
 const Hero = () => {
   const navigate = useNavigate();

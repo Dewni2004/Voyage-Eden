@@ -1,10 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import fitur1 from '../../assets/Fitur image 1.jpg';
-import fitur2 from '../../assets/Fitur image 2.jpg';
-import fitur3 from '../../assets/Fitur image 3.jpg';
-import fitur4 from '../../assets/Fitur image 4.jpg';
-import fitur5 from '../../assets/Fitur image 5.png';
+import fitur1 from '../../assets/Fitur image 1.webp';
+import fitur2 from '../../assets/Fitur image 2.webp';
+import fitur3 from '../../assets/Fitur image 3.webp';
+import fitur4 from '../../assets/Fitur image 4.webp';
+import fitur5 from '../../assets/Fitur image 5.webp';
 
 const Salons = () => {
   const { t } = useTranslation();

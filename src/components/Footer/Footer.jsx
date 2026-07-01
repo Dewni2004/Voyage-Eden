@@ -1,11 +1,11 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import logoColorFR from '../../assets/French-t.png';
-import logoColorEN from '../../assets/English-Logo-scaled.png';
-import logoColorES from '../../assets/Spanish-Logo-scaled.png';
-import logoColorIT from '../../assets/Italy-Logo-scaled.png';
-import logoColorDE from '../../assets/Geman logo.png';
+import logoColorFR from '../../assets/French-t.webp';
+import logoColorEN from '../../assets/English-Logo-scaled.webp';
+import logoColorES from '../../assets/Spanish-Logo-scaled.webp';
+import logoColorIT from '../../assets/Italy-Logo-scaled.webp';
+import logoColorDE from '../../assets/Geman logo.webp';
 
 const Footer = () => {
   const { t, i18n } = useTranslation();

@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { getReviews } from '../services/contentService';
 
 import PageHero from '../components/UI/PageHero';
-import reviewsBanner from '../assets/Review page Banner.jpeg';
+import reviewsBanner from '../assets/Review page Banner.webp';
 
 const getVideoReviews = (lang) => {
   const l = lang ? lang.split('-')[0] : 'es';

@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import emailjs from '@emailjs/browser';
 import PageHero from '../components/UI/PageHero';
-import officeStaff2 from '../assets/Office - staff 2.jpg';
+import officeStaff2 from '../assets/Office - staff 2.webp';
 import nethmiImg from '../assets/Nethmi.webp';
 import marcoImg from '../assets/Marco.webp';
 import anaImg from '../assets/Ana.webp';

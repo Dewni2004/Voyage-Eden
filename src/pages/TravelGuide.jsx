@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { getArticles } from '../services/contentService';
 import PageHero from '../components/UI/PageHero';
-import guideBanner from '../assets/itinerary-hero.png';
+import guideBanner from '../assets/itinerary-hero.webp';
 
 const TravelGuide = () => {
   const { t, i18n } = useTranslation();

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import bgImage from '../../assets/custom-trip-bg.jpg';
+import bgImage from '../../assets/custom-trip-bg.webp';
 
 const CustomTripCTA = ({ 
   title = "CONCEVEZ VOTRE ITINÉRAIRE DE RÊVE AVEC NOUS", 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getGPSForDay, convertGPSToPercentage, getMatchedCity, getRouteWaypoints } from '../../utils/mapUtils';
-import newMapImg from '../../assets/New_Map.png';
+import newMapImg from '../../assets/New_Map.webp';
 const CUSTOM_CITY_OFFSETS = {
   'negombo': { x: -8, y: -4 },
   'aéroport': { x: -8, y: -4 },

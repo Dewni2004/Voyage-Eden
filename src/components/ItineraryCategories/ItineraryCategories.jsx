@@ -7,8 +7,8 @@ import familyImg from '../../assets/Family - Trip Card.webp';
 import luxuryImg from '../../assets/Luxury - Trip Card.webp';
 import esalaImg from '../../assets/Perhera - Trip Card.webp';
 import eightDaysImg from '../../assets/8Days - Trip Card.webp';
-import popularImg from '../../assets/Popularies.jpg';
-import interestsImg from '../../assets/Intrests.jpg';
+import popularImg from '../../assets/Popularies.webp';
+import interestsImg from '../../assets/Intrests.webp';
 
 const ItineraryCategories = ({ showTitle = false, itineraries = [] }) => {
   const { t, i18n } = useTranslation();
