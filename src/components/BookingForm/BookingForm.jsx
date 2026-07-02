@@ -1,7 +1,8 @@
 import React, { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 // { useRef, useState } from 'react';
-import emailjs from '@emailjs/browser';
+import { supabase } from '../../supabase';
+import { generateEmailTemplate } from '../../utils/emailTemplate';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -121,7 +122,7 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
 
   const numDays = durationDays || '';
 
-  const sendEmail = (e) => {
+  const sendEmail = async (e) => {
     e.preventDefault();
     setIsSending(true);
     setMessageStatus({ type: '', text: '' });
@@ -136,30 +137,49 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
       return;
     }
 
-    // Proceed with EmailJS for all languages
+    try {
+      const formData = new FormData(form.current);
+      const htmlContent = generateEmailTemplate('New Booking Request', formData, i18n.language);
 
-    const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || "service_t8ls4md"; 
-    const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "template_1w4ymtk";
-    const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "NgNgKSh6lkDB3OdZH";
+      const { data, error } = await supabase.functions.invoke('send-email', {
+        body: {
+          to: ['info@voyageeden.com'], 
+          reply_to: formData.get('user_email'),
+          subject: `[${i18n.language.toUpperCase()}] New Booking Request`,
+          html: htmlContent
+        }
+      });
 
-    console.log("EmailJS Params being sent:", { SERVICE_ID, TEMPLATE_ID, PUBLIC_KEY });
+      if (error) throw error;
 
-    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY)
-      .then((result) => {
-          setMessageStatus({ 
-            type: 'success', 
-            text: t("bookingForm.successMsg") 
-          });
-          form.current.reset();
-          setStartDate(null);
-      }, (error) => {
-          setMessageStatus({ 
-            type: 'error', 
-            text: t("bookingForm.errorMsg") || "Sorry, an error occurred. Please try again or contact us directly." 
-          });
-          console.error('EmailJS Error Details:', { status: error.status, text: error.text });
-      })
-      .finally(() => setIsSending(false));
+      setMessageStatus({
+        type: 'success',
+        text: t("bookingForm.successMsg")
+      });
+      form.current.reset();
+      
+      setSelectedHotelOptions({
+        '4-5-star': false,
+        '3-4-star': false,
+        'standard': false,
+      });
+      setSelectedBoardOptions({
+        'half-board': false,
+        'full-board': false,
+        'all-inclusive': false,
+      });
+      setCounts({ adults_count: 0, teens_count: 0, children_count: 0, infants_count: 0 });
+      setStartDate(null);
+      setEndDate(null);
+    } catch (error) {
+      console.error('Edge Function Error:', error);
+      setMessageStatus({
+        type: 'error',
+        text: t("bookingForm.errorMsg") || "Sorry, an error occurred."
+      });
+    } finally {
+      setIsSending(false);
+    }
   };
 
   const inputClass = "w-full bg-white border border-gray-200 rounded-xl py-3.5 px-4 text-[15px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 placeholder-gray-400 transition-all shadow-sm";

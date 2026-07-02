@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import emailjs from '@emailjs/browser';
+import { supabase } from '../supabase';
+import { generateEmailTemplate } from '../utils/emailTemplate';
 import PageHero from '../components/UI/PageHero';
 import officeStaff2 from '../assets/Office - staff 2.webp';
 
@@ -239,36 +240,46 @@ const B2BPartner = () => {
   const lang = ['fr', 'en', 'de', 'es', 'it'].includes(i18n.language) ? i18n.language : 'es';
   const text = localTranslations[lang] || localTranslations.es;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSending(true);
     setMessageStatus({ type: '', text: '' });
 
-    const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || "service_t8ls4md"; 
-    const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "template_1w4ymtk";
-    const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "NgNgKSh6lkDB3OdZH";
+    try {
+      const formData = new FormData(formRef.current);
+      const htmlContent = generateEmailTemplate('New B2B Partner Request', formData, i18n.language);
 
-    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current, PUBLIC_KEY)
-      .then(() => {
-        setMessageStatus({
-          type: 'success',
-          text: text.success
-        });
-        formRef.current.reset();
-        setCounts({
-          adults_count: 0,
-          teens_count: 0,
-          children_count: 0,
-          infants_count: 0
-        });
-      }, (error) => {
-        setMessageStatus({
-          type: 'error',
-          text: text.error
-        });
-        console.error('EmailJS Error:', error);
-      })
-      .finally(() => setIsSending(false));
+      const { data, error } = await supabase.functions.invoke('send-email', {
+        body: {
+          to: ['info@voyageeden.com'], 
+          reply_to: formData.get('email'),
+          subject: `[${i18n.language.toUpperCase()}] New B2B Partner Request`,
+          html: htmlContent
+        }
+      });
+
+      if (error) throw error;
+
+      setMessageStatus({
+        type: 'success',
+        text: text.success
+      });
+      formRef.current.reset();
+      setCounts({
+        adults_count: 0,
+        teens_count: 0,
+        children_count: 0,
+        infants_count: 0
+      });
+    } catch (error) {
+      console.error('Edge Function Error:', error);
+      setMessageStatus({
+        type: 'error',
+        text: text.error
+      });
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (

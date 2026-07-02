@@ -1,6 +1,8 @@
 import React, { useRef, useState } from 'react';
+import { supabase } from '../supabase';
+import { generateEmailTemplate } from '../utils/emailTemplate';
 import { useTranslation } from 'react-i18next';
-import emailjs from '@emailjs/browser';
+import { useTranslation } from 'react-i18next';
 import PageHero from '../components/UI/PageHero';
 import officeStaff2 from '../assets/Office - staff 2.webp';
 import nethmiImg from '../assets/Nethmi.webp';
@@ -9,7 +11,7 @@ import anaImg from '../assets/Ana.webp';
 
 const ContactUs = () => {
   const form = useRef();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [isSending, setIsSending] = useState(false);
   const [messageStatus, setMessageStatus] = useState({ type: '', text: '' });
 
@@ -29,31 +31,43 @@ const ContactUs = () => {
     consultantImg = anaImg;
   }
 
-  const sendEmail = (e) => {
+  const sendEmail = async (e) => {
     e.preventDefault();
     setIsSending(true);
     setMessageStatus({ type: '', text: '' });
 
-    // IMPORTANT: replace these with your actual IDs from emailjs.com
-    const SERVICE_ID = "service_xxxxxx"; 
-    const TEMPLATE_ID = "template_xxxxxx";
-    const PUBLIC_KEY = "xxxxxxxxxxxx";
+    try {
+      const formDataObj = new FormData(form.current);
+      const name = formDataObj.get('user_name');
+      const email = formDataObj.get('user_email');
+      
+      const htmlContent = generateEmailTemplate('New Contact Message', formDataObj, i18n.language);
 
-    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY)
-      .then((result) => {
-          setMessageStatus({ 
-            type: 'success', 
-            text: 'Merci ! Votre message a été envoyé avec succès. Nous vous répondrons bientôt.' 
-          });
-          form.current.reset();
-      }, (error) => {
-          setMessageStatus({ 
-            type: 'error', 
-            text: "Désolé, une erreur s'est produite. Veuillez réessayer ou nous contacter via WhatsApp." 
-          });
-          console.error('EmailJS Error:', error);
-      })
-      .finally(() => setIsSending(false));
+      const { data, error } = await supabase.functions.invoke('send-email', {
+        body: {
+          to: ['info@voyageeden.com'], 
+          reply_to: email,
+          subject: `[${i18n.language.toUpperCase()}] New message from ${name}`,
+          html: htmlContent
+        }
+      });
+
+      if (error) throw error;
+
+      setMessageStatus({ 
+        type: 'success', 
+        text: 'Merci ! Votre message a été envoyé avec succès. Nous vous répondrons bientôt.' 
+      });
+      form.current.reset();
+    } catch (error) {
+      console.error('Edge Function Error:', error);
+      setMessageStatus({ 
+        type: 'error', 
+        text: "Désolé, une erreur s'est produite. Veuillez réessayer ou nous contacter via WhatsApp." 
+      });
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
