@@ -90,7 +90,9 @@
     },
     "destinations": {
       "title": "Il Giornale di Eden",
-      "subtitle": "Ispirazione e scoperte dal mondo."
+      "subtitle": "Ispirazione e scoperte dal mondo.",
+      "articlePublishedSingle": "articolo pubblicato",
+      "articlePublishedPlural": "articoli pubblicati"
     },
     "reviews": {
       "title": "Cosa dicono i nostri clienti",

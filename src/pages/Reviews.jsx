@@ -18,8 +18,8 @@ const getVideoReviews = (lang) => {
     },
     { 
       id: "T5pHb4KrFJg", 
-      name: l === 'es' ? "Familia Wilson" : l === 'fr' ? "Famille Wilson" : l === 'it' ? "Famiglia Wilson" : l === 'de' ? "Familie Wilson" : "The Wilson Family", 
-      date: l === 'es' ? "Dic 2023" : l === 'fr' ? "Déc 2023" : l === 'de' ? "Dez 2023" : "Dec 2023", 
+      name: "Antonio Planells", 
+      date: l === 'es' ? "Noviembre 2025" : l === 'fr' ? "Novembre 2025" : l === 'it' ? "Novembre 2025" : l === 'de' ? "November 2025" : "November 2025", 
       thumbnail: "https://img.youtube.com/vi/T5pHb4KrFJg/hqdefault.jpg" 
     },
     { 

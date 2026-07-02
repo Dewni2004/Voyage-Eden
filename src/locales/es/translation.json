@@ -5,7 +5,7 @@
       "itineraries": "Itinerarios",
       "about": "Quienes Somos",
       "guide": "Guía Práctica",
-      "reviews": "Opinión de los viajeros",
+      "reviews": "Opiniones publicadas",
       "contact": "Contacto",
       "quote": "Presupuesto a Medida",
       "changeLanguage": "Cambiar idioma"
@@ -21,7 +21,7 @@
       "subtitle": "Descubre Sri Lanka a tu medida: Viajes privados, personalizados y con guías en español. Incluye entradas a monumentos, safaris, hoteles con encanto y un coche con chofer privado exclusivo para ti.",
       "explore": "Explorar Paquetes",
       "contact": "Contáctenos",
-      "brandName": "Sri Lanka Viyajes Eden"
+      "brandName": "Sri Lanka Viajes Edén"
     },
     "footer": {
       "description": "Sri Lanka Eden Travels forma parte de un grupo de empresas bien establecido que opera en el sector del turismo receptivo en Sri Lanka. Con más de 13 años de experiencia en la industria, nos especializamos en ofrecer experiencias de viaje auténticas y personalizadas que muestran la verdadera belleza y cultura de Sri Lanka, manteniendo prácticas éticas y promoviendo el turismo responsable.",
@@ -63,36 +63,38 @@
     "tours": {
       "title": "Nuestros tours personalizables recomendados",
       "subtitle": "Desde montañas brumosas hasta playas doradas, descubra una isla de infinitas maravillas con los mayores expertos en viajes de Sri Lanka.",
-      "more": "Descubra nuestros otros itinerarios",
-      "mostSold": "Tours Más Vendidos",
-      "mostSoldSubtitle": "Descubra nuestros itinerarios más populares adorados por los viajeros.",
+      "more": "Descubra todos nuestros itinearios",
+      "mostSold": "Los Itinerarios Favoritos de Nuestros Viajeros",
+      "mostSoldSubtitle": " Explora las rutas que han enamorado a miles de viajeros",
       "familyTours": "Tours En familia",
-      "familyToursSubtitle": "Aprovecha nuestras ofertas en hoteles Superior 4/5* y hoteles 3/4* para viajar en familia o con tus hijos",
+      "familyToursSubtitle": "Descubre nuestras mejores ofertas en hoteles Superior 4/5★ y 3/4★, ideales para disfrutar de unas vacaciones inolvidables en familia o con niños.",
       "familyStandardHotels": "Rutas en Hoteles 3/4*",
       "familyPremiumHotels": "Rutas en Hoteles Superior 4/5*",
       "honeymoonTours": "Viajes de luna de Miel",
       "honeymoonToursSubtitle": "Escapadas románticas diseñadas para momentos perfectos juntos.",
       "luxuryTours": "Tours de lujo",
-      "luxuryToursSubtitle": "Experimente Sri Lanka con el máximo confort y elegancia."
+      "luxuryToursSubtitle": "Experimiente Sri Lanka con el máximo confort, elegancia y experiencias cuidadosamente diseñadas."
     },
     "why": {
-      "title": "Razones para elegir viajar con Sri Lanka Viajes Eden",
-      "subtitle": "Nos enorgullece ofrecer experiencias de viaje auténticas y personalizadas.",
+      "title": "Razones para elegir Sri Lanka Viajes Edén",
+      "subtitle": "Nos enorgullece ofrecer experiencias de viaje auténticas, personalizadas y cuidadosamente diseñadas.",
       "t1": "Precios sin intermediarios",
-      "d1": "Tarifas directas de proveedores locales, garantizando el mejor precio para tu viaje sin comisiones ocultas.",
+      "d1": "Tarifas directas de proveedores locales, sin comisiones ocultas, garantizando el mejor precio para tu viaje.",
       "t2": "Estamos en Sri Lanka",
-      "d2": "Nuestro equipo y guías locales están sobre el terreno para mostrarte los secretos y tesoros ocultos del país.",
+      "d2": "Contamos con un equipo local de expertos y guías en destino que te descubrirán los rincones más auténticos del país.",
       "t3": "Viaje personalizado",
-      "d3": "Diseñamos un itinerario a tu medida. Cada viajero es único, por lo que adaptamos cada ruta a tus gustos y ritmo.",
+      "d3": "Diseñamos itinerarios a tu medida. Cada viajero es único, por eso adaptamos cada ruta a tus gustos, intereses y ritmo.",
       "t4": "Turismo responsable",
-      "d4": "Apoyamos a las comunidades locales y protegemos el medio ambiente para que tu impacto sea siempre positivo."
+      "d4": "Apoyamos a las comunidades locales y protegemos el medio ambiente para que tu viaje tenga siempre un impacto positivo."
     },
     "destinations": {
       "title": "Guía práctica de Sri Lanka",
-      "subtitle": "Información útil para tu viaje a Sri Lanka"
+      "subtitle": "Información útil para tu viaje a Sri Lanka",
+      "articlePublishedSingle": "artículo publicado",
+      "articlePublishedPlural": "artículos publicados"
     },
     "reviews": {
-      "title": "Opiniones de nuestros clientes mas recientes",
+      "title": "Lo que dicen nuestros clientes más recientes.",
       "subtitle": "Viajeros que han experimentado nuestros servicios",
       "heroTitle": "Que Opinon Los Clients De Sri Lanka Viyajes Eden",
       "heroSubtitle": "Viajes Inolvidables",
@@ -149,15 +151,15 @@
       "subtitle": "Descubra las ferias internacionales de turismo en las que tuvimos el honor de representar a nuestra organización."
     },
     "banner": {
-      "title": "Podemos personalizar todas las rutas, según tus gustos e intereses\nSIN COSTE ADICIONAL ALGUNO",
+      "title": "Podemos personalizar todas las rutas según tus gustos e intereses\nSin ningún coste adicional.",
       "subtitle": "",
       "button": "Diseña tu viaje personalizado",
       "steps": {
-        "step1": "Cuéntenos",
+        "step1": "Cuéntanos",
         "step2": "Diseñamos",
-        "step3": "Revise",
-        "step4": "Confirme",
-        "step5": "Viaje"
+        "step3": "Revisas",
+        "step4": "Confirmas",
+        "step5": "Viajas"
       }
     },
     "customTrip": {

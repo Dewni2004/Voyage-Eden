@@ -379,8 +379,10 @@ const TourCards = () => {
     fetchTours();
   }, [i18n.language, t]);
 
+  const l = i18n.language || 'fr';
+  const loadingToursText = l === 'es' ? "Cargando itinerarios..." : l === 'it' ? "Caricamento degli itinerari..." : l === 'de' ? "Reiserouten laden..." : l === 'en' ? "Loading itineraries..." : "Chargement des itinéraires...";
   if (loading) {
-    return <div className="py-16 text-center text-gray-500">Chargement des itinéraires...</div>;
+    return <div className="py-16 text-center text-gray-500">{loadingToursText}</div>;
   }
 
   // Filter tours by categories

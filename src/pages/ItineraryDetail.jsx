@@ -114,8 +114,12 @@ const ItineraryDetail = () => {
     // No longer lock body scroll since the card floats over the map
   }, [isModalOpen]);
 
-  if (loading) return <div className="min-h-screen flex items-center justify-center text-primary font-bold">Chargement des détails du voyage...</div>;
-  if (!itinerary) return <div className="min-h-screen flex items-center justify-center text-primary font-bold">Voyage non trouvé</div>;
+  const l = i18n.language || 'fr';
+  const loadingText = l === 'es' ? "Cargando detalles del viaje..." : l === 'it' ? "Caricamento dei dettagli del viaggio..." : l === 'de' ? "Lade Reisedetails..." : l === 'en' ? "Loading trip details..." : "Chargement des détails du voyage...";
+  const notFoundText = l === 'es' ? "Viaje no encontrado" : l === 'it' ? "Viaggio non trovato" : l === 'de' ? "Reise nicht gefunden" : l === 'en' ? "Trip not found" : "Voyage non trouvé";
+
+  if (loading) return <div className="min-h-screen flex items-center justify-center text-primary font-bold">{loadingText}</div>;
+  if (!itinerary) return <div className="min-h-screen flex items-center justify-center text-primary font-bold">{notFoundText}</div>;
 
   const days = itinerary.days || [];
 

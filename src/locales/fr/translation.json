@@ -90,7 +90,9 @@
     },
     "destinations": {
       "title": "Le Journal d’Eden",
-      "subtitle": "Inspiration et découvertes du monde."
+      "subtitle": "Inspiration et découvertes du monde.",
+      "articlePublishedSingle": "article publié",
+      "articlePublishedPlural": "articles publiés"
     },
     "reviews": {
       "title": "Ce que disent nos clients",

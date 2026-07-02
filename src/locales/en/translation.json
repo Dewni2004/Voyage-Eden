@@ -89,7 +89,9 @@
     },
     "destinations": {
       "title": "The Eden Journal",
-      "subtitle": "Inspiration and discoveries from around the world."
+      "subtitle": "Inspiration and discoveries from around the world.",
+      "articlePublishedSingle": "published article",
+      "articlePublishedPlural": "published articles"
     },
     "reviews": {
       "title": "What our clients say",

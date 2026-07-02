@@ -64,7 +64,7 @@ const Destinations = () => {
             {t('destinations.subtitle')}
           </p>
           <span className="inline-block bg-primary/5 text-primary text-[11px] px-3.5 py-1 rounded-full font-bold uppercase tracking-wider">
-            {totalCount} {totalCount <= 1 ? 'article publié' : 'articles publiés'}
+            {totalCount} {totalCount <= 1 ? t('destinations.articlePublishedSingle') : t('destinations.articlePublishedPlural')}
           </span>
         </div>
 
