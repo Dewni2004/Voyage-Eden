@@ -443,7 +443,9 @@
         "email": "E-mail*",
         "messageLabel": "Écrivez votre message*",
         "submitBtn": "Envoyez votre message",
-        "sending": "Envoi en cours..."
+        "sending": "Envoi...",
+        "success": "Merci ! Votre message a été envoyé avec succès. Nous vous répondrons bientôt.",
+        "error": "Désolé, une erreur s'est produite. Veuillez réessayer ou nous contacter via WhatsApp."
       },
       "consultants": {
         "title": "Rencontrez vos conseillers",

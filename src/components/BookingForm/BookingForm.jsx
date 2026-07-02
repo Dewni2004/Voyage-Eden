@@ -158,17 +158,6 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
       });
       form.current.reset();
       
-      setSelectedHotelOptions({
-        '4-5-star': false,
-        '3-4-star': false,
-        'standard': false,
-      });
-      setSelectedBoardOptions({
-        'half-board': false,
-        'full-board': false,
-        'all-inclusive': false,
-      });
-      setCounts({ adults_count: 0, teens_count: 0, children_count: 0, infants_count: 0 });
       setStartDate(null);
       setEndDate(null);
     } catch (error) {

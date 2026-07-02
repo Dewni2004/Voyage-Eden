@@ -436,7 +436,9 @@
         "email": "E-Mail*",
         "messageLabel": "Schreiben Sie Ihre Nachricht*",
         "submitBtn": "Nachricht senden",
-        "sending": "Senden..."
+        "sending": "Senden...",
+        "success": "Danke! Ihre Nachricht wurde erfolgreich gesendet. Wir werden uns in Kürze bei Ihnen melden.",
+        "error": "Entschuldigung, ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut oder kontaktieren Sie uns über WhatsApp."
       },
       "consultants": {
         "title": "Lernen Sie Ihre Berater kennen",

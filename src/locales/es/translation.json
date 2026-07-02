@@ -453,8 +453,10 @@
         "whatsappContact": "Autorizo el contacto a través de WhatsApp",
         "email": "E mail",
         "messageLabel": "Escribe tu mensaje*",
-        "submitBtn": "Enviar",
-        "sending": "Enviando..."
+        "submitBtn": "Enviar tu mensaje",
+        "sending": "Enviando...",
+        "success": "¡Gracias! Su mensaje ha sido enviado con éxito. Nos pondremos en contacto con usted en breve.",
+        "error": "Lo sentimos, ocurrió un error. Por favor, inténtelo de nuevo o contáctenos vía WhatsApp."
       },
       "consultants": {
         "title": "Conozca a sus asesores",

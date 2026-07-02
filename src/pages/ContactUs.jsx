@@ -55,14 +55,14 @@ const ContactUs = () => {
 
       setMessageStatus({ 
         type: 'success', 
-        text: 'Merci ! Votre message a été envoyé avec succès. Nous vous répondrons bientôt.' 
+        text: t("contactUs.form.success", "Thank you! Your message has been successfully sent. We will get back to you shortly.") 
       });
       form.current.reset();
     } catch (error) {
       console.error('Edge Function Error:', error);
       setMessageStatus({ 
         type: 'error', 
-        text: "Désolé, une erreur s'est produite. Veuillez réessayer ou nous contacter via WhatsApp." 
+        text: t("contactUs.form.error", "Sorry, an error occurred. Please try again or contact us via WhatsApp.") 
       });
     } finally {
       setIsSending(false);

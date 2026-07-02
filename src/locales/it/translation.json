@@ -467,7 +467,9 @@
         "email": "Email*",
         "messageLabel": "Scrivi il tuo messaggio*",
         "submitBtn": "Invia il tuo messaggio",
-        "sending": "Invio in corso..."
+        "sending": "Invio in corso...",
+        "success": "Grazie! Il tuo messaggio è stato inviato con successo. Ti risponderemo a breve.",
+        "error": "Siamo spiacenti, si è verificato un errore. Riprova o contattaci tramite WhatsApp."
       },
       "consultants": {
         "title": "Incontra i tuoi consulenti",
