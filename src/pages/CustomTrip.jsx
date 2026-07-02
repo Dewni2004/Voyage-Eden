@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import WelcomeVideo from '../assets/Welcome.mov';
+import { supabase } from '../supabase';
+import { generateEmailTemplate } from '../utils/emailTemplate';
 
 const CustomTrip = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [currentSlide, setCurrentSlide] = useState(1);
   const [isSending, setIsSending] = useState(false);
   const [status, setStatus] = useState({ type: '', message: '' });
@@ -71,12 +73,25 @@ const CustomTrip = () => {
     if (currentSlide > 1) setCurrentSlide(prev => prev - 1);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSending(true);
     setSubmittedName(formData.fullName || '');
-    // Dummy submit for now until backend logic is decided
-    setTimeout(() => {
+    
+    try {
+      const htmlContent = generateEmailTemplate('Custom Trip Request', formData, i18n.language || 'en');
+      
+      const { data, error } = await supabase.functions.invoke('send-email', {
+        body: {
+          to: ['info@voyageeden.com'], 
+          reply_to: formData.email,
+          subject: `[${(i18n.language || 'en').toUpperCase()}] New Custom Trip Request`,
+          html: htmlContent
+        }
+      });
+
+      if (error) throw error;
+
       setIsSending(false);
       setStatus({ type: 'success', message: t('customTrip.success', 'Your request has been sent successfully!') });
       setCurrentSlide(6);
@@ -88,7 +103,11 @@ const CustomTrip = () => {
         singleRooms: '0', doubleRooms: '0', tripleRooms: '0', mealPlan: '',
         accompaniment: '', langPref: '', otherLanguage: '', comments: '',
       });
-    }, 1500);
+    } catch (error) {
+      console.error('Edge Function Error:', error);
+      setIsSending(false);
+      setStatus({ type: 'error', message: t('customTrip.error', 'Sorry, an error occurred while sending your request.') });
+    }
   };
 
   // Auto-next for slide 1

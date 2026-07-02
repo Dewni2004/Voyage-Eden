@@ -21,20 +21,26 @@ export default {
         throw new Error('RESEND_API_KEY is not set');
       }
 
+      const payload: any = {
+        from: 'Voyage Eden <onboarding@resend.dev>', 
+        // TEMPORARY FIX: Force the 'to' address to the verified email for testing.
+        // Once voyageeden.com is verified in Resend, change this back to: to: to || ['dewnipathirana1@gmail.com']
+        to: ['dewnipathirana1@gmail.com'], 
+        subject: subject || 'New Form Submission',
+        html: html || '<p>New submission from website</p>',
+      };
+
+      if (reply_to && typeof reply_to === 'string' && reply_to.trim() !== '') {
+        payload.reply_to = reply_to;
+      }
+
       const res = await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${RESEND_API_KEY}`,
         },
-        body: JSON.stringify({
-          from: 'Voyage Eden <onboarding@resend.dev>', 
-          // Resend requires sending ONLY to the registered email until a domain is verified
-          to: ['dewnipathirana1@gmail.com'], 
-          reply_to: reply_to,
-          subject: subject || 'New Form Submission',
-          html: html || '<p>New submission from website</p>',
-        }),
+        body: JSON.stringify(payload),
       });
 
       const data = await res.json();
