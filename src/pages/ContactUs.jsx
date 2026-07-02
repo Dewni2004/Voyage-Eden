@@ -2,7 +2,6 @@ import React, { useRef, useState } from 'react';
 import { supabase } from '../supabase';
 import { generateEmailTemplate } from '../utils/emailTemplate';
 import { useTranslation } from 'react-i18next';
-import { useTranslation } from 'react-i18next';
 import PageHero from '../components/UI/PageHero';
 import officeStaff2 from '../assets/Office - staff 2.webp';
 import nethmiImg from '../assets/Nethmi.webp';
