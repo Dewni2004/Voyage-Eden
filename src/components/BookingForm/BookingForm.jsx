@@ -237,7 +237,7 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
                 <p className="text-xs text-gray-500 mt-1 font-medium">{t("bookingForm.step1Desc")}</p>
               </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               <div>
                 <label className={labelClass}>{t("bookingForm.fullName")}</label>
                 <input type="text" name="full_name" required placeholder={t("bookingForm.fullNameHolder")} className={inputClass} onBlur={checkStep1Completion} />
@@ -290,14 +290,14 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
               </div>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-              <div className="md:col-span-2">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+              <div className="lg:col-span-2">
                 <label className={labelClass}>{t("bookingForm.tourName")}</label>
                 <input type="text" name="tour_name" defaultValue={itineraryTitle} readOnly className={`${inputClass} bg-gray-100 text-gray-500 font-medium cursor-not-allowed`} />
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               <div>
                 <label className={labelClass}>{t("bookingForm.dates")}</label>
                 <div className="relative">
@@ -357,7 +357,7 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
               <div>
                 <label className={labelClass}>{t("bookingForm.hotelCat")}</label>
                 <select name="hotel_category" required className={inputClass} defaultValue="">
@@ -383,7 +383,7 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div>
                 <label className={labelClass}>{t("bookingForm.driverLang")}</label>
                 <select name="chauffeur_language" required className={inputClass} defaultValue="">
@@ -392,7 +392,7 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
                   <option value="Anglophone">{t("bookingForm.english")}</option>
                 </select>
               </div>
-              <div className="md:col-span-2">
+              <div className="lg:col-span-2">
                 <label className={labelClass}>{t("bookingForm.specialReq")}</label>
                 <textarea 
                   name="special_requirements" 
