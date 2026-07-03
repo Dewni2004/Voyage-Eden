@@ -16,6 +16,18 @@ const resources = {
   it: { translation: translationIT.translation }
 };
 
+const getDomainLanguage = () => {
+  const hostname = window.location.hostname;
+  
+  if (hostname.includes('viajeseden.es')) return 'es';
+  if (hostname.includes('voyageeden.fr')) return 'fr';
+  if (hostname.includes('edenreisen')) return 'de';
+  if (hostname.includes('viaggieden.it')) return 'it';
+  if (hostname.includes('edentravels.com')) return 'en';
+  
+  return 'es'; // Default fallback (for localhost or render default domain)
+};
+
 i18n
   // Detects user language
   .use(LanguageDetector)
@@ -23,7 +35,8 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    fallbackLng: 'es', // Spanish is the default language
+    lng: localStorage.getItem('i18nextLng') || getDomainLanguage(),
+    fallbackLng: getDomainLanguage(),
     supportedLngs: ['fr', 'en', 'de', 'es', 'it'],
     interpolation: {
       escapeValue: false, // React already safe from xss
