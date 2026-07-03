@@ -189,3 +189,9 @@ export const getAgentEmail = (language) => {
   }
   return agentEmail.split(',').map(e => e.trim());
 };
+
+export const getBrandName = (language = 'en') => {
+  const langCode = language.toLowerCase().split('-')[0];
+  const t = translations[langCode] || translations['en'];
+  return t.brandName;
+};

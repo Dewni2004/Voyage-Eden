@@ -13,7 +13,7 @@ export default {
     }
 
     try {
-      const { to, subject, html, reply_to } = await req.json();
+      const { to, subject, html, reply_to, brand_name } = await req.json();
 
       const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY');
 
@@ -21,8 +21,10 @@ export default {
         throw new Error('RESEND_API_KEY is not set');
       }
 
+      const senderName = brand_name || 'Voyage Eden';
+      
       const payload: any = {
-        from: 'Voyage Eden <info@srilankaviajeseden.es>', 
+        from: `${senderName} <info@srilankaviajeseden.es>`, 
         // TEMPORARY FIX: Force the 'to' address to the verified email for testing.
         // Once voyageeden.com is verified in Resend, change this back to: to: to || ['dewnipathirana1@gmail.com']
         to: to || ['dewnipathirana1@gmail.com'], 

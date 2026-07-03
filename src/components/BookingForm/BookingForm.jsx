@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 // { useRef, useState } from 'react';
 import { supabase } from '../../supabase';
-import { generateEmailTemplate, getAgentEmail } from '../../utils/emailTemplate';
+import { generateEmailTemplate, getAgentEmail, getBrandName } from '../../utils/emailTemplate';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -147,7 +147,8 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
           to: emailTo, 
           reply_to: formData.get('user_email'),
           subject: `[${i18n.language.toUpperCase()}] New Booking Request`,
-          html: htmlContent
+          html: htmlContent,
+          brand_name: getBrandName(i18n.language)
         }
       });
 

@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import WelcomeVideo from '../assets/Welcome.mov';
 import { supabase } from '../supabase';
-import { generateEmailTemplate, getAgentEmail } from '../utils/emailTemplate';
+import { generateEmailTemplate, getAgentEmail, getBrandName } from '../utils/emailTemplate';
 
 const CustomTrip = () => {
   const { t, i18n } = useTranslation();
@@ -86,7 +86,8 @@ const CustomTrip = () => {
           to: getAgentEmail(i18n.language), 
           reply_to: formData.email,
           subject: `[${(i18n.language || 'en').toUpperCase()}] New Custom Trip Request`,
-          html: htmlContent
+          html: htmlContent,
+          brand_name: getBrandName(i18n.language)
         }
       });
 
