@@ -22,10 +22,10 @@ export default {
       }
 
       const payload: any = {
-        from: 'Voyage Eden <onboarding@resend.dev>', 
+        from: 'Voyage Eden <info@srilankaviajeseden.es>', 
         // TEMPORARY FIX: Force the 'to' address to the verified email for testing.
         // Once voyageeden.com is verified in Resend, change this back to: to: to || ['dewnipathirana1@gmail.com']
-        to: ['dewnipathirana1@gmail.com'], 
+        to: to || ['dewnipathirana1@gmail.com'], 
         subject: subject || 'New Form Submission',
         html: html || '<p>New submission from website</p>',
       };

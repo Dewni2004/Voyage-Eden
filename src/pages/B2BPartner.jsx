@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { supabase } from '../supabase';
-import { generateEmailTemplate } from '../utils/emailTemplate';
+import { generateEmailTemplate, getAgentEmail } from '../utils/emailTemplate';
 import PageHero from '../components/UI/PageHero';
 import officeStaff2 from '../assets/Office - staff 2.webp';
 
@@ -251,7 +251,7 @@ const B2BPartner = () => {
 
       const { data, error } = await supabase.functions.invoke('send-email', {
         body: {
-          to: ['info@voyageeden.com'], 
+          to: getAgentEmail(i18n.language), 
           reply_to: formData.get('email'),
           subject: `[${i18n.language.toUpperCase()}] New B2B Partner Request`,
           html: htmlContent

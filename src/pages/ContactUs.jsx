@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { supabase } from '../supabase';
-import { generateEmailTemplate } from '../utils/emailTemplate';
+import { generateEmailTemplate, getAgentEmail } from '../utils/emailTemplate';
 import { useTranslation } from 'react-i18next';
 import PageHero from '../components/UI/PageHero';
 import officeStaff2 from '../assets/Office - staff 2.webp';
@@ -44,7 +44,7 @@ const ContactUs = () => {
 
       const { data, error } = await supabase.functions.invoke('send-email', {
         body: {
-          to: ['info@voyageeden.com'], 
+          to: getAgentEmail(i18n.language), 
           reply_to: email,
           subject: `[${i18n.language.toUpperCase()}] New message from ${name}`,
           html: htmlContent

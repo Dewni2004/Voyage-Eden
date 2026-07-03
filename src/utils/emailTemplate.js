@@ -175,3 +175,17 @@ export const generateEmailTemplate = (title, formDataObj, language = 'en') => {
     </div>
   `;
 };
+
+export const getAgentEmail = (language) => {
+  const currentLang = language?.split('-')[0] || 'fr';
+  let agentEmail = import.meta.env.VITE_AGENT_EMAIL_FR;
+  if (currentLang === 'en') agentEmail = import.meta.env.VITE_AGENT_EMAIL_EN;
+  else if (currentLang === 'de') agentEmail = import.meta.env.VITE_AGENT_EMAIL_DE;
+  else if (currentLang === 'es') agentEmail = import.meta.env.VITE_AGENT_EMAIL_ES;
+  else if (currentLang === 'it') agentEmail = import.meta.env.VITE_AGENT_EMAIL_IT;
+  
+  if (!agentEmail) {
+    agentEmail = import.meta.env.VITE_AGENT_EMAIL || "info@voyageeden.com";
+  }
+  return agentEmail.split(',').map(e => e.trim());
+};

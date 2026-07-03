@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 // { useRef, useState } from 'react';
 import { supabase } from '../../supabase';
-import { generateEmailTemplate } from '../../utils/emailTemplate';
+import { generateEmailTemplate, getAgentEmail } from '../../utils/emailTemplate';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -141,9 +141,10 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
       const formData = new FormData(form.current);
       const htmlContent = generateEmailTemplate('New Booking Request', formData, i18n.language);
 
+      const emailTo = getAgentEmail(i18n.language);
       const { data, error } = await supabase.functions.invoke('send-email', {
         body: {
-          to: ['info@voyageeden.com'], 
+          to: emailTo, 
           reply_to: formData.get('user_email'),
           subject: `[${i18n.language.toUpperCase()}] New Booking Request`,
           html: htmlContent
@@ -174,17 +175,7 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
   const inputClass = "w-full bg-white border border-gray-200 rounded-xl py-3.5 px-4 text-[15px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 placeholder-gray-400 transition-all shadow-sm";
   const labelClass = "block text-xs font-bold text-gray-600 mb-2 uppercase tracking-wider";
 
-  // Determine agent email based on current language
-  const currentLang = i18n.language?.split('-')[0] || 'fr';
-  let agentEmail = import.meta.env.VITE_AGENT_EMAIL_FR;
-  if (currentLang === 'en') agentEmail = import.meta.env.VITE_AGENT_EMAIL_EN;
-  else if (currentLang === 'de') agentEmail = import.meta.env.VITE_AGENT_EMAIL_DE;
-  else if (currentLang === 'es') agentEmail = import.meta.env.VITE_AGENT_EMAIL_ES;
-  else if (currentLang === 'it') agentEmail = import.meta.env.VITE_AGENT_EMAIL_IT;
-  
-  if (!agentEmail) {
-    agentEmail = import.meta.env.VITE_AGENT_EMAIL || "info@voyage-eden.com";
-  }
+  const agentEmail = getAgentEmail(i18n.language);
 
   return (
     <section id="booking-form" className="max-w-7xl mx-auto px-6 py-8 md:py-16 pb-2 md:pb-16">

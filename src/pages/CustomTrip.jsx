@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import WelcomeVideo from '../assets/Welcome.mov';
 import { supabase } from '../supabase';
-import { generateEmailTemplate } from '../utils/emailTemplate';
+import { generateEmailTemplate, getAgentEmail } from '../utils/emailTemplate';
 
 const CustomTrip = () => {
   const { t, i18n } = useTranslation();
@@ -83,7 +83,7 @@ const CustomTrip = () => {
       
       const { data, error } = await supabase.functions.invoke('send-email', {
         body: {
-          to: ['info@voyageeden.com'], 
+          to: getAgentEmail(i18n.language), 
           reply_to: formData.email,
           subject: `[${(i18n.language || 'en').toUpperCase()}] New Custom Trip Request`,
           html: htmlContent
