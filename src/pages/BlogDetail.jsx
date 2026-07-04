@@ -79,14 +79,7 @@ const BlogDetail = () => {
           {/* Left Column: Article Content */}
           <div className="lg:w-3/4">
             <div className="bg-white rounded-[40px] p-10 md:p-16 shadow-xl border border-gray-100">
-              <div className="mb-16">
-                <h3 className="text-xl md:text-2xl font-bold text-primary mb-6">
-                  {t('blogDetail.introTo', "Introduction à")} {article.title}
-                </h3>
-                <p className="text-gray-600 text-base md:text-lg leading-relaxed font-medium">
-                  {article.description}
-                </p>
-              </div>
+
               
               <div className="prose prose-lg max-w-none text-gray-700 font-medium leading-relaxed">
                 {(typeof article.content === 'string' ? JSON.parse(article.content || '[]') : (article.content || [])).map((block, index) => {
