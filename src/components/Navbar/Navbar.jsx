@@ -42,7 +42,14 @@ const Navbar = () => {
   const currentLogoColor = colorLogos[i18n.language] || logoColorFR;
 
   const handleLanguageChange = (langCode) => {
-    i18n.changeLanguage(langCode);
+    const domainMap = {
+      en: 'https://srilankaedentravels.com',
+      es: 'https://srilankaviajeseden.es',
+      de: 'https://srilankaedenreisen.com',
+      fr: 'https://srilankavoyageeden.com',
+      it: 'https://srilankaviaggieden.com'
+    };
+
     let newPath = `/${langCode}`;
     const pathParts = location.pathname.split('/').filter(Boolean);
     
@@ -53,6 +60,19 @@ const Navbar = () => {
       newPath = '/' + [langCode, ...pathParts].join('/');
     }
     
+    // Redirect to the correct domain if in production
+    const targetDomain = domainMap[langCode];
+    if (targetDomain && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+      const targetHostname = new URL(targetDomain).hostname;
+      // If we are not currently on the target domain, redirect the browser entirely
+      if (window.location.hostname !== targetHostname && window.location.hostname !== `www.${targetHostname}`) {
+        window.location.href = `${targetDomain}${newPath}${window.location.search}`;
+        return; // Stop execution
+      }
+    }
+
+    // Fallback for localhost or if already on the correct domain
+    i18n.changeLanguage(langCode);
     navigate(newPath);
     setIsMenuOpen(false);
   };
