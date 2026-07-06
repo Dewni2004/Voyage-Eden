@@ -50,7 +50,7 @@ const TrustSection = () => {
             {/* Buttons */}
             <div className="flex flex-row gap-1.5 w-full justify-center mt-2 px-1">
               <a 
-                href="https://www.google.com/search?q=Sri+Lanka+Eden+Travels"
+                href="https://www.google.com/search?q=Sri+Lanka+Viajes+Eden"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex flex-1 items-center justify-center gap-1 bg-transparent border border-primary text-primary hover:bg-primary/5 font-bold px-1 py-1.5 rounded-lg transition-all shadow-sm text-[9px]"
@@ -61,7 +61,7 @@ const TrustSection = () => {
                 <span className="truncate">{t('trust.consult', 'Consulter')}</span>
               </a>
               <a 
-                href="https://www.google.com/search?q=Sri+Lanka+Eden+Travels#lrd=0x3ae3662a67e2a9b3:0xd9099db1070ff22,3"
+                href="https://www.google.com/search?q=sri+lanka+viajes+eden&hl=en&sxsrf=ALiCzsZYAaZVpXmj1ex2uzEGHyoJHwoyCQ:1669526223209&ei=z_KCY--pDNOY4-EP_dCvoAg&gs_ssp=eJzj4tVP1zc0TDYsKslOyskzYLRSNagwTkw1NrNISjIyNTZPMUwztzKoMDEysEyzTDVNNktJTDJLNvESLS7KVMhJzMtOVCjLTMxKLVZITUnNAwBsMBei&oq=&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQARgDMgcIIxDqAhAnMgcIIxDqAhAnMgcIIxDqAhAnMg0ILhDHARCvARDqAhAnMgcIIxDqAhAnMgcIIxDqAhAnMgcIIxDqAhAnMgcIIxDqAhAnMgcIIxDqAhAnMgcIIxDqAhAnSgQIQRgASgQIRhgAUABYAGDqF2gBcAB4AIABAIgBAJIBAJgBAKABAbABCsABAQ&sclient=gws-wiz-serp#lrd=0x3ae368bb2537d1f7:0x4209f9e5c6dab6c4,1"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex flex-1 items-center justify-center gap-1 bg-transparent border border-primary text-primary hover:bg-primary/5 font-bold px-1 py-1.5 rounded-lg transition-all shadow-sm text-[9px]"
@@ -174,7 +174,7 @@ const TrustSection = () => {
             {/* Actions for Google */}
             <div className="flex gap-3 mt-6 justify-start">
               <a 
-                href="https://www.google.com/search?q=Sri+Lanka+Eden+Travels"
+                href="https://www.google.com/search?q=Sri+Lanka+Viajes+Eden"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-1.5 bg-white border border-[#1e406f] hover:bg-[#1e406f]/5 text-[#1e406f] font-bold px-4 py-2.5 rounded-xl transition-all shadow-sm text-xs"
@@ -185,7 +185,7 @@ const TrustSection = () => {
                 {t('trust.consult', 'Consulter')}
               </a>
               <a 
-                href="https://www.google.com/search?q=Sri+Lanka+Eden+Travels#lrd=0x3ae3662a67e2a9b3:0xd9099db1070ff22,3"
+                href="https://www.google.com/search?q=sri+lanka+viajes+eden&hl=en&sxsrf=ALiCzsZYAaZVpXmj1ex2uzEGHyoJHwoyCQ:1669526223209&ei=z_KCY--pDNOY4-EP_dCvoAg&gs_ssp=eJzj4tVP1zc0TDYsKslOyskzYLRSNagwTkw1NrNISjIyNTZPMUwztzKoMDEysEyzTDVNNktJTDJLNvESLS7KVMhJzMtOVCjLTMxKLVZITUnNAwBsMBei&oq=&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQARgDMgcIIxDqAhAnMgcIIxDqAhAnMgcIIxDqAhAnMg0ILhDHARCvARDqAhAnMgcIIxDqAhAnMgcIIxDqAhAnMgcIIxDqAhAnMgcIIxDqAhAnMgcIIxDqAhAnMgcIIxDqAhAnSgQIQRgASgQIRhgAUABYAGDqF2gBcAB4AIABAIgBAJIBAJgBAKABAbABCsABAQ&sclient=gws-wiz-serp#lrd=0x3ae368bb2537d1f7:0x4209f9e5c6dab6c4,1"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-1.5 bg-white border border-[#1e406f] hover:bg-[#1e406f]/5 text-[#1e406f] font-bold px-4 py-2.5 rounded-xl transition-all shadow-sm text-xs"
