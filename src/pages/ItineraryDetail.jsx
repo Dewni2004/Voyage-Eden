@@ -206,7 +206,7 @@ const ItineraryDetail = () => {
       </div>
 
       {/* Interactive Itinerary Section */}
-      <section id="itinerary-section" className="max-w-[1360px] mx-auto px-0 md:px-6 pb-6 md:pb-24">
+      <section id="itinerary-section" className="max-w-[1360px] mx-auto px-4 sm:px-5 md:px-6 pb-6 md:pb-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 items-stretch">
           
           {/* Left Column: Interactive Map (Styled as a Card) */}
@@ -223,96 +223,10 @@ const ItineraryDetail = () => {
               itineraryId={itinerary.id}
             />
 
-            {/* Mobile Floating Card */}
-            {isModalOpen && (
-              <div className="absolute bottom-4 left-4 right-4 z-[100] lg:hidden animate-fade-in-up">
-                <div className="bg-white/95 backdrop-blur-xl w-full max-h-[75vh] overflow-y-auto rounded-[32px] shadow-2xl p-4 border border-white/50 hide-scrollbar">
-                  {/* Image & Close Button Overlay */}
-                  <div className="relative h-36 rounded-[24px] overflow-hidden mb-4 shadow-sm">
-                    <img src={days[activeDay - 1].image} alt="" className="w-full h-full object-cover" loading="lazy" width="800" height="600" />
-                    <button 
-                      onClick={() => setIsModalOpen(false)} 
-                      className="absolute top-3 right-3 w-8 h-8 bg-black/40 backdrop-blur-md text-white rounded-full flex items-center justify-center transition-all hover:bg-black/60"
-                    >
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 18L18 6M6 6l12 12" /></svg>
-                    </button>
-                  </div>
-
-                  <span className="text-luxury text-[10px] font-bold uppercase tracking-widest mb-1 block">{days[activeDay - 1].displayLabel || `${t("itineraryDetail.day")} ${days[activeDay - 1].id}`}</span>
-                  <h3 className="text-primary text-xl font-bold mb-2 leading-tight">{days[activeDay - 1].location}</h3>
-                  
-                  {/* Full Description */}
-                  <p className="text-gray-600 text-[13px] leading-relaxed mb-5">{days[activeDay - 1].description}</p>
-                  
-                  {/* Additional Details for Mobile */}
-                  <div className="flex-grow space-y-5 mb-5">
-                    {/* Highlights */}
-                    <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center flex-shrink-0 shadow-md">
-                        <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L16 4m0 13V4m0 0L9 7" /></svg>
-                      </div>
-                      <div>
-                        <h4 className="text-primary font-bold text-xs uppercase tracking-wider mb-0.5">{t("itineraryDetail.highlights")}</h4>
-                        <p className="text-gray-500 text-[11px] font-medium leading-relaxed">{days[activeDay - 1].highlights}</p>
-                      </div>
-                    </div>
-
-                    {/* Accommodation */}
-                    <div className="flex flex-col gap-3">
-                      <div className="flex items-start gap-4">
-                        <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center flex-shrink-0 shadow-md">
-                          <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
-                        </div>
-                        <div>
-                          <h4 className="text-primary font-bold text-xs uppercase tracking-wider mb-0.5">{t("itineraryDetail.accommodation")}</h4>
-                          <p className="text-gray-500 text-[11px] font-medium leading-relaxed">{days[activeDay - 1].accommodation}</p>
-                        </div>
-                      </div>
-
-                      {days[activeDay - 1].accommodationImages && days[activeDay - 1].accommodationImages.some(img => img) && (
-                        <div className="w-full mt-2">
-                          <div className="grid grid-cols-4 gap-2">
-                            {days[activeDay - 1].accommodationImages.map((img, idx) => img ? (
-                              <div key={idx} onClick={() => setSelectedGalleryImage(img)} className="h-14 sm:h-20 rounded-xl overflow-hidden shadow-sm relative cursor-pointer hover:opacity-90 transition-opacity">
-                                <img src={img} alt="" className="w-full h-full object-cover" loading="lazy" width="400" height="300" />
-                              </div>
-                            ) : null)}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                  
-                  <div className="flex gap-3 w-full">
-                    {activeDay > 1 && (
-                      <button onClick={() => setActiveDay(activeDay - 1)} className="w-1/2 bg-transparent border-2 border-primary text-primary py-3 rounded-[20px] shadow-sm flex items-center justify-center gap-2 text-sm font-bold hover:bg-primary/5 transition-all">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
-                        {t("itineraryDetail.prevDay", "Jour précédent")} 
-                      </button>
-                    )}
-                    <button onClick={() => { 
-                      if (activeDay < days.length) {
-                        setActiveDay(activeDay + 1); 
-                      } else { 
-                        setIsModalOpen(false); 
-                        setTimeout(() => document.getElementById('booking-form')?.scrollIntoView({ behavior: 'smooth' }), 300);
-                      } 
-                    }} className={`${activeDay === 1 ? 'w-full' : 'w-1/2'} btn-premium-primary py-3 rounded-[20px] shadow-sm flex items-center justify-center gap-2 text-sm font-bold transition-all`}>
-                      {activeDay === days.length ? t("itineraryDetail.close") : (
-                        <>
-                          {t("itineraryDetail.nextDay", "Jour suivant")} 
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-                        </>
-                      )}
-                    </button>
-                  </div>
-                </div>
-              </div>
-            )}
           </div>
 
           {/* Right Column: Day Details Card */}
-          <div className="bg-[#e9ecef] rounded-[40px] p-5 md:p-6 shadow-2xl border border-white lg:h-[750px] overflow-y-auto hidden lg:flex flex-col transition-all duration-500 hide-scrollbar">
+          <div className="bg-[#e9ecef] rounded-[40px] p-5 md:p-6 shadow-2xl border border-white lg:h-[750px] overflow-y-auto flex flex-col transition-all duration-500 hide-scrollbar">
             {/* Day Image */}
             <div className="relative h-48 lg:h-52 rounded-[32px] overflow-hidden mb-5 shadow-xl group/img flex-shrink-0">
               <img 
