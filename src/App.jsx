@@ -36,11 +36,28 @@ function LanguageWrapper() {
   return <Outlet />;
 }
 
-// Redirects the root (/) to the user's detected language (e.g. /fr)
+// Redirects the root (/) to the correct language based on the domain name
 function RootRedirect() {
   const { i18n } = useTranslation();
-  const lang = i18n.language?.split('-')[0] || 'es';
-  const targetLang = ['fr', 'en', 'de', 'es', 'it'].includes(lang) ? lang : 'es';
+  const hostname = window.location.hostname;
+  let targetLang = 'es'; // default fallback
+
+  if (hostname.includes('.es') || hostname.includes('viajeseden')) {
+    targetLang = 'es';
+  } else if (hostname.includes('.it') || hostname.includes('viaggieden')) {
+    targetLang = 'it';
+  } else if (hostname.includes('.fr') || hostname.includes('voyage-eden')) {
+    targetLang = 'fr';
+  } else if (hostname.includes('.de') || hostname.includes('edenreisen')) {
+    targetLang = 'de';
+  } else if (hostname.includes('edentravels') || hostname.includes('.com') || hostname.includes('.co.uk')) {
+    targetLang = 'en';
+  } else {
+    // If testing locally (localhost), use browser language
+    const lang = i18n.language?.split('-')[0] || 'es';
+    targetLang = ['fr', 'en', 'de', 'es', 'it'].includes(lang) ? lang : 'es';
+  }
+
   return <Navigate to={`/${targetLang}`} replace />;
 }
 

@@ -194,7 +194,7 @@ const AnimatedMap = ({ days, activeDay, setActiveDay, setIsModalOpen, itineraryT
   // We'll generate segments in the render loop.
 
   return (
-    <div className="relative w-full h-full z-10 flex items-center justify-center px-2 md:px-0">
+    <div className="relative w-full h-full z-10 flex items-center justify-center px-6 md:px-0">
       {/* Inner shrink-wrap container to match exact image dimensions */}
       <div 
         className={`relative flex items-center justify-center ${isCustomMap ? 'w-full h-full' : ''}`}
@@ -467,21 +467,6 @@ const AnimatedMap = ({ days, activeDay, setActiveDay, setIsModalOpen, itineraryT
         )}
       </div>
       
-      {/* Mobile Interaction Hint (Global Top Right) */}
-      {!hasInteracted && isMobile && (
-        <motion.div 
-          className="absolute top-[8%] right-[8%] z-50 pointer-events-none flex flex-col items-center"
-          animate={{ y: [0, -8, 0] }}
-          transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-        >
-          <div className="bg-white/95 text-primary text-[10px] font-bold px-3 py-1 rounded-full shadow-lg mb-0.5 whitespace-nowrap border border-primary/10">
-            Appuyez pour voir
-          </div>
-          <svg className="w-5 h-5 text-primary drop-shadow-md rotate-[-15deg]" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M9 11.24V7.5a2.5 2.5 0 0 1 5 0v.68a2 2 0 0 1 1.5-.68 2 2 0 0 1 2 2v.2a2.5 2.5 0 0 1 1.5 2.5V16c0 3.31-2.69 6-6 6h-2c-2.76 0-5-2.24-5-5v-3.5c0-1.1.9-2 2-2h.24l.76 2.24z"/>
-          </svg>
-        </motion.div>
-      )}
     </div>
   );
 };
