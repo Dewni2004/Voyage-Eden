@@ -161,7 +161,6 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
       form.current.reset();
       
       setStartDate(null);
-      setEndDate(null);
     } catch (error) {
       console.error('Edge Function Error:', error);
       setMessageStatus({
