@@ -207,16 +207,20 @@ const ItineraryDetail = () => {
 
       {/* Interactive Itinerary Section */}
       <section id="itinerary-section" className="max-w-[1360px] mx-auto px-0 md:px-6 pb-6 md:pb-24">
-        <div className="grid grid-cols-1 lg:grid-cols-[530px_1fr] gap-4 md:gap-6 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 items-stretch">
           
-          {/* Left Column: Interactive Map */}
-          <div className="relative group/map h-[450px] sm:h-[550px] md:h-[600px] lg:h-[940px]">
-            <div className="absolute -inset-4 bg-gradient-to-tr from-primary/5 to-luxury/5 rounded-[48px] blur-2xl opacity-0 group-hover/map:opacity-100 transition-duration-700"></div>
+          {/* Left Column: Interactive Map (Styled as a Card) */}
+          <div className={`relative group/map rounded-[40px] shadow-2xl h-[450px] sm:h-[550px] md:h-[600px] lg:h-[750px] flex flex-col justify-center items-center overflow-hidden ${(itinerary.id === '9be862d3-2cb3-424e-b56a-aaaf384bb8ef' || itinerary.id === 'e43b5dec-05c3-48a2-854e-45fef616675e' || itinerary.id === 'f889e49c-89be-40fa-8f75-1a96be58664a' || itinerary.id === '5786c88e-6e80-404c-9e67-c7c8b9594f4f' || itinerary.id === '6b5bdec5-93a6-4f5d-8f55-4de8b0637f17' || itinerary.id === 'e6ed3219-8240-47aa-bc18-2e30ab4aa8c1' || itinerary.id === 'f9087bed-98d7-473f-8981-f7222f662958' || itinerary.id === 'acaecf14-07bc-4bdd-ba6c-8f1f3146b3a4' || itinerary.id === '19e84602-a2cc-4cc8-88f3-bbbf311b74ba' || itinerary.id === '7e2b6fa2-a297-4376-933d-ecdbac951183' || itinerary.id === 'c1264913-ac00-4e83-acfd-73e139efd628' || itinerary.id === '8c630a0f-b4e0-44f6-9a38-af954d0d8cf8' || itinerary.id === '9b6c3e5a-e6ed-4219-ae82-b9535cf3a048' || itinerary.id === '5b039c8f-8955-44de-9788-2b8ef2f958df' || itinerary.id === '8882bc3e-7338-47cc-b4aa-3573a1efad31' || itinerary.id === 'e20e7213-a43e-48dc-92b8-4d7dff732774' || itinerary.id === '8fc7a86b-90f9-4736-8d79-81da76a86879' || itinerary.id === 'bf91c1df-7027-42b9-8918-1e5033fb9fa8' || itinerary.id === '1921a084-239d-43e7-be83-a64e029ec9a3' || itinerary.id === 'd9fa26f8-7ba8-483f-a942-7c1f130004ca' || itinerary.id === '8517ac5e-d6dc-4c9d-9879-b1f8203f4290' || itinerary.id === '268f9c88-4fe4-4d37-ad6e-e4b1f0c40923' || itinerary.id === '37b1b6e1-c1f9-4260-bc2c-6351305ab197' || itinerary.id === '3ff5c7a9-f8cd-455a-b8bd-66d56431f299' || itinerary.id === '78eeebc2-6926-4ffa-8826-1d61570b0ab6' || itinerary.id === 'fd4ec913-9f0c-4a17-9b0e-9d25ebb6880f' || itinerary.id === 'db5ed07a-1c15-4ec4-9081-57bb092c42d9' || itinerary.id === 'e96a035f-0d5f-4d3f-bb1b-d0524c5c78c9' || itinerary.id === 'b6b8b207-f55c-4c83-a7d8-3caa5284c73b' || itinerary.id === 'b9fc78bc-c766-4b08-8a84-ef4224c143d4' || itinerary.id === 'ef67877f-92f9-4113-9880-94a03f79413f' || itinerary.id === 'c9492146-5f0f-46b8-98b0-3575fc7b6e5a' || itinerary.id === 'd3285989-25c1-4f88-b018-493d85751509') ? 'bg-[#1a1e44] border-0 p-0' : 'bg-[#e9ecef] border border-white p-5 md:p-6'}`}>
+            {itinerary.id !== '9be862d3-2cb3-424e-b56a-aaaf384bb8ef' && itinerary.id !== 'e43b5dec-05c3-48a2-854e-45fef616675e' && itinerary.id !== 'f889e49c-89be-40fa-8f75-1a96be58664a' && itinerary.id !== '5786c88e-6e80-404c-9e67-c7c8b9594f4f' && itinerary.id !== '6b5bdec5-93a6-4f5d-8f55-4de8b0637f17' && itinerary.id !== 'e6ed3219-8240-47aa-bc18-2e30ab4aa8c1' && itinerary.id !== 'f9087bed-98d7-473f-8981-f7222f662958' && itinerary.id !== 'acaecf14-07bc-4bdd-ba6c-8f1f3146b3a4' && itinerary.id !== '19e84602-a2cc-4cc8-88f3-bbbf311b74ba' && itinerary.id !== '7e2b6fa2-a297-4376-933d-ecdbac951183' && itinerary.id !== 'c1264913-ac00-4e83-acfd-73e139efd628' && itinerary.id !== '8c630a0f-b4e0-44f6-9a38-af954d0d8cf8' && itinerary.id !== '9b6c3e5a-e6ed-4219-ae82-b9535cf3a048' && itinerary.id !== '5b039c8f-8955-44de-9788-2b8ef2f958df' && itinerary.id !== '8882bc3e-7338-47cc-b4aa-3573a1efad31' && itinerary.id !== 'e20e7213-a43e-48dc-92b8-4d7dff732774' && itinerary.id !== '8fc7a86b-90f9-4736-8d79-81da76a86879' && itinerary.id !== 'bf91c1df-7027-42b9-8918-1e5033fb9fa8' && itinerary.id !== '1921a084-239d-43e7-be83-a64e029ec9a3' && itinerary.id !== 'd9fa26f8-7ba8-483f-a942-7c1f130004ca' && itinerary.id !== '8517ac5e-d6dc-4c9d-9879-b1f8203f4290' && itinerary.id !== '268f9c88-4fe4-4d37-ad6e-e4b1f0c40923' && itinerary.id !== '37b1b6e1-c1f9-4260-bc2c-6351305ab197' && itinerary.id !== '3ff5c7a9-f8cd-455a-b8bd-66d56431f299' && itinerary.id !== '78eeebc2-6926-4ffa-8826-1d61570b0ab6' && itinerary.id !== 'fd4ec913-9f0c-4a17-9b0e-9d25ebb6880f' && itinerary.id !== 'db5ed07a-1c15-4ec4-9081-57bb092c42d9' && itinerary.id !== 'e96a035f-0d5f-4d3f-bb1b-d0524c5c78c9' && itinerary.id !== 'b6b8b207-f55c-4c83-a7d8-3caa5284c73b' && itinerary.id !== 'b9fc78bc-c766-4b08-8a84-ef4224c143d4' && itinerary.id !== 'ef67877f-92f9-4113-9880-94a03f79413f' && itinerary.id !== 'c9492146-5f0f-46b8-98b0-3575fc7b6e5a' && itinerary.id !== 'd3285989-25c1-4f88-b018-493d85751509' && (
+              <div className="absolute -inset-4 bg-gradient-to-tr from-primary/5 to-luxury/5 rounded-[48px] blur-2xl opacity-0 group-hover/map:opacity-100 transition-duration-700 pointer-events-none"></div>
+            )}
             <AnimatedMap 
               days={days} 
               activeDay={activeDay} 
               setActiveDay={setActiveDay} 
               setIsModalOpen={setIsModalOpen} 
+              itineraryTitle={itinerary.title}
+              itineraryId={itinerary.id}
             />
 
             {/* Mobile Floating Card */}
@@ -308,9 +312,9 @@ const ItineraryDetail = () => {
           </div>
 
           {/* Right Column: Day Details Card */}
-          <div className="bg-[#e9ecef] rounded-[40px] p-6 md:p-8 shadow-2xl border border-white h-[940px] overflow-y-auto hidden lg:flex flex-col transition-all duration-500 hide-scrollbar">
+          <div className="bg-[#e9ecef] rounded-[40px] p-5 md:p-6 shadow-2xl border border-white lg:h-[750px] overflow-y-auto hidden lg:flex flex-col transition-all duration-500 hide-scrollbar">
             {/* Day Image */}
-            <div className="relative h-60 rounded-[32px] overflow-hidden mb-6 shadow-xl group/img flex-shrink-0">
+            <div className="relative h-48 lg:h-52 rounded-[32px] overflow-hidden mb-5 shadow-xl group/img flex-shrink-0">
               <img 
                 src={days[activeDay - 1].image} 
                 alt={days[activeDay - 1].location} 
@@ -330,14 +334,13 @@ const ItineraryDetail = () => {
               </div>
             </div>
 
-            {/* Description */}
-            <div className="mb-10 px-2">
-              <p className="text-gray-700 text-[15px] leading-relaxed font-medium">
+            <div className="mb-6 px-2">
+              <p className="text-gray-700 text-[14px] leading-relaxed font-medium">
                 {days[activeDay - 1].description}
               </p>
             </div>
 
-            <div className="flex-grow space-y-8 px-2">
+            <div className="flex-grow space-y-6 px-2">
               {/* Highlights */}
               <div className="flex items-center gap-6 group/item">
                 <div className="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center flex-shrink-0 shadow-lg">
@@ -377,7 +380,7 @@ const ItineraryDetail = () => {
             </div>
 
             {/* Navigation Buttons */}
-            <div className="mt-12 flex gap-4 w-full">
+            <div className="mt-8 flex gap-4 w-full">
               {activeDay > 1 && (
                 <button 
                   onClick={() => setActiveDay(activeDay - 1)}

@@ -1,28 +1,23 @@
-# Hosting Plan & Progress for Voyage Eden
+# 🚀 Migration & Hosting Plan (Remaining Tasks)
 
-## What we achieved so far:
-1. **Multi-language email template:** Configured `emailTemplate.js` to dynamically show the correct Brand Name based on the form's language (e.g., Sri Lanka Viajes Eden, Sri Lanka Eden Reisen).
-2. **Resend Edge Function Setup:** We modified the `send-email` Supabase Edge Function to temporarily force the `to` address to `dewnipathirana1@gmail.com` because the domain is not yet verified in Resend. This prevents errors during testing.
+## ⏳ Pending Tasks (To do)
 
-## Next Steps (To do tomorrow):
-The user has promised the boss to host the 5 language sites. Since this is ONE React app with `react-i18next`, we will host it once and point 5 domains to it.
+### 1. Add Custom Domains to Render & Configure DNS
+- [ ] In Render Dashboard -> **Settings -> Custom Domains**, add all 5 domain names (e.g., `srilankaviajeseden.es`, etc.).
+- [ ] Log in to your domain provider (e.g., Hostinger, Namecheap).
+- [ ] Add the `A record` and `CNAME record` provided by Render to the DNS settings of all 5 domains.
 
-### Step 1: GitHub Push
-- Create a GitHub repo and push the `Voyage Eden` codebase.
+### 2. Configure Domain-Based Language Routing (React Code)
+- [ ] Update `App.jsx` (and potentially `src/i18n.js`) to detect the incoming domain URL (`window.location.hostname`).
+- [ ] Add logic to automatically route `.es` to Spanish, `.fr` to French, etc., so each domain opens the correct language version instantly.
 
-### Step 2: Custom Domain Language Router in `src/i18n.js`
-- Modify `i18n.js` to detect `window.location.hostname`.
-- If `srilankaviajeseden.es` -> set language to `es`.
-- If `voyageeden.fr` -> set language to `fr`.
-- Add this logic before i18n initializes so the site loads in the correct language instantly.
+### 3. SEO Migration (Critical to preserve Google Rankings)
+- [ ] **301 Redirects:** Map and set up redirects from old WordPress URLs (e.g., `site.es/sobre-nosotros`) to the new React URLs (e.g., `site.es/es/about`). This prevents 404 errors and SEO drops.
+- [ ] **Google Analytics:** Copy the existing GA Measurement ID (`G-XXXXX`) and add it to `index.html` to continue tracking visitor data without interruption.
+- [ ] **Dynamic Meta Tags:** Install and configure `react-helmet` to set unique `<title>` and `<meta name="description">` tags for each page (replacing Yoast SEO functionality).
+- [ ] **Sitemap:** Generate a new `sitemap.xml` for the React application and submit it to Google Search Console.
 
-### Step 3: Hosting on Render (or Vercel)
-- Create a Static Site on Render connected to the GitHub repo.
-- Build command: `npm run build`
-- Publish directory: `dist`
-- Add Environment Variables (Supabase URL, Anon Key).
-
-### Step 4: Domain Connection & Email Verification
-- Point all 5 old WordPress domains to the new Render site via DNS (CNAME/A records).
-- Add the main domain (e.g., `srilankaviajeseden.es` or `voyageeden.com`) to **Resend** and add the TXT/MX records to verify it.
-- Once verified, update `supabase/functions/send-email/index.ts` to remove the temporary hardcoded `to: ['dewnipathirana1@gmail.com']` email and use the frontend's requested email again. Redeploy the edge function.
+### 4. Email Verification (Resend & Supabase)
+- [ ] Add your main domain (e.g., `srilankaviajeseden.es`) to the **Resend** dashboard and add the required TXT/MX records to your DNS settings to verify it.
+- [ ] Once verified, update `supabase/functions/send-email/index.ts` to remove the temporary hardcoded email (`dewnipathirana1@gmail.com`) and enable the dynamic agent emails again.
+- [ ] Redeploy the Supabase Edge Function to apply changes.
