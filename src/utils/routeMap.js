@@ -64,5 +64,7 @@ export const routeMap = {
 export const getLocalizedPath = (pageKey, lang) => {
   const language = lang?.split('-')[0] || 'fr';
   const paths = routeMap[language] || routeMap['fr'];
-  return `/${paths[pageKey] || pageKey}`;
+  // Use hasOwnProperty to distinguish between a missing key and an intentional empty string (home route = '')
+  const route = Object.prototype.hasOwnProperty.call(paths, pageKey) ? paths[pageKey] : pageKey;
+  return route === '' ? '/' : `/${route}`;
 };
