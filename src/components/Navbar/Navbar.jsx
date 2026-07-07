@@ -51,7 +51,7 @@ const Navbar = () => {
       it: 'https://srilankaviaggieden.com'
     };
 
-    const newPath = location.pathname;
+    const newPath = '/';
     
     // Redirect to the correct domain if in production
     const targetDomain = domainMap[langCode];
@@ -59,7 +59,7 @@ const Navbar = () => {
       const targetHostname = new URL(targetDomain).hostname;
       // If we are not currently on the target domain, redirect the browser entirely
       if (window.location.hostname !== targetHostname && window.location.hostname !== `www.${targetHostname}`) {
-        window.location.href = `${targetDomain}${newPath === '/' ? '' : newPath}${window.location.search}`;
+        window.location.href = targetDomain;
         return; // Stop execution
       }
     }
