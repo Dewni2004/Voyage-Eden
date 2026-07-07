@@ -35,7 +35,17 @@ const RedirectHandler = ({ children }) => {
     const matchedRedirect = redirectMap[currentPath] || redirectMap[normalizedPath] || redirectMap[alternativePath];
 
     if (matchedRedirect) {
-      navigate(`${matchedRedirect}${location.search}`, { replace: true });
+      const finalRedirect = matchedRedirect.startsWith('/blog/') 
+        ? matchedRedirect.substring(5) 
+        : matchedRedirect;
+      navigate(`${finalRedirect}${location.search}`, { replace: true });
+      return;
+    }
+
+    // Catch any direct visits to /blog/slug and redirect to /slug
+    if (currentPath.startsWith('/blog/')) {
+      navigate(`${currentPath.substring(5)}${location.search}`, { replace: true });
+      return;
     }
   }, [location, navigate]);
 

@@ -212,7 +212,7 @@ const BlogDetail = () => {
                 {popularReads.map((read, index) => {
                   const slug = generateSlug(read.title, read.id);
                   return (
-                  <Link to={`/blog/${slug}`} key={index} className="flex gap-4 group cursor-pointer block">
+                  <Link to={`/${slug}`} key={index} className="flex gap-4 group cursor-pointer block">
                     <div className="w-20 h-20 rounded-2xl overflow-hidden flex-shrink-0 shadow-md">
                       <img src={read.image} alt="" className="w-full h-full object-cover" />
                     </div>

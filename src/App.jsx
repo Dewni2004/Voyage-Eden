@@ -83,7 +83,7 @@ function AppContent() {
               {getAllPaths('contact').map(path => <Route key={path} path={path} element={<ContactUs />} />)}
               {getAllPaths('customTrip').map(path => <Route key={path} path={path} element={<CustomTrip />} />)}
               <Route path="itinerary/:id" element={<ItineraryDetail />} />
-              <Route path="blog/:id" element={<BlogDetail />} />
+              <Route path=":id" element={<BlogDetail />} />
               {getAllPaths('reviews').map(path => <Route key={path} path={path} element={<Reviews />} />)}
               <Route path="review/:id" element={<ReviewDetail />} />
               {getAllPaths('hotels').map(path => <Route key={path} path={`${path}/:category`} element={<HotelCategoryPage />} />)}
