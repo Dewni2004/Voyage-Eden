@@ -35,16 +35,23 @@ const RedirectHandler = ({ children }) => {
     const matchedRedirect = redirectMap[currentPath] || redirectMap[normalizedPath] || redirectMap[alternativePath];
 
     if (matchedRedirect) {
-      const finalRedirect = matchedRedirect.startsWith('/blog/') 
-        ? matchedRedirect.substring(5) 
-        : matchedRedirect;
+      let finalRedirect = matchedRedirect;
+      if (finalRedirect.startsWith('/blog/')) {
+        finalRedirect = finalRedirect.substring(5);
+      } else if (finalRedirect.startsWith('/itinerary/')) {
+        finalRedirect = finalRedirect.substring(10);
+      }
       navigate(`${finalRedirect}${location.search}`, { replace: true });
       return;
     }
 
-    // Catch any direct visits to /blog/slug and redirect to /slug
+    // Catch any direct visits to /blog/slug or /itinerary/slug and redirect to /slug
     if (currentPath.startsWith('/blog/')) {
       navigate(`${currentPath.substring(5)}${location.search}`, { replace: true });
+      return;
+    }
+    if (currentPath.startsWith('/itinerary/')) {
+      navigate(`${currentPath.substring(10)}${location.search}`, { replace: true });
       return;
     }
   }, [location, navigate]);

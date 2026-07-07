@@ -382,7 +382,7 @@ const ItineraryCard = ({
             </span>
           </div>
           <button 
-            onClick={() => navigate(`/${i18n.language}/itinerary/${generateSlug(title, id)}`)}
+            onClick={() => navigate(`/${generateSlug(title, id)}`)}
             className={`${
               isGreen 
                 ? 'border border-white bg-transparent text-white hover:bg-white hover:text-green-800' 

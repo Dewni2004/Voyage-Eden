@@ -399,7 +399,7 @@ const PopularItineraries = ({ title, subtitle, id, itineraries, isDark, isGreen 
                       </span>
                     </div>
                     <button 
-                      onClick={() => navigate(`/${i18n.language}/itinerary/${generateSlug(item.title, item.id)}`)}
+                      onClick={() => navigate(`/${generateSlug(item.title, item.id)}`)}
                       className={`${
                         isGreen 
                           ? 'border border-white bg-transparent text-white hover:bg-white hover:text-green-800' 
