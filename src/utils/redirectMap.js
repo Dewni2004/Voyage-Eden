@@ -857,4 +857,17 @@ export const redirectMap = {
   "/es": "/blog/es",
   "/en": "/blog/en",
   "/de": "/blog/de",
+  // Old Itinerary Redirects
+  "/itinerarios/norte-de-sri-lanka-8-dias-con-playas-del-este/": "/itinerary/norte-de-srilanka-8-dias-con-playas-del-este",
+  "/itinerarios/sri-lanka-en-11-dias-luna-de-miel-en-el-paraiso/": "/itinerary/sri-lanka-11-dias-luna-de-miel-en-el-paraiso",
+  "/itinerarios/sri-lanka-en-9-dias-diversion-en-familia/": "/itinerary/sri-lanka-9-dias-diversion-en-familia",
+  "/itinerarios/sri-lanka-12-dias-gran-viaje-en-lujo-exclusivo-2/": "/itinerary/sri-lanka-12-dias-gran-viaje-en-lujo-exclusivo",
+  "/itinerarios/luna-de-miel-en-el-paraiso-14-dias/": "/itinerary/sri-lanka-14-dias-luna-de-miel-en-el-paraiso",
+  "/itinerarios/sri-lanka-11-dias-descubre-el-buceo-en-la-mitica-isla-de-ceylan/": "/itinerary/sri-lanka-11-dias-el-buceo-en-la-mitica-isla",
+  "/itinerarios/sri-lanka-7-dias-el-eden-del-buceo/": "/itinerary/sri-lanka-7-dias-el-eden-del-submarinismo",
+  "/itinerarios/sri-lanka-10-dias-en-los-mejores-campos-de-golf-de-asia/": "/itinerary/10-dias-en-los-mejores-campos-de-golf-de-asia",
+  "/itinerarios/sri-lanka-10-dias-la-ruta-del-ellefante/": "/itinerary/sri-lanka-10-dias-la-ruta-del-elefante",
+  "/itinerarios/sri-lanka-12-dias-verano-de-lujo-en-familia/": "/itinerary/sri-lanka-en-12-dias-verano-de-lujo-en-familia",
+  "/itinerarios/sri-lanka-15-dias-playas-idilicas/": "/itinerarios",
+  "/itinerarios/sri-lanka-8-dias-aventura-y-safaris-sin-limites/": "/itinerary/sri-lanka-8-dias-safaris-sin-limites"
 };
