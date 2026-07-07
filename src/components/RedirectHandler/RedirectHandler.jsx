@@ -58,6 +58,14 @@ const RedirectHandler = ({ children }) => {
       navigate(`${localizedItineraryPath}/${currentPath.substring(11)}${location.search}`, { replace: true });
       return;
     }
+    if (currentPath.startsWith('/opiniones/')) {
+      navigate(`/review/${currentPath.substring(11)}${location.search}`, { replace: true });
+      return;
+    }
+    if (currentPath.startsWith('/testimonial/')) {
+      navigate(`/review/${currentPath.substring(13)}${location.search}`, { replace: true });
+      return;
+    }
   }, [location, navigate]);
 
   return <>{children}</>;

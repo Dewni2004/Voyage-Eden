@@ -19,8 +19,18 @@ const ReviewDetail = () => {
       const combinedData = [...dynamicData];
       setAllReviews(combinedData);
       
-      // 3. Find the review (handle both string and number IDs)
-      const found = combinedData.find(r => r.id.toString() === id.toString());
+      // 3. Find the review (handle both string and number IDs, and generated slugs for backwards compatibility)
+      const found = combinedData.find(r => {
+        if (r.id.toString() === id.toString()) return true;
+        
+        // Check generated slug (e.g., from old WordPress URLs)
+        const nameSlug = r.name ? r.name.toLowerCase().replace(/[^a-z0-9]+/g, '-') : '';
+        const headlineSlug = r.headline ? r.headline.toLowerCase().replace(/[^a-z0-9]+/g, '-') : '';
+        const titleSlug = r.title ? r.title.toLowerCase().replace(/[^a-z0-9]+/g, '-') : '';
+        
+        return id.includes(nameSlug) || id.includes(headlineSlug) || id.includes(titleSlug);
+      });
+      
       setReview(found);
       setLoading(false);
     };
