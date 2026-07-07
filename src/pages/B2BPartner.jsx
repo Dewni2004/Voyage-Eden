@@ -4,6 +4,8 @@ import { supabase } from '../supabase';
 import { generateEmailTemplate, getAgentEmail, getBrandName } from '../utils/emailTemplate';
 import PageHero from '../components/UI/PageHero';
 import officeStaff2 from '../assets/Office - staff 2.webp';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const localTranslations = {
   es: {
@@ -20,8 +22,8 @@ const localTranslations = {
     children: "Niños < 11 años",
     infants: "Bebés < 2 años",
     numDays: "Número de días *",
-    departureDate: "Fecha de salida aproximada *",
-    interests: "Intereses del cliente (Varias opciones son posibles)",
+    departureDate: "Fechas de llegada y salida *",
+    interests: "Intereses del cliente (Varias opciones posibles)",
     monuments: "Monumentos",
     temples: "Templos",
     nature: "Naturaleza / Vida animal",
@@ -62,8 +64,8 @@ const localTranslations = {
     children: "Children < 11 years",
     infants: "Infants < 2 years",
     numDays: "Number of days *",
-    departureDate: "Approximate departure date *",
-    interests: "Client interests (Multiple options possible)",
+    departureDate: "Arrival & Departure Dates *",
+    interests: "Client interests (Several options are possible)",
     monuments: "Monuments",
     temples: "Temples",
     nature: "Nature / Wildlife",
@@ -104,7 +106,7 @@ const localTranslations = {
     children: "Enfants < 11 ans",
     infants: "Bébés < 2 ans",
     numDays: "Nombre de jours *",
-    departureDate: "Date de départ approximative *",
+    departureDate: "Dates d'arrivée et de départ *",
     interests: "Intérêts du client (Plusieurs options possibles)",
     monuments: "Monuments",
     temples: "Temples",
@@ -146,7 +148,7 @@ const localTranslations = {
     children: "Bambini < 11 anni",
     infants: "Neonati < 2 anni",
     numDays: "Numero di giorni *",
-    departureDate: "Data di partenza approssimativa *",
+    departureDate: "Date di arrivo e partenza *",
     interests: "Interessi del cliente (Sono possibili più opzioni)",
     monuments: "Monumenti",
     temples: "Templi",
@@ -188,7 +190,7 @@ const localTranslations = {
     children: "Kinder < 11 Jahre",
     infants: "Babys < 2 Jahre",
     numDays: "Anzahl der Tage *",
-    departureDate: "Ungefähres Abreisedatum *",
+    departureDate: "Ankunfts- und Abreisedatum *",
     interests: "Kundeninteressen (Mehrere Optionen möglich)",
     monuments: "Denkmäler",
     temples: "Tempel",
@@ -229,6 +231,10 @@ const B2BPartner = () => {
     children_count: 0,
     infants_count: 0
   });
+  const [dateRange, setDateRange] = useState([null, null]);
+  const [startDate, endDate] = dateRange;
+  
+  const numDays = startDate && endDate ? Math.round((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1 : '';
 
   const updateCount = (key, delta) => {
     setCounts(prev => ({
@@ -375,23 +381,37 @@ const B2BPartner = () => {
               </div>
 
               {/* Number of Days and Departure Date */}
+              <style>{`
+                .b2b-datepicker-wrapper .react-datepicker-wrapper { width: 100%; display: block; }
+                .b2b-datepicker-wrapper .react-datepicker__input-container { display: block; width: 100%; }
+                .b2b-datepicker-wrapper input { width: 100%; }
+              `}</style>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2 relative b2b-datepicker-wrapper">
+                  <label className="text-sm sm:text-base font-bold text-primary ml-1 block">{text.departureDate}</label>
+                  <DatePicker
+                    selectsRange={true}
+                    startDate={startDate}
+                    endDate={endDate}
+                    onChange={(update) => setDateRange(update)}
+                    minDate={new Date()}
+                    dateFormat="dd/MM/yyyy"
+                    className="w-full bg-gray-50 border border-gray-200 rounded-2xl py-4 px-6 focus:outline-none focus:ring-2 focus:ring-luxury/50 transition-all text-sm md:text-base"
+                    placeholderText="DD/MM/YYYY - DD/MM/YYYY"
+                    required
+                  />
+                  <input type="hidden" name="arrival_date" value={startDate ? startDate.toLocaleDateString() : ''} />
+                  <input type="hidden" name="departure_date" value={endDate ? endDate.toLocaleDateString() : ''} />
+                </div>
                 <div className="space-y-2">
                   <label className="text-sm sm:text-base font-bold text-primary ml-1 block">{text.numDays}</label>
                   <input
                     name="num_days"
                     type="text"
-                    required
-                    className="w-full bg-gray-50 border border-gray-200 rounded-2xl py-4 px-6 focus:outline-none focus:ring-2 focus:ring-luxury/50 transition-all text-sm md:text-base"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm sm:text-base font-bold text-primary ml-1 block">{text.departureDate}</label>
-                  <input
-                    name="departure_date"
-                    type="text"
-                    required
-                    className="w-full bg-gray-50 border border-gray-200 rounded-2xl py-4 px-6 focus:outline-none focus:ring-2 focus:ring-luxury/50 transition-all text-sm md:text-base"
+                    readOnly
+                    value={numDays}
+                    placeholder="Automático"
+                    className="w-full bg-gray-100 border border-gray-200 rounded-2xl py-4 px-6 focus:outline-none transition-all text-sm md:text-base text-gray-500 cursor-not-allowed"
                   />
                 </div>
               </div>
