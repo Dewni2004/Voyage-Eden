@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { getArticles } from '../services/contentService';
 import PageHero from '../components/UI/PageHero';
 import { Helmet } from 'react-helmet-async';
+import { generateSlug } from '../utils/slugify';
 
 const BlogDetail = () => {
   const { id } = useParams();
@@ -18,9 +19,9 @@ const BlogDetail = () => {
   useEffect(() => {
     const fetchArticle = async () => {
       const dynamicArticles = await getArticles(i18n.language);
-      const found = dynamicArticles.find(item => item.id === id);
+      const found = dynamicArticles.find(item => item.id === id || generateSlug(item.title, item.id) === id);
       setArticle(found);
-      setPopularReads(dynamicArticles.filter(item => item.id !== id).slice(0, 3));
+      setPopularReads(dynamicArticles.filter(item => item.id !== id && generateSlug(item.title, item.id) !== id).slice(0, 3));
       setLoading(false);
     };
     fetchArticle();
@@ -208,8 +209,10 @@ const BlogDetail = () => {
                 <span className="absolute -bottom-2 left-0 w-12 h-1 bg-luxury rounded-full"></span>
               </h3>
               <div className="space-y-8">
-                {popularReads.map((read, index) => (
-                  <div key={index} className="flex gap-4 group cursor-pointer">
+                {popularReads.map((read, index) => {
+                  const slug = generateSlug(read.title, read.id);
+                  return (
+                  <Link to={`/blog/${slug}`} key={index} className="flex gap-4 group cursor-pointer block">
                     <div className="w-20 h-20 rounded-2xl overflow-hidden flex-shrink-0 shadow-md">
                       <img src={read.image} alt="" className="w-full h-full object-cover" />
                     </div>
@@ -219,8 +222,8 @@ const BlogDetail = () => {
                       </h4>
                       <span className="text-gray-400 text-[11px] font-medium uppercase tracking-wider">{read.date}</span>
                     </div>
-                  </div>
-                ))}
+                  </Link>
+                )})}
               </div>
             </div>
 
