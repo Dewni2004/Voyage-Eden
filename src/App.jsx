@@ -73,6 +73,7 @@ function AppContent() {
       <Navbar />
       <main className="flex-grow">
         <Suspense fallback={<LoadingSpinner />}>
+          <RedirectHandler />
           <Routes>
             <Route element={<DomainLanguageWrapper />}>
               <Route path="*" element={<RedirectHandler />} />

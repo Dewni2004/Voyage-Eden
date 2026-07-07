@@ -47,7 +47,9 @@ const RedirectHandler = ({ children }) => {
         const localizedReviewPath = getLocalizedPath('reviewDetail', i18n.language);
         finalRedirect = `${localizedReviewPath}/${finalRedirect.substring(8)}`;
       }
-      navigate(`${finalRedirect}${location.search}`, { replace: true });
+      if (currentPath !== finalRedirect && currentPath !== finalRedirect + '/') {
+        navigate(`${finalRedirect}${location.search}`, { replace: true });
+      }
       return;
     }
 
