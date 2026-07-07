@@ -22,43 +22,36 @@ const HotelCategoryPage = React.lazy(() => import('./pages/HotelCategoryPage'));
 const Restaurants = React.lazy(() => import('./pages/Restaurants'));
 const B2BPartner = React.lazy(() => import('./pages/B2BPartner'));
 
-// Syncs the URL language parameter with the i18n engine
-function LanguageWrapper() {
-  const { lang } = useParams();
+// Syncs the i18n engine with the domain name
+function DomainLanguageWrapper() {
   const { i18n } = useTranslation();
   
   useEffect(() => {
-    if (['fr', 'en', 'de', 'es', 'it'].includes(lang)) {
-      i18n.changeLanguage(lang);
+    const hostname = window.location.hostname;
+    let targetLang = 'es'; // default fallback
+
+    if (hostname.includes('.es') || hostname.includes('viajeseden')) {
+      targetLang = 'es';
+    } else if (hostname.includes('.it') || hostname.includes('viaggieden')) {
+      targetLang = 'it';
+    } else if (hostname.includes('.fr') || hostname.includes('voyage-eden')) {
+      targetLang = 'fr';
+    } else if (hostname.includes('.de') || hostname.includes('edenreisen')) {
+      targetLang = 'de';
+    } else if (hostname.includes('edentravels') || hostname.includes('.com') || hostname.includes('.co.uk')) {
+      targetLang = 'en';
+    } else {
+      // If testing locally (localhost), use browser language
+      const lang = i18n.language?.split('-')[0] || 'es';
+      targetLang = ['fr', 'en', 'de', 'es', 'it'].includes(lang) ? lang : 'es';
     }
-  }, [lang, i18n]);
+
+    if (i18n.language !== targetLang) {
+      i18n.changeLanguage(targetLang);
+    }
+  }, [i18n]);
 
   return <Outlet />;
-}
-
-// Redirects the root (/) to the correct language based on the domain name
-function RootRedirect() {
-  const { i18n } = useTranslation();
-  const hostname = window.location.hostname;
-  let targetLang = 'es'; // default fallback
-
-  if (hostname.includes('.es') || hostname.includes('viajeseden')) {
-    targetLang = 'es';
-  } else if (hostname.includes('.it') || hostname.includes('viaggieden')) {
-    targetLang = 'it';
-  } else if (hostname.includes('.fr') || hostname.includes('voyage-eden')) {
-    targetLang = 'fr';
-  } else if (hostname.includes('.de') || hostname.includes('edenreisen')) {
-    targetLang = 'de';
-  } else if (hostname.includes('edentravels') || hostname.includes('.com') || hostname.includes('.co.uk')) {
-    targetLang = 'en';
-  } else {
-    // If testing locally (localhost), use browser language
-    const lang = i18n.language?.split('-')[0] || 'es';
-    targetLang = ['fr', 'en', 'de', 'es', 'it'].includes(lang) ? lang : 'es';
-  }
-
-  return <Navigate to={`/${targetLang}`} replace />;
 }
 
 function AppContent() {
@@ -68,8 +61,7 @@ function AppContent() {
       <main className="flex-grow">
         <Suspense fallback={<LoadingSpinner />}>
           <Routes>
-            <Route path="/" element={<RootRedirect />} />
-            <Route path="/:lang" element={<LanguageWrapper />}>
+            <Route element={<DomainLanguageWrapper />}>
               <Route index element={<Home />} />
               <Route path="itineraires" element={<Itineraires />} />
               <Route path="about" element={<AboutUs />} />

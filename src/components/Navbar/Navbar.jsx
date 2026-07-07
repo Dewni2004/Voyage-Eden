@@ -50,15 +50,7 @@ const Navbar = () => {
       it: 'https://srilankaviaggieden.com'
     };
 
-    let newPath = `/${langCode}`;
-    const pathParts = location.pathname.split('/').filter(Boolean);
-    
-    if (['fr', 'en', 'de', 'es', 'it'].includes(pathParts[0])) {
-      pathParts[0] = langCode;
-      newPath = '/' + pathParts.join('/');
-    } else {
-      newPath = '/' + [langCode, ...pathParts].join('/');
-    }
+    const newPath = location.pathname;
     
     // Redirect to the correct domain if in production
     const targetDomain = domainMap[langCode];
@@ -66,7 +58,7 @@ const Navbar = () => {
       const targetHostname = new URL(targetDomain).hostname;
       // If we are not currently on the target domain, redirect the browser entirely
       if (window.location.hostname !== targetHostname && window.location.hostname !== `www.${targetHostname}`) {
-        window.location.href = `${targetDomain}${newPath}${window.location.search}`;
+        window.location.href = `${targetDomain}${newPath === '/' ? '' : newPath}${window.location.search}`;
         return; // Stop execution
       }
     }
@@ -78,12 +70,12 @@ const Navbar = () => {
   };
 
   const navLinks = [
-    { name: t('nav.home'), path: `/${i18n.language}/` },
-    { name: t('nav.itineraries'), path: `/${i18n.language}/itineraires` },
-    { name: t('nav.about'), path: `/${i18n.language}/about` },
-    { name: t('nav.guide'), path: `/${i18n.language}/travel-guide` },
-    { name: t('nav.reviews', 'Avis'), path: `/${i18n.language}/reviews` },
-    { name: t('nav.contact'), path: `/${i18n.language}/contact` },
+    { name: t('nav.home'), path: `/` },
+    { name: t('nav.itineraries'), path: `/itineraires` },
+    { name: t('nav.about'), path: `/about` },
+    { name: t('nav.guide'), path: `/travel-guide` },
+    { name: t('nav.reviews', 'Avis'), path: `/reviews` },
+    { name: t('nav.contact'), path: `/contact` },
   ];
 
   const flags = [

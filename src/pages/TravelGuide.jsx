@@ -95,7 +95,7 @@ const TravelGuide = () => {
 
   const ArticleCard = ({ article }) => (
     <article className="bg-white rounded-2xl sm:rounded-[32px] overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 group flex flex-col">
-      <Link to={`/${i18n.language?.split('-')[0] || 'fr'}/blog/${article.id}`}>
+      <Link to={`/blog/${article.id}`}>
         <div className="relative h-32 xs:h-40 sm:h-64 overflow-hidden">
           <img 
             src={article.image} 
@@ -119,7 +119,7 @@ const TravelGuide = () => {
             <span className="hidden xs:inline-block">{article.author}</span>
           </div>
           
-          <Link to={`/${i18n.language?.split('-')[0] || 'fr'}/blog/${article.id}`}>
+          <Link to={`/blog/${article.id}`}>
             <h3 className="text-primary text-xs xs:text-base sm:text-xl font-bold mb-1.5 sm:mb-4 leading-tight hover:text-primary/80 transition-colors cursor-pointer line-clamp-2">
               {article.title}
             </h3>
@@ -130,7 +130,7 @@ const TravelGuide = () => {
           </p>
         </div>
         
-        <Link to={`/${i18n.language?.split('-')[0] || 'fr'}/blog/${article.id}`} className="text-primary font-bold text-[10px] sm:text-sm flex items-center group/btn hover:text-primary/80 transition-all mt-2 sm:mt-0">
+        <Link to={`/blog/${article.id}`} className="text-primary font-bold text-[10px] sm:text-sm flex items-center group/btn hover:text-primary/80 transition-all mt-2 sm:mt-0">
           {t('travelGuide.readMore')}
           <svg className="w-3 h-3 sm:w-4 sm:h-4 ml-1 sm:ml-2 transform group-hover/btn:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />

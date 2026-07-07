@@ -28,7 +28,7 @@ const ReviewDetail = () => {
   }, [id, i18n.language]);
 
   if (loading) return <div className="min-h-screen flex items-center justify-center bg-[#f8fbff] text-primary font-bold">{t('reviewDetail.loading')}</div>;
-  if (!review) return <div className="min-h-screen flex items-center justify-center bg-[#f8fbff] text-center px-6"><div><h2 className="text-2xl font-bold text-primary mb-4">{t('reviewDetail.notFound')}</h2><Link to={`/${i18n.language?.split('-')[0] || 'fr'}/reviews`} className="text-luxury font-bold hover:underline">{t('reviewDetail.backToReviews')}</Link></div></div>;
+  if (!review) return <div className="min-h-screen flex items-center justify-center bg-[#f8fbff] text-center px-6"><div><h2 className="text-2xl font-bold text-primary mb-4">{t('reviewDetail.notFound')}</h2><Link to={`/reviews`} className="text-luxury font-bold hover:underline">{t('reviewDetail.backToReviews')}</Link></div></div>;
 
   return (
     <div className="bg-[#f8fbff] min-h-screen">
@@ -115,7 +115,7 @@ const ReviewDetail = () => {
                   </div>
                 </li>
               </ul>
-              <Link to={`/${i18n.language?.split('-')[0] || 'fr'}/contact`} className="w-full btn-premium-primary py-3.5 rounded-2xl mt-10 text-center block">{t('reviewDetail.planMyTrip')}</Link>
+              <Link to={`/contact`} className="w-full btn-premium-primary py-3.5 rounded-2xl mt-10 text-center block">{t('reviewDetail.planMyTrip')}</Link>
             </div>
 
             {/* Featured Guide Card */}
@@ -150,7 +150,7 @@ const ReviewDetail = () => {
               <span className="text-luxury text-xs font-bold uppercase tracking-widest mb-2 block text-center md:text-left">{t('reviewDetail.ourGuests')}</span>
               <h2 className="text-primary text-4xl font-bold font-serif text-center md:text-left">{t('reviewDetail.moreStories')}</h2>
             </div>
-            <Link to={`/${i18n.language?.split('-')[0] || 'fr'}/reviews`} className="btn-premium-primary px-8 py-3.5 rounded-2xl flex items-center gap-2 group shadow-sm">
+            <Link to={`/reviews`} className="btn-premium-primary px-8 py-3.5 rounded-2xl flex items-center gap-2 group shadow-sm">
               {t('reviewDetail.viewAll')} 
               <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
             </Link>
@@ -166,7 +166,7 @@ const ReviewDetail = () => {
                   <div className="flex text-yellow-400 text-xs mb-3">{'★'.repeat(other.rating || 5)}</div>
                   <h4 className="text-primary font-bold text-xl mb-2">{other.name}</h4>
                   <p className="text-gray-500 text-sm line-clamp-3 mb-6 italic flex-1">"{other.text}"</p>
-                  <Link to={`/${i18n.language?.split('-')[0] || 'fr'}/review/${other.id}`} className="text-luxury font-bold text-xs uppercase tracking-widest hover:text-primary flex items-center gap-2 group/link">
+                  <Link to={`/review/${other.id}`} className="text-luxury font-bold text-xs uppercase tracking-widest hover:text-primary flex items-center gap-2 group/link">
                     {t('reviewDetail.readFullStory')} 
                     <svg className="w-4 h-4 transform group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                   </Link>

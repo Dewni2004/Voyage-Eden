@@ -87,7 +87,7 @@ const Footer = () => {
             {/* B2B Contacts Button */}
             <div className="pt-4 flex justify-center lg:justify-start">
               <Link 
-                to={`/${i18n.language}/b2b`}
+                to={`/b2b`}
                 className="inline-flex items-center gap-2 bg-white/10 border border-white/20 hover:border-white/60 text-white px-6 py-3 rounded-full text-sm font-bold tracking-wider transition-all duration-300 hover:bg-white/20"
               >
                 {t('footer.b2b')}

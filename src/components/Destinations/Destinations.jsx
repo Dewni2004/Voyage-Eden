@@ -91,7 +91,7 @@ const Destinations = () => {
             return (
               <Link
                 key={article.id}
-                to={`/${i18n.language?.split('-')[0] || 'fr'}/blog/${article.id}`}
+                to={`/blog/${article.id}`}
                 className={`${colSpanClass} ${rowSpanClass} relative rounded-2xl md:rounded-[1.75rem] overflow-hidden group cursor-pointer h-[180px] sm:h-[220px] lg:h-full hover:shadow-xl transition-all duration-500`}
               >
                 <img

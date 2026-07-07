@@ -40,7 +40,7 @@ const BlogDetail = () => {
       <div className="min-h-screen flex items-center justify-center bg-[#f8fbff]">
         <div className="text-center">
           <h2 className="text-3xl font-bold text-primary mb-4">{t('blogDetail.notFound', "Article non trouvé")}</h2>
-          <Link to={`/${i18n.language?.split('-')[0] || 'fr'}/travel-guide`} className="text-luxury font-bold hover:underline">{t('blogDetail.backBtn', "Retour au guide de voyage")}</Link>
+          <Link to={`/travel-guide`} className="text-luxury font-bold hover:underline">{t('blogDetail.backBtn', "Retour au guide de voyage")}</Link>
         </div>
       </div>
     );

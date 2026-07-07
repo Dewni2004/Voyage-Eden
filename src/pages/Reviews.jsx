@@ -515,7 +515,7 @@ const Reviews = () => {
                         <p className="text-primary text-[8px] sm:text-[10px] font-bold uppercase tracking-widest mt-0.5 sm:mt-1 truncate">{review.date}</p>
                       </div>
                       <Link 
-                        to={`/${i18n.language?.split('-')[0] || 'fr'}/review/${review.id}`}
+                        to={`/review/${review.id}`}
                         onClick={(e) => e.stopPropagation()}
                         className="w-7 h-7 xs:w-8 xs:h-8 sm:w-10 sm:h-10 bg-white/10 hover:bg-white text-white hover:text-primary rounded-full flex items-center justify-center transition-all group/btn backdrop-blur-sm shrink-0"
                       >
@@ -607,7 +607,7 @@ const Reviews = () => {
 
               <div className="flex flex-col sm:flex-row justify-center items-center gap-3">
                 <Link 
-                  to={`/${i18n.language}/contact`} 
+                  to={`/contact`} 
                   className="btn-premium-white px-8 py-2.5 rounded-2xl text-sm"
                 >
                   {t("reviews.planTrip")}
@@ -699,7 +699,7 @@ const Reviews = () => {
                 <h4 className="text-primary font-bold text-2xl mb-1">{selectedReview.name}</h4>
                 <p className="text-gray-400 text-sm font-bold uppercase tracking-[0.2em]">{t("reviews.tripIn")} {selectedReview.date}</p>
                 <Link
-                  to={`/${i18n.language?.split('-')[0] || 'fr'}/review/${selectedReview.id}`}
+                  to={`/review/${selectedReview.id}`}
                   className="mt-6 text-primary font-bold text-sm flex items-center gap-2 group/btn hover:text-primary/80 transition-all"
                 >
                   {t("reviews.readFullStory")}
