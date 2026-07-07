@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import i18n from 'i18next';
 import { generateSlug } from '../../utils/slugify';
+import { getLocalizedPath } from '../../utils/routeMap';
 
 const formatPrice = (price, t) => {
   if (!price) return '';
@@ -382,7 +383,7 @@ const ItineraryCard = ({
             </span>
           </div>
           <button 
-            onClick={() => navigate(`/${generateSlug(title, id)}`)}
+            onClick={() => navigate(`${getLocalizedPath('itineraries', i18n.language)}/${generateSlug(title, id)}`)}
             className={`${
               isGreen 
                 ? 'border border-white bg-transparent text-white hover:bg-white hover:text-green-800' 

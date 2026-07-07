@@ -5,7 +5,6 @@ import { getItineraries } from '../services/contentService';
 import { generateSlug } from '../utils/slugify';
 
 import { Helmet } from 'react-helmet-async';
-import BlogDetail from './BlogDetail';
 import IncludedExcluded from '../components/IncludedExcluded/IncludedExcluded';
 import BookingCard from '../components/BookingCard/BookingCard';
 import BookingForm from '../components/BookingForm/BookingForm';
@@ -126,7 +125,7 @@ const ItineraryDetail = () => {
   const notFoundText = l === 'es' ? "Viaje no encontrado" : l === 'it' ? "Viaggio non trovato" : l === 'de' ? "Reise nicht gefunden" : l === 'en' ? "Trip not found" : "Voyage non trouvé";
 
   if (loading) return <div className="min-h-screen flex items-center justify-center text-primary font-bold">{loadingText}</div>;
-  if (!itinerary) return <BlogDetail />;
+  if (!itinerary) return <div className="min-h-screen flex items-center justify-center text-primary font-bold">{notFoundText}</div>;
 
   const days = itinerary.days || [];
 

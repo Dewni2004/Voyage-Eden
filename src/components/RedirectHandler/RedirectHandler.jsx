@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { redirectMap } from '../../utils/redirectMap';
+import i18n from '../../i18n';
+import { getLocalizedPath } from '../../utils/routeMap';
 
 const LANG_PREFIXES = ['fr', 'en', 'de', 'es', 'it'];
 
@@ -20,7 +22,7 @@ const RedirectHandler = ({ children }) => {
     // 2. Strip language-code prefixes like /es/, /fr/, /de/, /en/, /it/
     //    e.g. /es/itinerarios → /itinerarios, /es/ → /
     const langPrefixMatch = currentPath.match(
-      new RegExp(`^/(${LANG_PREFIXES.join('|')})(\/.*)?$`)
+      new RegExp(`^/(${LANG_PREFIXES.join('|')})(/.*)?$`)
     );
     if (langPrefixMatch) {
       const remainder = langPrefixMatch[2] || '/';
@@ -39,19 +41,21 @@ const RedirectHandler = ({ children }) => {
       if (finalRedirect.startsWith('/blog/')) {
         finalRedirect = finalRedirect.substring(5);
       } else if (finalRedirect.startsWith('/itinerary/')) {
-        finalRedirect = finalRedirect.substring(10);
+        const localizedItineraryPath = getLocalizedPath('itineraries', i18n.language);
+        finalRedirect = `${localizedItineraryPath}/${finalRedirect.substring(11)}`;
       }
       navigate(`${finalRedirect}${location.search}`, { replace: true });
       return;
     }
 
-    // Catch any direct visits to /blog/slug or /itinerary/slug and redirect to /slug
+    // Catch any direct visits to /blog/slug or /itinerary/slug
     if (currentPath.startsWith('/blog/')) {
       navigate(`${currentPath.substring(5)}${location.search}`, { replace: true });
       return;
     }
     if (currentPath.startsWith('/itinerary/')) {
-      navigate(`${currentPath.substring(10)}${location.search}`, { replace: true });
+      const localizedItineraryPath = getLocalizedPath('itineraries', i18n.language);
+      navigate(`${localizedItineraryPath}/${currentPath.substring(11)}${location.search}`, { replace: true });
       return;
     }
   }, [location, navigate]);
