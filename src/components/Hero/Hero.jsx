@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { getLocalizedPath } from '../../utils/routeMap';
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -33,13 +34,13 @@ const Hero = () => {
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
           <button 
-            onClick={() => navigate(`/${i18n.language}/itineraires`)}
+            onClick={() => navigate(getLocalizedPath('itineraries', i18n.language))}
             className="w-full sm:w-auto border border-white bg-transparent text-white hover:bg-white hover:text-primary transition-all duration-300 transform active:scale-95 px-8 md:px-10 py-3 md:py-3.5 rounded-full text-base md:text-lg font-semibold"
           >
             {t('hero.explore')}
           </button>
           <button 
-            onClick={() => navigate(`/${i18n.language}/contact`)}
+            onClick={() => navigate(getLocalizedPath('contact', i18n.language))}
             className="w-full sm:w-auto border border-white bg-transparent text-white hover:bg-white hover:text-primary transition-all duration-300 transform active:scale-95 px-8 md:px-10 py-3 md:py-3.5 rounded-full text-base md:text-lg font-semibold"
           >
             {t('hero.contact')}
