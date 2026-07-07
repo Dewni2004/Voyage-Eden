@@ -47,7 +47,7 @@ function DomainLanguageWrapper() {
       targetLang = 'es';
     } else if (hostname.includes('.it') || hostname.includes('viaggieden')) {
       targetLang = 'it';
-    } else if (hostname.includes('.fr') || hostname.includes('voyage-eden')) {
+    } else if (hostname.includes('.fr') || hostname.includes('voyage-eden') || hostname.includes('voyageeden')) {
       targetLang = 'fr';
     } else if (hostname.includes('.de') || hostname.includes('edenreisen')) {
       targetLang = 'de';
