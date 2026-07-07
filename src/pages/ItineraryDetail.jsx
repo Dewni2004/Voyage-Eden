@@ -97,6 +97,7 @@ const ItineraryDetail = () => {
 
   useEffect(() => {
     const fetchItinerary = async () => {
+      setLoading(true);
       try {
         const dynamicData = await getItineraries(i18n.language);
         const all = dynamicData;

@@ -19,6 +19,7 @@ const BlogDetail = () => {
 
   useEffect(() => {
     const fetchArticle = async () => {
+      setLoading(true);
       const dynamicArticles = await getArticles(i18n.language);
       const found = dynamicArticles.find(item => item.id === id || generateSlug(item.title, item.id) === id);
       setArticle(found);
