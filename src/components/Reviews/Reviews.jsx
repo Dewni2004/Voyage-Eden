@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { getReviews } from '../../services/contentService';
-
+import { generateSlug } from '../../utils/slugify';
 
 const Reviews = () => {
   const { t, i18n } = useTranslation();
@@ -106,7 +106,7 @@ const Reviews = () => {
           {reviews.slice(0, 5).map((review) => (
             <Link 
               key={review.id} 
-              to={`/review/${review.id}`}
+              to={`/review/${generateSlug(review.name || review.headline || review.title, review.id)}`}
               className="relative h-[450px] min-w-[280px] w-[85vw] sm:w-auto md:w-auto md:min-w-0 snap-center rounded-[2.5rem] overflow-hidden shadow-2xl cursor-pointer shrink-0 md:shrink block"
             >
               {/* Background Image */}

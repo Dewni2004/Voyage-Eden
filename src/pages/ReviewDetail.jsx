@@ -176,7 +176,7 @@ const ReviewDetail = () => {
                   <div className="flex text-yellow-400 text-xs mb-3">{'★'.repeat(other.rating || 5)}</div>
                   <h4 className="text-primary font-bold text-xl mb-2">{other.name}</h4>
                   <p className="text-gray-500 text-sm line-clamp-3 mb-6 italic flex-1">"{other.text}"</p>
-                  <Link to={`/review/${other.id}`} className="text-luxury font-bold text-xs uppercase tracking-widest hover:text-primary flex items-center gap-2 group/link">
+                  <Link to={`/review/${generateSlug(other.name || other.headline || other.title, other.id)}`} className="text-luxury font-bold text-xs uppercase tracking-widest hover:text-primary flex items-center gap-2 group/link">
                     {t('reviewDetail.readFullStory')} 
                     <svg className="w-4 h-4 transform group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                   </Link>
