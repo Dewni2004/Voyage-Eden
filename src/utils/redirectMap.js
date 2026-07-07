@@ -659,4 +659,7 @@ export const redirectMap = {
   "/testimonial/zulman-jose-y-alberto/": "/review/zulman-jose-y-alberto",
   "/tour-guiado-por-la-ciudad-con-traslados-en-tuk-tuk/": "/blog/tour-guiado-por-la-ciudad-con-traslados-en-tuk-tuk",
   "/itinerario_cliente/sri-lanka-14-dias-itinerario-refp299-24august14/": "/itinerary/sri-lanka-14-dias-itinerario-refp299-24august14"
+  "/es": "/blog/es",
+  "/en": "/blog/en",
+  "/de": "/blog/de",
 };
