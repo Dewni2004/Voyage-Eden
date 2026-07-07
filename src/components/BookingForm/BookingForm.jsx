@@ -387,8 +387,8 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
                 <label className={labelClass}>{t("bookingForm.driverLang")}</label>
                 <select name="chauffeur_language" required className={inputClass} defaultValue="">
                   <option value="" disabled>{t("bookingForm.select")}</option>
-                  <option value="Francophone">{t("bookingForm.french")}</option>
-                  <option value="Anglophone">{t("bookingForm.english")}</option>
+                  <option value={t("bookingForm.nativeLangValue")}>{t("bookingForm.nativeLang")}</option>
+                  {i18n.language !== 'en' && <option value="Anglophone">{t("bookingForm.english")}</option>}
                 </select>
               </div>
               <div className="lg:col-span-2">

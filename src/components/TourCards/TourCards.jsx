@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import ItineraryCard from '../UI/ItineraryCard';
+import { getLocalizedPath } from '../../utils/routeMap';
 
 import { getItineraries } from '../../services/contentService';
 import CategoryPillsSection from './CategoryPillsSection';
@@ -490,8 +492,8 @@ const TourCards = () => {
 
           {/* View All Button */}
           <div className="mt-1 md:mt-6 text-center mb-0 md:mb-6">
-            <a 
-              href={`/${i18n.language}/itineraires`} 
+            <Link 
+              to={getLocalizedPath('itineraries', i18n.language)} 
               className="group inline-flex items-center gap-2 sm:gap-3 border border-primary bg-white text-primary hover:bg-primary hover:text-white px-5 py-2.5 sm:px-8 sm:py-3 rounded-full text-xs sm:text-sm md:text-base font-bold shadow-sm hover:shadow-md transition-all duration-300 transform active:scale-95"
             >
               <span>{t('tours.more')}</span>
@@ -500,7 +502,7 @@ const TourCards = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                 </svg>
               </div>
-            </a>
+            </Link>
           </div>
         </div>
       </section>
