@@ -8,6 +8,19 @@ import ScrollToTop from './components/ScrollToTop';
 import LoadingSpinner from './components/UI/LoadingSpinner';
 
 // Lazy loading components
+import RedirectHandler from './components/RedirectHandler/RedirectHandler';
+import { routeMap } from './utils/routeMap';
+
+const getAllPaths = (pageKey) => {
+  const paths = new Set();
+  Object.values(routeMap).forEach(langMap => {
+    if (langMap[pageKey]) paths.add(langMap[pageKey]);
+  });
+  // Also add the default English path just in case
+  paths.add(pageKey);
+  return Array.from(paths);
+};
+
 import Home from './pages/Home';
 const Itineraires = React.lazy(() => import('./pages/Itineraires'));
 const AboutUs = React.lazy(() => import('./pages/AboutUs'));
@@ -62,19 +75,20 @@ function AppContent() {
         <Suspense fallback={<LoadingSpinner />}>
           <Routes>
             <Route element={<DomainLanguageWrapper />}>
+              <Route path="*" element={<RedirectHandler />} />
               <Route index element={<Home />} />
-              <Route path="itineraires" element={<Itineraires />} />
-              <Route path="about" element={<AboutUs />} />
-              <Route path="travel-guide" element={<TravelGuide />} />
-              <Route path="contact" element={<ContactUs />} />
-              <Route path="custom-trip" element={<CustomTrip />} />
+              {getAllPaths('itineraries').map(path => <Route key={path} path={path} element={<Itineraires />} />)}
+              {getAllPaths('about').map(path => <Route key={path} path={path} element={<AboutUs />} />)}
+              {getAllPaths('guide').map(path => <Route key={path} path={path} element={<TravelGuide />} />)}
+              {getAllPaths('contact').map(path => <Route key={path} path={path} element={<ContactUs />} />)}
+              {getAllPaths('customTrip').map(path => <Route key={path} path={path} element={<CustomTrip />} />)}
               <Route path="itinerary/:id" element={<ItineraryDetail />} />
               <Route path="blog/:id" element={<BlogDetail />} />
-              <Route path="reviews" element={<Reviews />} />
+              {getAllPaths('reviews').map(path => <Route key={path} path={path} element={<Reviews />} />)}
               <Route path="review/:id" element={<ReviewDetail />} />
-              <Route path="hotels/:category" element={<HotelCategoryPage />} />
-              <Route path="restaurants" element={<Restaurants />} />
-              <Route path="b2b" element={<B2BPartner />} />
+              {getAllPaths('hotels').map(path => <Route key={path} path={`${path}/:category`} element={<HotelCategoryPage />} />)}
+              {getAllPaths('restaurants').map(path => <Route key={path} path={path} element={<Restaurants />} />)}
+              {getAllPaths('b2b').map(path => <Route key={path} path={path} element={<B2BPartner />} />)}
             </Route>
           </Routes>
         </Suspense>

@@ -8,6 +8,7 @@ import logoColorIT from '../../assets/Italy-Logo-scaled.webp';
 import logoColorDE from '../../assets/Geman logo.webp';
 import logoWhiteText from '../../assets/French-t-white-text.webp';
 import logoWhiteDE from '../../assets/Geman logo2.webp';
+import { getLocalizedPath } from '../../utils/routeMap';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -70,12 +71,12 @@ const Navbar = () => {
   };
 
   const navLinks = [
-    { name: t('nav.home'), path: `/` },
-    { name: t('nav.itineraries'), path: `/itineraires` },
-    { name: t('nav.about'), path: `/about` },
-    { name: t('nav.guide'), path: `/travel-guide` },
-    { name: t('nav.reviews', 'Avis'), path: `/reviews` },
-    { name: t('nav.contact'), path: `/contact` },
+    { name: t('nav.home'), path: getLocalizedPath('home', i18n.language) },
+    { name: t('nav.itineraries'), path: getLocalizedPath('itineraries', i18n.language) },
+    { name: t('nav.about'), path: getLocalizedPath('about', i18n.language) },
+    { name: t('nav.guide'), path: getLocalizedPath('guide', i18n.language) },
+    { name: t('nav.reviews', 'Avis'), path: getLocalizedPath('reviews', i18n.language) },
+    { name: t('nav.contact'), path: getLocalizedPath('contact', i18n.language) },
   ];
 
   const flags = [
