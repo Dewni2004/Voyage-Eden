@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { getItineraries } from '../services/contentService';
+import { generateSlug } from '../utils/slugify';
 
 import { Helmet } from 'react-helmet-async';
 import IncludedExcluded from '../components/IncludedExcluded/IncludedExcluded';
@@ -99,8 +100,13 @@ const ItineraryDetail = () => {
       try {
         const dynamicData = await getItineraries(i18n.language);
         const all = dynamicData;
-        // ID can be string or number depending on source
-        const found = all.find(it => it.id.toString() === id.toString());
+        
+        // Find itinerary by slug or fallback to ID
+        const found = all.find(it => {
+          const generatedSlug = generateSlug(it.title, it.id);
+          return it.id.toString() === id.toString() || generatedSlug === id.toString();
+        });
+        
         setItinerary(found);
       } catch (e) {
         console.error(e);

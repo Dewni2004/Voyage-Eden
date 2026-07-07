@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import i18n from 'i18next';
+import { generateSlug } from '../../utils/slugify';
 
 const formatPrice = (price, t) => {
   if (!price) return '';
@@ -398,7 +399,7 @@ const PopularItineraries = ({ title, subtitle, id, itineraries, isDark, isGreen 
                       </span>
                     </div>
                     <button 
-                      onClick={() => navigate(`/${i18n.language}/itinerary/${item.id}`)}
+                      onClick={() => navigate(`/${i18n.language}/itinerary/${generateSlug(item.title, item.id)}`)}
                       className={`${
                         isGreen 
                           ? 'border border-white bg-transparent text-white hover:bg-white hover:text-green-800' 
