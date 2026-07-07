@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { getCategories } from '../../services/contentService';
+import { Link } from 'react-router-dom';
+import { getLocalizedPath } from '../../utils/routeMap';
 import honeymoonImg from '../../assets/Honeymoon - Trips Card.webp';
 import adventureImg from '../../assets/Adventure - Trips Card.webp';
 import familyImg from '../../assets/Family - Trip Card.webp';
@@ -52,9 +54,9 @@ const CategoryPillsSection = () => {
     <div className="mt-4 pt-4 sm:mt-10 sm:pt-10 border-t border-gray-100">
       <div className="flex overflow-x-auto hide-scrollbar gap-4 lg:gap-2 xl:gap-4 2xl:gap-8 pb-6 sm:pb-12 px-4 max-w-[1400px] mx-auto justify-start lg:justify-center">
         {categories.map((category, idx) => (
-          <a 
+          <Link 
             key={category.id}
-            href={`/${i18n.language?.split('-')[0] || 'fr'}/itineraires#${category.id === 'interests' ? 'popular' : category.id}`}
+            to={`${getLocalizedPath('itineraries', i18n.language)}#${category.id === 'interests' ? 'popular' : category.id}`}
             className="group flex flex-col items-center gap-3 md:gap-4 shrink-0 mx-auto"
           >
             <div className="relative w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-[70px] lg:h-[70px] xl:w-[80px] xl:h-[80px] 2xl:w-[90px] 2xl:h-[90px] rounded-full flex items-center justify-center">
@@ -75,7 +77,7 @@ const CategoryPillsSection = () => {
             <h4 className="text-gray-600 group-hover:text-primary font-sans text-[9px] sm:text-[10px] md:text-xs lg:text-[9px] xl:text-[10px] 2xl:text-xs font-bold tracking-[0.1em] sm:tracking-[0.2em] text-center uppercase w-[70px] sm:w-[90px] md:w-[110px] lg:w-[85px] xl:w-[100px] 2xl:w-[110px] transition-colors duration-300">
               {t(`itinerariesPage.categories.${category.id}`, { defaultValue: category.title })}
             </h4>
-          </a>
+          </Link>
         ))}
       </div>
     </div>

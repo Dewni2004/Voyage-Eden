@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { getArticles } from '../../services/contentService';
 import { Link } from 'react-router-dom';
+import { generateSlug } from '../../utils/slugify';
 import sigiriya from '../../assets/Sigiriya.webp';
 import ella from '../../assets/Ella.webp';
 import kandy from '../../assets/Kandy.webp';
@@ -91,7 +92,7 @@ const Destinations = () => {
             return (
               <Link
                 key={article.id}
-                to={`/${article.id}`}
+                to={`/${generateSlug(article.title, article.id)}`}
                 className={`${colSpanClass} ${rowSpanClass} relative rounded-2xl md:rounded-[1.75rem] overflow-hidden group cursor-pointer h-[180px] sm:h-[220px] lg:h-full hover:shadow-xl transition-all duration-500`}
               >
                 <img

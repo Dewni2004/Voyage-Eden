@@ -25,7 +25,7 @@ const Navbar = () => {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
-  const forceSolidNavbar = location.pathname.includes('/custom-trip');
+  const forceSolidNavbar = location.pathname.includes(getLocalizedPath('customTrip', i18n.language));
 
   const colorLogos = {
     fr: logoColorFR,
