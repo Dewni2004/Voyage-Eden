@@ -2,6 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import bannerImage from '../../assets/design your itinerary.webp';
+import { getLocalizedPath } from '../../utils/routeMap';
 
 const CustomTripBanner = () => {
   const { t, i18n } = useTranslation();
@@ -64,7 +65,7 @@ const CustomTripBanner = () => {
             
             <div className="flex-shrink-0">
               <Link 
-                to={`/custom-trip`} 
+                to={getLocalizedPath('customTrip', i18n.language)} 
                 className="group/btn relative inline-flex items-center justify-center px-6 py-2.5 sm:px-8 sm:py-4 text-xs sm:text-sm md:text-base font-semibold text-white bg-white/10 backdrop-blur-md border-2 border-blue-400/80 rounded-full overflow-hidden transition-all duration-300 hover:bg-white/20 hover:border-blue-300 hover:shadow-[0_0_20px_rgba(96,165,250,0.5)] hover:-translate-y-1 whitespace-nowrap"
               >
                 <span className="relative z-10 flex items-center gap-2 drop-shadow-md">

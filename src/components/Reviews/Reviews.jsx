@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { getReviews } from '../../services/contentService';
 import { generateSlug } from '../../utils/slugify';
+import { getLocalizedPath } from '../../utils/routeMap';
 
 const Reviews = () => {
   const { t, i18n } = useTranslation();
@@ -106,7 +107,7 @@ const Reviews = () => {
           {reviews.slice(0, 5).map((review) => (
             <Link 
               key={review.id} 
-              to={`/review/${generateSlug(review.name || review.headline || review.title, review.id)}`}
+              to={`${getLocalizedPath('reviewDetail', i18n.language)}/${generateSlug(review.name || review.headline || review.title, review.id)}`}
               className="relative h-[450px] min-w-[280px] w-[85vw] sm:w-auto md:w-auto md:min-w-0 snap-center rounded-[2.5rem] overflow-hidden shadow-2xl cursor-pointer shrink-0 md:shrink block"
             >
               {/* Background Image */}
@@ -151,7 +152,7 @@ const Reviews = () => {
         {/* View All Button */}
         <div className="mt-6 md:mt-16 text-center">
           <Link 
-            to={`/reviews`} 
+            to={getLocalizedPath('reviews', i18n.language)} 
             className="group inline-flex items-center gap-2 sm:gap-3 border border-primary bg-transparent text-primary hover:bg-primary hover:text-white px-5 py-2.5 sm:px-8 sm:py-3 rounded-full text-[10px] sm:text-xs md:text-sm font-bold tracking-wider uppercase shadow-sm hover:shadow-md transition-all duration-300 transform active:scale-95"
           >
             <span>{t('nav.reviews')}</span>

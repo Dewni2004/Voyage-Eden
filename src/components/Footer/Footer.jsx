@@ -6,6 +6,7 @@ import logoColorEN from '../../assets/English-Logo-scaled.webp';
 import logoColorES from '../../assets/Spanish-Logo-scaled.webp';
 import logoColorIT from '../../assets/Italy-Logo-scaled.webp';
 import logoColorDE from '../../assets/Geman logo.webp';
+import { getLocalizedPath } from '../../utils/routeMap';
 
 const Footer = () => {
   const { t, i18n } = useTranslation();
@@ -87,7 +88,7 @@ const Footer = () => {
             {/* B2B Contacts Button */}
             <div className="pt-4 flex justify-center lg:justify-start">
               <Link 
-                to={`/b2b`}
+                to={getLocalizedPath('b2b', i18n.language)}
                 className="inline-flex items-center gap-2 bg-white/10 border border-white/20 hover:border-white/60 text-white px-6 py-3 rounded-full text-sm font-bold tracking-wider transition-all duration-300 hover:bg-white/20"
               >
                 {t('footer.b2b')}

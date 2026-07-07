@@ -5,6 +5,7 @@ import { getArticles } from '../services/contentService';
 import PageHero from '../components/UI/PageHero';
 import { Helmet } from 'react-helmet-async';
 import { generateSlug } from '../utils/slugify';
+import { getLocalizedPath } from '../utils/routeMap';
 
 const BlogDetail = () => {
   const { id } = useParams();
@@ -41,7 +42,7 @@ const BlogDetail = () => {
       <div className="min-h-screen flex items-center justify-center bg-[#f8fbff]">
         <div className="text-center">
           <h2 className="text-3xl font-bold text-primary mb-4">{t('blogDetail.notFound', "Article non trouvé")}</h2>
-          <Link to={`/travel-guide`} className="text-luxury font-bold hover:underline">{t('blogDetail.backBtn', "Retour au guide de voyage")}</Link>
+          <Link to={getLocalizedPath('guide', i18n.language)} className="text-luxury font-bold hover:underline">{t('blogDetail.backBtn', "Retour au guide de voyage")}</Link>
         </div>
       </div>
     );

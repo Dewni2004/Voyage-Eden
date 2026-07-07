@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import { getLocalizedPath } from '../../utils/routeMap';
 
 const RestaurantBanner = () => {
   const { t, i18n } = useTranslation();
@@ -44,7 +45,7 @@ const RestaurantBanner = () => {
             
             <div className="flex-shrink-0">
               <Link 
-                to={`/restaurants`} 
+                to={getLocalizedPath('restaurants', i18n.language)} 
                 className="group/btn relative inline-flex items-center justify-center px-8 py-4 text-sm md:text-base font-bold text-white bg-white/10 backdrop-blur-md border border-white/20 rounded-full overflow-hidden transition-all duration-300 hover:bg-white/20 hover:border-white/40 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] hover:shadow-[0_8px_32px_0_rgba(0,0,0,0.5)] hover:-translate-y-1"
               >
                 <span className="relative z-10 flex items-center gap-2">

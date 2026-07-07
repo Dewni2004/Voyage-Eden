@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import { getReviews } from '../services/contentService';
 import { generateSlug } from '../utils/slugify';
+import { getLocalizedPath } from '../utils/routeMap';
 
 import PageHero from '../components/UI/PageHero';
 import reviewsBanner from '../assets/Review page Banner.webp';
@@ -516,7 +517,7 @@ const Reviews = () => {
                         <p className="text-primary text-[8px] sm:text-[10px] font-bold uppercase tracking-widest mt-0.5 sm:mt-1 truncate">{review.date}</p>
                       </div>
                       <Link 
-                        to={`/review/${generateSlug(review.name || review.headline || review.title, review.id)}`}
+                        to={`${getLocalizedPath('reviewDetail', i18n.language)}/${generateSlug(review.name || review.headline || review.title, review.id)}`}
                         onClick={(e) => e.stopPropagation()}
                         className="w-7 h-7 xs:w-8 xs:h-8 sm:w-10 sm:h-10 bg-white/10 hover:bg-white text-white hover:text-primary rounded-full flex items-center justify-center transition-all group/btn backdrop-blur-sm shrink-0"
                       >
@@ -700,7 +701,7 @@ const Reviews = () => {
                 <h4 className="text-primary font-bold text-2xl mb-1">{selectedReview.name}</h4>
                 <p className="text-gray-400 text-sm font-bold uppercase tracking-[0.2em]">{t("reviews.tripIn")} {selectedReview.date}</p>
                 <Link
-                  to={`/review/${generateSlug(selectedReview.name || selectedReview.headline || selectedReview.title, selectedReview.id)}`}
+                  to={`${getLocalizedPath('reviewDetail', i18n.language)}/${generateSlug(selectedReview.name || selectedReview.headline || selectedReview.title, selectedReview.id)}`}
                   className="mt-6 text-primary font-bold text-sm flex items-center gap-2 group/btn hover:text-primary/80 transition-all"
                 >
                   {t("reviews.readFullStory")}

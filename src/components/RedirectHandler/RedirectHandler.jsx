@@ -43,6 +43,9 @@ const RedirectHandler = ({ children }) => {
       } else if (finalRedirect.startsWith('/itinerary/')) {
         const localizedItineraryPath = getLocalizedPath('itineraries', i18n.language);
         finalRedirect = `${localizedItineraryPath}/${finalRedirect.substring(11)}`;
+      } else if (finalRedirect.startsWith('/review/')) {
+        const localizedReviewPath = getLocalizedPath('reviewDetail', i18n.language);
+        finalRedirect = `${localizedReviewPath}/${finalRedirect.substring(8)}`;
       }
       navigate(`${finalRedirect}${location.search}`, { replace: true });
       return;
@@ -59,11 +62,13 @@ const RedirectHandler = ({ children }) => {
       return;
     }
     if (currentPath.startsWith('/opiniones/')) {
-      navigate(`/review/${currentPath.substring(11)}${location.search}`, { replace: true });
+      const localizedReviewPath = getLocalizedPath('reviewDetail', i18n.language);
+      navigate(`${localizedReviewPath}/${currentPath.substring(11)}${location.search}`, { replace: true });
       return;
     }
     if (currentPath.startsWith('/testimonial/')) {
-      navigate(`/review/${currentPath.substring(13)}${location.search}`, { replace: true });
+      const localizedReviewPath = getLocalizedPath('reviewDetail', i18n.language);
+      navigate(`${localizedReviewPath}/${currentPath.substring(13)}${location.search}`, { replace: true });
       return;
     }
   }, [location, navigate]);

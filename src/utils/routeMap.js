@@ -9,7 +9,8 @@ export const routeMap = {
     reviews: 'avis',
     hotels: 'hotels',
     restaurants: 'restaurants',
-    b2b: 'b2b'
+    b2b: 'b2b',
+    reviewDetail: 'avis'
   },
   es: {
     home: '',
@@ -21,7 +22,8 @@ export const routeMap = {
     reviews: 'opiniones-sobre-sri-lanka-viajes-eden',
     hotels: 'hoteles',
     restaurants: 'restaurantes',
-    b2b: 'b2b'
+    b2b: 'b2b',
+    reviewDetail: 'opiniones'
   },
   it: {
     home: '',
@@ -33,7 +35,8 @@ export const routeMap = {
     reviews: 'recensioni',
     hotels: 'hotel',
     restaurants: 'ristoranti',
-    b2b: 'b2b'
+    b2b: 'b2b',
+    reviewDetail: 'recensioni'
   },
   de: {
     home: '',
@@ -45,7 +48,8 @@ export const routeMap = {
     reviews: 'bewertungen',
     hotels: 'hotels',
     restaurants: 'restaurants',
-    b2b: 'b2b'
+    b2b: 'b2b',
+    reviewDetail: 'bewertungen'
   },
   en: {
     home: '',
@@ -57,7 +61,8 @@ export const routeMap = {
     reviews: 'reviews',
     hotels: 'hotels',
     restaurants: 'restaurants',
-    b2b: 'b2b'
+    b2b: 'b2b',
+    reviewDetail: 'review'
   }
 };
 

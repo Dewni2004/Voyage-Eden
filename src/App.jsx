@@ -85,7 +85,7 @@ function AppContent() {
               {getAllPaths('itineraries').map(path => <Route key={`${path}-detail`} path={`${path}/:id`} element={<ItineraryDetail />} />)}
               <Route path=":id" element={<BlogDetail />} />
               {getAllPaths('reviews').map(path => <Route key={path} path={path} element={<Reviews />} />)}
-              <Route path="review/:id" element={<ReviewDetail />} />
+              {getAllPaths('reviewDetail').map(path => <Route key={`${path}-detail`} path={`${path}/:id`} element={<ReviewDetail />} />)}
               {getAllPaths('hotels').map(path => <Route key={path} path={`${path}/:category`} element={<HotelCategoryPage />} />)}
               {getAllPaths('restaurants').map(path => <Route key={path} path={path} element={<Restaurants />} />)}
               {getAllPaths('b2b').map(path => <Route key={path} path={path} element={<B2BPartner />} />)}
