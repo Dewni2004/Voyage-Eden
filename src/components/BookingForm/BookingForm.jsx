@@ -236,10 +236,14 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
                 <p className="text-xs text-gray-500 mt-1 font-medium">{t("bookingForm.step1Desc")}</p>
               </div>
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
               <div>
                 <label className={labelClass}>{t("bookingForm.fullName")}</label>
                 <input type="text" name="full_name" required placeholder={t("bookingForm.fullNameHolder")} className={inputClass} onBlur={checkStep1Completion} />
+              </div>
+              <div>
+                <label className={labelClass}>{t("bookingForm.email")}</label>
+                <input type="email" name="user_email" required placeholder={t("bookingForm.emailHolder")} className={inputClass} onBlur={checkStep1Completion} />
               </div>
               <div>
                 <label className={labelClass}>{t("bookingForm.whatsapp")}</label>

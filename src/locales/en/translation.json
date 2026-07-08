@@ -577,6 +577,8 @@
       "step1Desc": "Your contact details to reach you",
       "fullName": "Full name",
       "fullNameHolder": "Your full name",
+      "email": "Email Address",
+      "emailHolder": "Your email address",
       "whatsapp": "WhatsApp Number",
       "nationality": "Nationality",
       "nationalityHolder": "Type or select",

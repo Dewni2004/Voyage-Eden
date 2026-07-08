@@ -553,6 +553,8 @@
       "step1Desc": "Vos coordonnées pour vous recontacter",
       "fullName": "Nom complet",
       "fullNameHolder": "Votre nom complet",
+      "email": "Adresse e-mail",
+      "emailHolder": "Votre adresse e-mail",
       "whatsapp": "Numéro WhatsApp",
       "nationality": "Nationalité",
       "nationalityHolder": "Tapez ou sélectionnez",

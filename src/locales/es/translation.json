@@ -567,6 +567,8 @@
       "step1Desc": "Tus datos de contacto para localizarte",
       "fullName": "Nombre completo",
       "fullNameHolder": "Tu nombre completo",
+      "email": "Correo electrónico",
+      "emailHolder": "Tu correo electrónico",
       "whatsapp": "Número de WhatsApp",
       "nationality": "Nacionalidad",
       "nationalityHolder": "Escriba o seleccione",
