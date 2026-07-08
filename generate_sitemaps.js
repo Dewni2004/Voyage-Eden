@@ -12,7 +12,7 @@ const domains = {
   en: 'https://srilankaedentravels.com',
   fr: 'https://srilankavoyageeden.com',
   it: 'https://srilankaviaggieden.com',
-  de: 'https://srilankaedenreisen.de'
+  de: 'https://srilankaedenreisen.com'
 };
 
 const generateSlug = (text, id) => {
