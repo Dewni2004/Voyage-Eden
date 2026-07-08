@@ -1,3 +1,42 @@
+const emailTitles = {
+  "New Booking Request": {
+    en: "New Booking Request",
+    es: "Nueva solicitud de reserva",
+    fr: "Nouvelle demande de réservation",
+    de: "Neue Buchungsanfrage",
+    it: "Nuova richiesta di prenotazione"
+  },
+  "New Contact Message": {
+    en: "New Contact Message",
+    es: "Nuevo mensaje de contacto",
+    fr: "Nouveau message de contact",
+    de: "Neue Kontaktanfrage",
+    it: "Nuovo messaggio di contatto"
+  },
+  "Custom Trip Request": {
+    en: "Custom Trip Request",
+    es: "Solicitud de viaje a medida",
+    fr: "Demande de voyage sur mesure",
+    de: "Maßgeschneiderte Reiseanfrage",
+    it: "Richiesta di viaggio su misura"
+  },
+  "New B2B Partner Request": {
+    en: "New B2B Partner Request",
+    es: "Nueva solicitud de socio B2B",
+    fr: "Nouvelle demande de partenaire B2B",
+    de: "Neue B2B-Partneranfrage",
+    it: "Nuova richiesta per partner B2B"
+  }
+};
+
+export const getTranslatedTitle = (title, lang = 'en') => {
+  const language = lang.toLowerCase().split('-')[0];
+  if (emailTitles[title] && emailTitles[title][language]) {
+    return emailTitles[title][language];
+  }
+  return title; // Fallback to English/original
+};
+
 const translations = {
   en: {
     brandName: "Sri Lanka Eden Travels",
@@ -111,11 +150,12 @@ const translations = {
   }
 };
 
-export const generateEmailTemplate = (title, formDataObj, language = 'en') => {
-  // Normalize language code
-  const langCode = language.toLowerCase().split('-')[0];
-  const t = translations[langCode] || translations['en'];
+export const generateEmailTemplate = (title, formDataObj, lang = 'en') => {
+  const language = lang.toLowerCase().split('-')[0];
+  const t = translations[language] || translations['en'];
   
+  const translatedTitle = getTranslatedTitle(title, language);
+
   // Convert to array of entries. Handles both FormData and plain objects.
   const entries = formDataObj instanceof FormData 
     ? Array.from(formDataObj.entries()) 
@@ -152,12 +192,12 @@ export const generateEmailTemplate = (title, formDataObj, language = 'en') => {
     <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 650px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);">
       <div style="background-color: #1e406f; padding: 30px; text-align: center;">
         <h1 style="color: #ffffff; margin: 0; font-size: 26px; font-weight: 700; letter-spacing: 1px;">${t.brandName}</h1>
-        <p style="color: #bae6fd; margin: 10px 0 0 0; font-size: 14px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600;">${title}</p>
+        <p style="color: #bae6fd; margin: 10px 0 0 0; font-size: 14px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600;">${translatedTitle}</p>
       </div>
       
       <div style="padding: 40px 30px; background-color: #ffffff;">
         <p style="margin-top: 0; margin-bottom: 25px; color: #475569; font-size: 16px; line-height: 1.6;">
-          ${t.receivedMsg(title, language.toUpperCase())}
+          ${t.receivedMsg(translatedTitle, language.toUpperCase())}
         </p>
         
         <table style="width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 15px; text-align: left; background-color: #f8fafc; border-radius: 8px; overflow: hidden;">

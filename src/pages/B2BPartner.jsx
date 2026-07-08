@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { supabase } from '../supabase';
-import { generateEmailTemplate, getAgentEmail, getBrandName } from '../utils/emailTemplate';
+import { generateEmailTemplate, getAgentEmail, getBrandName, getTranslatedTitle } from '../utils/emailTemplate';
 import PageHero from '../components/UI/PageHero';
 import officeStaff2 from '../assets/Office - staff 2.webp';
 import DatePicker from "react-datepicker";
@@ -259,7 +259,7 @@ const B2BPartner = () => {
         body: {
           to: getAgentEmail(i18n.language), 
           reply_to: formData.get('email'),
-          subject: `[${i18n.language.toUpperCase()}] New B2B Partner Request`,
+          subject: `[${(i18n.language || 'en').toUpperCase()}] ${getTranslatedTitle('New B2B Partner Request', i18n.language)}`,
           html: htmlContent,
           brand_name: getBrandName(i18n.language)
         }

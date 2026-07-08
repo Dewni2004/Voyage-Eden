@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import WelcomeVideo from '../assets/Welcome.mov';
 import { supabase } from '../supabase';
-import { generateEmailTemplate, getAgentEmail, getBrandName } from '../utils/emailTemplate';
+import { generateEmailTemplate, getAgentEmail, getBrandName, getTranslatedTitle } from '../utils/emailTemplate';
 
 const CustomTrip = () => {
   const { t, i18n } = useTranslation();
@@ -85,7 +85,7 @@ const CustomTrip = () => {
         body: {
           to: getAgentEmail(i18n.language), 
           reply_to: formData.email,
-          subject: `[${(i18n.language || 'en').toUpperCase()}] New Custom Trip Request`,
+          subject: `[${(i18n.language || 'en').toUpperCase()}] ${getTranslatedTitle('Custom Trip Request', i18n.language)}`,
           html: htmlContent,
           brand_name: getBrandName(i18n.language)
         }
@@ -231,14 +231,14 @@ const CustomTrip = () => {
                     <div>
                       <label className="block text-xs font-bold text-gray-600 mb-2 uppercase tracking-wider">{t('customTrip.nationality', 'Nationality')} <span className="text-red-500">*</span></label>
                       <select name="nationality" value={formData.nationality} onChange={handleInputChange} required className="w-full bg-white border border-gray-200 rounded-xl py-3.5 px-4 text-[15px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 transition-all shadow-sm">
-                        <option value="">{t('customTrip.selectNationality', 'Select Nationality')}</option>
-                        <option value="Sri Lankan">{t('customTrip.natSriLankan', 'Sri Lankan')}</option>
-                        <option value="French">{t('customTrip.natFrench', 'French')}</option>
-                        <option value="British">{t('customTrip.natBritish', 'British')}</option>
-                        <option value="German">{t('customTrip.natGerman', 'German')}</option>
-                        <option value="Spanish">{t('customTrip.natSpanish', 'Spanish')}</option>
-                        <option value="Italian">{t('customTrip.natItalian', 'Italian')}</option>
-                        <option value="Other">{t('customTrip.natOther', 'Other')}</option>
+                        <option value="" disabled>{t('customTrip.selectNationality', 'Select Nationality')}</option>
+                        <option value={t('customTrip.natSriLankan', 'Sri Lankan')}>{t('customTrip.natSriLankan', 'Sri Lankan')}</option>
+                        <option value={t('customTrip.natFrench', 'French')}>{t('customTrip.natFrench', 'French')}</option>
+                        <option value={t('customTrip.natBritish', 'British')}>{t('customTrip.natBritish', 'British')}</option>
+                        <option value={t('customTrip.natGerman', 'German')}>{t('customTrip.natGerman', 'German')}</option>
+                        <option value={t('customTrip.natSpanish', 'Spanish')}>{t('customTrip.natSpanish', 'Spanish')}</option>
+                        <option value={t('customTrip.natItalian', 'Italian')}>{t('customTrip.natItalian', 'Italian')}</option>
+                        <option value={t('customTrip.natOther', 'Other')}>{t('customTrip.natOther', 'Other')}</option>
                       </select>
                     </div>
                     <div>
@@ -437,13 +437,13 @@ const CustomTrip = () => {
                         required 
                         className="w-full bg-white border border-gray-200 rounded-xl py-3.5 px-4 text-[15px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 transition-all shadow-sm"
                       >
-                        <option value="">{t('customTrip.selectLanguage', 'Select Language')}</option>
-                        <option value="Spanish">{t('customTrip.spanish', 'Spanish')}</option>
-                        <option value="English">{t('customTrip.english', 'English')}</option>
-                        <option value="French">{t('customTrip.french', 'French')}</option>
-                        <option value="German">{t('customTrip.german', 'German')}</option>
-                        <option value="Italian">{t('customTrip.italian', 'Italian')}</option>
-                        <option value="Other">{t('customTrip.otherLanguage', 'Other')}</option>
+                        <option value="" disabled>{t('customTrip.selectLanguage', 'Select Language')}</option>
+                        <option value={t('customTrip.spanish', 'Spanish')}>{t('customTrip.spanish', 'Spanish')}</option>
+                        <option value={t('customTrip.english', 'English')}>{t('customTrip.english', 'English')}</option>
+                        <option value={t('customTrip.french', 'French')}>{t('customTrip.french', 'French')}</option>
+                        <option value={t('customTrip.german', 'German')}>{t('customTrip.german', 'German')}</option>
+                        <option value={t('customTrip.italian', 'Italian')}>{t('customTrip.italian', 'Italian')}</option>
+                        <option value={t('customTrip.otherLanguage', 'Other')}>{t('customTrip.otherLanguage', 'Other')}</option>
                       </select>
 
                       {formData.langPref === 'Other' && (

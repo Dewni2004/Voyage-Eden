@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 // { useRef, useState } from 'react';
 import { supabase } from '../../supabase';
-import { generateEmailTemplate, getAgentEmail, getBrandName } from '../../utils/emailTemplate';
+import { generateEmailTemplate, getAgentEmail, getBrandName, getTranslatedTitle } from '../../utils/emailTemplate';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -146,7 +146,7 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
         body: {
           to: emailTo, 
           reply_to: formData.get('user_email'),
-          subject: `[${i18n.language.toUpperCase()}] New Booking Request`,
+          subject: `[${i18n.language.toUpperCase()}] ${getTranslatedTitle('New Booking Request', i18n.language)}`,
           html: htmlContent,
           brand_name: getBrandName(i18n.language)
         }
@@ -365,10 +365,10 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
                 <label className={labelClass}>{t("bookingForm.hotelCat")}</label>
                 <select name="hotel_category" required className={inputClass} defaultValue="">
                   <option value="" disabled>{t("bookingForm.select")}</option>
-                  <option value="Standard (3★)">{t("bookingForm.standard3")}</option>
-                  <option value="Superior (4★)">{t("bookingForm.superior4")}</option>
-                  <option value="Luxury (5★)">{t("bookingForm.luxury5")}</option>
-                  <option value="Super Luxury">{t("bookingForm.superLuxury")}</option>
+                  <option value={t("bookingForm.standard3")}>{t("bookingForm.standard3")}</option>
+                  <option value={t("bookingForm.superior4")}>{t("bookingForm.superior4")}</option>
+                  <option value={t("bookingForm.luxury5")}>{t("bookingForm.luxury5")}</option>
+                  <option value={t("bookingForm.superLuxury")}>{t("bookingForm.superLuxury")}</option>
                 </select>
               </div>
               <div>
@@ -379,9 +379,9 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
                 <label className={labelClass}>{t("bookingForm.mealPlan")}</label>
                 <select name="meal_plan" required className={inputClass} defaultValue="">
                   <option value="" disabled>{t("bookingForm.select")}</option>
-                  <option value="BB - Bed & Breakfast">{t("bookingForm.bb")}</option>
-                  <option value="HB - Breakfast & Dinner">{t("bookingForm.hb")}</option>
-                  <option value="FB - Breakfast + Lunch + Dinner">{t("bookingForm.fb")}</option>
+                  <option value={t("bookingForm.bb")}>{t("bookingForm.bb")}</option>
+                  <option value={t("bookingForm.hb")}>{t("bookingForm.hb")}</option>
+                  <option value={t("bookingForm.fb")}>{t("bookingForm.fb")}</option>
                 </select>
               </div>
             </div>
@@ -392,7 +392,7 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
                 <select name="chauffeur_language" required className={inputClass} defaultValue="">
                   <option value="" disabled>{t("bookingForm.select")}</option>
                   <option value={t("bookingForm.nativeLangValue")}>{t("bookingForm.nativeLang")}</option>
-                  {i18n.language !== 'en' && <option value="Anglophone">{t("bookingForm.english")}</option>}
+                  {i18n.language !== 'en' && <option value={t("bookingForm.english")}>{t("bookingForm.english")}</option>}
                 </select>
               </div>
               <div className="lg:col-span-2">
