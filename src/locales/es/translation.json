@@ -605,8 +605,8 @@
       "luxury5": "Lujo (5★)",
       "superLuxury": "Súper Lujo",
       "bb": "BB - Alojamiento y Desayuno",
-      "hb": "HB - Media Pensión (Desayuno y Cena)",
-      "fb": "FB - Pensión Completa (Desayuno + Almuerzo + Cena)"
+      "hb": "MP - Media Pensión (Desayuno y Cena)",
+      "fb": "PC - Pensión Completa (Desayuno + Almuerzo + Cena)"
     },
     "includedExcluded": {
       "title": "Lo que está incluido y excluido",

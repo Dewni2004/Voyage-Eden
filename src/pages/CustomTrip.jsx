@@ -234,7 +234,7 @@ const CustomTrip = () => {
                         <option value="" disabled>{t('customTrip.selectNationality', 'Select Nationality')}</option>
                         {i18n.language?.startsWith('es') ? (
                           <>
-                            <option value="España">España</option>
+                            <option value="Español">Español</option>
                             <option value="Argentina">Argentina</option>
                             <option value="Bolivia">Bolivia</option>
                             <option value="Chile">Chile</option>

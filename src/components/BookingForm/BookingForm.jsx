@@ -264,7 +264,7 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
                 <datalist id="nationalities">
                   {i18n.language?.startsWith('es') ? (
                     <>
-                      <option value="España" />
+                      <option value="Español" />
                       <option value="Argentina" />
                       <option value="Bolivia" />
                       <option value="Chile" />
