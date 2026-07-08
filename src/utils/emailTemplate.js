@@ -40,7 +40,7 @@ export const getTranslatedTitle = (title, lang = 'en') => {
 const translations = {
   en: {
     brandName: "Sri Lanka Eden Travels",
-    receivedMsg: (title, lang) => `You have received a new <strong>${title}</strong> from the <strong>${lang}</strong> version of the website. Below are the submitted details:`,
+    receivedMsg: (title, brandName) => `You have received a new <strong>${title}</strong> from <strong>${brandName}</strong>. Below are the submitted details:`,
     automatedMsg: "This is an automated message sent from your Voyage Eden website. <br>Please reply directly to this email to contact the sender.",
     keys: {
       fullName: "Full Name", full_name: "Full Name",
@@ -62,7 +62,7 @@ const translations = {
   },
   es: {
     brandName: "Sri Lanka Viajes Eden",
-    receivedMsg: (title, lang) => `Ha recibido una nueva <strong>${title}</strong> de la versión <strong>${lang}</strong> del sitio web. A continuación se muestran los detalles enviados:`,
+    receivedMsg: (title, brandName) => `Ha recibido una nueva <strong>${title}</strong> de <strong>${brandName}</strong>. A continuación se muestran los detalles enviados:`,
     automatedMsg: "Este es un mensaje automatizado enviado desde su sitio web Voyage Eden. <br>Por favor, responda directamente a este correo electrónico para contactar al remitente.",
     keys: {
       fullName: "Nombre completo", full_name: "Nombre completo",
@@ -84,7 +84,7 @@ const translations = {
   },
   fr: {
     brandName: "Sri Lanka Voyage Eden",
-    receivedMsg: (title, lang) => `Vous avez reçu une nouvelle <strong>${title}</strong> de la version <strong>${lang}</strong> du site web. Voici les détails soumis :`,
+    receivedMsg: (title, brandName) => `Vous avez reçu une nouvelle <strong>${title}</strong> de <strong>${brandName}</strong>. Voici les détails soumis :`,
     automatedMsg: "Ceci est un message automatisé envoyé depuis votre site Voyage Eden. <br>Veuillez répondre directement à cet e-mail pour contacter l'expéditeur.",
     keys: {
       fullName: "Nom complet", full_name: "Nom complet",
@@ -106,7 +106,7 @@ const translations = {
   },
   de: {
     brandName: "Sri Lanka Eden Reisen",
-    receivedMsg: (title, lang) => `Sie haben eine neue <strong>${title}</strong> von der <strong>${lang}</strong>-Version der Website erhalten. Nachfolgend finden Sie die übermittelten Details:`,
+    receivedMsg: (title, brandName) => `Sie haben eine neue <strong>${title}</strong> von <strong>${brandName}</strong> erhalten. Nachfolgend finden Sie die übermittelten Details:`,
     automatedMsg: "Dies ist eine automatische Nachricht, die von Ihrer Voyage Eden Website gesendet wurde. <br>Bitte antworten Sie direkt auf diese E-Mail, um den Absender zu kontaktieren.",
     keys: {
       fullName: "Vollständiger Name", full_name: "Vollständiger Name",
@@ -128,7 +128,7 @@ const translations = {
   },
   it: {
     brandName: "Sri Lanka Viaggi Eden",
-    receivedMsg: (title, lang) => `Hai ricevuto una nuova <strong>${title}</strong> dalla versione <strong>${lang}</strong> del sito web. Di seguito sono riportati i dettagli inviati:`,
+    receivedMsg: (title, brandName) => `Hai ricevuto una nuova <strong>${title}</strong> da <strong>${brandName}</strong>. Di seguito sono riportati i dettagli inviati:`,
     automatedMsg: "Questo è un messaggio automatico inviato dal tuo sito web Voyage Eden. <br>Si prega di rispondere direttamente a questa e-mail per contattare il mittente.",
     keys: {
       fullName: "Nome completo", full_name: "Nome completo",
@@ -197,7 +197,7 @@ export const generateEmailTemplate = (title, formDataObj, lang = 'en') => {
       
       <div style="padding: 40px 30px; background-color: #ffffff;">
         <p style="margin-top: 0; margin-bottom: 25px; color: #475569; font-size: 16px; line-height: 1.6;">
-          ${t.receivedMsg(translatedTitle, language.toUpperCase())}
+          ${t.receivedMsg(translatedTitle, t.brandName)}
         </p>
         
         <table style="width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 15px; text-align: left; background-color: #f8fafc; border-radius: 8px; overflow: hidden;">
