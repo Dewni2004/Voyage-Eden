@@ -262,12 +262,38 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
                   onBlur={checkStep1Completion}
                 />
                 <datalist id="nationalities">
-                  <option value="France" />
-                  <option value="Belgique" />
-                  <option value="Suisse" />
-                  <option value="Canada" />
-                  <option value="Royaume-Uni" />
-                  <option value="Allemagne" />
+                  {i18n.language?.startsWith('es') ? (
+                    <>
+                      <option value="España" />
+                      <option value="Argentina" />
+                      <option value="Bolivia" />
+                      <option value="Chile" />
+                      <option value="Colombia" />
+                      <option value="Costa Rica" />
+                      <option value="Cuba" />
+                      <option value="República Dominicana" />
+                      <option value="Ecuador" />
+                      <option value="El Salvador" />
+                      <option value="Guatemala" />
+                      <option value="Honduras" />
+                      <option value="México" />
+                      <option value="Nicaragua" />
+                      <option value="Panamá" />
+                      <option value="Paraguay" />
+                      <option value="Perú" />
+                      <option value="Uruguay" />
+                      <option value="Venezuela" />
+                    </>
+                  ) : (
+                    <>
+                      <option value="France" />
+                      <option value="Belgique" />
+                      <option value="Suisse" />
+                      <option value="Canada" />
+                      <option value="Royaume-Uni" />
+                      <option value="Allemagne" />
+                    </>
+                  )}
                 </datalist>
               </div>
             </div>

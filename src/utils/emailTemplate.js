@@ -68,7 +68,7 @@ const translations = {
       fullName: "Nombre completo", full_name: "Nombre completo",
       whatsapp: "WhatsApp", whatsapp_number: "WhatsApp",
       nationality: "Nacionalidad", email: "Correo electrónico", user_email: "Correo electrónico",
-      whoWith: "Viaja con", whereAt: "Etapa de planificación", planeTickets: "Tiene billetes de avión",
+      whoWith: "Con quien viaja", whereAt: "Etapa de planificación", planeTickets: "Tiene billetes de avión",
       numTravelers: "Nº de viajeros", num_travelers: "Nº de viajeros",
       adults: "Adultos", teens: "Adolescentes", children: "Niños", infants: "Bebés",
       numDays: "Nº de días", num_days: "Nº de días",

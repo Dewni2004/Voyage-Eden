@@ -232,13 +232,38 @@ const CustomTrip = () => {
                       <label className="block text-xs font-bold text-gray-600 mb-2 uppercase tracking-wider">{t('customTrip.nationality', 'Nationality')} <span className="text-red-500">*</span></label>
                       <select name="nationality" value={formData.nationality} onChange={handleInputChange} required className="w-full bg-white border border-gray-200 rounded-xl py-3.5 px-4 text-[15px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 transition-all shadow-sm">
                         <option value="" disabled>{t('customTrip.selectNationality', 'Select Nationality')}</option>
-                        <option value={t('customTrip.natSriLankan', 'Sri Lankan')}>{t('customTrip.natSriLankan', 'Sri Lankan')}</option>
-                        <option value={t('customTrip.natFrench', 'French')}>{t('customTrip.natFrench', 'French')}</option>
-                        <option value={t('customTrip.natBritish', 'British')}>{t('customTrip.natBritish', 'British')}</option>
-                        <option value={t('customTrip.natGerman', 'German')}>{t('customTrip.natGerman', 'German')}</option>
-                        <option value={t('customTrip.natSpanish', 'Spanish')}>{t('customTrip.natSpanish', 'Spanish')}</option>
-                        <option value={t('customTrip.natItalian', 'Italian')}>{t('customTrip.natItalian', 'Italian')}</option>
-                        <option value={t('customTrip.natOther', 'Other')}>{t('customTrip.natOther', 'Other')}</option>
+                        {i18n.language?.startsWith('es') ? (
+                          <>
+                            <option value="España">España</option>
+                            <option value="Argentina">Argentina</option>
+                            <option value="Bolivia">Bolivia</option>
+                            <option value="Chile">Chile</option>
+                            <option value="Colombia">Colombia</option>
+                            <option value="Costa Rica">Costa Rica</option>
+                            <option value="Cuba">Cuba</option>
+                            <option value="República Dominicana">República Dominicana</option>
+                            <option value="Ecuador">Ecuador</option>
+                            <option value="El Salvador">El Salvador</option>
+                            <option value="Guatemala">Guatemala</option>
+                            <option value="Honduras">Honduras</option>
+                            <option value="México">México</option>
+                            <option value="Nicaragua">Nicaragua</option>
+                            <option value="Panamá">Panamá</option>
+                            <option value="Paraguay">Paraguay</option>
+                            <option value="Perú">Perú</option>
+                            <option value="Uruguay">Uruguay</option>
+                            <option value="Venezuela">Venezuela</option>
+                          </>
+                        ) : (
+                          <>
+                            <option value="France">France</option>
+                            <option value="Belgique">Belgique</option>
+                            <option value="Suisse">Suisse</option>
+                            <option value="Canada">Canada</option>
+                            <option value="Royaume-Uni">Royaume-Uni</option>
+                            <option value="Allemagne">Allemagne</option>
+                          </>
+                        )}
                       </select>
                     </div>
                     <div>
