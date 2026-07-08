@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://srilankaviajeseden.es/sitemap_es.xml
+Sitemap: https://srilankaedentravels.com/sitemap_en.xml
+Sitemap: https://srilankavoyageeden.com/sitemap_fr.xml
+Sitemap: https://srilankaviaggieden.com/sitemap_it.xml
+Sitemap: https://edenreisen.de/sitemap_de.xml
