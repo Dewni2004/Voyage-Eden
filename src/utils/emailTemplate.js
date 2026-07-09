@@ -95,7 +95,11 @@ const translations = {
       interest_nature: "Interés: Naturaleza", interest_beach: "Interés: Playa", interest_adventure: "Interés: Aventura",
       interest_hiking: "Interés: Senderismo", couple: "Pareja", honeymoon: "Luna de miel", family: "Familia", group: "Grupo",
       standard: "Estándar", superior: "Superior", luxury: "Lujo", driverEnglish: "Chofer en inglés",
-      driverSpanish: "Chofer en español", guideSpanish: "Guía en español", yes: "Sí"
+      driverSpanish: "Chofer en español", guideSpanish: "Guía en español", yes: "Sí", no: "No",
+      bb: "Alojamiento y desayuno", hb: "Media Pensión", fb: "Pensión Completa",
+      info: "Actualmente busco información", organize: "Empiezo a organizar mi viaje",
+      driver: "Conductor Profesional", chauffeur: "Chófer guía", nationalGuide: "Guía Nacional",
+      monuments: "Monumentos", temples: "Templos", nature: "Naturaleza", beach: "Playa", adventure: "Aventura", hiking: "Senderismo"
     }
   },
   fr: {
@@ -185,7 +189,11 @@ const translations = {
       interest_nature: "Interesse: Natura", interest_beach: "Interesse: Spiaggia", interest_adventure: "Interesse: Avventura",
       interest_hiking: "Interesse: Trekking", couple: "Coppia", honeymoon: "Luna di miele", family: "Famiglia", group: "Gruppo",
       standard: "Standard", superior: "Superiore", luxury: "Lusso", driverEnglish: "Autista parlante inglese",
-      driverSpanish: "Autista parlante spagnolo", guideSpanish: "Guida parlante spagnolo", yes: "Sì"
+      driverSpanish: "Autista parlante spagnolo", guideSpanish: "Guida parlante spagnolo", yes: "Sì", no: "No",
+      bb: "B&B - Pernottamento e colazione", hb: "MP - Mezza pensione", fb: "PC - Pensione completa",
+      info: "Sto cercando informazioni", organize: "Sto iniziando a organizzare",
+      driver: "Autista turistico", chauffeur: "Autista-guida", nationalGuide: "Guida Nazionale",
+      monuments: "Monumenti", temples: "Templi", nature: "Natura", beach: "Spiaggia", adventure: "Avventura", hiking: "Trekking"
     }
   }
 };
