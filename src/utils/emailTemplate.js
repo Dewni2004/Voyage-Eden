@@ -64,8 +64,12 @@ const translations = {
       client_name: "Client name", interest_monuments: "Interest: Monuments", interest_temples: "Interest: Temples",
       interest_nature: "Interest: Nature", interest_beach: "Interest: Beach", interest_adventure: "Interest: Adventure",
       interest_hiking: "Interest: Hiking", couple: "Couple", honeymoon: "Honeymoon", family: "Family", group: "Group",
-      standard: "Standard", superior: "Superior", luxury: "Luxury", driverEnglish: "English Driver",
-      driverSpanish: "Spanish Driver", guideSpanish: "Spanish Guide", yes: "Yes"
+      standard: "Standard", superior: "Superior", luxury: "Luxury", superLuxury: "Super Luxury", driverEnglish: "English Driver",
+      driverSpanish: "Spanish Driver", guideSpanish: "Spanish Guide", yes: "Yes", no: "No",
+      bb: "Bed & Breakfast", hb: "Half Board", fb: "Full Board",
+      info: "Looking for information", organize: "Starting to organize",
+      driver: "Tourist Driver", chauffeur: "Chauffeur Guide", nationalGuide: "National Guide",
+      monuments: "Monuments", temples: "Temples", nature: "Nature", beach: "Beach", adventure: "Adventure", hiking: "Hiking"
     }
   },
   es: {
