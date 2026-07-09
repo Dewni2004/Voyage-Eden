@@ -365,19 +365,19 @@ const CustomTrip = () => {
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-gray-50/30 p-4 border border-gray-100 rounded-2xl">
                     <div>
                       <label className="block text-[10px] font-bold text-gray-500 mb-1.5 uppercase tracking-wider">{t('customTrip.adults', 'No. Adults')}</label>
-                      <input type="number" min="0" name="adults" value={formData.adults} onChange={handleInputChange} autoComplete="off" className="w-full bg-white border border-gray-200 rounded-xl py-2 px-3 text-[14px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 transition-all shadow-sm" />
+                      <input type="number" min="0" name="adults" value={formData.adults} onChange={handleInputChange} autoComplete="new-password" className="w-full bg-white border border-gray-200 rounded-xl py-2 px-3 text-[14px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 transition-all shadow-sm" />
                     </div>
                     <div>
                       <label className="block text-[10px] font-bold text-gray-500 mb-1.5 uppercase tracking-wider">{t('customTrip.teens', 'Teens <16 years')}</label>
-                      <input type="number" min="0" name="teens" value={formData.teens} onChange={handleInputChange} autoComplete="off" className="w-full bg-white border border-gray-200 rounded-xl py-2 px-3 text-[14px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 transition-all shadow-sm" />
+                      <input type="number" min="0" name="teens" value={formData.teens} onChange={handleInputChange} autoComplete="new-password" className="w-full bg-white border border-gray-200 rounded-xl py-2 px-3 text-[14px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 transition-all shadow-sm" />
                     </div>
                     <div>
                       <label className="block text-[10px] font-bold text-gray-500 mb-1.5 uppercase tracking-wider">{t('customTrip.children', 'Children <11 years')}</label>
-                      <input type="number" min="0" name="children" value={formData.children} onChange={handleInputChange} autoComplete="off" className="w-full bg-white border border-gray-200 rounded-xl py-2 px-3 text-[14px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 transition-all shadow-sm" />
+                      <input type="number" min="0" name="children" value={formData.children} onChange={handleInputChange} autoComplete="new-password" className="w-full bg-white border border-gray-200 rounded-xl py-2 px-3 text-[14px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 transition-all shadow-sm" />
                     </div>
                     <div>
                       <label className="block text-[10px] font-bold text-gray-500 mb-1.5 uppercase tracking-wider">{t('customTrip.infants', 'Infants <2 years')}</label>
-                      <input type="number" min="0" name="infants" value={formData.infants} onChange={handleInputChange} autoComplete="off" className="w-full bg-white border border-gray-200 rounded-xl py-2 px-3 text-[14px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 transition-all shadow-sm" />
+                      <input type="number" min="0" name="infants" value={formData.infants} onChange={handleInputChange} autoComplete="new-password" className="w-full bg-white border border-gray-200 rounded-xl py-2 px-3 text-[14px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 transition-all shadow-sm" />
                     </div>
                   </div>
 
@@ -438,7 +438,7 @@ const CustomTrip = () => {
                         <label className="block text-[10px] font-bold text-gray-500 mb-1.5 uppercase tracking-wider">{t('customTrip.singleRooms', 'Single')}</label>
                         <div className="flex items-center gap-1.5 sm:gap-2">
                           <button type="button" onClick={() => handleCounterChange('singleRooms', -1)} className="w-7 h-7 sm:w-8 sm:h-8 shrink-0 rounded-full bg-gray-200 flex items-center justify-center text-primary font-bold hover:bg-primary hover:text-white transition-all shadow-sm">-</button>
-                          <input type="number" min="0" name="singleRooms" value={formData.singleRooms} onChange={handleInputChange} autoComplete="off" className="w-full text-center bg-white border border-gray-200 rounded-xl py-1.5 sm:py-2 px-1 text-[13px] sm:text-[14px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 transition-all shadow-sm" />
+                          <input type="number" min="0" name="singleRooms" value={formData.singleRooms} onChange={handleInputChange} autoComplete="new-password" className="w-full text-center bg-white border border-gray-200 rounded-xl py-1.5 sm:py-2 px-1 text-[13px] sm:text-[14px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 transition-all shadow-sm" />
                           <button type="button" onClick={() => handleCounterChange('singleRooms', 1)} className="w-7 h-7 sm:w-8 sm:h-8 shrink-0 rounded-full bg-gray-200 flex items-center justify-center text-primary font-bold hover:bg-primary hover:text-white transition-all shadow-sm">+</button>
                         </div>
                       </div>
@@ -446,7 +446,7 @@ const CustomTrip = () => {
                         <label className="block text-[10px] font-bold text-gray-500 mb-1.5 uppercase tracking-wider">{t('customTrip.doubleRooms', 'Double')}</label>
                         <div className="flex items-center gap-1.5 sm:gap-2">
                           <button type="button" onClick={() => handleCounterChange('doubleRooms', -1)} className="w-7 h-7 sm:w-8 sm:h-8 shrink-0 rounded-full bg-gray-200 flex items-center justify-center text-primary font-bold hover:bg-primary hover:text-white transition-all shadow-sm">-</button>
-                          <input type="number" min="0" name="doubleRooms" value={formData.doubleRooms} onChange={handleInputChange} autoComplete="off" className="w-full text-center bg-white border border-gray-200 rounded-xl py-1.5 sm:py-2 px-1 text-[13px] sm:text-[14px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 transition-all shadow-sm" />
+                          <input type="number" min="0" name="doubleRooms" value={formData.doubleRooms} onChange={handleInputChange} autoComplete="new-password" className="w-full text-center bg-white border border-gray-200 rounded-xl py-1.5 sm:py-2 px-1 text-[13px] sm:text-[14px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 transition-all shadow-sm" />
                           <button type="button" onClick={() => handleCounterChange('doubleRooms', 1)} className="w-7 h-7 sm:w-8 sm:h-8 shrink-0 rounded-full bg-gray-200 flex items-center justify-center text-primary font-bold hover:bg-primary hover:text-white transition-all shadow-sm">+</button>
                         </div>
                       </div>
@@ -454,7 +454,7 @@ const CustomTrip = () => {
                         <label className="block text-[10px] font-bold text-gray-500 mb-1.5 uppercase tracking-wider">{t('customTrip.tripleRooms', 'Triple')}</label>
                         <div className="flex items-center gap-1.5 sm:gap-2">
                           <button type="button" onClick={() => handleCounterChange('tripleRooms', -1)} className="w-7 h-7 sm:w-8 sm:h-8 shrink-0 rounded-full bg-gray-200 flex items-center justify-center text-primary font-bold hover:bg-primary hover:text-white transition-all shadow-sm">-</button>
-                          <input type="number" min="0" name="tripleRooms" value={formData.tripleRooms} onChange={handleInputChange} autoComplete="off" className="w-full text-center bg-white border border-gray-200 rounded-xl py-1.5 sm:py-2 px-1 text-[13px] sm:text-[14px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 transition-all shadow-sm" />
+                          <input type="number" min="0" name="tripleRooms" value={formData.tripleRooms} onChange={handleInputChange} autoComplete="new-password" className="w-full text-center bg-white border border-gray-200 rounded-xl py-1.5 sm:py-2 px-1 text-[13px] sm:text-[14px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 transition-all shadow-sm" />
                           <button type="button" onClick={() => handleCounterChange('tripleRooms', 1)} className="w-7 h-7 sm:w-8 sm:h-8 shrink-0 rounded-full bg-gray-200 flex items-center justify-center text-primary font-bold hover:bg-primary hover:text-white transition-all shadow-sm">+</button>
                         </div>
                       </div>
