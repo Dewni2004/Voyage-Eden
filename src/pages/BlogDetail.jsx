@@ -85,88 +85,130 @@ const BlogDetail = () => {
 
               
               <div className="prose prose-lg max-w-none text-gray-700 font-medium leading-relaxed">
-                {(typeof article.content === 'string' ? JSON.parse(article.content || '[]') : (article.content || [])).map((block, index) => {
-                  if (block.type === 'paragraph') {
-                    return (
-                      <p key={index} className={`mb-8 ${index === 0 ? 'relative pl-16 first-letter:text-7xl first-letter:font-bold first-letter:text-primary first-letter:float-left first-letter:mr-4 first-letter:mt-2' : ''}`}>
-                        {block.text}
-                      </p>
-                    );
-                  }
-                  if (block.type === 'heading') {
-                    return <h3 key={index} className="text-primary text-2xl font-bold mt-12 mb-6">{block.text}</h3>;
-                  }
-                  if (block.type === 'quote') {
-                    return (
-                      <div key={index} className="my-12 bg-[#f8fbff] border-l-8 border-luxury p-10 rounded-r-[32px] italic">
-                        <p className="text-xl md:text-2xl text-primary font-bold leading-relaxed">
-                          "{block.text}"
+                {(() => {
+                  const contentArray = typeof article.content === 'string' ? JSON.parse(article.content || '[]') : (article.content || []);
+                  const groupedContent = [];
+                  let currentImageGroup = null;
+
+                  contentArray.forEach((block, index) => {
+                    if (block.type === 'image') {
+                      if (!currentImageGroup) {
+                        currentImageGroup = { type: 'imageGroup', images: [{ ...block, originalIndex: index }] };
+                        groupedContent.push(currentImageGroup);
+                      } else {
+                        currentImageGroup.images.push({ ...block, originalIndex: index });
+                      }
+                    } else {
+                      currentImageGroup = null;
+                      groupedContent.push({ ...block, originalIndex: index });
+                    }
+                  });
+
+                  return groupedContent.map((block, index) => {
+                    if (block.type === 'paragraph') {
+                      return (
+                        <p key={`p-${index}`} className={`mb-8 ${index === 0 ? 'relative pl-16 first-letter:text-7xl first-letter:font-bold first-letter:text-primary first-letter:float-left first-letter:mr-4 first-letter:mt-2' : ''}`}>
+                          {block.text}
                         </p>
-                      </div>
-                    );
-                  }
-                  if (block.type === 'image') {
-                    return (
-                      <div key={index} className="my-12 rounded-[32px] overflow-hidden shadow-lg border border-gray-100">
-                        <img src={block.text} alt="" className="w-full h-auto object-cover" />
-                      </div>
-                    );
-                  }
-                  if (block.type === 'tips') {
-                    return (
-                      <div key={index} className="my-12 bg-gradient-to-br from-[#1e406f] to-[#0d213f] p-10 md:p-12 rounded-[40px] shadow-2xl relative overflow-hidden group">
-                        {/* Decorative Background Elements */}
-                        <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl group-hover:scale-110 transition-transform duration-700"></div>
-                        <div className="absolute bottom-0 left-0 w-32 h-32 bg-luxury/10 rounded-full translate-y-1/2 -translate-x-1/2 blur-2xl"></div>
-                        
-                        <div className="relative z-10">
-                          <div className="flex items-center gap-4 mb-8">
-                            <div className="w-14 h-14 bg-luxury rounded-2xl flex items-center justify-center text-2xl shadow-lg shadow-luxury/20">
-                              💡
-                            </div>
-                            <div>
-                              <h4 className="text-white text-2xl font-bold font-serif tracking-wide">{t('blogDetail.travelTips', "Conseils de voyage")}</h4>
-                              <p className="text-luxury text-xs font-bold uppercase tracking-widest">{t('blogDetail.expertAdvice', "Avis d'expert")}</p>
-                            </div>
+                      );
+                    }
+                    if (block.type === 'heading') {
+                      return <h3 key={`h-${index}`} className="text-primary text-2xl font-bold mt-12 mb-6">{block.text}</h3>;
+                    }
+                    if (block.type === 'quote') {
+                      return (
+                        <div key={`q-${index}`} className="my-12 bg-[#f8fbff] border-l-8 border-luxury p-10 rounded-r-[32px] italic">
+                          <p className="text-xl md:text-2xl text-primary font-bold leading-relaxed">
+                            "{block.text}"
+                          </p>
+                        </div>
+                      );
+                    }
+                    if (block.type === 'imageGroup') {
+                      if (block.images.length === 1) {
+                        return (
+                          <div key={`ig-${index}`} className="my-12 rounded-[32px] overflow-hidden shadow-lg border border-gray-100">
+                            <img src={block.images[0].text} alt="" className="w-full h-auto object-cover" />
                           </div>
-                          
-                          <div className="prose prose-invert max-w-none">
-                            <ul className="space-y-4 list-none p-0 m-0">
-                              {block.text.split('\n').filter(tip => tip.trim() !== '').map((tip, i) => (
-                                <li key={i} className="flex gap-3 text-white/90 text-base md:text-lg font-medium leading-relaxed italic">
-                                  <span className="text-luxury mt-1.5 flex-shrink-0">✦</span>
-                                  <span>{tip.trim()}</span>
-                                </li>
-                              ))}
-                            </ul>
+                        );
+                      } else {
+                        const gridClass = block.images.length === 2 ? 'md:grid-cols-2' : 'md:grid-cols-2 lg:grid-cols-3';
+                        return (
+                          <div key={`ig-${index}`} className={`my-12 grid grid-cols-1 ${gridClass} gap-6`}>
+                            {block.images.map((img, i) => (
+                              <div key={i} className="rounded-[32px] overflow-hidden shadow-lg border border-gray-100 h-64 md:h-80">
+                                <img src={img.text} alt="" className="w-full h-full object-cover transition-transform hover:scale-105 duration-500" />
+                              </div>
+                            ))}
                           </div>
+                        );
+                      }
+                    }
+                    if (block.type === 'tips') {
+                      return (
+                        <div key={`t-${index}`} className="my-12 bg-gradient-to-br from-[#1e406f] to-[#0d213f] p-10 md:p-12 rounded-[40px] shadow-2xl relative overflow-hidden group">
+                          {/* Decorative Background Elements */}
+                          <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl group-hover:scale-110 transition-transform duration-700"></div>
+                          <div className="absolute bottom-0 left-0 w-32 h-32 bg-luxury/10 rounded-full translate-y-1/2 -translate-x-1/2 blur-2xl"></div>
                           
-                          <div className="mt-8 pt-8 border-t border-white/10 flex items-center justify-between">
-                            <span className="text-white/40 text-[10px] font-bold uppercase tracking-widest">{t('blogDetail.signatureGuide', "Guide signature Eden Travels")}</span>
-                            <div className="flex gap-1">
-                              {[1,2,3].map(i => <div key={i} className="w-1 h-1 bg-luxury rounded-full opacity-50"></div>)}
+                          <div className="relative z-10">
+                            <div className="flex items-center gap-4 mb-8">
+                              <div className="w-14 h-14 bg-luxury rounded-2xl flex items-center justify-center text-2xl shadow-lg shadow-luxury/20">
+                                💡
+                              </div>
+                              <div>
+                                <h4 className="text-white text-2xl font-bold font-serif tracking-wide">{t('blogDetail.travelTips', "Conseils de voyage")}</h4>
+                                <p className="text-luxury text-xs font-bold uppercase tracking-widest">{t('blogDetail.expertAdvice', "Avis d'expert")}</p>
+                              </div>
+                            </div>
+                            
+                            <div className="prose prose-invert max-w-none">
+                              <ul className="space-y-4 list-none p-0 m-0">
+                                {block.text.split('\n').filter(tip => tip.trim() !== '').map((tip, i) => (
+                                  <li key={i} className="flex gap-3 text-white/90 text-base md:text-lg font-medium leading-relaxed italic">
+                                    <span className="text-luxury mt-1.5 flex-shrink-0">✦</span>
+                                    <span>{tip.trim()}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                            
+                            <div className="mt-8 pt-8 border-t border-white/10 flex items-center justify-between">
+                              <span className="text-white/40 text-[10px] font-bold uppercase tracking-widest">{t('blogDetail.signatureGuide', "Guide signature Eden Travels")}</span>
+                              <div className="flex gap-1">
+                                {[1,2,3].map(i => <div key={i} className="w-1 h-1 bg-luxury rounded-full opacity-50"></div>)}
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    );
-                  }
-                  if (block.type === 'list') {
-                    return (
-                      <ul key={index} className="my-10 space-y-4">
-                        {block.text.split('\n').filter(item => item.trim() !== '').map((item, i) => (
-                          <li key={i} className="flex gap-4 group">
-                            <div className="mt-1.5 flex-shrink-0 w-5 h-5 rounded-full bg-luxury/10 flex items-center justify-center group-hover:bg-luxury transition-colors">
-                              <div className="w-1.5 h-1.5 bg-luxury rounded-full group-hover:bg-white"></div>
-                            </div>
-                            <span className="text-gray-700 font-medium leading-relaxed">{item.trim()}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    );
-                  }
-                  return null;
-                })}
+                      );
+                    }
+                    if (block.type === 'list') {
+                      return (
+                        <ul key={`l-${index}`} className="my-10 space-y-4">
+                          {block.text.split('\n').filter(item => item.trim() !== '').map((item, i) => (
+                            <li key={i} className="flex gap-4 group">
+                              <div className="mt-1.5 flex-shrink-0 w-5 h-5 rounded-full bg-luxury/10 flex items-center justify-center group-hover:bg-luxury transition-colors">
+                                <div className="w-1.5 h-1.5 bg-luxury rounded-full group-hover:bg-white"></div>
+                              </div>
+                              <span className="text-gray-700 font-medium leading-relaxed">{item.trim()}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      );
+                    }
+                    if (block.type === 'link') {
+                      return (
+                        <div key={`lk-${index}`} className="my-8">
+                          <a href={block.url || block.text} target="_blank" rel="noopener noreferrer" className="inline-block text-primary font-bold text-lg hover:text-luxury underline decoration-luxury decoration-2 underline-offset-4 transition-colors">
+                            {block.text || block.url}
+                          </a>
+                        </div>
+                      );
+                    }
+                    return null;
+                  });
+                })()}
 
                 <div className="pt-8 border-t border-gray-100 flex flex-wrap gap-4">
                   {(typeof article.tags === 'string' ? JSON.parse(article.tags || '[]') : (article.tags || [])).map((tag) => {
