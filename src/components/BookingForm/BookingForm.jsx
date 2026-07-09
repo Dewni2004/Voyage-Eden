@@ -280,6 +280,13 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
                       <option value="Uruguay">Uruguay</option>
                       <option value="Venezuela">Venezuela</option>
                     </>
+                  ) : i18n.language?.startsWith('it') ? (
+                    <>
+                      <option value="Italiana">Italiana</option>
+                      <option value="Svizzera">Svizzera</option>
+                      <option value="San Marino">San Marino</option>
+                      <option value="Altro">Altro</option>
+                    </>
                   ) : (
                     <>
                       <option value="France">France</option>
