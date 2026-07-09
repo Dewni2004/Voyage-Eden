@@ -217,7 +217,16 @@ const BlogDetail = () => {
                 })()}
 
                 <div className="pt-8 border-t border-gray-100 flex flex-wrap gap-4">
-                  {(typeof article.tags === 'string' ? JSON.parse(article.tags || '[]') : (article.tags || [])).map((tag) => {
+                  {(() => {
+                    let parsedTags = [];
+                    try {
+                      parsedTags = typeof article.tags === 'string' ? JSON.parse(article.tags || '[]') : (article.tags || []);
+                    } catch (e) {
+                      console.error("Failed to parse article tags JSON", e);
+                      parsedTags = [];
+                    }
+                    return parsedTags;
+                  })().map((tag) => {
                     const cleanTag = tag.startsWith('#') ? tag.substring(1) : tag;
                     return (
                       <span key={tag} className="bg-gray-50 text-gray-400 font-bold px-6 py-2 rounded-full text-sm border border-gray-100">
