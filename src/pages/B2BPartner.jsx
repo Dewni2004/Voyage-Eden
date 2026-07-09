@@ -303,7 +303,7 @@ const B2BPartner = () => {
         <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
           <div className="bg-white p-6 sm:p-12 rounded-[32px] sm:rounded-[40px] shadow-xl border border-gray-100">
             
-            <form ref={formRef} onSubmit={handleSubmit} className="space-y-8">
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-8" autoComplete="off">
               {messageStatus.text && (
                 <div className={`p-4 rounded-2xl text-sm font-bold animate-in fade-in slide-in-from-top-4 duration-500 ${messageStatus.type === 'success' ? 'bg-green-50 text-green-600 border border-green-100' : 'bg-red-50 text-red-600 border border-red-100'}`}>
                   {messageStatus.text}

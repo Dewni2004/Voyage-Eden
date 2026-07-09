@@ -200,7 +200,7 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
           </div>
         )}
 
-        <form ref={form} onSubmit={sendEmail} className="relative z-10">
+        <form ref={form} onSubmit={sendEmail} className="relative z-10" autoComplete="off">
           
           {/* Step Indicator on Mobile */}
           {isMobile && (
@@ -362,7 +362,7 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
               </div>
               <div>
                 <label className={labelClass}>{t("bookingForm.numTravelers")}</label>
-                <input type="number" name="num_travelers" min="1" required placeholder="Ex: 2" className={inputClass} />
+                <input type="number" name="num_travelers" min="1" required placeholder="Ex: 2" className={inputClass} autoComplete="off" />
               </div>
             </div>
 
