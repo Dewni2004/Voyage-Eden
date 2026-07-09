@@ -86,7 +86,13 @@ const BlogDetail = () => {
               
               <div className="prose prose-lg max-w-none text-gray-700 font-medium leading-relaxed">
                 {(() => {
-                  const contentArray = typeof article.content === 'string' ? JSON.parse(article.content || '[]') : (article.content || []);
+                  let contentArray = [];
+                  try {
+                    contentArray = typeof article.content === 'string' ? JSON.parse(article.content || '[]') : (article.content || []);
+                  } catch (e) {
+                    console.error("Failed to parse article content JSON", e);
+                    contentArray = [{ type: 'paragraph', text: article.content || '' }];
+                  }
                   const groupedContent = [];
                   let currentImageGroup = null;
 
