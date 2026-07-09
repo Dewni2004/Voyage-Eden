@@ -57,7 +57,15 @@ const translations = {
       room_distribution: "Room Distribution", mealPlan: "Meal Plan", meal_plan: "Meal Plan",
       accompaniment: "Accompaniment", chauffeur_language: "Chauffeur Language",
       langPref: "Language Preference", otherLanguage: "Other Language",
-      comments: "Comments", special_requirements: "Special Requirements", tour_name: "Tour Name"
+      comments: "Comments", special_requirements: "Special Requirements", tour_name: "Tour Name",
+      group_composition: "Group composition", adults_count: "Adults count",
+      teens_count: "Teens count", children_count: "Children count", infants_count: "Infants count",
+      accommodation_type: "Accommodation type", agency_name: "Agency name", agent_name: "Agent name",
+      client_name: "Client name", interest_monuments: "Interest: Monuments", interest_temples: "Interest: Temples",
+      interest_nature: "Interest: Nature", interest_beach: "Interest: Beach", interest_adventure: "Interest: Adventure",
+      interest_hiking: "Interest: Hiking", couple: "Couple", honeymoon: "Honeymoon", family: "Family", group: "Group",
+      standard: "Standard", superior: "Superior", luxury: "Luxury", driverEnglish: "English Driver",
+      driverSpanish: "Spanish Driver", guideSpanish: "Spanish Guide", yes: "Yes"
     }
   },
   es: {
@@ -79,7 +87,15 @@ const translations = {
       room_distribution: "Distribución de habitaciones", mealPlan: "Plan de comidas", meal_plan: "Plan de comidas",
       accompaniment: "Acompañamiento", chauffeur_language: "Idioma del chófer",
       langPref: "Preferencia de idioma", otherLanguage: "Otro idioma",
-      comments: "Comentarios", special_requirements: "Requisitos especiales", tour_name: "Nombre del tour"
+      comments: "Comentarios", special_requirements: "Requisitos especiales", tour_name: "Nombre del tour",
+      group_composition: "Composición del grupo", adults_count: "Nº de adultos",
+      teens_count: "Nº de adolescentes", children_count: "Nº de niños", infants_count: "Nº de bebés",
+      accommodation_type: "Tipo de alojamiento", agency_name: "Nombre de la agencia", agent_name: "Nombre del agente",
+      client_name: "Nombre del cliente", interest_monuments: "Interés: Monumentos", interest_temples: "Interés: Templos",
+      interest_nature: "Interés: Naturaleza", interest_beach: "Interés: Playa", interest_adventure: "Interés: Aventura",
+      interest_hiking: "Interés: Senderismo", couple: "Pareja", honeymoon: "Luna de miel", family: "Familia", group: "Grupo",
+      standard: "Estándar", superior: "Superior", luxury: "Lujo", driverEnglish: "Chofer en inglés",
+      driverSpanish: "Chofer en español", guideSpanish: "Guía en español", yes: "Sí"
     }
   },
   fr: {
@@ -101,7 +117,15 @@ const translations = {
       room_distribution: "Répartition des chambres", mealPlan: "Plan de repas", meal_plan: "Plan de repas",
       accompaniment: "Accompagnement", chauffeur_language: "Langue du chauffeur",
       langPref: "Préférence de langue", otherLanguage: "Autre langue",
-      comments: "Commentaires", special_requirements: "Besoins spéciaux", tour_name: "Nom de l'excursion"
+      comments: "Commentaires", special_requirements: "Besoins spéciaux", tour_name: "Nom de l'excursion",
+      group_composition: "Composition du groupe", adults_count: "Nombre d'adultes",
+      teens_count: "Nombre d'adolescents", children_count: "Nombre d'enfants", infants_count: "Nombre de bébés",
+      accommodation_type: "Type d'hébergement", agency_name: "Nom de l'agence", agent_name: "Nom de l'agent",
+      client_name: "Nom du client", interest_monuments: "Intérêt : Monuments", interest_temples: "Intérêt : Temples",
+      interest_nature: "Intérêt : Nature", interest_beach: "Intérêt : Plage", interest_adventure: "Intérêt : Aventure",
+      interest_hiking: "Intérêt : Randonnée", couple: "Couple", honeymoon: "Lune de miel", family: "Famille", group: "Groupe",
+      standard: "Standard", superior: "Supérieur", luxury: "Luxe", driverEnglish: "Chauffeur anglophone",
+      driverSpanish: "Chauffeur hispanophone", guideSpanish: "Guide hispanophone", yes: "Oui"
     }
   },
   de: {
@@ -123,7 +147,15 @@ const translations = {
       room_distribution: "Zimmeraufteilung", mealPlan: "Verpflegungsplan", meal_plan: "Verpflegungsplan",
       accompaniment: "Begleitung", chauffeur_language: "Fahrersprache",
       langPref: "Sprachpräferenz", otherLanguage: "Andere Sprache",
-      comments: "Kommentare", special_requirements: "Spezielle Anforderungen", tour_name: "Tourname"
+      comments: "Kommentare", special_requirements: "Spezielle Anforderungen", tour_name: "Tourname",
+      group_composition: "Gruppenzusammensetzung", adults_count: "Anzahl Erwachsene",
+      teens_count: "Anzahl Jugendliche", children_count: "Anzahl Kinder", infants_count: "Anzahl Kleinkinder",
+      accommodation_type: "Unterkunftsart", agency_name: "Name der Agentur", agent_name: "Name des Agenten",
+      client_name: "Name des Kunden", interest_monuments: "Interesse: Denkmäler", interest_temples: "Interesse: Tempel",
+      interest_nature: "Interesse: Natur", interest_beach: "Interesse: Strand", interest_adventure: "Interesse: Abenteuer",
+      interest_hiking: "Interesse: Wandern", couple: "Paar", honeymoon: "Flitterwochen", family: "Familie", group: "Gruppe",
+      standard: "Standard", superior: "Superior", luxury: "Luxus", driverEnglish: "Englischsprachiger Fahrer",
+      driverSpanish: "Spanischsprachiger Fahrer", guideSpanish: "Spanischsprachiger Guide", yes: "Ja"
     }
   },
   it: {
@@ -145,7 +177,15 @@ const translations = {
       room_distribution: "Distribuzione camere", mealPlan: "Piano pasti", meal_plan: "Piano pasti",
       accompaniment: "Accompagnamento", chauffeur_language: "Lingua autista",
       langPref: "Preferenza lingua", otherLanguage: "Altra lingua",
-      comments: "Commenti", special_requirements: "Requisiti speciali", tour_name: "Nome del tour"
+      comments: "Commenti", special_requirements: "Requisiti speciali", tour_name: "Nome del tour",
+      group_composition: "Composizione del gruppo", adults_count: "N. di adulti",
+      teens_count: "N. di adolescenti", children_count: "N. di bambini", infants_count: "N. di neonati",
+      accommodation_type: "Tipo di alloggio", agency_name: "Nome dell'agenzia", agent_name: "Nome dell'agente",
+      client_name: "Nome del cliente", interest_monuments: "Interesse: Monumenti", interest_temples: "Interesse: Templi",
+      interest_nature: "Interesse: Natura", interest_beach: "Interesse: Spiaggia", interest_adventure: "Interesse: Avventura",
+      interest_hiking: "Interesse: Trekking", couple: "Coppia", honeymoon: "Luna di miele", family: "Famiglia", group: "Gruppo",
+      standard: "Standard", superior: "Superiore", luxury: "Lusso", driverEnglish: "Autista parlante inglese",
+      driverSpanish: "Autista parlante spagnolo", guideSpanish: "Guida parlante spagnolo", yes: "Sì"
     }
   }
 };
@@ -171,14 +211,22 @@ export const generateEmailTemplate = (title, formDataObj, lang = 'en') => {
       .trim();
   };
 
+  // Helper to format values
+  const formatValue = (val) => {
+    if (typeof val === 'string' && t.keys[val]) return t.keys[val];
+    return val;
+  };
+
   let rowsHtml = '';
   for (let [key, value] of entries) {
     if (!value || value.toString().trim() === '') continue;
     // Skip hidden or internal fields if needed, e.g. agent_email
     if (key === 'agent_email') continue;
     
-    // Format array values (like interests)
-    const displayValue = Array.isArray(value) ? value.join(', ') : value;
+    // Format array values (like interests) and translate individual values
+    const displayValue = Array.isArray(value) 
+      ? value.map(v => formatValue(v)).join(', ') 
+      : formatValue(value);
     
     rowsHtml += `
       <tr>
