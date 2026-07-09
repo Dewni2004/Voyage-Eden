@@ -190,7 +190,7 @@ const translations = {
       interest_hiking: "Interesse: Trekking", couple: "Coppia", honeymoon: "Luna di miele", family: "Famiglia", group: "Gruppo",
       standard: "Standard", superior: "Superiore", luxury: "Lusso", driverEnglish: "Autista parlante inglese",
       driverSpanish: "Autista parlante spagnolo", guideSpanish: "Guida parlante spagnolo", yes: "Sì", no: "No",
-      bb: "B&B - Pernottamento e colazione", hb: "MP - Mezza pensione", fb: "PC - Pensione completa",
+      bb: "AC – Alloggio e colazione", hb: "MP – Mezza pensione", fb: "PC – Pensione completa",
       info: "Sto cercando informazioni", organize: "Sto iniziando a organizzare",
       driver: "Autista turistico", chauffeur: "Autista-guida", nationalGuide: "Guida Nazionale",
       monuments: "Monumenti", temples: "Templi", nature: "Natura", beach: "Spiaggia", adventure: "Avventura", hiking: "Trekking"

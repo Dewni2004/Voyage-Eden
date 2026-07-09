@@ -201,9 +201,9 @@
       "doubleRooms": "Camere doppie",
       "tripleRooms": "Camere triple",
       "mealPlan": "Piani pasto",
-      "bb": "B&B - Pernottamento e colazione",
-      "hb": "MP - Mezza pensione",
-      "fb": "PC - Pensione completa",
+      "bb": "AC – Alloggio e colazione",
+      "hb": "MP – Mezza pensione",
+      "fb": "PC – Pensione completa",
       "accompaniment": "Tipo di accompagnamento:",
       "driver": "Autista turistico",
       "chauffeur": "Autista-guida",
@@ -616,9 +616,9 @@
       "superior4": "Superiore (4★)",
       "luxury5": "Lusso (5★)",
       "superLuxury": "Super Lusso",
-      "bb": "B&B - Pernottamento e Prima Colazione",
-      "hb": "MP - Mezza Pensione (Colazione e Cena)",
-      "fb": "PC - Pensione Completa (Colazione + Pranzo + Cena)"
+      "bb": "AC – Alloggio e colazione",
+      "hb": "MP – Mezza pensione",
+      "fb": "PC – Pensione completa"
     },
     "includedExcluded": {
       "title": "Cosa è incluso ed escluso",
