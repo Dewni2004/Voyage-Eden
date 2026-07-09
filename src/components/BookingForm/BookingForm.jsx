@@ -37,31 +37,30 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
   React.useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 1024);
-      // Trigger a re-measurement of height on resize if mobile
-      if (window.innerWidth < 1024) {
-        updateHeight();
-      }
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const updateHeight = () => {
-    if (window.innerWidth >= 1024) {
+  React.useEffect(() => {
+    if (!isMobile) {
       setContainerHeight('auto');
       return;
     }
-    setTimeout(() => {
-      const activeRef = currentStep === 1 ? step1Ref : currentStep === 2 ? step2Ref : step3Ref;
-      if (activeRef.current) {
-        setContainerHeight(activeRef.current.offsetHeight + 'px');
+    const activeRef = currentStep === 1 ? step1Ref : currentStep === 2 ? step2Ref : step3Ref;
+    if (!activeRef.current) return;
+    
+    const resizeObserver = new ResizeObserver(entries => {
+      for (let entry of entries) {
+        setContainerHeight(entry.target.offsetHeight + 'px');
       }
-    }, 50); // slight delay to ensure DOM is updated
-  };
-
-  React.useEffect(() => {
-    updateHeight();
-  }, [currentStep, isMobile]);
+    });
+    
+    resizeObserver.observe(activeRef.current);
+    setContainerHeight(activeRef.current.offsetHeight + 'px');
+    
+    return () => resizeObserver.disconnect();
+  }, [currentStep, isMobile, i18n.language]);
 
   const handleNext = (e, currentRef) => {
     e.preventDefault();
