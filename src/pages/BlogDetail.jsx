@@ -89,6 +89,9 @@ const BlogDetail = () => {
                   let contentArray = [];
                   try {
                     contentArray = typeof article.content === 'string' ? JSON.parse(article.content || '[]') : (article.content || []);
+                    if (!Array.isArray(contentArray)) {
+                      contentArray = [{ type: 'paragraph', text: String(contentArray) }];
+                    }
                   } catch (e) {
                     console.error("Failed to parse article content JSON", e);
                     contentArray = [{ type: 'paragraph', text: article.content || '' }];
@@ -221,6 +224,9 @@ const BlogDetail = () => {
                     let parsedTags = [];
                     try {
                       parsedTags = typeof article.tags === 'string' ? JSON.parse(article.tags || '[]') : (article.tags || []);
+                      if (!Array.isArray(parsedTags)) {
+                        parsedTags = [String(parsedTags)];
+                      }
                     } catch (e) {
                       console.error("Failed to parse article tags JSON", e);
                       parsedTags = [];
