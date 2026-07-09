@@ -1,4 +1,5 @@
 export const redirectMap = {
+  "/passaporto-e-visto/": "/consigli-per-un-viaggio-in-sri-lanka",
   "/opiniones-sobre-sri-lanka-viajes-eden/": "/opiniones-sobre-sri-lanka-viajes-eden",
   "/enchufes-y-adaptadores-electricos-en-sri-lanka/": "/blog/enchufes-y-adaptadores-electricos-en-sri-lanka",
   "/guia-practica-de-sri-lanka/": "/blog/guia-practica-de-sri-lanka",
