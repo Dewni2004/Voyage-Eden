@@ -65,6 +65,14 @@ const CustomTrip = () => {
     }
   };
 
+  const handleCounterChange = (field, delta) => {
+    setFormData(prev => {
+      const currentVal = parseInt(prev[field] || '0', 10);
+      const newVal = Math.max(0, currentVal + delta);
+      return { ...prev, [field]: newVal.toString() };
+    });
+  };
+
   const nextSlide = () => {
     if (currentSlide < 5) setCurrentSlide(prev => prev + 1);
   };
@@ -421,15 +429,27 @@ const CustomTrip = () => {
                     <div className="grid grid-cols-3 gap-4">
                       <div>
                         <label className="block text-[10px] font-bold text-gray-500 mb-1.5 uppercase tracking-wider">{t('customTrip.singleRooms', 'Single')}</label>
-                        <input type="number" min="0" name="singleRooms" value={formData.singleRooms} onChange={handleInputChange} className="w-full bg-white border border-gray-200 rounded-xl py-2 px-3 text-[14px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 transition-all shadow-sm" />
+                        <div className="flex items-center gap-1.5 sm:gap-2">
+                          <button type="button" onClick={() => handleCounterChange('singleRooms', -1)} className="w-7 h-7 sm:w-8 sm:h-8 shrink-0 rounded-full bg-gray-200 flex items-center justify-center text-primary font-bold hover:bg-primary hover:text-white transition-all shadow-sm">-</button>
+                          <input type="number" min="0" name="singleRooms" value={formData.singleRooms} onChange={handleInputChange} className="w-full text-center bg-white border border-gray-200 rounded-xl py-1.5 sm:py-2 px-1 text-[13px] sm:text-[14px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 transition-all shadow-sm" />
+                          <button type="button" onClick={() => handleCounterChange('singleRooms', 1)} className="w-7 h-7 sm:w-8 sm:h-8 shrink-0 rounded-full bg-gray-200 flex items-center justify-center text-primary font-bold hover:bg-primary hover:text-white transition-all shadow-sm">+</button>
+                        </div>
                       </div>
                       <div>
                         <label className="block text-[10px] font-bold text-gray-500 mb-1.5 uppercase tracking-wider">{t('customTrip.doubleRooms', 'Double')}</label>
-                        <input type="number" min="0" name="doubleRooms" value={formData.doubleRooms} onChange={handleInputChange} className="w-full bg-white border border-gray-200 rounded-xl py-2 px-3 text-[14px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 transition-all shadow-sm" />
+                        <div className="flex items-center gap-1.5 sm:gap-2">
+                          <button type="button" onClick={() => handleCounterChange('doubleRooms', -1)} className="w-7 h-7 sm:w-8 sm:h-8 shrink-0 rounded-full bg-gray-200 flex items-center justify-center text-primary font-bold hover:bg-primary hover:text-white transition-all shadow-sm">-</button>
+                          <input type="number" min="0" name="doubleRooms" value={formData.doubleRooms} onChange={handleInputChange} className="w-full text-center bg-white border border-gray-200 rounded-xl py-1.5 sm:py-2 px-1 text-[13px] sm:text-[14px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 transition-all shadow-sm" />
+                          <button type="button" onClick={() => handleCounterChange('doubleRooms', 1)} className="w-7 h-7 sm:w-8 sm:h-8 shrink-0 rounded-full bg-gray-200 flex items-center justify-center text-primary font-bold hover:bg-primary hover:text-white transition-all shadow-sm">+</button>
+                        </div>
                       </div>
                       <div>
                         <label className="block text-[10px] font-bold text-gray-500 mb-1.5 uppercase tracking-wider">{t('customTrip.tripleRooms', 'Triple')}</label>
-                        <input type="number" min="0" name="tripleRooms" value={formData.tripleRooms} onChange={handleInputChange} className="w-full bg-white border border-gray-200 rounded-xl py-2 px-3 text-[14px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 transition-all shadow-sm" />
+                        <div className="flex items-center gap-1.5 sm:gap-2">
+                          <button type="button" onClick={() => handleCounterChange('tripleRooms', -1)} className="w-7 h-7 sm:w-8 sm:h-8 shrink-0 rounded-full bg-gray-200 flex items-center justify-center text-primary font-bold hover:bg-primary hover:text-white transition-all shadow-sm">-</button>
+                          <input type="number" min="0" name="tripleRooms" value={formData.tripleRooms} onChange={handleInputChange} className="w-full text-center bg-white border border-gray-200 rounded-xl py-1.5 sm:py-2 px-1 text-[13px] sm:text-[14px] focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary text-gray-800 transition-all shadow-sm" />
+                          <button type="button" onClick={() => handleCounterChange('tripleRooms', 1)} className="w-7 h-7 sm:w-8 sm:h-8 shrink-0 rounded-full bg-gray-200 flex items-center justify-center text-primary font-bold hover:bg-primary hover:text-white transition-all shadow-sm">+</button>
+                        </div>
                       </div>
                     </div>
                   </div>
