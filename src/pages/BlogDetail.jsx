@@ -198,11 +198,10 @@ const BlogDetail = () => {
                       );
                     }
                     if (block.type === 'link') {
-                      const linkUrl = block.url || block.text;
                       return (
                         <div key={`lk-${index}`} className="my-8">
-                          <a href={linkUrl} target="_blank" rel="noopener noreferrer" className="inline-block text-primary font-bold text-lg hover:text-luxury underline decoration-luxury decoration-2 underline-offset-4 transition-colors break-all">
-                            {linkUrl}
+                          <a href={block.url || block.text} target="_blank" rel="noopener noreferrer" className="inline-block text-primary font-bold text-lg hover:text-luxury underline decoration-luxury decoration-2 underline-offset-4 transition-colors break-all">
+                            {block.text || block.url}
                           </a>
                         </div>
                       );
