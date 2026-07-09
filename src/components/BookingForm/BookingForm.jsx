@@ -362,7 +362,7 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
               </div>
               <div>
                 <label className={labelClass}>{t("bookingForm.numTravelers")}</label>
-                <input type="number" name="num_travelers" min="1" required placeholder="Ex: 2" className={inputClass} autoComplete="new-password" />
+                <input type="number" name="travelers_count" min="1" required placeholder="Ex: 2" className={inputClass} autoComplete="nope" />
               </div>
             </div>
 
