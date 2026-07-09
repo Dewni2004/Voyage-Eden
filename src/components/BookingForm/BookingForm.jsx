@@ -247,7 +247,7 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
               </div>
               <div>
                 <label className={labelClass}>{t("bookingForm.whatsapp")}</label>
-                <input type="tel" name="whatsapp_number" required placeholder="Ex: +33 6 12 34 56 78" className={inputClass} onBlur={checkStep1Completion} />
+                <input type="tel" name="whatsapp_number" required placeholder="Ex: +33 6 12 34 56 78" className={inputClass} onBlur={checkStep1Completion} autoComplete="tel" />
               </div>
               <div>
                 <label className={labelClass}>{t("bookingForm.nationality")}</label>
