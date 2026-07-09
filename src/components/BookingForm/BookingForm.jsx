@@ -250,50 +250,47 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
               </div>
               <div>
                 <label className={labelClass}>{t("bookingForm.nationality")}</label>
-                <input 
-                  type="text" 
+                <select 
                   name="nationality" 
-                  list="nationalities" 
                   required 
-                  placeholder={t("bookingForm.nationalityHolder")} 
+                  defaultValue=""
                   className={inputClass} 
-                  autoComplete="off"
                   onBlur={checkStep1Completion}
-                />
-                <datalist id="nationalities">
+                >
+                  <option value="" disabled>{t("bookingForm.nationalityHolder")}</option>
                   {i18n.language?.startsWith('es') ? (
                     <>
-                      <option value="Española" />
-                      <option value="Argentina" />
-                      <option value="Bolivia" />
-                      <option value="Chile" />
-                      <option value="Colombia" />
-                      <option value="Costa Rica" />
-                      <option value="Cuba" />
-                      <option value="República Dominicana" />
-                      <option value="Ecuador" />
-                      <option value="El Salvador" />
-                      <option value="Guatemala" />
-                      <option value="Honduras" />
-                      <option value="México" />
-                      <option value="Nicaragua" />
-                      <option value="Panamá" />
-                      <option value="Paraguay" />
-                      <option value="Perú" />
-                      <option value="Uruguay" />
-                      <option value="Venezuela" />
+                      <option value="Española">Española</option>
+                      <option value="Argentina">Argentina</option>
+                      <option value="Bolivia">Bolivia</option>
+                      <option value="Chile">Chile</option>
+                      <option value="Colombia">Colombia</option>
+                      <option value="Costa Rica">Costa Rica</option>
+                      <option value="Cuba">Cuba</option>
+                      <option value="República Dominicana">República Dominicana</option>
+                      <option value="Ecuador">Ecuador</option>
+                      <option value="El Salvador">El Salvador</option>
+                      <option value="Guatemala">Guatemala</option>
+                      <option value="Honduras">Honduras</option>
+                      <option value="México">México</option>
+                      <option value="Nicaragua">Nicaragua</option>
+                      <option value="Panamá">Panamá</option>
+                      <option value="Paraguay">Paraguay</option>
+                      <option value="Perú">Perú</option>
+                      <option value="Uruguay">Uruguay</option>
+                      <option value="Venezuela">Venezuela</option>
                     </>
                   ) : (
                     <>
-                      <option value="France" />
-                      <option value="Belgique" />
-                      <option value="Suisse" />
-                      <option value="Canada" />
-                      <option value="Royaume-Uni" />
-                      <option value="Allemagne" />
+                      <option value="France">France</option>
+                      <option value="Belgique">Belgique</option>
+                      <option value="Suisse">Suisse</option>
+                      <option value="Canada">Canada</option>
+                      <option value="Royaume-Uni">Royaume-Uni</option>
+                      <option value="Allemagne">Allemagne</option>
                     </>
                   )}
-                </datalist>
+                </select>
               </div>
             </div>
 
