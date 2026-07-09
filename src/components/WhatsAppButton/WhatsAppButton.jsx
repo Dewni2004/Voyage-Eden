@@ -7,11 +7,16 @@ const WhatsAppButton = () => {
   
   // Use Marco's number for Italian, Ana's for Spanish, Nethmi's for others
   const phoneNumber = lang === 'it' ? '393336449849' : lang === 'es' ? '94764409650' : '94771470150';
+  const brandName = t('hero.brandName', 'Eden Travels');
   const message = lang === 'it' 
-    ? "Ciao Eden Travels, sono interessato a un tour!" 
+    ? `Ciao ${brandName}, sono interessato a un tour!` 
     : lang === 'es'
-      ? "¡Hola Eden Travels, estoy interesado en un viaje!"
-      : "Hi Eden Travels, I'm interested in a tour!";
+      ? `¡Hola ${brandName}, estoy interesado en un viaje!`
+      : lang === 'fr'
+        ? `Bonjour ${brandName}, je suis intéressé(e) par un voyage !`
+        : lang === 'de'
+          ? `Hallo ${brandName}, ich bin an einer Reise interessiert!`
+          : `Hi ${brandName}, I'm interested in a tour!`;
   
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
