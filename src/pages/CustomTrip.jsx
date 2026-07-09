@@ -426,7 +426,7 @@ const CustomTrip = () => {
 
                   <div className="bg-gray-50/55 border border-gray-100 p-6 rounded-2xl">
                     <p className="block text-xs font-bold text-gray-600 mb-3 uppercase tracking-wider">{t('customTrip.roomDist', 'Room Distribution')}</p>
-                    <div className="grid grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
                       <div>
                         <label className="block text-[10px] font-bold text-gray-500 mb-1.5 uppercase tracking-wider">{t('customTrip.singleRooms', 'Single')}</label>
                         <div className="flex items-center gap-1.5 sm:gap-2">
