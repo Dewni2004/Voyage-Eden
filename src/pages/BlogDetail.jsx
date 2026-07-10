@@ -31,9 +31,14 @@ const BlogDetail = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#f8fbff] relative">
-        <div className="absolute top-0 left-0 right-0 h-24 bg-gray-900"></div>
-        <div className="text-primary font-bold">{t('blogDetail.loading', "Chargement de l'article...")}</div>
+      <div className="min-h-screen bg-[#f8fbff]">
+        <div className="w-full h-[60vh] bg-gray-200 animate-pulse"></div>
+        <div className="max-w-4xl mx-auto px-6 py-16 flex justify-center">
+          <div className="flex flex-col items-center gap-4">
+            <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+            <div className="text-primary font-bold text-lg">{t('blogDetail.loading', "Chargement de l'article...")}</div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -41,11 +46,12 @@ const BlogDetail = () => {
   // If article not found, show error
   if (!article) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#f8fbff] relative">
-        <div className="absolute top-0 left-0 right-0 h-24 bg-gray-900"></div>
+      <div className="min-h-screen flex items-center justify-center bg-[#f8fbff]">
         <div className="text-center">
           <h2 className="text-3xl font-bold text-primary mb-4">{t('blogDetail.notFound', "Article non trouvé")}</h2>
-          <Link to={getLocalizedPath('guide', i18n.language)} className="text-luxury font-bold hover:underline">{t('blogDetail.backBtn', "Retour au guide de voyage")}</Link>
+          <Link to={getLocalizedPath('guide', i18n.language)} className="text-accent hover:underline">
+            {t('blogDetail.backToGuide', "Retour au guide de voyage")}
+          </Link>
         </div>
       </div>
     );
