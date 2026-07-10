@@ -370,7 +370,15 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
               </div>
               <div>
                 <label className={labelClass}>{t("bookingForm.roomDist")}</label>
-                <input type="text" name="room_distribution" required placeholder={t("bookingForm.roomHolder")} className={inputClass} />
+                <div className="flex gap-2">
+                  <input type="number" name="room_count" min="1" required className={`${inputClass} w-24`} autoComplete="nope" placeholder="Ex: 1" />
+                  <select name="room_type" required className={inputClass} defaultValue="">
+                    <option value="" disabled>{t("bookingForm.select")}</option>
+                    <option value={t("bookingForm.single")}>{t("bookingForm.single")}</option>
+                    <option value={t("bookingForm.double")}>{t("bookingForm.double")}</option>
+                    <option value={t("bookingForm.triple")}>{t("bookingForm.triple")}</option>
+                  </select>
+                </div>
               </div>
               <div>
                 <label className={labelClass}>{t("bookingForm.mealPlan")}</label>
