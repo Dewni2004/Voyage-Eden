@@ -66,6 +66,15 @@ p, span, li, a, button {
     padding-top: 2.5rem !important; /* 40px instead of 64px-128px */
     padding-bottom: 2.5rem !important;
   }
+
+  /* Force display of number input spinners (arrows) on mobile */
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: inner-spin-button !important;
+    appearance: inner-spin-button !important;
+    display: block !important;
+    opacity: 1 !important;
+  }
 }
 
 @layer utilities {
