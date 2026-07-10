@@ -246,9 +246,27 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
           <p className="text-gray-500 text-base max-w-2xl mx-auto font-medium leading-relaxed">{t("bookingForm.desc")}</p>
         </div>
 
+        {/* Success / Error Popup Modal */}
         {messageStatus.text && (
-          <div className={`p-4 rounded-2xl text-sm font-bold mb-10 text-center shadow-sm relative z-10 ${messageStatus.type === 'success' ? 'bg-green-50 text-green-700 border border-green-200' : 'bg-red-50 text-red-700 border border-red-200'}`}>
-            {messageStatus.text}
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-gray-900/60 backdrop-blur-sm">
+            <div className={`bg-white rounded-[32px] p-8 md:p-10 max-w-sm md:max-w-md w-full shadow-2xl relative text-center border-t-[8px] ${messageStatus.type === 'success' ? 'border-green-500' : 'border-red-500'}`}>
+              <div className={`w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 border-[6px] ${messageStatus.type === 'success' ? 'bg-green-50 border-green-100/50 text-green-500' : 'bg-red-50 border-red-100/50 text-red-500'}`}>
+                {messageStatus.type === 'success' ? (
+                  <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" /></svg>
+                ) : (
+                  <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M6 18L18 6M6 6l12 12" /></svg>
+                )}
+              </div>
+              <p className="text-gray-700 font-bold text-lg md:text-xl mb-8 leading-relaxed">
+                {messageStatus.text}
+              </p>
+              <button 
+                onClick={() => setMessageStatus({ type: '', text: '' })}
+                className={`w-full text-white font-bold py-4 rounded-xl transition-all shadow-md hover:shadow-lg active:scale-95 ${messageStatus.type === 'success' ? 'bg-green-500 hover:bg-green-600 shadow-green-500/30' : 'bg-red-500 hover:bg-red-600 shadow-red-500/30'}`}
+              >
+                OK
+              </button>
+            </div>
           </div>
         )}
 
