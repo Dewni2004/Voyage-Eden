@@ -394,8 +394,8 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
                   name="travelers_count" 
                   min="1" 
                   required 
-                  className="w-24"
-                  placeholder="Ex: 2"
+                  className="w-[120px]"
+                  placeholder="2"
                   value={travelersCount}
                   onChange={setTravelersCount}
                 />
@@ -435,8 +435,8 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
                       <NumberSpinner 
                         min="1" 
                         required 
-                        className="w-[100px]"
-                        placeholder="Ex: 1" 
+                        className="w-[120px]"
+                        placeholder="1" 
                         value={room.count}
                         onChange={(val) => handleRoomChange(index, 'count', val)}
                       />
