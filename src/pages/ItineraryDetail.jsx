@@ -233,9 +233,9 @@ const ItineraryDetail = () => {
           </div>
 
           {/* Right Column: Day Details Card */}
-          <div className="bg-[#e9ecef] rounded-[40px] p-5 md:p-6 shadow-2xl border border-white lg:h-[750px] overflow-y-auto flex flex-col transition-all duration-500 hide-scrollbar">
+          <div className="bg-[#e9ecef] rounded-[28px] md:rounded-[40px] p-4 md:p-6 shadow-2xl border border-white lg:h-[750px] overflow-y-auto flex flex-col transition-all duration-500 hide-scrollbar">
             {/* Day Image */}
-            <div className="relative h-48 lg:h-52 rounded-[32px] overflow-hidden mb-5 shadow-xl group/img flex-shrink-0">
+            <div className="relative h-36 md:h-48 lg:h-52 rounded-[24px] md:rounded-[32px] overflow-hidden mb-4 md:mb-5 shadow-xl group/img flex-shrink-0">
               <img 
                 src={days[activeDay - 1].image} 
                 alt={days[activeDay - 1].location} 
@@ -245,51 +245,51 @@ const ItineraryDetail = () => {
                 height="600"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
-              <div className="absolute bottom-6 left-8 flex flex-col items-start gap-2">
-                    <span className="bg-white/20 backdrop-blur-md text-white px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest border border-white/30">
+              <div className="absolute bottom-4 md:bottom-6 left-4 md:left-8 flex flex-col items-start gap-1 md:gap-2">
+                    <span className="bg-white/20 backdrop-blur-md text-white px-2.5 py-1 md:px-3 md:py-1.5 rounded-full text-[9px] md:text-[10px] font-bold uppercase tracking-widest border border-white/30">
                   {days[activeDay - 1].displayLabel || `${t("itineraryDetail.day")} ${days[activeDay - 1].id}`}
                 </span>
-                <h3 className="text-white text-2xl md:text-3xl font-bold drop-shadow-xl leading-tight">
+                <h3 className="text-white text-xl md:text-3xl font-bold drop-shadow-xl leading-tight">
                   {days[activeDay - 1].location}
                 </h3>
               </div>
             </div>
 
-            <div className="mb-6 px-2">
-              <p className="text-gray-700 text-[14px] leading-relaxed font-medium">
+            <div className="mb-4 md:mb-6 px-1 md:px-2">
+              <p className="text-gray-700 text-[13px] md:text-[14px] leading-relaxed font-medium">
                 {days[activeDay - 1].description}
               </p>
             </div>
 
-            <div className="flex-grow space-y-6 px-2">
+            <div className="flex-grow space-y-4 md:space-y-6 px-1 md:px-2">
               {/* Highlights */}
-              <div className="flex items-center gap-6 group/item">
-                <div className="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center flex-shrink-0 shadow-lg">
-                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L16 4m0 13V4m0 0L9 7" /></svg>
+              <div className="flex items-center gap-4 md:gap-6 group/item">
+                <div className="w-11 h-11 md:w-14 md:h-14 rounded-[14px] md:rounded-2xl bg-primary flex items-center justify-center flex-shrink-0 shadow-lg">
+                  <svg className="w-5 h-5 md:w-7 md:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L16 4m0 13V4m0 0L9 7" /></svg>
                 </div>
                 <div>
-                  <h4 className="text-primary font-bold text-sm uppercase tracking-wider mb-0.5">{t("itineraryDetail.highlights")}</h4>
-                  <p className="text-gray-500 text-xs font-medium leading-relaxed">{days[activeDay - 1].highlights}</p>
+                  <h4 className="text-primary font-bold text-[11px] md:text-sm uppercase tracking-wider mb-0.5">{t("itineraryDetail.highlights")}</h4>
+                  <p className="text-gray-500 text-[11px] md:text-xs font-medium leading-relaxed">{days[activeDay - 1].highlights}</p>
                 </div>
               </div>
 
               {/* Accommodation */}
-              <div className="flex flex-col gap-4 group/item">
-                <div className="flex items-center gap-6">
-                  <div className="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center flex-shrink-0 shadow-lg">
-                    <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+              <div className="flex flex-col gap-3 md:gap-4 group/item">
+                <div className="flex items-center gap-4 md:gap-6">
+                  <div className="w-11 h-11 md:w-14 md:h-14 rounded-[14px] md:rounded-2xl bg-primary flex items-center justify-center flex-shrink-0 shadow-lg">
+                    <svg className="w-5 h-5 md:w-7 md:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
                   </div>
                   <div>
-                    <h4 className="text-primary font-bold text-sm uppercase tracking-wider mb-0.5">{t("itineraryDetail.accommodation")}</h4>
-                    <p className="text-gray-500 text-xs font-medium leading-relaxed">{days[activeDay - 1].accommodation}</p>
+                    <h4 className="text-primary font-bold text-[11px] md:text-sm uppercase tracking-wider mb-0.5">{t("itineraryDetail.accommodation")}</h4>
+                    <p className="text-gray-500 text-[11px] md:text-xs font-medium leading-relaxed">{days[activeDay - 1].accommodation}</p>
                   </div>
                 </div>
 
                 {days[activeDay - 1].accommodationImages && days[activeDay - 1].accommodationImages.some(img => img) && (
-                  <div className="mt-4 w-full">
-                    <div className="grid grid-cols-4 gap-3">
+                  <div className="mt-2 md:mt-4 w-full">
+                    <div className="grid grid-cols-4 gap-2 md:gap-3">
                       {days[activeDay - 1].accommodationImages.map((img, idx) => img ? (
-                        <div key={idx} onClick={() => setSelectedGalleryImage(img)} className="h-20 sm:h-24 md:h-28 rounded-2xl overflow-hidden shadow-md group/acc-img cursor-pointer relative">
+                        <div key={idx} onClick={() => setSelectedGalleryImage(img)} className="h-16 md:h-20 sm:h-24 md:h-28 rounded-xl md:rounded-2xl overflow-hidden shadow-md group/acc-img cursor-pointer relative">
                           <img src={img} alt="" className="w-full h-full object-cover transition-transform duration-700 group-hover/acc-img:scale-110" loading="lazy" width="400" height="300" />
                           <div className="absolute inset-0 bg-black/10 group-hover/acc-img:bg-transparent transition-colors"></div>
                         </div>
@@ -301,13 +301,13 @@ const ItineraryDetail = () => {
             </div>
 
             {/* Navigation Buttons */}
-            <div className="mt-8 flex gap-4 w-full">
+            <div className="mt-6 md:mt-8 flex gap-3 md:gap-4 w-full">
               {activeDay > 1 && (
                 <button 
                   onClick={() => setActiveDay(activeDay - 1)}
-                  className="w-1/2 bg-transparent border-2 border-primary text-primary py-4 rounded-2xl shadow-sm flex items-center justify-center gap-2 font-bold hover:bg-primary/5 transition-all"
+                  className="w-1/2 bg-transparent border-2 border-primary text-primary py-3 md:py-4 rounded-[14px] md:rounded-2xl shadow-sm flex items-center justify-center gap-1 md:gap-2 font-bold hover:bg-primary/5 transition-all text-sm md:text-base"
                 >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
+                  <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
                   {t("itineraryDetail.prevDay", "Jour précédent")} 
                 </button>
               )}
@@ -319,12 +319,12 @@ const ItineraryDetail = () => {
                     document.getElementById('booking-form')?.scrollIntoView({ behavior: 'smooth' });
                   }
                 }}
-                className={`${activeDay === 1 ? 'w-full' : 'w-1/2'} btn-premium-primary py-4 rounded-2xl shadow-sm flex items-center justify-center gap-2 transition-all font-bold`}
+                className={`${activeDay === 1 ? 'w-full' : 'w-1/2'} btn-premium-primary py-3 md:py-4 rounded-[14px] md:rounded-2xl shadow-sm flex items-center justify-center gap-1 md:gap-2 transition-all font-bold text-sm md:text-base`}
               >
                 {activeDay === days.length ? t("itineraryDetail.tourFinished") : (
                   <>
                     {t("itineraryDetail.nextDay", "Jour suivant")} 
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                    <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                   </>
                 )}
               </button>
