@@ -6,6 +6,7 @@ import Footer from './components/Footer/Footer';
 import WhatsAppButton from './components/WhatsAppButton/WhatsAppButton';
 import ScrollToTop from './components/ScrollToTop';
 import LoadingSpinner from './components/UI/LoadingSpinner';
+import WelcomePopup from './components/WelcomePopup/WelcomePopup';
 
 // Lazy loading components
 import RedirectHandler from './components/RedirectHandler/RedirectHandler';
@@ -96,6 +97,7 @@ function AppContent() {
       </main>
       <Footer />
       <WhatsAppButton />
+      <WelcomePopup />
     </div>
   );
 }
