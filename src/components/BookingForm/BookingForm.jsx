@@ -14,6 +14,45 @@ const SectionIcon = ({ d }) => (
   </div>
 );
 
+const NumberSpinner = ({ value, min = 1, max, onChange, placeholder, required, name, className }) => {
+  const handleDecrement = (e) => {
+    e.preventDefault();
+    const current = parseInt(value) || min;
+    if (current > min) onChange(current - 1);
+  };
+  const handleIncrement = (e) => {
+    e.preventDefault();
+    const current = parseInt(value) || min;
+    if (!max || current < max) onChange(current + 1);
+  };
+  const handleChange = (e) => {
+    onChange(e.target.value);
+  };
+  
+  return (
+    <div className={`flex items-center bg-white border border-gray-200 rounded-xl overflow-hidden focus-within:ring-4 focus-within:ring-primary/10 focus-within:border-primary transition-all shadow-sm shrink-0 h-[46px] ${className}`}>
+      <button type="button" onClick={handleDecrement} className="w-8 h-full flex items-center justify-center text-gray-500 hover:bg-gray-100 transition-colors shrink-0">
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M20 12H4" /></svg>
+      </button>
+      <input 
+        type="number" 
+        min={min} 
+        max={max}
+        required={required}
+        name={name}
+        className="w-full h-full text-center p-0 border-none bg-transparent focus:ring-0 text-[15px] font-semibold text-gray-800 hide-spin-button" 
+        placeholder={placeholder}
+        value={value}
+        onChange={handleChange}
+        autoComplete="nope"
+      />
+      <button type="button" onClick={handleIncrement} className="w-8 h-full flex items-center justify-center text-gray-500 hover:bg-gray-100 transition-colors shrink-0">
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 4v16m8-8H4" /></svg>
+      </button>
+    </div>
+  );
+};
+
 const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
   const { t, i18n } = useTranslation();
   const form = useRef();
@@ -33,7 +72,8 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
   const [containerHeight, setContainerHeight] = useState('auto');
-  const [rooms, setRooms] = useState([{ count: '', type: '' }]);
+  const [rooms, setRooms] = useState([{ count: '1', type: '' }]);
+  const [travelersCount, setTravelersCount] = useState('');
 
   const handleAddRoom = () => setRooms([...rooms, { count: '', type: '' }]);
   const handleRemoveRoom = (index) => setRooms(rooms.filter((_, i) => i !== index));
@@ -350,7 +390,15 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
               </div>
               <div>
                 <label className={labelClass}>{t("bookingForm.numTravelers")}</label>
-                <input type="number" name="travelers_count" min="1" required placeholder="Ex: 2" className={inputClass} autoComplete="nope" />
+                <NumberSpinner 
+                  name="travelers_count" 
+                  min="1" 
+                  required 
+                  className="w-24"
+                  placeholder="Ex: 2"
+                  value={travelersCount}
+                  onChange={setTravelersCount}
+                />
               </div>
             </div>
 
@@ -384,16 +432,13 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
                 <div className="space-y-3">
                   {rooms.map((room, index) => (
                     <div key={index} className="flex gap-2 relative">
-                      <input 
-                        type="number" 
+                      <NumberSpinner 
                         min="1" 
                         required 
-                        className={`${inputClass} !w-20 py-2.5 px-3`} 
-                        style={{ width: '80px', flexShrink: 0 }}
-                        autoComplete="nope" 
+                        className="w-[100px]"
                         placeholder="Ex: 1" 
                         value={room.count}
-                        onChange={(e) => handleRoomChange(index, 'count', e.target.value)}
+                        onChange={(val) => handleRoomChange(index, 'count', val)}
                       />
                       <select 
                         required 
