@@ -17,13 +17,15 @@ const SectionIcon = ({ d }) => (
 const NumberSpinner = ({ value, min = 1, max, onChange, placeholder, required, name, className }) => {
   const handleDecrement = (e) => {
     e.preventDefault();
-    const current = parseInt(value) || min;
-    if (current > min) onChange(current - 1);
+    const current = parseInt(value, 10);
+    const validCurrent = isNaN(current) ? min : current;
+    if (validCurrent > min) onChange(validCurrent - 1);
   };
   const handleIncrement = (e) => {
     e.preventDefault();
-    const current = parseInt(value) || min;
-    if (!max || current < max) onChange(current + 1);
+    const current = parseInt(value, 10);
+    const validCurrent = isNaN(current) ? min : current;
+    if (!max || validCurrent < max) onChange(validCurrent + 1);
   };
   const handleChange = (e) => {
     onChange(e.target.value);
@@ -433,10 +435,10 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
                   {rooms.map((room, index) => (
                     <div key={index} className="flex gap-2 relative">
                       <NumberSpinner 
-                        min="1" 
+                        min="0" 
                         required 
                         className="w-[120px]"
-                        placeholder="1" 
+                        placeholder="0" 
                         value={room.count}
                         onChange={(val) => handleRoomChange(index, 'count', val)}
                       />
