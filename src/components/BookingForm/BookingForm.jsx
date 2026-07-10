@@ -202,31 +202,15 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
 
         <form ref={form} onSubmit={sendEmail} className="relative z-10" autoComplete="off">
           
-          {/* Step Indicator on Mobile */}
-          {isMobile && (
-            <div className="flex items-center justify-center gap-2 mb-8">
-              {[1, 2, 3].map(step => (
-                <div key={step} className={`h-2 rounded-full transition-all duration-300 ${currentStep === step ? 'w-8 bg-primary' : 'w-2 bg-gray-200'}`} />
-              ))}
-            </div>
-          )}
-
           {/* Hidden inputs to pass data to EmailJS */}
           <input type="hidden" name="arrival_date" value={startDate ? startDate.toLocaleDateString('fr-FR') : ''} />
           <input type="hidden" name="departure_date" value={endDate ? endDate.toLocaleDateString('fr-FR') : ''} />
           <input type="hidden" name="agent_email" value={agentEmail} />
-
-          <div 
-            className={isMobile ? "overflow-hidden -mx-2 px-2 transition-[height] duration-500 ease-in-out" : "space-y-10"}
-            style={isMobile ? { height: containerHeight } : {}}
-          >
-            <div 
-              className={isMobile ? "flex items-start transition-transform duration-500 ease-in-out w-[300%]" : "space-y-10"}
-              style={isMobile ? { transform: `translateX(-${(currentStep - 1) * 33.333333}%)` } : {}}
-            >
+          <div className="space-y-10">
+            <div className="space-y-10">
 
               {/* Section 1: Informations Personnelles */}
-              <div className={isMobile ? "w-1/3 shrink-0 px-2 h-max" : ""}>
+              <div>
                 <div ref={step1Ref} className="bg-[#f8f9fa] rounded-[32px] p-6 md:p-10 border border-gray-100 shadow-sm transition-all hover:shadow-md">
                   <div className="mb-8 flex items-center gap-5">
               <SectionIcon d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -301,13 +285,6 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
               </div>
             </div>
 
-            {/* Mobile Navigation */}
-            {isMobile && (
-              <div className="mt-8 pt-6 border-t border-gray-200 flex justify-end">
-                <button type="button" onClick={(e) => handleNext(e, step1Ref)} className="btn-premium-primary py-3 px-6 rounded-full text-sm font-bold shadow-md flex items-center">{t("bookingForm.next")} <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7" /></svg>
-                </button>
-              </div>
-            )}
           </div>
         </div>
 
@@ -366,15 +343,6 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
               </div>
             </div>
 
-            {/* Mobile Navigation */}
-            {isMobile && (
-              <div className="mt-8 pt-6 border-t border-gray-200 flex justify-between items-center">
-                <button type="button" onClick={handlePrev} className="text-gray-500 font-bold py-2 px-2 flex items-center text-sm">
-                  <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 19l-7-7 7-7" /></svg> {t("bookingForm.back")}</button>
-                <button type="button" onClick={(e) => handleNext(e, step2Ref)} className="btn-premium-primary py-3 px-6 rounded-full text-sm font-bold shadow-md flex items-center">{t("bookingForm.next")} <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7" /></svg>
-                </button>
-              </div>
-            )}
           </div>
         </div>
 
@@ -435,22 +403,6 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
               </div>
             </div>
 
-            {/* Mobile Navigation & Submit */}
-            {isMobile && (
-              <div className="mt-8 pt-6 border-t border-gray-200 flex justify-between items-center">
-                <button type="button" onClick={handlePrev} className="text-gray-500 font-bold py-2 px-2 flex items-center text-sm">
-                  <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 19l-7-7 7-7" /></svg> {t("bookingForm.back")}</button>
-                <button type="submit" disabled={isSending} className="btn-premium-primary py-3 px-6 rounded-full text-sm font-bold shadow-md flex items-center gap-2">
-                  {isSending ? (
-                    <>
-                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>{t("bookingForm.sending")}</>
-                  ) : (
-                    <>{t("bookingForm.send")}<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-                    </>
-                  )}
-                </button>
-              </div>
-            )}
           </div>
         </div>
 
@@ -458,7 +410,6 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
         </div>
 
         {/* Desktop Footer / Submit */}
-        {!isMobile && (
           <div className="pt-8 flex justify-center">
             <button 
               type="submit"
@@ -474,7 +425,6 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
               )}
             </button>
           </div>
-        )}
       </form>
       </div>
     </section>
