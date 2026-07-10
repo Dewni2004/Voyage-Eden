@@ -233,7 +233,7 @@ const ItineraryDetail = () => {
           </div>
 
           {/* Right Column: Day Details Card */}
-          <div className="bg-[#e9ecef] rounded-[28px] md:rounded-[40px] p-4 md:p-6 shadow-2xl border border-white lg:h-[750px] overflow-y-auto flex flex-col transition-all duration-500 hide-scrollbar">
+          <div className="bg-[#e9ecef] rounded-[28px] md:rounded-[40px] p-4 pb-24 md:p-6 md:pb-6 shadow-2xl border border-white lg:h-[750px] overflow-y-auto flex flex-col transition-all duration-500 hide-scrollbar">
             {/* Day Image */}
             <div className="relative h-36 md:h-48 lg:h-52 rounded-[24px] md:rounded-[32px] overflow-hidden mb-4 md:mb-5 shadow-xl group/img flex-shrink-0">
               <img 
