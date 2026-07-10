@@ -33,6 +33,16 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
   const [containerHeight, setContainerHeight] = useState('auto');
+  const [rooms, setRooms] = useState([{ count: '', type: '' }]);
+
+  const handleAddRoom = () => setRooms([...rooms, { count: '', type: '' }]);
+  const handleRemoveRoom = (index) => setRooms(rooms.filter((_, i) => i !== index));
+  const handleRoomChange = (index, field, value) => {
+    const newRooms = [...rooms];
+    newRooms[index][field] = value;
+    setRooms(newRooms);
+  };
+  const combinedRooms = rooms.filter(r => r.count && r.type).map(r => `${r.count} ${r.type}`).join(', ');
 
   React.useEffect(() => {
     const handleResize = () => {
@@ -206,6 +216,7 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
           <input type="hidden" name="arrival_date" value={startDate ? startDate.toLocaleDateString('fr-FR') : ''} />
           <input type="hidden" name="departure_date" value={endDate ? endDate.toLocaleDateString('fr-FR') : ''} />
           <input type="hidden" name="agent_email" value={agentEmail} />
+          <input type="hidden" name="room_distribution" value={combinedRooms} />
           <div className="space-y-10">
             <div className="space-y-10">
 
@@ -370,14 +381,49 @@ const BookingForm = ({ itineraryTitle, itineraryDuration }) => {
               </div>
               <div>
                 <label className={labelClass}>{t("bookingForm.roomDist")}</label>
-                <div className="flex gap-2">
-                  <input type="number" name="room_count" min="1" required className={`${inputClass} w-24`} autoComplete="nope" placeholder="Ex: 1" />
-                  <select name="room_type" required className={inputClass} defaultValue="">
-                    <option value="" disabled>{t("bookingForm.select")}</option>
-                    <option value={t("bookingForm.single")}>{t("bookingForm.single")}</option>
-                    <option value={t("bookingForm.double")}>{t("bookingForm.double")}</option>
-                    <option value={t("bookingForm.triple")}>{t("bookingForm.triple")}</option>
-                  </select>
+                <div className="space-y-3">
+                  {rooms.map((room, index) => (
+                    <div key={index} className="flex gap-2 relative">
+                      <input 
+                        type="number" 
+                        min="1" 
+                        required 
+                        className={`${inputClass} !w-20 py-2.5 px-3`} 
+                        style={{ width: '80px', flexShrink: 0 }}
+                        autoComplete="nope" 
+                        placeholder="Ex: 1" 
+                        value={room.count}
+                        onChange={(e) => handleRoomChange(index, 'count', e.target.value)}
+                      />
+                      <select 
+                        required 
+                        className={`${inputClass} flex-1 py-2.5 px-3`} 
+                        value={room.type}
+                        onChange={(e) => handleRoomChange(index, 'type', e.target.value)}
+                      >
+                        <option value="" disabled>{t("bookingForm.select")}</option>
+                        <option value={t("bookingForm.single")}>{t("bookingForm.single")}</option>
+                        <option value={t("bookingForm.double")}>{t("bookingForm.double")}</option>
+                        <option value={t("bookingForm.triple")}>{t("bookingForm.triple")}</option>
+                      </select>
+                      {rooms.length > 1 && (
+                        <button 
+                          type="button" 
+                          onClick={() => handleRemoveRoom(index)}
+                          className="absolute -right-2 -top-2 bg-red-100 text-red-600 rounded-full w-6 h-6 flex items-center justify-center shadow-sm hover:bg-red-200"
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                        </button>
+                      )}
+                    </div>
+                  ))}
+                  <button 
+                    type="button" 
+                    onClick={handleAddRoom}
+                    className="text-xs font-bold text-accent hover:text-primary flex items-center gap-1 mt-1 transition-colors"
+                  >
+                    {t("bookingForm.addRoom")}
+                  </button>
                 </div>
               </div>
               <div>

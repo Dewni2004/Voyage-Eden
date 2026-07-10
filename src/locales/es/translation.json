@@ -591,6 +591,7 @@
       "single": "Individual",
       "double": "Doble",
       "triple": "Triple",
+      "addRoom": "+ Añadir habitación",
       "roomHolder": "Ej: 1 Doble, 2 Simples",
       "mealPlan": "Preferencia de plan de comidas",
       "driverLang": "Idioma del conductor",
