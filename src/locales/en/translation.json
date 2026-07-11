@@ -255,6 +255,7 @@
       "goHome": "Back to Home"
     },
     "itineraries": {
+      "otherItineraries": "Other itineraries",
       "popular": "Our most popular itineraries",
       "honeymoon": "Honeymoon trips",
       "family": "Family trips",
