@@ -76,7 +76,7 @@ const WelcomePopup = () => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             transition={{ type: "spring", bounce: 0.4, duration: 0.6 }}
-            className="relative w-full max-w-xl bg-white rounded-[40px] shadow-2xl overflow-hidden z-10 flex flex-col"
+            className="relative w-full max-w-xl bg-white rounded-[24px] sm:rounded-[40px] shadow-2xl overflow-hidden z-10 flex flex-col max-h-[90vh]"
           >
             
             {/* Close Button */}
@@ -88,7 +88,7 @@ const WelcomePopup = () => {
             </button>
 
             {/* Top Decorative Section with Image */}
-            <div className="relative h-48 sm:h-56 overflow-hidden flex items-center justify-center">
+            <div className="relative h-28 sm:h-56 shrink-0 overflow-hidden flex items-center justify-center">
               <div 
                 className="absolute inset-0 bg-cover bg-center"
                 style={{ backgroundImage: "url('/hero-image.webp')" }}
@@ -109,7 +109,7 @@ const WelcomePopup = () => {
             </div>
 
             {/* Content Section */}
-            <div className="px-8 pb-10 pt-8 text-center flex-grow flex flex-col items-center bg-white relative">
+            <div className="px-5 sm:px-8 pb-6 sm:pb-10 pt-6 sm:pt-8 text-center flex-grow flex flex-col items-center bg-white relative overflow-y-auto">
               {/* Floating Sparkles */}
               <div className="absolute top-0 right-10 text-yellow-400 opacity-50 animate-pulse">
                 <Sparkles className="w-6 h-6" />
@@ -118,7 +118,7 @@ const WelcomePopup = () => {
                 <Sparkles className="w-5 h-5" />
               </div>
 
-              <div className="flex gap-1.5 text-yellow-400 mb-5">
+              <div className="flex gap-1.5 text-yellow-400 mb-3 sm:mb-5">
                 {[...Array(5)].map((_, i) => (
                   <motion.div
                     key={i}
@@ -131,17 +131,17 @@ const WelcomePopup = () => {
                 ))}
               </div>
 
-              <h2 className="text-2xl sm:text-3xl font-serif font-bold text-gray-800 mb-3 leading-tight">
+              <h2 className="text-xl sm:text-3xl font-serif font-bold text-gray-800 mb-2 sm:mb-3 leading-tight mt-2 sm:mt-0">
                 {content.title}
               </h2>
               
-              <div className="inline-block bg-primary/10 px-4 py-1.5 rounded-full mb-5">
-                <p className="text-sm font-bold text-primary uppercase tracking-wider">
+              <div className="inline-block bg-primary/10 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full mb-3 sm:mb-5">
+                <p className="text-[11px] sm:text-sm font-bold text-primary uppercase tracking-wider">
                   {content.subtitle}
                 </p>
               </div>
 
-              <p className="text-gray-600 mb-8 leading-relaxed text-[15px] sm:text-base max-w-md">
+              <p className="text-gray-600 mb-5 sm:mb-8 leading-relaxed text-[13px] sm:text-base max-w-md">
                 {content.description}
               </p>
 
