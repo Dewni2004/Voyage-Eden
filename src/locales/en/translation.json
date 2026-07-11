@@ -446,11 +446,7 @@
           "line3": "Mobile/WhatsApp Rasika +94 76 440 9656"
         }
       },
-      "registration": {
-        "title": "Company Registration",
-        "sltda": "SLTDA (Sri Lanka Tourism Development Authority): SLTDA/SQA/TA/02233",
-        "regNo": "Business Registration No : PV 00242848"
-      },
+
       "offices": {
         "title": "Our Offices"
       },
@@ -474,7 +470,8 @@
         "submitBtn": "Send your message",
         "sending": "Sending...",
         "success": "Thank you! Your message has been successfully sent. We will get back to you shortly.",
-        "error": "Sorry, an error occurred. Please try again or contact us via WhatsApp."
+        "error": "Sorry, an error occurred. Please try again or contact us via WhatsApp.",
+        "whatsappContact": "Contact me via WhatsApp"
       },
       "consultants": {
         "title": "Meet your consultants",
@@ -486,7 +483,9 @@
         "whatsappNum": "94771470150"
       },
       "registration": {
-        "title": "Company Registration"
+        "title": "Company Registration",
+        "sltda": "SLTDA (Sri Lanka Tourism Development Authority): SLTDA/SQA/TA/02233",
+        "regNo": "Business Registration No : PV 00242848"
       },
       "mapKurunegala": "Our Kurunegala Office",
       "mapKandy": "Our Kandy Office"
