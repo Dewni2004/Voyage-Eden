@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { X, Award, Star, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-
+import oldWebsiteImg from '../../assets/Old website .png';
 const WelcomePopup = () => {
   const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
@@ -78,7 +78,6 @@ const WelcomePopup = () => {
             transition={{ type: "spring", bounce: 0.4, duration: 0.6 }}
             className="relative w-full max-w-xl bg-white rounded-[24px] sm:rounded-[40px] shadow-2xl overflow-hidden z-10 flex flex-col max-h-[90vh]"
           >
-            
             {/* Close Button */}
             <button 
               onClick={handleClose}
@@ -91,7 +90,7 @@ const WelcomePopup = () => {
             <div className="relative h-28 sm:h-56 shrink-0 overflow-hidden flex items-center justify-center">
               <div 
                 className="absolute inset-0 bg-cover bg-center"
-                style={{ backgroundImage: "url('/hero-image.webp')" }}
+                style={{ backgroundImage: `url(${oldWebsiteImg})` }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/40 to-transparent" />
               
