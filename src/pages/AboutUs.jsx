@@ -34,11 +34,16 @@ import noelImg from '../assets/Noel.webp';
 import chinthakaImg from '../assets/Chinthaka.webp';
 
 import PageHero from '../components/UI/PageHero';
+import { Helmet } from 'react-helmet-async';
 
 const AboutUs = () => {
   const { t } = useTranslation();
   return (
-    <div>
+    <div className="bg-gray-50/50">
+      <Helmet>
+        <title>{t('nav.about', 'About Us')} | {t('hero.brandName', 'Eden Travels')}</title>
+        <meta name="description" content={t('aboutUs.heroSubtitle', 'Discover our story and meet the team.')} />
+      </Helmet>
       <PageHero 
         title={t('aboutUs.heroTitle')}
         description={t('aboutUs.heroDesc')}

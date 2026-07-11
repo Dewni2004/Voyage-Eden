@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-
+import { Helmet } from 'react-helmet-async';
 import { getReviews } from '../services/contentService';
 import { generateSlug } from '../utils/slugify';
 import { getLocalizedPath } from '../utils/routeMap';
@@ -151,6 +151,10 @@ const Reviews = () => {
 
   return (
     <div className="bg-[#f8fbff] min-h-screen">
+      <Helmet>
+        <title>{t('nav.reviews', 'Reviews')} | {t('hero.brandName', 'Eden Travels')}</title>
+        <meta name="description" content={t('reviews.heroDesc', 'Read what our clients say about us.')} />
+      </Helmet>
       <div className="relative h-[60vh] flex items-center justify-center overflow-hidden">
         <img src={reviewsBanner} alt="" className="absolute inset-0 w-full h-full object-cover object-center" width="1920" height="1080" />
         <div className="absolute inset-0 bg-black/60"></div>

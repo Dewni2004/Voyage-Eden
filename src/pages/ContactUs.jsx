@@ -7,6 +7,7 @@ import officeStaff2 from '../assets/Office - staff 2.webp';
 import nethmiImg from '../assets/Nethmi.webp';
 import marcoImg from '../assets/Marco.webp';
 import anaImg from '../assets/Ana.webp';
+import { Helmet } from 'react-helmet-async';
 
 const ContactUs = () => {
   const form = useRef();

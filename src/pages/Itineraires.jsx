@@ -9,9 +9,7 @@ import { getItineraries } from '../services/contentService';
 import HotelOptions from '../components/HotelOptions/HotelOptions';
 import RestaurantBanner from '../components/RestaurantBanner/RestaurantBanner';
 import { FamilyTourSplitSection } from '../components/TourCards/TourCards';
-
-
-
+import { Helmet } from 'react-helmet-async';
 const Itineraires = () => {
   const { t, i18n } = useTranslation();
   const location = useLocation();
@@ -189,7 +187,11 @@ const Itineraires = () => {
   const familyStandardTours = formattedFamilyTours.filter(t => !isPremium(t.title));
 
   return (
-    <div>
+    <div className="bg-[#f8fbff] min-h-screen">
+      <Helmet>
+        <title>{t('nav.itineraries', 'Itineraries')} | {t('hero.brandName', 'Eden Travels')}</title>
+        <meta name="description" content={t('tours.subtitle', 'Discover our recommended customizable tours.')} />
+      </Helmet>
       <ItineraryHero />
       <ItineraryCategories itineraries={itineraries} />
       
