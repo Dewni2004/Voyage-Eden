@@ -9,7 +9,7 @@ import IncludedExcluded from '../components/IncludedExcluded/IncludedExcluded';
 import BookingCard from '../components/BookingCard/BookingCard';
 import BookingForm from '../components/BookingForm/BookingForm';
 import AnimatedMap from '../components/InteractiveMap/AnimatedMap';
-
+import PopularItineraries from '../components/PopularItineraries/PopularItineraries';
 const capitalizeFirstLetter = (string) => {
   if (!string) return '';
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -94,6 +94,7 @@ const ItineraryDetail = () => {
   const [activeDay, setActiveDay] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedGalleryImage, setSelectedGalleryImage] = useState(null);
+  const [allItineraries, setAllItineraries] = useState([]);
 
   useEffect(() => {
     const fetchItinerary = async () => {
@@ -109,6 +110,7 @@ const ItineraryDetail = () => {
         });
         
         setItinerary(found);
+        setAllItineraries(all);
       } catch (e) {
         console.error(e);
       }
@@ -338,6 +340,16 @@ const ItineraryDetail = () => {
       <BookingForm itineraryTitle={itinerary.title} itineraryDuration={itinerary.duration} />
       <IncludedExcluded />
       <BookingCard price={itinerary.price} />
+      
+      {/* Other Itineraries */}
+      {allItineraries && allItineraries.length > 1 && (
+        <PopularItineraries 
+          title={t('itineraries.otherItineraries', "Other Itineraries")} 
+          id="related-itineraries" 
+          itineraries={allItineraries.filter(it => it.id.toString() !== itinerary.id.toString()).slice(0, 4)} 
+          isDark={false}
+        />
+      )}
       
       {/* Lightbox Modal */}
       {selectedGalleryImage && (
