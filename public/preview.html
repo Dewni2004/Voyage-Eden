@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium Icons Preview</title>
+  <style>
+    /* =========================================
+       Why Choose Us - Premium SVG Version
+       ========================================= */
+    body {
+      background-color: #f7fafc;
+      padding: 50px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    
+    .eden-features-wrapper {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      width: 100%;
+      max-width: 1100px;
+      margin: 40px auto;
+    }
+
+    .eden-feature-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .eden-icon-box {
+      background-color: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      width: 100%;
+      aspect-ratio: 1; /* Make it a perfect square */
+      max-height: 220px; 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .eden-icon-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .eden-icon-box svg {
+      width: 100%;
+      height: 100%;
+      max-width: 110px;
+      max-height: 110px;
+      /* Adding a tiny drop shadow to SVGs to match the 3D look in the image */
+      filter: drop-shadow(0px 5px 5px rgba(0,0,0,0.05));
+    }
+
+    .eden-feature-title {
+      font-size: 18px !important;
+      font-weight: 600 !important;
+      color: #2d3748 !important;
+      margin: 0 0 6px 0 !important;
+      line-height: 1.3 !important;
+    }
+
+    .eden-feature-subtitle {
+      font-size: 14px !important;
+      color: #718096 !important;
+      margin: 0 !important;
+      font-weight: 400 !important;
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 991px) {
+      .eden-features-wrapper {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .eden-features-wrapper {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .eden-icon-box {
+        max-width: 200px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 
+    Me code eka copy karala oyaage wordpress eke custom html widget ekata danna. 
+    Meka exactly oyaage image eke thiyena gradient and shapes walatama hadala thiyenne.
+  -->
+
+  <div class="eden-features-wrapper">
+    
+    <!-- Card 1 -->
+    <div class="eden-feature-card">
+      <div class="eden-icon-box">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="lightG" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#e2f1f8"/><stop offset="100%" stop-color="#a8d3e6"/></linearGradient>
+            <linearGradient id="darkG" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#4a7dae"/><stop offset="100%" stop-color="#1a355b"/></linearGradient>
+          </defs>
+          <path d="M45 40 L45 80 C45 82.7 47.3 85 50 85 L80 85 C82.7 85 85 82.7 85 80 L85 40 L65 20 L45 40 Z" fill="url(#lightG)" stroke="#1a3454" stroke-width="4" stroke-linejoin="round"/>
+          <circle cx="65" cy="35" r="4" fill="#1a3454"/>
+          <text x="65" y="70" font-family="Arial, sans-serif" font-weight="bold" font-size="28" fill="#1a3454" text-anchor="middle">$</text>
+          <path d="M65 35 Q 85 0 95 30 Q 100 45 85 55" fill="none" stroke="#1a3454" stroke-width="3" stroke-linecap="round"/>
+          <g transform="rotate(-30 45 55)">
+            <path d="M20 25 L20 75 C20 77.7 22.3 80 25 80 L65 80 C67.7 80 70 77.7 70 75 L70 25 L45 5 L20 25 Z" fill="url(#darkG)" stroke="#1a3454" stroke-width="4" stroke-linejoin="round"/>
+            <circle cx="45" cy="20" r="4" fill="#fff"/>
+            <circle cx="35" cy="45" r="5" fill="#fff"/>
+            <circle cx="55" cy="65" r="5" fill="#fff"/>
+            <path d="M25 70 L65 40" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+          </g>
+        </svg>
+      </div>
+      <h3 class="eden-feature-title">Direct Price</h3>
+      <p class="eden-feature-subtitle">No Intermediaries</p>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="eden-feature-card">
+      <div class="eden-icon-box">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="pinG" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#cde8f4"/><stop offset="100%" stop-color="#80b8d6"/></linearGradient>
+            <linearGradient id="checkG" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#a6dba0"/><stop offset="100%" stop-color="#69b55c"/></linearGradient>
+            <linearGradient id="darkG2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#4a7dae"/><stop offset="100%" stop-color="#1a355b"/></linearGradient>
+          </defs>
+          <ellipse cx="50" cy="90" rx="20" ry="6" fill="#d1e3ec"/>
+          <path d="M50 10 C25 10 12 30 12 50 C12 70 45 85 50 92 C55 85 88 70 88 50 C88 30 75 10 50 10 Z" fill="url(#pinG)" stroke="#1a3454" stroke-width="4" stroke-linejoin="round"/>
+          <circle cx="50" cy="45" r="22" fill="#fff" stroke="#1a3454" stroke-width="4"/>
+          <g transform="rotate(45 50 45)">
+            <path d="M50 25 L58 45 L50 65 L42 45 Z" fill="url(#darkG2)" stroke="#1a3454" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M50 25 L58 45 L50 45 Z" fill="#b0d4e3"/>
+          </g>
+          <circle cx="50" cy="45" r="4" fill="#fff" stroke="#1a3454" stroke-width="3"/>
+          <circle cx="80" cy="75" r="16" fill="url(#checkG)" stroke="#fff" stroke-width="4"/>
+          <circle cx="80" cy="75" r="16" fill="none" stroke="#1a3454" stroke-width="3"/>
+          <path d="M72 75 L77 80 L88 68" fill="none" stroke="#1a3454" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h3 class="eden-feature-title">Local Experts</h3>
+      <p class="eden-feature-subtitle">Certified Guides</p>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="eden-feature-card">
+      <div class="eden-icon-box">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+             <linearGradient id="boxG" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#cde8f4"/><stop offset="100%" stop-color="#80b8d6"/></linearGradient>
+          </defs>
+          <path d="M15 30 L85 30 A 10 10 0 0 1 95 40 L95 70" fill="none" stroke="#1a3454" stroke-width="4" stroke-linecap="round"/>
+          <polygon points="95,75 88,62 102,62" fill="#1a3454" stroke="#1a3454" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M85 80 L15 80 A 10 10 0 0 1 5 70 L5 40" fill="none" stroke="#1a3454" stroke-width="4" stroke-linecap="round"/>
+          <polygon points="5,35 -2,48 12,48" fill="#1a3454" stroke="#1a3454" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M38 32 L38 22 C38 18 42 16 45 16 L55 16 C58 16 62 18 62 22 L62 32" fill="none" stroke="#1a3454" stroke-width="4" stroke-linecap="round"/>
+          <rect x="22" y="32" width="56" height="42" rx="6" fill="url(#boxG)" stroke="#1a3454" stroke-width="4" stroke-linejoin="round"/>
+          <line x1="32" y1="32" x2="32" y2="74" stroke="#1a3454" stroke-width="4"/>
+          <line x1="68" y1="32" x2="68" y2="74" stroke="#1a3454" stroke-width="4"/>
+          <path d="M50 40 L52 40 L54 43 L57 43 L58 41 L61 43 L60 46 L63 47 L65 48 L65 52 L62 53 L62 56 L64 58 L62 61 L59 59 L56 62 L55 65 L52 65 L50 63 L48 65 L45 65 L44 62 L41 59 L38 61 L36 58 L38 56 L38 53 L35 52 L35 48 L37 47 L38 46 L39 43 L42 43 L44 40 L46 40 L48 43 Z" fill="#fff" stroke="#1a3454" stroke-width="3" stroke-linejoin="round"/>
+          <circle cx="50" cy="53" r="4" fill="#1a3454"/>
+          <path d="M46 57 L58 45" stroke="#1a3454" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="59" cy="44" r="2.5" fill="#1a3454" stroke="#fff" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <h3 class="eden-feature-title">Tailor-made Travels</h3>
+      <p class="eden-feature-subtitle">Personalized Itineraries</p>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="eden-feature-card">
+      <div class="eden-icon-box">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="leafG" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#b4dc9d"/><stop offset="100%" stop-color="#5fa14d"/></linearGradient>
+            <linearGradient id="globeG" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#cde8f4"/><stop offset="100%" stop-color="#80b8d6"/></linearGradient>
+          </defs>
+          <circle cx="65" cy="55" r="22" fill="url(#globeG)" stroke="#1a3454" stroke-width="4"/>
+          <path d="M43 55 L87 55 M65 33 L65 77 M53 36 A 22 22 0 0 0 53 74 M77 36 A 22 22 0 0 1 77 74" fill="none" stroke="#1a3454" stroke-width="3"/>
+          <path d="M25 80 C10 80 12 35 40 20 C65 20 60 65 25 80 Z" fill="url(#leafG)" stroke="#1a3454" stroke-width="4" stroke-linejoin="round"/>
+          <path d="M40 20 C35 45 25 65 25 80" fill="none" stroke="#1a3454" stroke-width="3"/>
+          <path d="M36 38 L22 30 M31 52 L15 45 M26 65 L12 60" fill="none" stroke="#1a3454" stroke-width="3" stroke-linecap="round"/>
+          <path d="M65 15 C 85 15, 100 35, 95 65" fill="none" stroke="#7ab868" stroke-width="4" stroke-linecap="round"/>
+          <polygon points="95,68 88,55 102,55" fill="#7ab868" stroke="#7ab868" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M45 92 C 25 92, 10 72, 15 42" fill="none" stroke="#7ab868" stroke-width="4" stroke-linecap="round"/>
+          <polygon points="15,39 8,52 22,52" fill="#7ab868" stroke="#7ab868" stroke-width="2" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h3 class="eden-feature-title">Sustainable Tourism</h3>
+      <p class="eden-feature-subtitle">Eco-Friendly Experiences</p>
+    </div>
+
+  </div>
+</body>
+</html>
