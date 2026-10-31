@@ -21,21 +21,30 @@ const ReviewDetail = () => {
       const combinedData = [...dynamicData];
       setAllReviews(combinedData);
       
-      // 3. Find the review (handle both string and number IDs, and generated slugs for backwards compatibility)
-      const found = combinedData.find(r => {
-        if (r.id && r.id.toString() === id.toString()) return true;
-        
-        // Check generated slug (e.g., from old WordPress URLs)
-        const nameSlug = r.name ? r.name.toLowerCase().replace(/[^a-z0-9]+/g, '-') : '';
-        const headlineSlug = r.headline ? r.headline.toLowerCase().replace(/[^a-z0-9]+/g, '-') : '';
-        const titleSlug = r.title ? r.title.toLowerCase().replace(/[^a-z0-9]+/g, '-') : '';
-        
-        if (nameSlug && id.includes(nameSlug)) return true;
-        if (headlineSlug && id.includes(headlineSlug)) return true;
-        if (titleSlug && id.includes(titleSlug)) return true;
-        
-        return false;
+      // 3. Find the review:
+      // A. Match exact ID or slug ending with -${r.id} (e.g., /avis/eduardo-pallares-123)
+      let found = combinedData.find(r => {
+        if (!r.id) return false;
+        const idStr = r.id.toString();
+        return idStr === id.toString() || id.toString().endsWith(`-${idStr}`);
       });
+      
+      // B. Fallback: If not matched by ID (e.g., legacy WordPress / plain name slugs),
+      // search newest-to-oldest so duplicate names always pick the latest review!
+      if (!found) {
+        const reversed = [...combinedData].reverse();
+        found = reversed.find(r => {
+          const nameSlug = r.name ? r.name.toLowerCase().replace(/[^a-z0-9]+/g, '-') : '';
+          const headlineSlug = r.headline ? r.headline.toLowerCase().replace(/[^a-z0-9]+/g, '-') : '';
+          const titleSlug = r.title ? r.title.toLowerCase().replace(/[^a-z0-9]+/g, '-') : '';
+          
+          if (nameSlug && (id === nameSlug || id.includes(nameSlug))) return true;
+          if (headlineSlug && (id === headlineSlug || id.includes(headlineSlug))) return true;
+          if (titleSlug && (id === titleSlug || id.includes(titleSlug))) return true;
+          
+          return false;
+        });
+      }
       
       setReview(found);
       setLoading(false);
@@ -182,7 +191,7 @@ const ReviewDetail = () => {
                   <div className="flex text-yellow-400 text-xs mb-3">{'★'.repeat(other.rating || 5)}</div>
                   <h4 className="text-primary font-bold text-xl mb-2">{other.name}</h4>
                   <p className="text-gray-500 text-sm line-clamp-3 mb-6 italic flex-1">"{other.text}"</p>
-                  <Link to={`${getLocalizedPath('reviewDetail', i18n.language)}/${generateSlug(other.name || other.headline || other.title, other.id)}`} className="text-luxury font-bold text-xs uppercase tracking-widest hover:text-primary flex items-center gap-2 group/link">
+                  <Link to={`${getLocalizedPath('reviewDetail', i18n.language)}/${generateSlug(other.name || other.headline || other.title, other.id)}${other.id ? `-${other.id}` : ''}`} className="text-luxury font-bold text-xs uppercase tracking-widest hover:text-primary flex items-center gap-2 group/link">
                     {t('reviewDetail.readFullStory')} 
                     <svg className="w-4 h-4 transform group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                   </Link>
